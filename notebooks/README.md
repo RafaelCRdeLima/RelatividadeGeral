@@ -7,6 +7,9 @@ SymPy, NumPy, SciPy e Matplotlib.
 
 - `00_ambiente_e_escala_gravitacional.ipynb`: verificação do ambiente,
   dedução do raio de Schwarzschild e exploração numérica de escalas de massa.
+- `01_transformacoes_de_lorentz.ipynb`: transformações de eventos, diagramas de
+  Minkowski com velocidade ajustável, simultaneidade, tempo próprio, paradoxo
+  dos gêmeos e problemas orientados do capítulo 2.
 
 ## Instalação local
 
