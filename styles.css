@@ -61,39 +61,47 @@ a { color: inherit; }
 }
 
 .brand-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
   color: var(--navy);
   background: var(--cyan);
   border-radius: 50%;
   font-family: "Newsreader", serif;
-  font-size: 1.2rem;
 }
 
 .tensor-r {
+  position: absolute;
+  top: 11px;
+  left: 13px;
+  display: block;
+  font-size: 22px;
   font-style: italic;
   line-height: 1;
 }
 
 .tensor-indices {
-  display: flex;
-  margin-left: 0.04em;
-  flex-direction: column;
-  align-items: flex-start;
+  position: absolute;
+  top: 7px;
+  left: 29px;
+  display: grid;
+  grid-template-rows: 13px 13px;
+  margin: 0;
   font-style: italic;
-  line-height: 0.72;
-  transform: translateY(-0.01em);
+  line-height: 1;
 }
 
 .tensor-indices sup,
 .tensor-indices sub {
   position: static;
   display: block;
-  font-size: 0.48em;
-  line-height: 1;
+  width: 8px;
+  height: 13px;
+  font-size: 10px;
+  line-height: 13px;
+  text-align: left;
   vertical-align: baseline;
 }
 
