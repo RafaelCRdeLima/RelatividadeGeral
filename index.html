@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Apostila e notebooks da disciplina de Relatividade Geral — UDESC/CCT.">
+    <meta name="theme-color" content="#071b2c">
+    <title>Relatividade Geral · UDESC</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Página inicial">
+        <span class="brand-mark" aria-hidden="true">R<sup>μ</sup><sub>ν</sub></span>
+        <span>Relatividade Geral</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href="#apostila">Apostila</a>
+        <a href="#notebooks">Notebooks</a>
+        <a href="https://github.com/RafaelCRdeLima/RelatividadeGeral">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="conteudo">
+      <section class="hero" id="inicio">
+        <div class="orbit orbit-one" aria-hidden="true"></div>
+        <div class="orbit orbit-two" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">UDESC · Centro de Ciências Tecnológicas</p>
+          <h1>Relatividade Geral</h1>
+          <p class="hero-lead">
+            Material aberto de apoio para uma disciplina em 72 aulas: geometria do
+            espaço-tempo, gravitação de Einstein e experimentos computacionais.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="apostila/Relatividade_Geral_72_Aulas.pdf">
+              Ler a apostila
+            </a>
+            <a class="button button-secondary" href="#notebooks">Explorar os códigos</a>
+          </div>
+        </div>
+        <div class="equation-card" aria-label="Equação de Einstein">
+          <span class="equation-label">A geometria encontra a matéria</span>
+          <div class="equation">G<sub>μν</sub> + Λg<sub>μν</sub> = <span>8πG</span> T<sub>μν</sub></div>
+          <div class="equation-rule"></div>
+          <p>Um curso sobre como ler — e calcular — a curvatura do Universo.</p>
+        </div>
+      </section>
+
+      <section class="section" id="apostila">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Texto principal</p>
+            <h2>Apostila do curso</h2>
+          </div>
+          <p>
+            Uma apresentação progressiva, com exemplos resolvidos, problemas
+            orientados, exercícios e projetos finais.
+          </p>
+        </div>
+
+        <article class="book-card">
+          <div class="book-cover" aria-hidden="true">
+            <div class="book-grid"></div>
+            <span class="book-kicker">72 aulas</span>
+            <strong>Relatividade<br>Geral</strong>
+            <span class="book-author">Rafael · UDESC/CCT</span>
+          </div>
+          <div class="book-info">
+            <span class="status"><i></i> Versão atual</span>
+            <h3>Relatividade Geral: apostila para 72 aulas</h3>
+            <p>
+              Do espaço-tempo de Minkowski às equações de Einstein, buracos
+              negros, cosmologia e ondas gravitacionais.
+            </p>
+            <dl class="book-meta">
+              <div><dt>Formato</dt><dd>PDF · A4</dd></div>
+              <div><dt>Extensão</dt><dd>115 páginas</dd></div>
+              <div><dt>Atualização</dt><dd>Julho de 2026</dd></div>
+            </dl>
+            <div class="card-actions">
+              <a class="button button-primary" href="apostila/Relatividade_Geral_72_Aulas.pdf">Abrir no navegador</a>
+              <a class="text-link" href="apostila/Relatividade_Geral_72_Aulas.pdf" download>Baixar PDF <span>↓</span></a>
+              <a class="text-link" href="apostila/fonte/rg_72_aulas.tex" download>Fonte LaTeX <span>↓</span></a>
+            </div>
+          </div>
+        </article>
+
+        <details class="pdf-preview">
+          <summary>Visualizar a apostila nesta página</summary>
+          <div class="pdf-frame">
+            <object data="apostila/Relatividade_Geral_72_Aulas.pdf" type="application/pdf">
+              <p>
+                Seu navegador não exibiu o PDF.
+                <a href="apostila/Relatividade_Geral_72_Aulas.pdf">Abra a apostila diretamente.</a>
+              </p>
+            </object>
+          </div>
+        </details>
+      </section>
+
+      <section class="section notebooks-section" id="notebooks">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Laboratório computacional</p>
+            <h2>Notebooks Jupyter</h2>
+          </div>
+          <p>
+            Experimentos reproduzíveis em Python, com derivação, cálculo numérico
+            e visualização. Podem ser baixados ou executados no Google Colab.
+          </p>
+        </div>
+
+        <div class="notebook-grid">
+          <article class="notebook-card featured">
+            <div class="notebook-number">00</div>
+            <div class="notebook-content">
+              <div class="tags"><span>Introdução</span><span>Python</span></div>
+              <h3>Ambiente e escala gravitacional</h3>
+              <p>
+                Verificação das bibliotecas científicas, dedução simbólica do raio
+                de Schwarzschild e comparação numérica entre diferentes massas.
+              </p>
+              <div class="notebook-actions">
+                <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/00_ambiente_e_escala_gravitacional.ipynb">Abrir no Colab ↗</a>
+                <a class="text-link" href="notebooks/00_ambiente_e_escala_gravitacional.ipynb" download>Baixar .ipynb <span>↓</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="notebook-card upcoming">
+            <div class="notebook-number">01</div>
+            <div class="notebook-content">
+              <div class="tags"><span>Em preparação</span></div>
+              <h3>Transformações de Lorentz</h3>
+              <p>Eventos, intervalos invariantes, dilatação temporal e diagramas do espaço-tempo.</p>
+            </div>
+          </article>
+
+          <article class="notebook-card upcoming">
+            <div class="notebook-number">02</div>
+            <div class="notebook-content">
+              <div class="tags"><span>Em preparação</span></div>
+              <h3>Geodésicas e curvatura</h3>
+              <p>Símbolos de Christoffel, geodésicas na esfera e integração numérica.</p>
+            </div>
+          </article>
+
+          <article class="notebook-card upcoming">
+            <div class="notebook-number">03</div>
+            <div class="notebook-content">
+              <div class="tags"><span>Em preparação</span></div>
+              <h3>Órbitas em Schwarzschild</h3>
+              <p>Órbitas, precessão do periélio, deflexão da luz e estabilidade.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="toolbox">
+          <div>
+            <p class="eyebrow">Ferramentas</p>
+            <h3>Uma base simples e aberta</h3>
+          </div>
+          <div class="tool-list" aria-label="Bibliotecas utilizadas">
+            <span>Jupyter</span><span>SymPy</span><span>NumPy</span><span>SciPy</span><span>Matplotlib</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <strong>Relatividade Geral</strong>
+        <p>Material didático em desenvolvimento · UDESC/CCT</p>
+      </div>
+      <a href="https://github.com/RafaelCRdeLima/RelatividadeGeral">Código-fonte no GitHub ↗</a>
+    </footer>
+  </body>
+</html>

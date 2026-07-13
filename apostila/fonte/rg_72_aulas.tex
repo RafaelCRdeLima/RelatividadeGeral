@@ -1,0 +1,2972 @@
+\documentclass[12pt,a4paper,oneside]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{setspace}
+
+\geometry{top=3.2cm,bottom=3.2cm,left=3.1cm,right=3.1cm,headheight=15pt}
+\doublespacing
+\setlength{\parskip}{3pt}
+\setlist[itemize]{topsep=3pt,itemsep=2pt}
+\setlist[enumerate]{topsep=3pt,itemsep=2pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=green!45!black,
+  urlcolor=cyan!55!black,
+  pdftitle={Relatividade Geral: Apostila para 72 Aulas},
+  pdfauthor={Rafael -- UDESC/CCT}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Relatividade Geral}
+\fancyhead[R]{\small \leftmark}
+\fancyfoot[C]{\thepage}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definição}[chapter]
+\newtheorem{example}{Exemplo}[chapter]
+\newtheorem{exercise}{Exercício}[chapter]
+\newtheorem{activity}{Atividade}[chapter]
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposição}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Observação}[chapter]
+
+\newtcolorbox{objetivos}{
+  colback=blue!4!white,
+  colframe=blue!55!black,
+  title=Objetivos,
+  fonttitle=\bfseries,
+  breakable
+}
+
+\newtcolorbox{resultado}{
+  colback=green!4!white,
+  colframe=green!45!black,
+  title=Resultado central,
+  fonttitle=\bfseries,
+  breakable
+}
+
+\newtcolorbox{roteiro}{
+  colback=gray!5!white,
+  colframe=gray!65!black,
+  title=Roteiro de aula,
+  fonttitle=\bfseries,
+  breakable
+}
+
+\newtcolorbox{leitura}{
+  colback=yellow!7!white,
+  colframe=orange!70!black,
+  title=Leitura orientada,
+  fonttitle=\bfseries,
+  breakable
+}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\pd}{\partial}
+\newcommand{\Lie}{\mathcal{L}}
+\newcommand{\Riem}{R^{\rho}{}_{\sigma\mu\nu}}
+\newcommand{\Ric}{R_{\mu\nu}}
+\newcommand{\Ein}{G_{\mu\nu}}
+\newcommand{\T}{T_{\mu\nu}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Lag}{\mathcal{L}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\etaab}{\eta_{\alpha\beta}}
+\newcommand{\munu}{\mu\nu}
+\begin{document}
+
+\frontmatter
+
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Large Universidade do Estado de Santa Catarina\\
+Centro de Ciências Tecnológicas}\\[2.5cm]
+
+{\Huge\bfseries Relatividade Geral}\\[0.5cm]
+{\LARGE Apostila para um curso de 72 encontros}\\[0.8cm]
+{\Large Aulas de 50 minutos}\\[2cm]
+
+{\large Material original de apoio didático}\\[0.3cm]
+{\large Referência principal: Bernard Schutz, \textit{A First Course in General Relativity}, 3ª ed.}\\[2.5cm]
+
+{\large 2026}
+\vfill
+{\small Esta apostila foi preparada como material de ensino. Ela usa o livro de Bernard Schutz como guia de organização e referência bibliográfica, mas apresenta texto, exemplos e exercícios em formulação própria.}
+\end{titlepage}
+
+\chapter*{Prefácio}
+\addcontentsline{toc}{chapter}{Prefácio}
+
+Estas notas foram organizadas para uma disciplina de Relatividade Geral com
+72 encontros de 50 minutos. O objetivo é conduzir o estudante desde a
+relatividade especial e a linguagem tensorial até aplicações centrais da teoria:
+ondas gravitacionais, estrelas relativísticas, buracos negros e cosmologia.
+
+O livro de Bernard Schutz, \textit{A First Course in General Relativity}, terceira
+edição, foi usado como referência principal para a sequência conceitual. A
+apostila não substitui o livro: ela funciona como roteiro de aula, resumo
+matemático, coleção de atividades e ponte entre o quadro-negro e os problemas
+que o estudante deve resolver por conta própria.
+
+O curso assume familiaridade com cálculo vetorial, álgebra linear, equações
+diferenciais ordinárias, mecânica clássica e eletromagnetismo em nível de
+graduação. Quando uma ferramenta matemática aparece pela primeira vez, ela é
+introduzida operacionalmente: primeiro se explica para que serve, depois se
+formaliza.
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Plano do curso}
+
+\section{Ementa expandida}
+
+Relatividade restrita. Espaço-tempo de Minkowski. Diagramas espaço-tempo.
+Quadrivetores. Energia, momento e fótons. Tensores, formas lineares, métrica e
+notação de índices. Fluido perfeito e tensor energia-momento. Princípio da
+equivalência. Coordenadas curvilíneas. Derivada covariante, transporte paralelo,
+geodésicas e curvatura. Equações de Einstein. Limite newtoniano. Ondas
+gravitacionais. Soluções esfericamente simétricas. Estrelas relativísticas.
+Geometria de Schwarzschild. Buracos negros. Cosmologia de Friedmann-Lemaître-
+Robertson-Walker. Problemas selecionados de astrofísica relativística.
+
+\section{Objetivos de aprendizagem}
+
+Ao final do curso, o estudante deverá ser capaz de:
+
+\begin{itemize}
+  \item usar quadrivetores e tensores em espaço-tempo plano e curvo;
+  \item interpretar a métrica como objeto geométrico e físico;
+  \item calcular símbolos de Christoffel, geodésicas e curvatura em exemplos simples;
+  \item explicar o princípio da equivalência e sua relação com a geometrização da gravidade;
+  \item derivar o limite newtoniano das equações de Einstein;
+  \item aplicar a métrica de Schwarzschild a órbitas, desvio da luz, redshift gravitacional e horizonte;
+  \item descrever a física básica de ondas gravitacionais e seus detectores;
+  \item formular as equações cosmológicas de Friedmann e interpretar soluções simples.
+\end{itemize}
+
+\section{Distribuição dos 72 encontros}
+
+\begin{center}
+\small
+\begin{tabular}{cp{3.1cm}p{8.1cm}}
+\toprule
+Encontros & Módulo & Conteúdo \\
+\midrule
+1--6 & Relatividade especial & Postulados, intervalos, diagramas, transformações de Lorentz, paradoxo dos gêmeos. \\
+7--12 & Vetores relativísticos & Quadrivelocidade, quadrimomento, produto escalar, fótons, colisões e decaimentos. \\
+13--18 & Tensores em Minkowski & Um-formas, métrica, tensores mistos, mudança de base, derivadas. \\
+19--22 & Fluidos relativísticos & Fluxo de partículas, tensor energia-momento, fluido perfeito, conservação. \\
+23--30 & Curvatura em coordenadas & Coordenadas polares, bases não coordenadas, símbolos de Christoffel, geodésicas. \\
+31--38 & Variedades curvas & Derivada covariante, transporte paralelo, tensor de Riemann, Ricci, escalar de curvatura, Bianchi. \\
+39--44 & Física em espaço-tempo curvo & Princípio da equivalência, referenciais locais, constantes de movimento, partículas e luz. \\
+45--50 & Equações de Einstein & Motivação, ação gravitacional, limite fraco, limite newtoniano, constante cosmológica. \\
+51--56 & Ondas gravitacionais & Perturbações lineares, gauge TT, polarizações, resposta de detectores, emissão quadrupolar. \\
+57--62 & Estrelas e Schwarzschild & Simetria esférica, equações TOV, exterior de Schwarzschild, órbitas, lentes, precessão. \\
+63--67 & Buracos negros & Horizonte, coordenadas regulares, geodésicas radiais, Kerr qualitativo, termodinâmica. \\
+68--72 & Cosmologia & Métrica FLRW, redshift cosmológico, Friedmann, conteúdo material, história térmica e problemas abertos. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Avaliação sugerida}
+
+\begin{itemize}
+  \item Listas quinzenais de problemas: 40\%.
+  \item Duas provas escritas: 40\%.
+  \item Seminário final ou projeto computacional curto: 20\%.
+\end{itemize}
+
+\section{Calendário aula a aula}
+
+\scriptsize
+\begin{longtable}{cp{4.2cm}p{8.0cm}}
+\toprule
+Aula & Foco & Seções da apostila a cobrir \\
+\midrule
+\endfirsthead
+\toprule
+Aula & Foco & Seções da apostila a cobrir \\
+\midrule
+\endhead
+1 & Apresentação e escala física da RG & Plano do curso: Ementa expandida, Objetivos de aprendizagem, Distribuição dos 72 encontros, Avaliação sugerida. Leitura orientadora: Prefácio. \\
+2 & Eventos e intervalo & Relatividade especial: Eventos, observadores e intervalo. Iniciar Leitura física do intervalo. \\
+3 & Tempo próprio e causalidade & Relatividade especial: Tempo próprio; concluir Leitura física do intervalo. \\
+4 & Lorentz I & Relatividade especial: Transformações de Lorentz; exemplos de simultaneidade em Exemplos resolvidos adicionais. \\
+5 & Lorentz II e contração & Relatividade especial: Contração e dilatação sem mistério; Problemas orientados, itens 1--3. \\
+6 & Paradoxo dos gêmeos e fechamento de RE & Relatividade especial: Paradoxo dos gêmeos; Problemas orientados, itens 4--6; Exercícios. \\
+7 & Quadrivelocidade & Vetores e momento relativístico: Quadrivelocidade; conectar com Relatividade especial: Tempo próprio. \\
+8 & Quadrimomento & Vetores e momento relativístico: Quadrimomento; Energia como componente temporal. \\
+9 & Conservação relativística & Vetores e momento relativístico: Conservação; exemplos de decaimento em dois corpos. \\
+10 & Fótons e Doppler & Vetores e momento relativístico: Partículas massivas e partículas sem massa; Problemas orientados, itens 4--5. \\
+11 & Centro de momento & Vetores e momento relativístico: Centro de momento; Problemas orientados, itens 2--3 e 6. \\
+12 & Consolidação de RE e quadrivetores & Vetores e momento relativístico: Exercícios. Revisão conjunta dos capítulos Relatividade especial e Vetores e momento relativístico. \\
+13 & Um-formas e contrações & Tensores no espaço-tempo plano: Vetores, um-formas e contrações. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+14 & Métrica e índices & Tensores no espaço-tempo plano: Métrica; A métrica como instrumento de medida. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+15 & Regras de índices & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial. Apoio: Apêndice~\ref{ap:indices}, Índices mudos e troca de nomes. \\
+16 & Mudança de base & Tensores no espaço-tempo plano: Mudança de base e transformação de componentes; Exemplos resolvidos adicionais. \\
+17 & Erros comuns e prática & Tensores no espaço-tempo plano: Erros comuns com índices; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
+18 & Oficina de tensores planos & Tensores no espaço-tempo plano: Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
+19 & Poeira e fluxo de partículas & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
+20 & Fluido perfeito & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
+21 & Conservação local & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados, itens 1--4. \\
+22 & Fechamento de fluidos & Fluidos relativísticos: Problemas orientados, itens 5--6; Exercícios. \\
+23 & Coordenadas curvilíneas & Da gravidade à curvatura: Coordenadas curvilíneas; Christoffel não é força. \\
+24 & Geodésicas I & Da gravidade à curvatura: Equação geodésica; Derivação por princípio variacional. \\
+25 & Equivalência e marés & Da gravidade à curvatura: O princípio da equivalência; Marés como sinal de curvatura. \\
+26 & Geodésicas II & Da gravidade à curvatura: Problemas orientados, itens 1--4. \\
+27 & Esfera e exemplos 2D & Da gravidade à curvatura: Problemas orientados, itens 5--6; Exercícios. \\
+28 & Variedades & Variedades, derivada covariante e curvatura: Variedades e métricas. \\
+29 & Derivada covariante & Variedades, derivada covariante e curvatura: Derivada covariante; Compatibilidade métrica. \\
+30 & Transporte paralelo e curvatura & Variedades, derivada covariante e curvatura: Curvatura; Curvatura intrínseca e extrínseca. \\
+31 & Riemann e simetrias & Variedades, derivada covariante e curvatura: Simetrias do tensor de Riemann; Exemplos resolvidos adicionais. \\
+32 & Desvio geodésico & Variedades, derivada covariante e curvatura: Desvio geodésico; Problemas orientados, itens 1--3. \\
+33 & Ricci, escalar e Einstein & Variedades, derivada covariante e curvatura: Problemas orientados, itens 4--6; Resumo de fórmulas: Geometria. \\
+34 & Oficina de geometria diferencial & Variedades, derivada covariante e curvatura: Exercícios. \\
+35 & Movimento livre & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
+36 & Observadores locais & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais. \\
+37 & Simetrias e Killing & Física em espaço-tempo curvo: Simetrias e quantidades conservadas; Constantes de movimento e energia local. \\
+38 & Oficina de física em espaço-tempo curvo & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
+39 & Equações de campo I & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
+40 & Equações de campo II & Equações de Einstein: Traço das equações de campo; Conservação local. \\
+41 & Limite newtoniano I & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
+42 & Constante cosmológica & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados, itens 1--3. \\
+43 & Vácuo e ordens de grandeza & Equações de Einstein: Exemplos resolvidos adicionais; Problemas orientados, itens 4--6. \\
+44 & Fechamento de Einstein & Equações de Einstein: Exercícios; Resumo de fórmulas: Einstein. \\
+45 & Ondas gravitacionais I & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
+46 & Polarizações & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
+47 & Detectores & Ondas gravitacionais: Detecção; Escalas de detecção. \\
+48 & Emissão & Ondas gravitacionais: Emissão; Binárias compactas. \\
+49 & Oficina de ondas & Ondas gravitacionais: Problemas orientados; Erros comuns e interpretação. \\
+50 & Fechamento de ondas & Ondas gravitacionais: Exercícios. Preparar transição para soluções exatas. \\
+51 & Schwarzschild I & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
+52 & Redshift & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional; Testes clássicos, parte de redshift. \\
+53 & Geodésicas em Schwarzschild & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
+54 & Órbitas circulares e fótons & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
+55 & Estrelas relativísticas & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
+56 & Testes clássicos e exercícios & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Problemas orientados; Exercícios. \\
+57 & Horizonte & Buracos negros: Horizonte; Horizon versus singularidade. \\
+58 & Coordenadas regulares & Buracos negros: Coordenadas regulares; Diagramas causais. \\
+59 & Buracos negros reais & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
+60 & Termodinâmica & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
+61 & Oficina de buracos negros & Buracos negros: Problemas orientados; Erros comuns e interpretação. \\
+62 & Fechamento de buracos negros & Buracos negros: Exercícios; Resumo de fórmulas: Schwarzschild. \\
+63 & Cosmologia I & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
+64 & Friedmann I & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
+65 & Distâncias e horizontes & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
+66 & Parâmetros e problemas abertos & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
+67 & Oficina de cosmologia & Cosmologia relativística: Problemas orientados; Exercícios, itens de matéria e radiação. \\
+68 & Síntese cosmológica & Cosmologia relativística: Erros comuns e interpretação; Síntese conceitual do curso; Resumo de fórmulas: Cosmologia. \\
+69 & Revisão técnica & Apêndice~\ref{ap:indices}: Checklist para não errar; Revisão de tensores, geodésicas, curvatura e Einstein. \\
+70 & Projetos I & Projetos finais: Projeto 1 e Projeto 2. Definir grupos, escopo, equações e entregáveis. \\
+71 & Projetos II & Projetos finais: Projeto 3 e Projeto 4. Discussão de formas de onda, Friedmann numérico e critérios de avaliação. \\
+72 & Síntese final & Revisão global: Síntese conceitual do curso; Bibliografia comentada; fechamento dos projetos e preparação para avaliação final. \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\chapter{Relatividade especial}
+
+\begin{objetivos}
+Entender que a relatividade especial é a geometria do espaço-tempo plano.
+O estudante deve sair deste módulo vendo o intervalo como a grandeza
+invariante fundamental e o tempo próprio como quantidade física medida por
+um relógio ao longo de uma linha de mundo.
+\end{objetivos}
+
+\section{Eventos, observadores e intervalo}
+
+Um evento é algo que ocorre em um ponto do espaço e em um instante. Em um
+referencial inercial, escrevemos suas coordenadas como
+\[
+  x^\mu=(t,x,y,z),
+\]
+onde adotaremos frequentemente unidades com $c=1$. O intervalo entre dois
+eventos próximos é
+\[
+  \dd s^2=-\dd t^2+\dd x^2+\dd y^2+\dd z^2.
+\]
+A convenção de sinais usada aqui é $(-,+,+,+)$. O mesmo conteúdo físico pode
+ser escrito com a convenção oposta, desde que ela seja usada de modo
+consistente.
+
+\begin{resultado}
+O intervalo $\dd s^2$ é invariante sob transformações de Lorentz. Essa
+invariância substitui a noção newtoniana de tempo absoluto.
+\end{resultado}
+
+Quando $\dd s^2<0$, a separação é temporal; quando $\dd s^2=0$, é nula; quando
+$\dd s^2>0$, é espacial. Partículas massivas percorrem curvas temporais. A luz
+percorre curvas nulas.
+
+\section{Tempo próprio}
+
+Para uma partícula massiva, define-se o tempo próprio $\tau$ por
+\[
+  \dd \tau^2=-\dd s^2.
+\]
+Se a partícula tem velocidade ordinária $v$, então
+\[
+  \dd \tau=\dd t\sqrt{1-v^2}=\frac{\dd t}{\gamma},
+  \qquad
+  \gamma=\frac{1}{\sqrt{1-v^2}}.
+\]
+Assim, o relógio comóvel à partícula mede $\tau$, não $t$.
+
+\section{Transformações de Lorentz}
+
+Para dois referenciais com velocidade relativa $v$ ao longo de $x$, a
+transformação de Lorentz é
+\[
+  t'=\gamma(t-vx), \qquad
+  x'=\gamma(x-vt), \qquad
+  y'=y,\qquad z'=z.
+\]
+Ela preserva o intervalo e mistura tempo com espaço. A relatividade da
+simultaneidade nasce desse acoplamento.
+
+\begin{activity}
+Mostre que dois eventos simultâneos em $S$, separados por $\Delta x\ne0$, não
+são simultâneos em $S'$ se $v\ne0$. Interprete o resultado em um diagrama
+espaço-tempo.
+\end{activity}
+
+\section{Paradoxo dos gêmeos}
+
+O paradoxo dos gêmeos não é uma contradição porque as duas linhas de mundo
+entre os eventos ``partida'' e ``reencontro'' não são equivalentes. O tempo
+próprio acumulado é
+\[
+  \tau=\int \sqrt{1-v(t)^2}\,\dd t.
+\]
+Entre dois eventos fixos em espaço-tempo plano, a linha de mundo inercial
+maximiza o tempo próprio. O gêmeo que acelera para retornar percorre uma linha
+de mundo com menor tempo próprio.
+
+\section{Leitura física do intervalo}
+
+O intervalo é a primeira grande mudança conceitual do curso. Em mecânica
+newtoniana, dois observadores podem discordar das coordenadas espaciais de um
+evento, mas concordam sobre o intervalo de tempo entre eventos. Na
+relatividade especial, essa separação deixa de ser absoluta. O que permanece
+absoluto é uma combinação de tempo e espaço. A geometria que antes era
+euclidiana no espaço tridimensional passa a ser pseudo-euclidiana no
+espaço-tempo.
+
+É útil insistir em uma frase: o sinal de $\Delta s^2$ tem conteúdo causal.
+Se $\Delta s^2<0$, existe um referencial no qual os dois eventos ocorrem no
+mesmo ponto espacial. Esse é o referencial momentaneamente comóvel a uma
+partícula massiva que poderia ligar os eventos. Se $\Delta s^2>0$, existe um
+referencial no qual os eventos são simultâneos. Nesse caso nenhum sinal causal,
+limitado pela velocidade da luz, pode conectar os eventos. Se $\Delta s^2=0$,
+os eventos podem ser ligados por um raio luminoso.
+
+\begin{example}
+Considere dois eventos separados por $\Delta t=5$ e $\Delta x=3$, em unidades
+com $c=1$. O intervalo é
+\[
+  \Delta s^2=-25+9=-16.
+\]
+A separação é temporal. O tempo próprio entre os eventos, ao longo da reta
+inercial que os conecta, é $\Delta\tau=4$. Esse número é o tempo medido por um
+relógio que passa pelos dois eventos sem aceleração.
+\end{example}
+
+\begin{example}
+Agora tome $\Delta t=2$ e $\Delta x=5$. Temos
+\[
+  \Delta s^2=-4+25=21.
+\]
+A separação é espacial. Não faz sentido perguntar qual partícula massiva liga
+esses eventos, pois isso exigiria velocidade maior que a da luz. Contudo, faz
+sentido procurar um referencial no qual os eventos sejam simultâneos.
+\end{example}
+
+\section{Contração e dilatação sem mistério}
+
+A dilatação temporal não significa que ``o tempo realmente fica lento'' em
+sentido absoluto. Significa que, entre dois eventos sobre a linha de mundo de
+um relógio, o tempo próprio daquele relógio é menor que a diferença de tempo
+coordenado atribuída por um observador que vê o relógio se mover. A contração
+de comprimentos também depende de simultaneidade: medir o comprimento de uma
+barra em movimento exige registrar as posições de suas extremidades no mesmo
+instante do referencial do observador.
+
+Essa observação elimina muitos falsos paradoxos. Quando dois observadores em
+movimento relativo se descrevem mutuamente como tendo relógios dilatados, eles
+não estão fazendo afirmações contraditórias sobre um mesmo par de eventos. Cada
+um compara eventos diferentes, definidos por sua própria noção de
+simultaneidade. A geometria de Minkowski organiza essas comparações sem
+privilegiar um observador.
+
+\begin{activity}
+Desenhe uma barra em repouso em $S'$ e represente as linhas de mundo de suas
+extremidades. Marque dois eventos simultâneos em $S$ e use o diagrama para
+explicar por que o comprimento medido em $S$ é menor que o comprimento próprio.
+\end{activity}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Relógio de luz.} Monte o argumento da dilatação temporal usando
+  dois espelhos separados por uma distância $L$. Primeiro calcule o período no
+  referencial do relógio. Depois calcule o caminho diagonal percorrido pela luz
+  quando o relógio se move com velocidade $v$. A pista é aplicar Pitágoras ao
+  triângulo formado por metade do percurso.
+
+  \item \textbf{Comprimento próprio.} Uma barra está em repouso em $S'$ com
+  comprimento $L_0$. Use transformações de Lorentz para mostrar que eventos
+  simultâneos em $S$ nas extremidades da barra não são simultâneos em $S'$.
+  Conclua que $L=L_0/\gamma$.
+
+  \item \textbf{Ordem temporal.} Escolha dois eventos com separação espacial.
+  Encontre uma velocidade $v$ tal que a ordem temporal dos eventos seja
+  invertida. Discuta por que isso não viola causalidade.
+
+  \item \textbf{Tempo próprio máximo.} Compare uma linha de mundo inercial com
+  uma trajetória formada por dois trechos retilíneos de velocidades opostas.
+  Calcule o tempo próprio total e interprete a desigualdade resultante.
+
+  \item \textbf{Adição de velocidades.} Derive a fórmula
+  \[
+    u'=\frac{u-v}{1-uv}
+  \]
+  a partir das transformações de Lorentz. Verifique explicitamente que, se
+  $u=1$, então $u'=1$.
+
+  \item \textbf{Rapidez.} Defina a rapidez $\varphi$ por $v=\tanh\varphi$.
+  Mostre que transformações de Lorentz sucessivas na mesma direção somam
+  rapidezes. Essa variável revela a estrutura hiperbólica da relatividade.
+\end{enumerate}
+
+\section{Exemplos resolvidos adicionais}
+
+\begin{example}
+\textbf{Simultaneidade relativa.} Dois eventos ocorrem em $S$ com
+$\Delta t=0$ e $\Delta x=L$. Em $S'$, que se move com velocidade $v$ em relação
+a $S$,
+\[
+  \Delta t'=\gamma(\Delta t-v\Delta x)=-\gamma vL.
+\]
+Logo os eventos não são simultâneos em $S'$. O sinal negativo indica que, para
+$v>0$, o evento com maior $x$ ocorre antes em $S'$. Essa conta simples é a
+origem operacional da contração de comprimentos: medir uma barra em movimento
+requer escolher eventos simultâneos no referencial de medida.
+\end{example}
+
+\begin{example}
+\textbf{Invariância do cone de luz.} Se $\Delta x=\Delta t$ em uma dimensão
+espacial, então a separação é nula. Aplicando Lorentz,
+\[
+  \Delta t'=\gamma(\Delta t-v\Delta x)=\gamma\Delta t(1-v),
+\]
+\[
+  \Delta x'=\gamma(\Delta x-v\Delta t)=\gamma\Delta t(1-v).
+\]
+Portanto $\Delta x'=\Delta t'$. Um raio de luz continua sendo raio de luz para
+qualquer observador inercial.
+\end{example}
+
+\begin{example}
+\textbf{Rapidez e composição.} Escreva $v=\tanh\varphi$. Então
+$\gamma=\cosh\varphi$ e $\gamma v=\sinh\varphi$. A transformação de Lorentz em
+$1+1$ dimensões fica
+\[
+  t' = t\cosh\varphi-x\sinh\varphi,\qquad
+  x' = x\cosh\varphi-t\sinh\varphi.
+\]
+Ela se parece com uma rotação hiperbólica. Duas transformações sucessivas
+somam os parâmetros $\varphi$, o que explica por que a lei de adição de
+velocidades não é simplesmente soma de velocidades.
+\end{example}
+
+\begin{example}
+\textbf{Tempo próprio em trajetória por partes.} Uma nave afasta-se da Terra
+com velocidade $v$ durante tempo coordenado $T/2$ e retorna com velocidade
+$-v$ durante $T/2$. O tempo próprio acumulado é
+\[
+  \tau=T\sqrt{1-v^2}.
+\]
+O relógio terrestre, aproximadamente inercial nesse modelo idealizado, acumula
+$T$. A diferença não é causada apenas pelo instante de aceleração, mas pela
+geometria total da linha de mundo escolhida.
+\end{example}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Verifique explicitamente que a transformação de Lorentz preserva
+$-\Delta t^2+\Delta x^2$.
+\end{exercise}
+
+\begin{exercise}
+Uma partícula viaja com velocidade constante $v=0{,}8$ durante 10 anos no
+referencial da Terra. Quanto tempo próprio passa para a partícula?
+\end{exercise}
+
+\begin{exercise}
+Desenhe os cones de luz de um evento e marque regiões causalmente conectadas
+ao evento.
+\end{exercise}
+
+\chapter{Vetores e momento relativístico}
+
+\begin{objetivos}
+Construir a linguagem de quadrivetores e usá-la para resolver problemas de
+cinemática e dinâmica relativística sem depender de componentes particulares.
+\end{objetivos}
+
+\section{Quadrivelocidade}
+
+A linha de mundo de uma partícula é parametrizada por $x^\mu(\tau)$. A
+quadrivelocidade é
+\[
+  U^\mu=\frac{\dd x^\mu}{\dd\tau}.
+\]
+Em componentes inerciais,
+\[
+  U^\mu=\gamma(1,\bm v).
+\]
+Seu produto escalar consigo mesma é fixo:
+\[
+  U^\mu U_\mu=-1.
+\]
+Isso mostra que a quadrivelocidade não é uma velocidade comum em quatro
+dimensões; ela é o vetor tangente normalizado à linha de mundo.
+
+\section{Quadrimomento}
+
+Para massa de repouso $m$,
+\[
+  p^\mu=mU^\mu=(E,\bm p),
+  \qquad
+  E=\gamma m,\quad \bm p=\gamma m\bm v.
+\]
+A relação de dispersão é
+\[
+  p^\mu p_\mu=-m^2
+  \quad\Longrightarrow\quad
+  E^2=\bm p^2+m^2.
+\]
+Para fótons, $m=0$ e $E=|\bm p|$.
+
+\section{Conservação}
+
+Em uma interação local no espaço-tempo plano,
+\[
+  \sum_{\rm inicial}p^\mu=\sum_{\rm final}p^\mu.
+\]
+Essa equação compacta contém conservação de energia e de momento. A vantagem
+da forma tensorial é que, se ela é verdadeira em um referencial inercial, é
+verdadeira em todos.
+
+\begin{example}
+Considere o decaimento de uma partícula de massa $M$ em duas partículas
+idênticas de massa $m$, no referencial de repouso da partícula inicial. Por
+simetria, os momentos finais têm módulos iguais e direções opostas. A energia
+de cada produto é $E=M/2$, logo
+\[
+  |\bm p|=\sqrt{\frac{M^2}{4}-m^2}.
+\]
+O decaimento só é possível se $M\ge 2m$.
+\end{example}
+
+\section{Energia como componente temporal}
+
+No formalismo relativístico, energia não é uma quantidade isolada: ela é a
+componente temporal do quadrimomento. Isso ajuda a entender por que energia e
+momento se misturam sob transformações de Lorentz. Assim como tempo e espaço
+são partes de um mesmo objeto geométrico, energia e momento também são partes
+de um mesmo objeto. Uma colisão que parece envolver apenas energia em um
+referencial pode envolver energia e momento de modo inseparável em outro.
+
+A massa de repouso aparece como norma do quadrimomento:
+\[
+  m^2=-p^\mu p_\mu.
+\]
+Essa equação é mais fundamental que $E=\gamma m$, pois não depende do
+referencial escolhido. Em particular, a energia de uma partícula depende do
+observador, mas a massa de repouso não. Para um sistema de várias partículas, a
+massa invariante total é obtida a partir do quadrimomento total,
+\[
+  M_{\rm sist}^2=-P^\mu P_\mu,
+  \qquad
+  P^\mu=\sum_a p_a^\mu.
+\]
+Essa massa inclui energia cinética interna. Por isso um gás quente confinado em
+uma caixa tem massa total ligeiramente maior que o mesmo gás frio, se o número
+de partículas for o mesmo.
+
+\begin{example}
+Duas partículas sem massa, cada uma com energia $E$, movem-se em direções
+opostas. Seus quadrimomentos podem ser escritos como
+\[
+  p_1^\mu=(E,E,0,0),\qquad p_2^\mu=(E,-E,0,0).
+\]
+O quadrimomento total é $P^\mu=(2E,0,0,0)$, logo
+\[
+  M_{\rm sist}=2E.
+\]
+Embora cada partícula tenha massa zero, o sistema tem massa invariante não
+nula.
+\end{example}
+
+\section{Centro de momento}
+
+O referencial do centro de momento é definido por $\bm P=0$. Ele simplifica
+problemas de colisão porque toda a energia total disponível aparece como massa
+invariante do sistema. Em uma colisão de duas partículas, a quantidade
+\[
+  s=-(p_1+p_2)^2
+\]
+é invariante. No centro de momento, $\sqrt{s}$ é a energia total. Em
+experimentos de altas energias, essa é a quantidade que determina quais
+partículas podem ser produzidas.
+
+\begin{activity}
+Compare duas maneiras de obter uma grande energia de centro de massa: colidir
+duas partículas de mesma energia em sentidos opostos ou lançar uma partícula
+contra um alvo em repouso. Use conservação de quadrimomento para mostrar por
+que colisores são muito mais eficientes que experimentos de alvo fixo.
+\end{activity}
+
+\section{Partículas massivas e partículas sem massa}
+
+Para partículas massivas, existe referencial de repouso. Nesse referencial
+$\bm p=0$ e $E=m$. Para partículas sem massa, não há referencial de repouso:
+qualquer transformação de Lorentz admissível ainda observa a partícula se
+movendo à velocidade da luz. Essa diferença é geométrica. O quadrimomento de
+uma partícula massiva é temporal; o de um fóton é nulo.
+
+Essa distinção reaparece em relatividade geral. Partículas massivas seguem
+geodésicas temporais, parametrizadas naturalmente pelo tempo próprio. Fótons
+seguem geodésicas nulas, para as quais o tempo próprio ao longo da trajetória é
+zero. Isso não significa que ``a luz não exista durante o percurso'', mas sim
+que não há relógio físico comóvel com um fóton.
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Normalização da quadrivelocidade.} Parta de
+  $U^\mu=\gamma(1,\bm v)$ e mostre que $U^\mu U_\mu=-1$. Depois derive
+  $A^\mu U_\mu=0$ diferenciando essa normalização em relação a $\tau$.
+
+  \item \textbf{Energia de limiar.} Uma partícula de massa $m$ atinge uma
+  partícula idêntica em repouso e produz uma partícula de massa $M$ além dos
+  produtos originais. Use o invariante $s$ para encontrar a energia mínima no
+  laboratório.
+
+  \item \textbf{Decaimento em dois corpos.} Uma partícula de massa $M$ decai em
+  partículas de massas $m_1$ e $m_2$. No referencial de repouso inicial, derive
+  as energias finais usando conservação de quadrimomento.
+
+  \item \textbf{Sistema de fótons.} Dois fótons de energias $E_1$ e $E_2$ fazem
+  ângulo $\theta$. Mostre que a massa invariante do sistema satisfaz
+  \[
+    M^2=2E_1E_2(1-\cos\theta).
+  \]
+  Discuta os casos $\theta=0$ e $\theta=\pi$.
+
+  \item \textbf{Doppler covariante.} Use $E=-p_\mu U^\mu$ para obter a mudança
+  de frequência observada quando fonte e observador se movem ao longo da mesma
+  linha. Compare com a fórmula clássica no limite $v\ll1$.
+
+  \item \textbf{Colisão elástica.} No centro de momento, duas partículas
+  idênticas colidem elasticamente. Explique por que as energias finais são
+  iguais às iniciais e por que apenas as direções dos momentos mudam.
+\end{enumerate}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Mostre que a quadriaceleração $A^\mu=\dd U^\mu/\dd\tau$ satisfaz
+$A^\mu U_\mu=0$.
+\end{exercise}
+
+\begin{exercise}
+Um fóton de frequência $\nu$ é observado por dois observadores inerciais em
+movimento relativo. Use $E=-p_\mu U^\mu$ para obter o efeito Doppler
+relativístico.
+\end{exercise}
+
+\chapter{Tensores no espaço-tempo plano}
+
+\begin{objetivos}
+Dominar a notação de índices, distinguir vetores de um-formas e compreender a
+métrica como o objeto que transforma uma coisa na outra.
+\end{objetivos}
+
+\section{Vetores, um-formas e contrações}
+
+Um vetor $V$ age como derivada direcional; uma um-forma $\omega$ age sobre
+vetores e retorna escalares. Em componentes,
+\[
+  \omega(V)=\omega_\mu V^\mu.
+\]
+Um tensor de tipo $(r,s)$ é multilinear: recebe $s$ vetores e $r$ um-formas, e
+retorna um número. Em física, componentes tensoriais são úteis porque suas
+transformações preservam a forma das equações.
+
+Para uma caixa de ferramentas prática sobre manipulação de índices, deltas,
+símbolos antissimétricos e contrações, consulte o Apêndice~\ref{ap:indices}.
+Ele foi escrito para ser usado como apoio de cálculo enquanto este capítulo é
+estudado.
+
+\section{Métrica}
+
+No espaço-tempo de Minkowski,
+\[
+  \eta_{\mu\nu}=\mathrm{diag}(-1,1,1,1).
+\]
+A métrica define o produto escalar
+\[
+  A\cdot B=\eta_{\mu\nu}A^\mu B^\nu
+\]
+e permite baixar índices:
+\[
+  A_\mu=\eta_{\mu\nu}A^\nu.
+\]
+Com a convenção $(-,+,+,+)$, se $A^\mu=(A^0,A^1,A^2,A^3)$, então
+$A_\mu=(-A^0,A^1,A^2,A^3)$.
+
+\section{Regra prática de índices}
+
+Índices repetidos uma vez acima e uma vez abaixo são somados. Índices livres
+devem aparecer de modo idêntico nos dois lados da equação. Por exemplo,
+\[
+  A^\mu=B^\mu+C^\mu
+\]
+é uma equação vetorial válida, enquanto $A^\mu=B^\nu$ é mal escrita, pois
+$\mu$ e $\nu$ são índices livres diferentes.
+
+\begin{activity}
+Classifique cada expressão como escalar, vetor, um-forma, tensor de ordem dois
+ou expressão inválida:
+\[
+  A_\mu B^\mu,\qquad
+  T^{\mu\nu}V_\nu,\qquad
+  R_{\mu\nu}A^\rho,\qquad
+  A_\mu+B^\mu.
+\]
+\end{activity}
+
+\section{O que significa uma equação tensorial}
+
+Uma equação tensorial bem escrita é uma afirmação independente de coordenadas.
+Isso não quer dizer que as componentes sejam iguais em todos os referenciais.
+Quer dizer que, se a relação entre objetos geométricos é verdadeira, qualquer
+observador que escreva a relação em suas próprias componentes obterá uma
+equação da mesma forma. Essa é a razão profunda para preferirmos tensores em
+relatividade: eles separam física de descrição.
+
+Por exemplo, a equação
+\[
+  p^\mu p_\mu=-m^2
+\]
+é escalar. Cada observador pode atribuir valores diferentes a $E$ e $\bm p$,
+mas todos obtêm o mesmo valor para $E^2-\bm p^2$. Já a equação
+\[
+  A^\mu=B^\mu+C^\mu
+\]
+é vetorial: as componentes mudam de referencial, mas a relação entre os
+vetores permanece. Em contraste, uma expressão como $A^\mu=B_\mu$ não é uma
+igualdade tensorial natural sem uma métrica especificada, pois os dois lados
+têm tipos diferentes.
+
+\section{Mudança de base e transformação de componentes}
+
+Considere uma mudança linear de coordenadas
+\[
+  x^{\mu'}=\Lambda^{\mu'}{}_\nu x^\nu.
+\]
+As componentes de um vetor transformam como
+\[
+  V^{\mu'}=\Lambda^{\mu'}{}_\nu V^\nu.
+\]
+As componentes de uma um-forma transformam com a matriz inversa:
+\[
+  \omega_{\mu'}=\frac{\partial x^\nu}{\partial x^{\mu'}}\omega_\nu.
+\]
+Essa diferença é exatamente o que torna a contração $\omega_\mu V^\mu$
+invariante. A contração é a operação que junta um índice covariante e um
+contravariante, eliminando a dependência da base.
+
+\begin{example}
+Em duas dimensões euclidianas, seja $\omega=(2,1)$ e $V=(3,4)$ em uma base
+cartesiana. A contração é $\omega(V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma
+base rotacionada, as componentes individuais mudam, mas o número obtido pela
+ação da um-forma sobre o vetor permanece o mesmo.
+\end{example}
+
+\section{A métrica como instrumento de medida}
+
+A métrica tem duas funções simultâneas. Primeiro, ela mede produtos escalares e
+normas. Segundo, ela fornece uma identificação entre vetores e um-formas. Essa
+identificação não é automática em uma variedade; ela é informação geométrica
+adicional. Em relatividade geral, quando a métrica passa a depender da posição,
+essa informação geométrica torna-se dinâmica.
+
+Em notação de índices, baixar um índice parece uma operação simples:
+\[
+  V_\mu=g_{\mu\nu}V^\nu.
+\]
+Mas o significado é físico. O objeto $V_\mu$ é a um-forma que, ao agir sobre
+um vetor $W^\mu$, retorna o produto escalar $V\cdot W$. Essa leitura evita a
+ideia equivocada de que índices altos e baixos são meras posições tipográficas.
+
+\section{Erros comuns com índices}
+
+Há três erros frequentes. O primeiro é repetir um índice mais de duas vezes em
+um mesmo termo, como em $A_\mu B^\mu C^\mu$. O segundo é mudar o nome de um
+índice livre entre os lados de uma equação. O terceiro é somar objetos de tipos
+diferentes, como $A_\mu+B^\mu$, sem uma métrica ou identificação explícita.
+
+Um bom hábito é ler os índices em voz alta: índices repetidos desaparecem por
+soma; índices livres nomeiam o tipo do objeto resultante. Se depois de uma
+contração ainda sobram índices $\alpha$ e $\beta$, o resultado é um tensor com
+esses índices livres. Essa regra simples previne a maioria dos erros técnicos
+no início do curso.
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Contrações possíveis.} Dado $T^{\mu\nu}$, $A_\mu$ e $B^\mu$,
+  liste todas as contrações escalares que podem ser formadas com um único
+  $T$, um $A$ e um $B$. Explique quais expressões deixam índices livres.
+
+  \item \textbf{Parte simétrica e antissimétrica.} Para um tensor $M_{\mu\nu}$,
+  defina
+  \[
+    M_{(\mu\nu)}=\frac12(M_{\mu\nu}+M_{\nu\mu}),\qquad
+    M_{[\mu\nu]}=\frac12(M_{\mu\nu}-M_{\nu\mu}).
+  \]
+  Mostre que $M_{\mu\nu}=M_{(\mu\nu)}+M_{[\mu\nu]}$.
+
+  \item \textbf{Traço invariante.} Use a lei de transformação de um tensor
+  misto $T^\mu{}_\nu$ para mostrar que $T^\mu{}_\mu$ não depende da base.
+
+  \item \textbf{Gradiente.} Seja $f=t^2-x^2$. Calcule $\partial_\mu f$ e
+  depois eleve o índice com a métrica de Minkowski. Interprete por que o sinal
+  da componente temporal muda.
+
+  \item \textbf{Produto externo.} Dados dois vetores $A^\mu$ e $B^\nu$,
+  construa $A^\mu B^\nu$. Separe sua parte simétrica e antissimétrica.
+
+  \item \textbf{Checagem de equações.} Verifique se as expressões
+  $A_\mu=B_\mu+C_\mu$, $A^\mu B_\mu=C^\nu D_\nu$ e
+  $T^{\mu\nu}=A^\mu B^\nu$ são tensorialmente consistentes.
+\end{enumerate}
+
+\section{Exemplos resolvidos adicionais}
+
+\begin{example}
+\textbf{Abaixamento de índices.} Seja $V^\mu=(3,2,0,0)$ em Minkowski com
+assinatura $(-,+,+,+)$. Então
+\[
+  V_\mu=\eta_{\mu\nu}V^\nu=(-3,2,0,0).
+\]
+A norma é
+\[
+  V^\mu V_\mu=-9+4=-5.
+\]
+O vetor é temporal. Se fosse quadrimomento, corresponderia a uma partícula
+massiva com massa invariante $\sqrt{5}$.
+\end{example}
+
+\begin{example}
+\textbf{Contração de tensor antissimétrico.} Se $F_{\mu\nu}=-F_{\nu\mu}$ e
+$S^{\mu\nu}=S^{\nu\mu}$, então
+\[
+  F_{\mu\nu}S^{\mu\nu}
+  =F_{\nu\mu}S^{\nu\mu}
+  =-F_{\mu\nu}S^{\nu\mu}
+  =-F_{\mu\nu}S^{\mu\nu}.
+\]
+Logo a contração é igual ao seu negativo e, portanto, vale zero.
+\end{example}
+
+\begin{example}
+\textbf{Transformação de uma um-forma.} Em duas dimensões, tome
+$x'=2x$, $y'=y$. Se $\omega=\dd x$, então
+\[
+  \dd x=\frac{1}{2}\dd x'.
+\]
+Assim, a componente da um-forma na coordenada $x'$ é metade da componente
+original. Vetores e um-formas transformam de modos inversos para preservar
+$\omega(V)$.
+\end{example}
+
+\begin{example}
+\textbf{Tensor como máquina multilinear.} Um tensor $T_{\mu\nu}$ recebe dois
+vetores e devolve um número:
+\[
+  T(A,B)=T_{\mu\nu}A^\mu B^\nu.
+\]
+Se fixamos apenas o segundo vetor, obtemos uma um-forma:
+\[
+  \alpha_\mu=T_{\mu\nu}B^\nu.
+\]
+Essa leitura ajuda a lembrar que contração parcial reduz o tipo tensorial do
+objeto.
+\end{example}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Mostre que o traço $T^\mu{}_\mu$ é invariante sob mudança de base.
+\end{exercise}
+
+\begin{exercise}
+Se $F_{\mu\nu}=-F_{\nu\mu}$ e $S^{\mu\nu}=S^{\nu\mu}$, mostre que
+$F_{\mu\nu}S^{\mu\nu}=0$.
+\end{exercise}
+
+\chapter{Fluidos relativísticos}
+
+\begin{objetivos}
+Introduzir o tensor energia-momento como fonte da gravidade e como objeto que
+resume densidade de energia, fluxo de energia, densidade de momento e tensões.
+\end{objetivos}
+
+\section{Poeira}
+
+Uma poeira é um conjunto de partículas sem pressão em seu referencial local de
+repouso. Se $\rho$ é a densidade de energia própria e $U^\mu$ a
+quadrivelocidade, então
+\[
+  T^{\mu\nu}=\rho U^\mu U^\nu.
+\]
+No referencial comóvel, $U^\mu=(1,0,0,0)$ e apenas $T^{00}=\rho$ é diferente
+de zero.
+
+\section{Fluido perfeito}
+
+Um fluido perfeito isotrópico tem densidade de energia $\rho$ e pressão $p$.
+Seu tensor energia-momento é
+\[
+  T^{\mu\nu}=(\rho+p)U^\mu U^\nu+p g^{\mu\nu}.
+\]
+No espaço plano, basta tomar $g^{\mu\nu}=\eta^{\mu\nu}$. Em relatividade geral,
+o mesmo formato vale localmente em um espaço-tempo curvo.
+
+\begin{resultado}
+A conservação local de energia e momento é
+\[
+  \nabla_\mu T^{\mu\nu}=0.
+\]
+Em espaço-tempo plano e coordenadas cartesianas, isso se reduz a
+$\partial_\mu T^{\mu\nu}=0$.
+\end{resultado}
+
+\section{Como ler o tensor energia-momento}
+
+O tensor energia-momento é uma tabela de fluxos. A componente $T^{00}$ é
+densidade de energia. As componentes $T^{0i}$ representam fluxo de energia na
+direção $i$. As componentes $T^{i0}$ representam densidade de momento. As
+componentes $T^{ij}$ representam fluxo do momento $i$ através de uma superfície
+normal à direção $j$; por isso incluem pressão e tensões.
+
+No caso de um fluido perfeito em repouso local,
+\[
+  T^{\mu\nu}=
+  \begin{pmatrix}
+  \rho&0&0&0\\
+  0&p&0&0\\
+  0&0&p&0\\
+  0&0&0&p
+  \end{pmatrix}.
+\]
+Essa matriz mostra por que pressão gravita em relatividade geral. A fonte da
+geometria não é apenas massa no sentido newtoniano, mas todo o tensor
+energia-momento. Em situações não relativísticas, $p\ll\rho$ e a pressão pode
+ser desprezada como fonte gravitacional. Em estrelas de nêutrons, radiação no
+Universo primordial ou campos relativísticos, essa aproximação deixa de ser
+segura.
+
+\section{Equações de estado}
+
+Para fechar um problema de fluido, é necessário relacionar pressão e densidade.
+Uma forma simples é
+\[
+  p=w\rho.
+\]
+Poeira fria tem $w=0$. Radiação tem $w=1/3$, pois o traço do tensor
+energia-momento eletromagnético é nulo. Uma constante cosmológica efetiva tem
+$w=-1$. Esses valores reaparecerão em cosmologia, onde determinam como a
+densidade de energia evolui com a expansão.
+
+\begin{example}
+No referencial comóvel de um fluido de radiação,
+\[
+  T^\mu{}_\mu=-\rho+3p.
+\]
+Para radiação, $T^\mu{}_\mu=0$, logo $p=\rho/3$. Essa é uma maneira rápida de
+lembrar a equação de estado relativística para um gás de partículas sem massa.
+\end{example}
+
+\section{Conservação local e leis integrais}
+
+Em espaço plano, a equação $\partial_\mu T^{\mu\nu}=0$ pode ser integrada em
+um volume. A componente $\nu=0$ expressa conservação de energia: a variação da
+energia dentro do volume é igual ao fluxo líquido através da fronteira. As
+componentes espaciais expressam conservação de momento. Em espaço-tempo curvo,
+a forma local torna-se $\nabla_\mu T^{\mu\nu}=0$, mas a passagem para uma
+energia global conservada exige simetria temporal. Essa sutileza é uma das
+diferenças profundas entre gravitação relativística e teorias de campo em um
+fundo fixo.
+
+\begin{activity}
+Escolha três sistemas físicos: poeira fria, gás relativístico e energia escura.
+Para cada um, escreva uma matriz diagonal plausível para $T^{\mu}{}_{\nu}$ no
+referencial comóvel e discuta o sinal da pressão.
+\end{activity}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Poeira em movimento.} Para uma poeira com densidade própria
+  $\rho$ e velocidade $v$ na direção $x$, calcule explicitamente os componentes
+  $T^{00}$, $T^{0x}$ e $T^{xx}$ em Minkowski.
+
+  \item \textbf{Traço do fluido perfeito.} Mostre que
+  \[
+    T^\mu{}_\mu=-\rho+3p.
+  \]
+  Aplique o resultado a poeira, radiação e constante cosmológica.
+
+  \item \textbf{Limite não relativístico.} Assuma $p\ll\rho$ e $v\ll1$.
+  Identifique os termos dominantes de $T^{\mu\nu}$ e explique por que a fonte
+  newtoniana é aproximadamente a densidade de massa.
+
+  \item \textbf{Conservação de partículas.} Partindo de $N^\mu=nU^\mu$,
+  escreva $\partial_\mu N^\mu=0$ em um referencial onde o fluido tem velocidade
+  ordinária $\bm v$.
+
+  \item \textbf{Pressão como fluxo.} Explique por que $T^{xx}=p$ no referencial
+  comóvel significa fluxo de momento $x$ através de uma superfície normal a
+  $x$. Use colisões microscópicas com uma parede como imagem física.
+
+  \item \textbf{Som de um fluido.} Para uma equação de estado $p=p(\rho)$, a
+  velocidade do som relativística satisfaz $c_s^2=\dd p/\dd\rho$. Discuta por
+  que causalidade sugere $c_s\le1$.
+\end{enumerate}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Calcule $T^{\mu\nu}$ de um fluido perfeito no referencial de repouso local.
+\end{exercise}
+
+\begin{exercise}
+No limite não relativístico, identifique quais componentes de $T^{\mu\nu}$ são
+dominantes para uma poeira lenta.
+\end{exercise}
+
+\chapter{Da gravidade à curvatura}
+
+\begin{objetivos}
+Preparar a transição conceitual: gravidade não é uma força em um palco fixo,
+mas manifestação da geometria do espaço-tempo.
+\end{objetivos}
+
+\section{O princípio da equivalência}
+
+Localmente, um campo gravitacional uniforme pode ser eliminado pela escolha de
+um referencial em queda livre. Essa afirmação não diz que a gravidade desaparece
+globalmente. Gradientes do campo gravitacional, isto é, efeitos de maré, não
+podem ser removidos em uma região finita.
+
+\begin{resultado}
+O conteúdo físico da curvatura está nos efeitos de maré. A conexão pode ser
+zerada em um ponto por uma escolha de coordenadas; o tensor de curvatura não.
+\end{resultado}
+
+\section{Coordenadas curvilíneas}
+
+Mesmo no plano euclidiano, coordenadas polares produzem símbolos de Christoffel
+não nulos. Com
+\[
+  \dd \ell^2=\dd r^2+r^2\dd\phi^2,
+\]
+os símbolos não nulos são
+\[
+  \Gamma^r_{\phi\phi}=-r,\qquad
+  \Gamma^\phi_{r\phi}=\Gamma^\phi_{\phi r}=\frac{1}{r}.
+\]
+Isso ensina uma lição importante: Christoffel não nulo não significa curvatura
+não nula. Ele pode ser apenas efeito de coordenadas.
+
+\section{Equação geodésica}
+
+Uma geodésica satisfaz
+\[
+  \frac{\dd^2 x^\mu}{\dd\lambda^2}
+  +\Gamma^\mu_{\alpha\beta}
+  \frac{\dd x^\alpha}{\dd\lambda}
+  \frac{\dd x^\beta}{\dd\lambda}=0,
+\]
+onde $\lambda$ é parâmetro afim. Para partículas massivas, podemos escolher
+$\lambda=\tau$. Para luz, usa-se um parâmetro afim nulo.
+
+\section{Christoffel não é força}
+
+É tentador interpretar $\Gamma^\mu_{\alpha\beta}$ como força gravitacional,
+pois ele aparece na equação geodésica em uma posição parecida com aceleração.
+Essa interpretação é perigosa. Os símbolos de Christoffel não formam um tensor
+e podem ser anulados em um ponto por escolha adequada de coordenadas. Uma
+quantidade física local não deve depender desse tipo de escolha.
+
+A maneira correta de ler a equação geodésica é: uma partícula livre mantém seu
+vetor tangente paralelamente transportado ao longo da própria trajetória. Em
+coordenadas curvilíneas, a mudança dos vetores de base introduz termos
+adicionais. Em uma geometria curva, termos semelhantes descrevem também a
+estrutura gravitacional local. A distinção entre efeito de coordenadas e
+efeito físico é feita pela curvatura.
+
+\section{Derivação por princípio variacional}
+
+Para uma curva $x^\mu(\lambda)$, considere a Lagrangiana
+\[
+  L=\frac{1}{2}g_{\mu\nu}(x)\dot x^\mu\dot x^\nu,
+\]
+onde ponto denota derivada em relação a $\lambda$. As equações de
+Euler-Lagrange são
+\[
+  \frac{\dd}{\dd\lambda}\left(\frac{\partial L}{\partial \dot x^\rho}\right)
+  -\frac{\partial L}{\partial x^\rho}=0.
+\]
+Como
+\[
+  \frac{\partial L}{\partial \dot x^\rho}=g_{\rho\nu}\dot x^\nu,
+\]
+temos
+\[
+  g_{\rho\nu}\ddot x^\nu+\partial_\alpha g_{\rho\nu}\dot x^\alpha\dot x^\nu
+  -\frac{1}{2}\partial_\rho g_{\mu\nu}\dot x^\mu\dot x^\nu=0.
+\]
+Multiplicando por $g^{\rho\sigma}$ e rearranjando índices, obtemos
+\[
+  \ddot x^\sigma+\Gamma^\sigma_{\mu\nu}\dot x^\mu\dot x^\nu=0.
+\]
+Assim, geodésicas podem ser vistas tanto como curvas de transporte paralelo do
+tangente quanto como extremantes do comprimento ou do tempo próprio.
+
+\section{Marés como sinal de curvatura}
+
+Imagine duas partículas em queda livre próximas uma da outra. Em um campo
+gravitacional uniforme ideal, elas mantêm separação constante em um referencial
+em queda livre. No campo real da Terra, duas partículas separadas radialmente
+tendem a se afastar, enquanto partículas separadas transversalmente tendem a se
+aproximar. Esse padrão é chamado efeito de maré.
+
+Na linguagem relativística, marés são descritas por curvatura. A conexão pode
+ser removida em um ponto; diferenças da conexão em pontos vizinhos não podem
+ser removidas em uma região finita. Por isso a curvatura, e não a conexão,
+contém a parte observável da gravidade local.
+
+\begin{example}
+Em coordenadas polares no plano, os símbolos de Christoffel são não nulos, mas
+se transportarmos um vetor ao longo de um pequeno circuito fechado e retornarmos
+ao ponto inicial, o vetor não sofre rotação líquida associada à curvatura do
+plano. Em uma esfera, o mesmo experimento produz uma diferença angular
+proporcional à área envolvida. Essa é uma manifestação geométrica da curvatura.
+\end{example}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Inversa da métrica polar.} Para
+  $\dd\ell^2=\dd r^2+r^2\dd\phi^2$, escreva $g_{ij}$ e $g^{ij}$. Use a fórmula
+  de Christoffel para obter os símbolos não nulos.
+
+  \item \textbf{Geodésica radial.} Mostre que curvas com $\phi=\mathrm{const}$
+  são geodésicas no plano polar. Interprete o resultado geometricamente.
+
+  \item \textbf{Círculos não são geodésicas.} Tome $r=R$ constante e
+  $\phi=\lambda$. Substitua na equação geodésica e mostre que a equação radial
+  não é satisfeita.
+
+  \item \textbf{Esfera unitária.} Para
+  $\dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2$, calcule
+  $\Gamma^\theta_{\phi\phi}$ e $\Gamma^\phi_{\theta\phi}$.
+
+  \item \textbf{Grande círculos.} Use simetria para argumentar que o equador de
+  uma esfera é geodésica. Depois verifique pela equação geodésica.
+
+  \item \textbf{Maré newtoniana.} Para $\Phi=-GM/r$, calcule qualitativamente
+  as segundas derivadas radiais e transversais. Relacione-as a alongamento
+  radial e compressão transversal.
+\end{enumerate}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Use os símbolos de Christoffel polares para mostrar que uma reta no plano
+continua sendo geodésica, embora suas coordenadas polares satisfaçam equações
+não triviais.
+\end{exercise}
+
+\begin{exercise}
+Explique por que uma estação espacial em órbita está em queda livre, apesar de
+sua distância ao centro da Terra ser aproximadamente constante.
+\end{exercise}
+
+\chapter{Variedades, derivada covariante e curvatura}
+
+\begin{objetivos}
+Formalizar o cálculo tensorial em espaços-tempos curvos e obter os objetos
+geométricos que entram nas equações de Einstein.
+\end{objetivos}
+
+\section{Variedades e métricas}
+
+Uma variedade diferenciável é um espaço que, localmente, parece $\mathbb{R}^n$.
+O espaço-tempo da relatividade geral é uma variedade quadridimensional equipada
+com uma métrica lorentziana $g_{\mu\nu}$.
+
+O elemento de linha é
+\[
+  \dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu.
+\]
+Quando $g_{\mu\nu}$ depende da posição, a geometria muda de ponto a ponto.
+
+\section{Derivada covariante}
+
+Para um vetor,
+\[
+  \nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu_{\mu\alpha}V^\alpha.
+\]
+Para uma um-forma,
+\[
+  \nabla_\mu \omega_\nu=\partial_\mu \omega_\nu-\Gamma^\alpha_{\mu\nu}\omega_\alpha.
+\]
+O sinal muda porque a contração $\omega_\nu V^\nu$ deve ter derivada usual
+compatível.
+
+Para a conexão de Levi-Civita, impomos torção nula e compatibilidade métrica:
+\[
+  \Gamma^\rho_{\mu\nu}=\Gamma^\rho_{\nu\mu},
+  \qquad
+  \nabla_\alpha g_{\mu\nu}=0.
+\]
+Daí segue
+\[
+  \Gamma^\rho_{\mu\nu}
+  =\frac{1}{2}g^{\rho\sigma}
+  \left(\partial_\mu g_{\nu\sigma}
+  +\partial_\nu g_{\mu\sigma}
+  -\partial_\sigma g_{\mu\nu}\right).
+\]
+
+\section{Curvatura}
+
+O tensor de Riemann mede a falha de derivadas covariantes em comutar:
+\[
+  [\nabla_\mu,\nabla_\nu]V^\rho
+  =R^\rho{}_{\sigma\mu\nu}V^\sigma.
+\]
+Em componentes,
+\[
+  R^\rho{}_{\sigma\mu\nu}
+  =\partial_\mu\Gamma^\rho_{\nu\sigma}
+  -\partial_\nu\Gamma^\rho_{\mu\sigma}
+  +\Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}
+  -\Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}.
+\]
+As contrações relevantes são
+\[
+  R_{\mu\nu}=R^\rho{}_{\mu\rho\nu},\qquad
+  R=g^{\mu\nu}R_{\mu\nu},
+\]
+e o tensor de Einstein é
+\[
+  G_{\mu\nu}=R_{\mu\nu}-\frac{1}{2}Rg_{\mu\nu}.
+\]
+
+\begin{resultado}
+A identidade de Bianchi contraída implica
+\[
+  \nabla_\mu G^{\mu\nu}=0.
+\]
+Essa propriedade geométrica antecipa a conservação local de energia e momento
+da matéria.
+\end{resultado}
+
+\section{Compatibilidade métrica}
+
+A condição $\nabla_\alpha g_{\mu\nu}=0$ afirma que o transporte paralelo
+preserva produtos escalares. Se dois vetores são transportados paralelamente ao
+longo de uma curva, o produto escalar entre eles permanece constante. Essa é
+uma exigência natural para uma conexão que deve representar a geometria
+determinada pela métrica.
+
+Junto com torção nula, a compatibilidade métrica determina de modo único a
+conexão de Levi-Civita. Em relatividade geral padrão, essa é a conexão usada
+para definir geodésicas, curvatura e derivada covariante. Teorias mais gerais
+podem relaxar torção nula ou compatibilidade métrica, mas isso está além do
+curso introdutório.
+
+\section{Simetrias do tensor de Riemann}
+
+O tensor de Riemann possui várias simetrias. Com todos os índices abaixados,
+\[
+  R_{\rho\sigma\mu\nu}
+  =-R_{\sigma\rho\mu\nu}
+  =-R_{\rho\sigma\nu\mu}
+  =R_{\mu\nu\rho\sigma}.
+\]
+Além disso, vale a primeira identidade de Bianchi,
+\[
+  R_{\rho[\sigma\mu\nu]}=0.
+\]
+Essas simetrias reduzem drasticamente o número de componentes independentes.
+Em quatro dimensões, o tensor de Riemann possui 20 componentes independentes,
+não 256. O tensor de Ricci contém 10 componentes independentes. As 10 restantes
+estão associadas ao tensor de Weyl, que descreve a parte livre da curvatura,
+incluindo marés de vácuo e ondas gravitacionais.
+
+\section{Curvatura intrínseca e extrínseca}
+
+Uma superfície pode parecer curva por estar embutida em um espaço maior, mas a
+curvatura relevante em relatividade geral é intrínseca. Habitantes
+bidimensionais de uma esfera poderiam detectar sua curvatura medindo somas de
+ângulos de triângulos, sem olhar para uma terceira dimensão. Do mesmo modo, a
+curvatura do espaço-tempo não exige imaginá-lo embutido em um espaço externo.
+Ela é medida por experimentos internos: transporte paralelo, desvio geodésico,
+volumes de pequenas bolas geodésicas e propagação de luz.
+
+\begin{example}
+Em uma esfera de raio $a$, um triângulo formado por dois meridianos separados
+por $90^\circ$ e pelo equador possui três ângulos retos. A soma é $270^\circ$,
+maior que $180^\circ$. Essa diferença é uma medida integrada da curvatura
+positiva da esfera.
+\end{example}
+
+\section{Desvio geodésico}
+
+Seja $\xi^\mu$ o vetor separação entre duas geodésicas vizinhas e $U^\mu$ o
+vetor tangente à família de geodésicas. A equação de desvio geodésico é
+\[
+  \frac{\D^2\xi^\mu}{\D\tau^2}
+  =
+  -R^\mu{}_{\alpha\nu\beta}U^\alpha\xi^\nu U^\beta.
+\]
+Essa equação é uma das formas mais diretas de interpretar curvatura. Ela diz
+que a aceleração relativa entre partículas em queda livre é controlada pelo
+tensor de Riemann. No limite newtoniano, ela se reduz à equação de maré
+envolvendo segundas derivadas do potencial gravitacional.
+
+\begin{activity}
+Considere duas partículas inicialmente em repouso relativo, separadas por uma
+pequena distância radial no campo de uma massa central. Use intuição
+newtoniana para determinar se a separação aumenta ou diminui. Depois associe o
+resultado ao sinal de componentes apropriadas de curvatura.
+\end{activity}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Compatibilidade métrica.} Partindo de $\nabla_\alpha g_{\mu\nu}=0$,
+  mostre que $\nabla_\alpha g^{\mu\nu}=0$. A pista é derivar
+  $g_{\mu\rho}g^{\rho\nu}=\delta_\mu{}^\nu$.
+
+  \item \textbf{Divergência de vetor.} Mostre que
+  \[
+    \nabla_\mu V^\mu=\frac{1}{\sqrt{|g|}}\partial_\mu(\sqrt{|g|}V^\mu).
+  \]
+  Esse resultado é útil para leis de conservação em coordenadas gerais.
+
+  \item \textbf{Comutador em escalares.} Verifique que
+  $[\nabla_\mu,\nabla_\nu]f=0$ para qualquer escalar $f$, assumindo conexão sem
+  torção.
+
+  \item \textbf{Ricci da esfera.} Usando os Christoffel da esfera unitária,
+  calcule pelo menos uma componente de $R_{\mu\nu}$ e compare com
+  $R_{\mu\nu}=g_{\mu\nu}$ para esfera unitária.
+
+  \item \textbf{Número de componentes.} Conte os componentes independentes de
+  um tensor simétrico $4\times4$. Depois discuta por que as equações de
+  Einstein têm dez componentes, mas nem todas são evolutivas independentes.
+
+  \item \textbf{Curvatura zero.} Explique por que todos os componentes do
+  tensor de Riemann se anulam em Minkowski, mesmo quando usamos coordenadas
+  polares ou esféricas.
+\end{enumerate}
+
+\section{Exemplos resolvidos adicionais}
+
+\begin{example}
+\textbf{Divergência em coordenadas polares.} No plano,
+$g_{ij}=\mathrm{diag}(1,r^2)$ e $\sqrt{|g|}=r$. Para um vetor
+$V^i=(V^r,V^\phi)$,
+\[
+  \nabla_iV^i=\frac{1}{r}\partial_r(rV^r)+\frac{1}{r}\partial_\phi(rV^\phi).
+\]
+Como $r$ não depende de $\phi$,
+\[
+  \nabla_iV^i=\partial_rV^r+\frac{1}{r}V^r+\partial_\phi V^\phi.
+\]
+Esse é o termo extra familiar da divergência em polares, agora entendido como
+consequência de $\sqrt{|g|}$.
+\end{example}
+
+\begin{example}
+\textbf{Geodésicas na esfera.} Na esfera unitária,
+\[
+  \dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2.
+\]
+Os símbolos relevantes são
+\[
+  \Gamma^\theta_{\phi\phi}=-\sin\theta\cos\theta,\qquad
+  \Gamma^\phi_{\theta\phi}=\cot\theta.
+\]
+No equador, $\theta=\pi/2$ e $\dot\theta=0$. A equação para $\theta$ contém
+$-\sin\theta\cos\theta\,\dot\phi^2$, que se anula no equador. Portanto o
+equador é geodésica.
+\end{example}
+
+\begin{example}
+\textbf{Curvatura por transporte paralelo.} Transporte um vetor ao longo de um
+triângulo pequeno em uma superfície curva. A diferença entre o vetor inicial e
+final é proporcional à área do circuito e ao tensor de curvatura. No limite de
+área infinitesimal, essa relação fornece uma interpretação geométrica direta de
+$R^\rho{}_{\sigma\mu\nu}$: ele mede a rotação infinitesimal produzida por um
+paralelogramo infinitesimal.
+\end{example}
+
+\begin{example}
+\textbf{Coordenadas normais.} Em qualquer ponto de uma variedade pseudo-
+riemanniana, é possível escolher coordenadas tais que
+$g_{\mu\nu}=\eta_{\mu\nu}$ e $\partial_\alpha g_{\mu\nu}=0$ naquele ponto. Como
+os Christoffel dependem de primeiras derivadas da métrica, eles se anulam ali.
+As segundas derivadas, porém, permanecem e codificam a curvatura.
+\end{example}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Calcule os símbolos de Christoffel da métrica da esfera unitária,
+$\dd \ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2$.
+\end{exercise}
+
+\begin{exercise}
+Mostre que, em coordenadas localmente inerciais em um ponto, podemos ter
+$\Gamma^\rho_{\mu\nu}=0$ nesse ponto, mas em geral não podemos anular
+$\partial_\alpha\Gamma^\rho_{\mu\nu}$.
+\end{exercise}
+
+\chapter{Física em espaço-tempo curvo}
+
+\begin{objetivos}
+Aprender como partículas, luz, relógios e observadores são descritos em uma
+geometria curva.
+\end{objetivos}
+
+\section{Movimento livre}
+
+Na relatividade geral, uma partícula livre segue uma geodésica temporal:
+\[
+  U^\nu\nabla_\nu U^\mu=0.
+\]
+Essa equação expressa que o vetor tangente é transportado paralelamente ao
+longo da própria curva.
+
+Para luz,
+\[
+  k^\nu\nabla_\nu k^\mu=0,
+  \qquad
+  k^\mu k_\mu=0.
+\]
+
+\section{Energia medida por um observador}
+
+Se uma partícula tem quadrimomento $p^\mu$ e o observador tem
+quadrivelocidade $U^\mu$, a energia medida localmente é
+\[
+  E_{\rm obs}=-p_\mu U^\mu.
+\]
+Essa fórmula é uma das mais úteis da relatividade: ela vale em espaço plano,
+em espaço curvo, para partículas massivas e para fótons.
+
+\section{Simetrias e quantidades conservadas}
+
+Se $\xi^\mu$ é um vetor de Killing, então ao longo de uma geodésica com
+momento $p^\mu$,
+\[
+  C=\xi_\mu p^\mu
+\]
+é constante. Em uma geometria estacionária, a simetria temporal fornece uma
+energia conservada. Em uma geometria axial, a simetria angular fornece momento
+angular conservado.
+
+\section{Observadores não são coordenadas}
+
+Em relatividade geral, coordenadas são rótulos; observadores são objetos
+físicos. Um observador ideal é representado por uma linha de mundo temporal e
+por uma quadrivelocidade $U^\mu$ normalizada. Dois observadores podem usar as
+mesmas coordenadas e ainda assim medir energias diferentes, pois a medida
+depende de sua quadrivelocidade. Do mesmo modo, uma coordenada temporal $t$ não
+é automaticamente o tempo próprio de alguém.
+
+Essa distinção é crucial em espaços-tempos curvos. Na métrica de
+Schwarzschild, por exemplo, o observador estático em raio fixo mede um tempo
+próprio relacionado a $\dd t$ por um fator que depende de $r$. Um observador em
+queda livre atravessando o mesmo ponto possui outra quadrivelocidade e mede
+outra decomposição local de energia e momento.
+
+\section{Tetradas locais}
+
+Uma tetrada é um conjunto de quatro vetores ortonormais carregados por um
+observador. O vetor temporal da tetrada é a quadrivelocidade do observador; os
+três vetores espaciais definem seus eixos locais. Em componentes de tetrada, a
+métrica parece a métrica de Minkowski:
+\[
+  g(e_{\hat\alpha},e_{\hat\beta})=\eta_{\hat\alpha\hat\beta}.
+\]
+Índices com chapéu indicam componentes medidas localmente, não componentes em
+uma carta qualquer.
+
+Essa linguagem é útil porque aparelhos reais medem componentes locais. Um
+detector não mede diretamente $p_t$ ou $p_r$ como números abstratos de uma
+carta; ele mede energia e direção em seu laboratório. A conversão entre
+componentes coordenadas e componentes medidas passa pela tetrada.
+
+\section{Constantes de movimento e energia local}
+
+Em uma geometria estacionária, $p_t$ pode ser constante ao longo de uma
+geodésica. Isso não significa que todos os observadores locais meçam a mesma
+energia. A energia conservada associada ao infinito e a energia local medida
+por um observador são conceitos relacionados, mas distintos:
+\[
+  E_{\rm loc}=-p_\mu U^\mu.
+\]
+No caso de um fóton subindo em um campo gravitacional estático, a quantidade
+conservada ligada à simetria temporal permanece fixa, enquanto a energia
+medida por observadores estáticos muda com o potencial gravitacional. Essa é a
+origem do redshift gravitacional.
+
+\begin{example}
+Em espaço plano, dois observadores inerciais com quadrivelocidades $U^\mu$ e
+$V^\mu$ medem energias diferentes para a mesma partícula. A diferença é
+puramente cinemática e corresponde ao efeito Doppler. Em espaço-tempo curvo,
+além dessa diferença cinemática, pode haver variação associada à posição dos
+observadores na geometria.
+\end{example}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Energia local.} Em Minkowski, tome $p^\mu=m\gamma(1,v,0,0)$ e
+  um observador em repouso $U^\mu=(1,0,0,0)$. Calcule $E=-p_\mu U^\mu$.
+
+  \item \textbf{Observador em movimento.} Repita o cálculo anterior para um
+  observador com velocidade $u$ na direção $x$. Mostre que aparece a energia
+  transformada por Lorentz.
+
+  \item \textbf{Killing temporal.} Em uma métrica independente de $t$, mostre
+  que $\xi^\mu=(1,0,0,0)$ é candidato natural a vetor de Killing. Escreva a
+  constante associada para uma geodésica.
+
+  \item \textbf{Killing axial.} Em uma métrica independente de $\phi$, obtenha
+  a constante associada a rotações. Interprete-a como momento angular.
+
+  \item \textbf{Geodésica nula.} Explique por que não podemos usar tempo
+  próprio para parametrizar a trajetória de um fóton. O que significa escolher
+  um parâmetro afim?
+
+  \item \textbf{Tetrada estática.} Para uma métrica diagonal estática, construa
+  qualitativamente uma tetrada de observador em repouso nas coordenadas
+  espaciais.
+\end{enumerate}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Mostre que $C=\xi_\mu p^\mu$ é conservado ao longo de uma geodésica quando
+$\nabla_{(\mu}\xi_{\nu)}=0$.
+\end{exercise}
+
+\chapter{Equações de Einstein}
+
+\begin{objetivos}
+Compreender a forma, a motivação e os limites físicos das equações de campo.
+\end{objetivos}
+
+\section{A equação de campo}
+
+As equações de Einstein são
+\[
+  G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi G T_{\mu\nu},
+\]
+ou, em unidades geométricas $G=c=1$,
+\[
+  G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi T_{\mu\nu}.
+\]
+O lado esquerdo descreve geometria; o lado direito descreve matéria e energia.
+A constante cosmológica $\Lambda$ pode ser interpretada geometricamente ou como
+componente efetiva do conteúdo energético do Universo.
+
+\section{Limite newtoniano}
+
+No limite de campo fraco e velocidades pequenas, escrevemos
+\[
+  g_{00}\approx -(1+2\Phi),
+\]
+onde $\Phi$ é o potencial gravitacional newtoniano. As equações de Einstein
+reduzem-se à equação de Poisson
+\[
+  \nabla^2\Phi=4\pi G\rho.
+\]
+Esse limite fixa o fator $8\pi G$ na equação de campo.
+
+\section{Conservação local}
+
+Como $\nabla_\mu G^{\mu\nu}=0$, as equações de Einstein exigem
+\[
+  \nabla_\mu T^{\mu\nu}=0.
+\]
+Essa conservação é local. Em espaço-tempos genéricos, não existe uma energia
+gravitacional global simples e tensorialmente definida.
+
+\section{Por que o tensor de Einstein}
+
+Queremos uma equação que relacione geometria e matéria. O lado da matéria deve
+ser o tensor energia-momento $T_{\mu\nu}$, pois ele contém densidade de energia,
+fluxos e tensões. Portanto o lado geométrico deve ser também um tensor
+simétrico de tipo $(0,2)$. Além disso, deve ter divergência covariante nula,
+para ser compatível com conservação local de energia e momento. O tensor de
+Einstein satisfaz exatamente essa exigência:
+\[
+  \nabla_\mu G^{\mu\nu}=0.
+\]
+
+Outro requisito é que a equação contenha no máximo segundas derivadas da
+métrica. Isso é importante para que a teoria tenha um problema de valor inicial
+bem comportado, análogo ao de outras teorias clássicas. O tensor de Einstein é
+construído a partir da curvatura, que envolve segundas derivadas da métrica e
+termos quadráticos em primeiras derivadas.
+
+\section{Traço das equações de campo}
+
+Sem constante cosmológica, as equações são
+\[
+  R_{\mu\nu}-\frac{1}{2}Rg_{\mu\nu}=8\pi G T_{\mu\nu}.
+\]
+Contraindo com $g^{\mu\nu}$ em quatro dimensões,
+\[
+  R-\frac{1}{2}R\,g^{\mu\nu}g_{\mu\nu}=8\pi G T.
+\]
+Como $g^{\mu\nu}g_{\mu\nu}=4$, obtemos
+\[
+  R-2R=8\pi G T,
+  \qquad
+  R=-8\pi G T.
+\]
+Substituindo de volta,
+\[
+  R_{\mu\nu}=8\pi G\left(T_{\mu\nu}-\frac{1}{2}Tg_{\mu\nu}\right).
+\]
+Essa forma é muitas vezes útil em cálculos. No vácuo, $T_{\mu\nu}=0$, ela
+implica $R_{\mu\nu}=0$, embora o tensor de Riemann completo possa ser não nulo.
+Por isso há gravidade de maré e ondas gravitacionais mesmo em regiões sem
+matéria.
+
+\section{O limite fraco com mais detalhe}
+
+No limite newtoniano, assumimos campo estático, velocidades pequenas e métrica
+quase plana. Escrevemos
+\[
+  g_{00}=-(1+2\Phi),\qquad |\Phi|\ll1.
+\]
+Para uma partícula lenta, a equação geodésica espacial é dominada por termos
+com duas derivadas temporais da coordenada:
+\[
+  \frac{\dd^2 x^i}{\dd t^2}\approx-\Gamma^i_{00}.
+\]
+Como
+\[
+  \Gamma^i_{00}\approx \partial_i\Phi,
+\]
+temos
+\[
+  \frac{\dd^2 x^i}{\dd t^2}\approx-\partial_i\Phi,
+\]
+que é a equação newtoniana. A componente $00$ das equações de Einstein fornece
+a equação de Poisson,
+\[
+  \nabla^2\Phi=4\pi G\rho.
+\]
+
+\section{Constante cosmológica como fluido}
+
+Movendo o termo $\Lambda g_{\mu\nu}$ para o lado direito, podemos definir
+\[
+  T^{(\Lambda)}_{\mu\nu}=-\frac{\Lambda}{8\pi G}g_{\mu\nu}.
+\]
+No referencial comóvel de um fluido perfeito, isso corresponde a
+\[
+  \rho_\Lambda=\frac{\Lambda}{8\pi G},
+  \qquad
+  p_\Lambda=-\rho_\Lambda.
+\]
+Essa pressão negativa gera aceleração da expansão cosmológica nas equações de
+Friedmann. A interpretação microscópica da energia escura permanece uma das
+questões abertas da física fundamental.
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Traço de Einstein.} Contraia as equações de campo em quatro
+  dimensões e obtenha $R=-8\pi G T$. Depois escreva a forma equivalente para
+  $R_{\mu\nu}$.
+
+  \item \textbf{Vácuo não é plano.} Explique por que $R_{\mu\nu}=0$ não implica
+  $R^\rho{}_{\sigma\mu\nu}=0$. Use o exterior de uma estrela esférica como
+  exemplo.
+
+  \item \textbf{Unidades.} Restaure fatores de $c$ e verifique que
+  $G_{\mu\nu}=8\pi G T_{\mu\nu}/c^4$ tem dimensões consistentes.
+
+  \item \textbf{Geodésica newtoniana.} Complete o cálculo de
+  $\Gamma^i_{00}$ para $g_{00}=-(1+2\Phi)$ e obtenha
+  $\ddot x^i=-\partial_i\Phi$.
+
+  \item \textbf{Pressão gravitante.} Use o fluido perfeito para discutir por
+  que pressão contribui para a fonte gravitacional em regimes relativísticos.
+
+  \item \textbf{Energia gravitacional.} Discuta por que não existe, em geral,
+  um tensor local de energia do campo gravitacional análogo ao tensor
+  energia-momento da matéria.
+\end{enumerate}
+
+\section{Exemplos resolvidos adicionais}
+
+\begin{example}
+\textbf{Equações no vácuo.} Se $T_{\mu\nu}=0$ e $\Lambda=0$, então
+\[
+  R_{\mu\nu}-\frac12Rg_{\mu\nu}=0.
+\]
+Contraindo, obtemos $R-2R=0$, logo $R=0$. Substituindo de volta,
+$R_{\mu\nu}=0$. Isso não torna o espaço-tempo necessariamente plano, pois a
+parte de Weyl da curvatura pode permanecer.
+\end{example}
+
+\begin{example}
+\textbf{Constante cosmológica em vácuo.} Se $T_{\mu\nu}=0$ mas
+$\Lambda\ne0$, as equações dão
+\[
+  R_{\mu\nu}-\frac12Rg_{\mu\nu}+\Lambda g_{\mu\nu}=0.
+\]
+Contraindo em quatro dimensões,
+\[
+  -R+4\Lambda=0,\qquad R=4\Lambda.
+\]
+Logo
+\[
+  R_{\mu\nu}=\Lambda g_{\mu\nu}.
+\]
+Espaços de de Sitter e anti-de Sitter são soluções maximamente simétricas
+desse tipo, com sinal de $\Lambda$ determinando o caráter da curvatura.
+\end{example}
+
+\begin{example}
+\textbf{Estimativa de campo fraco.} Para a Terra,
+$GM/(Rc^2)\sim7\times10^{-10}$. Para o Sol,
+$GM/(Rc^2)\sim2\times10^{-6}$. Para uma estrela de nêutrons, essa quantidade
+pode ser da ordem de $0{,}1$. Isso explica por que relatividade geral é uma
+correção pequena em laboratórios terrestres, mas central para objetos compactos.
+\end{example}
+
+\begin{example}
+\textbf{Pressão e traço.} Para radiação, $T=0$. A forma traçada das equações
+mostra que $R=-8\pi GT=0$, mas isso não implica $R_{\mu\nu}=0$, pois
+$T_{\mu\nu}$ pode ser não nulo mesmo com traço zero. Esse caso é importante no
+Universo primordial dominado por radiação.
+\end{example}
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Explique por que a equação $R_{\mu\nu}=8\pi T_{\mu\nu}$ não é a melhor
+candidata para a equação de campo relativística.
+\end{exercise}
+
+\begin{exercise}
+No vácuo com $\Lambda=0$, mostre que as equações de Einstein implicam
+$R_{\mu\nu}=0$.
+\end{exercise}
+
+\chapter{Ondas gravitacionais}
+
+\begin{objetivos}
+Descrever ondas gravitacionais como perturbações da métrica, entender suas
+polarizações e conectar a teoria linearizada à detecção interferométrica.
+\end{objetivos}
+
+\section{Campo fraco}
+
+Em uma região quase plana,
+\[
+  g_{\mu\nu}=\eta_{\mu\nu}+h_{\mu\nu},
+  \qquad |h_{\mu\nu}|\ll1.
+\]
+Após uma escolha conveniente de gauge, as perturbações radiativas satisfazem,
+no vácuo,
+\[
+  \Box h^{\rm TT}_{ij}=0.
+\]
+O sobrescrito TT indica gauge transversal e sem traço.
+
+\section{Polarizações}
+
+Uma onda propagando-se na direção $z$ possui duas polarizações independentes:
+\[
+  h^{\rm TT}_{ij}=
+  \begin{pmatrix}
+  h_+ & h_\times & 0\\
+  h_\times & -h_+ & 0\\
+  0&0&0
+  \end{pmatrix}.
+\]
+Elas deformam distâncias transversais de modos característicos.
+
+\section{Detecção}
+
+Interferômetros como LIGO, Virgo e KAGRA medem diferenças relativas de
+comprimento entre braços quase perpendiculares. O sinal adimensional típico é
+a deformação
+\[
+  h\sim\frac{\Delta L}{L}.
+\]
+Na prática, detectar ondas gravitacionais exige modelagem de ruído, filtros
+casados e comparação com famílias de formas de onda.
+
+\section{Emissão}
+
+A radiação gravitacional dominante vem de variações temporais do momento de
+quadrupolo da fonte. Uma estimativa dimensional para a potência emitida é
+\[
+  P\sim \frac{G}{c^5}\left(\frac{\dd^3 Q}{\dd t^3}\right)^2,
+\]
+onde $Q$ representa uma escala de quadrupolo de massa. A presença de $c^5/G$
+mostra por que a emissão é pequena para sistemas cotidianos e enorme para
+binárias compactas.
+
+\section{Gauge e graus de liberdade}
+
+Uma perturbação simétrica $h_{\mu\nu}$ possui inicialmente dez componentes.
+Nem todas representam física. Parte delas muda quando fazemos uma pequena
+transformação de coordenadas. Essa liberdade é chamada liberdade de gauge. A
+escolha TT remove componentes não radiativas e deixa apenas dois graus de
+liberdade físicos, correspondentes às polarizações $+$ e $\times$.
+
+Essa situação é análoga ao eletromagnetismo, onde o potencial $A_\mu$ possui
+liberdade de gauge e nem todos os seus componentes são observáveis. O campo
+físico está nas combinações invariantes apropriadas. Em ondas gravitacionais,
+o observável direto é a variação relativa de distâncias entre massas teste,
+relacionada à curvatura perturbativa.
+
+\section{Efeito sobre partículas teste}
+
+Considere partículas inicialmente em repouso relativo formando um pequeno anel
+no plano transversal à propagação da onda. Uma polarização $+$ alonga o anel em
+uma direção enquanto o comprime na direção perpendicular; meio período depois,
+os papéis se trocam. A polarização $\times$ produz o mesmo padrão rotacionado
+de $45^\circ$.
+
+Esse efeito não deve ser imaginado como uma força empurrando partículas dentro
+de um espaço fixo. A onda altera a geometria, e as partículas livres seguem
+geodésicas nessa geometria oscilante. O detector mede uma diferença de tempo de
+propagação da luz entre braços, que pode ser descrita como uma deformação
+relativa $h$.
+
+\section{Escalas de detecção}
+
+Uma deformação típica detectável por interferômetros terrestres é
+$h\sim10^{-21}$. Para braços de $4\,\mathrm{km}$, a variação efetiva de
+comprimento é da ordem de
+\[
+  \Delta L\sim hL\sim 4\times10^{-18}\,\mathrm{m}.
+\]
+Esse número é muito menor que o tamanho de um próton. A detecção só é possível
+porque o experimento mede fase acumulada da luz, usa cavidades ópticas para
+aumentar o caminho efetivo e emprega análise estatística com formas de onda
+teóricas.
+
+\section{Binárias compactas}
+
+Durante a fase inspiralante de uma binária compacta, a emissão de ondas
+gravitacionais remove energia e momento angular orbital. A separação diminui,
+a frequência orbital aumenta e o sinal observado apresenta um ``chirp''. A
+frequência da onda gravitacional dominante é aproximadamente duas vezes a
+frequência orbital, pois a emissão quadrupolar repete o padrão duas vezes por
+órbita.
+
+As últimas órbitas e a fusão exigem relatividade numérica para descrição
+precisa. Depois da fusão, o buraco negro final relaxa por modos quase-normais,
+produzindo o chamado ringdown. O sinal completo permite inferir massas, spins,
+distância luminosidade e testes de consistência da relatividade geral.
+
+\begin{activity}
+Esboce qualitativamente amplitude e frequência de uma onda gravitacional de
+binária compacta em função do tempo. Indique as fases inspiral, merger e
+ringdown.
+\end{activity}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Traço TT.} Verifique que a matriz de polarizações em gauge TT
+  tem traço nulo e é transversal para propagação na direção $z$.
+
+  \item \textbf{Anel de partículas.} Escreva as deformações relativas
+  $\Delta x/L$ e $\Delta y/L$ para uma onda $+$ ideal. Desenhe quatro instantes
+  separados por um quarto de período.
+
+  \item \textbf{Estimativa de detector.} Para $h=10^{-21}$ e $L=4$ km, calcule
+  $\Delta L$. Compare com escalas nucleares e discuta por que interferometria é
+  necessária.
+
+  \item \textbf{Ausência de monopolo.} Explique por que conservação de massa
+  total impede radiação gravitacional monopolar em sistemas isolados.
+
+  \item \textbf{Ausência de dipolo.} Explique por que conservação do centro de
+  massa elimina radiação dipolar gravitacional dominante.
+
+  \item \textbf{Chirp.} Use energia orbital newtoniana e emissão qualitativa
+  de energia para argumentar por que a frequência orbital aumenta durante o
+  inspiral.
+\end{enumerate}
+
+\section{Erros comuns e interpretação}
+
+Um erro comum é pensar em ondas gravitacionais como ondas que se propagam
+dentro do espaço, deformando uma espécie de meio material. A descrição correta
+é mais sutil: a própria métrica oscila. Como a métrica determina tempos
+próprios, distâncias e cones de luz, a passagem de uma onda altera relações de
+medida entre massas teste. Essa alteração é pequena, transversal e possui duas
+polarizações independentes.
+
+Outro erro frequente é imaginar que qualquer movimento de massa produz ondas
+gravitacionais intensas. Sistemas esfericamente simétricos não irradiam. Um
+colapso perfeitamente esférico, por mais violento que seja, não emite ondas
+gravitacionais. É a variação de quadrupolo que importa. Por isso binárias
+compactas são fontes tão eficientes: elas têm grandes massas, velocidades
+relativísticas e forte assimetria quadrupolar.
+
+Também é importante distinguir detecção direta de evidência indireta. Antes de
+2015, a perda orbital de pulsares binários já fornecia forte confirmação da
+emissão de ondas gravitacionais. A detecção interferométrica acrescentou a
+observação direta do sinal passando pela Terra, abrindo uma forma nova de
+astronomia.
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Descreva qualitativamente como uma onda com polarização $+$ altera um anel de
+partículas teste.
+\end{exercise}
+
+\begin{exercise}
+Por que sistemas esfericamente simétricos não emitem ondas gravitacionais?
+\end{exercise}
+
+\chapter{Soluções esféricas, estrelas e Schwarzschild}
+
+\begin{objetivos}
+Aplicar as equações de Einstein a sistemas esfericamente simétricos e extrair
+previsões observáveis da geometria de Schwarzschild.
+\end{objetivos}
+
+\section{Métrica de Schwarzschild}
+
+A solução exterior esfericamente simétrica, estática e de vácuo é
+\[
+  \dd s^2=
+  -\left(1-\frac{2GM}{r}\right)\dd t^2
+  +\left(1-\frac{2GM}{r}\right)^{-1}\dd r^2
+  +r^2\dd\Omega^2,
+\]
+com
+\[
+  \dd\Omega^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2.
+\]
+Em unidades $G=c=1$, substituímos $GM$ por $M$.
+
+\section{Redshift gravitacional}
+
+Para observadores estáticos em Schwarzschild, a frequência de um fóton emitido
+em $r_e$ e observado em $r_o$ satisfaz
+\[
+  \frac{\nu_o}{\nu_e}
+  =
+  \sqrt{
+  \frac{1-2GM/r_e}{1-2GM/r_o}
+  }.
+\]
+Se o observador está muito longe, $r_o\to\infty$, então
+\[
+  \nu_o=\nu_e\sqrt{1-\frac{2GM}{r_e}}.
+\]
+
+\section{Geodésicas e potencial efetivo}
+
+No plano equatorial $\theta=\pi/2$, há duas constantes de movimento:
+\[
+  E=\left(1-\frac{2M}{r}\right)\dot t,
+  \qquad
+  L=r^2\dot\phi.
+\]
+Para partículas massivas,
+\[
+  \dot r^2+V_{\rm eff}(r)=E^2,
+  \qquad
+  V_{\rm eff}(r)=\left(1-\frac{2M}{r}\right)
+  \left(1+\frac{L^2}{r^2}\right).
+\]
+Para fótons, o termo $1$ é substituído por $0$.
+
+\section{Estrelas relativísticas}
+
+Dentro de uma estrela estática e esfericamente simétrica, a matéria pode ser
+modelada por fluido perfeito. A equação de equilíbrio relativístico é a
+equação de Tolman-Oppenheimer-Volkoff:
+\[
+  \frac{\dd p}{\dd r}
+  =
+  -\frac{(\rho+p)(m+4\pi r^3p)}{r(r-2m)},
+  \qquad
+  \frac{\dd m}{\dd r}=4\pi r^2\rho.
+\]
+Ela reduz a equação hidrostática newtoniana quando $p\ll\rho$ e $2m/r\ll1$.
+
+\section{Coordenada areal}
+
+Na métrica de Schwarzschild, a coordenada $r$ não é distância radial própria.
+Ela é definida pela área das esferas de simetria:
+\[
+  A=4\pi r^2.
+\]
+A distância radial própria entre $r_1$ e $r_2$ em uma fatia $t=\mathrm{const}$
+é
+\[
+  \ell=\int_{r_1}^{r_2}
+  \left(1-\frac{2M}{r}\right)^{-1/2}\dd r.
+\]
+Essa distinção é importante: perto do horizonte, a relação entre incremento de
+coordenada radial e distância própria torna-se muito diferente da intuição
+euclidiana.
+
+\section{Órbitas circulares}
+
+O potencial efetivo permite estudar órbitas circulares. Para partículas
+massivas, uma órbita circular satisfaz
+\[
+  \dot r=0,\qquad \frac{\dd V_{\rm eff}}{\dd r}=0.
+\]
+A estabilidade exige ainda
+\[
+  \frac{\dd^2 V_{\rm eff}}{\dd r^2}>0.
+\]
+Em Schwarzschild, há órbitas circulares estáveis apenas para $r>6M$. O raio
+$r=6M$ é a órbita circular estável mais interna, conhecida como ISCO. Em discos
+de acreção ao redor de buracos negros, essa escala é fisicamente importante,
+pois marca aproximadamente a borda interna de discos finos relativísticos.
+
+\section{Órbita de fótons}
+
+Para geodésicas nulas, o potencial efetivo é
+\[
+  V_{\rm eff}^{(\gamma)}=
+  \left(1-\frac{2M}{r}\right)\frac{L^2}{r^2}.
+\]
+A órbita circular nula ocorre em $r=3M$. Essa órbita é instável: uma pequena
+perturbação leva o fóton a escapar para longe ou cair em direção ao buraco
+negro. A região próxima a $r=3M$ está ligada à formação da sombra de buracos
+negros, pois raios luminosos podem executar trajetórias fortemente curvadas
+antes de chegar ao observador.
+
+\section{Testes clássicos}
+
+Três previsões históricas tornaram a relatividade geral observacionalmente
+marcante: o avanço do periélio de Mercúrio, o desvio da luz pelo Sol e o
+redshift gravitacional. O avanço do periélio surge porque a equação radial
+relativística contém correções que impedem a órbita de fechar exatamente. O
+desvio da luz é maior que uma estimativa newtoniana ingênua porque tanto a
+curvatura temporal quanto a espacial contribuem. O redshift gravitacional
+segue da diferença entre ritmos de relógios estáticos em potenciais
+diferentes.
+
+\begin{example}
+Para emissão em $r_e$ e observação no infinito, o fator de redshift em
+Schwarzschild é
+\[
+  \frac{\nu_\infty}{\nu_e}=\sqrt{1-\frac{2M}{r_e}}.
+\]
+Se $r_e$ se aproxima de $2M$, a frequência observada no infinito tende a zero.
+Isso não significa que o fóton ``perde toda energia localmente''; significa
+que a comparação entre o emissor próximo ao horizonte e o observador no
+infinito envolve uma diferença gravitacional extrema.
+\end{example}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Raio de Schwarzschild.} Calcule $r_s=2GM/c^2$ para o Sol e para
+  a Terra. Compare com seus raios físicos.
+
+  \item \textbf{Redshift fraco.} Expanda
+  $\sqrt{1-2M/r}$ para $M/r\ll1$ e mostre que recupera
+  $\Delta\nu/\nu\approx\Delta\Phi$.
+
+  \item \textbf{Órbita de fótons.} Derive a condição $r=3M$ a partir do
+  potencial efetivo nulo.
+
+  \item \textbf{ISCO.} Pesquise algebricamente as condições de circularidade e
+  estabilidade do potencial massivo e identifique por que $r=6M$ é especial.
+
+  \item \textbf{Queda radial.} Para $L=0$, escreva a equação radial de uma
+  partícula que cai a partir do repouso no infinito. Interprete $E=1$.
+
+  \item \textbf{Atraso de Shapiro.} Explique qualitativamente por que um raio
+  de luz que passa perto do Sol demora mais que em geometria plana.
+\end{enumerate}
+
+\section{Erros comuns e interpretação}
+
+O primeiro cuidado em Schwarzschild é não confundir a coordenada $r$ com
+distância radial própria. O raio $r$ é definido pela área das esferas de
+simetria. Essa escolha é extremamente conveniente, mas a distância própria
+radial envolve o fator $(1-2M/r)^{-1/2}$. Muitos paradoxos aparentes perto do
+horizonte nascem de tratar $r$ como se fosse uma régua euclidiana.
+
+Outro ponto importante é que o tempo coordenado $t$ é adaptado ao observador
+distante, não ao observador em queda. Quando uma partícula se aproxima de
+$r=2M$, o tempo $t$ necessário para cruzar o horizonte diverge. O tempo próprio
+da partícula, porém, permanece finito. A divergência de $t$ expressa uma
+limitação das coordenadas de Schwarzschild para cobrir o horizonte, não uma
+barreira física local para quem cai.
+
+Por fim, órbitas em Schwarzschild devem ser lidas com potencial efetivo, mas
+esse potencial é uma ferramenta, não uma energia potencial newtoniana literal.
+Ele resume a equação radial usando constantes de movimento. Sua forma permite
+visualizar pontos de retorno, órbitas circulares e estabilidade, mas a dinâmica
+subjacente continua sendo geodésica em espaço-tempo curvo.
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Use a métrica de Schwarzschild para obter a aceleração radial newtoniana no
+limite $r\gg 2M$ e velocidades pequenas.
+\end{exercise}
+
+\begin{exercise}
+Determine o raio da órbita circular nula em Schwarzschild usando o potencial
+efetivo de fótons.
+\end{exercise}
+
+\chapter{Buracos negros}
+
+\begin{objetivos}
+Separar singularidades físicas de singularidades de coordenadas, compreender o
+horizonte de eventos e introduzir buracos negros astrofísicos.
+\end{objetivos}
+
+\section{Horizonte}
+
+Em Schwarzschild, $r=2M$ é o raio do horizonte de eventos. A divergência de
+$g_{rr}$ nessa coordenada não é uma singularidade física. Invariantes de
+curvatura permanecem finitos em $r=2M$ e divergem em $r=0$.
+
+Um invariante útil é o escalar de Kretschmann:
+\[
+  R_{\alpha\beta\gamma\delta}R^{\alpha\beta\gamma\delta}
+  =\frac{48M^2}{r^6}.
+\]
+Ele é finito no horizonte e diverge na singularidade central.
+
+\section{Coordenadas regulares}
+
+Coordenadas de Eddington-Finkelstein mostram que raios de luz podem atravessar
+o horizonte para dentro em tempo finito. A dificuldade em $r=2M$ nas
+coordenadas de Schwarzschild é análoga a uma má escolha de mapa para descrever
+uma região perfeitamente regular.
+
+\section{Buracos negros em rotação}
+
+Buracos negros astrofísicos são descritos, em boa aproximação, pela métrica de
+Kerr, caracterizada por massa $M$ e momento angular $J$. A rotação produz
+arrastamento de referenciais e uma ergorregião, onde observadores não podem
+permanecer estáticos em relação ao infinito.
+
+\section{Termodinâmica}
+
+Classicamente, a área do horizonte não diminui. Com efeitos quânticos, buracos
+negros possuem temperatura
+\[
+  T_H=\frac{\hbar c^3}{8\pi G M k_B}
+\]
+para o caso de Schwarzschild. A entropia é proporcional à área do horizonte.
+
+\section{Horizon versus singularidade}
+
+O horizonte de eventos é uma superfície causal: ele separa eventos que podem
+enviar sinais ao infinito futuro daqueles que não podem. A singularidade é uma
+região onde a descrição clássica prevê curvaturas divergentes e geodésicas
+incompletas. Confundir os dois conceitos leva a interpretações erradas. Um
+observador em queda livre atravessa o horizonte de um buraco negro grande sem
+encontrar uma parede local. Já a aproximação da singularidade envolve marés
+crescentes que destroem qualquer objeto físico.
+
+Para um observador distante em coordenadas de Schwarzschild, a queda de um
+objeto parece congelar perto de $r=2M$, com sua luz cada vez mais desviada para
+o vermelho. Para o objeto em queda, a travessia do horizonte ocorre em tempo
+próprio finito. As duas descrições usam noções diferentes de tempo e não se
+contradizem.
+
+\section{Diagramas causais}
+
+Diagramas de Penrose compactificam infinitos para representar a estrutura
+causal global. Linhas de luz são desenhadas a $45^\circ$, o que facilita ver
+quais regiões podem influenciar outras. Para Schwarzschild, o diagrama mostra
+claramente que, dentro do horizonte futuro, qualquer trajetória causal aponta
+inevitavelmente para menores valores de $r$. Nesse sentido, a singularidade
+fica no futuro de todos os observadores que cruzam o horizonte.
+
+\section{Buracos negros reais}
+
+Buracos negros astrofísicos não são exatamente Schwarzschild. Eles giram,
+acrescem matéria, podem estar em binárias e são perturbados pelo ambiente.
+Ainda assim, a solução de Schwarzschild é o laboratório conceitual mais simples
+para entender horizonte, geodésicas e redshift. A solução de Kerr generaliza o
+caso para rotação e introduz fenômenos novos, como ergosfera e arrastamento de
+referenciais.
+
+Observacionalmente, buracos negros são estudados por órbitas estelares,
+emissão de discos de acreção, jatos relativísticos, sombras observadas por
+interferometria de base muito longa e ondas gravitacionais de fusões. Cada
+canal testa uma região diferente da geometria.
+
+\section{Leis da mecânica de buracos negros}
+
+Classicamente, a área do horizonte desempenha papel análogo à entropia: ela
+não diminui em processos físicos gerais. A gravidade superficial é análoga à
+temperatura, e a massa obedece uma relação semelhante à primeira lei da
+termodinâmica. A descoberta da radiação Hawking tornou essa analogia literal
+em teoria quântica de campos em espaço-tempo curvo.
+
+\begin{activity}
+Compare a dependência $T_H\propto1/M$ com a intuição térmica comum. Por que
+buracos negros maiores são mais frios? O que isso sugere sobre a evaporação de
+buracos negros pequenos?
+\end{activity}
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Kretschmann.} Use
+  $K=48M^2/r^6$ para comparar a curvatura no horizonte de buracos negros de
+  massas $M$ e $10M$.
+
+  \item \textbf{Tempo próprio de queda.} Discuta por que um observador em queda
+  livre cruza o horizonte em tempo próprio finito, embora a coordenada $t$ de
+  Schwarzschild divirja.
+
+  \item \textbf{Cone de luz.} Desenhe qualitativamente cones de luz fora,
+  sobre e dentro do horizonte. Indique por que dentro do horizonte diminuir
+  $r$ é inevitável.
+
+  \item \textbf{Ergosfera.} Explique a diferença entre horizonte e ergosfera em
+  Kerr. Por que a ergosfera permite extração de energia?
+
+  \item \textbf{Temperatura.} Estime como a temperatura de Hawking muda quando
+  a massa é multiplicada por $10^6$.
+
+  \item \textbf{Entropia de área.} Discuta por que a entropia proporcional à
+  área, e não ao volume, sugere uma física gravitacional profundamente
+  diferente da termodinâmica comum.
+\end{enumerate}
+
+\section{Erros comuns e interpretação}
+
+Buracos negros não são aspiradores cósmicos. Longe do objeto, o campo
+gravitacional de um buraco negro de massa $M$ é semelhante ao de qualquer corpo
+esférico com a mesma massa. Se o Sol fosse substituído por um buraco negro de
+mesma massa, as órbitas planetárias externas não seriam subitamente sugadas. O
+que muda é a existência de uma região compacta com horizonte.
+
+Também é incorreto dizer que nada acontece no horizonte em todos os sentidos.
+Para um observador em queda livre, um horizonte de buraco negro suficientemente
+grande pode ser atravessado sem efeito local dramático. Para a estrutura causal
+global, porém, o horizonte é decisivo: após cruzá-lo, nenhum sinal causal pode
+alcançar o infinito futuro. A frase correta depende de qual pergunta está sendo
+feita: experiência local ou causalidade global.
+
+A singularidade clássica em $r=0$ não deve ser interpretada como um ponto
+material comum. Ela indica incompletude da teoria clássica em regime extremo.
+Espera-se que gravidade quântica modifique essa descrição, mas ainda não há
+uma teoria completa testada experimentalmente para substituir a previsão
+clássica.
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Calcule o raio de Schwarzschild do Sol e da Terra. Comente por que esses
+valores não significam que tais objetos sejam buracos negros.
+\end{exercise}
+
+\begin{exercise}
+Explique a diferença entre horizonte de eventos e singularidade.
+\end{exercise}
+
+\chapter{Cosmologia relativística}
+
+\begin{objetivos}
+Usar simetria cosmológica para obter a métrica FLRW, as equações de Friedmann e
+as relações observacionais básicas da expansão do Universo.
+\end{objetivos}
+
+\section{Princípio cosmológico}
+
+Em grandes escalas, o Universo é aproximadamente homogêneo e isotrópico. A
+métrica compatível com essas simetrias é
+\[
+  \dd s^2=-\dd t^2+a(t)^2
+  \left[
+  \frac{\dd r^2}{1-kr^2}+r^2\dd\Omega^2
+  \right],
+\]
+onde $a(t)$ é o fator de escala e $k=0,\pm1$ representa a curvatura espacial.
+
+\section{Redshift cosmológico}
+
+O comprimento de onda da luz cresce com o fator de escala:
+\[
+  1+z=\frac{a(t_0)}{a(t_e)}.
+\]
+Esse redshift não é simplesmente Doppler local; ele expressa a evolução da
+geometria entre emissão e observação.
+
+\section{Equações de Friedmann}
+
+Para fluido perfeito homogêneo,
+\[
+  H^2=\left(\frac{\dot a}{a}\right)^2
+  =
+  \frac{8\pi G}{3}\rho-\frac{k}{a^2}+\frac{\Lambda}{3},
+\]
+\[
+  \frac{\ddot a}{a}
+  =
+  -\frac{4\pi G}{3}(\rho+3p)+\frac{\Lambda}{3}.
+\]
+A conservação local fornece
+\[
+  \dot\rho+3H(\rho+p)=0.
+\]
+Com uma equação de estado $p=w\rho$, segue
+\[
+  \rho\propto a^{-3(1+w)}.
+\]
+Matéria fria tem $w=0$; radiação tem $w=1/3$; energia escura do tipo constante
+cosmológica tem $w=-1$.
+
+\section{Distâncias em cosmologia}
+
+Em um Universo em expansão, a palavra distância precisa ser qualificada. A
+distância própria entre duas galáxias em uma fatia de tempo cosmológico cresce
+com $a(t)$. A distância comóvel remove essa expansão e permanece fixa para
+galáxias que acompanham o fluxo de Hubble. A distância luminosidade é definida
+pela relação entre luminosidade intrínseca e fluxo observado:
+\[
+  F=\frac{L}{4\pi d_L^2}.
+\]
+A distância angular relaciona tamanho físico e tamanho angular:
+\[
+  \theta=\frac{\ell}{d_A}.
+\]
+Em cosmologia relativística, $d_L$ e $d_A$ não são iguais; eles obedecem
+\[
+  d_L=(1+z)^2d_A.
+\]
+Essa relação é chamada dualidade de Etherington e depende da conservação do
+número de fótons e da propagação em geodésicas nulas.
+
+\section{Horizontes cosmológicos}
+
+O horizonte de partículas indica a maior distância comóvel de onde a luz pôde
+chegar desde o início da expansão. O horizonte de eventos cosmológico, quando
+existe, indica regiões que nunca poderão nos enviar sinais, mesmo esperando
+tempo infinito. Em um Universo dominado por constante cosmológica, a expansão
+acelerada produz um horizonte de eventos cosmológico.
+
+Esses horizontes são diferentes do horizonte de um buraco negro. O horizonte de
+buraco negro é associado a uma região da qual não se escapa para o infinito. O
+horizonte cosmológico depende da história global da expansão e do observador
+cosmológico considerado.
+
+\section{Eras de dominação}
+
+Com $p=w\rho$, a densidade escala como
+\[
+  \rho\propto a^{-3(1+w)}.
+\]
+Assim, radiação decai como $a^{-4}$: três potências vêm da diluição do número
+de fótons e uma potência adicional vem do redshift da energia de cada fóton.
+Matéria fria decai como $a^{-3}$, apenas por diluição do volume. A densidade de
+uma constante cosmológica permanece constante.
+
+Essa diferença produz uma sequência natural. No Universo muito jovem, a
+radiação domina. Depois, a matéria passa a dominar e permite crescimento mais
+eficiente de estruturas. Em tempos recentes, a energia escura domina e acelera
+a expansão.
+
+\section{Parâmetros observacionais}
+
+Define-se a densidade crítica
+\[
+  \rho_c=\frac{3H_0^2}{8\pi G}.
+\]
+Os parâmetros adimensionais
+\[
+  \Omega_i=\frac{\rho_i}{\rho_c}
+\]
+medem a contribuição atual de cada componente. Para $k=0$,
+\[
+  \Omega_m+\Omega_r+\Omega_\Lambda=1.
+\]
+Observações de supernovas, radiação cósmica de fundo, oscilações acústicas de
+bárions e estrutura em larga escala indicam um Universo aproximadamente plano,
+com matéria escura fria e energia escura dominante hoje.
+
+\section{Problemas conceituais}
+
+O modelo cosmológico padrão é extremamente bem-sucedido, mas deixa questões
+abertas. A natureza da matéria escura não é conhecida. A energia escura pode
+ser uma constante cosmológica, mas seu valor observado é extraordinariamente
+pequeno em comparação com escalas naturais de teoria quântica de campos. A
+inflação resolve problemas de horizonte e planura em muitos modelos, mas sua
+realização microscópica permanece em aberto. Essas questões mostram que a
+cosmologia é tanto aplicação da relatividade geral quanto fronteira de física
+fundamental.
+
+\section{Problemas orientados}
+
+\begin{enumerate}
+  \item \textbf{Redshift e escala.} Calcule $a(t_e)/a(t_0)$ para $z=1$, $z=3$ e
+  $z=1100$. Interprete o último valor no contexto da radiação cósmica de fundo.
+
+  \item \textbf{Escala da radiação.} Derive $\rho_r\propto a^{-4}$ separando
+  diluição de número e redshift de energia.
+
+  \item \textbf{Universo de matéria.} Para $k=0$ e $\Lambda=0$, resolva
+  $H^2=8\pi G\rho/3$ com $\rho\propto a^{-3}$ e obtenha $a\propto t^{2/3}$.
+
+  \item \textbf{Universo de radiação.} Repita o problema anterior para
+  $\rho\propto a^{-4}$ e obtenha $a\propto t^{1/2}$.
+
+  \item \textbf{Aceleração.} Use
+  $\ddot a/a=-(4\pi G/3)(\rho+3p)+\Lambda/3$ para determinar quando a expansão
+  acelera.
+
+  \item \textbf{Distâncias.} Explique por que distância luminosidade e
+  distância angular diferem em um Universo em expansão. Qual papel é
+  desempenhado pelo fator $(1+z)^2$?
+\end{enumerate}
+
+\section{Erros comuns e interpretação}
+
+O redshift cosmológico não deve ser reduzido simplesmente a um efeito Doppler
+global. Para galáxias próximas, a lei de Hubble pode ser aproximada por uma
+interpretação Doppler. Em grandes distâncias, porém, a luz atravessa um
+espaço-tempo cuja escala muda durante a propagação. A relação
+$1+z=a(t_0)/a(t_e)$ resume esse efeito geométrico.
+
+Outro cuidado é com a frase ``o Universo expande para dentro de algo''. A
+métrica FLRW descreve a evolução das distâncias internas entre observadores
+comóveis. Ela não exige um espaço externo no qual o Universo esteja embutido.
+A pergunta correta é como a distância própria entre pontos comóveis muda com o
+tempo cosmológico.
+
+A expansão acelerada também não significa que todas as distâncias aumentem em
+todos os sistemas. Sistemas ligados, como átomos, planetas, estrelas e
+galáxias virializadas, não acompanham a expansão de Hubble em sua escala
+interna. A expansão cosmológica descreve a dinâmica média em grandes escalas,
+onde a hipótese de homogeneidade e isotropia se torna adequada.
+
+\section{Síntese conceitual do curso}
+
+A relatividade geral começa com uma mudança de linguagem: de forças em um
+espaço absoluto para geometria dinâmica do espaço-tempo. A relatividade
+especial ensina que o intervalo substitui tempo e espaço absolutos. O cálculo
+tensorial fornece a gramática para escrever leis independentes de coordenadas.
+A curvatura codifica marés e torna precisa a ideia de gravidade geométrica.
+As equações de Einstein dizem como matéria e energia determinam essa curvatura.
+
+As soluções e aproximações estudadas no final do curso mostram a força da
+teoria. Schwarzschild descreve o exterior de corpos esféricos e introduz
+horizontes. Ondas gravitacionais mostram que a geometria possui graus de
+liberdade radiativos. Cosmologia aplica as equações de campo ao Universo como
+um todo. Em todos os casos, a pergunta central permanece a mesma: quais
+quantidades são invariantes, quais dependem do observador e quais são apenas
+artefatos de coordenadas?
+
+\clearpage
+\section{Exercícios}
+
+\begin{exercise}
+Mostre que, para matéria fria em Universo plano sem constante cosmológica,
+$a(t)\propto t^{2/3}$.
+\end{exercise}
+
+\begin{exercise}
+Mostre que, para radiação em Universo plano sem constante cosmológica,
+$a(t)\propto t^{1/2}$.
+\end{exercise}
+
+\chapter{Projetos finais}
+
+Os projetos abaixo foram pensados para duas ou três semanas de trabalho em
+duplas. Cada projeto deve resultar em um relatório curto e uma apresentação de
+15 minutos.
+
+\section{Projeto 1: geodésicas em Schwarzschild}
+
+Implementar numericamente as equações de geodésicas no plano equatorial da
+métrica de Schwarzschild. Comparar órbitas ligadas, espalhamento e queda radial.
+Entregar gráficos de $r(\lambda)$ e da trajetória no plano.
+
+\section{Projeto 2: redshift gravitacional}
+
+Derivar a expressão do redshift em uma métrica estacionária e aplicá-la a
+Schwarzschild. Discutir o limite fraco e estimar o efeito na superfície da
+Terra, do Sol e de uma estrela de nêutrons típica.
+
+\section{Projeto 3: ondas gravitacionais}
+
+Estudar uma forma de onda simplificada de binária compacta inspiralante.
+Relacionar crescimento de frequência e amplitude à perda de energia orbital.
+Comparar com a ideia de sirene padrão.
+
+\section{Projeto 4: cosmologias simples}
+
+Resolver numericamente as equações de Friedmann para componentes de matéria,
+radiação e constante cosmológica. Plotar $a(t)$ e $H(z)$ para diferentes
+parâmetros.
+
+\appendix
+
+\chapter{Truques com índices e tensores}
+\label{ap:indices}
+
+Este apêndice fornece um algoritmo de trabalho para
+manipular expressões com índices sem medo. O objetivo não é substituir a
+interpretação geométrica dos tensores, mas dar ferramentas rápidas para
+calcular, simplificar e conferir sinais.
+
+\section{A filosofia dos índices}
+
+Índices são uma linguagem para controlar somas. Um índice repetido é um índice
+mudo: ele é somado e seu nome não importa. Por exemplo,
+\[
+  A_iB_i=A_jB_j=A_kB_k.
+\]
+As três expressões representam o mesmo número. O nome do índice repetido é
+apenas uma variável de soma. Já um índice livre não pode ser renomeado em
+apenas um lado da equação. A expressão
+\[
+  A_i=B_i+C_i
+\]
+é uma igualdade entre componentes de vetores. A expressão
+\[
+  A_i=B_j+C_j
+\]
+não é uma igualdade vetorial bem escrita, pois o lado esquerdo tem índice livre
+$i$ e o lado direito não.
+
+\begin{resultado}
+Regra de ouro: em cada termo de uma equação, os índices livres devem ser os
+mesmos; índices repetidos são somados e podem ser renomeados.
+\end{resultado}
+
+Em relatividade, costuma-se somar apenas quando um índice aparece uma vez
+acima e uma vez abaixo:
+\[
+  A_\mu B^\mu.
+\]
+Em cálculo vetorial euclidiano tridimensional, muitas vezes escrevemos todos
+os índices embaixo, usando implicitamente a métrica euclidiana
+$\delta_{ij}$ para levantar e abaixar índices. Ao traduzir identidades 3D para
+relatividade, é preciso recolocar a métrica correta e respeitar a assinatura.
+
+\section{Delta de Kronecker}
+
+O delta de Kronecker é definido por
+\[
+  \delta_{ij}=
+  \begin{cases}
+  1, & i=j,\\
+  0, & i\ne j.
+  \end{cases}
+\]
+Ele funciona como identidade para índices:
+\[
+  \delta_{ij}V_j=V_i,
+  \qquad
+  \delta_{ij}A_{jk}=A_{ik}.
+\]
+Em três dimensões,
+\[
+  \delta_{ii}=3.
+\]
+Em quatro dimensões,
+\[
+  \delta^\mu{}_\mu=4.
+\]
+O valor é a dimensão do espaço de índices que está sendo somado.
+
+\begin{example}
+Se $A_{ij}$ é uma matriz, então
+\[
+  \delta_{ij}A_{ij}=A_{ii}
+\]
+é o traço de $A$. Em quatro dimensões relativísticas, a contração
+$T^\mu{}_\mu$ é o traço tensorial; se os dois índices estiverem ambos embaixo,
+é preciso usar a métrica para contrair:
+\[
+  T^\mu{}_\mu=g^{\mu\nu}T_{\mu\nu}.
+\]
+\end{example}
+
+\section{Índices mudos e troca de nomes}
+
+Muitas simplificações dependem de trocar nomes de índices mudos. Considere
+\[
+  S_{ij}A_{ij},
+\]
+com $S_{ij}=S_{ji}$ simétrico e $A_{ij}=-A_{ji}$ antissimétrico. Como $i$ e
+$j$ são mudos, podemos trocar seus nomes:
+\[
+  S_{ij}A_{ij}=S_{ji}A_{ji}.
+\]
+Usando as simetrias,
+\[
+  S_{ji}A_{ji}=S_{ij}(-A_{ij})=-S_{ij}A_{ij}.
+\]
+Portanto
+\[
+  S_{ij}A_{ij}=0.
+\]
+
+Esse truque aparece o tempo todo. Toda contração completa entre uma parte
+simétrica e uma parte antissimétrica se anula.
+
+\begin{activity}
+Mostre que $F_{\mu\nu}U^\mu U^\nu=0$ se $F_{\mu\nu}$ é antissimétrico. A pista
+é notar que $U^\mu U^\nu$ é simétrico em $\mu,\nu$.
+\end{activity}
+
+\section{Símbolo de Levi-Civita}
+
+Em três dimensões euclidianas, o símbolo de Levi-Civita $\epsilon_{ijk}$ é
+totalmente antissimétrico e definido por
+\[
+  \epsilon_{123}=1.
+\]
+Trocar dois índices muda o sinal; repetir índices dá zero. Assim,
+\[
+  \epsilon_{213}=-1,
+  \qquad
+  \epsilon_{113}=0.
+\]
+
+O produto vetorial pode ser escrito como
+\[
+  (A\times B)_i=\epsilon_{ijk}A_jB_k.
+\]
+Essa fórmula é mais segura que o determinante mnemônico quando as expressões
+ficam longas.
+
+\section{A identidade fundamental}
+
+A identidade mais útil em três dimensões é
+\[
+  \epsilon_{ijk}\epsilon_{klm}
+  =
+  \delta_{il}\delta_{jm}
+  -
+  \delta_{im}\delta_{jl}.
+\]
+Ela transforma produtos de dois símbolos $\epsilon$ em deltas. Depois disso,
+os deltas eliminam índices.
+
+\begin{example}
+Vamos obter o produto vetorial triplo:
+\[
+  [A\times(B\times C)]_i
+  =
+  \epsilon_{ijk}A_j(B\times C)_k.
+\]
+Como
+\[
+  (B\times C)_k=\epsilon_{klm}B_lC_m,
+\]
+temos
+\[
+  [A\times(B\times C)]_i
+  =
+  \epsilon_{ijk}\epsilon_{klm}A_jB_lC_m.
+\]
+Usando a identidade fundamental,
+\[
+  [A\times(B\times C)]_i
+  =
+  (\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})A_jB_lC_m.
+\]
+Logo,
+\[
+  [A\times(B\times C)]_i
+  =
+  B_i(A_jC_j)-C_i(A_jB_j).
+\]
+Em notação vetorial,
+\[
+  A\times(B\times C)=(A\cdot C)B-(A\cdot B)C.
+\]
+\end{example}
+
+\section{Derivadas como índices}
+
+Em coordenadas cartesianas euclidianas, escrevemos
+\[
+  \partial_i=\frac{\partial}{\partial x^i}.
+\]
+Então
+\[
+  \nabla\cdot A=\partial_iA_i,
+  \qquad
+  (\nabla\times A)_i=\epsilon_{ijk}\partial_jA_k.
+\]
+As identidades usuais de cálculo vetorial viram consequências de simetria e
+antissimetria.
+
+\begin{example}
+Para mostrar que $\nabla\times\nabla f=0$, escrevemos
+\[
+  (\nabla\times\nabla f)_i
+  =
+  \epsilon_{ijk}\partial_j\partial_k f.
+\]
+O fator $\epsilon_{ijk}$ é antissimétrico em $j,k$, enquanto
+$\partial_j\partial_k f$ é simétrico em $j,k$ se as derivadas mistas comutam.
+Logo a contração é zero.
+\end{example}
+
+\begin{example}
+Para mostrar que $\nabla\cdot(\nabla\times A)=0$,
+\[
+  \nabla\cdot(\nabla\times A)
+  =
+  \partial_i\epsilon_{ijk}\partial_jA_k
+  =
+  \epsilon_{ijk}\partial_i\partial_jA_k.
+\]
+Novamente, $\epsilon_{ijk}$ é antissimétrico em $i,j$, enquanto
+$\partial_i\partial_j$ é simétrico. Portanto,
+\[
+  \nabla\cdot(\nabla\times A)=0.
+\]
+\end{example}
+
+\section{Rotacional do rotacional}
+
+Uma identidade muito usada em eletromagnetismo é
+\[
+  \nabla\times(\nabla\times A)=\nabla(\nabla\cdot A)-\nabla^2A.
+\]
+Em componentes,
+\[
+  [\nabla\times(\nabla\times A)]_i
+  =
+  \epsilon_{ijk}\partial_j(\nabla\times A)_k
+  =
+  \epsilon_{ijk}\epsilon_{klm}\partial_j\partial_l A_m.
+\]
+Usando a identidade fundamental,
+\[
+  [\nabla\times(\nabla\times A)]_i
+  =
+  (\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})
+  \partial_j\partial_l A_m.
+\]
+Assim,
+\[
+  [\nabla\times(\nabla\times A)]_i
+  =
+  \partial_i\partial_mA_m-\partial_j\partial_jA_i,
+\]
+isto é,
+\[
+  \nabla\times(\nabla\times A)=\nabla(\nabla\cdot A)-\nabla^2A.
+\]
+
+\section{Tradução para relatividade}
+
+No espaço-tempo, as regras de índices continuam, mas alguns objetos mudam de
+papel:
+
+\begin{itemize}
+  \item o delta $\delta^\mu{}_\nu$ continua sendo a identidade;
+  \item a métrica $g_{\mu\nu}$ é quem levanta e abaixa índices;
+  \item a contração correta usa um índice acima e outro abaixo;
+  \item o símbolo de Levi-Civita em quatro dimensões tem quatro índices;
+  \item em espaço-tempo curvo, derivadas parciais de tensores são substituídas
+  por derivadas covariantes.
+\end{itemize}
+
+Por exemplo, a norma de um vetor não é $V_\mu V_\mu$, mas
+\[
+  V_\mu V^\mu=g_{\mu\nu}V^\mu V^\nu.
+\]
+Com assinatura $(-,+,+,+)$, um vetor temporal possui norma negativa. Esse sinal
+é físico e não deve ser apagado por analogia com a geometria euclidiana.
+
+\section{Checklist para não errar}
+
+Antes de aceitar uma conta com índices, verifique:
+
+\begin{enumerate}
+  \item Todo índice livre aparece igual em todos os termos?
+  \item Algum índice aparece três vezes no mesmo termo?
+  \item Todo índice repetido está realmente sendo somado?
+  \item Em relatividade, a contração tem um índice acima e um abaixo?
+  \item Alguma simetria ou antissimetria torna o termo zero?
+  \item Algum delta pode eliminar um índice?
+  \item Dois símbolos $\epsilon$ podem ser trocados por deltas?
+  \item A derivada usada deveria ser parcial ou covariante?
+\end{enumerate}
+
+Esse checklist é simples, mas resolve a maior parte dos erros algébricos em
+relatividade geral introdutória.
+
+\chapter{Resumo de fórmulas}
+
+\section{Relatividade especial}
+\[
+  \dd s^2=-\dd t^2+\dd x^2+\dd y^2+\dd z^2,
+  \qquad
+  \gamma=(1-v^2)^{-1/2}.
+\]
+\[
+  U^\mu=\frac{\dd x^\mu}{\dd\tau},
+  \qquad
+  p^\mu=mU^\mu,
+  \qquad
+  E^2=\bm p^2+m^2.
+\]
+
+\section{Geometria}
+\[
+  \dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu.
+\]
+\[
+  \Gamma^\rho_{\mu\nu}
+  =\frac{1}{2}g^{\rho\sigma}
+  (\partial_\mu g_{\nu\sigma}
+  +\partial_\nu g_{\mu\sigma}
+  -\partial_\sigma g_{\mu\nu}).
+\]
+\[
+  R^\rho{}_{\sigma\mu\nu}
+  =\partial_\mu\Gamma^\rho_{\nu\sigma}
+  -\partial_\nu\Gamma^\rho_{\mu\sigma}
+  +\Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}
+  -\Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}.
+\]
+\[
+  G_{\mu\nu}=R_{\mu\nu}-\frac{1}{2}Rg_{\mu\nu}.
+\]
+
+\section{Einstein}
+\[
+  G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi G T_{\mu\nu}.
+\]
+
+\section{Schwarzschild}
+\[
+  \dd s^2=
+  -\left(1-\frac{2GM}{r}\right)\dd t^2
+  +\left(1-\frac{2GM}{r}\right)^{-1}\dd r^2
+  +r^2\dd\Omega^2.
+\]
+
+\section{Cosmologia}
+\[
+  H^2=\frac{8\pi G}{3}\rho-\frac{k}{a^2}+\frac{\Lambda}{3},
+  \qquad
+  \dot\rho+3H(\rho+p)=0.
+\]
+
+\chapter{Bibliografia comentada}
+
+\begin{itemize}
+  \item Bernard Schutz, \textit{A First Course in General Relativity}, 3ª ed.,
+  Cambridge University Press, 2022. Referência principal do curso; excelente
+  para primeira exposição, com forte ligação entre cálculo tensorial e
+  aplicações astrofísicas.
+
+  \item Sean Carroll, \textit{Spacetime and Geometry}. Tratamento mais
+  geométrico e moderno, recomendado para aprofundamento após os módulos de
+  curvatura e equações de Einstein.
+
+  \item James Hartle, \textit{Gravity}. Muito bom para intuição física,
+  problemas e aplicações.
+
+  \item Robert Wald, \textit{General Relativity}. Referência avançada, indicada
+  para estudantes que queiram seguir pesquisa em gravitação matemática,
+  buracos negros ou teoria clássica de campos em espaço-tempo curvo.
+
+  \item Misner, Thorne e Wheeler, \textit{Gravitation}. Enciclopédico,
+  historicamente importante e cheio de intuição geométrica.
+\end{itemize}
+
+\end{document}
