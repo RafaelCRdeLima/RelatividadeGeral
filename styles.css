@@ -61,18 +61,41 @@ a { color: inherit; }
 }
 
 .brand-mark {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 42px;
   height: 42px;
   color: var(--navy);
   background: var(--cyan);
   border-radius: 50%;
   font-family: "Newsreader", serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
 }
 
-.brand-mark sup, .brand-mark sub { font-size: 0.55em; }
+.tensor-r {
+  font-style: italic;
+  line-height: 1;
+}
+
+.tensor-indices {
+  display: flex;
+  margin-left: 0.04em;
+  flex-direction: column;
+  align-items: flex-start;
+  font-style: italic;
+  line-height: 0.72;
+  transform: translateY(-0.01em);
+}
+
+.tensor-indices sup,
+.tensor-indices sub {
+  position: static;
+  display: block;
+  font-size: 0.48em;
+  line-height: 1;
+  vertical-align: baseline;
+}
 
 nav { display: flex; gap: 2rem; }
 
