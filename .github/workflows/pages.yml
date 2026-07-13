@@ -24,11 +24,26 @@ jobs:
       - name: Obter repositório
         uses: actions/checkout@v6
 
+      - name: Configurar Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: rg-interactive-lab/package-lock.json
+
+      - name: Construir RG Interactive Lab
+        working-directory: rg-interactive-lab
+        run: |
+          npm ci
+          npm run build
+
       - name: Montar site estático
         run: |
           mkdir _site
           cp index.html styles.css favicon.svg .nojekyll _site/
           cp -r apostila notebooks dashboards _site/
+          mkdir -p _site/dashboards/capitulo-4
+          cp -r rg-interactive-lab/dist/. _site/dashboards/capitulo-4/
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5

@@ -21,9 +21,13 @@ Depois de habilitado o GitHub Pages, a página estará disponível em:
 apostila/        PDF e fonte LaTeX
 notebooks/       laboratórios computacionais
 dashboards/      laboratórios visuais interativos
+rg-interactive-lab/ aplicação avaliativa do Capítulo 4 e Professor Viewer
 index.html       página da disciplina
 styles.css       apresentação visual da página
 ```
+
+O RG Interactive Lab possui documentação, testes e build próprios em
+[`rg-interactive-lab/`](rg-interactive-lab/README.md).
 
 ## Executar os notebooks localmente
 
