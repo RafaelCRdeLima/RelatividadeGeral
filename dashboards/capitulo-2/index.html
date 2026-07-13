@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Laboratório visual de relatividade especial: Lorentz, simultaneidade, tempo próprio e paradoxos.">
+    <meta name="theme-color" content="#071b2c">
+    <title>Laboratório visual · Relatividade especial</title>
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1">
+  </head>
+  <body>
+    <a class="skip-link" href="#laboratorios">Ir para os laboratórios</a>
+
+    <header class="topbar">
+      <a class="back-link" href="../../index.html#dashboards">← Página da disciplina</a>
+      <span>Capítulo 2 · Relatividade especial</span>
+      <a href="#guia">Guia de exploração</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-orbit" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">Dashboard interativo</p>
+          <h1>O espaço e o tempo<br><em>mudam juntos.</em></h1>
+          <p>
+            Explore referenciais em movimento sem escrever código. Mova os controles,
+            observe os diagramas e tente prever cada resultado antes de vê-lo.
+          </p>
+        </div>
+        <div class="hero-equation" aria-label="Transformação de Lorentz">
+          <span>x′ = γ(x − βt)</span>
+          <span>t′ = γ(t − βx)</span>
+        </div>
+      </section>
+
+      <section class="control-deck" aria-label="Controle global de velocidade">
+        <div class="control-title">
+          <span class="live-dot"></span>
+          <div><small>Controle global</small><strong>Velocidade relativa</strong></div>
+        </div>
+        <label class="range-field">
+          <span>β = v/c</span>
+          <input id="betaSlider" type="range" min="-0.90" max="0.90" step="0.05" value="0.60">
+        </label>
+        <div class="control-readouts">
+          <div><small>β</small><strong id="betaValue">+0,60</strong></div>
+          <div><small>γ</small><strong id="gammaValue">1,25</strong></div>
+          <div><small>rapidez φ</small><strong id="rapidityValue">0,69</strong></div>
+        </div>
+        <div class="presets" aria-label="Velocidades predefinidas">
+          <button data-beta="-0.8">−0,8</button>
+          <button data-beta="0">repouso</button>
+          <button data-beta="0.4">+0,4</button>
+          <button data-beta="0.8">+0,8</button>
+        </div>
+      </section>
+
+      <div class="lab-index" id="laboratorios" aria-label="Índice dos laboratórios">
+        <a href="#lorentz"><b>01</b><span>Eixos de Lorentz</span></a>
+        <a href="#simultaneidade"><b>02</b><span>Trem e plataforma</span></a>
+        <a href="#tempo-proprio"><b>03</b><span>Tempo próprio</span></a>
+        <a href="#gemeos"><b>04</b><span>Gêmeos</span></a>
+        <a href="#celeiro"><b>05</b><span>Escada e celeiro</span></a>
+      </div>
+
+      <section class="lab" id="lorentz">
+        <header class="lab-heading">
+          <div><span class="lab-number">01</span><p class="eyebrow">Geometria de Minkowski</p><h2>Os eixos se inclinam</h2></div>
+          <p>Compare S e S′. Quando |β| cresce, os eixos primados se aproximam do cone de luz, mas nunca o alcançam.</p>
+        </header>
+        <div class="visual-grid">
+          <article class="plot-card wide">
+            <div class="plot-toolbar"><span>Diagrama t × x</span><div class="legend"><i class="light"></i> luz <i class="time"></i> t′ <i class="space"></i> x′</div></div>
+            <svg id="minkowskiPlot" viewBox="0 0 720 560" role="img" aria-label="Diagrama de Minkowski interativo"></svg>
+          </article>
+          <aside class="insight-stack">
+            <article class="metric-card accent"><small>Inclinação visual</small><strong id="angleValue">31,0°</strong><p>Os eixos x′ e t′ inclinam-se pelo mesmo ângulo euclidiano no desenho.</p></article>
+            <article class="metric-card"><small>Eventos A e B</small><strong id="deltaTPrime">Δt′ = −3,00</strong><p>Simultâneos em S, mas não em S′.</p></article>
+            <article class="question-card"><small>Antes de mover β</small><p>Qual evento ocorrerá primeiro em S′ se invertermos o sinal da velocidade?</p></article>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab dark-lab" id="simultaneidade">
+        <header class="lab-heading">
+          <div><span class="lab-number">02</span><p class="eyebrow">Paradoxo do trem</p><h2>“Agora” não é universal</h2></div>
+          <p>Dois raios atingem as extremidades da plataforma ao mesmo tempo em S. O observador do trem atribui tempos diferentes aos mesmos eventos.</p>
+        </header>
+        <div class="train-layout">
+          <article class="plot-card dark-card">
+            <div class="plot-toolbar"><span>Trem e plataforma</span><span id="trainDirection">S′ move-se para a direita</span></div>
+            <svg id="trainPlot" viewBox="0 0 760 300" role="img" aria-label="Experimento do trem e da plataforma"></svg>
+          </article>
+          <div class="event-comparison">
+            <article><span class="event-badge">A</span><small>extremidade esquerda</small><strong id="timeA">t′A = +1,50</strong></article>
+            <div class="versus">≠</div>
+            <article><span class="event-badge gold">B</span><small>extremidade direita</small><strong id="timeB">t′B = −1,50</strong></article>
+          </div>
+          <p class="result-sentence" id="simultaneitySentence">Em S′, B acontece 3,00 unidades de tempo antes de A.</p>
+        </div>
+      </section>
+
+      <section class="lab" id="tempo-proprio">
+        <header class="lab-heading">
+          <div><span class="lab-number">03</span><p class="eyebrow">Relógios em movimento</p><h2>O tempo de cada trajetória</h2></div>
+          <p>O tempo próprio é o que um relógio carrega consigo. Para velocidade constante, τ/T = √(1−β²).</p>
+        </header>
+        <div class="visual-grid proper-grid">
+          <article class="plot-card wide">
+            <div class="plot-toolbar"><span>Fração de tempo próprio</span><span>τ/T = 1/γ</span></div>
+            <svg id="properTimePlot" viewBox="0 0 720 420" role="img" aria-label="Gráfico do tempo próprio em função da velocidade"></svg>
+          </article>
+          <aside class="proper-controls">
+            <label class="duration-control"><span>Duração em S: <b id="durationValue">10,0</b></span><input id="durationSlider" type="range" min="2" max="30" step="1" value="10"></label>
+            <div class="clock-pair">
+              <article><div class="clock earth-clock"><span>T</span></div><small>relógio em S</small><strong id="earthTime">10,00</strong></article>
+              <article><div class="clock traveler-clock" id="travelerClock"><span>τ</span></div><small>relógio móvel</small><strong id="properTime">8,00</strong></article>
+            </div>
+            <article class="metric-card"><small>Diferença acumulada</small><strong id="timeDifference">2,00</strong><p>Não é um atraso mecânico do relógio; é o comprimento da linha de mundo.</p></article>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab" id="gemeos">
+        <header class="lab-heading">
+          <div><span class="lab-number">04</span><p class="eyebrow">Paradoxo dos gêmeos</p><h2>Duas linhas de mundo, duas idades</h2></div>
+          <p>O viajante muda de referencial no retorno. As trajetórias não são simétricas, embora cada trecho uniforme seja inercial.</p>
+        </header>
+        <div class="visual-grid">
+          <article class="plot-card wide">
+            <div class="plot-toolbar"><span>Partida → retorno → reencontro</span><span>tempo terrestre na vertical</span></div>
+            <svg id="twinsPlot" viewBox="0 0 720 500" role="img" aria-label="Linhas de mundo do paradoxo dos gêmeos"></svg>
+          </article>
+          <aside class="insight-stack">
+            <article class="age-card earth"><small>Gêmeo na Terra</small><strong id="twinEarthAge">10,00 anos</strong><span>trajetória inercial</span></article>
+            <article class="age-card traveler"><small>Gêmeo viajante</small><strong id="twinTravelerAge">8,00 anos</strong><span>trajetória por trechos</span></article>
+            <article class="question-card"><small>A ideia central</small><p>Entre os mesmos eventos de partida e reencontro, a linha inercial maximiza o tempo próprio.</p></article>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab barn-lab" id="celeiro">
+        <header class="lab-heading">
+          <div><span class="lab-number">05</span><p class="eyebrow">Paradoxo da escada e do celeiro</p><h2>Cabe ou não cabe?</h2></div>
+          <p>Uma escada de comprimento próprio 10 atravessa um celeiro de comprimento 7. Em S, ela pode estar contraída o bastante para caber — por um instante.</p>
+        </header>
+        <article class="plot-card barn-card">
+          <svg id="barnPlot" viewBox="0 0 760 300" role="img" aria-label="Escada relativística atravessando um celeiro"></svg>
+          <div class="barn-readouts">
+            <div><small>Comprimento próprio</small><strong>L₀ = 10,00</strong></div>
+            <div><small>Comprimento em S</small><strong id="contractedLength">L = 8,00</strong></div>
+            <div><small>Celeiro</small><strong>Lc = 7,00</strong></div>
+            <div class="fit-status" id="fitStatus">Ainda não cabe</div>
+          </div>
+        </article>
+        <div class="paradox-note"><b>Onde está o paradoxo?</b><p>No referencial da escada, é o celeiro que está contraído. A resolução está na simultaneidade: as duas portas não fecham ao mesmo tempo nesse referencial.</p></div>
+      </section>
+
+      <section class="guide" id="guia">
+        <p class="eyebrow">Guia de exploração</p>
+        <h2>Três perguntas para levar consigo</h2>
+        <ol>
+          <li><span>01</span><p>Quais quantidades mudam quando trocamos de referencial — e qual combinação permanece invariante?</p></li>
+          <li><span>02</span><p>Em cada paradoxo, estamos realmente comparando os mesmos pares de eventos?</p></li>
+          <li><span>03</span><p>O que acontece com os gráficos quando |β| se aproxima de 1? O que nunca pode ser alcançado?</p></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer><span>Relatividade Geral · UDESC/CCT</span><a href="../../apostila/Relatividade_Geral_72_Aulas.pdf">Consultar a apostila ↗</a></footer>
+    <script src="app.js?v=1"></script>
+  </body>
+</html>

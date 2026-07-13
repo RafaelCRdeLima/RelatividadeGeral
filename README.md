@@ -6,6 +6,7 @@ O repositório reúne:
 
 - a apostila do curso em PDF e seu fonte LaTeX;
 - laboratórios computacionais em Jupyter Notebook;
+- dashboards de exploração visual sem programação;
 - a página pública para leitura e download dos materiais.
 
 ## Acesso
@@ -19,6 +20,7 @@ Depois de habilitado o GitHub Pages, a página estará disponível em:
 ```text
 apostila/        PDF e fonte LaTeX
 notebooks/       laboratórios computacionais
+dashboards/      laboratórios visuais interativos
 index.html       página da disciplina
 styles.css       apresentação visual da página
 ```
