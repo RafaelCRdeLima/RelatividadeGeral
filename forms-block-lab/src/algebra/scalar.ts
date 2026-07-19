@@ -206,13 +206,15 @@ export function scalarToLatex(s: Scalar): string {
       return factors.join(" ");
     }
     case "partial": {
+      // notação compacta (∂_x f, ∂_x²f) em vez de fração empilhada — o
+      // conteúdo vive dentro de um bloco de altura fixa, não numa linha de
+      // texto solta, então uma \dfrac de duas linhas não cabe.
       const counts = new Map<string, number>();
       for (const w of s.wrts) counts.set(w, (counts.get(w) ?? 0) + 1);
-      const denom = Array.from(counts.entries())
-        .map(([name, n]) => `\\partial ${name}${n > 1 ? `^${n}` : ""}`)
-        .join("\\,");
-      const order = s.wrts.length;
-      return `\\dfrac{\\partial${order > 1 ? `^${order}` : ""} ${scalarToLatex(s.of)}}{${denom}}`;
+      const ops = Array.from(counts.entries())
+        .map(([name, n]) => `\\partial_{${name}}${n > 1 ? `^{${n}}` : ""}`)
+        .join("");
+      return `${ops} ${scalarToLatex(s.of)}`;
     }
   }
 }

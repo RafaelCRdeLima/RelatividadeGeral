@@ -12,14 +12,9 @@ import {
 } from "@dnd-kit/core";
 import { Block } from "./Block";
 import { MathTag } from "./MathTag";
-
-type Stage = 0 | 1 | 2;
-
-const CAPTIONS: Record<Stage, string> = {
-  0: "Uma 0-forma é uma função escalar. Arraste o operador d sobre o bloco para aplicá-lo.",
-  1: "df é uma 1-forma — o grau subiu em 1 e apareceu um dente. Arraste d de novo para ver o que acontece.",
-  2: "d²f = 0 — a derivada exterior aplicada duas vezes sempre se anula. É essa identidade que separa formas fechadas (dω=0) de exatas (ω=dη).",
-};
+import { useCoords } from "./CoordsContext";
+import { exteriorDerivative, formToLatex, isZeroForm, scalarForm, type FormExpr } from "../algebra/form";
+import { symbol } from "../algebra/scalar";
 
 function DOperator() {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: "d-operator" });
@@ -44,78 +39,79 @@ function Target({ children }: { children: ReactNode }) {
 }
 
 export function ExteriorDDemo() {
-  const [stage, setStage] = useState<Stage>(0);
   const [tag, setTag] = useState("f");
+  const [form, setForm] = useState<FormExpr>(() => scalarForm(symbol("f")));
+  const [appliedCount, setAppliedCount] = useState(0);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
     useSensor(KeyboardSensor),
   );
 
+  const coords = useCoords();
+
+  // o motor decide se e quando colapsa — "zero" não é uma etapa roteirizada,
+  // é o resultado real de aplicar exteriorDerivative duas vezes.
+  const zero = isZeroForm(form);
+
   function handleDragEnd(event: DragEndEvent) {
-    if (event.over?.id === "target" && stage < 2) {
-      setStage((current) => (current + 1) as Stage);
+    if (event.over?.id === "target" && appliedCount < 2) {
+      setForm((current) => exteriorDerivative(current, coords));
+      setAppliedCount((count) => count + 1);
     }
   }
+
+  function updateTag(next: string) {
+    setTag(next);
+    setForm(scalarForm(symbol(next)));
+  }
+
+  function reset() {
+    setForm(scalarForm(symbol(tag)));
+    setAppliedCount(0);
+  }
+
+  const width = appliedCount === 0 ? 90 : zero ? 80 : 480;
+  const background = appliedCount === 0 ? "var(--fb-neutral)" : zero ? "var(--fb-muted)" : "var(--fb-orange)";
+
+  const captions = [
+    "Uma 0-forma é uma função escalar. Arraste o operador d sobre o bloco para aplicá-lo.",
+    "df é uma 1-forma calculada de verdade pelo motor — a soma das derivadas parciais vezes cada dx, não um rótulo fixo. Arraste d de novo para ver o que acontece.",
+    "d²f = 0 — não é uma regra decorada, é o que o motor calculou: derivadas mistas comutam e a antissimetria do wedge cancela os termos cruzados.",
+  ];
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <div className="fb-dstage-row">
         <Target>
           <AnimatePresence mode="wait">
-            {stage < 2 ? (
-              <motion.div
-                key={stage}
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.4 }}
-              >
-                <Block
-                  width={stage === 0 ? 90 : 130}
-                  height={64}
-                  degreeOut={stage}
-                  background={stage === 0 ? "var(--fb-neutral)" : "var(--fb-orange)"}
-                >
-                  {stage === 0 ? (
-                    <MathTag value={tag} editable onChange={setTag} />
-                  ) : (
-                    <MathTag value={`d${tag}`} />
-                  )}
-                </Block>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="collapsed"
-                initial={{ opacity: 1, scale: 1.2 }}
-                animate={{ opacity: 0, scale: 0 }}
-                transition={{ duration: 0.55, ease: "easeIn" }}
-              >
-                <Block width={130} height={64} degreeOut={2} background="var(--fb-orange-2)">
-                  <MathTag value={`d(d${tag})`} />
-                </Block>
-              </motion.div>
-            )}
+            <motion.div
+              key={appliedCount}
+              initial={{ opacity: 0, scale: zero ? 1.2 : 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.4 }}
+            >
+              <Block width={width} height={64} degreeOut={form.degree} background={background}>
+                {appliedCount === 0 ? (
+                  <MathTag value={tag} editable onChange={updateTag} />
+                ) : (
+                  <MathTag value={formToLatex(form)} />
+                )}
+              </Block>
+            </motion.div>
           </AnimatePresence>
         </Target>
 
-        {stage < 2 ? (
-          <DOperator />
-        ) : (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-            <Block width={70} height={64} background="var(--fb-muted)">
-              <span className="fb-zero">0</span>
-            </Block>
-          </motion.div>
-        )}
+        {appliedCount < 2 && <DOperator />}
 
-        {stage === 2 && (
-          <button className="fb-reset" onClick={() => setStage(0)}>
+        {appliedCount >= 2 && (
+          <button className="fb-reset" onClick={reset}>
             Reiniciar
           </button>
         )}
       </div>
 
-      <p className="fb-caption">{CAPTIONS[stage]}</p>
+      <p className="fb-caption">{captions[Math.min(appliedCount, 2)]}</p>
     </DndContext>
   );
 }

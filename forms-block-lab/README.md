@@ -4,19 +4,24 @@ App irmão do `rg-interactive-lab`, para ensinar álgebra de formas
 diferenciais (1-formas, 2-formas, produto wedge, derivada exterior, e depois
 Hodge star, pullback e integração/Stokes) por manipulação de blocos.
 
-**Este é ainda um protótipo.** A camada visual (`src/blocks/`) valida forma,
-cor e animação dos blocos; a camada simbólica nova (`src/algebra/`) é o motor
-real de álgebra exterior, mas as duas ainda não estão conectadas — os dois
-demos visuais têm estado próprio ad-hoc, não usam o motor ainda. Falta:
+**Este é ainda um protótipo**, mas desde já com matemática de verdade: a
+camada visual (`src/blocks/`) e o motor simbólico (`src/algebra/`) estão
+ligados — os dois demos chamam `formWedge`/`exteriorDerivative` a cada
+interação e mostram o resultado real (inclusive a expansão em derivadas
+parciais de `df`, não um rótulo fixo). Falta:
 
-- ligar `src/blocks/*` a `src/algebra/*` (hoje a UI só simula os dois casos
-  específicos já validados; o motor sabe fazer muito mais que isso);
 - currículo de atividades (`activities.ts`, competências, pontuação);
 - sessão persistida, telemetria, retomada;
 - Professor Viewer, exportação `.rglab`;
 - os operadores da Fase 3 (⋆, ι, f*, ∫, Stokes) na UI — o motor simbólico só
   cobre ∧, soma e `d` por enquanto;
-- a barra de contexto (carta ativa, orientação, métrica) do layout-alvo.
+- orientação e métrica na barra de contexto (só carta/coordenadas por
+  enquanto — necessárias para ⋆ e ∫, ainda não implementadas);
+- reordenar/mover subárvores já colocadas no canvas livre — hoje só dá pra
+  preencher soquetes vazios ou apagar (o que apaga a subárvore inteira);
+- validar se as tags digitadas correspondem às coordenadas da carta ativa
+  (hoje uma tag "w" numa carta 3D só não aparece nas somas de `d`, não gera
+  aviso).
 
 ### Escopo do motor simbólico (`src/algebra/`)
 
@@ -40,12 +45,32 @@ compostos por soma e produto de símbolos).
 ## O que dá para ver
 
 - **Produto wedge**: dois blocos de 1-forma (grau = 1 dente) encaixados num
-  operador ∧, produzindo um bloco de 2-forma (2 dentes). Arraste um bloco
-  sobre o outro para trocar a ordem — o sinal muda (antissimetria); se os
-  dois índices ficarem iguais, o resultado colapsa para 0.
-- **Derivada exterior**: aplicar `d` sobe o grau em 1; aplicar `d` de novo
-  colapsa para 0 (identidade d²=0), construído pela manipulação, não
-  declarado em texto.
+  operador ∧, produzindo um bloco de 2-forma (2 dentes) com o resultado
+  canônico real de `formWedge` (índices ordenados, sinal correto). Arraste
+  um bloco sobre o outro para trocar a ordem — o sinal muda porque o motor
+  recalcula a permutação; se os dois índices ficarem iguais,
+  `isZeroForm` detecta e o resultado colapsa para 0.
+- **Derivada exterior**: aplicar `d` chama `exteriorDerivative` de verdade —
+  o resultado de `df` é a soma real das derivadas parciais formais vezes
+  cada `dx` (ex.: `∂ₓf dx + ∂ᵧf dy + ∂_z f dz`). Aplicar `d` de novo
+  recalcula e o motor produz a forma zero (`d²=0`), não um estado
+  roteirizado.
+- **Canvas livre**: paleta de blocos (0-forma, 1-forma, ∧, +, d) à esquerda,
+  área de montagem no centro, expressão calculada ao vivo à direita.
+  Diferente dos dois demos guiados, aqui a árvore é genérica e recursiva
+  (`src/blocks/canvasModel.ts`) — dá pra montar qualquer combinação, incluindo
+  operadores aninhados (`d(dx∧dy)`, por exemplo). Soquete vazio mostra
+  "expressão incompleta"; soma de graus incompatíveis mostra o erro do motor
+  em vez de travar o encaixe — o bloco engata fisicamente, é a matemática que
+  rejeita. Cada bloco/soquete aceita **arrastar OU clicar para
+  selecionar e depois clicar para encaixar** — o clique existe porque
+  arrastar-e-soltar segurando o botão é difícil em trackpad.
+- **Barra de contexto**: seletor de carta ativa (2D, 3D, espaço-tempo 1+3,
+  esféricas) no topo da página, compartilhado pelas três abas via
+  `CoordsContext`. Trocar a carta muda de verdade o parâmetro `coords`
+  passado para `exteriorDerivative`/`formWedge` — testável visualmente
+  trocando para "Espaço-tempo" e vendo `df` somar sobre `t,x,y,z` em vez de
+  só `x,y,z`.
 
 ## Decisões de implementação (ver plano completo na conversa)
 

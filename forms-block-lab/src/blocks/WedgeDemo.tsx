@@ -12,6 +12,8 @@ import {
 } from "@dnd-kit/core";
 import { Block } from "./Block";
 import { MathTag } from "./MathTag";
+import { useCoords } from "./CoordsContext";
+import { basisForm, formWedge, isZeroForm } from "../algebra/form";
 
 interface FormItem {
   id: string;
@@ -58,15 +60,21 @@ export function WedgeDemo() {
     left: { id: "a", tag: "x" },
     right: { id: "b", tag: "y" },
   });
-  const [signFlipped, setSignFlipped] = useState(false);
-  const [flashKey, setFlashKey] = useState(0);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
     useSensor(KeyboardSensor),
   );
 
-  const equal = slotItems.left.tag === slotItems.right.tag;
+  const coords = useCoords();
+
+  // o motor real decide grau, sinal e anulação — nada disso é estado
+  // manipulado à mão; recalculado a cada render a partir das tags atuais.
+  const wedge = formWedge(basisForm(slotItems.left.tag), basisForm(slotItems.right.tag), coords);
+  const zero = isZeroForm(wedge);
+  const resultTerm = wedge.terms[0];
+  const sign = resultTerm && resultTerm.coeff.kind === "num" && resultTerm.coeff.value < 0 ? -1 : 1;
+  const basisLatex = resultTerm ? resultTerm.indices.map((i) => `d${i}`).join(" \\wedge ") : "";
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -76,8 +84,6 @@ export function WedgeDemo() {
     if (!fromSlot || fromSlot === toSlot) return;
 
     setSlotItems((prev) => ({ ...prev, [fromSlot]: prev[toSlot], [toSlot]: prev[fromSlot] }));
-    setSignFlipped((flipped) => !flipped);
-    setFlashKey((key) => key + 1);
   }
 
   function updateTag(slot: SlotId, tag: string) {
@@ -104,7 +110,7 @@ export function WedgeDemo() {
         </span>
 
         <AnimatePresence mode="wait">
-          {equal ? (
+          {zero ? (
             <motion.div
               key="zero"
               initial={{ opacity: 0, scale: 1.2 }}
@@ -116,12 +122,12 @@ export function WedgeDemo() {
               </Block>
             </motion.div>
           ) : (
-            <motion.div key={flashKey} layout>
+            <motion.div key={slotItems.left.id} layout>
               <Block width={190} height={64} degreeIn={2} background="var(--fb-orange-2)">
-                <span className={`fb-sign ${signFlipped ? "fb-sign-neg" : "fb-sign-pos"}`}>
-                  {signFlipped ? "−" : "+"}
+                <span className={`fb-sign ${sign < 0 ? "fb-sign-neg" : "fb-sign-pos"}`}>
+                  {sign < 0 ? "−" : "+"}
                 </span>
-                <MathTag value={`d${slotItems.left.tag} \\wedge d${slotItems.right.tag}`} />
+                <MathTag value={basisLatex} />
               </Block>
             </motion.div>
           )}
@@ -129,8 +135,8 @@ export function WedgeDemo() {
       </div>
 
       <p className="fb-caption">
-        {equal
-          ? "Os dois índices ficaram iguais: dx∧dx = 0 é a antissimetria do produto wedge anulando o termo."
+        {zero
+          ? "Os dois índices ficaram iguais: dx∧dx = 0 é a antissimetria do produto wedge anulando o termo — calculado pelo motor, não fingido."
           : "Arraste um bloco sobre o outro para trocar a ordem — o sinal muda porque dx∧dy = −dy∧dx. Clique numa tag para editar o índice."}
       </p>
     </DndContext>
