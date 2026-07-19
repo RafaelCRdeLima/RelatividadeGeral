@@ -1,7 +1,7 @@
 import { CHART_PRESETS, useCoordsSelector } from "./CoordsContext";
 
 export function ContextBar() {
-  const { presetId, coords, setPresetId } = useCoordsSelector();
+  const { presetId, coords, metric, setPresetId } = useCoordsSelector();
 
   return (
     <div className="fb-context-bar">
@@ -22,6 +22,17 @@ export function ContextBar() {
           {coords.map((name) => (
             <span key={name} className="fb-coord-chip">
               {name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="fb-context-field">
+        <span>Métrica (diagonal)</span>
+        <div className="fb-coord-chips">
+          {coords.map((name) => (
+            <span key={name} className="fb-coord-chip fb-metric-chip">
+              g<sub>{name}{name}</sub>={metric[name] ?? 1}
             </span>
           ))}
         </div>

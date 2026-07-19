@@ -32,6 +32,10 @@ export function MathTag({ value, editable = false, onChange }: MathTagProps) {
           onChange?.(next);
         }}
         onKeyDown={(event) => {
+          // impede que Enter/Espaço/Escape borbulhem até um ancestral
+          // arrastável (dnd-kit) e sejam interpretados como ativação de
+          // arraste por teclado — isto é edição de texto, não drag.
+          event.stopPropagation();
           if (event.key === "Enter") inputRef.current?.blur();
           if (event.key === "Escape") {
             setDraft(value);
@@ -53,6 +57,10 @@ export function MathTag({ value, editable = false, onChange }: MathTagProps) {
       onKeyDown={(event) => {
         if (editable && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
+          // mesma razão do input: Espaço é a tecla padrão de ativação de
+          // arraste do dnd-kit — sem isto, focar+apertar espaço numa tag
+          // dispararia edição de texto e drag por teclado ao mesmo tempo.
+          event.stopPropagation();
           setEditing(true);
         }
       }}

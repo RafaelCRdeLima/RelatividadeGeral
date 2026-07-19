@@ -164,6 +164,43 @@ export function interiorProduct(field: VectorField, a: FormExpr): FormExpr {
   return normalize(a.degree - 1, rawTerms);
 }
 
+/**
+ * Métrica diagonal constante — só números, não Scalar. Cobre Euclidiana
+ * (todos os componentes 1) e Minkowski (um componente -1), que são os dois
+ * casos pedagógicos centrais. Métricas dependentes de posição (esféricas:
+ * g_θθ=r²) exigiriam raiz quadrada simbólica no motor escalar, que ainda
+ * não existe — ver README para o registro dessa decisão de escopo.
+ */
+export type Metric = Record<string, number>;
+
+/**
+ * Dual de Hodge ⋆: Λᵏ → Λⁿ⁻ᵏ sobre uma métrica diagonal, com n = coords.length.
+ * Para cada monômio dx^{i1}∧...∧dx^{ik}, o resultado é o complemento dos
+ * índices em `coords`, multiplicado por √|det g| · sinal da permutação que
+ * reordena (índices, complemento) para a ordem canônica de `coords` · o
+ * produto dos g^{ii} inversos dos índices originais — a definição padrão
+ * do dual de Hodge em coordenadas (não numa base ortonormal).
+ */
+export function hodgeStar(metric: Metric, coords: string[], a: FormExpr): FormExpr {
+  const detG = coords.reduce((product, name) => product * (metric[name] ?? 1), 1);
+  const volumeFactor = Math.sqrt(Math.abs(detG));
+  const degree = coords.length - a.degree;
+
+  const rawTerms: Term[] = [];
+  for (const t of a.terms) {
+    const complement = coords.filter((name) => !t.indices.includes(name));
+    const { sign } = canonicalizeIndices([...t.indices, ...complement], coords);
+    if (sign === 0) continue;
+
+    let inverseProduct = 1;
+    for (const name of t.indices) inverseProduct *= 1 / (metric[name] ?? 1);
+
+    const factor = sign * volumeFactor * inverseProduct;
+    rawTerms.push({ coeff: scalarMul(num(factor), t.coeff), indices: complement });
+  }
+  return normalize(degree, rawTerms);
+}
+
 export function isZeroForm(a: FormExpr): boolean {
   return a.terms.length === 0;
 }

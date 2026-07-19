@@ -7,9 +7,11 @@ import {
   formWedge,
   formsEqual,
   exteriorDerivative,
+  hodgeStar,
   interiorProduct,
   isZeroForm,
   scalarForm,
+  type Metric,
   type VectorField,
 } from "../../src/algebra/form";
 
@@ -130,6 +132,40 @@ describe("interiorProduct", () => {
 
   it("ι_X de uma 0-forma é 0 por convenção", () => {
     expect(isZeroForm(interiorProduct(X, scalarForm(symbol("f"))))).toBe(true);
+  });
+});
+
+describe("hodgeStar", () => {
+  const EUCLIDEAN: Metric = { x: 1, y: 1, z: 1 };
+
+  it("⋆dx = dy∧dz, ⋆dz = dx∧dy — casos padrão de ℝ³ euclidiano", () => {
+    expect(formsEqual(hodgeStar(EUCLIDEAN, XYZ, dx), formWedge(dy, dz, XYZ))).toBe(true);
+    expect(formsEqual(hodgeStar(EUCLIDEAN, XYZ, dz), formWedge(dx, dy, XYZ))).toBe(true);
+  });
+
+  it("⋆dy = dz∧dx (= -dx∧dz) — o sinal da permutação aparece certo", () => {
+    const result = hodgeStar(EUCLIDEAN, XYZ, dy);
+    expect(formsEqual(result, formWedge(dz, dx, XYZ))).toBe(true);
+  });
+
+  it("⋆1 = dx∧dy∧dz e ⋆(dx∧dy∧dz) = 1 — extremos de grau 0 e grau máximo", () => {
+    const volume = formWedge(dx, formWedge(dy, dz, XYZ), XYZ);
+    expect(formsEqual(hodgeStar(EUCLIDEAN, XYZ, scalarForm(num(1))), volume)).toBe(true);
+    expect(formsEqual(hodgeStar(EUCLIDEAN, XYZ, volume), scalarForm(num(1)))).toBe(true);
+  });
+
+  it("⋆⋆dx = dx em ℝ³ euclidiano — (-1)^(k(n-k)) com k=1,n=3 dá sinal +1", () => {
+    const once = hodgeStar(EUCLIDEAN, XYZ, dx);
+    const twice = hodgeStar(EUCLIDEAN, XYZ, once);
+    expect(formsEqual(twice, dx)).toBe(true);
+  });
+
+  it("Minkowski (-,+,+,+): ⋆dt = -dx∧dy∧dz", () => {
+    const minkowski: Metric = { t: -1, x: 1, y: 1, z: 1 };
+    const TXYZ = ["t", "x", "y", "z"];
+    const result = hodgeStar(minkowski, TXYZ, basisForm("t"));
+    const expected = formWedge(dx, formWedge(dy, dz, TXYZ), TXYZ);
+    expect(result.terms).toEqual([{ coeff: { kind: "num", value: -1 }, indices: expected.terms[0].indices }]);
   });
 });
 
