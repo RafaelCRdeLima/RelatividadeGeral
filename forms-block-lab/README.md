@@ -13,15 +13,19 @@ parciais de `df`, não um rótulo fixo). Falta:
 - currículo de atividades (`activities.ts`, competências, pontuação);
 - sessão persistida, telemetria, retomada;
 - Professor Viewer, exportação `.rglab`;
-- os operadores da Fase 3 (⋆, ι, f*, ∫, Stokes) na UI — o motor simbólico só
-  cobre ∧, soma e `d` por enquanto;
+- os operadores ⋆ (Hodge star), f* (pullback) e ∫/Stokes da Fase 3 — só ι
+  (contração) foi implementado até agora, além de ∧, soma e `d`;
 - orientação e métrica na barra de contexto (só carta/coordenadas por
-  enquanto — necessárias para ⋆ e ∫, ainda não implementadas);
+  enquanto — necessárias para ⋆, ainda não implementada);
 - reordenar/mover subárvores já colocadas no canvas livre — hoje só dá pra
   preencher soquetes vazios ou apagar (o que apaga a subárvore inteira);
 - validar se as tags digitadas correspondem às coordenadas da carta ativa
   (hoje uma tag "w" numa carta 3D só não aparece nas somas de `d`, não gera
-  aviso).
+  aviso);
+- o bloco "vetor" do canvas só representa vetores de base (∂/∂x, componente
+  1 numa única coordenada) — `interiorProduct` no motor já aceita campos
+  gerais com componentes simbólicas (`VectorField = Record<string, Scalar>`,
+  testado em `form.test.ts`), só a UI não expõe isso ainda.
 
 ### Escopo do motor simbólico (`src/algebra/`)
 
@@ -55,16 +59,17 @@ compostos por soma e produto de símbolos).
   cada `dx` (ex.: `∂ₓf dx + ∂ᵧf dy + ∂_z f dz`). Aplicar `d` de novo
   recalcula e o motor produz a forma zero (`d²=0`), não um estado
   roteirizado.
-- **Canvas livre**: paleta de blocos (0-forma, 1-forma, ∧, +, d) à esquerda,
-  área de montagem no centro, expressão calculada ao vivo à direita.
-  Diferente dos dois demos guiados, aqui a árvore é genérica e recursiva
-  (`src/blocks/canvasModel.ts`) — dá pra montar qualquer combinação, incluindo
-  operadores aninhados (`d(dx∧dy)`, por exemplo). Soquete vazio mostra
-  "expressão incompleta"; soma de graus incompatíveis mostra o erro do motor
-  em vez de travar o encaixe — o bloco engata fisicamente, é a matemática que
-  rejeita. Cada bloco/soquete aceita **arrastar OU clicar para
-  selecionar e depois clicar para encaixar** — o clique existe porque
-  arrastar-e-soltar segurando o botão é difícil em trackpad.
+- **Canvas livre**: paleta de blocos (0-forma, 1-forma, vetor, ∧, +, d, ι) à
+  esquerda, área de montagem no centro, expressão calculada ao vivo à
+  direita. Diferente dos dois demos guiados, aqui a árvore é genérica e
+  recursiva (`src/blocks/canvasModel.ts`) — dá pra montar qualquer
+  combinação, incluindo operadores aninhados (`d(dx∧dy)`, `ι[∂ₓ; dx∧dy]`).
+  Soquete vazio mostra "expressão incompleta"; soma de graus incompatíveis
+  mostra o erro do motor em vez de travar o encaixe — o bloco engata
+  fisicamente, é a matemática que rejeita. Cada bloco/soquete aceita
+  **arrastar OU clicar para selecionar e depois clicar para encaixar** — o
+  clique existe porque arrastar-e-soltar segurando o botão é difícil em
+  trackpad.
 - **Barra de contexto**: seletor de carta ativa (2D, 3D, espaço-tempo 1+3,
   esféricas) no topo da página, compartilhado pelas três abas via
   `CoordsContext`. Trocar a carta muda de verdade o parâmetro `coords`

@@ -16,12 +16,16 @@ import { createNode, removeNode, setSocket, updateTag, type CanvasNode, type Pal
 import { evaluateNode } from "./evaluate";
 import { formToLatex } from "../algebra/form";
 
+type SocketSlot = "left" | "right" | "child" | "field" | "form";
+
 const PALETTE: { kind: PaletteKind; label: string; background: string }[] = [
   { kind: "zero-form", label: "0-forma", background: "var(--fb-neutral)" },
   { kind: "one-form", label: "1-forma", background: "var(--fb-orange)" },
+  { kind: "vector-field", label: "vetor", background: "var(--fb-violet)" },
   { kind: "wedge", label: "∧", background: "var(--fb-cyan)" },
   { kind: "sum", label: "+", background: "var(--fb-cyan)" },
   { kind: "d", label: "d", background: "var(--fb-cyan)" },
+  { kind: "interior", label: "ι", background: "var(--fb-cyan)" },
 ];
 
 function PaletteItem({
@@ -72,28 +76,42 @@ function EmptySocket({ socketId, armable, onClick }: { socketId: string; armable
   );
 }
 
-function NodeView({
-  node,
-  onDelete,
-  onTagChange,
-  armed,
-  onSocketClick,
-}: {
+interface NodeViewProps {
   node: CanvasNode;
   onDelete: (id: string) => void;
   onTagChange: (id: string, tag: string) => void;
   armed: boolean;
   onSocketClick: (socketId: string) => void;
-}) {
-  if (node.kind === "zero-form" || node.kind === "one-form") {
-    const isForm = node.kind === "one-form";
+}
+
+function Slot({ node, socketPrefix, slot, ...rest }: NodeViewProps & { socketPrefix: string; slot: SocketSlot }) {
+  const child = (node as unknown as Record<SocketSlot, CanvasNode | null>)[slot];
+  return child ? (
+    <NodeView node={child} {...rest} />
+  ) : (
+    <EmptySocket
+      socketId={`${socketPrefix}:${slot}`}
+      armable={rest.armed}
+      onClick={() => rest.onSocketClick(`${socketPrefix}:${slot}`)}
+    />
+  );
+}
+
+function NodeView({ node, onDelete, onTagChange, armed, onSocketClick }: NodeViewProps) {
+  const rest = { onDelete, onTagChange, armed, onSocketClick };
+
+  if (node.kind === "zero-form" || node.kind === "one-form" || node.kind === "vector-field") {
+    const background =
+      node.kind === "one-form" ? "var(--fb-orange)" : node.kind === "vector-field" ? "var(--fb-violet)" : "var(--fb-neutral)";
+    const value =
+      node.kind === "one-form" ? `d${node.tag}` : node.kind === "vector-field" ? `\\partial_{${node.tag}}` : node.tag;
     return (
       <div className="fb-canvas-node">
-        <Block width={100} height={60} degreeOut={isForm ? 1 : 0} background={isForm ? "var(--fb-orange)" : "var(--fb-neutral)"}>
+        <Block width={100} height={60} degreeOut={node.kind === "one-form" ? 1 : 0} background={background}>
           <MathTag
-            value={isForm ? `d${node.tag}` : node.tag}
+            value={value}
             editable
-            onChange={(next) => onTagChange(node.id, isForm ? next.replace(/^d/, "") : next)}
+            onChange={(next) => onTagChange(node.id, node.kind === "one-form" ? next.replace(/^d/, "") : next.replace(/^\\partial_\{?|\}?$/g, ""))}
           />
         </Block>
         <button className="fb-delete" onClick={() => onDelete(node.id)} aria-label="Remover bloco">
@@ -106,19 +124,11 @@ function NodeView({
   if (node.kind === "wedge" || node.kind === "sum") {
     return (
       <div className="fb-canvas-node fb-canvas-branch">
-        {node.left ? (
-          <NodeView node={node.left} onDelete={onDelete} onTagChange={onTagChange} armed={armed} onSocketClick={onSocketClick} />
-        ) : (
-          <EmptySocket socketId={`${node.id}:left`} armable={armed} onClick={() => onSocketClick(`${node.id}:left`)} />
-        )}
+        <Slot node={node} socketPrefix={node.id} slot="left" {...rest} />
         <Block width={48} height={60} background="var(--fb-cyan)">
           <span className="fb-op-symbol">{node.kind === "wedge" ? "∧" : "+"}</span>
         </Block>
-        {node.right ? (
-          <NodeView node={node.right} onDelete={onDelete} onTagChange={onTagChange} armed={armed} onSocketClick={onSocketClick} />
-        ) : (
-          <EmptySocket socketId={`${node.id}:right`} armable={armed} onClick={() => onSocketClick(`${node.id}:right`)} />
-        )}
+        <Slot node={node} socketPrefix={node.id} slot="right" {...rest} />
         <button className="fb-delete" onClick={() => onDelete(node.id)} aria-label="Remover bloco">
           ×
         </button>
@@ -126,23 +136,33 @@ function NodeView({
     );
   }
 
-  // d
+  if (node.kind === "d") {
+    return (
+      <div className="fb-canvas-node fb-canvas-branch">
+        <Block width={48} height={60} background="var(--fb-cyan)">
+          <span className="fb-op-symbol">d</span>
+        </Block>
+        <span className="fb-paren" aria-hidden="true">(</span>
+        <Slot node={node} socketPrefix={node.id} slot="child" {...rest} />
+        <span className="fb-paren" aria-hidden="true">)</span>
+        <button className="fb-delete" onClick={() => onDelete(node.id)} aria-label="Remover bloco">
+          ×
+        </button>
+      </div>
+    );
+  }
+
+  // interior (ι)
   return (
     <div className="fb-canvas-node fb-canvas-branch">
-      <Block width={48} height={60} background="var(--fb-cyan)">
-        <span className="fb-op-symbol">d</span>
+      <Block width={40} height={60} background="var(--fb-cyan)">
+        <span className="fb-op-symbol">ι</span>
       </Block>
-      <span className="fb-paren" aria-hidden="true">
-        (
-      </span>
-      {node.child ? (
-        <NodeView node={node.child} onDelete={onDelete} onTagChange={onTagChange} armed={armed} onSocketClick={onSocketClick} />
-      ) : (
-        <EmptySocket socketId={`${node.id}:child`} armable={armed} onClick={() => onSocketClick(`${node.id}:child`)} />
-      )}
-      <span className="fb-paren" aria-hidden="true">
-        )
-      </span>
+      <span className="fb-paren" aria-hidden="true">[</span>
+      <Slot node={node} socketPrefix={node.id} slot="field" {...rest} />
+      <span className="fb-paren" aria-hidden="true">;</span>
+      <Slot node={node} socketPrefix={node.id} slot="form" {...rest} />
+      <span className="fb-paren" aria-hidden="true">]</span>
       <button className="fb-delete" onClick={() => onDelete(node.id)} aria-label="Remover bloco">
         ×
       </button>
@@ -165,7 +185,7 @@ export function FreeCanvas() {
       setRoot(newNode);
       return;
     }
-    const [targetId, slot] = socketId.split(":") as [string, "left" | "right" | "child"];
+    const [targetId, slot] = socketId.split(":") as [string, SocketSlot];
     setRoot((prev) => (prev ? setSocket(prev, targetId, slot, newNode) : prev));
   }
 

@@ -137,6 +137,33 @@ export function exteriorDerivative(a: FormExpr, coords: string[]): FormExpr {
   return normalize(degree, rawTerms);
 }
 
+/** Campo vetorial: componente escalar por nome de coordenada. Ausente = 0. */
+export type VectorField = Record<string, Scalar>;
+
+/**
+ * Produto interior (contração) ι_X. Baixa o grau em 1: para cada monômio,
+ * soma sobre cada posição j do índice removendo dx^{ij} e multiplicando
+ * pela componente X^{ij}, com sinal (-1)^j (0-indexado) — a soma alternada
+ * que aparece porque contrair "por dentro" do wedge exige passar X por
+ * cada fator anterior. ι_X∘ι_X = 0 sempre, pela mesma razão estrutural que
+ * d²=0: os termos cruzados se cancelam aos pares na normalização.
+ */
+export function interiorProduct(field: VectorField, a: FormExpr): FormExpr {
+  if (a.degree === 0) return zeroForm(0);
+  const rawTerms: Term[] = [];
+  for (const t of a.terms) {
+    for (let position = 0; position < t.indices.length; position++) {
+      const component = field[t.indices[position]];
+      if (!component || isZeroScalar(simplifyScalar(component))) continue;
+      const sign = position % 2 === 0 ? 1 : -1;
+      const remaining = t.indices.filter((_, i) => i !== position);
+      const coeff = scalarMul(num(sign), scalarMul(t.coeff, component));
+      rawTerms.push({ coeff, indices: remaining });
+    }
+  }
+  return normalize(a.degree - 1, rawTerms);
+}
+
 export function isZeroForm(a: FormExpr): boolean {
   return a.terms.length === 0;
 }

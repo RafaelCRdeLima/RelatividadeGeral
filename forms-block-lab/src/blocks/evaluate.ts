@@ -1,5 +1,14 @@
-import { basisForm, exteriorDerivative, formAdd, formWedge, scalarForm, type FormExpr } from "../algebra/form";
-import { symbol } from "../algebra/scalar";
+import {
+  basisForm,
+  exteriorDerivative,
+  formAdd,
+  formWedge,
+  interiorProduct,
+  scalarForm,
+  type FormExpr,
+  type VectorField,
+} from "../algebra/form";
+import { ONE, symbol } from "../algebra/scalar";
 import type { CanvasNode } from "./canvasModel";
 
 export interface EvalResult {
@@ -55,6 +64,23 @@ export function evaluateNode(node: CanvasNode | null, coords: string[]): EvalRes
       if (child.error) return child;
       if (!child.form) return INCOMPLETE;
       return { form: exteriorDerivative(child.form, coords), error: null };
+    }
+
+    // um campo vetorial sozinho não é uma forma — só faz sentido como
+    // entrada do soquete "field" de ι; não tem valor de FormExpr próprio.
+    case "vector-field":
+      return INCOMPLETE;
+
+    case "interior": {
+      if (!node.field || node.field.kind !== "vector-field") return INCOMPLETE;
+      const form = evaluateNode(node.form, coords);
+      if (form.error) return form;
+      if (!form.form) return INCOMPLETE;
+      if (form.form.degree === 0) {
+        return { form: null, error: "ι (contração) exige uma forma de grau 1 ou mais." };
+      }
+      const field: VectorField = { [node.field.tag]: ONE };
+      return { form: interiorProduct(field, form.form), error: null };
     }
   }
 }

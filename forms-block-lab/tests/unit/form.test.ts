@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { coord, scalarMul, symbol } from "../../src/algebra/scalar";
+import { coord, num, scalarMul, symbol } from "../../src/algebra/scalar";
 import {
   basisForm,
   formAdd,
@@ -7,8 +7,10 @@ import {
   formWedge,
   formsEqual,
   exteriorDerivative,
+  interiorProduct,
   isZeroForm,
   scalarForm,
+  type VectorField,
 } from "../../src/algebra/form";
 
 const dx = basisForm("x");
@@ -90,6 +92,44 @@ describe("exteriorDerivative", () => {
     const omega = formWedge(scalarForm(symbol("f")), formWedge(dx, dy, XYZ), XYZ);
     const result = exteriorDerivative(omega, XYZ);
     expect(result.degree).toBe(3);
+  });
+});
+
+describe("interiorProduct", () => {
+  const X: VectorField = { x: num(1) }; // ∂/∂x
+
+  it("ι_X(dx) = 1 — contrai a 1-forma pro escalar componente", () => {
+    const result = interiorProduct(X, dx);
+    expect(result.degree).toBe(0);
+    expect(formsEqual(result, scalarForm(num(1)))).toBe(true);
+  });
+
+  it("ι_X(dy) = 0 — componente ausente do campo", () => {
+    expect(isZeroForm(interiorProduct(X, dy))).toBe(true);
+  });
+
+  it("ι_X(dx∧dy) = dy — contrai só o primeiro fator, sem sinal (posição 0)", () => {
+    const result = interiorProduct(X, formWedge(dx, dy, XYZ));
+    expect(formsEqual(result, dy)).toBe(true);
+  });
+
+  it("ι_X(dy∧dx) = -dy — mesmo monômio canônico, mas x aparece na posição 1 antes de ordenar", () => {
+    // dy∧dx normaliza para -1·(dx∧dy) internamente; contrair x (posição 1
+    // do índice já ordenado [x,y]) dá sinal -1, então o resultado é -dy.
+    const result = interiorProduct(X, formWedge(dy, dx, XYZ));
+    expect(result.terms).toEqual([{ coeff: { kind: "num", value: -1 }, indices: ["y"] }]);
+  });
+
+  it("ι_X∘ι_X = 0 sempre, para um campo geral, sobre uma 3-forma", () => {
+    const field: VectorField = { x: symbol("a"), y: symbol("b"), z: symbol("c") };
+    const vol = formWedge(dx, formWedge(dy, dz, XYZ), XYZ); // dx∧dy∧dz
+    const once = interiorProduct(field, vol);
+    const twice = interiorProduct(field, once);
+    expect(isZeroForm(twice)).toBe(true);
+  });
+
+  it("ι_X de uma 0-forma é 0 por convenção", () => {
+    expect(isZeroForm(interiorProduct(X, scalarForm(symbol("f"))))).toBe(true);
   });
 });
 
