@@ -8,3 +8,11 @@ playwright-report/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
+apostila/fonte/*.aux
+apostila/fonte/*.log
+apostila/fonte/*.out
+apostila/fonte/*.toc
+apostila/fonte/*.synctex.gz
+apostila/fonte/*.fdb_latexmk
+apostila/fonte/*.fls
+apostila/fonte/rg_72_aulas.pdf

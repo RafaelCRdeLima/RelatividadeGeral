@@ -19,6 +19,9 @@
 \usepackage{fancyhdr}
 \usepackage{microtype}
 \usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{listings}
 
 \geometry{top=3.2cm,bottom=3.2cm,left=3.1cm,right=3.1cm,headheight=15pt}
 \doublespacing
@@ -81,6 +84,84 @@
   colback=yellow!7!white,
   colframe=orange!70!black,
   title=Leitura orientada,
+  fonttitle=\bfseries,
+  breakable
+}
+
+\graphicspath{{figuras/}}
+
+\definecolor{codebg}{rgb}{0.97,0.97,0.97}
+\definecolor{codekeyword}{rgb}{0.0,0.35,0.55}
+\definecolor{codecomment}{rgb}{0.35,0.45,0.35}
+\definecolor{codestring}{rgb}{0.55,0.15,0.15}
+
+\lstset{
+  extendedchars=true,
+  inputencoding=utf8,
+  literate=
+    {á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {â}{{\^a}}1
+    {é}{{\'e}}1 {ê}{{\^e}}1
+    {í}{{\'i}}1
+    {ó}{{\'o}}1 {õ}{{\~o}}1 {ô}{{\^o}}1
+    {ú}{{\'u}}1 {ü}{{\"u}}1
+    {ç}{{\c c}}1
+    {Á}{{\'A}}1 {À}{{\`A}}1 {Ã}{{\~A}}1 {Â}{{\^A}}1
+    {É}{{\'E}}1 {Ê}{{\^E}}1
+    {Í}{{\'I}}1
+    {Ó}{{\'O}}1 {Õ}{{\~O}}1 {Ô}{{\^O}}1
+    {Ú}{{\'U}}1 {Ü}{{\"U}}1
+    {Ç}{{\c C}}1,
+}
+
+\lstdefinestyle{python}{
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=7pt,
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  rulecolor=\color{gray!40},
+  xleftmargin=1.2em,
+  tabsize=4,
+}
+
+\lstdefinelanguage{Mathematica}{
+  morekeywords={Simplify,FullSimplify,Solve,DSolve,NDSolve,Table,Plot,Manipulate,
+    Module,Block,With,If,For,Do,Sum,Integrate,D,Grad,Series,MatrixForm,
+    Transpose,Inverse,Det,Eigenvalues,Cosh,Sinh,Tanh,Sqrt,ArcTanh},
+  sensitive=true,
+  morecomment=[l]{(*}{*)},
+  morestring=[b]",
+}
+
+\lstdefinestyle{mathematica}{
+  language=Mathematica,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=7pt,
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  rulecolor=\color{gray!40},
+  xleftmargin=1.2em,
+  tabsize=4,
+}
+
+\newtcolorbox{numerico}{
+  colback=purple!4!white,
+  colframe=purple!45!black,
+  title=Resolução numérica,
   fonttitle=\bfseries,
   breakable
 }
@@ -294,6 +375,7 @@ Aula & Foco & Seções da apostila a cobrir \\
 \normalsize
 
 \chapter{Relatividade especial}
+\label{chap:relatividade-especial}
 
 \begin{objetivos}
 Entender que a relatividade especial é a geometria do espaço-tempo plano.
@@ -343,20 +425,75 @@ Assim, o relógio comóvel à partícula mede $\tau$, não $t$.
 
 \section{Transformações de Lorentz}
 
-Para dois referenciais com velocidade relativa $v$ ao longo de $x$, a
-transformação de Lorentz é
+Em vez de simplesmente declarar a transformação, vale a pena deduzi-la: ela é
+a única mudança de coordenadas linear que preserva o intervalo $\dd s^2$ entre
+referenciais inerciais. Essa dedução mostra que a forma de $\gamma$ não é um
+acidente, mas uma consequência direta de dois fatos geométricos.
+
+\begin{resultado}
+\textbf{Dedução a partir da invariância do intervalo.} Restrinja-se a $1+1$
+dimensões (coordenadas $t,x$; as direções $y,z$ transversas ao movimento não
+são afetadas). Como o espaço-tempo é homogêneo, a transformação entre dois
+referenciais inerciais $S$ e $S'$ deve ser \emph{linear}:
+\[
+  t'=At+Bx,\qquad x'=Ct+Dx,
+\]
+com $A,B,C,D$ dependendo apenas da velocidade relativa $v$. Duas condições
+fixam completamente essas constantes.
+
+\emph{Condição 1 -- a origem de $S'$ se move com velocidade $v$ em $S$.} O
+ponto $x'=0$ corresponde a $x=vt$, logo $Ct+Dvt=0$ para todo $t$, ou seja
+$C=-Dv$.
+
+\emph{Condição 2 -- o intervalo é invariante.} Substituindo $t',x'$ em
+$-\dd t'^2+\dd x'^2=-\dd t^2+\dd x^2$ e igualando os coeficientes de
+$\dd t^2$, $\dd x^2$ e $\dd t\,\dd x$, obtém-se
+\[
+  -A^2+C^2=-1,\qquad -B^2+D^2=1,\qquad -AB+CD=0.
+\]
+Usando $C=-Dv$ na primeira equação, $D^2v^2-A^2=-1$. A simetria entre os dois
+referenciais (o que $S$ vê como velocidade $v$, $S'$ vê como $-v$, e nenhum
+referencial é privilegiado) impõe $A=D$. Chamando esse valor comum de
+$\gamma(v)$, a primeira equação dá $\gamma^2(1-v^2)=1$, isto é,
+\[
+  \gamma=\frac{1}{\sqrt{1-v^2}}.
+\]
+A terceira equação então fornece $B=-\gamma v$. O resultado é
 \[
   t'=\gamma(t-vx), \qquad
   x'=\gamma(x-vt), \qquad
   y'=y,\qquad z'=z.
 \]
-Ela preserva o intervalo e mistura tempo com espaço. A relatividade da
-simultaneidade nasce desse acoplamento.
+\end{resultado}
+
+Duas observações tornam essa dedução mais transparente. Primeiro, nenhuma
+hipótese sobre luz foi usada diretamente -- apenas linearidade e invariância
+de uma forma quadrática. A velocidade da luz aparece como a velocidade
+invariante permitida por essa geometria, não como um ingrediente extra.
+Segundo, no limite $v\ll1$ (em unidades com $c=1$, isso significa $v\ll c$),
+$\gamma\to1$ e a transformação se reduz à transformação de Galileu
+$t'\approx t$, $x'\approx x-vt$: a relatividade especial contém a mecânica
+newtoniana como caso limite.
+
+A transformação preserva o intervalo e mistura tempo com espaço. A
+relatividade da simultaneidade nasce desse acoplamento: eventos com $\dd t=0$
+em $S$ têm, em geral, $\dd t'=-\gamma v\,\dd x\ne0$ em $S'$.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{cap02_simultaneidade.pdf}
+\caption{Diagrama de Minkowski: os eixos $ct'$ e $x'$ de $S'$ aparecem
+inclinados em relação aos eixos de $S$ pelo mesmo ângulo $\arctan v$. A reta
+tracejada liga dois eventos $A$ e $B$ simultâneos em $S$ (mesma $ct$); a reta
+pontilhada é a reta de simultaneidade de $S'$ passando por $A$ -- ela não
+contém $B$.}
+\label{fig:simultaneidade}
+\end{figure}
 
 \begin{activity}
 Mostre que dois eventos simultâneos em $S$, separados por $\Delta x\ne0$, não
-são simultâneos em $S'$ se $v\ne0$. Interprete o resultado em um diagrama
-espaço-tempo.
+são simultâneos em $S'$ se $v\ne0$. Use a Figura~\ref{fig:simultaneidade}
+como guia e refaça a construção geométrica para $v<0$.
 \end{activity}
 
 \section{Paradoxo dos gêmeos}
@@ -370,6 +507,25 @@ próprio acumulado é
 Entre dois eventos fixos em espaço-tempo plano, a linha de mundo inercial
 maximiza o tempo próprio. O gêmeo que acelera para retornar percorre uma linha
 de mundo com menor tempo próprio.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{cap02_paradoxo_gemeos.pdf}
+\caption{Diagrama de Minkowski do paradoxo dos gêmeos, com $v=0{,}8$. As
+marcas transversais indicam intervalos \emph{iguais} de tempo próprio ao
+longo de cada linha de mundo. O gêmeo viajante acumula visivelmente menos
+marcas entre a partida e o reencontro, mesmo percorrendo o mesmo par de
+eventos que o gêmeo que fica em casa.}
+\label{fig:gemeos}
+\end{figure}
+
+Vale insistir no que a figura mostra: as marcas não representam "tique-taques
+que ficam mais lentos" em algum sentido absoluto. Cada marca é um intervalo
+igual de tempo próprio -- o tempo lido por um relógio que acompanha aquele
+observador especificamente. A diferença entre $\tau_{\rm casa}$ e
+$\tau_{\rm viajante}$ é puramente geométrica: é a diferença entre o
+``comprimento'' (no sentido de Minkowski) de duas curvas com os mesmos pontos
+extremos.
 
 \section{Leitura física do intervalo}
 
@@ -388,6 +544,16 @@ partícula massiva que poderia ligar os eventos. Se $\Delta s^2>0$, existe um
 referencial no qual os eventos são simultâneos. Nesse caso nenhum sinal causal,
 limitado pela velocidade da luz, pode conectar os eventos. Se $\Delta s^2=0$,
 os eventos podem ser ligados por um raio luminoso.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\textwidth]{cap02_cone_luz.pdf}
+\caption{Cone de luz do evento $O$ no plano $(x,ct)$. Eventos no futuro ou
+passado causal de $O$ têm separação temporal; eventos em ``alhures'' têm
+separação espacial e não podem ser causalmente ligados a $O$. Os três pontos
+marcados retomam os Exemplos resolvidos desta seção.}
+\label{fig:cone-luz}
+\end{figure}
 
 \begin{example}
 Considere dois eventos separados por $\Delta t=5$ e $\Delta x=3$, em unidades
@@ -455,7 +621,7 @@ explicar por que o comprimento medido em $S$ é menor que o comprimento próprio
   uma trajetória formada por dois trechos retilíneos de velocidades opostas.
   Calcule o tempo próprio total e interprete a desigualdade resultante.
 
-  \item \textbf{Adição de velocidades.} Derive a fórmula
+  \item \label{item-adicao-velocidades} \textbf{Adição de velocidades.} Derive a fórmula
   \[
     u'=\frac{u-v}{1-uv}
   \]
@@ -521,6 +687,86 @@ geometria total da linha de mundo escolhida.
 \end{example}
 
 \clearpage
+\section{Resolução numérica}
+
+Esta seção resolve dois problemas do capítulo por computador: (i) verificar
+numericamente que os boosts de Lorentz preservam o intervalo e compõem-se
+pela fórmula relativística de adição de velocidades, e não pela soma
+ingênua; (ii) calcular o tempo próprio do gêmeo viajante quando a velocidade
+varia suavemente no tempo, caso em que a integral $\tau=\int\sqrt{1-v(t)^2}\dd t$
+não tem forma fechada simples e precisa ser tratada numericamente. Os dois
+problemas são resolvidos em Python e, de forma simbólica, em Mathematica.
+Os scripts completos estão na pasta \texttt{codigo/} que acompanha esta
+apostila.
+
+\subsection{Python}
+
+O primeiro script constrói a matriz de boost $2\times2$ e testa
+numericamente, com velocidades aleatórias, que $\Lambda^{T}\eta\Lambda=\eta$
+e que a composição de dois boosts colineares reproduz a fórmula de adição de
+velocidades (e não $v_1+v_2$).
+
+\begin{numerico}
+\lstinputlisting[style=python]{codigo/cap02_boosts.py}
+\end{numerico}
+
+A execução confirma as três propriedades com resíduo numérico da ordem de
+$10^{-16}$ (erro de arredondamento de ponto flutuante, não erro físico):
+a invariância do intervalo, a composição correta de boosts e a aditividade
+da rapidez $\varphi=\operatorname{artanh}v$.
+
+O segundo script resolve o paradoxo dos gêmeos para um perfil de velocidade
+suave, $v(t)=v_0\sin(\pi t/T)$, que parte e retorna ao repouso continuamente
+(sem o salto instantâneo de velocidade do modelo idealizado). A integral do
+tempo próprio é calculada por quadratura adaptativa.
+
+\begin{numerico}
+\lstinputlisting[style=python]{codigo/cap02_tempo_proprio.py}
+\end{numerico}
+
+Com $T=10$ e $v_0=0{,}8$, a integração numérica dá
+$\tau_{\rm viajante}\approx8{,}1255$, contra $T=10$ para o gêmeo que fica em
+casa -- uma diferença de cerca de $18\%$. O script também mostra por que
+não se pode simplesmente usar o fator de Lorentz da velocidade
+\emph{média}: $T/\gamma(\bar v)\approx8{,}61$ subestima o efeito, porque
+$\gamma$ é uma função convexa de $v^2$ e não comuta com a média temporal
+(desigualdade de Jensen). A Figura~\ref{fig:tempo-proprio-numerico} mostra o
+perfil de velocidade e o tempo próprio acumulado.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{cap02_tempo_proprio_numerico.pdf}
+\caption{Acima: perfil de velocidade suave $v(t)=v_0\sin(\pi t/T)$ do gêmeo
+viajante. Abaixo: tempo próprio acumulado $\tau(t)$ (integração numérica,
+vermelho) comparado ao tempo coordenado $t$ do gêmeo em casa (tracejado).}
+\label{fig:tempo-proprio-numerico}
+\end{figure}
+
+\subsection{Mathematica}
+
+O mesmo conjunto de verificações pode ser feito simbolicamente. Aqui o valor
+do Mathematica não é confirmar números, mas provar as identidades
+algebricamente para \emph{qualquer} $v_1,v_2$ no intervalo físico
+$(-1,1)$, sem depender de amostragem aleatória.
+
+\begin{numerico}
+\lstinputlisting[style=mathematica]{codigo/cap02_boosts.wl}
+\end{numerico}
+
+Os três primeiros \texttt{Print} produzem a matriz nula $2\times2$: isso é a
+prova simbólica de que (i) o intervalo é invariante, (ii) a composição de
+dois boosts colineares é exatamente o boost com a velocidade relativística
+combinada, e (iii) na variável rapidez a composição é simplesmente soma. O
+último bloco resolve, por eliminação direta (sem supor a resposta), a
+velocidade efetiva de dois boosts sucessivos e recupera
+\[
+  w=\frac{v_1+v_2}{1+v_1v_2},
+\]
+fechando o ciclo: a fórmula de adição de velocidades, pedida no item
+\ref{item-adicao-velocidades} de Problemas orientados, é re-derivada aqui de
+modo puramente algébrico, sem qualquer apelo a diagramas ou limites físicos.
+
+\clearpage
 \section{Exercícios}
 
 \begin{exercise}
@@ -556,12 +802,33 @@ Em componentes inerciais,
 \[
   U^\mu=\gamma(1,\bm v).
 \]
-Seu produto escalar consigo mesma é fixo:
+Seu produto escalar consigo mesma é fixo. Usando a métrica de Minkowski
+$\eta_{\munu}={\rm diag}(-1,1,1,1)$,
 \[
-  U^\mu U_\mu=-1.
+  U^\mu U_\mu=\etaab U^\alpha U^\beta
+  =-\gamma^2+\gamma^2\bm v\cdot\bm v
+  =-\gamma^2(1-v^2)
+  =-1,
 \]
-Isso mostra que a quadrivelocidade não é uma velocidade comum em quatro
-dimensões; ela é o vetor tangente normalizado à linha de mundo.
+onde a última igualdade usa $\gamma^2=1/(1-v^2)$. O resultado $U^\mu U_\mu=-1$
+não depende do referencial: é uma afirmação sobre a norma de um vetor
+geométrico, válida em qualquer base. Isso mostra que a quadrivelocidade não é
+uma velocidade comum em quatro dimensões -- seu ``tamanho'' é sempre o mesmo,
+$-1$ -- mas o vetor tangente normalizado à linha de mundo, parametrizada pelo
+tempo próprio.
+
+Uma consequência imediata aparece ao derivar essa identidade em relação a
+$\tau$. Como $U^\mu U_\mu$ é constante,
+\[
+  \frac{\dd}{\dd\tau}\left(U^\mu U_\mu\right)=2U^\mu\frac{\dd U_\mu}{\dd\tau}
+  =2U^\mu A_\mu=0,
+\]
+onde $A^\mu=\dd U^\mu/\dd\tau$ é a quadriaceleração. Logo $A^\mu U_\mu=0$
+sempre: a quadriaceleração é ortogonal (no sentido de Minkowski) à
+quadrivelocidade. No referencial instantaneamente comóvel à partícula,
+$U^\mu=(1,0,0,0)$, e a ortogonalidade força $A^0=0$: naquele referencial a
+aceleração é puramente espacial, exatamente como se espera de uma força
+comum.
 
 \section{Quadrimomento}
 
@@ -641,6 +908,7 @@ nula.
 \end{example}
 
 \section{Centro de momento}
+\label{sec:centro-momento}
 
 O referencial do centro de momento é definido por $\bm P=0$. Ele simplifica
 problemas de colisão porque toda a energia total disponível aparece como massa
@@ -659,6 +927,18 @@ contra um alvo em repouso. Use conservação de quadrimomento para mostrar por
 que colisores são muito mais eficientes que experimentos de alvo fixo.
 \end{activity}
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.66\textwidth]{cap03_colisor_alvo_fixo.pdf}
+\caption{Energia disponível no referencial de centro de momento,
+$\sqrt{s}$, em função da energia $E$ de cada partícula (mesma massa $m$ nos
+dois casos). No colisor, $\sqrt{s}=2E$ cresce linearmente com $E$. No alvo
+fixo, $\sqrt{s}=\sqrt{2m^2+2mE}$ cresce apenas com $\sqrt{E}$ para $E\gg m$.
+A defasagem entre as duas curvas é exatamente a energia ``desperdiçada'' em
+manter o centro de momento em movimento no laboratório.}
+\label{fig:colisor-alvo-fixo}
+\end{figure}
+
 \section{Partículas massivas e partículas sem massa}
 
 Para partículas massivas, existe referencial de repouso. Nesse referencial
@@ -666,6 +946,17 @@ $\bm p=0$ e $E=m$. Para partículas sem massa, não há referencial de repouso:
 qualquer transformação de Lorentz admissível ainda observa a partícula se
 movendo à velocidade da luz. Essa diferença é geométrica. O quadrimomento de
 uma partícula massiva é temporal; o de um fóton é nulo.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.55\textwidth]{cap03_casca_massa.pdf}
+\caption{Casca de massa $E^2=|\bm p|^2+m^2$ no plano $(|\bm p|,E)$. Para
+$m>0$ a curva é um ramo de hipérbole que nunca toca a reta $E=|\bm p|$: por
+maior que seja o momento, $E>|\bm p|$ sempre. Para $m=0$ a casca degenera na
+própria reta $E=|\bm p|$ -- não há ``folga'' entre energia e momento para o
+fóton.}
+\label{fig:casca-massa}
+\end{figure}
 
 Essa distinção reaparece em relatividade geral. Partículas massivas seguem
 geodésicas temporais, parametrizadas naturalmente pelo tempo próprio. Fótons
@@ -676,27 +967,37 @@ que não há relógio físico comóvel com um fóton.
 \section{Problemas orientados}
 
 \begin{enumerate}
-  \item \textbf{Normalização da quadrivelocidade.} Parta de
-  $U^\mu=\gamma(1,\bm v)$ e mostre que $U^\mu U_\mu=-1$. Depois derive
-  $A^\mu U_\mu=0$ diferenciando essa normalização em relação a $\tau$.
+  \item \label{item-aceleracao-propria} \textbf{Aceleração própria constante.}
+  Uma partícula tem quadriaceleração de norma fixa,
+  $A^\mu A_\mu=a_0^2$, com $a_0$ constante (o valor medido por um
+  acelerômetro preso à partícula). Restrinja-se a $1+1$ dimensões e mostre
+  que $A^\mu U_\mu=0$ (já demonstrado no texto) mais essa condição implicam
+  \[
+    U^\mu=(\cosh(a_0\tau),\sinh(a_0\tau))
+  \]
+  a menos de uma escolha de origem para $\tau$. Integre mais uma vez para
+  obter $t(\tau)$ e $x(\tau)$, e mostre que a trajetória no espaço-tempo é uma
+  hipérbole. Esse é o movimento ``uniformemente acelerado'' relativístico
+  (a base do problema do foguete relativístico).
 
-  \item \textbf{Energia de limiar.} Uma partícula de massa $m$ atinge uma
-  partícula idêntica em repouso e produz uma partícula de massa $M$ além dos
-  produtos originais. Use o invariante $s$ para encontrar a energia mínima no
-  laboratório.
+  \item \label{item-energia-limiar} \textbf{Energia de limiar.} Uma partícula
+  de massa $m$ atinge uma partícula idêntica em repouso e produz uma
+  partícula de massa $M$ além dos produtos originais. Use o invariante $s$
+  para encontrar a energia mínima no laboratório.
 
   \item \textbf{Decaimento em dois corpos.} Uma partícula de massa $M$ decai em
   partículas de massas $m_1$ e $m_2$. No referencial de repouso inicial, derive
   as energias finais usando conservação de quadrimomento.
 
-  \item \textbf{Sistema de fótons.} Dois fótons de energias $E_1$ e $E_2$ fazem
-  ângulo $\theta$. Mostre que a massa invariante do sistema satisfaz
+  \item \label{item-sistema-fotons} \textbf{Sistema de fótons.} Dois fótons de
+  energias $E_1$ e $E_2$ fazem ângulo $\theta$. Mostre que a massa invariante
+  do sistema satisfaz
   \[
     M^2=2E_1E_2(1-\cos\theta).
   \]
   Discuta os casos $\theta=0$ e $\theta=\pi$.
 
-  \item \textbf{Doppler covariante.} Use $E=-p_\mu U^\mu$ para obter a mudança
+  \item \label{item-doppler} \textbf{Doppler covariante.} Use $E=-p_\mu U^\mu$ para obter a mudança
   de frequência observada quando fonte e observador se movem ao longo da mesma
   linha. Compare com a fórmula clássica no limite $v\ll1$.
 
@@ -704,6 +1005,185 @@ que não há relógio físico comóvel com um fóton.
   idênticas colidem elasticamente. Explique por que as energias finais são
   iguais às iniciais e por que apenas as direções dos momentos mudam.
 \end{enumerate}
+
+\clearpage
+\section{Exemplos resolvidos adicionais}
+
+\begin{example}
+\textbf{Espalhamento Compton.} Um fóton de energia $E$ colide com um elétron
+em repouso (massa $m_e$) e é espalhado por um ângulo $\theta$, saindo com
+energia $E'$. O elétron recua com quadrimomento $p_e'$, que não medimos
+diretamente -- a estratégia é eliminá-lo usando $p_e'^\mu p_{e\,\mu}'=-m_e^2$.
+
+Conservação de quadrimomento dá $p_\gamma+p_e=p_\gamma'+p_e'$, ou seja
+$p_e'=p_\gamma+p_e-p_\gamma'$. Elevando ao quadrado (produto de Minkowski
+consigo mesmo) e usando $p_\gamma^2=p_\gamma'^2=0$ (fótons) e $p_e^2=-m_e^2$,
+\[
+  p_e'^2=p_\gamma^2+p_e^2+p_\gamma'^2+2p_\gamma\cdot p_e-2p_\gamma\cdot
+  p_\gamma'-2p_e\cdot p_\gamma'
+  \quad\Longrightarrow\quad
+  p_\gamma\cdot p_e=p_\gamma\cdot p_\gamma'+p_e\cdot p_\gamma'.
+\]
+Nas coordenadas em que o elétron está inicialmente em repouso e o fóton
+incidente se move ao longo de $x$,
+\[
+  p_\gamma^\mu=(E,E,0,0),\qquad
+  p_e^\mu=(m_e,0,0,0),\qquad
+  p_\gamma'^\mu=(E',E'\cos\theta,E'\sin\theta,0).
+\]
+Calculando os três produtos ($p_\gamma\cdot p_e=-Em_e$,
+$p_\gamma\cdot p_\gamma'=-EE'(1-\cos\theta)$, $p_e\cdot p_\gamma'=-m_eE'$) e
+substituindo,
+\[
+  -Em_e=-EE'(1-\cos\theta)-m_eE'
+  \quad\Longrightarrow\quad
+  \boxed{\ \frac{1}{E'}-\frac{1}{E}=\frac{1-\cos\theta}{m_e}\ }.
+\]
+Essa é a relação de Compton escrita em energias, sem precisar de $h$ ou de
+$\lambda$. Usando $E=hc/\lambda$ (restaurando as constantes), ela é
+equivalente à forma mais conhecida
+\[
+  \lambda'-\lambda=\frac{h}{m_ec}(1-\cos\theta).
+\]
+Note a estrutura do método: nunca foi preciso calcular o quadrimomento do
+elétron espalhado -- ele foi eliminado usando apenas sua casca de massa. Essa
+é a técnica padrão para resolver processos de espalhamento e decaimento em
+relatividade especial.
+\end{example}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{cap03_compton.pdf}
+\caption{Fração de energia $E'/E$ do fóton espalhado em função do ângulo
+$\theta$, para três energias incidentes. Quanto maior $E/m_e$, mais forte o
+espalhamento (curva mais baixa): no limite $E\ll m_e$ (curva azul) o efeito
+quase desaparece e recupera-se o espalhamento Thomson clássico,
+$E'\approx E$.}
+\label{fig:compton}
+\end{figure}
+
+\begin{example}
+\textbf{Efeito Doppler transversal.} O item~\ref{item-doppler} pede o efeito
+Doppler quando fonte e observador se movem ao longo da \emph{mesma linha}.
+Aqui tratamos o caso perpendicular, que não tem análogo clássico. Uma fonte
+tem quadrivelocidade $U_{\rm fonte}^\mu=\gamma(1,v,0,0)$ no referencial $S$ do
+observador. No instante em que o observador (em repouso em $S$) recebe o
+fóton \emph{perpendicularmente} à velocidade da fonte, o quadrimomento do
+fóton em $S$ é $p^\mu=(\nu,0,\nu,0)$, onde $\nu$ é a frequência medida pelo
+observador.
+
+A frequência própria $\nu_0$ -- a que a fonte mediria em seu próprio
+referencial de repouso -- é a energia do fóton medida por um observador com
+quadrivelocidade $U_{\rm fonte}^\mu$, ou seja $\nu_0=-p_\mu U_{\rm fonte}^\mu$:
+\[
+  \nu_0=-\left[-\nu\cdot\gamma\cdot1+0\cdot\gamma v+\nu\cdot0+0\right]=\gamma\nu
+  \quad\Longrightarrow\quad
+  \nu=\frac{\nu_0}{\gamma}.
+\]
+O observador mede uma frequência \emph{menor} que a própria, mesmo sem
+nenhuma componente de velocidade ao longo da linha de visada. Esse
+redshift transversal é dilatação temporal pura -- não existe efeito Doppler
+clássico correspondente, e sua medição (por exemplo em experimentos com
+rotores, ou no efeito Ives--Stilwell) é um teste direto de $\dd\tau=\dd t/\gamma$.
+\end{example}
+
+\begin{example}
+\textbf{Foguete relativístico com aceleração própria constante.} O
+item~\ref{item-aceleracao-propria} mostra que, sob aceleração própria
+constante $a_0$, a trajetória em $1+1$ dimensões é
+\[
+  t(\tau)=\frac{1}{a_0}\sinh(a_0\tau),\qquad
+  x(\tau)=\frac{1}{a_0}\bigl[\cosh(a_0\tau)-1\bigr].
+\]
+Considere uma nave que acelera a $a_0=1\,g$ durante metade da viagem e
+desacelera pelo mesmo tanto na segunda metade, chegando em repouso no
+destino. Para $a_0=1g\approx1{,}03$ ano-luz/ano$^2$ e uma distância
+$D=4{,}25$ anos-luz (Proxima Centauri), resolvendo $x(\tau_{1/2})=D/2$ para o
+tempo próprio de meia viagem $\tau_{1/2}$ e depois dobrando por simetria,
+obtém-se
+\[
+  \tau_{\rm nave}\approx3{,}54\text{ anos},\qquad
+  t_{\rm Terra}\approx5{,}87\text{ anos}.
+\]
+A tripulação envelhece 3,54 anos; quem ficou na Terra espera 5,87 anos. A
+diferença não vem de nenhum efeito exótico -- é a mesma geometria do
+paradoxo dos gêmeos (Figura~\ref{fig:gemeos} do
+Capítulo~\ref{chap:relatividade-especial}), agora com aceleração própria
+constante e explícita em vez de um salto instantâneo de velocidade.
+\end{example}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{cap03_foguete.pdf}
+\caption{Trajetória no plano $(t,x)$ do referencial da Terra para uma nave
+com aceleração própria constante $a_0=1g$, acelerando até o meio do percurso
+e desacelerando depois, para alcançar Proxima Centauri
+($D=4{,}25$ anos-luz) em repouso. A reta tracejada é o cone de luz
+($x=t$): a trajetória nunca a alcança.}
+\label{fig:foguete}
+\end{figure}
+
+\clearpage
+\section{Resolução numérica}
+
+Esta seção trata por computador cinco problemas do capítulo: (i) verificar
+numericamente a normalização $U^\mu U_\mu=-1$ e a casca de massa
+$p^\mu p_\mu=-m^2$ para quadrivetores arbitrários; (ii) calcular a energia de
+limiar de uma reação (item~\ref{item-energia-limiar}) e comparar com um
+número físico conhecido; (iii) visualizar por que colisores são mais
+eficientes que alvos fixos (a Atividade da Seção~\ref{sec:centro-momento},
+``Centro de momento''); (iv) resolver o espalhamento Compton por busca
+numérica de raiz, sem usar a fórmula fechada, como checagem independente do
+Exemplo de espalhamento Compton; (v) reproduzir os números do foguete
+relativístico da Figura~\ref{fig:foguete}. Os scripts completos estão em
+\texttt{codigo/}.
+
+\subsection{Python}
+
+\begin{numerico}
+\lstinputlisting[style=python]{codigo/cap03_quadrivetores.py}
+\end{numerico}
+
+A energia de limiar calculada,
+$E_{\rm thr}\approx1217{,}9\,{\rm MeV}$ para $p+p_{\rm repouso}\to p+p+\pi^0$
+(com $m_p=938{,}272\,{\rm MeV}$ e $m_{\pi^0}=134{,}9768\,{\rm MeV}$),
+corresponde a uma energia cinética de limiar de
+$E_{\rm thr}-m_p\approx279{,}7\,{\rm MeV}$ -- o valor conhecido
+experimentalmente para essa reação, que é o processo inelástico dominante
+quando prótons de alta energia colidem com prótons em repouso (por exemplo,
+raios cósmicos atingindo o meio interestelar).
+
+O segundo script ataca os dois problemas dos Exemplos resolvidos por um
+caminho diferente do algébrico: para o espalhamento Compton, resolve a
+condição de casca de massa do elétron espalhado por busca de raiz
+(\texttt{scipy.optimize.brentq}) em vez de usar a fórmula fechada, e
+confirma que os dois métodos concordam a $10^{-16}$; para o foguete, refaz a
+integração da trajetória hiperbólica e recupera exatamente
+$\tau_{\rm nave}\approx3{,}54$ anos e $t_{\rm Terra}\approx5{,}87$ anos.
+
+\begin{numerico}
+\lstinputlisting[style=python]{codigo/cap03_compton_foguete.py}
+\end{numerico}
+
+\subsection{Mathematica}
+
+\begin{numerico}
+\lstinputlisting[style=mathematica]{codigo/cap03_quadrivetores.wl}
+\end{numerico}
+
+O script deriva simbolicamente, em sequência: a normalização da
+quadrivelocidade para uma 3-velocidade genérica; a fórmula do
+item~\ref{item-sistema-fotons} para a massa invariante de dois fótons; por
+eliminação direta (resolvendo $s=(2m+M)^2$ para $E$), a fórmula fechada
+\[
+  E_{\rm thr}=m+2M+\frac{M^2}{2m}
+\]
+pedida no item~\ref{item-energia-limiar}; e, por fim, a mesma eliminação do
+quadrimomento do elétron usada no Exemplo de espalhamento Compton, resolvida
+agora simbolicamente para reproduzir
+$1/E'-1/E=(1-\cos\theta)/m_e$. A avaliação numérica de $E_{\rm thr}$ com as
+massas do próton e do píon neutro reproduz o mesmo número obtido em Python
+-- uma checagem cruzada entre os dois ambientes.
 
 \clearpage
 \section{Exercícios}
@@ -736,6 +1216,27 @@ vetores e retorna escalares. Em componentes,
 Um tensor de tipo $(r,s)$ é multilinear: recebe $s$ vetores e $r$ um-formas, e
 retorna um número. Em física, componentes tensoriais são úteis porque suas
 transformações preservam a forma das equações.
+
+Vale ter uma imagem geométrica de por que vetores e um-formas são objetos
+diferentes, e não apenas ``vetores com índice em cima ou embaixo''. Um vetor
+é uma seta: tem magnitude e direção. Uma um-forma é melhor visualizada como
+uma \emph{pilha de superfícies} -- as superfícies de nível de uma função
+linear $\varphi(x)=\omega_\mu x^\mu$. O valor $\omega(V)$ é, literalmente, o
+número de superfícies que a seta $V$ perfura ao ir da origem até sua ponta.
+Superfícies mais próximas entre si representam uma um-forma ``mais forte''
+(maior magnitude); a orientação das superfícies codifica a direção da
+um-forma.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\textwidth]{cap04_umaforma_pilha.pdf}
+\caption{A um-forma $\omega=(2,1)$ representada como uma pilha de retas
+(superfícies de nível de $\varphi=2x+y$, espaçadas de $\Delta\varphi=1$). O
+vetor $V=(3,4)$ vai de $\varphi=0$ a $\varphi=10$, perfurando exatamente $10$
+retas -- por isso $\omega(V)=10$. Esses são os mesmos $\omega$ e $V$ do
+Exemplo~\ref{ex:umaforma-contracao}, adiante.}
+\label{fig:umaforma-pilha}
+\end{figure}
 
 Para uma caixa de ferramentas prática sobre manipulação de índices, deltas,
 símbolos antissimétricos e contrações, consulte o Apêndice~\ref{ap:indices}.
@@ -821,11 +1322,13 @@ Essa diferença é exatamente o que torna a contração $\omega_\mu V^\mu$
 invariante. A contração é a operação que junta um índice covariante e um
 contravariante, eliminando a dependência da base.
 
-\begin{example}
+\begin{example}\label{ex:umaforma-contracao}
 Em duas dimensões euclidianas, seja $\omega=(2,1)$ e $V=(3,4)$ em uma base
 cartesiana. A contração é $\omega(V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma
 base rotacionada, as componentes individuais mudam, mas o número obtido pela
-ação da um-forma sobre o vetor permanece o mesmo.
+ação da um-forma sobre o vetor permanece o mesmo -- é o mesmo número de
+superfícies perfuradas na Figura~\ref{fig:umaforma-pilha}, agora contado em
+coordenadas diferentes.
 \end{example}
 
 \section{A métrica como instrumento de medida}
@@ -843,6 +1346,36 @@ Em notação de índices, baixar um índice parece uma operação simples:
 Mas o significado é físico. O objeto $V_\mu$ é a um-forma que, ao agir sobre
 um vetor $W^\mu$, retorna o produto escalar $V\cdot W$. Essa leitura evita a
 ideia equivocada de que índices altos e baixos são meras posições tipográficas.
+
+Em uma base ortonormal essa distinção passa despercebida, porque
+$V^\mu=V_\mu$ a menos de sinais. Ela fica visível em uma base oblíqua (não
+ortogonal), como a que aparece naturalmente em coordenadas curvilíneas ou em
+diagramas de Minkowski com eixos inclinados (Figura~\ref{fig:simultaneidade}
+do Capítulo~\ref{chap:relatividade-especial}). Dada uma base $\{\bm e_1,\bm
+e_2\}$ qualquer, um mesmo vetor $V$ admite duas decomposições naturais e
+geometricamente distintas:
+\[
+  V=V^ie_i\quad\text{(regra do paralelogramo)},
+  \qquad
+  V_i=V\cdot e_i\quad\text{(projeção perpendicular sobre cada eixo)}.
+\]
+As componentes contravariantes $V^i$ respondem à pergunta ``quanto de cada
+vetor de base preciso somar para reconstruir $V$?''. As componentes
+covariantes $V_i$ respondem a uma pergunta diferente: ``qual é a projeção de
+$V$ ao longo de cada eixo?''. As duas só coincidem quando a base é
+ortonormal.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.92\textwidth]{cap04_base_obliqua.pdf}
+\caption{O mesmo vetor $V$, na mesma base oblíqua $\{e_1,e_2\}$, decomposto
+de duas maneiras. À esquerda, a regra do paralelogramo dá as componentes
+contravariantes $V^i$. À direita, a projeção perpendicular sobre cada eixo
+dá as componentes covariantes $V_i=V\cdot e_i$. Numericamente, com
+$e_1=(1,0)$, $e_2=(0{,}4,1)$ e $V=(1{,}3,0{,}9)$: $V^1=0{,}94$,
+$V^2=0{,}9$, mas $V_1=1{,}3$, $V_2=1{,}42$.}
+\label{fig:base-obliqua}
+\end{figure}
 
 \section{Erros comuns com índices}
 
@@ -864,16 +1397,17 @@ no início do curso.
   liste todas as contrações escalares que podem ser formadas com um único
   $T$, um $A$ e um $B$. Explique quais expressões deixam índices livres.
 
-  \item \textbf{Parte simétrica e antissimétrica.} Para um tensor $M_{\mu\nu}$,
-  defina
+  \item \label{item-sim-antisim} \textbf{Parte simétrica e antissimétrica.}
+  Para um tensor $M_{\mu\nu}$, defina
   \[
     M_{(\mu\nu)}=\frac12(M_{\mu\nu}+M_{\nu\mu}),\qquad
     M_{[\mu\nu]}=\frac12(M_{\mu\nu}-M_{\nu\mu}).
   \]
   Mostre que $M_{\mu\nu}=M_{(\mu\nu)}+M_{[\mu\nu]}$.
 
-  \item \textbf{Traço invariante.} Use a lei de transformação de um tensor
-  misto $T^\mu{}_\nu$ para mostrar que $T^\mu{}_\mu$ não depende da base.
+  \item \label{item-traco-invariante} \textbf{Traço invariante.} Use a lei de
+  transformação de um tensor misto $T^\mu{}_\nu$ para mostrar que
+  $T^\mu{}_\mu$ não depende da base.
 
   \item \textbf{Gradiente.} Seja $f=t^2-x^2$. Calcule $\partial_\mu f$ e
   depois eleve o índice com a métrica de Minkowski. Interprete por que o sinal
@@ -939,6 +1473,50 @@ Se fixamos apenas o segundo vetor, obtemos uma um-forma:
 Essa leitura ajuda a lembrar que contração parcial reduz o tipo tensorial do
 objeto.
 \end{example}
+
+\clearpage
+\section{Resolução numérica}
+
+As identidades deste capítulo são de álgebra linear/tensorial pura -- não
+dependem de nenhuma física específica -- e por isso se prestam bem a
+verificação por computador com números ou símbolos genéricos, em vez de um
+único exemplo à mão. Esta seção trata três problemas: (i) construir a base
+dual de uma base oblíqua e confirmar a biortogonalidade $e^i\cdot e_j=
+\delta^i_j$, reproduzindo os números da Figura~\ref{fig:base-obliqua}; (ii)
+confirmar a decomposição simétrica/antissimétrica e a identidade do
+item~\ref{item-sim-antisim} para tensores genéricos; (iii) confirmar a
+invariância do traço (item~\ref{item-traco-invariante}) sob uma mudança de
+base arbitrária, não apenas sob transformações de Lorentz. Os scripts
+completos estão em \texttt{codigo/}.
+
+\subsection{Python}
+
+\begin{numerico}
+\lstinputlisting[style=python]{codigo/cap04_tensores.py}
+\end{numerico}
+
+Dois pontos merecem destaque. Primeiro, a base dual $e^i$ é recuperada por
+$e^i=g^{ij}e_j$ -- a mesma operação de ``subir índice'' com a métrica que já
+usamos para passar de $V_\mu$ a $V^\mu$, agora aplicada aos próprios vetores
+de base. Segundo, a invariância do traço é testada sob matrizes $L$
+\emph{aleatórias e não ortogonais} -- não apenas rotações ou boosts --, o
+que deixa claro que a invariância do traço é uma propriedade de
+$GL(n)$ (qualquer mudança de base linear), mais geral que a invariância de
+Lorentz usada nos capítulos anteriores.
+
+\subsection{Mathematica}
+
+\begin{numerico}
+\lstinputlisting[style=mathematica]{codigo/cap04_tensores.wl}
+\end{numerico}
+
+Diferentemente do script em Python, aqui as entradas de $F$, $S$, $T$ e $L$
+são símbolos livres, não números sorteados: o \texttt{Simplify} resultando
+em $0$ é uma prova de que a identidade vale para \emph{quaisquer} valores
+das entradas, não uma checagem para uma amostra. Essa é a vantagem do
+cálculo simbólico para resultados de álgebra tensorial pura como os deste
+capítulo -- ele entrega exatamente o tipo de afirmação ``para todo tensor
+$M_{\mu\nu}$'' que os Problemas orientados pedem para demonstrar à mão.
 
 \clearpage
 \section{Exercícios}
