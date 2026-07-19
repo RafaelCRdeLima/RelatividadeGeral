@@ -1,0 +1,237 @@
+:root {
+  /* paleta herdada do rg-interactive-lab (Capítulo 4), para o protótipo já
+     nascer com a mesma linguagem visual do resto do projeto */
+  --fb-bg: #edf0ec;
+  --fb-surface: #fffef9;
+  --fb-surface-2: #f3f4ef;
+  --fb-ink: #102838;
+  --fb-muted: #687c88;
+  --fb-navy: #061826;
+  --fb-cyan: #6ed4dc;
+  --fb-blue: #157b9b;
+  --fb-orange: #e9a44b;
+  --fb-orange-2: #c97a1f;
+  --fb-neutral: #d7dcdf;
+  --fb-red: #bf4d54;
+  --fb-green: #2f9569;
+  --fb-line: rgba(16, 40, 56, 0.14);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fb-bg: #071722;
+    --fb-surface: #0d2635;
+    --fb-surface-2: #102d3e;
+    --fb-ink: #f2faf9;
+    --fb-muted: #abc0ca;
+    --fb-line: rgba(222, 245, 244, 0.18);
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--fb-ink);
+  background: var(--fb-bg);
+  font-family: system-ui, "Segoe UI", sans-serif;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.fb-app {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+.fb-header {
+  margin-bottom: 2rem;
+}
+
+.fb-eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--fb-blue);
+  font: 600 0.7rem monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.fb-header h1 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.fb-banner {
+  max-width: 640px;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  color: var(--fb-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: var(--fb-surface-2);
+  border-left: 3px solid var(--fb-cyan);
+}
+
+.fb-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid var(--fb-line);
+}
+
+.fb-tabs button {
+  padding: 0.7rem 1.1rem;
+  color: var(--fb-muted);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.fb-tabs button.active {
+  color: var(--fb-ink);
+  border-bottom-color: var(--fb-blue);
+}
+
+.fb-intro {
+  max-width: 640px;
+  margin: 0 0 2rem;
+  color: var(--fb-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.fb-stage {
+  padding: 2.5rem 2rem;
+  background: var(--fb-surface);
+  border: 1px solid var(--fb-line);
+}
+
+.fb-wedge-row,
+.fb-dstage-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  min-height: 80px;
+}
+
+.fb-block {
+  display: flex;
+  touch-action: none;
+}
+
+.fb-block-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  height: 100%;
+  padding: 0 18px;
+  color: var(--fb-navy);
+  font-size: 1.05rem;
+  overflow: hidden;
+}
+
+.fb-slot,
+.fb-target {
+  padding: 4px;
+  border: 2px dashed transparent;
+  border-radius: 6px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.fb-slot-over,
+.fb-target-over {
+  background: rgba(110, 212, 220, 0.18);
+  border-color: var(--fb-cyan);
+}
+
+.fb-dragging {
+  opacity: 0.55;
+  z-index: 10;
+  position: relative;
+}
+
+.fb-op-symbol {
+  color: var(--fb-navy);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.fb-arrow {
+  color: var(--fb-muted);
+  font-size: 1.3rem;
+}
+
+.fb-zero {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.fb-sign {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.fb-sign-pos {
+  color: var(--fb-green);
+}
+
+.fb-sign-neg {
+  color: var(--fb-red);
+}
+
+.fb-tag {
+  cursor: default;
+}
+
+.fb-tag-editable {
+  cursor: text;
+  border-bottom: 1px dashed rgba(16, 40, 56, 0.35);
+}
+
+.fb-tag-editable:hover {
+  border-bottom-color: var(--fb-navy);
+}
+
+.fb-tag-input {
+  width: 3.5rem;
+  padding: 0.2rem 0.35rem;
+  color: var(--fb-navy);
+  background: var(--fb-surface);
+  border: 1px solid var(--fb-blue);
+  border-radius: 3px;
+  font: 500 0.95rem monospace;
+}
+
+.fb-reset {
+  padding: 0.6rem 1rem;
+  color: white;
+  background: var(--fb-blue);
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.fb-caption {
+  margin: 1.6rem 0 0;
+  padding-top: 1rem;
+  color: var(--fb-muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  border-top: 1px solid var(--fb-line);
+}
