@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Programas Python e Wolfram Language da apostila de Relatividade Geral — UDESC/CCT.">
+    <meta name="description" content="Notebooks e programas da apostila de Relatividade Geral — UDESC/CCT. Abra no Colab ou baixe.">
     <meta name="theme-color" content="#071b2c">
-    <title>Programas da apostila · Relatividade Geral · UDESC</title>
+    <title>Notebooks e programas · Relatividade Geral · UDESC</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css?v=20260731-1">
+    <link rel="stylesheet" href="../styles.css?v=20260731-2">
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -19,14 +19,13 @@
       <a class="brand" href="../index.html" aria-label="Página inicial">
         <span class="brand-mark" aria-hidden="true">
           <span class="tensor-r">R</span>
-          <span class="tensor-indices"><sup>μ</sup><sub>ν</sub></span>
+          <span class="tensor-indices"><sup>&#956;</sup><sub>&#957;</sub></span>
         </span>
         <span>Relatividade Geral</span>
       </a>
       <nav aria-label="Navegação principal">
         <a href="../index.html#apostila">Apostila</a>
-        <a href="index.html" aria-current="page">Programas</a>
-        <a href="../index.html#notebooks">Notebooks</a>
+        <a href="index.html" aria-current="page">Notebooks e programas</a>
         <a href="../index.html#dashboards">Dashboards</a>
         <a href="https://github.com/RafaelCRdeLima/RelatividadeGeral">GitHub</a>
       </nav>
@@ -36,15 +35,16 @@
       <section class="section codigos-hero">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Material complementar da apostila</p>
-            <h2>Programas do curso</h2>
+            <p class="eyebrow">Laboratório computacional</p>
+            <h2>Notebooks e programas</h2>
           </div>
           <p>
-            Todos os programas citados na apostila, prontos para baixar e
-            executar. Cada seção de <em>Resolução numérica</em> do texto
-            aponta para um arquivo desta página; os números impressos nas
-            caixas de saída da apostila são exatamente o que estes scripts
-            produzem quando executados.
+            Todo o material computacional da disciplina em um só lugar. Cada
+            programa citado na apostila tem um notebook equivalente: abra
+            direto no Google Colab, sem instalar nada, ou baixe o
+            <code>.ipynb</code> e o <code>.py</code> para rodar na sua
+            máquina. As verificações simbólicas em Wolfram Language ficam
+            disponíveis como <code>.wl</code>.
           </p>
         </div>
 
@@ -59,24 +59,32 @@
 
         <div class="codigos-instrucoes">
           <div>
-            <h3>Como executar os arquivos <code>.py</code></h3>
+            <h3>No Google Colab, sem instalar nada</h3>
             <p>
-              Os scripts rodam sem argumentos e não dependem uns dos outros.
-              Os que geram figuras escrevem em uma pasta <code>figuras/</code>
-              criada ao lado da pasta do script.
+              O botão <strong>Abrir no Colab</strong> carrega o notebook
+              direto do repositório. Antes de alterar qualquer coisa, use
+              <em>Arquivo → Salvar uma cópia no Drive</em>: assim cada aluno
+              guarda a própria versão e o original continua intacto.
             </p>
-            <pre><code>python3 -m pip install numpy scipy matplotlib
-python3 cap07_curvatura.py</code></pre>
+            <p>
+              O Colab já traz NumPy, SciPy, SymPy e Matplotlib — os notebooks
+              rodam de cima a baixo sem nenhuma instalação.
+            </p>
           </div>
           <div>
-            <h3>Como executar os arquivos <code>.wl</code></h3>
+            <h3>Na sua máquina</h3>
             <p>
-              São verificações simbólicas em Wolfram Language. Abra no
-              Mathematica ou execute pelo terminal com o
+              Os arquivos <code>.py</code> rodam sem argumentos e não dependem
+              uns dos outros. Os <code>.wl</code> abrem no Mathematica ou
+              rodam pelo terminal com o
               <a href="https://www.wolfram.com/engine/">Wolfram Engine</a>,
               gratuito para uso pessoal.
             </p>
-            <pre><code>wolframscript -file cap07_curvatura_simbolico.wl</code></pre>
+            <pre><code>pip install jupyterlab numpy scipy sympy matplotlib
+
+jupyter lab                  # abre os .ipynb
+python3 cap07_curvatura.py   # roda um .py
+wolframscript -file cap07_curvatura_simbolico.wl</code></pre>
           </div>
         </div>
       </section>
@@ -85,343 +93,357 @@ python3 cap07_curvatura.py</code></pre>
         <div class="section-heading">
           <div>
             <p class="eyebrow">Por capítulo</p>
-            <h2>Os 22 programas</h2>
+            <h2>Os 23 laboratórios</h2>
           </div>
           <p>
-            A convenção de nomes é <code>capNN_</code>, com o número do
-            capítulo a que o programa pertence. Os terminados em
-            <code>_simbolico</code> são as verificações em Wolfram Language.
+            Dois laboratórios interativos escritos para explorar conceitos, os
+            13 programas de resolução numérica da apostila (cada um com seu
+            notebook) e as 8 verificações simbólicas em Wolfram Language.
           </p>
         </div>
 
-        <!-- ============================ CAPÍTULO 2 -->
+        <h3 class="codigos-cap">Introdução · Ambiente e primeiros cálculos</h3>
+        <div class="codigo-grid">
+          <article class="codigo-card destaque">
+            <div class="codigo-topo">
+              <code class="codigo-nome">00_ambiente_e_escala_gravitacional.ipynb</code>
+              <span class="codigo-lang lab">Notebook</span>
+            </div>
+            <h4>Ambiente e escala gravitacional</h4>
+            <p>Verificação das bibliotecas científicas, dedução simbólica do raio de Schwarzschild e comparação numérica entre diferentes massas.</p>
+            <p class="codigo-saida">Comece por aqui se for a sua primeira vez no Colab.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/00_ambiente_e_escala_gravitacional.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/00_ambiente_e_escala_gravitacional.ipynb" download>Baixar .ipynb ↓</a>
+            </div>
+          </article>
+        </div>
+
         <h3 class="codigos-cap">Capítulo 2 · Relatividade especial</h3>
         <div class="codigo-grid">
-          <article class="codigo-card">
+          <article class="codigo-card destaque">
+            <div class="codigo-topo">
+              <code class="codigo-nome">01_transformacoes_de_lorentz.ipynb</code>
+              <span class="codigo-lang lab">Notebook</span>
+            </div>
+            <h4>Transformações de Lorentz</h4>
+            <p>Laboratório interativo: diagramas de Minkowski com velocidade ajustável, simultaneidade, tempo próprio, paradoxo dos gêmeos e problemas orientados.</p>
+            <p class="codigo-saida">Com controles ajustáveis e perguntas de exploração.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/01_transformacoes_de_lorentz.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/01_transformacoes_de_lorentz.ipynb" download>Baixar .ipynb ↓</a>
+            </div>
+          </article>
+
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap02_boosts.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Verifica numericamente que Λ<sup>T</sup>ηΛ = η, que a composição
-              de dois boosts colineares segue a fórmula relativística de adição
-              de velocidades e que a rapidez é aditiva.
-            </p>
-            <p class="codigo-saida">Imprime resíduos da ordem de 10<sup>−16</sup>.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap02_boosts.py" download>Baixar</a>
+            <h4>Invariância do intervalo e adição de velocidades</h4>
+            <p>Verifica numericamente que Λ<sup>T</sup>ηΛ = η, que a composição de dois boosts colineares segue a fórmula relativística e que a rapidez é aditiva.</p>
+            <p class="codigo-saida">Resíduos da ordem de 10<sup>−16</sup>.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap02_boosts.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap02_boosts.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap02_boosts.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap02_tempo_proprio.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Tempo próprio do gêmeo viajante para um perfil de velocidade
-              suave, v(t) = v₀ sen(πt/T), por quadratura adaptativa. Mostra por
-              que não se pode usar o fator de Lorentz da velocidade média.
-            </p>
-            <p class="codigo-saida">Gera <code>cap02_tempo_proprio_numerico.pdf</code>.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap02_tempo_proprio.py" download>Baixar</a>
+            <h4>Tempo próprio do gêmeo viajante</h4>
+            <p>Integra τ = ∫√(1−v²) dt para um perfil de velocidade suave e mostra por que não se pode usar o fator de Lorentz da velocidade média.</p>
+            <p class="codigo-saida">τ ≈ 8,1255 contra T = 10.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap02_tempo_proprio.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap02_tempo_proprio.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap02_tempo_proprio.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap02_figuras.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Gera as figuras do capítulo: diagrama de simultaneidade, paradoxo
-              dos gêmeos com marcas de tempo próprio e cone de luz.
-            </p>
-            <p class="codigo-saida">Gera 3 PDFs em <code>figuras/</code>.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap02_figuras.py" download>Baixar</a>
+            <h4>Figuras do capítulo</h4>
+            <p>Diagrama de simultaneidade, paradoxo dos gêmeos com marcas de tempo próprio e cone de luz.</p>
+            <p class="codigo-saida">Gera 3 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap02_figuras.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap02_figuras.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap02_figuras.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap02_boosts.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Prova simbólica, para v₁ e v₂ arbitrários, da invariância do
-              intervalo, da composição de boosts e da aditividade da rapidez.
-              Deriva a fórmula de adição de velocidades por eliminação direta.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap02_boosts.wl" download>Baixar</a>
+            <h4>Verificação simbólica</h4>
+            <p>Prova, para v₁ e v₂ arbitrários, a invariância do intervalo, a composição de boosts e a aditividade da rapidez.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap02_boosts.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 3 -->
         <h3 class="codigos-cap">Capítulo 3 · Vetores e momento relativístico</h3>
         <div class="codigo-grid">
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap03_quadrivetores.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Normalização U<sup>μ</sup>U<sub>μ</sub> = −1, casca de massa,
-              decaimento em dois corpos e energia de limiar da reação
-              p + p → p + p + π⁰.
-            </p>
+            <h4>Quadrivetores e energia de limiar</h4>
+            <p>Normalização U<sup>μ</sup>U<sub>μ</sub> = −1, casca de massa, decaimento em dois corpos e limiar de p + p → p + p + π⁰.</p>
             <p class="codigo-saida">E<sub>thr</sub> ≈ 1217,9 MeV.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap03_quadrivetores.py" download>Baixar</a>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap03_quadrivetores.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap03_quadrivetores.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap03_quadrivetores.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap03_compton_foguete.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Resolve o espalhamento Compton por busca de raiz, sem usar a
-              fórmula fechada, e integra a trajetória do foguete com aceleração
-              própria constante até Proxima Centauri.
-            </p>
+            <h4>Compton e foguete relativístico</h4>
+            <p>Resolve o espalhamento Compton por busca de raiz, sem a fórmula fechada, e integra a viagem a Proxima Centauri com aceleração própria constante.</p>
             <p class="codigo-saida">τ<sub>nave</sub> ≈ 3,54 anos · t<sub>Terra</sub> ≈ 5,87 anos.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap03_compton_foguete.py" download>Baixar</a>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap03_compton_foguete.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap03_compton_foguete.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap03_compton_foguete.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap03_figuras.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Figuras do capítulo: colisor contra alvo fixo, casca de massa,
-              espalhamento Compton e trajetória do foguete.
-            </p>
-            <p class="codigo-saida">Gera 4 PDFs em <code>figuras/</code>.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap03_figuras.py" download>Baixar</a>
+            <h4>Figuras do capítulo</h4>
+            <p>Colisor contra alvo fixo, casca de massa, espalhamento Compton e trajetória do foguete.</p>
+            <p class="codigo-saida">Gera 4 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap03_figuras.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap03_figuras.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap03_figuras.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap03_quadrivetores.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Deriva simbolicamente a massa invariante de dois fótons e a
-              fórmula fechada da energia de limiar,
-              E<sub>thr</sub> = m + 2M + M²/2m.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap03_quadrivetores.wl" download>Baixar</a>
+            <h4>Verificação simbólica</h4>
+            <p>Massa invariante de dois fótons e a fórmula fechada E<sub>thr</sub> = m + 2M + M²/2m.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap03_quadrivetores.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 4 -->
         <h3 class="codigos-cap">Capítulo 4 · Tensores no espaço-tempo plano</h3>
         <div class="codigo-grid">
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap04_tensores.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Constrói a base dual de uma base oblíqua, confirma a
-              biortogonalidade e testa a invariância do traço sob mudanças de
-              base aleatórias e não ortogonais.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap04_tensores.py" download>Baixar</a>
+            <h4>Base dual, simetrias e traço</h4>
+            <p>Constrói a base dual de uma base oblíqua, confirma a biortogonalidade e testa a invariância do traço sob mudanças de base não ortogonais.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap04_tensores.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap04_tensores.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap04_tensores.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap04_figuras.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Figuras do capítulo: a um-forma como pilha de superfícies e as
-              duas decomposições de um vetor em base oblíqua.
-            </p>
-            <p class="codigo-saida">Gera 2 PDFs em <code>figuras/</code>.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap04_figuras.py" download>Baixar</a>
+            <h4>Figuras do capítulo</h4>
+            <p>A um-forma como pilha de superfícies e as duas decomposições de um vetor em base oblíqua.</p>
+            <p class="codigo-saida">Gera 2 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap04_figuras.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap04_figuras.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap04_figuras.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap04_tensores.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              As mesmas identidades com entradas simbólicas livres: prova para
-              <em>quaisquer</em> valores, não para uma amostra.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap04_tensores.wl" download>Baixar</a>
+            <h4>Verificação simbólica</h4>
+            <p>As mesmas identidades com entradas simbólicas livres: prova para quaisquer valores, não para uma amostra.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap04_tensores.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 7 -->
         <h3 class="codigos-cap">Capítulo 7 · Derivada covariante e curvatura</h3>
         <div class="codigo-grid">
-          <article class="codigo-card destaque">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap07_curvatura.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Transporte paralelo e holonomia; tensor de Riemann por diferenças
-              finitas a partir de uma métrica qualquer; desvio geodésico
-              integrado com a curvatura medida numericamente.
-            </p>
-            <p class="codigo-saida">
-              Contém a máquina genérica <code>christoffel</code> /
-              <code>riemann</code> / <code>invariantes</code>, reutilizável em
-              qualquer métrica. Gera 2 PDFs.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap07_curvatura.py" download>Baixar</a>
+            <h4>Holonomia, Riemann numérico e desvio geodésico</h4>
+            <p>Transporte paralelo em circuito fechado; tensor de Riemann por diferenças finitas a partir de uma métrica qualquer; desvio geodésico integrado com a curvatura medida numericamente.</p>
+            <p class="codigo-saida">Traz a máquina genérica reutilizável em qualquer métrica. Gera 2 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap07_curvatura.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap07_curvatura.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap07_curvatura.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap07_curvatura_simbolico.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Verifica as quatro simetrias do tensor de Riemann, produz a
-              contagem n²(n²−1)/12 e mostra que ∇<sub>μ</sub>G<sup>μν</sup> = 0
-              vale para uma métrica esférica genérica.
-            </p>
-            <p class="codigo-saida">Define as rotinas <code>Christoffel</code>, <code>Riemann</code> e <code>Ricci</code>.</p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap07_curvatura_simbolico.wl" download>Baixar</a>
+            <h4>Simetrias de Riemann e Bianchi</h4>
+            <p>Verifica as quatro simetrias do tensor de Riemann, a contagem n²(n²−1)/12 e mostra que ∇<sub>μ</sub>G<sup>μν</sup> = 0 vale para uma métrica esférica genérica.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap07_curvatura_simbolico.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 10 -->
         <h3 class="codigos-cap">Capítulo 10 · Ondas gravitacionais</h3>
         <div class="codigo-grid">
-          <article class="codigo-card destaque">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap10_ondas.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Deformação do anel de partículas nas duas polarizações; fórmula
-              do quadrupolo verificada por derivação numérica; teste de
-              Hulse–Taylor; inspiral, massa de chirp e amplitude.
-            </p>
-            <p class="codigo-saida">
-              dP<sub>b</sub>/dt = −2,4031×10<sup>−12</sup> (0,2 % do observado).
-              Gera 2 PDFs.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap10_ondas.py" download>Baixar</a>
+            <h4>Anel, quadrupolo e inspiral</h4>
+            <p>Deformação do anel nas duas polarizações; fórmula do quadrupolo conferida por derivação numérica; teste de Hulse–Taylor; inspiral e massa de chirp.</p>
+            <p class="codigo-saida">dP<sub>b</sub>/dt = −2,4031×10<sup>−12</sup>, a 0,2 % do observado. Gera 2 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap10_ondas.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap10_ondas.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap10_ondas.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap10_ondas_simbolico.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Linearização das equações de Einstein, gauge de Lorenz, onda
-              plana em gauge TT e dedução exata do fator 32/5 da potência
-              irradiada.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap10_ondas_simbolico.wl" download>Baixar</a>
+            <h4>Linearização e fórmula do quadrupolo</h4>
+            <p>Equações de Einstein linearizadas, gauge de Lorenz, onda plana em gauge TT e dedução exata do fator 32/5.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap10_ondas_simbolico.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 11 -->
         <h3 class="codigos-cap">Capítulo 11 · Soluções esféricas e Schwarzschild</h3>
         <div class="codigo-grid">
-          <article class="codigo-card destaque">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap11_geodesicas_schwarzschild.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              ISCO e eficiência de acreção; precessão do periélio integrada em
-              campo forte; deflexão da luz por detecção de evento; queda radial
-              e a divergência do tempo coordenado.
-            </p>
-            <p class="codigo-saida">
-              r<sub>ISCO</sub> = 6M · 42,98″/século para Mercúrio · 1,751″ na
-              borda do Sol. Gera 2 PDFs.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap11_geodesicas_schwarzschild.py" download>Baixar</a>
+            <h4>ISCO, precessão, deflexão e queda radial</h4>
+            <p>Órbitas circulares e ISCO; precessão do periélio integrada em campo forte; deflexão da luz por detecção de evento; queda radial e a divergência do tempo coordenado.</p>
+            <p class="codigo-saida">r<sub>ISCO</sub> = 6M · 42,98″/século · 1,751″ na borda do Sol. Gera 2 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap11_geodesicas_schwarzschild.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap11_geodesicas_schwarzschild.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap11_geodesicas_schwarzschild.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap11_schwarzschild_simbolico.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Christoffel, Riemann e Ricci de Schwarzschild; escalar de
-              Kretschmann; extração exata da ISCO e da precessão em série de
-              M/r.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap11_schwarzschild_simbolico.wl" download>Baixar</a>
+            <h4>Curvatura de Schwarzschild</h4>
+            <p>Christoffel, Riemann e Ricci; escalar de Kretschmann; extração exata da ISCO e da precessão em série de M/r.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap11_schwarzschild_simbolico.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 12 -->
         <h3 class="codigos-cap">Capítulo 12 · Buracos negros</h3>
         <div class="codigo-grid">
-          <article class="codigo-card destaque">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap12_buracos_negros.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Cones de luz em Schwarzschild e em Eddington–Finkelstein;
-              diagrama de Kruskal–Szekeres; marés no horizonte; temperatura de
-              Hawking, entropia e evaporação; horizontes, ergosfera e ISCO de
-              Kerr.
-            </p>
-            <p class="codigo-saida">
-              Eficiência de acreção de 5,72 % (a = 0) a 42,26 % (extremo).
-              Gera 2 PDFs.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap12_buracos_negros.py" download>Baixar</a>
+            <h4>Cones de luz, Kruskal, marés, Hawking e Kerr</h4>
+            <p>Cones em Schwarzschild e Eddington–Finkelstein; diagrama de Kruskal–Szekeres; marés no horizonte; temperatura, entropia e evaporação; horizontes, ergosfera e ISCO de Kerr.</p>
+            <p class="codigo-saida">Eficiência de acreção de 5,72 % (a = 0) a 42,26 % (extremo). Gera 2 PDFs.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap12_buracos_negros.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap12_buracos_negros.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap12_buracos_negros.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap12_buracos_negros_simbolico.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Regularidade da métrica de Eddington–Finkelstein no horizonte,
-              gravidade superficial κ = 1/4M e a primeira lei na forma
-              T dS = dM.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap12_buracos_negros_simbolico.wl" download>Baixar</a>
+            <h4>Horizonte regular e primeira lei</h4>
+            <p>Regularidade de Eddington–Finkelstein no horizonte, gravidade superficial κ = 1/4M e a primeira lei na forma T dS = dM.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap12_buracos_negros_simbolico.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
-        <!-- ============================ CAPÍTULO 13 -->
         <h3 class="codigos-cap">Capítulo 13 · Cosmologia relativística</h3>
         <div class="codigo-grid">
-          <article class="codigo-card destaque">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap13_friedmann.py</code>
               <span class="codigo-lang py">Python</span>
             </div>
-            <p>
-              Idade do universo e igualdades entre eras; evolução do fator de
-              escala para quatro universos; distâncias comóvel, luminosidade e
-              angular; horizonte de partículas.
-            </p>
-            <p class="codigo-saida">
-              t₀ = 13,791 Gyr · máximo de D<sub>A</sub> em z = 1,5877 ·
-              horizonte de 46,13 Glyr. Gera 1 PDF.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap13_friedmann.py" download>Baixar</a>
+            <h4>Idade, fator de escala e distâncias</h4>
+            <p>Idade do universo e igualdades entre eras; evolução de a(t) para quatro universos; distâncias comóvel, luminosidade e angular; horizontes.</p>
+            <p class="codigo-saida">t₀ = 13,791 Gyr · máximo de D<sub>A</sub> em z = 1,5877 · horizonte de 46,13 Glyr. Gera 1 PDF.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="https://colab.research.google.com/github/RafaelCRdeLima/RelatividadeGeral/blob/main/notebooks/programas/cap13_friedmann.ipynb">Abrir no Colab ↗</a>
+            <a class="text-link" href="../notebooks/programas/cap13_friedmann.ipynb" download>Baixar .ipynb ↓</a>
+            <a class="text-link" href="../apostila/fonte/codigo/cap13_friedmann.py" download>Baixar .py ↓</a>
+            </div>
           </article>
 
-          <article class="codigo-card">
+          <article class="codigo-card ">
             <div class="codigo-topo">
               <code class="codigo-nome">cap13_friedmann_simbolico.wl</code>
               <span class="codigo-lang wl">Wolfram</span>
             </div>
-            <p>
-              Deriva as equações de Friedmann a partir da métrica FLRW, em vez
-              de assumi-las, e verifica a solução fechada em sinh<sup>2/3</sup>
-              para matéria mais Λ.
-            </p>
-            <a class="button button-small" href="../apostila/fonte/codigo/cap13_friedmann_simbolico.wl" download>Baixar</a>
+            <h4>Friedmann a partir da métrica</h4>
+            <p>Deriva as equações de Friedmann da métrica FLRW, em vez de assumi-las, e verifica a solução fechada em sinh<sup>2/3</sup>.</p>
+            <div class="codigo-acoes">
+            <a class="button button-small" href="../apostila/fonte/codigo/cap13_friedmann_simbolico.wl" download>Baixar .wl ↓</a>
+            </div>
           </article>
         </div>
 
@@ -434,7 +456,7 @@ python3 cap07_curvatura.py</code></pre>
             A apostila traz, ao fim de cada capítulo, uma seção
             <strong>Conteúdo extra</strong> com três problemas que pedem para
             alterar um destes arquivos e obter um resultado que não está no
-            texto. Baixe o programa, edite e compare.
+            texto. Abra o notebook no Colab, salve uma cópia, edite e compare.
           </p>
         </div>
       </section>

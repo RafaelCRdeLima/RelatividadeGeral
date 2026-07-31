@@ -639,6 +639,27 @@ footer a { color: var(--cyan); text-decoration: none; }
 
 .codigo-lang.py { background: rgba(30, 92, 131, 0.12); color: var(--blue); }
 .codigo-lang.wl { background: rgba(230, 183, 92, 0.22); color: #8a6a1f; }
+.codigo-lang.lab { background: rgba(141, 215, 220, 0.34); color: #145b66; }
+
+.codigo-card h4 {
+  margin: 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.32;
+}
+
+.codigo-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 1rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.codigo-acoes .button { margin-top: 0; }
+.codigo-acoes .text-link { font-size: 0.84rem; white-space: nowrap; }
 
 .codigo-saida {
   padding-left: 0.8rem;

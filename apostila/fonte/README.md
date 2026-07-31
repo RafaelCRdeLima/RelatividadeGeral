@@ -12,7 +12,7 @@ Arquivos principais:
 
 ## Os programas não são impressos na apostila
 
-Nenhum código aparece no PDF. Os 22 programas ficam para download na subpágina
+Nenhum código aparece no PDF. Os 21 programas ficam para download na subpágina
 [`codigos/`](../../codigos/) do site da disciplina,
 <https://rafaelcrdelima.github.io/RelatividadeGeral/codigos/>, e o texto aponta
 para eles com a caixa `\programa{arquivo}`:
@@ -27,9 +27,22 @@ Duas consequências práticas para quem edita a apostila:
   execução dos scripts, não são transcritos à mão. Ao alterar um programa,
   rode-o e atualize a caixa correspondente.
 - **Ao acrescentar um programa novo**, inclua-o em `codigo/`, aponte para ele
-  com `\programa` e acrescente o cartão correspondente em
-  [`codigos/index.html`](../../codigos/index.html). O `.zip` de download é
-  montado automaticamente pelo workflow do GitHub Pages a partir de `codigo/`.
+  com `\programa`, rode `python3 codigo/gerar_notebooks.py` e acrescente o
+  cartão correspondente em [`codigos/index.html`](../../codigos/index.html).
+  O `.zip` de download é montado pelo workflow do GitHub Pages a partir de
+  `codigo/`.
+
+## Notebooks
+
+Os `.py` são a fonte de verdade; os notebooks em `notebooks/programas/` são
+**gerados** a partir deles por `codigo/gerar_notebooks.py` e não devem ser
+editados à mão. O conversor fatia o script em células, troca o diretório de
+figuras (porque `__file__` não existe em um notebook) e faz as figuras
+aparecerem embaixo da célula. Depois de alterar qualquer `.py`:
+
+```bash
+python3 codigo/gerar_notebooks.py
+```
 
 Cada capítulo termina em uma seção **Conteúdo extra** com três problemas que
 pedem para modificar um desses programas e obter um resultado que não está no
@@ -73,9 +86,9 @@ Vindos de `estilo-rg.sty`:
 - `objetivos` — abertura de capítulo
 - `central` — resultado central
 - `atencao` — erro comum ("onde se erra")
-- `caixacodigo` + `lstlisting` — listagem com barra de título
 - `saida` + `lstlisting[style=rgsaida]` — saída de programa
-- `\rgcodigo{título}{linguagem}{arquivo}` — atalho para imprimir um script inteiro
+- `\programa[descrição]{arquivo}` — ponteiro para um programa no site; **é este que se usa hoje**
+- `caixacodigo` + `lstlisting` e `\rgcodigo{título}{linguagem}{arquivo}` — imprimem código no PDF; continuam definidos, mas não são mais usados
 
 Definidos no preâmbulo do `.tex`, na mesma paleta: `resultado`, `roteiro`, `leitura` e os ambientes de teorema `definition`, `example`, `exercise`, `activity`, `proposition`, `remark`.
 
