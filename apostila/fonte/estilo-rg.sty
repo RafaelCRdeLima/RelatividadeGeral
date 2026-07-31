@@ -1,0 +1,294 @@
+% =====================================================================
+%  estilo-rg.sty — identidade visual da apostila de Relatividade Geral
+%  UDESC/CCT — Mestrado em Física
+%
+%  Compile preferencialmente com XeLaTeX ou LuaLaTeX (fontes OpenType).
+%  Com pdfLaTeX o pacote cai automaticamente em Palatino/Helvetica e
+%  tudo continua funcionando, só com menos refinamento tipográfico.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{estilo-rg}[2026/07/28 Estilo da apostila de RG]
+
+\RequirePackage{iftex}
+\RequirePackage[table,dvipsnames]{xcolor}
+\RequirePackage{amsmath,amssymb,mathtools}
+\RequirePackage{amsthm}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{enumitem}
+\RequirePackage{setspace}
+\RequirePackage{microtype}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{listings}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{caption}
+\RequirePackage[hidelinks]{hyperref}
+
+% ---------------------------------------------------------------------
+%  1. PALETA
+%     Tinta fria em vez de preto puro, primária petróleo, acento âmbar,
+%     alerta terracota. Contraste alto no papel, sóbrio na tela.
+% ---------------------------------------------------------------------
+\definecolor{rgTinta}    {HTML}{16222B}  % corpo do texto
+\definecolor{rgPetroleo} {HTML}{0E5A6B}  % cor primária
+\definecolor{rgPetroClaro}{HTML}{2E7C8C}
+\definecolor{rgAmbar}    {HTML}{C1832F}  % acento
+\definecolor{rgTerracota}{HTML}{A6503C}  % alerta
+\definecolor{rgGrafite}  {HTML}{5A6B75}  % texto secundário
+\definecolor{rgNevoa}    {HTML}{EDF3F4}  % fundo frio
+\definecolor{rgAreia}    {HTML}{FBF6EE}  % fundo quente
+\definecolor{rgCodigo}   {HTML}{F6F8F9}  % fundo de código
+\definecolor{rgLinha}    {HTML}{D6DEE1}  % filetes
+
+\AtBeginDocument{\color{rgTinta}}
+
+% ---------------------------------------------------------------------
+%  2. TIPOGRAFIA
+%     Serifa humanista para o corpo (Pagella/Palatino: legível em
+%     parágrafos longos e com math casado), geométrica para títulos
+%     (Poppins: dá o registro contemporâneo), mono de traço aberto
+%     para código.
+% ---------------------------------------------------------------------
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{mathpazo}
+  \RequirePackage{helvet}
+  \RequirePackage{courier}
+\else
+  \RequirePackage{mathpazo}          % apenas para o math casado com Palatino
+  \RequirePackage[no-math]{fontspec}
+  \setmainfont{TeX Gyre Pagella}[Numbers=OldStyle, Ligatures=TeX]
+  % O teste é feito pelo nome do ARQUIVO: perguntar por uma família que não
+  % está instalada faz o kpathsea disparar mktextfm e sujar o log.
+  \newcommand{\rg@sePoppins}[2]{%
+    \IfFontExistsTF{Poppins-Regular.ttf}{#1}{%
+      \IfFontExistsTF{Poppins-Regular.otf}{#1}{#2}}}
+  \newcommand{\rg@seJetBrains}[2]{%
+    \IfFontExistsTF{JetBrainsMono-Regular.ttf}{#1}{%
+      \IfFontExistsTF{JetBrainsMono-Regular.otf}{#1}{#2}}}
+  \rg@sePoppins
+    {\setsansfont{Poppins}[Scale=0.94, Ligatures=TeX]}
+    {\IfFontExistsTF{TeX Gyre Adventor}
+      {\setsansfont{TeX Gyre Adventor}[Scale=0.94, Ligatures=TeX]}
+      {\setsansfont{TeX Gyre Heros}[Scale=0.90, Ligatures=TeX]}}
+  \rg@seJetBrains
+    {\setmonofont{JetBrains Mono}[Scale=0.80]}
+    {\setmonofont{DejaVu Sans Mono}[Scale=0.80]}
+\fi
+
+\linespread{1.10}
+\setlength{\parskip}{0.30\baselineskip}
+
+% ---------------------------------------------------------------------
+%  3. TÍTULOS
+%     Numeral grande e leve, filete fino, título em sans.
+% ---------------------------------------------------------------------
+\newcommand{\rgFilete}{{\color{rgLinha}\rule{\linewidth}{0.6pt}}}
+
+\titleformat{\chapter}[display]
+  {\sffamily\color{rgTinta}}
+  {\normalfont\sffamily\bfseries\fontsize{11}{13}\selectfont
+   \color{rgPetroleo}\MakeUppercase{\chaptertitlename}\ \thechapter}
+  {6pt}
+  {\vspace{-2pt}\fontsize{25}{29}\selectfont\bfseries\raggedright}
+  [\vspace{6pt}{\color{rgPetroleo}\rule{4.2cm}{1.6pt}}]
+
+\titlespacing*{\chapter}{0pt}{6pt}{28pt}
+
+\titleformat{\section}
+  {\sffamily\bfseries\large\color{rgTinta}}
+  {\color{rgPetroleo}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\sffamily\bfseries\normalsize\color{rgTinta}}
+  {\color{rgPetroClaro}\thesubsection}{0.6em}{}
+
+\titlespacing*{\section}{0pt}{1.5\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.2\baselineskip}{0.4\baselineskip}
+
+% ---------------------------------------------------------------------
+%  4. CABEÇALHOS
+%     Correção do bug de colisão: use \chapter[título curto]{...} em
+%     capítulos de título longo. O cabeçalho usa o título curto.
+% ---------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhead[L]{\sffamily\footnotesize\color{rgGrafite}Relatividade Geral}
+\fancyhead[R]{\sffamily\footnotesize\color{rgGrafite}\nouppercase{\leftmark}}
+\fancyfoot[C]{\sffamily\footnotesize\color{rgGrafite}\thepage}
+\fancypagestyle{plain}{\fancyhf{}%
+  \fancyfoot[C]{\sffamily\footnotesize\color{rgGrafite}\thepage}%
+  \renewcommand{\headrulewidth}{0pt}}
+
+% filete fino sob o cabeçalho, em vez da régua preta padrão
+\renewcommand{\headrule}{\color{rgLinha}\rule{\headwidth}{0.4pt}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ---------------------------------------------------------------------
+%  5. LEGENDAS
+% ---------------------------------------------------------------------
+\captionsetup{font={small,color=rgGrafite}, labelfont={sf,bf,color=rgPetroleo},
+              labelsep=period, width=0.92\linewidth}
+
+% ---------------------------------------------------------------------
+%  6. CAIXAS
+% ---------------------------------------------------------------------
+\tcbset{rgbase/.style={
+    enhanced, breakable, boxrule=0pt, arc=1.6pt, left=10pt, right=10pt,
+    top=7pt, bottom=7pt, fontupper=\normalsize,
+    before skip=10pt, after skip=10pt}}
+
+% Objetivos do capítulo
+\newtcolorbox{objetivos}[1][]{rgbase,
+  colback=rgNevoa, colframe=rgNevoa,
+  borderline west={2.4pt}{0pt}{rgPetroleo},
+  fontupper=\small,
+  title={\sffamily\bfseries\footnotesize\color{rgPetroleo}OBJETIVOS DO CAPÍTULO},
+  coltitle=rgPetroleo, colbacktitle=rgNevoa, titlerule=0pt,
+  attach title to upper=\par\vspace{2pt}, #1}
+
+% Resultado central
+\newtcolorbox{central}[1][]{rgbase,
+  colback=rgAreia, colframe=rgAreia,
+  borderline west={2.4pt}{0pt}{rgAmbar},
+  title={\sffamily\bfseries\footnotesize\color{rgAmbar}RESULTADO CENTRAL},
+  coltitle=rgAmbar, colbacktitle=rgAreia, titlerule=0pt,
+  attach title to upper=\par\vspace{2pt}, #1}
+
+% Erro comum / atenção
+\newtcolorbox{atencao}[1][]{rgbase,
+  colback=white, colframe=rgTerracota, boxrule=0.5pt,
+  borderline west={2.4pt}{0pt}{rgTerracota},
+  title={\sffamily\bfseries\footnotesize\color{rgTerracota}ONDE SE ERRA},
+  coltitle=rgTerracota, colbacktitle=white, titlerule=0pt,
+  attach title to upper=\par\vspace{2pt}, #1}
+
+% Caixa de código
+\newtcolorbox{caixacodigo}[1][]{
+  enhanced, breakable, colback=rgCodigo, colframe=rgLinha, boxrule=0.5pt,
+  arc=1.6pt, left=2pt, right=2pt, top=4pt, bottom=4pt,
+  before skip=10pt, after skip=6pt,
+  fonttitle=\sffamily\bfseries\footnotesize, coltitle=white,
+  colbacktitle=rgPetroleo, attach boxed title to top left={xshift=6pt, yshift=-2pt},
+  boxed title style={boxrule=0pt, arc=1.2pt, left=6pt, right=6pt,
+                     top=2pt, bottom=2pt}, #1}
+
+% Saída do programa (conteúdo em lstlisting com style=rgsaida)
+\newtcolorbox{saida}[1][]{
+  enhanced, breakable, colback=white, colframe=rgLinha, boxrule=0.5pt,
+  arc=1.6pt, left=8pt, right=8pt, top=4pt, bottom=4pt,
+  before skip=4pt, after skip=10pt,
+  overlay unbroken and first={\node[anchor=north east, font=\sffamily\tiny,
+      text=rgGrafite, inner sep=4pt] at (frame.north east) {saída};}, #1}
+
+% ---------------------------------------------------------------------
+%  7. LISTAGENS
+%     \setstretch{1} é o que impede o código de herdar o entrelinha do
+%     corpo do texto — sem isso, uma listagem de 60 linhas ocupa 4 páginas.
+% ---------------------------------------------------------------------
+\definecolor{codKey}   {HTML}{0E5A6B}
+\definecolor{codStr}   {HTML}{8A6A1F}
+\definecolor{codCom}   {HTML}{7A8A93}
+\definecolor{codNum}   {HTML}{A6503C}
+
+\lstdefinestyle{rgstyle}{
+  basicstyle=\ttfamily\scriptsize\setstretch{1}\color{rgTinta},
+  keywordstyle=\color{codKey}\bfseries,
+  commentstyle=\color{codCom}\itshape,
+  stringstyle=\color{codStr},
+  numberstyle=\ttfamily\tiny\color{rgLinha},
+  numbers=left, numbersep=9pt, xleftmargin=20pt, framexleftmargin=20pt,
+  showstringspaces=false, breaklines=true, breakatwhitespace=true,
+  breakindent=14pt, tabsize=4, columns=fullflexible, keepspaces=true,
+  postbreak=\mbox{\textcolor{rgAmbar}{$\hookrightarrow$}\space},
+  aboveskip=2pt, belowskip=2pt,
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {â}{{\^a}}1 {à}{{\`a}}1 {é}{{\'e}}1
+           {ê}{{\^e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1
+           {ú}{{\'u}}1 {ü}{{\"u}}1 {ç}{{\c c}}1
+           {Á}{{\'A}}1 {Ã}{{\~A}}1 {É}{{\'E}}1 {Ê}{{\^E}}1 {Í}{{\'I}}1
+           {Ó}{{\'O}}1 {Õ}{{\~O}}1 {Ú}{{\'U}}1 {Ç}{{\c C}}1
+           {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+}
+\lstdefinestyle{rgsaida}{
+  basicstyle=\ttfamily\scriptsize\setstretch{1}\color{rgGrafite},
+  numbers=none, frame=none, xleftmargin=0pt, framexleftmargin=0pt,
+  breaklines=true, columns=fullflexible, keepspaces=true,
+  showstringspaces=false, aboveskip=0pt, belowskip=0pt,
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {â}{{\^a}}1 {é}{{\'e}}1 {ê}{{\^e}}1
+           {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ú}{{\'u}}1
+           {ç}{{\c c}}1
+}
+
+\lstset{style=rgstyle}
+
+\lstdefinelanguage{Wolfram}{
+  morekeywords={Module,Table,Simplify,FullSimplify,D,Sum,Solve,NSolve,Series,
+    Normal,Inverse,Det,Transpose,Length,Array,Print,Column,Grid,Plot,Manipulate,
+    NDSolve,Integrate,NIntegrate,Assuming,Element,Reals,Expand,Collect,Limit,
+    MatrixForm,Union,Flatten,Position,Chop,Reduce,Refine,Evaluate},
+  sensitive=true,
+  morecomment=[s]{(*}{*)},
+  morestring=[b]",
+}
+
+% atalho: código com título de arquivo
+\newcommand{\rgcodigo}[3]{%
+  \begin{caixacodigo}[title={#1}]
+    \lstinputlisting[language=#2]{#3}
+  \end{caixacodigo}}
+
+% ---------------------------------------------------------------------
+%  Ponteiro para um programa hospedado no site da disciplina.
+%  Os programas não são impressos na apostila: ficam para download em
+%  \rgsitecodigos, e cada seção de resolução numérica aponta para eles.
+%     \programa{arquivo}            -- só o nome
+%     \programa[descrição]{arquivo} -- com uma linha de descrição
+% ---------------------------------------------------------------------
+\newcommand{\rgsitecodigos}
+  {https://rafaelcrdelima.github.io/RelatividadeGeral/codigos/}
+
+% nome de arquivo em mono, com quebra de linha permitida nos sublinhados
+\newcommand{\arq}[1]{{\ttfamily\small
+  \def\_{\textunderscore\penalty0\hspace{0pt}}#1}}
+
+\newtcolorbox{rgprogramabox}[1][]{rgbase,
+  colback=rgNevoa, colframe=rgNevoa,
+  borderline west={2.4pt}{0pt}{rgPetroleo},
+  top=6pt, bottom=6pt, before skip=9pt, after skip=9pt, #1}
+
+\newcommand{\programa}[2][]{%
+  \begin{rgprogramabox}
+    {\sffamily\bfseries\footnotesize\color{rgPetroleo}PROGRAMA}%
+    \hfill
+    {\sffamily\footnotesize\href{\rgsitecodigos}{\color{rgAmbar}baixar
+     \raisebox{-0.1ex}{$\rightarrow$}}}\par
+    \vspace{2pt}
+    \texttt{\small #2}%
+    \if\relax\detokenize{#1}\relax\else
+      \par\vspace{2pt}{\small #1}%
+    \fi
+  \end{rgprogramabox}}
+
+% ---------------------------------------------------------------------
+%  8. AMBIENTES DE TEXTO
+% ---------------------------------------------------------------------
+\newtheoremstyle{rgplain}{8pt}{8pt}{}{0pt}{\sffamily\bfseries\color{rgPetroleo}}{.}{0.6em}{}
+\theoremstyle{rgplain}
+\newtheorem{exemplo}{Exemplo}[chapter]
+\newtheorem{atividade}[exemplo]{Atividade}
+\newtheorem{exercicio}{Exercício}[chapter]
+
+% listas mais respiradas
+\setlist[enumerate]{itemsep=3pt, topsep=4pt, leftmargin=*}
+\setlist[itemize]{itemsep=3pt, topsep=4pt, leftmargin=*, label=\textcolor{rgPetroleo}{\textbullet}}
+
+% comandos de notação usados no texto
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\rd}[2]{\frac{\dd #1}{\dd #2}}
+\newcommand{\Msol}{M_\odot}
+\newcommand{\Veff}{V_{\mathrm{ef}}}
+
+\endinput

@@ -5,6 +5,7 @@ Material didático da disciplina de Relatividade Geral da UDESC/CCT.
 O repositório reúne:
 
 - a apostila do curso em PDF e seu fonte LaTeX;
+- os 22 programas citados na apostila, em Python e Wolfram Language;
 - laboratórios computacionais em Jupyter Notebook;
 - dashboards de exploração visual sem programação;
 - a página pública para leitura e download dos materiais.
@@ -18,7 +19,8 @@ Depois de habilitado o GitHub Pages, a página estará disponível em:
 ## Estrutura
 
 ```text
-apostila/        PDF e fonte LaTeX
+apostila/        PDF e fonte LaTeX (os programas ficam em apostila/fonte/codigo/)
+codigos/         página de download dos programas da apostila
 notebooks/       laboratórios computacionais
 dashboards/      laboratórios visuais interativos
 rg-interactive-lab/ aplicação avaliativa do Capítulo 4 e Professor Viewer

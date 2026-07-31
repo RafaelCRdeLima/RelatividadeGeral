@@ -41,7 +41,8 @@ jobs:
         run: |
           mkdir _site
           cp index.html styles.css favicon.svg .nojekyll _site/
-          cp -r apostila notebooks dashboards _site/
+          cp -r apostila notebooks dashboards codigos _site/
+          (cd apostila/fonte && zip -qr "$GITHUB_WORKSPACE/_site/codigos/codigos-relatividade-geral.zip" codigo)
           mkdir -p _site/dashboards/capitulo-4
           cp -r rg-interactive-lab/dist/. _site/dashboards/capitulo-4/
 

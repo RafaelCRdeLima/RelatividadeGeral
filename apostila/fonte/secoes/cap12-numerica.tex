@@ -1,0 +1,189 @@
+% =====================================================================
+%  Capítulo 12 — Resolução numérica
+%  Inserir antes da seção de exercícios.
+% =====================================================================
+\section{Resolução numérica}
+\label{sec:cap12-numerica}
+
+As afirmações centrais deste capítulo foram feitas em palavras: que o
+horizonte é uma singularidade de coordenada, que quem cai não sente nada de
+especial ao cruzá-lo, que buracos negros maiores são mais frios. Cada uma
+delas vira um número aqui, e o resultado é menos intuitivo do que a versão
+verbal sugere. Os blocos geométricos usam $G=c=M=1$; os astrofísicos usam SI
+e imprimem em unidades solares.
+
+\subsection{Python}
+
+\programa[Cones de luz, diagrama de Kruskal, marés no horizonte, termodinâmica de Hawking e a família de Kerr.]{codigo/cap12\_buracos\_negros.py}
+
+\subsubsection*{Os cones de luz e o que a carta cobre}
+
+Em coordenadas de Schwarzschild, os raios nulos radiais satisfazem
+$\dd t/\dd r = \pm(1-2M/r)^{-1}$, que diverge em $r=2M$: o cone se fecha e a
+carta termina. Em Eddington--Finkelstein entrante, com $v = t+r_{*}$ e
+$r_{*} = r + 2M\ln|r/2M - 1|$, a métrica é
+\begin{equation}
+  \dd s^{2} = -\left(1-\frac{2M}{r}\right)\dd v^{2}
+              + 2\,\dd v\,\dd r + r^{2}\dd\Omega^{2},
+  \label{eq:cap12-ef}
+\end{equation}
+e os dois raios radiais são $\dd v/\dd r = 0$ (entrando) e
+$\dd v/\dd r = 2/(1-2M/r)$.
+
+\begin{atencao}
+O sinal de $f = 1-2M/r$ é a conta inteira. Para $r>2M$ o segundo raio tem
+$\dd r>0$ e escapa; em $r=2M$ ele fica com $\dd r=0$, parado sobre o
+horizonte para sempre; para $r<2M$ ele tem $\dd r<0$ e \emph{também} cai. Não
+há nada de singular nessa transição --- é uma mudança contínua de inclinação.
+O que muda é global: a partir de $r=2M$, nenhuma direção causal aponta para
+fora. O horizonte não é um lugar onde algo acontece; é o lugar a partir do
+qual o futuro tem uma propriedade diferente.
+\end{atencao}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/cap12_cones_luz.pdf}
+  \caption{A mesma geometria em duas cartas. À esquerda, Schwarzschild: os
+  cones se fecham ao se aproximarem de $r=2M$ e a região sombreada
+  simplesmente não é coberta pelas coordenadas. À direita,
+  Eddington--Finkelstein: os cones nunca se fecham, apenas tombam
+  progressivamente; em $r=2M$ o raio que ``sai'' fica vertical, e para dentro
+  os dois raios apontam para $r$ decrescente.}
+  \label{fig:cap12-cones}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.74\linewidth]{figuras/cap12_kruskal.pdf}
+  \caption{Diagrama de Kruskal--Szekeres, onde raios de luz radiais são
+  retas a $45^\circ$. As hipérboles tracejadas são $r$ constante e as retas
+  claras pela origem são $t$ constante --- note que todo o horizonte, para
+  $-\infty<t<\infty$, colapsa nas duas diagonais. A linha de mundo em âmbar
+  cruza o horizonte sem nada de particular e termina na singularidade, que é
+  uma \emph{hipérbole horizontal}: um instante no futuro, não um lugar no
+  espaço.}
+  \label{fig:cap12-kruskal}
+\end{figure}
+
+\subsubsection*{Marés no horizonte}
+
+A aceleração de maré radial entre dois pontos separados por $\Delta x$ é
+$2GM\Delta x/r^{3}$. Avaliada no próprio horizonte, $r=r_{s}=2GM/c^{2}$, ela
+vale $c^{6}\Delta x/(4G^{2}M^{2})$: cai como $1/M^{2}$.
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+objeto                         M/M_sol    r_s [km]   mare em 1.8 m [g]
+estelar                             10       29.54            1.89e+07
+Cygnus X-1                          21       62.03            4.29e+06
+Sgr A*                         4.3e+06   1.269e+07            0.000102
+M87*                           6.5e+09    1.92e+10            4.47e-11
+\end{lstlisting}
+\end{saida}
+
+\begin{central}
+Um astronauta que cruzasse o horizonte de um buraco negro de $10\,\Msol$
+sofreria uma maré de $19$~milhões de $g$ entre a cabeça e os pés --- seria
+destruído muito antes de chegar lá. No horizonte de Sgr~A$^{*}$ a mesma maré
+é de $10^{-4}\,g$, imperceptível; no de M87$^{*}$, $4\times10^{-11}\,g$. A
+frase ``nada de especial acontece no horizonte'' é rigorosamente verdadeira
+como afirmação sobre a \emph{geometria local}, e ainda assim falsa como
+conselho prático para buracos negros estelares. O invariante que decide é o
+escalar de Kretschmann, $K = 48M^{2}/r^{6}$, que no horizonte vale
+$3/(4M^{4})$ --- e é por isso que a resposta depende da massa.
+\end{central}
+
+\subsubsection*{Termodinâmica}
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+     M/M_sol       T_H [K]         S/k_B   t_evap [anos]
+           1     6.169e-08     1.049e+77       2.097e+67
+          10     6.169e-09     1.049e+79       2.097e+70
+   4.297e+06     1.436e-14     1.938e+90       1.664e+87
+buraco negro em equilibrio com a CMB (T = 2.7255 K):
+  M = 2.263e-08 M_sol = 4.502e+22 kg   (~0.613 massas lunares)
+\end{lstlisting}
+\end{saida}
+
+A entropia de um buraco negro de uma massa solar é $10^{77}k_{B}$. Para
+comparação, a entropia do Sol \emph{inteiro} é da ordem de $10^{58}k_{B}$:
+comprimir o Sol até o horizonte multiplicaria sua entropia por
+$10^{19}$. Buracos negros são, de longe, os objetos mais entrópicos do
+Universo, e é por isso que a segunda lei generalizada é uma restrição tão
+forte.
+
+A última linha inverte uma intuição comum. Um buraco negro só evapora se
+estiver mais quente que o ambiente, e o ambiente do Universo atual é a CMB a
+$2{,}73$~K. Isso exige $M < 4{,}5\times10^{22}$~kg, cerca de $0{,}6$ massa
+lunar. \emph{Todo} buraco negro conhecido está muitas ordens de grandeza
+acima disso: hoje todos eles absorvem mais do que irradiam. A evaporação de
+Hawking não é um processo em curso --- é um processo que só começará quando o
+Universo tiver esfriado o bastante, daqui a algo como $10^{100}$ anos.
+
+\subsubsection*{Kerr: o que a rotação muda}
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+   a/M      r_+      r_-  r_ergo(eq)  ISCO prog  ISCO retr  eficiencia
+ 0.000   2.0000   0.0000         2.0     6.0000     6.0000       5.72%
+ 0.500   1.8660   0.1340         2.0     4.2330     7.5546       8.21%
+ 0.900   1.4359   0.5641         2.0     2.3209     8.7174      15.58%
+ 0.990   1.1411   0.8589         2.0     1.4545     8.9719      26.40%
+ 0.998   1.0632   0.9368         2.0     1.2370     8.9944      32.10%
+limite extremo: 42.26%
+\end{lstlisting}
+\end{saida}
+
+A coluna da ergosfera é constante: no equador ela fica em $2M$ para qualquer
+spin, enquanto o horizonte encolhe de $2M$ até $M$. A ergosfera não é uma
+casca fina em torno do horizonte --- para $a$ grande, ela é uma região
+espessa, e é dentro dela que o arrastamento de referenciais permite extrair
+energia de rotação.
+
+\begin{central}
+A eficiência de acreção salta de $5{,}72\,\%$ (estático) para $42{,}26\,\%$
+no limite extremo $a\to M$, onde $1-E_{\rm ISCO} = 1-1/\sqrt3$. Compare com
+$0{,}7\,\%$ da fusão de hidrogênio: um disco em torno de um buraco negro em
+rotação rápida converte massa em radiação sessenta vezes mais eficientemente
+que uma estrela. É essa conta, e não a massa engolida, que explica por que
+quasares superam em brilho a galáxia inteira que os hospeda. O valor
+$32\,\%$ em $a=0{,}998$ é o limite de Thorne, o spin máximo que a própria
+acreção consegue sustentar.
+\end{central}
+
+\subsection{Mathematica}
+
+\programa[Regularidade de Eddington--Finkelstein no horizonte, gravidade superficial e a primeira lei.]{codigo/cap12\_buracos\_negros\_simbolico.wl}
+
+O bloco simbólico prova o que a Figura~\ref{fig:cap12-cones} apenas ilustra:
+que a Equação~\eqref{eq:cap12-ef} é regular no horizonte e descreve a mesma
+solução de vácuo.
+
+O determinante é a chave: $\det g = -r^{4}\sin^{2}\theta$ vale
+$-16M^{4}\sin^{2}\theta$ em $r=2M$, isto é, a métrica continua invertível
+ali. Na forma de Schwarzschild, $g_{rr}=(1-2M/r)^{-1}$ diverge no mesmo
+ponto. \emph{A geometria é a mesma; o que era ruim era o mapa.} O termo
+cruzado $2\,\dd v\,\dd r$ é o que salva o determinante.
+
+O mesmo tensor de Riemann fornece o invariante que distingue as duas
+singularidades, $K = 48M^{2}/r^{6}$, finito em $r=2M$ e divergente em $r=0$.
+A gravidade superficial, $\kappa = \tfrac12\,\partial_r(1-2M/r)$ avaliada no
+horizonte, vale $1/4M$ --- e é ela que fecha a primeira lei:
+
+\begin{central}
+A última linha devolve exatamente $1$, isto é, $T\,\dd S = \dd M$. Para
+Schwarzschild, a primeira lei da mecânica de buracos negros não é uma
+analogia aproximada nem um resultado de teoria quântica: é uma identidade
+algébrica entre $\kappa = 1/4M$, $A = 16\pi M^{2}$ e a própria massa. O que a
+radiação Hawking acrescentou não foi a relação --- foi a constatação de que
+$T = \kappa/2\pi$ é uma temperatura de verdade, com radiação térmica de
+verdade, e não apenas um parâmetro com as unidades certas.
+\end{central}
+
+O último bloco trata de Kerr. A área do horizonte,
+$A = 4\pi(r_{+}^{2}+a^{2})$, vale $16\pi M^{2}$ para $a=0$ e apenas
+$8\pi M^{2}$ para $a=M$: extrair todo o momento angular de um buraco negro
+extremo, a massa irredutível mantida fixa, no máximo dobra a área --- e
+nunca a diminui, como exige o teorema da área.
+

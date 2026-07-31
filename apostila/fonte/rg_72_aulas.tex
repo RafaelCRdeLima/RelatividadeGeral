@@ -1,172 +1,89 @@
 \documentclass[12pt,a4paper,oneside]{book}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% =====================================================================
+%  Identidade visual: fontes, paleta, títulos, caixas e listagens estão
+%  todos em estilo-rg.sty. Compile com XeLaTeX ou LuaLaTeX para obter o
+%  desenho pretendido (TeX Gyre Pagella no corpo, Poppins ou TeX Gyre
+%  Adventor nos títulos, JetBrains Mono ou DejaVu Sans Mono no código).
+%  Com pdfLaTeX o pacote cai sozinho em Palatino/Helvetica e tudo
+%  continua compilando.
+% =====================================================================
 \usepackage[brazil]{babel}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{mathtools}
+\usepackage{estilo-rg}
+
+\usepackage{amsfonts}
 \usepackage{bm}
-\usepackage{geometry}
-\usepackage{xcolor}
-\usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
-\usepackage{enumitem}
-\usepackage{hyperref}
-\usepackage{cleveref}
-\usepackage[most]{tcolorbox}
-\usepackage{fancyhdr}
-\usepackage{microtype}
-\usepackage{setspace}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{listings}
+\usepackage{geometry}
 
-\geometry{top=3.2cm,bottom=3.2cm,left=3.1cm,right=3.1cm,headheight=15pt}
-\doublespacing
-\setlength{\parskip}{3pt}
-\setlist[itemize]{topsep=3pt,itemsep=2pt}
-\setlist[enumerate]{topsep=3pt,itemsep=2pt}
+\geometry{top=3.0cm,bottom=3.0cm,left=3.1cm,right=3.1cm,
+          headheight=23pt,headsep=18pt}
 
 \hypersetup{
   colorlinks=true,
-  linkcolor=blue!55!black,
-  citecolor=green!45!black,
-  urlcolor=cyan!55!black,
+  linkcolor=rgPetroleo,
+  citecolor=rgPetroleo,
+  urlcolor=rgPetroClaro,
   pdftitle={Relatividade Geral: Apostila para 72 Aulas},
   pdfauthor={Rafael -- UDESC/CCT}
 }
 
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\small Relatividade Geral}
-\fancyhead[R]{\small \leftmark}
-\fancyfoot[C]{\thepage}
+\graphicspath{{figuras/}}
 
-\theoremstyle{definition}
+% ---------------------------------------------------------------------
+%  Ambientes de teorema, no desenho de estilo-rg
+% ---------------------------------------------------------------------
+\theoremstyle{rgplain}
 \newtheorem{definition}{Definição}[chapter]
 \newtheorem{example}{Exemplo}[chapter]
 \newtheorem{exercise}{Exercício}[chapter]
 \newtheorem{activity}{Atividade}[chapter]
-
-\theoremstyle{plain}
 \newtheorem{proposition}{Proposição}[chapter]
 
-\theoremstyle{remark}
+\newtheoremstyle{rgremark}{8pt}{8pt}{}{0pt}
+  {\sffamily\bfseries\color{rgGrafite}}{.}{0.6em}{}
+\theoremstyle{rgremark}
 \newtheorem{remark}{Observação}[chapter]
 
-\newtcolorbox{objetivos}{
-  colback=blue!4!white,
-  colframe=blue!55!black,
-  title=Objetivos,
-  fonttitle=\bfseries,
-  breakable
-}
+% ---------------------------------------------------------------------
+%  Caixas do texto, na paleta de estilo-rg
+%  (objetivos, central, atencao, caixacodigo e saida vêm do pacote)
+% ---------------------------------------------------------------------
+\newtcolorbox{resultado}[1][]{rgbase,
+  colback=rgAreia, colframe=rgAreia,
+  borderline west={2.4pt}{0pt}{rgAmbar},
+  title={\sffamily\bfseries\footnotesize\color{rgAmbar}RESULTADO CENTRAL},
+  coltitle=rgAmbar, colbacktitle=rgAreia, titlerule=0pt,
+  attach title to upper=\par\vspace{2pt}, #1}
 
-\newtcolorbox{resultado}{
-  colback=green!4!white,
-  colframe=green!45!black,
-  title=Resultado central,
-  fonttitle=\bfseries,
-  breakable
-}
+\newtcolorbox{roteiro}[1][]{rgbase,
+  colback=white, colframe=rgLinha, boxrule=0.5pt,
+  borderline west={2.4pt}{0pt}{rgGrafite},
+  fontupper=\small,
+  title={\sffamily\bfseries\footnotesize\color{rgGrafite}ROTEIRO DE AULA},
+  coltitle=rgGrafite, colbacktitle=white, titlerule=0pt,
+  attach title to upper=\par\vspace{2pt}, #1}
 
-\newtcolorbox{roteiro}{
-  colback=gray!5!white,
-  colframe=gray!65!black,
-  title=Roteiro de aula,
-  fonttitle=\bfseries,
-  breakable
-}
+\newtcolorbox{leitura}[1][]{rgbase,
+  colback=rgNevoa, colframe=rgNevoa,
+  borderline west={2.4pt}{0pt}{rgPetroClaro},
+  fontupper=\small,
+  title={\sffamily\bfseries\footnotesize\color{rgPetroClaro}LEITURA ORIENTADA},
+  coltitle=rgPetroClaro, colbacktitle=rgNevoa, titlerule=0pt,
+  attach title to upper=\par\vspace{2pt}, #1}
 
-\newtcolorbox{leitura}{
-  colback=yellow!7!white,
-  colframe=orange!70!black,
-  title=Leitura orientada,
-  fonttitle=\bfseries,
-  breakable
-}
+% ---------------------------------------------------------------------
+%  Estilos de listagem herdados, agora derivados de rgstyle
+%  (é o \setstretch{1} de rgstyle que impede o código de herdar o
+%  entrelinha do corpo do texto)
+% ---------------------------------------------------------------------
+\lstdefinestyle{python}{style=rgstyle,language=Python}
+\lstdefinestyle{mathematica}{style=rgstyle,language=Wolfram}
 
-\graphicspath{{figuras/}}
-
-\definecolor{codebg}{rgb}{0.97,0.97,0.97}
-\definecolor{codekeyword}{rgb}{0.0,0.35,0.55}
-\definecolor{codecomment}{rgb}{0.35,0.45,0.35}
-\definecolor{codestring}{rgb}{0.55,0.15,0.15}
-
-\lstset{
-  extendedchars=true,
-  inputencoding=utf8,
-  literate=
-    {á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {â}{{\^a}}1
-    {é}{{\'e}}1 {ê}{{\^e}}1
-    {í}{{\'i}}1
-    {ó}{{\'o}}1 {õ}{{\~o}}1 {ô}{{\^o}}1
-    {ú}{{\'u}}1 {ü}{{\"u}}1
-    {ç}{{\c c}}1
-    {Á}{{\'A}}1 {À}{{\`A}}1 {Ã}{{\~A}}1 {Â}{{\^A}}1
-    {É}{{\'E}}1 {Ê}{{\^E}}1
-    {Í}{{\'I}}1
-    {Ó}{{\'O}}1 {Õ}{{\~O}}1 {Ô}{{\^O}}1
-    {Ú}{{\'U}}1 {Ü}{{\"U}}1
-    {Ç}{{\c C}}1,
-}
-
-\lstdefinestyle{python}{
-  language=Python,
-  backgroundcolor=\color{codebg},
-  basicstyle=\ttfamily\small,
-  keywordstyle=\color{codekeyword}\bfseries,
-  commentstyle=\color{codecomment}\itshape,
-  stringstyle=\color{codestring},
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  numbersep=7pt,
-  breaklines=true,
-  showstringspaces=false,
-  frame=single,
-  rulecolor=\color{gray!40},
-  xleftmargin=1.2em,
-  tabsize=4,
-}
-
-\lstdefinelanguage{Mathematica}{
-  morekeywords={Simplify,FullSimplify,Solve,DSolve,NDSolve,Table,Plot,Manipulate,
-    Module,Block,With,If,For,Do,Sum,Integrate,D,Grad,Series,MatrixForm,
-    Transpose,Inverse,Det,Eigenvalues,Cosh,Sinh,Tanh,Sqrt,ArcTanh},
-  sensitive=true,
-  morecomment=[l]{(*}{*)},
-  morestring=[b]",
-}
-
-\lstdefinestyle{mathematica}{
-  language=Mathematica,
-  backgroundcolor=\color{codebg},
-  basicstyle=\ttfamily\small,
-  keywordstyle=\color{codekeyword}\bfseries,
-  commentstyle=\color{codecomment}\itshape,
-  stringstyle=\color{codestring},
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  numbersep=7pt,
-  breaklines=true,
-  showstringspaces=false,
-  frame=single,
-  rulecolor=\color{gray!40},
-  xleftmargin=1.2em,
-  tabsize=4,
-}
-
-\newtcolorbox{numerico}{
-  colback=purple!4!white,
-  colframe=purple!45!black,
-  title=Resolução numérica,
-  fonttitle=\bfseries,
-  breakable
-}
-
-\newcommand{\dd}{\mathrm{d}}
+% ---------------------------------------------------------------------
+%  Notação
+% ---------------------------------------------------------------------
 \newcommand{\D}{\mathrm{D}}
 \newcommand{\pd}{\partial}
 \newcommand{\Lie}{\mathcal{L}}
@@ -180,26 +97,48 @@
 \newcommand{\half}{\frac{1}{2}}
 \newcommand{\etaab}{\eta_{\alpha\beta}}
 \newcommand{\munu}{\mu\nu}
+
 \begin{document}
 
 \frontmatter
 
 \begin{titlepage}
-\centering
-\vspace*{2cm}
-{\Large Universidade do Estado de Santa Catarina\\
-Centro de Ciências Tecnológicas}\\[2.5cm]
+\thispagestyle{empty}
+\raggedright
+\vspace*{4cm}
 
-{\Huge\bfseries Relatividade Geral}\\[0.5cm]
-{\LARGE Apostila para um curso de 72 encontros}\\[0.8cm]
-{\Large Aulas de 50 minutos}\\[2cm]
+{\sffamily\footnotesize\color{rgGrafite}
+\MakeUppercase{Universidade do Estado de Santa Catarina}\\
+\MakeUppercase{Centro de Ciências Tecnológicas}}
 
-{\large Material original de apoio didático}\\[0.3cm]
-{\large Referência principal: Bernard Schutz, \textit{A First Course in General Relativity}, 3ª ed.}\\[2.5cm]
+\vspace{2.2cm}
+{\color{rgPetroleo}\rule{5.2cm}{2pt}}
 
-{\large 2026}
+\vspace{1.4cm}
+{\sffamily\bfseries\fontsize{44}{50}\selectfont\color{rgTinta}
+Relatividade\\ Geral\par}
+
+\vspace{0.6cm}
+{\sffamily\large\color{rgGrafite}Apostila para um curso de 72 encontros
+de 50 minutos\par}
+
+\vspace{3cm}
+{\color{rgLinha}\rule{\linewidth}{0.6pt}}
+
+\vspace{0.5cm}
+\begin{minipage}[t]{0.72\linewidth}
+\small Material original de apoio didático. Referência principal:
+Bernard Schutz, \textit{A First Course in General Relativity}, 3ª ed.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.2\linewidth}
+\raggedleft{\sffamily\color{rgAmbar}2026}
+\end{minipage}
+
 \vfill
-{\small Esta apostila foi preparada como material de ensino. Ela usa o livro de Bernard Schutz como guia de organização e referência bibliográfica, mas apresenta texto, exemplos e exercícios em formulação própria.}
+{\footnotesize\color{rgGrafite} Esta apostila foi preparada como material de
+ensino. Ela usa o livro de Bernard Schutz como guia de organização e
+referência bibliográfica, mas apresenta texto, exemplos e exercícios em
+formulação própria.\par}
 \end{titlepage}
 
 \chapter*{Prefácio}
@@ -221,6 +160,32 @@ diferenciais ordinárias, mecânica clássica e eletromagnetismo em nível de
 graduação. Quando uma ferramenta matemática aparece pela primeira vez, ela é
 introduzida operacionalmente: primeiro se explica para que serve, depois se
 formaliza.
+
+\section*{Os programas do curso}
+\phantomsection
+\addcontentsline{toc}{section}{Os programas do curso}
+
+Oito capítulos trazem uma seção de \emph{Resolução numérica}, e todos os doze
+capítulos de conteúdo terminam em uma seção de \emph{Conteúdo extra} com três
+problemas que pedem para modificar um dos programas. Esses programas não são
+impressos aqui: seria desperdiçar dezenas
+de páginas com texto que ninguém digita à mão. Eles ficam para download, em
+Python e em Wolfram Language, na página da disciplina:
+
+\begin{center}
+  \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}
+\end{center}
+
+Ao longo do texto, uma caixa como esta indica qual arquivo corresponde ao
+trecho que está sendo discutido:
+
+\programa[Um exemplo. Toda caixa de programa traz o nome do arquivo e um
+resumo do que ele faz; o link leva à página de download.]{codigo/capNN\_exemplo.py}
+
+Os números que aparecem nas caixas de saída são a execução real desses
+scripts, não valores transcritos. Se você alterar um programa e rodá-lo de
+novo, os números da apostila devem mudar de acordo --- e é exatamente isso
+que o \emph{Conteúdo extra} de cada capítulo pede que você faça.
 
 \tableofcontents
 
@@ -256,28 +221,46 @@ Ao final do curso, o estudante deverá ser capaz de:
 
 \section{Distribuição dos 72 encontros}
 
+A tabela abaixo e o calendário da Seção~\ref{sec:calendario} descrevem o mesmo
+plano em duas resoluções: aqui por módulo, lá aula a aula. O número de
+encontros de cada módulo foi calibrado pela extensão real do capítulo
+correspondente, de modo que a média fica em torno de duas páginas por
+encontro. Os capítulos de 5 a 9 recebem proporcionalmente menos páginas por
+aula de propósito: são os mais densos conceitualmente, e neles o quadro-negro
+faz mais trabalho que o texto.
+
 \begin{center}
 \small
 \begin{tabular}{cp{3.1cm}p{8.1cm}}
 \toprule
 Encontros & Módulo & Conteúdo \\
 \midrule
-1--6 & Relatividade especial & Postulados, intervalos, diagramas, transformações de Lorentz, paradoxo dos gêmeos. \\
-7--12 & Vetores relativísticos & Quadrivelocidade, quadrimomento, produto escalar, fótons, colisões e decaimentos. \\
-13--18 & Tensores em Minkowski & Um-formas, métrica, tensores mistos, mudança de base, derivadas. \\
-19--22 & Fluidos relativísticos & Fluxo de partículas, tensor energia-momento, fluido perfeito, conservação. \\
-23--30 & Curvatura em coordenadas & Coordenadas polares, bases não coordenadas, símbolos de Christoffel, geodésicas. \\
-31--38 & Variedades curvas & Derivada covariante, transporte paralelo, tensor de Riemann, Ricci, escalar de curvatura, Bianchi. \\
-39--44 & Física em espaço-tempo curvo & Princípio da equivalência, referenciais locais, constantes de movimento, partículas e luz. \\
-45--50 & Equações de Einstein & Motivação, ação gravitacional, limite fraco, limite newtoniano, constante cosmológica. \\
-51--56 & Ondas gravitacionais & Perturbações lineares, gauge TT, polarizações, resposta de detectores, emissão quadrupolar. \\
-57--62 & Estrelas e Schwarzschild & Simetria esférica, equações TOV, exterior de Schwarzschild, órbitas, lentes, precessão. \\
-63--67 & Buracos negros & Horizonte, coordenadas regulares, geodésicas radiais, Kerr qualitativo, termodinâmica. \\
-68--72 & Cosmologia & Métrica FLRW, redshift cosmológico, Friedmann, conteúdo material, história térmica e problemas abertos. \\
+1 & Abertura & Apresentação da disciplina, escala física da relatividade geral e critérios de avaliação. \\
+2--7 & Relatividade especial & Postulados, intervalos, diagramas, transformações de Lorentz, paradoxo dos gêmeos. \\
+8--13 & Vetores relativísticos & Quadrivelocidade, quadrimomento, produto escalar, fótons, colisões e decaimentos. \\
+14--18 & Tensores em Minkowski & Um-formas, métrica, tensores mistos, mudança de base, derivadas. \\
+19--21 & Fluidos relativísticos & Fluxo de partículas, tensor energia-momento, fluido perfeito, conservação. \\
+22--25 & Da gravidade à curvatura & Equivalência, marés, coordenadas curvilíneas, bases não coordenadas, geodésicas. \\
+26--30 & Variedades curvas & Derivada covariante, transporte paralelo, tensor de Riemann, Ricci, escalar de curvatura, Bianchi. \\
+31--34 & Física em espaço-tempo curvo & Referenciais locais, tetradas, vetores de Killing e constantes de movimento. \\
+35--39 & Equações de Einstein & Motivação, ação de Einstein--Hilbert, traço, limite fraco, limite newtoniano, constante cosmológica. \\
+40--46 & Ondas gravitacionais & Perturbações lineares, gauge TT, polarizações, fórmula do quadrupolo, detectores, inspiral. \\
+47--53 & Estrelas e Schwarzschild & Simetria esférica, equações TOV, exterior de Schwarzschild, órbitas, testes clássicos, lentes. \\
+54--59 & Buracos negros & Horizonte, coordenadas regulares, Kruskal, Kerr, termodinâmica. \\
+60--65 & Cosmologia & Métrica FLRW, redshift cosmológico, Friedmann, distâncias, horizontes, parâmetros observacionais. \\
+66--72 & Revisão, projetos e síntese & Revisão técnica, desenvolvimento dos quatro projetos finais, síntese conceitual e seminários. \\
 \bottomrule
 \end{tabular}
 \end{center}
 
+\begin{roteiro}
+\textbf{As oficinas computacionais.} Oito capítulos trazem uma seção de
+resolução numérica, e o calendário reserva um ou dois encontros para cada uma
+delas (aulas 7, 13, 18, 30, 45--46, 53, 58--59 e 64--65). Elas não são material
+complementar: são o lugar onde os resultados enunciados no texto viram números
+verificados, e alimentam diretamente os quatro projetos finais. Todos os
+scripts acompanham a apostila em \texttt{codigo/} e rodam sem argumentos.
+\end{roteiro}
 \section{Avaliação sugerida}
 
 \begin{itemize}
@@ -287,6 +270,7 @@ Encontros & Módulo & Conteúdo \\
 \end{itemize}
 
 \section{Calendário aula a aula}
+\label{sec:calendario}
 
 \scriptsize
 \begin{longtable}{cp{4.2cm}p{8.0cm}}
@@ -299,77 +283,77 @@ Aula & Foco & Seções da apostila a cobrir \\
 \midrule
 \endhead
 1 & Apresentação e escala física da RG & Plano do curso: Ementa expandida, Objetivos de aprendizagem, Distribuição dos 72 encontros, Avaliação sugerida. Leitura orientadora: Prefácio. \\
-2 & Eventos e intervalo & Relatividade especial: Eventos, observadores e intervalo. Iniciar Leitura física do intervalo. \\
-3 & Tempo próprio e causalidade & Relatividade especial: Tempo próprio; concluir Leitura física do intervalo. \\
-4 & Lorentz I & Relatividade especial: Transformações de Lorentz; exemplos de simultaneidade em Exemplos resolvidos adicionais. \\
-5 & Lorentz II e contração & Relatividade especial: Contração e dilatação sem mistério; Problemas orientados, itens 1--3. \\
-6 & Paradoxo dos gêmeos e fechamento de RE & Relatividade especial: Paradoxo dos gêmeos; Problemas orientados, itens 4--6; Exercícios. \\
-7 & Quadrivelocidade & Vetores e momento relativístico: Quadrivelocidade; conectar com Relatividade especial: Tempo próprio. \\
-8 & Quadrimomento & Vetores e momento relativístico: Quadrimomento; Energia como componente temporal. \\
-9 & Conservação relativística & Vetores e momento relativístico: Conservação; exemplos de decaimento em dois corpos. \\
-10 & Fótons e Doppler & Vetores e momento relativístico: Partículas massivas e partículas sem massa; Problemas orientados, itens 4--5. \\
-11 & Centro de momento & Vetores e momento relativístico: Centro de momento; Problemas orientados, itens 2--3 e 6. \\
-12 & Consolidação de RE e quadrivetores & Vetores e momento relativístico: Exercícios. Revisão conjunta dos capítulos Relatividade especial e Vetores e momento relativístico. \\
-13 & Um-formas e contrações & Tensores no espaço-tempo plano: Vetores, um-formas e contrações. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
-14 & Métrica e índices & Tensores no espaço-tempo plano: Métrica; A métrica como instrumento de medida. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
-15 & Regras de índices & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial. Apoio: Apêndice~\ref{ap:indices}, Índices mudos e troca de nomes. \\
-16 & Mudança de base & Tensores no espaço-tempo plano: Mudança de base e transformação de componentes; Exemplos resolvidos adicionais. \\
-17 & Erros comuns e prática & Tensores no espaço-tempo plano: Erros comuns com índices; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
-18 & Oficina de tensores planos & Tensores no espaço-tempo plano: Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
-19 & Poeira e fluxo de partículas & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
-20 & Fluido perfeito & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
-21 & Conservação local & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados, itens 1--4. \\
-22 & Fechamento de fluidos & Fluidos relativísticos: Problemas orientados, itens 5--6; Exercícios. \\
+2 & Eventos e intervalo & Relatividade especial: Eventos, observadores e intervalo. \\
+3 & Tempo próprio e causalidade & Relatividade especial: Tempo próprio; Leitura física do intervalo. \\
+4 & Transformações de Lorentz & Relatividade especial: Transformações de Lorentz, com a dedução a partir da invariância do intervalo. \\
+5 & Contração, dilatação e simultaneidade & Relatividade especial: Contração e dilatação sem mistério; Exemplos resolvidos adicionais. \\
+6 & Paradoxo dos gêmeos & Relatividade especial: Paradoxo dos gêmeos; Problemas orientados. \\
+7 & Oficina computacional I & Relatividade especial: Resolução numérica (Python e Mathematica); Exercícios. \\
+8 & Quadrivelocidade & Vetores e momento relativístico: Quadrivelocidade; conectar com Relatividade especial: Tempo próprio. \\
+9 & Quadrimomento e conservação & Vetores e momento relativístico: Quadrimomento; Conservação. \\
+10 & Energia como componente temporal & Vetores e momento relativístico: Energia como componente temporal; massa invariante de sistemas. \\
+11 & Centro de momento e colisões & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
+12 & Compton, Doppler e foguete & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
+13 & Oficina computacional II & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
+14 & Um-formas e contrações & Tensores no espaço-tempo plano: Vetores, um-formas e contrações. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+15 & Métrica e índices & Tensores no espaço-tempo plano: Métrica; A métrica como instrumento de medida. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+16 & Equações tensoriais e mudança de base & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Mudança de base e transformação de componentes. \\
+17 & Erros comuns e prática & Tensores no espaço-tempo plano: Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
+18 & Oficina computacional III & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
+19 & Poeira e tensor energia-momento & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
+20 & Fluido perfeito e equações de estado & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
+21 & Conservação local e fechamento & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados; Exercícios. \\
+22 & Equivalência e marés & Da gravidade à curvatura: O princípio da equivalência; Marés como sinal de curvatura. \\
 23 & Coordenadas curvilíneas & Da gravidade à curvatura: Coordenadas curvilíneas; Christoffel não é força. \\
-24 & Geodésicas I & Da gravidade à curvatura: Equação geodésica; Derivação por princípio variacional. \\
-25 & Equivalência e marés & Da gravidade à curvatura: O princípio da equivalência; Marés como sinal de curvatura. \\
-26 & Geodésicas II & Da gravidade à curvatura: Problemas orientados, itens 1--4. \\
-27 & Esfera e exemplos 2D & Da gravidade à curvatura: Problemas orientados, itens 5--6; Exercícios. \\
-28 & Variedades & Variedades, derivada covariante e curvatura: Variedades e métricas. \\
-29 & Derivada covariante & Variedades, derivada covariante e curvatura: Derivada covariante; Compatibilidade métrica. \\
-30 & Transporte paralelo e curvatura & Variedades, derivada covariante e curvatura: Curvatura; Curvatura intrínseca e extrínseca. \\
-31 & Riemann e simetrias & Variedades, derivada covariante e curvatura: Simetrias do tensor de Riemann; Exemplos resolvidos adicionais. \\
-32 & Desvio geodésico & Variedades, derivada covariante e curvatura: Desvio geodésico; Problemas orientados, itens 1--3. \\
-33 & Ricci, escalar e Einstein & Variedades, derivada covariante e curvatura: Problemas orientados, itens 4--6; Resumo de fórmulas: Geometria. \\
-34 & Oficina de geometria diferencial & Variedades, derivada covariante e curvatura: Exercícios. \\
-35 & Movimento livre & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
-36 & Observadores locais & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais. \\
-37 & Simetrias e Killing & Física em espaço-tempo curvo: Simetrias e quantidades conservadas; Constantes de movimento e energia local. \\
-38 & Oficina de física em espaço-tempo curvo & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
-39 & Equações de campo I & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
-40 & Equações de campo II & Equações de Einstein: Traço das equações de campo; Conservação local. \\
-41 & Limite newtoniano I & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
-42 & Constante cosmológica & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados, itens 1--3. \\
-43 & Vácuo e ordens de grandeza & Equações de Einstein: Exemplos resolvidos adicionais; Problemas orientados, itens 4--6. \\
-44 & Fechamento de Einstein & Equações de Einstein: Exercícios; Resumo de fórmulas: Einstein. \\
-45 & Ondas gravitacionais I & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
-46 & Polarizações & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
-47 & Detectores & Ondas gravitacionais: Detecção; Escalas de detecção. \\
-48 & Emissão & Ondas gravitacionais: Emissão; Binárias compactas. \\
-49 & Oficina de ondas & Ondas gravitacionais: Problemas orientados; Erros comuns e interpretação. \\
-50 & Fechamento de ondas & Ondas gravitacionais: Exercícios. Preparar transição para soluções exatas. \\
-51 & Schwarzschild I & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
-52 & Redshift & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional; Testes clássicos, parte de redshift. \\
-53 & Geodésicas em Schwarzschild & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
-54 & Órbitas circulares e fótons & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
-55 & Estrelas relativísticas & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
-56 & Testes clássicos e exercícios & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Problemas orientados; Exercícios. \\
-57 & Horizonte & Buracos negros: Horizonte; Horizon versus singularidade. \\
-58 & Coordenadas regulares & Buracos negros: Coordenadas regulares; Diagramas causais. \\
-59 & Buracos negros reais & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
-60 & Termodinâmica & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
-61 & Oficina de buracos negros & Buracos negros: Problemas orientados; Erros comuns e interpretação. \\
-62 & Fechamento de buracos negros & Buracos negros: Exercícios; Resumo de fórmulas: Schwarzschild. \\
-63 & Cosmologia I & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
-64 & Friedmann I & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
-65 & Distâncias e horizontes & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
-66 & Parâmetros e problemas abertos & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
-67 & Oficina de cosmologia & Cosmologia relativística: Problemas orientados; Exercícios, itens de matéria e radiação. \\
-68 & Síntese cosmológica & Cosmologia relativística: Erros comuns e interpretação; Síntese conceitual do curso; Resumo de fórmulas: Cosmologia. \\
-69 & Revisão técnica & Apêndice~\ref{ap:indices}: Checklist para não errar; Revisão de tensores, geodésicas, curvatura e Einstein. \\
-70 & Projetos I & Projetos finais: Projeto 1 e Projeto 2. Definir grupos, escopo, equações e entregáveis. \\
-71 & Projetos II & Projetos finais: Projeto 3 e Projeto 4. Discussão de formas de onda, Friedmann numérico e critérios de avaliação. \\
-72 & Síntese final & Revisão global: Síntese conceitual do curso; Bibliografia comentada; fechamento dos projetos e preparação para avaliação final. \\
+24 & Bases não coordenadas & Da gravidade à curvatura: Bases coordenadas e bases não coordenadas. \\
+25 & Geodésicas e princípio variacional & Da gravidade à curvatura: Equação geodésica; Derivação por princípio variacional; Problemas orientados; Exercícios. \\
+26 & Variedades e derivada covariante & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
+27 & Compatibilidade métrica & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
+28 & Riemann e suas simetrias & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
+29 & Curvatura intrínseca e desvio geodésico & Variedades, derivada covariante e curvatura: Curvatura intrínseca e extrínseca; Desvio geodésico. \\
+30 & Oficina computacional IV & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
+31 & Movimento livre e energia medida & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
+32 & Simetrias e vetores de Killing & Física em espaço-tempo curvo: Simetrias e quantidades conservadas, com a equação de Killing e a demonstração da constante de movimento. \\
+33 & Observadores e tetradas & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais; Constantes de movimento e energia local. \\
+34 & Oficina de física em espaço-tempo curvo & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
+35 & A equação de campo & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
+36 & Ação de Einstein--Hilbert & Equações de Einstein: A ação de Einstein--Hilbert; definição variacional de $T_{\mu\nu}$. \\
+37 & Traço e conservação local & Equações de Einstein: Traço das equações de campo; Conservação local; Exemplos resolvidos adicionais. \\
+38 & Limite newtoniano & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
+39 & Constante cosmológica e fechamento & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados; Exercícios. Resumo de fórmulas: Einstein. \\
+40 & Campo fraco e gauge & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
+41 & Polarizações e partículas teste & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
+42 & Emissão e fórmula do quadrupolo & Ondas gravitacionais: Emissão. \\
+43 & Detectores e escalas & Ondas gravitacionais: Detecção; Escalas de detecção. \\
+44 & Binárias compactas & Ondas gravitacionais: Binárias compactas; Erros comuns e interpretação. \\
+45 & Oficina computacional V & Ondas gravitacionais: Resolução numérica, Python -- anel de partículas, fórmula do quadrupolo e teste de Hulse--Taylor. \\
+46 & Oficina computacional VI & Ondas gravitacionais: Resolução numérica, inspiral e bloco em Mathematica; Problemas orientados; Exercícios. \\
+47 & Métrica de Schwarzschild & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
+48 & Redshift gravitacional & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional. \\
+49 & Geodésicas e potencial efetivo & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
+50 & Órbitas circulares e de fótons & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
+51 & Estrelas relativísticas & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
+52 & Testes clássicos e lentes & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Lentes gravitacionais. \\
+53 & Oficina computacional VII & Soluções esféricas, estrelas e Schwarzschild: Resolução numérica; Problemas orientados; Erros comuns e interpretação; Exercícios. \\
+54 & Horizonte & Buracos negros: Horizonte; Horizonte versus singularidade. \\
+55 & Coordenadas regulares e diagramas causais & Buracos negros: Coordenadas regulares; Diagramas causais. \\
+56 & Kerr e buracos negros reais & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
+57 & Termodinâmica & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
+58 & Oficina computacional VIII & Buracos negros: Resolução numérica, Python -- cones de luz, diagrama de Kruskal e marés no horizonte. \\
+59 & Oficina computacional IX & Buracos negros: Resolução numérica, Hawking, Kerr e bloco em Mathematica; Problemas orientados; Erros comuns; Exercícios. Resumo de fórmulas: Schwarzschild. \\
+60 & Princípio cosmológico e redshift & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
+61 & Equações de Friedmann & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
+62 & Distâncias e horizontes & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
+63 & Parâmetros e problemas abertos & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
+64 & Oficina computacional X & Cosmologia relativística: Resolução numérica, Python -- escalas temporais, fator de escala e distâncias. \\
+65 & Oficina computacional XI & Cosmologia relativística: Resolução numérica, bloco em Mathematica; Problemas orientados; Erros comuns e interpretação; Exercícios. Resumo de fórmulas: Cosmologia. \\
+66 & Revisão técnica & Apêndice~\ref{ap:indices} integral, com ênfase no Checklist para não errar. Revisão de tensores, geodésicas, curvatura e equações de campo. \\
+67 & Projeto 1 & Projetos finais: geodésicas em Schwarzschild. Definição de grupos, escopo, equações e entregáveis. \\
+68 & Projeto 2 & Projetos finais: redshift gravitacional. \\
+69 & Projeto 3 & Projetos finais: ondas gravitacionais; discussão de formas de onda e sirene padrão. \\
+70 & Projeto 4 & Projetos finais: cosmologias simples; Friedmann numérico e critérios de avaliação. \\
+71 & Síntese conceitual & Cosmologia relativística: Síntese conceitual do curso. Resumo de fórmulas integral; Bibliografia comentada. \\
+72 & Seminários e fechamento & Apresentação dos projetos finais e fechamento da disciplina. \\
 \bottomrule
 \end{longtable}
 \normalsize
@@ -706,9 +690,7 @@ numericamente, com velocidades aleatórias, que $\Lambda^{T}\eta\Lambda=\eta$
 e que a composição de dois boosts colineares reproduz a fórmula de adição de
 velocidades (e não $v_1+v_2$).
 
-\begin{numerico}
-\lstinputlisting[style=python]{codigo/cap02_boosts.py}
-\end{numerico}
+\programa[Invariância do intervalo, composição de boosts e aditividade da rapidez, testadas com velocidades aleatórias.]{codigo/cap02\_boosts.py}
 
 A execução confirma as três propriedades com resíduo numérico da ordem de
 $10^{-16}$ (erro de arredondamento de ponto flutuante, não erro físico):
@@ -720,9 +702,7 @@ suave, $v(t)=v_0\sin(\pi t/T)$, que parte e retorna ao repouso continuamente
 (sem o salto instantâneo de velocidade do modelo idealizado). A integral do
 tempo próprio é calculada por quadratura adaptativa.
 
-\begin{numerico}
-\lstinputlisting[style=python]{codigo/cap02_tempo_proprio.py}
-\end{numerico}
+\programa[Tempo próprio do gêmeo viajante por quadratura adaptativa, para um perfil de velocidade suave.]{codigo/cap02\_tempo\_proprio.py}
 
 Com $T=10$ e $v_0=0{,}8$, a integração numérica dá
 $\tau_{\rm viajante}\approx8{,}1255$, contra $T=10$ para o gêmeo que fica em
@@ -749,9 +729,7 @@ do Mathematica não é confirmar números, mas provar as identidades
 algebricamente para \emph{qualquer} $v_1,v_2$ no intervalo físico
 $(-1,1)$, sem depender de amostragem aleatória.
 
-\begin{numerico}
-\lstinputlisting[style=mathematica]{codigo/cap02_boosts.wl}
-\end{numerico}
+\programa[As mesmas três identidades, provadas simbolicamente para $v_1$ e $v_2$ arbitrários.]{codigo/cap02\_boosts.wl}
 
 Os três primeiros \texttt{Print} produzem a matriz nula $2\times2$: isso é a
 prova simbólica de que (i) o intervalo é invariante, (ii) a composição de
@@ -768,21 +746,81 @@ modo puramente algébrico, sem qualquer apelo a diagramas ou limites físicos.
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Verifique explicitamente que a transformação de Lorentz preserva
-$-\Delta t^2+\Delta x^2$.
+\textbf{Múons atmosféricos.} Múons produzidos a $15$~km de altitude têm vida
+média própria $\tau_0=2{,}2\,\mu$s e velocidade $v=0{,}995$. Calcule a fração
+que chegaria ao solo (i) ignorando a relatividade e (ii) levando em conta a
+dilatação temporal. Explique o mesmo resultado no referencial do múon, onde
+não há dilatação alguma.
 \end{exercise}
 
 \begin{exercise}
-Uma partícula viaja com velocidade constante $v=0{,}8$ durante 10 anos no
-referencial da Terra. Quanto tempo próprio passa para a partícula?
+\textbf{Barra e celeiro.} Uma barra de comprimento próprio $10$~m move-se com
+$v=0{,}8$ ao longo de um celeiro de comprimento próprio $8$~m, com portas nas
+duas extremidades. No referencial do celeiro a barra cabe inteira e as duas
+portas podem ser fechadas simultaneamente. No referencial da barra, o celeiro
+mede $4{,}8$~m e ela não cabe. Descreva os quatro eventos relevantes nos dois
+referenciais e mostre que não há contradição física.
 \end{exercise}
 
 \begin{exercise}
-Desenhe os cones de luz de um evento e marque regiões causalmente conectadas
-ao evento.
+\textbf{Movimento superluminal aparente.} Um jato é emitido de um núcleo
+galáctico com velocidade $v$ e ângulo $\theta$ em relação à linha de visada.
+Mostre que a velocidade transversal aparente é
+\[
+  \beta_{\rm ap}=\frac{\beta\sin\theta}{1-\beta\cos\theta},
+\]
+que seu máximo sobre $\theta$ vale $\gamma\beta$, e calcule-o para
+$\beta=0{,}99$. Esse é o mecanismo pelo qual jatos parecem violar o limite de
+velocidade da luz sem violá-lo.
 \end{exercise}
+
+\begin{exercise}
+\textbf{Aberração da luz.} Um fóton faz ângulo $\theta$ com o eixo $x$ em $S$.
+Use a transformação do quadrimomento para obter
+$\cos\theta'=(\cos\theta-v)/(1-v\cos\theta)$. Mostre que, para
+$v\to1$, quase toda a esfera celeste se concentra num cone estreito à frente
+--- o efeito de \emph{farol} que torna jatos relativísticos tão brilhantes
+quando apontados para nós.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Ordem causal e o cone.} Sejam dois eventos com $\Delta t$ e $\Delta x$
+dados. Determine a condição sobre $|\Delta x/\Delta t|$ para que exista um
+referencial em que a ordem temporal se inverta, e calcule explicitamente a
+velocidade mínima desse referencial. Conclua que a inversão só ocorre para
+pares de eventos que nenhum sinal causal pode ligar.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{A rotação de Wigner.} Em \arq{cap02\_boosts.py}, troque a matriz
+$2\times2$ por uma $4\times4$ e componha dois boosts em direções
+\emph{perpendiculares}, $\Lambda_x(v_1)\Lambda_y(v_2)$. Mostre
+numericamente que o produto não é um boost puro: ele preserva o intervalo,
+mas contém uma rotação espacial. Extraia o ângulo dessa rotação e verifique
+que, para $v_1=v_2=0{,}6$, ele é de alguns graus. Esse é o efeito que produz
+a precessão de Thomas no átomo.
+
+  \item \textbf{Qual perfil de viagem envelhece menos?} Em
+\arq{cap02\_tempo\_proprio.py}, o gêmeo viaja com
+$v(t)=v_0\sin(\pi t/T)$. Substitua por outros três perfis com o
+\emph{mesmo} $T$ e a \emph{mesma} velocidade máxima $v_0$: um trapézio, uma
+onda quadrada suavizada e $v_0\sin^2(\pi t/T)$. Calcule $\tau$ para cada um
+e ordene-os. Qual perfil minimiza o tempo próprio, e por quê? Relacione a
+resposta com o fato de $\sqrt{1-v^2}$ ser côncava.
+
+  \item \textbf{O horizonte de Rindler.} Em \arq{cap02\_figuras.py}, acrescente
+ao diagrama do cone de luz a linha de mundo hiperbólica de um observador com
+aceleração própria constante $a_0$, $x^2-t^2=1/a_0^2$. Desenhe a assíntota
+$x=t$ e mostre, numericamente, que um fóton emitido da origem em $t=0$
+alcança o observador, mas um emitido de $x=-0{,}5$ nunca o alcança.
+Determine a posição limite e interprete-a como um horizonte.
+\end{enumerate}
+
 
 \chapter{Vetores e momento relativístico}
 
@@ -1018,12 +1056,12 @@ diretamente -- a estratégia é eliminá-lo usando $p_e'^\mu p_{e\,\mu}'=-m_e^2$
 Conservação de quadrimomento dá $p_\gamma+p_e=p_\gamma'+p_e'$, ou seja
 $p_e'=p_\gamma+p_e-p_\gamma'$. Elevando ao quadrado (produto de Minkowski
 consigo mesmo) e usando $p_\gamma^2=p_\gamma'^2=0$ (fótons) e $p_e^2=-m_e^2$,
-\[
-  p_e'^2=p_\gamma^2+p_e^2+p_\gamma'^2+2p_\gamma\cdot p_e-2p_\gamma\cdot
-  p_\gamma'-2p_e\cdot p_\gamma'
-  \quad\Longrightarrow\quad
+\begin{align*}
+  p_e'^2 &= p_\gamma^2+p_e^2+p_\gamma'^2+2p_\gamma\cdot p_e-2p_\gamma\cdot
+           p_\gamma'-2p_e\cdot p_\gamma'\\
+  &\Longrightarrow\quad
   p_\gamma\cdot p_e=p_\gamma\cdot p_\gamma'+p_e\cdot p_\gamma'.
-\]
+\end{align*}
 Nas coordenadas em que o elétron está inicialmente em repouso e o fóton
 incidente se move ao longo de $x$,
 \[
@@ -1140,9 +1178,7 @@ relativístico da Figura~\ref{fig:foguete}. Os scripts completos estão em
 
 \subsection{Python}
 
-\begin{numerico}
-\lstinputlisting[style=python]{codigo/cap03_quadrivetores.py}
-\end{numerico}
+\programa[Normalização da quadrivelocidade, casca de massa, decaimento em dois corpos e energia de limiar.]{codigo/cap03\_quadrivetores.py}
 
 A energia de limiar calculada,
 $E_{\rm thr}\approx1217{,}9\,{\rm MeV}$ para $p+p_{\rm repouso}\to p+p+\pi^0$
@@ -1161,15 +1197,11 @@ confirma que os dois métodos concordam a $10^{-16}$; para o foguete, refaz a
 integração da trajetória hiperbólica e recupera exatamente
 $\tau_{\rm nave}\approx3{,}54$ anos e $t_{\rm Terra}\approx5{,}87$ anos.
 
-\begin{numerico}
-\lstinputlisting[style=python]{codigo/cap03_compton_foguete.py}
-\end{numerico}
+\programa[Compton por busca de raiz, sem a fórmula fechada, e a trajetória do foguete de aceleração própria constante.]{codigo/cap03\_compton\_foguete.py}
 
 \subsection{Mathematica}
 
-\begin{numerico}
-\lstinputlisting[style=mathematica]{codigo/cap03_quadrivetores.wl}
-\end{numerico}
+\programa[Derivação simbólica da massa invariante de dois fótons e da energia de limiar.]{codigo/cap03\_quadrivetores.wl}
 
 O script deriva simbolicamente, em sequência: a normalização da
 quadrivelocidade para uma 3-velocidade genérica; a fórmula do
@@ -1187,17 +1219,75 @@ massas do próton e do píon neutro reproduz o mesmo número obtido em Python
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Mostre que a quadriaceleração $A^\mu=\dd U^\mu/\dd\tau$ satisfaz
-$A^\mu U_\mu=0$.
+\textbf{Limiar de produção de antiprótons.} No Bevatron, prótons acelerados
+atingem um alvo de hidrogênio em repouso e produzem pares próton--antipróton
+pela reação $p+p\to p+p+p+\bar p$. Use o invariante $s$ para obter a energia
+cinética de limiar no laboratório e verifique que ela é aproximadamente
+$5{,}6$~GeV. Por que o limiar é tão maior que os $2m_pc^2=1{,}88$~GeV que a
+conta ingênua sugeriria?
 \end{exercise}
 
 \begin{exercise}
-Um fóton de frequência $\nu$ é observado por dois observadores inerciais em
-movimento relativo. Use $E=-p_\mu U^\mu$ para obter o efeito Doppler
-relativístico.
+\textbf{Decaimento $\pi^0\to2\gamma$.} Um píon neutro de massa
+$m_\pi=135$~MeV e fator de Lorentz $\gamma$ decai em dois fótons. Mostre que
+o ângulo de abertura entre eles tem um valor \emph{mínimo}
+$\theta_{\min}=2\arcsin(1/\gamma)$, atingido quando os fótons saem
+simetricamente. Calcule $\theta_{\min}$ para $\gamma=10$.
 \end{exercise}
+
+\begin{exercise}
+\textbf{Um fóton só é impossível.} Mostre, usando apenas conservação de
+quadrimomento e a casca de massa, que um elétron e um pósitron não podem
+aniquilar-se em um único fóton, mas podem em dois. Mostre também que um fóton
+livre não pode decair em um par $e^+e^-$ no vácuo --- e explique por que a
+mesma reação ocorre normalmente na presença de um núcleo.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Recuo e o efeito Mössbauer.} Um núcleo de massa $M$ em repouso emite
+um fóton de energia nominal $E_0\ll Mc^2$. Mostre que, por recuo, a energia do
+fóton emitido é menor por aproximadamente $E_0^2/(2Mc^2)$. Para o
+$^{57}$Fe, com $E_0=14{,}4$~keV, calcule esse deslocamento e compare com a
+largura natural da linha, $4{,}7\times10^{-9}$~eV. Por que a emissão em uma
+rede cristalina resolve o problema?
+\end{exercise}
+
+\begin{exercise}
+\textbf{Corte GZK.} Um próton de raio cósmico colide frontalmente com um fóton
+da radiação cósmica de fundo, de energia típica $6\times10^{-4}$~eV, e produz
+um píon: $p+\gamma\to p+\pi^0$. Use o invariante $s$ para estimar a energia
+mínima do próton e verifique que ela é da ordem de $10^{20}$~eV. Esse é o
+limite que deveria cortar o espectro de raios cósmicos de altíssima energia.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{Um limiar para qualquer reação.} Generalize a função de energia de
+limiar de \arq{cap03\_quadrivetores.py} para aceitar uma lista arbitrária
+de massas finais. Use-a para tabelar o limiar de laboratório de
+$p+p\to p+p+\pi^0$, de $p+p\to p+p+p+\bar p$ e de
+$\gamma+p\to p+\pi^0$ com um fóton da radiação cósmica de fundo. Verifique
+que o último cai perto de $10^{20}$~eV e comente o corte GZK.
+
+  \item \textbf{Aceleração própria contra aceleração coordenada.} Em
+\arq{cap03\_compton\_foguete.py}, acrescente uma segunda estratégia de
+viagem: acelerar com $\dd^2x/\dd t^2$ constante (aceleração
+\emph{coordenada}) até atingir $v=0{,}9$ e depois seguir em movimento
+inercial. Compare $\tau_{\rm nave}$ e $t_{\rm Terra}$ com o caso de
+aceleração própria constante para a mesma distância. Qual estratégia é mais
+rápida para a tripulação? E para quem ficou?
+
+  \item \textbf{A desigualdade da massa invariante.} Acrescente a
+\arq{cap03\_quadrivetores.py} uma rotina que sorteia $N$ partículas com
+massas e momentos aleatórios e calcula a massa invariante do sistema.
+Verifique em mil sorteios que $M_{\rm sist}\ge\sum_a m_a$ e determine
+numericamente em que condição vale a igualdade. Interprete o excesso.
+\end{enumerate}
+
 
 \chapter{Tensores no espaço-tempo plano}
 
@@ -1258,7 +1348,7 @@ e permite baixar índices:
   A_\mu=\eta_{\mu\nu}A^\nu.
 \]
 Com a convenção $(-,+,+,+)$, se $A^\mu=(A^0,A^1,A^2,A^3)$, então
-$A_\mu=(-A^0,A^1,A^2,A^3)$.
+temos $A_\mu=(-A^0,A^1,A^2,A^3)$.
 
 \section{Regra prática de índices}
 
@@ -1354,11 +1444,10 @@ diagramas de Minkowski com eixos inclinados (Figura~\ref{fig:simultaneidade}
 do Capítulo~\ref{chap:relatividade-especial}). Dada uma base $\{\bm e_1,\bm
 e_2\}$ qualquer, um mesmo vetor $V$ admite duas decomposições naturais e
 geometricamente distintas:
-\[
-  V=V^ie_i\quad\text{(regra do paralelogramo)},
-  \qquad
-  V_i=V\cdot e_i\quad\text{(projeção perpendicular sobre cada eixo)}.
-\]
+\begin{align*}
+  V &= V^ie_i && \text{(regra do paralelogramo)},\\
+  V_i &= V\cdot e_i && \text{(projeção perpendicular sobre cada eixo)}.
+\end{align*}
 As componentes contravariantes $V^i$ respondem à pergunta ``quanto de cada
 vetor de base preciso somar para reconstruir $V$?''. As componentes
 covariantes $V_i$ respondem a uma pergunta diferente: ``qual é a projeção de
@@ -1491,9 +1580,7 @@ completos estão em \texttt{codigo/}.
 
 \subsection{Python}
 
-\begin{numerico}
-\lstinputlisting[style=python]{codigo/cap04_tensores.py}
-\end{numerico}
+\programa[Base dual de uma base oblíqua, decomposição simétrica/antissimétrica e invariância do traço.]{codigo/cap04\_tensores.py}
 
 Dois pontos merecem destaque. Primeiro, a base dual $e^i$ é recuperada por
 $e^i=g^{ij}e_j$ -- a mesma operação de ``subir índice'' com a métrica que já
@@ -1506,9 +1593,7 @@ Lorentz usada nos capítulos anteriores.
 
 \subsection{Mathematica}
 
-\begin{numerico}
-\lstinputlisting[style=mathematica]{codigo/cap04_tensores.wl}
-\end{numerico}
+\programa[As mesmas identidades com entradas simbólicas livres, válidas para quaisquer valores.]{codigo/cap04\_tensores.wl}
 
 Diferentemente do script em Python, aqui as entradas de $F$, $S$, $T$ e $L$
 são símbolos livres, não números sorteados: o \texttt{Simplify} resultando
@@ -1520,17 +1605,74 @@ $M_{\mu\nu}$'' que os Problemas orientados pedem para demonstrar à mão.
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Mostre que o traço $T^\mu{}_\mu$ é invariante sob mudança de base.
+\textbf{O tensor eletromagnético.} Escreva as componentes de $F_{\mu\nu}$ em
+termos de $\bm E$ e $\bm B$, com $F_{0i}=E_i$ e $F_{ij}=\epsilon_{ijk}B_k$.
+Calcule o escalar $F_{\mu\nu}F^{\mu\nu}$ e mostre que ele vale
+$2(B^2-E^2)$. Conclua que a afirmação ``este campo é puramente elétrico'' não
+é invariante, mas ``$B^2-E^2>0$'' é.
 \end{exercise}
 
 \begin{exercise}
-Se $F_{\mu\nu}=-F_{\nu\mu}$ e $S^{\mu\nu}=S^{\nu\mu}$, mostre que
-$F_{\mu\nu}S^{\mu\nu}=0$.
+\textbf{O segundo invariante.} Usando o símbolo de Levi-Civita
+quadridimensional, mostre que
+$\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}\propto\bm E\cdot\bm B$.
+Conclua que, se $\bm E\perp\bm B$ em um referencial, isso vale em todos.
+Relacione com o caso da onda plana eletromagnética.
 \end{exercise}
+
+\begin{exercise}
+\textbf{O projetor espacial.} Dado um observador de quadrivelocidade $U^\mu$,
+defina $h_{\mu\nu}=g_{\mu\nu}+U_\mu U_\nu$. Mostre que
+$h^\mu{}_\nu U^\nu=0$ e que $h^\mu{}_\nu h^\nu{}_\rho=h^\mu{}_\rho$. Interprete
+$h_{\mu\nu}$ como a métrica do espaço tridimensional que esse observador
+chama de ``agora''.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Autovalores do fluido perfeito.} Escreva $T^\mu{}_\nu$ de um fluido
+perfeito com a métrica de Minkowski. Mostre que $U^\mu$ é autovetor com
+autovalor $-\rho$ e que qualquer vetor ortogonal a $U^\mu$ é autovetor com
+autovalor $p$. Explique por que essa é a definição invariante de densidade de
+energia e pressão, válida em qualquer referencial.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Contagem de componentes.} Quantas componentes independentes tem um
+tensor totalmente antissimétrico de posto $p$ em $n$ dimensões? Aplique o
+resultado a $F_{\mu\nu}$ em $n=4$ e ao símbolo de Levi-Civita. Mostre que não
+existe tensor totalmente antissimétrico de posto $5$ em quatro dimensões.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{Os dois invariantes do campo eletromagnético.} Estenda
+\arq{cap04\_tensores.py} para montar $F_{\mu\nu}$ a partir de $\bm E$ e
+$\bm B$ dados e calcular $F_{\mu\nu}F^{\mu\nu}$ e
+$\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}$. Depois, para um campo
+com $\bm E\cdot\bm B\ne0$, procure numericamente o boost que torna $\bm E$
+paralelo a $\bm B$. Mostre que ele existe sempre que o segundo invariante é
+não nulo, e que não existe para uma onda plana.
+
+  \item \textbf{Base oblíqua em Minkowski.} Adapte a figura de base oblíqua de
+\arq{cap04\_figuras.py} para eixos de Minkowski inclinados (um boost com
+$v=0{,}5$) e desenhe as duas decomposições de um quadrivetor. Mostre que,
+diferentemente do caso euclidiano, a componente covariante temporal troca de
+sinal em relação à contravariante, e explique de onde vem esse sinal.
+
+  \item \textbf{Quando a base quase degenera.} Em \arq{cap04\_tensores.py}, faça
+o ângulo entre $\bm e_1$ e $\bm e_2$ tender a zero e acompanhe o número de
+condição da matriz da métrica e o erro numérico na recuperação da base dual.
+Faça um gráfico do erro contra o ângulo e explique por que referenciais
+ortonormais são preferíveis em qualquer cálculo numérico.
+\end{enumerate}
+
 
 \chapter{Fluidos relativísticos}
+\label{cap:fluidos}
 
 \begin{objetivos}
 Introduzir o tensor energia-momento como fonte da gravidade e como objeto que
@@ -1662,15 +1804,81 @@ referencial comóvel e discuta o sinal da pressão.
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Calcule $T^{\mu\nu}$ de um fluido perfeito no referencial de repouso local.
+\textbf{Tensor energia-momento do campo eletromagnético.} Para
+\[
+  T^{\mu\nu}=F^{\mu\alpha}F^\nu{}_\alpha
+  -\tfrac14\eta^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta},
+\]
+mostre que $T^\mu{}_\mu=0$ e identifique $T^{00}$ com a densidade de energia
+$(E^2+B^2)/2$. Use o traço nulo para concluir que um gás de fótons tem
+$p=\rho/3$ sem nenhuma hipótese estatística.
 \end{exercise}
 
 \begin{exercise}
-No limite não relativístico, identifique quais componentes de $T^{\mu\nu}$ são
-dominantes para uma poeira lenta.
+\textbf{Campo escalar como energia escura.} Para um campo escalar homogêneo
+$\varphi(t)$ com potencial $V(\varphi)$, valem
+$\rho=\tfrac12\dot\varphi^2+V$ e $p=\tfrac12\dot\varphi^2-V$. Obtenha
+$w=p/\rho$ e mostre que $w\to-1$ quando $\dot\varphi^2\ll V$. Que condição
+sobre a inclinação de $V$ isso impõe?
 \end{exercise}
+
+\begin{exercise}
+\textbf{Mistura de componentes.} Um fluido é composto de poeira com densidade
+$\rho_m$ e radiação com densidade $\rho_r$. Escreva o $w$ efetivo da mistura
+em função de $x=\rho_r/\rho_m$ e mostre que ele interpola continuamente entre
+$0$ e $1/3$. Em que valor de $x$ temos $w=1/6$?
+\end{exercise}
+
+\begin{exercise}
+\textbf{Condições de energia.} A condição de energia fraca exige
+\[
+  T_{\mu\nu}V^\mu V^\nu\ge0
+  \quad\text{para todo vetor temporal } V^\mu .
+\]
+Mostre que, para um fluido perfeito, ela equivale a $\rho\ge0$ e
+$\rho+p\ge0$. Verifique quais
+dos casos $w=0$, $w=1/3$ e $w=-1$ a satisfazem, e explique por que a
+constante cosmológica passa no teste apesar da pressão negativa.
+\end{exercise}
+
+\begin{exercise}
+\textbf{A radiação cósmica de fundo como fluido.} A CMB é um corpo negro a
+$2{,}73$~K. Calcule sua densidade de energia $\rho_r c^2=aT^4$ em J\,m$^{-3}$
+e a pressão correspondente. Compare com a densidade de energia da matéria
+hoje, cerca de $2\times10^{-10}$~J\,m$^{-3}$, e diga em que redshift as duas
+eram iguais.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{A equação de estado efetiva de uma mistura.} Usando a função
+\texttt{Efunc} de \arq{cap13\_friedmann.py} como ponto de partida,
+escreva $w_{\rm ef}(a) = p_{\rm total}/\rho_{\rm total}$ para uma mistura de
+matéria, radiação e $\Lambda$ com os parâmetros de Planck. Faça o gráfico de
+$w_{\rm ef}$ contra o redshift e determine em que $z$ ele cruza $-1/3$ ---
+que é a fronteira entre expansão desacelerada e acelerada.
+
+  \item \textbf{O fluido perfeito visto de outro referencial.} Adapte
+\arq{cap04\_tensores.py} para montar $T^{\mu\nu}$ de um fluido perfeito
+com $\rho$ e $p$ dados e depois aplicar um boost de velocidade $v$. Verifique
+numericamente que os autovalores de $T^\mu{}_\nu$ não mudam e que o
+autovetor temporal é a quadrivelocidade transformada. Confirme que $T^{0i}$
+deixa de ser nulo, embora nenhuma propriedade intrínseca do fluido tenha
+mudado.
+
+  \item \textbf{Radiação de verdade.} Monte, no mesmo script, o tensor
+energia-momento de uma onda eletromagnética plana,
+$T^{\mu\nu}=F^{\mu\alpha}F^\nu{}_\alpha
+-\tfrac14\eta^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}$. Verifique
+numericamente que seu traço é nulo e que ele tem um autovetor \emph{nulo}
+--- e não temporal, como o fluido perfeito. Discuta por que essa é a
+assinatura de um fluido com $w=1/3$ sem referencial de repouso.
+\end{enumerate}
+
 
 \chapter{Da gravidade à curvatura}
 
@@ -1705,6 +1913,84 @@ os símbolos não nulos são
 \]
 Isso ensina uma lição importante: Christoffel não nulo não significa curvatura
 não nula. Ele pode ser apenas efeito de coordenadas.
+
+\section{Bases coordenadas e bases não coordenadas}
+\label{sec:bases-nao-coordenadas}
+
+Há uma segunda armadilha nas coordenadas curvilíneas, e ela é responsável por
+boa parte da confusão entre o cálculo vetorial da graduação e a notação
+tensorial deste curso. A base natural associada a um sistema de coordenadas é
+a base \emph{coordenada}, formada pelos vetores tangentes às curvas de
+coordenada:
+\[
+  \bm e_\mu=\frac{\partial}{\partial x^\mu}.
+\]
+Essa base tem uma propriedade excelente --- é ela que faz $V=V^\mu\bm e_\mu$
+com $V^\mu=\dd x^\mu/\dd\lambda$ --- e um defeito: ela em geral \emph{não é
+ortonormal}. Em coordenadas polares,
+\[
+  \bm e_r\cdot\bm e_r=g_{rr}=1,
+  \qquad
+  \bm e_\phi\cdot\bm e_\phi=g_{\phi\phi}=r^2 .
+\]
+O vetor $\bm e_\phi$ tem comprimento $r$, não $1$, e seu comprimento muda de
+ponto a ponto.
+
+A alternativa é a base \emph{não coordenada} ortonormal, obtida normalizando:
+\[
+  \bm e_{\hat r}=\bm e_r,
+  \qquad
+  \bm e_{\hat\phi}=\frac{1}{r}\bm e_\phi,
+  \qquad\text{de modo que}\qquad
+  \bm e_{\hat i}\cdot\bm e_{\hat j}=\delta_{\hat i\hat j}.
+\]
+Ela é chamada não coordenada porque não existe nenhum sistema de coordenadas
+cujas curvas tenham $\bm e_{\hat\phi}$ como tangente. As componentes nas duas
+bases se relacionam por
+\begin{equation}
+  V^{\hat r}=V^r,
+  \qquad
+  V^{\hat\phi}=r\,V^\phi .
+  \label{eq:comp-ortonormais}
+\end{equation}
+
+\begin{atencao}
+Esta é a origem de um erro clássico. As fórmulas de divergência, gradiente e
+rotacional que o estudante decorou em cálculo vetorial estão escritas em
+componentes \emph{ortonormais} $V^{\hat i}$, com unidades de $V$. As fórmulas
+tensoriais deste curso estão em componentes \emph{coordenadas} $V^\mu$, e
+$V^\phi$ tem unidades de $V/\text{comprimento}$. As duas expressões parecem
+diferir por fatores de $r$ --- e realmente diferem, porque não são a mesma
+coisa. Antes de comparar qualquer resultado com uma tabela de fórmulas, veja
+em qual das duas bases a tabela está escrita.
+\end{atencao}
+
+Um caso concreto aparece no Capítulo~\ref{cap:curvatura}: a divergência em
+polares vale
+\[
+  \nabla_iV^i=\partial_rV^r+\frac{1}{r}V^r+\partial_\phi V^\phi
+  \qquad\text{(componentes coordenadas)},
+\]
+enquanto o livro de cálculo vetorial traz
+\[
+  \nabla\cdot\bm V=\frac{1}{r}\partial_r\!\left(rV^{\hat r}\right)
+  +\frac{1}{r}\partial_\phi V^{\hat\phi}
+  \qquad\text{(componentes ortonormais)}.
+\]
+Substituindo a Equação~\eqref{eq:comp-ortonormais} na segunda, as duas
+coincidem exatamente. Não há contradição: há duas bases.
+
+Em relatividade geral, a versão quadridimensional dessa base ortonormal é a
+\emph{tetrada}, retomada no Capítulo~\ref{cap:fisica-curva}. Ela é o que
+converte componentes de uma carta arbitrária no que um aparelho realmente
+mede.
+
+\begin{activity}
+Escreva $\bm e_{\hat\theta}$ e $\bm e_{\hat\phi}$ para a esfera de raio $a$,
+$\dd\ell^2=a^2\dd\theta^2+a^2\sin^2\theta\,\dd\phi^2$, e obtenha a relação
+entre $V^{\hat\phi}$ e $V^\phi$. Onde essa relação degenera, e o que isso diz
+sobre a base coordenada nos polos?
+\end{activity}
 
 \section{Equação geodésica}
 
@@ -1810,19 +2096,78 @@ proporcional à área envolvida. Essa é uma manifestação geométrica da curva
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Use os símbolos de Christoffel polares para mostrar que uma reta no plano
-continua sendo geodésica, embora suas coordenadas polares satisfaçam equações
-não triviais.
+\textbf{Coordenadas cilíndricas.} Para
+$\dd\ell^2=\dd r^2+r^2\dd\phi^2+\dd z^2$, calcule todos os símbolos de
+Christoffel não nulos e verifique explicitamente que
+$R^\rho{}_{\sigma\mu\nu}=0$. Comente por que era obrigatório que desse zero.
 \end{exercise}
 
 \begin{exercise}
-Explique por que uma estação espacial em órbita está em queda livre, apesar de
-sua distância ao centro da Terra ser aproximadamente constante.
+\textbf{Métrica de Rindler.} A métrica $\dd s^2=-(ax)^2\dd t^2+\dd x^2$
+descreve o espaço-tempo plano visto por observadores uniformemente
+acelerados. Calcule os Christoffel, verifique que a curvatura é nula e mostre
+que $x=0$ é um horizonte: nenhum sinal emitido de $x<0$ alcança os
+observadores em $x>0$. Compare com o horizonte de Schwarzschild --- o que é
+análogo e o que não é.
 \end{exercise}
 
-\chapter{Variedades, derivada covariante e curvatura}
+\begin{exercise}
+\textbf{Da base coordenada à ortonormal.} Usando a
+Seção~\ref{sec:bases-nao-coordenadas}, escreva o gradiente de uma função $f$
+em coordenadas polares nas duas bases. Mostre que a componente coordenada
+$(\dd f)_\phi=\partial_\phi f$ e a componente ortonormal
+$(\dd f)_{\hat\phi}=(1/r)\partial_\phi f$, e reconcilie com a fórmula do
+cálculo vetorial.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Quão local é ``local''?} Um laboratório em queda livre na Terra tem
+altura $h$. Estime, usando a maré newtoniana, a partir de que $h$ a
+aceleração relativa entre topo e base excede $10^{-6}g$. Repita para um
+laboratório em queda livre a $r=10M$ de um buraco negro de $10\,\Msol$.
+Discuta o que ``princípio da equivalência local'' significa quantitativamente.
+\end{exercise}
+
+\begin{exercise}
+\textbf{O cone é plano.} Um cone de abertura $\alpha$ pode ser cortado e
+desenrolado no plano sem esticar. Conclua que sua curvatura intrínseca é nula
+em toda parte exceto no vértice, descreva suas geodésicas em termos do
+desenrolamento e mostre que duas geodésicas podem se cruzar duas vezes. O que
+está concentrado no vértice?
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{Rindler pela máquina de curvatura.} Baixe
+\arq{cap07\_curvatura.py} e aplique sua rotina \texttt{riemann} à métrica de
+Rindler, $\dd s^2=-(ax)^2\dd t^2+\dd x^2$. Confirme que os símbolos de Christoffel
+são não nulos e que o tensor de Riemann se anula em toda parte, dentro do
+piso das diferenças finitas. Depois investigue o que acontece com
+$\Gamma^t{}_{tx}$ quando $x\to0$ e relacione com o horizonte.
+
+  \item \textbf{A holonomia de um cone.} Modifique a rotina \texttt{transporta} de
+\arq{cap07\_curvatura.py} para a métrica de um cone,
+$\dd\ell^2=\dd\rho^2+k^2\rho^2\dd\phi^2$ com $0<k<1$. Transporte um vetor em
+torno do vértice e mostre que a holonomia é $2\pi(1-k)$, independente do
+raio do circuito. Como a curvatura pode ser nula em toda parte e a holonomia
+não? Onde está a curvatura?
+
+  \item \textbf{Quão grande pode ser o laboratório?} Escreva um script que calcule a
+aceleração de maré newtoniana entre topo e base de um laboratório em queda
+livre, em função da altura $h$, para a Terra, para a superfície do Sol e
+para $r=10M$ de um buraco negro de $10\,\Msol$. Determine, em cada caso, o
+$h$ máximo para que a maré fique abaixo de $10^{-6}g$. Tabule os três
+valores e discuta o que ``local'' significa em cada contexto.
+\end{enumerate}
+
+
+\chapter[Derivada covariante e curvatura]{Variedades, derivada covariante e
+curvatura}
+\label{cap:curvatura}
 
 \begin{objetivos}
 Formalizar o cálculo tensorial em espaços-tempos curvos e obter os objetos
@@ -2018,7 +2363,10 @@ Como $r$ não depende de $\phi$,
   \nabla_iV^i=\partial_rV^r+\frac{1}{r}V^r+\partial_\phi V^\phi.
 \]
 Esse é o termo extra familiar da divergência em polares, agora entendido como
-consequência de $\sqrt{|g|}$.
+consequência de $\sqrt{|g|}$. Atenção ao comparar com a fórmula do cálculo
+vetorial: esta está em componentes \emph{coordenadas}, aquela em componentes
+\emph{ortonormais}, e a tradução entre as duas é a
+Seção~\ref{sec:bases-nao-coordenadas}.
 \end{example}
 
 \begin{example}
@@ -2054,20 +2402,84 @@ As segundas derivadas, porém, permanecem e codificam a curvatura.
 \end{example}
 
 \clearpage
+\input{secoes/cap07-numerica}
+
+\clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Calcule os símbolos de Christoffel da métrica da esfera unitária,
-$\dd \ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2$.
+\textbf{O plano hiperbólico.} Para $\dd\ell^2=(\dd x^2+\dd y^2)/y^2$ com
+$y>0$, calcule os símbolos de Christoffel, o tensor de Ricci e o escalar de
+curvatura. Mostre que $R=-2$, constante e negativa, e que
+$R_{\mu\nu}=-g_{\mu\nu}$. Compare com o resultado análogo para a esfera
+unitária.
 \end{exercise}
 
 \begin{exercise}
-Mostre que, em coordenadas localmente inerciais em um ponto, podemos ter
-$\Gamma^\rho_{\mu\nu}=0$ nesse ponto, mas em geral não podemos anular
-$\partial_\alpha\Gamma^\rho_{\mu\nu}$.
+\textbf{Comutador sobre um-formas.} Sabendo que
+\[
+  [\nabla_\mu,\nabla_\nu]V^\rho=R^\rho{}_{\sigma\mu\nu}V^\sigma,
+\]
+deduza a regra correspondente para uma um-forma,
+\[
+  [\nabla_\mu,\nabla_\nu]\omega_\rho=-R^\sigma{}_{\rho\mu\nu}\omega_\sigma .
+\]
+A pista é aplicar o comutador ao escalar $\omega_\rho V^\rho$.
 \end{exercise}
+
+\begin{exercise}
+\textbf{De Bianchi a Einstein.} Parta da segunda identidade de Bianchi,
+$\nabla_{[\lambda}R_{\rho\sigma]\mu\nu}=0$, contraia duas vezes com a métrica
+e obtenha $\nabla_\mu G^{\mu\nu}=0$. Este é o cálculo que garante a
+consistência das equações de campo, e vale a pena fazê-lo uma vez na vida.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Gravidade em 2+1 dimensões.} Em $n$ dimensões, o tensor de Riemann tem
+$n^2(n^2-1)/12$ componentes independentes e o de Ricci tem $n(n+1)/2$.
+Mostre que em $n=3$ os dois números coincidem, de modo que Riemann é
+inteiramente determinado por Ricci. Conclua que, em $2+1$ dimensões,
+$R_{\mu\nu}=0$ implica espaço-tempo plano --- e que portanto não existem ondas
+gravitacionais nessa dimensão.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Esfera de raio $a$ e o excesso angular.} Mostre que a esfera de raio
+$a$ tem $R=2/a^2$. Use o teorema de Gauss--Bonnet na forma
+$\sum\theta_i-\pi=\tfrac12\!\int\! R\,\dd A$ para recuperar o excesso de
+$90^\circ$ do triângulo com três ângulos retos discutido no texto, e
+verifique que a área desse triângulo é $\pi a^2/2$.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{O toro e Gauss--Bonnet.} Aplique a máquina de
+\arq{cap07\_curvatura.py} à métrica do toro,
+$\dd\ell^2=\dd u^2+(R+a\cos u)^2\dd v^2$. Mostre que a curvatura de Gauss é
+positiva na face externa, negativa na interna e nula nos dois círculos com
+$\cos u=0$. Integre $K$ sobre toda a superfície e verifique que o resultado
+é zero, como exige Gauss--Bonnet para gênero $1$.
+
+  \item \textbf{Os dois regimes do erro numérico.} Meça o erro do escalar de
+curvatura da esfera calculado por \texttt{riemann} em função do passo $h$,
+varrendo de $10^{-1}$ a $10^{-8}$. Faça o gráfico em escala logarítmica.
+Mostre que o erro cai como $h^2$ até cerca de $10^{-4}$ e volta a crescer
+depois, e identifique a origem de cada regime: truncamento de um lado,
+cancelamento catastrófico de ponto flutuante do outro. Qual é o $h$ ótimo?
+
+  \item \textbf{Curvatura de um universo em expansão.} Alimente a mesma máquina com
+a métrica FLRW plana, $\dd s^2=-\dd t^2+a(t)^2(\dd x^2+\dd y^2+\dd z^2)$,
+para uma $a(t)$ dada em forma fechada. Extraia $R$ numericamente e compare
+com o resultado simbólico $R=6(\ddot a a+\dot a^2)/a^2$. Faça o teste com
+$a\propto t^{2/3}$ e com $a\propto e^{Ht}$, e mostre que o segundo dá $R$
+constante --- é o espaço de de Sitter.
+\end{enumerate}
+
 
 \chapter{Física em espaço-tempo curvo}
+\label{cap:fisica-curva}
 
 \begin{objetivos}
 Aprender como partículas, luz, relógios e observadores são descritos em uma
@@ -2102,14 +2514,61 @@ em espaço curvo, para partículas massivas e para fótons.
 
 \section{Simetrias e quantidades conservadas}
 
-Se $\xi^\mu$ é um vetor de Killing, então ao longo de uma geodésica com
-momento $p^\mu$,
+Em mecânica clássica, cada simetria da Lagrangiana produz uma quantidade
+conservada. Em relatividade geral, quem carrega a simetria é a métrica, e a
+condição precisa é a \textbf{equação de Killing}:
+\begin{equation}
+  \nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu=0,
+  \qquad\text{ou, de forma equivalente,}\qquad
+  \nabla_{(\mu}\xi_{\nu)}=0.
+  \label{eq:killing}
+\end{equation}
+Um campo vetorial $\xi^\mu$ que a satisfaz é chamado vetor de Killing. O
+significado geométrico é direto: deslocar todos os pontos da variedade ao
+longo de $\xi^\mu$ por um parâmetro infinitesimal não altera a métrica. A
+geometria é invariante naquela direção.
+
+Há um teste prático que dispensa calcular derivadas covariantes. Se, em
+algum sistema de coordenadas, a métrica \emph{não depende} de uma coordenada
+$x^{(a)}$, então $\xi^\mu=\delta^\mu{}_{(a)}$ é vetor de Killing. Em
+Schwarzschild, $g_{\mu\nu}$ não depende de $t$ nem de $\phi$, e daí saem
+imediatamente dois vetores de Killing.
+
+\begin{resultado}
+\textbf{De simetria a constante de movimento.} Seja $p^\mu$ o momento de uma
+partícula em geodésica e $\xi^\mu$ um vetor de Killing. Então
 \[
   C=\xi_\mu p^\mu
 \]
-é constante. Em uma geometria estacionária, a simetria temporal fornece uma
-energia conservada. Em uma geometria axial, a simetria angular fornece momento
-angular conservado.
+é constante ao longo da geodésica. A demonstração cabe em duas linhas.
+Derivando ao longo da curva,
+\[
+  p^\nu\nabla_\nu(\xi_\mu p^\mu)
+  =\underbrace{p^\mu p^\nu\nabla_\nu\xi_\mu}_{\text{(i)}}
+  +\underbrace{\xi_\mu\,p^\nu\nabla_\nu p^\mu}_{\text{(ii)}}.
+\]
+O termo (ii) é zero pela equação geodésica. O termo (i) contrai o objeto
+simétrico $p^\mu p^\nu$ com $\nabla_\nu\xi_\mu$; só a parte simétrica de
+$\nabla_\nu\xi_\mu$ sobrevive a essa contração, e a
+Equação~\eqref{eq:killing} diz justamente que ela é nula. Logo $C$ é
+conservada.
+\end{resultado}
+
+Em uma geometria estacionária, o Killing temporal fornece uma energia
+conservada; em uma geometria axialmente simétrica, o Killing axial fornece
+momento angular conservado. São exatamente as duas constantes $E$ e $L$ que
+o Capítulo~\ref{cap:schwarzschild} usa para reduzir as geodésicas de
+Schwarzschild a um problema de potencial efetivo unidimensional --- e agora
+sabemos de onde elas vêm.
+
+\begin{atencao}
+A conservação vale para a quantidade $\xi_\mu p^\mu$, não para ``a energia''
+em algum sentido absoluto. Um espaço-tempo genérico não tem vetor de Killing
+temporal nenhum, e nesse caso simplesmente não existe energia conservada
+associada à geodésica. A métrica FLRW é o exemplo mais importante: ela
+depende de $t$, não é estacionária, e é por isso que a energia de um fóton
+cosmológico não se conserva --- ele sofre redshift.
+\end{atencao}
 
 \section{Observadores não são coordenadas}
 
@@ -2193,13 +2652,79 @@ observadores na geometria.
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Mostre que $C=\xi_\mu p^\mu$ é conservado ao longo de uma geodésica quando
-$\nabla_{(\mu}\xi_{\nu)}=0$.
+\textbf{Killing na esfera.} Verifique explicitamente que
+$\xi^\mu=(0,1)$ nas coordenadas $(\theta,\phi)$ satisfaz a equação de Killing
+para $\dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2$. Depois mostre que
+$\xi^\mu=(\sin\phi,\cot\theta\cos\phi)$ também é de Killing, e interprete
+geometricamente os dois campos.
 \end{exercise}
 
+\begin{exercise}
+\textbf{Álgebra de Killing.} Sejam $\xi$ e $\eta$ dois vetores de Killing.
+Mostre que o comutador $[\xi,\eta]^\mu=\xi^\nu\partial_\nu\eta^\mu
+-\eta^\nu\partial_\nu\xi^\mu$ também satisfaz a equação de Killing. Conclua
+que os vetores de Killing de uma variedade formam uma álgebra de Lie e
+identifique, para a esfera, de qual álgebra se trata.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Tetrada estática e redshift.} Para a métrica de Schwarzschild,
+construa a tetrada de um observador estático em $r$ fixo, cujo vetor
+temporal é $e_{\hat t}^\mu=(1-2M/r)^{-1/2}(1,0,0,0)$. Um fóton tem energia
+conservada $E=-p_t$. Mostre que a energia local medida é
+\[
+  E_{\rm loc}=E\left(1-\frac{2M}{r}\right)^{-1/2}
+\]
+e recupere daí a fórmula do redshift
+gravitacional do Capítulo~\ref{cap:schwarzschild}.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Acoplamento mínimo.} Escreva as equações de Maxwell em espaço-tempo
+curvo como $\nabla_\mu F^{\mu\nu}=4\pi J^\nu$ e
+$\nabla_{[\lambda}F_{\mu\nu]}=0$. Mostre que a segunda equação é idêntica à
+versão com derivadas parciais, e explique por que --- a pista está na simetria
+dos Christoffel. Em seguida, use coordenadas normais para argumentar que a
+primeira também se reduz à forma plana em um ponto.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Simetria máxima.} Mostre que uma variedade de dimensão $n$ admite no
+máximo $n(n+1)/2$ vetores de Killing independentes. Verifique que Minkowski
+atinge esse máximo em $n=4$ (dez: quatro translações, três rotações e três
+boosts) e identifique quais desses dez sobrevivem em Schwarzschild.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{Testando a equação de Killing.} Use a rotina \texttt{christoffel} de
+\arq{cap07\_curvatura.py} para montar $\nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu$
+em Schwarzschild e verificar numericamente que $\xi=\partial_t$ e
+$\xi=\partial_\phi$ satisfazem a equação de Killing, enquanto
+$\xi=\partial_r$ não. Meça quanto vale o resíduo em cada caso e mostre que a
+diferença é de muitas ordens de grandeza, não de arredondamento.
+
+  \item \textbf{A tetrada do observador estático.} Monte numericamente a tetrada de
+um observador estático em Schwarzschild e calcule a energia local de um
+fóton que cai do infinito com $E=-p_t$ fixo, em função de $r$. Faça o
+gráfico de $E_{\rm loc}/E$ de $r=100M$ até $r=2{,}01M$ e mostre que ele
+diverge no horizonte. Por que a quantidade conservada permanece finita?
+
+  \item \textbf{Contando simetrias.} A equação de Killing é um sistema linear
+homogêneo nas componentes de $\xi$ e em suas primeiras derivadas. Monte esse
+sistema numericamente para Minkowski, Schwarzschild e FLRW, e determine a
+dimensão do espaço de soluções em cada caso. Confirme os valores $10$, $4$ e
+$6$, e identifique quais das dez simetrias de Minkowski sobrevivem em cada
+uma das outras duas.
+\end{enumerate}
+
+
 \chapter{Equações de Einstein}
+\label{cap:einstein}
 
 \begin{objetivos}
 Compreender a forma, a motivação e os limites físicos das equações de campo.
@@ -2258,6 +2783,83 @@ métrica. Isso é importante para que a teoria tenha um problema de valor inicia
 bem comportado, análogo ao de outras teorias clássicas. O tensor de Einstein é
 construído a partir da curvatura, que envolve segundas derivadas da métrica e
 termos quadráticos em primeiras derivadas.
+
+\section{A ação de Einstein--Hilbert}
+\label{sec:acao-hilbert}
+
+O argumento anterior é de eliminação: procuramos o único tensor com as
+propriedades exigidas e o encontramos. Existe um caminho mais econômico e
+mais próximo do resto da física teórica --- postular uma ação e variar.
+
+A ação mais simples que se pode escrever para a métrica é a integral do
+escalar de curvatura sobre o volume invariante:
+\begin{equation}
+  S_{\rm EH}=\frac{1}{16\pi G}\int R\,\sqrt{-g}\,\dd^4x .
+  \label{eq:acao-hilbert}
+\end{equation}
+Só há duas escolhas embutidas aqui, e ambas são escolhas de \emph{mínima}
+estrutura: o integrando é o único escalar construído da curvatura sem
+derivadas adicionais nem potências, e $\sqrt{-g}\,\dd^4x$ é o único elemento
+de volume que não depende de coordenadas.
+
+Variando em relação a $g^{\mu\nu}$, três peças aparecem:
+\[
+  \delta\left(R\sqrt{-g}\right)
+  =\underbrace{R_{\mu\nu}\sqrt{-g}\,\delta g^{\mu\nu}}_{\text{(i)}}
+  +\underbrace{R\,\delta\sqrt{-g}}_{\text{(ii)}}
+  +\underbrace{g^{\mu\nu}\sqrt{-g}\,\delta R_{\mu\nu}}_{\text{(iii)}} .
+\]
+A peça (ii) usa a identidade
+$\delta\sqrt{-g}=-\tfrac12\sqrt{-g}\,g_{\mu\nu}\,\delta g^{\mu\nu}$, e é ela
+que produz o famoso $-\tfrac12 Rg_{\mu\nu}$. A peça (iii) é a mais
+interessante: $g^{\mu\nu}\delta R_{\mu\nu}$ é uma divergência total, de modo
+que ela não contribui para as equações de movimento --- vira um termo de
+fronteira. Somando (i) e (ii),
+\[
+  \frac{1}{\sqrt{-g}}\frac{\delta S_{\rm EH}}{\delta g^{\mu\nu}}
+  =\frac{1}{16\pi G}\left(R_{\mu\nu}-\frac12 Rg_{\mu\nu}\right)
+  =\frac{G_{\mu\nu}}{16\pi G}.
+\]
+
+O lado da matéria entra pela ação da matéria $S_{\rm m}$, e o tensor
+energia-momento passa a ser \emph{definido} --- não postulado --- por
+\begin{equation}
+  T_{\mu\nu}=-\frac{2}{\sqrt{-g}}\frac{\delta S_{\rm m}}{\delta g^{\mu\nu}}.
+  \label{eq:T-variacional}
+\end{equation}
+Exigindo $\delta(S_{\rm EH}+S_{\rm m})=0$ recuperamos exatamente
+$G_{\mu\nu}=8\pi G\,T_{\mu\nu}$.
+
+\begin{central}
+Nessa formulação, três fatos que antes pareciam coincidências viram
+consequências. \emph{Primeiro}, o tensor de Einstein aparece sozinho: não foi
+escolhido, foi o que a variação produziu. \emph{Segundo},
+$\nabla_\mu G^{\mu\nu}=0$ deixa de ser um acidente da identidade de Bianchi e
+passa a ser a expressão da invariância de $S_{\rm EH}$ por difeomorfismos ---
+é o teorema de Noether aplicado à liberdade de escolher coordenadas.
+\emph{Terceiro}, $\nabla_\mu T^{\mu\nu}=0$ segue da invariância de
+$S_{\rm m}$ pela mesma razão. Simetria de coordenadas e conservação local de
+energia são a mesma afirmação, vista de dois ângulos.
+\end{central}
+
+A constante cosmológica também ganha sua interpretação mais natural aqui: ela
+é simplesmente o termo constante permitido no integrando,
+\[
+  S=\frac{1}{16\pi G}\int (R-2\Lambda)\sqrt{-g}\,\dd^4x ,
+\]
+cuja variação acrescenta $+\Lambda g_{\mu\nu}$ ao lado geométrico. Não há
+nenhuma razão de princípio para omiti-lo --- omitir $\Lambda$ é que seria a
+escolha arbitrária.
+
+\begin{atencao}
+A peça (iii) só é ``puramente de fronteira'' se admitirmos que $\delta
+g^{\mu\nu}$ e suas primeiras derivadas se anulam no contorno. Como a ação
+contém segundas derivadas da métrica, o problema variacional bem posto exige
+acrescentar o termo de fronteira de Gibbons--Hawking--York. Ele não altera as
+equações de campo no interior --- e por isso é omitido aqui ---, mas é
+essencial em termodinâmica de buracos negros, onde a entropia de horizonte
+vem justamente desse termo.
+\end{atencao}
 
 \section{Traço das equações de campo}
 
@@ -2399,18 +3001,77 @@ Universo primordial dominado por radiação.
 
 \clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Explique por que a equação $R_{\mu\nu}=8\pi T_{\mu\nu}$ não é a melhor
-candidata para a equação de campo relativística.
+\textbf{A variação do elemento de volume.} Prove a identidade
+$\delta\sqrt{-g}=-\tfrac12\sqrt{-g}\,g_{\mu\nu}\,\delta g^{\mu\nu}$, usada na
+dedução da Seção~\ref{sec:acao-hilbert}. A pista é a fórmula
+$\delta(\ln\det A)=\mathrm{tr}(A^{-1}\delta A)$.
 \end{exercise}
 
 \begin{exercise}
-No vácuo com $\Lambda=0$, mostre que as equações de Einstein implicam
-$R_{\mu\nu}=0$.
+\textbf{$T_{\mu\nu}$ pela porta variacional.} Para a ação de um campo escalar,
+$S_{\rm m}=-\tfrac12\int(g^{\mu\nu}\partial_\mu\varphi\partial_\nu\varphi
++2V(\varphi))\sqrt{-g}\,\dd^4x$, aplique a
+Equação~\eqref{eq:T-variacional} e obtenha
+$T_{\mu\nu}=\partial_\mu\varphi\partial_\nu\varphi
+-g_{\mu\nu}(\tfrac12(\partial\varphi)^2+V)$. Compare com a forma de fluido
+perfeito do Capítulo~\ref{cap:fluidos}.
 \end{exercise}
+
+\begin{exercise}
+\textbf{Einstein em $D$ dimensões.} Refaça a contração das equações de campo
+em $D$ dimensões e mostre que $R=-\dfrac{16\pi G\,T}{D-2}$. Verifique que
+$D=4$ devolve $R=-8\pi GT$. O que acontece em $D=2$, e o que isso diz sobre
+gravidade bidimensional?
+\end{exercise}
+
+\begin{exercise}
+\textbf{O valor de $\Lambda$.} Use $\Omega_\Lambda=0{,}685$ e
+$H_0=67{,}4$~km\,s$^{-1}$\,Mpc$^{-1}$ para calcular $\rho_\Lambda$ em
+J\,m$^{-3}$ e $\Lambda$ em m$^{-2}$. Compare $\rho_\Lambda$ com a estimativa
+ingênua de energia de vácuo em escala de Planck e quantifique a discrepância
+em ordens de grandeza. Esse é o problema da constante cosmológica.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Por que não $R_{\mu\nu}=8\pi GT_{\mu\nu}$.} Suponha que essa fosse a
+equação de campo. Tome a divergência covariante dos dois lados e use
+$\nabla_\mu T^{\mu\nu}=0$ para mostrar que ela forçaria $\partial^\nu R=0$, ou
+seja, $R$ constante e portanto $T$ constante em todo o espaço-tempo. Explique
+por que isso é fisicamente inaceitável.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{As equações de campo, verificadas.} Estenda
+\arq{cap07\_curvatura.py} com uma rotina que devolva $G_{\mu\nu}$.
+Aplique-a à solução interior de Schwarzschild para uma estrela de densidade
+uniforme e verifique numericamente que $G_{tt}=8\pi\rho$ e que as componentes
+espaciais reproduzem a pressão dada pela equação TOV. Este é o teste mais
+direto de que a métrica interior resolve as equações de Einstein.
+
+  \item \textbf{O pior palpite da física.} Escreva um script que calcule
+$\rho_\Lambda$ a partir de $\Omega_\Lambda$ e $H_0$, e a compare com a
+densidade de energia de vácuo estimada por teoria quântica de campos com
+corte na escala de Planck, $\rho\sim c^5/(\hbar G^2)$. Imprima a razão em
+ordens de grandeza. Repita com corte na escala eletrofraca e na escala do
+QCD, e monte uma tabela --- ela mostra que o problema não desaparece com
+nenhum corte razoável.
+
+  \item \textbf{Bianchi contraída, numericamente.} Implemente
+$\nabla_\mu G^{\mu\nu}$ por diferenças finitas e aplique a uma métrica
+esfericamente simétrica \emph{arbitrária}, com $A(r)$ e $B(r)$ escolhidas ao
+acaso e sem nenhuma relação com as equações de campo. Verifique que a
+divergência é nula dentro do erro numérico e estude como o resíduo escala
+com o passo $h$. Por que o resultado não depende de a métrica ser solução?
+\end{enumerate}
+
 
 \chapter{Ondas gravitacionais}
+\label{cap:ondas}
 
 \begin{objetivos}
 Descrever ondas gravitacionais como perturbações da métrica, entender suas
@@ -2458,13 +3119,35 @@ casados e comparação com famílias de formas de onda.
 \section{Emissão}
 
 A radiação gravitacional dominante vem de variações temporais do momento de
-quadrupolo da fonte. Uma estimativa dimensional para a potência emitida é
-\[
-  P\sim \frac{G}{c^5}\left(\frac{\dd^3 Q}{\dd t^3}\right)^2,
-\]
-onde $Q$ representa uma escala de quadrupolo de massa. A presença de $c^5/G$
-mostra por que a emissão é pequena para sistemas cotidianos e enorme para
-binárias compactas.
+quadrupolo da fonte. A expressão completa, obtida da solução retardada da
+equação de onda linearizada, é a \textbf{fórmula do quadrupolo} de Einstein:
+\begin{equation}
+  P=\frac{G}{5c^5}
+  \left\langle \frac{\dd^3 Q_{ij}}{\dd t^3}\frac{\dd^3 Q^{ij}}{\dd t^3}\right\rangle,
+  \qquad
+  Q_{ij}=\int\rho\left(x_ix_j-\tfrac13\delta_{ij}r^2\right)\dd^3x .
+  \label{eq:quadrupolo}
+\end{equation}
+O tensor $Q_{ij}$ é o quadrupolo \emph{reduzido}, isto é, sem traço; a média
+$\langle\cdot\rangle$ é sobre alguns períodos da fonte.
+
+Aplicada a duas massas em órbita circular de separação $a$, ela dá
+\begin{equation}
+  P=\frac{32}{5}\frac{G^4}{c^5}\frac{m_1^2m_2^2(m_1+m_2)}{a^5},
+  \label{eq:quadrupolo-binaria}
+\end{equation}
+resultado deduzido na Seção~\ref{sec:cap10-numerica}. A presença de
+$c^5/G\approx3{,}6\times10^{52}\,$W mostra por que a emissão é ridícula para
+sistemas cotidianos e colossal para binárias compactas: essa é a escala
+natural de luminosidade gravitacional, e tudo o mais é medido contra ela.
+
+\begin{atencao}
+A dependência $a^{-5}$ é brutal e explica a forma do sinal. Reduzir a
+separação pela metade multiplica a potência por $32$. Por isso a emissão é
+desprezível durante quase toda a vida da binária e explode nos últimos
+segundos --- o inspiral não é um decaimento suave, é uma corrida cuja última
+volta libera mais energia que todas as anteriores somadas.
+\end{atencao}
 
 \section{Gauge e graus de liberdade}
 
@@ -2575,18 +3258,84 @@ observação direta do sinal passando pela Terra, abrindo uma forma nova de
 astronomia.
 
 \clearpage
+\input{secoes/cap10-numerica}
+
+\clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Descreva qualitativamente como uma onda com polarização $+$ altera um anel de
-partículas teste.
+\textbf{Contagem de graus de liberdade.} Uma perturbação simétrica
+$h_{\mu\nu}$ tem dez componentes. Mostre que o gauge de Lorenz impõe quatro
+condições e que ainda resta uma liberdade residual de quatro funções
+harmônicas, deixando $10-4-4=2$ graus físicos. Relacione esse $2$ com as duas
+polarizações e com o fato de o gráviton ter helicidade $\pm2$.
 \end{exercise}
 
 \begin{exercise}
-Por que sistemas esfericamente simétricos não emitem ondas gravitacionais?
+\textbf{Energia total irradiada.} Integre a
+Equação~\eqref{eq:quadrupolo-binaria} ao longo do inspiral de uma binária de
+$36+29\,\Msol$, do infinito até a ISCO, e mostre que a energia emitida é da
+ordem de $3\,\Msol c^2$. Compare com a energia liberada por uma supernova
+($\sim10^{-3}\Msol c^2$ em fótons) e comente por que GW150914 foi, por alguns
+milésimos de segundo, mais luminosa que todo o Universo observável.
 \end{exercise}
 
-\chapter{Soluções esféricas, estrelas e Schwarzschild}
+\begin{exercise}
+\textbf{Sirene padrão.} A amplitude satisfaz
+$h\propto\mathcal{M}_c^{5/3}f^{2/3}/d$, e tanto $\mathcal{M}_c$ quanto $f$ são
+medidos diretamente da fase do sinal. Conclua que $d$ é determinada sem
+nenhuma calibração externa e explique por que isso torna binárias compactas
+``sirenes padrão'' --- em contraste com as velas padrão, que dependem de uma
+escada de distâncias.
+\end{exercise}
+
+\begin{exercise}
+\textbf{A banda dos detectores.} Use $f_{\rm ISCO}=c^3/(6^{3/2}\pi GM)$ para
+determinar a faixa de massa total cuja fusão cai entre $10$ e $1000$~Hz, a
+banda dos interferômetros terrestres. Repita para a banda do LISA,
+$10^{-4}$ a $10^{-1}$~Hz, e identifique que classe de objetos ela seleciona.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Diferença de tempo nos braços.} Uma onda com polarização $+$ incide
+perpendicularmente sobre um interferômetro de braços $L$ ao longo de $x$ e
+$y$. Mostre que a diferença de tempo de ida e volta da luz entre os dois
+braços é $\Delta t\approx hL/c$, e verifique que, para $h=10^{-21}$ e
+$L=4$~km, ela corresponde a uma diferença de fase mensurável quando a luz
+percorre $300$ vezes o braço em uma cavidade ressonante.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{O pulsar duplo.} Em \arq{cap10\_ondas.py}, troque os parâmetros
+de PSR~B1913+16 pelos de PSR~J0737\textendash 3039
+($m_1=1{,}338\,\Msol$, $m_2=1{,}249\,\Msol$, $P_b=2{,}45$~h, $e=0{,}088$) e
+compare a previsão com o valor medido, $-1{,}252\times10^{-12}$. Explique
+por que esse sistema decai a uma taxa comparável à de B1913+16 apesar de ter
+excentricidade quase nula.
+
+  \item \textbf{Polarização circular.} Modifique \texttt{desloca\_anel} para somar
+as duas polarizações com defasagem de $90^\circ$,
+$h_+\cos\omega t + h_\times\sin\omega t$, e gere a animação em quatro
+instantes. Mostre que o anel passa a \emph{girar} em vez de oscilar.
+Relacione o resultado com a inclinação da órbita da binária em relação à
+linha de visada, e explique como essa assinatura é usada para inferir a
+inclinação de um evento real.
+
+  \item \textbf{As bandas dos detectores.} Varra a massa total de $1$ a
+$10^{9}\,\Msol$ em \texttt{f\_isco} e determine quais faixas de massa caem
+na banda do LIGO ($10$--$1000$~Hz) e na do LISA
+($10^{-4}$--$10^{-1}$~Hz). Some ao script o cálculo da energia total
+irradiada do infinito até a ISCO e mostre que ela é da ordem de alguns por
+cento de $Mc^2$. Que classe de objetos cada instrumento seleciona?
+\end{enumerate}
+
+
+\chapter[Soluções esféricas e Schwarzschild]{Soluções esféricas, estrelas e
+Schwarzschild}
+\label{cap:schwarzschild}
 
 \begin{objetivos}
 Aplicar as equações de Einstein a sistemas esfericamente simétricos e extrair
@@ -2609,6 +3358,7 @@ com
 Em unidades $G=c=1$, substituímos $GM$ por $M$.
 
 \section{Redshift gravitacional}
+\label{sec:redshift-grav}
 
 Para observadores estáticos em Schwarzschild, a frequência de um fóton emitido
 em $r_e$ e observado em $r_o$ satisfaz
@@ -2634,9 +3384,9 @@ No plano equatorial $\theta=\pi/2$, há duas constantes de movimento:
 \]
 Para partículas massivas,
 \[
-  \dot r^2+V_{\rm eff}(r)=E^2,
+  \dot r^2+\Veff(r)=E^2,
   \qquad
-  V_{\rm eff}(r)=\left(1-\frac{2M}{r}\right)
+  \Veff(r)=\left(1-\frac{2M}{r}\right)
   \left(1+\frac{L^2}{r^2}\right).
 \]
 Para fótons, o termo $1$ é substituído por $0$.
@@ -2677,11 +3427,11 @@ euclidiana.
 O potencial efetivo permite estudar órbitas circulares. Para partículas
 massivas, uma órbita circular satisfaz
 \[
-  \dot r=0,\qquad \frac{\dd V_{\rm eff}}{\dd r}=0.
+  \dot r=0,\qquad \frac{\dd \Veff}{\dd r}=0.
 \]
 A estabilidade exige ainda
 \[
-  \frac{\dd^2 V_{\rm eff}}{\dd r^2}>0.
+  \frac{\dd^2 \Veff}{\dd r^2}>0.
 \]
 Em Schwarzschild, há órbitas circulares estáveis apenas para $r>6M$. O raio
 $r=6M$ é a órbita circular estável mais interna, conhecida como ISCO. Em discos
@@ -2692,7 +3442,7 @@ pois marca aproximadamente a borda interna de discos finos relativísticos.
 
 Para geodésicas nulas, o potencial efetivo é
 \[
-  V_{\rm eff}^{(\gamma)}=
+  \Veff^{(\gamma)}=
   \left(1-\frac{2M}{r}\right)\frac{L^2}{r^2}.
 \]
 A órbita circular nula ocorre em $r=3M$. Essa órbita é instável: uma pequena
@@ -2703,14 +3453,66 @@ antes de chegar ao observador.
 
 \section{Testes clássicos}
 
-Três previsões históricas tornaram a relatividade geral observacionalmente
-marcante: o avanço do periélio de Mercúrio, o desvio da luz pelo Sol e o
-redshift gravitacional. O avanço do periélio surge porque a equação radial
-relativística contém correções que impedem a órbita de fechar exatamente. O
-desvio da luz é maior que uma estimativa newtoniana ingênua porque tanto a
-curvatura temporal quanto a espacial contribuem. O redshift gravitacional
-segue da diferença entre ritmos de relógios estáticos em potenciais
-diferentes.
+Quatro previsões tornaram a relatividade geral observacionalmente marcante.
+Vale enunciá-las com fórmula e com número, porque é dos números que veio a
+autoridade da teoria.
+
+\paragraph{Avanço do periélio.} A equação radial relativística contém um termo
+$3ML^2/r^4$ ausente do problema de Kepler, e é ele que impede a órbita de
+fechar. Para uma órbita de semieixo maior $a$ e excentricidade $e$, o avanço
+por revolução é
+\begin{equation}
+  \Delta\phi=\frac{6\pi GM}{c^2a(1-e^2)} .
+  \label{eq:perielio}
+\end{equation}
+Para Mercúrio ($a=5{,}79\times10^{10}\,$m, $e=0{,}2056$), isso dá
+$5{,}02\times10^{-7}$~rad por órbita, ou $42{,}98''$ por século --- exatamente
+a discrepância que os astrônomos não conseguiam explicar desde Le~Verrier,
+em 1859.
+
+\paragraph{Desvio da luz.} Para um raio com parâmetro de impacto $b\gg GM/c^2$,
+\begin{equation}
+  \delta=\frac{4GM}{c^2b} .
+  \label{eq:deflexao}
+\end{equation}
+Na borda do Sol, $\delta=1{,}75''$. O fator $4$ é o ponto central: um cálculo
+newtoniano ingênuo, tratando o fóton como partícula, dá exatamente metade
+disso. A curvatura temporal e a espacial contribuem em partes iguais, e medir
+$1{,}75''$ em vez de $0{,}87''$ foi o que a expedição de Eddington
+verificou em 1919.
+
+\paragraph{Redshift gravitacional.} Já obtido na
+Seção~\ref{sec:redshift-grav}; no limite fraco,
+\[
+  \frac{\Delta\nu}{\nu}\approx\frac{\Delta\Phi}{c^2}=\frac{gh}{c^2}.
+\]
+Para os $22{,}5$~m da torre de Jefferson, o experimento de Pound e Rebka
+(1959) mediu $\Delta\nu/\nu\approx2{,}5\times10^{-15}$ com efeito
+Mössbauer --- o primeiro teste feito inteiramente em laboratório.
+
+\paragraph{Atraso de Shapiro.} O quarto teste, proposto só em 1964, é o mais
+direto de todos: um sinal de radar que passa perto do Sol demora \emph{mais}
+que em geometria plana. Para ida e volta entre dois planetas em conjunção
+superior,
+\begin{equation}
+  \Delta t\approx\frac{4GM}{c^3}
+  \ln\!\left(\frac{4r_1r_2}{b^2}\right),
+  \label{eq:shapiro}
+\end{equation}
+o que dá cerca de $200\,\mu$s para um eco em Vênus rasante ao Sol. O atraso
+não é ilusão de trajetória mais longa: é o tempo coordenado a mais que a luz
+leva para atravessar uma região onde $g_{tt}$ e $g_{rr}$ diferem de $1$.
+
+\begin{central}
+Os quatro testes sondam coisas diferentes da mesma métrica. O redshift mede
+apenas $g_{tt}$ e é compatível com qualquer teoria que respeite o princípio
+da equivalência --- ele não distingue a relatividade geral de suas rivais. O
+desvio da luz e o atraso de Shapiro medem a combinação de $g_{tt}$ com
+$g_{rr}$, e é aí que o fator $2$ entre a previsão newtoniana e a
+relativística aparece. O avanço do periélio é o único sensível ao termo de
+ordem seguinte. Um teste que confirma a teoria não vale tanto quanto um que
+saiba dizer \emph{qual} pedaço da métrica está sendo testado.
+\end{central}
 
 \begin{example}
 Para emissão em $r_e$ e observação no infinito, o fator de redshift em
@@ -2723,6 +3525,66 @@ Isso não significa que o fóton ``perde toda energia localmente''; significa
 que a comparação entre o emissor próximo ao horizonte e o observador no
 infinito envolve uma diferença gravitacional extrema.
 \end{example}
+
+\section{Lentes gravitacionais}
+\label{sec:lentes}
+
+A Equação~\eqref{eq:deflexao} foi verificada em 1919 como uma curiosidade
+sobre a posição aparente de estrelas. Hoje ela é um instrumento de medida, e
+a passagem de um para outro é apenas geometria.
+
+Considere uma massa $M$ (a \emph{lente}) entre nós e uma fonte distante.
+Sejam $D_L$, $D_S$ e $D_{LS}$ as distâncias observador--lente,
+observador--fonte e lente--fonte. Se a fonte está em posição angular $\beta$
+e a vemos em $\theta$, a geometria do triângulo com o desvio
+$\delta=4GM/(c^2b)$ e $b=D_L\theta$ dá a \textbf{equação da lente}:
+\begin{equation}
+  \beta=\theta-\frac{\theta_E^2}{\theta},
+  \qquad
+  \theta_E=\sqrt{\frac{4GM}{c^2}\frac{D_{LS}}{D_LD_S}} .
+  \label{eq:lente}
+\end{equation}
+O ângulo $\theta_E$ é o \textbf{raio de Einstein}, e é a única escala do
+problema.
+
+Três consequências saem daí quase sem conta. Primeiro, se o alinhamento é
+perfeito ($\beta=0$), a solução é $\theta=\pm\theta_E$: a fonte aparece como
+um \emph{anel} de raio $\theta_E$ --- o anel de Einstein. Segundo, para
+$\beta\ne0$ a equação é quadrática e sempre tem duas raízes de sinais
+opostos: toda lente esférica produz \emph{duas} imagens, uma de cada lado da
+lente. Terceiro, como o desvio não altera o brilho superficial mas altera o
+ângulo sólido, as imagens são amplificadas; a amplificação total, com
+$u=\beta/\theta_E$, é
+\begin{equation}
+  \mu=\frac{u^2+2}{u\sqrt{u^2+4}} ,
+  \label{eq:amplificacao}
+\end{equation}
+que diverge quando $u\to0$ --- o alinhamento perfeito é infinitamente
+brilhante no limite de fonte pontual.
+
+\begin{example}
+\textbf{Duas escalas de $\theta_E$.} Para uma estrela de $1\,\Msol$ a
+$4$~kpc, com a fonte a $8$~kpc, $\theta_E\approx1$~miliarcossegundo: pequeno
+demais para separar as imagens. É o regime de \emph{microlente}, no qual não
+se resolve nada e o que se observa é a amplificação $\mu(t)$ variando
+enquanto a lente cruza a linha de visada --- a técnica que detecta objetos
+compactos escuros e exoplanetas.
+
+Para um aglomerado de galáxias de $10^{14}\,\Msol$ a $z\sim0{,}3$, com a
+fonte a $z\sim1$, $\theta_E$ é da ordem de dezenas de segundos de arco. Aí as
+imagens múltiplas e os arcos são resolvidos diretamente, e a
+Equação~\eqref{eq:lente} inverte-se para \emph{pesar} o aglomerado.
+\end{example}
+
+\begin{central}
+A lente mede $M$ dentro de $\theta_E$ sem nenhuma hipótese sobre o que a
+massa é, se emite luz, ou se está em equilíbrio dinâmico. É a única forma
+direta de pesar matéria escura. Quando a massa medida por lenteamento excede
+sistematicamente a massa luminosa --- e excede, por fatores de cinco a dez
+---, a conclusão não depende de modelo de população estelar nem de hipótese
+virial. É por isso que o lenteamento do aglomerado da Bala é considerado a
+evidência mais limpa da existência de matéria escura.
+\end{central}
 
 \section{Problemas orientados}
 
@@ -2769,17 +3631,85 @@ visualizar pontos de retorno, órbitas circulares e estabilidade, mas a dinâmic
 subjacente continua sendo geodésica em espaço-tempo curvo.
 
 \clearpage
+\input{secoes/cap11-numerica}
+
+\clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Use a métrica de Schwarzschild para obter a aceleração radial newtoniana no
-limite $r\gg 2M$ e velocidades pequenas.
+\textbf{Distância própria contra coordenada.} Calcule
+$\ell=\int_{2M}^{10M}(1-2M/r)^{-1/2}\dd r$ e compare com a diferença
+coordenada $\Delta r=8M$. Por quanto por cento a distância própria excede a
+coordenada? Mostre que a integral converge apesar de o integrando divergir em
+$r=2M$.
 \end{exercise}
 
 \begin{exercise}
-Determine o raio da órbita circular nula em Schwarzschild usando o potencial
-efetivo de fótons.
+\textbf{Velocidade orbital local.} Um observador estático em $r$ mede a
+velocidade de uma partícula em órbita circular. Mostre que
+$v_{\rm loc}=\sqrt{M/(r-2M)}$ e que ela tende a $c$ quando $r\to3M$.
+Interprete: por que não existe órbita circular \emph{massiva} abaixo de $3M$,
+mesmo instável?
 \end{exercise}
+
+\begin{exercise}
+\textbf{TOV no limite newtoniano.} Mostre que, para $p\ll\rho$,
+$m\ll r$ e $4\pi r^3p\ll m$, a equação de Tolman--Oppenheimer--Volkoff se
+reduz a $\dd p/\dd r=-Gm\rho/r^2$. Identifique qual dos três termos
+relativísticos é o responsável por tornar o equilíbrio \emph{mais} difícil, e
+explique por que a pressão, que sustenta a estrela em Newton, também a puxa
+para dentro em Einstein.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Estrela de densidade uniforme.} Integre a equação TOV para
+$\rho=\mathrm{const}$ e obtenha a solução interior de Schwarzschild. Mostre
+que a pressão central diverge quando $2GM/Rc^2\to8/9$ e conclua que nenhuma
+estrela estática pode ser mais compacta que esse limite (limite de Buchdahl),
+independentemente da equação de estado.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Anel de Einstein.} Use a Equação~\eqref{eq:lente} para calcular
+$\theta_E$ de uma lente de $1\,\Msol$ a $4$~kpc com a fonte a $8$~kpc, e de
+um aglomerado de $10^{14}\,\Msol$ com $D_L=D_{LS}=1$~Gpc e $D_S=2$~Gpc.
+Compare com a resolução angular do Hubble ($0{,}05''$) e diga qual dos dois
+casos produz imagens resolvidas.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Birkhoff qualitativo.} Uma casca esférica de matéria pulsa radialmente
+mantendo a simetria esférica. Argumente, a partir do teorema de Birkhoff, que
+a geometria externa permanece exatamente Schwarzschild com a mesma $M$, e
+conclua que a casca não emite ondas gravitacionais. Relacione com a ausência
+de radiação monopolar do Capítulo~\ref{cap:ondas}.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{O atraso de Shapiro.} Acrescente a
+\arq{cap11\_geodesicas\_schwarzschild.py} a integração do tempo
+coordenado de um sinal de radar que vai da Terra a Vênus rente ao Sol e
+volta. Compare com o tempo que o mesmo percurso levaria em geometria plana e
+verifique que a diferença é de cerca de $200\,\mu$s. Estude como o atraso
+cresce quando o parâmetro de impacto se aproxima da borda solar.
+
+  \item \textbf{Os anéis de fóton.} Modifique a função \texttt{deflexao} para
+tabelar a deflexão entre $b=3\sqrt3\,M$ e $b=10M$. Mostre que ela diverge
+logaritmicamente quando $b$ tende ao parâmetro de impacto crítico e
+determine numericamente o coeficiente da divergência. Relacione o resultado
+com a formação dos anéis de fóton na sombra de um buraco negro.
+
+  \item \textbf{O limite de Buchdahl.} Escreva a integração da equação TOV para uma
+estrela de densidade uniforme, partindo do centro com uma pressão central
+$p_c$ e parando onde $p=0$. Varra $p_c$ e faça o gráfico de $2GM/Rc^2$
+contra $p_c$. Mostre que a compacidade satura em $8/9$ e que a pressão
+central diverge ali --- nenhuma estrela estática pode ser mais compacta,
+qualquer que seja a equação de estado.
+\end{enumerate}
+
 
 \chapter{Buracos negros}
 
@@ -2789,6 +3719,7 @@ horizonte de eventos e introduzir buracos negros astrofísicos.
 \end{objetivos}
 
 \section{Horizonte}
+\label{sec:horizonte}
 
 Em Schwarzschild, $r=2M$ é o raio do horizonte de eventos. A divergência de
 $g_{rr}$ nessa coordenada não é uma singularidade física. Invariantes de
@@ -2925,16 +3856,79 @@ uma teoria completa testada experimentalmente para substituir a previsão
 clássica.
 
 \clearpage
+\input{secoes/cap12-numerica}
+
+\clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Calcule o raio de Schwarzschild do Sol e da Terra. Comente por que esses
-valores não significam que tais objetos sejam buracos negros.
+\textbf{A coordenada tartaruga.} Verifique que
+$r_*=r+2M\ln|r/2M-1|$ satisfaz $\dd r_*/\dd r=(1-2M/r)^{-1}$ e que
+$r_*\to-\infty$ quando $r\to2M$. Mostre que, em termos de $v=t+r_*$, a
+métrica assume a forma da Equação~\eqref{eq:cap12-ef}, e explique como uma
+mudança de coordenada que diverge consegue produzir uma métrica regular.
 \end{exercise}
 
 \begin{exercise}
-Explique a diferença entre horizonte de eventos e singularidade.
+\textbf{Densidade média do horizonte.} Defina a densidade média como
+$M/(\tfrac43\pi r_s^3)$ e mostre que ela cai como $1/M^2$. Calcule-a para
+$10\,\Msol$ e para $10^9\,\Msol$, e verifique que no segundo caso ela é menor
+que a densidade da água. O que isso diz sobre a ideia de que buracos negros
+são ``matéria muito comprimida''?
 \end{exercise}
+
+\begin{exercise}
+\textbf{Massa irredutível e o processo de Penrose.} Para Kerr,
+$A=8\pi M(M+\sqrt{M^2-a^2})$ e $M_{\rm irr}=\sqrt{A/16\pi}$. Mostre que
+$M^2=M_{\rm irr}^2+J^2/(4M_{\rm irr}^2)$ e conclua que, para um buraco negro
+extremo, a fração máxima de massa extraível sem violar o teorema da área é
+$1-1/\sqrt2\approx29\,\%$.
+\end{exercise}
+
+\begin{exercise}
+\textbf{A sombra.} Mostre que o raio aparente do anel de fótons visto por um
+observador distante é $b_{\rm crit}=3\sqrt3\,GM/c^2$, e não $3GM/c^2$.
+Calcule o diâmetro angular correspondente para M87$^*$
+($M=6{,}5\times10^9\,\Msol$, $d=16{,}8$~Mpc) e para Sgr~A$^*$
+($M=4{,}3\times10^6\,\Msol$, $d=8{,}3$~kpc). Compare com os $42\,\mu$as
+medidos pelo Event Horizon Telescope.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Segunda lei em ação.} Dois buracos negros de Schwarzschild de massa
+$M$ cada um se fundem, produzindo um único buraco negro de massa $M_f$ e
+irradiando o resto. Use o teorema da área para obter a cota
+$M_f\ge\sqrt2\,M$ e conclua que no máximo $29\,\%$ da massa total pode ser
+convertida em ondas gravitacionais. Compare com os $5\,\%$ efetivamente
+irradiados em GW150914.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{O buraco branco.} Refaça a figura de cones de luz de
+\arq{cap12\_buracos\_negros.py} para coordenadas de
+Eddington--Finkelstein \emph{saintes}, $u=t-r_*$. Mostre que agora a região
+$r<2M$ é aquela de onde tudo necessariamente \emph{sai}. Situe as duas
+cartas no diagrama de Kruskal e explique por que elas cobrem regiões
+diferentes da mesma solução.
+
+  \item \textbf{Um buraco negro evaporando agora.} Use \texttt{tempo\_evaporacao}
+para determinar a massa de um buraco negro primordial cujo tempo de
+evaporação é exatamente a idade do Universo, $13{,}8$~Gyr. Calcule a
+temperatura de Hawking e a energia típica dos fótons emitidos nos últimos
+segundos. Em que faixa do espectro eletromagnético essa explosão apareceria,
+e por que ela é procurada por telescópios de raios gama?
+
+  \item \textbf{O teorema da área em ação.} Acrescente ao script uma rotina que,
+dadas as massas e os spins de dois buracos negros de Kerr, calcule a área
+total antes da fusão e a área mínima do buraco negro final compatível com o
+teorema da área. Use-a para obter a cota superior da energia irradiável em
+uma fusão de dois buracos negros iguais e sem spin, e compare com os $5\,\%$
+efetivamente irradiados em GW150914.
+\end{enumerate}
+
 
 \chapter{Cosmologia relativística}
 
@@ -3129,17 +4123,83 @@ quantidades são invariantes, quais dependem do observador e quais são apenas
 artefatos de coordenadas?
 
 \clearpage
+\input{secoes/cap13-numerica}
+
+\clearpage
 \section{Exercícios}
-
 \begin{exercise}
-Mostre que, para matéria fria em Universo plano sem constante cosmológica,
-$a(t)\propto t^{2/3}$.
+\textbf{A densidade crítica.} Calcule $\rho_c=3H_0^2/8\pi G$ para
+$H_0=67{,}4$~km\,s$^{-1}$\,Mpc$^{-1}$, em kg\,m$^{-3}$ e em prótons por metro
+cúbico. Comente o fato de o Universo ser, em média, um vácuo muito melhor que
+qualquer bomba de laboratório.
 \end{exercise}
 
 \begin{exercise}
-Mostre que, para radiação em Universo plano sem constante cosmológica,
-$a(t)\propto t^{1/2}$.
+\textbf{Temperatura e recombinação.} Da conservação do número de fótons e do
+redshift de energia, mostre que $T\propto1/a$, isto é, $T=T_0(1+z)$. Calcule
+$T$ em $z=1100$ e compare com a energia de ionização do hidrogênio,
+$13{,}6$~eV. Por que a recombinação ocorre a uma temperatura bem \emph{menor}
+que $13{,}6$~eV$/k_B$?
 \end{exercise}
+
+\begin{exercise}
+\textbf{Universo de de Sitter.} Para $\Omega_\Lambda=1$ e $k=0$, resolva a
+equação de Friedmann e obtenha $a\propto e^{H t}$. Mostre que existe um
+horizonte de eventos em distância própria $c/H$ e calcule seu valor em Gpc
+para o $H_0$ atual. O que acontece com uma galáxia que hoje está além dele?
+\end{exercise}
+
+\begin{exercise}
+\textbf{Parâmetro de desaceleração.} Defina $q=-\ddot a a/\dot a^2$ e mostre
+que hoje $q_0=\tfrac12\Omega_m-\Omega_\Lambda$ (desprezando radiação).
+Calcule $q_0$ para os parâmetros de Planck e determine o valor de
+$\Omega_\Lambda$ que daria $q_0=0$.
+\end{exercise}
+
+\begin{exercise}
+\textbf{O problema do horizonte.} Estime o tamanho angular, no céu de hoje, do
+horizonte de partículas na época da recombinação. Conclua que a superfície de
+último espalhamento se divide em milhares de regiões que nunca estiveram em
+contato causal, e explique por que a uniformidade da CMB a
+$10^{-5}$ é então um problema --- e como a inflação o resolve.
+\end{exercise}
+
+\begin{exercise}
+\textbf{Idade em alto redshift.} Obtenha $t(z)$ para Einstein--de Sitter e
+mostre que $t\propto(1+z)^{-3/2}$. Calcule a idade do Universo em $z=6$ para
+EdS e para $\Lambda$CDM, e comente a dificuldade de formar quasares de
+$10^9\,\Msol$ em tempo tão curto.
+\end{exercise}
+
+\section{Conteúdo extra}
+
+Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+
+\begin{enumerate}
+  \item \textbf{Um universo que recolapsa.} Acrescente a
+\arq{cap13\_friedmann.py} um universo fechado com $\Omega_m=1{,}5$ e
+$\Omega_\Lambda=0$. Determine numericamente o instante de expansão máxima e
+o de recolapso, e compare com o resultado analítico em termos da ciclóide.
+Mostre que o tempo total de vida é exatamente o dobro do tempo até a
+expansão máxima.
+
+  \item \textbf{As supernovas de 1998.} Calcule o módulo de distância
+\[
+  \mu(z)=5\log_{10}\!\left(\frac{D_L}{10\,{\rm pc}}\right)
+\]
+para $\Lambda$CDM e para um universo sem $\Lambda$ com o mesmo $\Omega_m$. Faça o gráfico da \emph{diferença}
+entre as duas curvas em função de $z$ e mostre que ela é de poucos décimos
+de magnitude em $z\sim0{,}5$. Essa é exatamente a precisão que as supernovas
+Ia precisaram atingir para detectar a aceleração.
+
+  \item \textbf{O horizonte de eventos cosmológico.} Calcule
+$d_E = a(t_0)\int_{t_0}^{\infty}\dd t/a(t)$ numericamente para
+$\Lambda$CDM e mostre que ele é finito, obtendo seu valor em Gpc. Repita
+para Einstein--de Sitter e mostre que diverge. Determine o redshift a partir
+do qual a luz emitida hoje jamais nos alcançará, e comente o que isso
+significa para o futuro observacional da cosmologia.
+\end{enumerate}
+
 
 \chapter{Projetos finais}
 
@@ -3503,10 +4563,38 @@ relatividade geral introdutória.
 \[
   G_{\mu\nu}=R_{\mu\nu}-\frac{1}{2}Rg_{\mu\nu}.
 \]
+\[
+  \frac{\dd^2x^\mu}{\dd\lambda^2}
+  +\Gamma^\mu_{\alpha\beta}\frac{\dd x^\alpha}{\dd\lambda}
+  \frac{\dd x^\beta}{\dd\lambda}=0,
+  \qquad
+  \nabla_{(\mu}\xi_{\nu)}=0
+  \ \Rightarrow\ \xi_\mu p^\mu=\text{const.}
+\]
 
 \section{Einstein}
 \[
-  G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi G T_{\mu\nu}.
+  S=\frac{1}{16\pi G}\int (R-2\Lambda)\sqrt{-g}\,\dd^4x+S_{\rm m},
+  \qquad
+  T_{\mu\nu}=-\frac{2}{\sqrt{-g}}\frac{\delta S_{\rm m}}{\delta g^{\mu\nu}}.
+\]
+\[
+  G_{\mu\nu}+\Lambda g_{\mu\nu}=8\pi G T_{\mu\nu},
+  \qquad
+  R_{\mu\nu}=8\pi G\left(T_{\mu\nu}-\tfrac12 Tg_{\mu\nu}\right).
+\]
+
+\section{Ondas gravitacionais}
+\[
+  \Box\bar h_{\mu\nu}=-16\pi G\,T_{\mu\nu},
+  \qquad
+  P=\frac{G}{5c^5}\left\langle\dddot Q_{ij}\dddot Q^{ij}\right\rangle .
+\]
+\[
+  \rd{f}{t}=\frac{96}{5}\pi^{8/3}
+  \left(\frac{G\mathcal{M}_c}{c^3}\right)^{5/3}f^{11/3},
+  \qquad
+  \mathcal{M}_c=\frac{(m_1m_2)^{3/5}}{(m_1+m_2)^{1/5}} .
 \]
 
 \section{Schwarzschild}
@@ -3516,12 +4604,42 @@ relatividade geral introdutória.
   +\left(1-\frac{2GM}{r}\right)^{-1}\dd r^2
   +r^2\dd\Omega^2.
 \]
+\[
+  \Veff=\left(1-\frac{2M}{r}\right)\left(1+\frac{L^2}{r^2}\right),
+  \qquad
+  r_{\rm ISCO}=6M,
+  \qquad
+  r_{\rm fóton}=3M .
+\]
+\[
+  \Delta\phi=\frac{6\pi GM}{c^2a(1-e^2)},
+  \qquad
+  \delta=\frac{4GM}{c^2b},
+  \qquad
+  \theta_E=\sqrt{\frac{4GM}{c^2}\frac{D_{LS}}{D_LD_S}} .
+\]
+\[
+  \frac{\dd p}{\dd r}=-\frac{(\rho+p)(m+4\pi r^3p)}{r(r-2m)},
+  \qquad
+  T_H=\frac{\hbar c^3}{8\pi GMk_B},
+  \qquad
+  S=\frac{k_Bc^3A}{4G\hbar} .
+\]
 
 \section{Cosmologia}
 \[
   H^2=\frac{8\pi G}{3}\rho-\frac{k}{a^2}+\frac{\Lambda}{3},
   \qquad
-  \dot\rho+3H(\rho+p)=0.
+  \frac{\ddot a}{a}=-\frac{4\pi G}{3}(\rho+3p)+\frac{\Lambda}{3},
+\]
+\[
+  \dot\rho+3H(\rho+p)=0,
+  \qquad
+  \rho\propto a^{-3(1+w)},
+  \qquad
+  1+z=\frac{a(t_0)}{a(t_e)},
+  \qquad
+  d_L=(1+z)^2d_A .
 \]
 
 \chapter{Bibliografia comentada}

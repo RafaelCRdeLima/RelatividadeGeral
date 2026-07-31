@@ -5,26 +5,97 @@ Material original de apoio para uma disciplina de Relatividade Geral com 72 enco
 Arquivos principais:
 
 - `rg_72_aulas.tex`: fonte LaTeX da apostila.
+- `estilo-rg.sty`: identidade visual (fontes, paleta, títulos, cabeçalhos, caixas e listagens). Todo o desenho da apostila está aqui; o `.tex` só carrega o pacote e define o que é específico do texto.
+- `secoes/`: seções longas mantidas em arquivos próprios e trazidas com `\input` — as seções de resolução numérica dos Capítulos 7, 10, 11, 12 e 13.
 - `figuras/`: PDFs das figuras (geradas por scripts em `codigo/`), incluídas via `\includegraphics`.
-- `codigo/`: scripts Python (`.py`) e Mathematica/Wolfram Language (`.wl`) de apoio a cada capítulo. Os `.py` que geram figuras também são impressos no capítulo correspondente via `\lstinputlisting`; os `.wl` são verificações simbólicas, também impressas no texto.
+- `codigo/`: scripts Python (`.py`) e Mathematica/Wolfram Language (`.wl`) de apoio a cada capítulo.
+
+## Os programas não são impressos na apostila
+
+Nenhum código aparece no PDF. Os 22 programas ficam para download na subpágina
+[`codigos/`](../../codigos/) do site da disciplina,
+<https://rafaelcrdelima.github.io/RelatividadeGeral/codigos/>, e o texto aponta
+para eles com a caixa `\programa{arquivo}`:
+
+```latex
+\programa[uma linha dizendo o que o programa faz]{codigo/cap07\_curvatura.py}
+```
+
+Duas consequências práticas para quem edita a apostila:
+
+- **As caixas `saida` são saída real.** Os números impressos nelas vêm da
+  execução dos scripts, não são transcritos à mão. Ao alterar um programa,
+  rode-o e atualize a caixa correspondente.
+- **Ao acrescentar um programa novo**, inclua-o em `codigo/`, aponte para ele
+  com `\programa` e acrescente o cartão correspondente em
+  [`codigos/index.html`](../../codigos/index.html). O `.zip` de download é
+  montado automaticamente pelo workflow do GitHub Pages a partir de `codigo/`.
+
+Cada capítulo termina em uma seção **Conteúdo extra** com três problemas que
+pedem para modificar um desses programas e obter um resultado que não está no
+texto.
 
 O PDF compilado, usado pela página do curso, fica em `../Relatividade_Geral_72_Aulas.pdf` (um nível acima).
 
 A referência principal de organização é Bernard Schutz, *A First Course in General Relativity*, 3ª edição. O texto da apostila foi escrito em formulação própria e não reproduz o livro.
 
-Para recompilar:
+## Compilação
+
+Compile com **XeLaTeX** (ou LuaLaTeX) para obter o desenho pretendido:
 
 ```bash
-pdflatex -interaction=nonstopmode -halt-on-error rg_72_aulas.tex
-pdflatex -interaction=nonstopmode -halt-on-error rg_72_aulas.tex
+xelatex -interaction=nonstopmode -halt-on-error rg_72_aulas.tex
+xelatex -interaction=nonstopmode -halt-on-error rg_72_aulas.tex
+xelatex -interaction=nonstopmode -halt-on-error rg_72_aulas.tex
 cp rg_72_aulas.pdf ../Relatividade_Geral_72_Aulas.pdf
 ```
 
-Para regenerar as figuras de um capítulo (exemplo, Capítulo 2):
+São três passadas por causa do sumário e das referências cruzadas. Com **pdfLaTeX** também compila sem erro — `estilo-rg.sty` detecta o motor e cai em Palatino/Helvetica —, só com menos refinamento tipográfico.
+
+Fontes usadas quando disponíveis: TeX Gyre Pagella no corpo (math casado via `mathpazo`), Poppins nos títulos e JetBrains Mono no código. Poppins e JetBrains Mono são gratuitas; se não estiverem instaladas, o pacote cai sozinho em TeX Gyre Adventor e DejaVu Sans Mono.
+
+## Paleta
+
+| cor           | hex       | uso                                   |
+|---------------|-----------|---------------------------------------|
+| `rgTinta`     | `#16222B` | corpo do texto (preto frio)           |
+| `rgPetroleo`  | `#0E5A6B` | primária: títulos, filetes, caixas    |
+| `rgAmbar`     | `#C1832F` | acento: resultados centrais, ênfase   |
+| `rgTerracota` | `#A6503C` | alerta: caixas "onde se erra"         |
+| `rgGrafite`   | `#5A6B75` | texto secundário, legendas, cabeçalho |
+
+As figuras usam exatamente as mesmas cores; a definição está no topo de cada script Python.
+
+## Ambientes disponíveis
+
+Vindos de `estilo-rg.sty`:
+
+- `objetivos` — abertura de capítulo
+- `central` — resultado central
+- `atencao` — erro comum ("onde se erra")
+- `caixacodigo` + `lstlisting` — listagem com barra de título
+- `saida` + `lstlisting[style=rgsaida]` — saída de programa
+- `\rgcodigo{título}{linguagem}{arquivo}` — atalho para imprimir um script inteiro
+
+Definidos no preâmbulo do `.tex`, na mesma paleta: `resultado`, `roteiro`, `leitura` e os ambientes de teorema `definition`, `example`, `exercise`, `activity`, `proposition`, `remark`.
+
+Capítulos de título longo devem usar título curto para o cabeçalho, como em
+`\chapter[Soluções esféricas e Schwarzschild]{Soluções esféricas, estrelas e Schwarzschild}`.
+
+## Figuras
+
+Para regenerar as figuras de um capítulo (exemplos):
 
 ```bash
 python3 codigo/cap02_figuras.py
 python3 codigo/cap02_tempo_proprio.py
+python3 codigo/cap07_curvatura.py
+python3 codigo/cap10_ondas.py
+python3 codigo/cap11_geodesicas_schwarzschild.py
+python3 codigo/cap12_buracos_negros.py
+python3 codigo/cap13_friedmann.py
 ```
+
+Os scripts rodam sem argumentos, escrevem em `figuras/` e imprimem no terminal exatamente os números citados no texto das seções de resolução numérica.
 
 Convenção de nomes: cada script/figura leva o prefixo `capNN_` do capítulo a que pertence, para manter a correspondência entre `codigo/`, `figuras/` e as seções do `.tex` à medida que novos capítulos forem revisados.
