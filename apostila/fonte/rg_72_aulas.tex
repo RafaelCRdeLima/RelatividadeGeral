@@ -195,9 +195,14 @@ que o \emph{Conteúdo extra} de cada capítulo pede que você faça.
 
 \mainmatter
 
-\chapter{Plano do curso}
+\chapter*{Plano do curso}
+\phantomsection
+\addcontentsline{toc}{chapter}{Plano do curso}
+\markboth{Plano do curso}{}
 
-\section{Ementa expandida}
+\section*{Ementa expandida}
+\phantomsection
+\addcontentsline{toc}{section}{Ementa expandida}
 
 Relatividade restrita. Espaço-tempo de Minkowski. Diagramas espaço-tempo.
 Quadrivetores. Energia, momento e fótons. Tensores, formas lineares, métrica e
@@ -208,7 +213,9 @@ gravitacionais. Soluções esfericamente simétricas. Estrelas relativísticas.
 Geometria de Schwarzschild. Buracos negros. Cosmologia de Friedmann-Lemaître-
 Robertson-Walker. Problemas selecionados de astrofísica relativística.
 
-\section{Objetivos de aprendizagem}
+\section*{Objetivos de aprendizagem}
+\phantomsection
+\addcontentsline{toc}{section}{Objetivos de aprendizagem}
 
 Ao final do curso, o estudante deverá ser capaz de:
 
@@ -223,13 +230,15 @@ Ao final do curso, o estudante deverá ser capaz de:
   \item formular as equações cosmológicas de Friedmann e interpretar soluções simples.
 \end{itemize}
 
-\section{Distribuição dos 72 encontros}
+\section*{Distribuição dos 72 encontros}
+\phantomsection
+\addcontentsline{toc}{section}{Distribuição dos 72 encontros}
 
-A tabela abaixo e o calendário da Seção~\ref{sec:calendario} descrevem o mesmo
+A tabela abaixo e o \hyperref[sec:calendario]{calendário aula a aula} descrevem o mesmo
 plano em duas resoluções: aqui por módulo, lá aula a aula. O número de
 encontros de cada módulo foi calibrado pela extensão real do capítulo
 correspondente, de modo que a média fica em torno de duas páginas por
-encontro. Os capítulos de 5 a 9 recebem proporcionalmente menos páginas por
+encontro. Os capítulos de 4 a 8 recebem proporcionalmente menos páginas por
 aula de propósito: são os mais densos conceitualmente, e neles o quadro-negro
 faz mais trabalho que o texto.
 
@@ -265,7 +274,9 @@ complementar: são o lugar onde os resultados enunciados no texto viram números
 verificados, e alimentam diretamente os quatro projetos finais. Todos os
 scripts acompanham a apostila em \texttt{codigo/} e rodam sem argumentos.
 \end{roteiro}
-\section{Avaliação sugerida}
+\section*{Avaliação sugerida}
+\phantomsection
+\addcontentsline{toc}{section}{Avaliação sugerida}
 
 \begin{itemize}
   \item Listas quinzenais de problemas: 40\%.
@@ -273,7 +284,9 @@ scripts acompanham a apostila em \texttt{codigo/} e rodam sem argumentos.
   \item Seminário final ou projeto computacional curto: 20\%.
 \end{itemize}
 
-\section{Calendário aula a aula}
+\section*{Calendário aula a aula}
+\phantomsection
+\addcontentsline{toc}{section}{Calendário aula a aula}
 \label{sec:calendario}
 
 \scriptsize
@@ -287,9 +300,9 @@ Aula & Foco & Seções da apostila a cobrir \\
 \midrule
 \endhead
 1 & Apresentação e escala física da RG & Plano do curso: Ementa expandida, Objetivos de aprendizagem, Distribuição dos 72 encontros, Avaliação sugerida. Leitura orientadora: Prefácio. \\
-2 & Eventos e intervalo & Relatividade especial: Eventos, observadores e intervalo. \\
+2 & Newton, Einstein e o intervalo & Relatividade especial: Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
 3 & Tempo próprio e causalidade & Relatividade especial: Tempo próprio; Leitura física do intervalo. \\
-4 & Transformações de Lorentz & Relatividade especial: Transformações de Lorentz, com a dedução a partir da invariância do intervalo. \\
+4 & Transformações de Lorentz & Relatividade especial: Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. \\
 5 & Contração, dilatação e simultaneidade & Relatividade especial: Contração e dilatação sem mistério; Exemplos resolvidos adicionais. \\
 6 & Paradoxo dos gêmeos & Relatividade especial: Paradoxo dos gêmeos; Problemas orientados. \\
 7 & Oficina computacional I & Relatividade especial: Resolução numérica (Python e Mathematica); Exercícios. \\
@@ -372,7 +385,148 @@ invariante fundamental e o tempo próprio como quantidade física medida por
 um relógio ao longo de uma linha de mundo.
 \end{objetivos}
 
+\section{Newton e Einstein: duas visões de mundo}
+\label{sec:galileu}
+
+Vale começar pelo quadro que a relatividade veio substituir, porque a maior
+parte da dificuldade do curso não está na matemática --- está em desmontar
+hipóteses que parecem óbvias por nunca terem sido enunciadas.
+
+\textbf{O mundo de Newton.} Nos \textit{Principia}, espaço e tempo são o palco
+onde a física acontece, e o palco não participa da peça. O espaço é absoluto:
+existe um ``aqui'' com sentido próprio, independente de qualquer corpo. O
+tempo é absoluto e universal, o mesmo para todos os observadores, correndo
+uniformemente sem relação com nada externo. Duas consequências vêm de graça e
+serão as primeiras a cair. A primeira é que a simultaneidade é absoluta:
+perguntar se dois eventos distantes aconteceram ``ao mesmo tempo'' tem uma
+resposta única, boa para todos. A segunda é que não existe velocidade máxima:
+velocidades simplesmente se somam, e nada impede que um corpo ultrapasse
+qualquer valor dado. Nesse mundo, a gravidade age instantaneamente à
+distância: mover o Sol agora mudaria a órbita da Terra agora.
+
+\textbf{O mundo de Einstein.} A relatividade nasce da observação de que o
+tempo universal não sobrevive ao experimento. Dois relógios em movimento
+relativo marcam intervalos diferentes entre os mesmos dois eventos, e não há
+como eleger um deles como o certo --- ambos estão certos. Em compensação,
+alguma coisa precisa ser comum a todos, ou não haveria física possível: o que
+é comum é a velocidade da luz e, junto com ela, uma combinação de tempo e
+distância chamada \emph{intervalo}, que é o objeto da
+Seção~\ref{sec:eventos-intervalo}. Tempo e espaço deixam de ser dois absolutos
+separados e passam a ser dois aspectos de uma única estrutura, o espaço-tempo.
+Como existe uma velocidade máxima, nenhuma influência é instantânea, e a
+gravidade newtoniana --- que é instantânea por construção --- fica insustentável:
+é esse impasse que a relatividade geral vem resolver, transformando o palco em
+personagem.
+
+\begin{center}
+\small
+\begin{tabular}{p{3.6cm}p{4.4cm}p{4.4cm}}
+\toprule
+ & Newton & Einstein \\
+\midrule
+Tempo & absoluto, universal & relativo ao observador \\
+Espaço & absoluto, palco fixo & inseparável do tempo \\
+Simultaneidade & absoluta & depende do referencial \\
+Velocidade máxima & não existe & $c$, a mesma para todos \\
+Soma de velocidades & $u'=u-v$ & $u'=(u-v)/(1-uv)$ \\
+O que é invariante & o tempo e a distância, separadamente & o intervalo
+$\dd s^2$, que os combina \\
+Gravidade & força instantânea à distância & curvatura do espaço-tempo (RG) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+O resto desta seção torna a primeira coluna precisa: escreve a transformação
+que traduz o mundo de Newton e mostra exatamente onde ela falha.
+
+\textbf{A transformação de Galileu.} Sejam $S$ e $S'$ dois referenciais
+inerciais com eixos paralelos, origens coincidentes em $t=0$, e $S'$
+deslocando-se com velocidade $v$ na direção $+x$ de $S$. A resposta de Galileu
+é a que o senso comum dita:
+\begin{equation}
+  t'=t,\qquad
+  x'=x-vt,\qquad
+  y'=y,\qquad
+  z'=z .
+  \label{eq:galileu}
+\end{equation}
+A segunda equação apenas desconta o quanto a origem de $S'$ andou. A primeira
+--- $t'=t$ --- é a hipótese forte, e passa despercebida justamente por parecer
+óbvia: é o tempo absoluto de Newton escrito em uma linha.
+
+Três consequências saem de \eqref{eq:galileu} imediatamente. \emph{Primeira},
+as velocidades se somam: derivando $x'=x-vt$ em relação a $t'=t$, uma
+partícula com velocidade $u$ em $S$ tem
+\begin{equation}
+  u'=u-v
+  \label{eq:galileu-velocidades}
+\end{equation}
+em $S'$ --- é a regra que todo mundo usa ao ultrapassar um carro na estrada.
+\emph{Segunda}, a aceleração não muda: derivando mais uma vez, $a'=a$, porque
+$v$ é constante. Como massas e forças também não mudam nessa descrição,
+$F=ma$ tem exatamente a mesma forma nos dois referenciais: a mecânica de
+Newton é insensível a \eqref{eq:galileu}, e é por isso que não se sente
+movimento uniforme dentro de um trem. \emph{Terceira}, distâncias entre
+eventos simultâneos são preservadas, já que $\Delta t=0$ implica
+$\Delta x'=\Delta x$. Note que esses dois últimos itens são o conteúdo da
+primeira coluna da tabela: o que Galileu preserva é o tempo de um lado e a
+distância do outro, cada um por si.
+
+\textbf{Onde isso quebra.} O problema aparece ao aplicar
+\eqref{eq:galileu-velocidades} à luz. Se um pulso tem velocidade $u=c$ em $S$,
+então em $S'$ ele teria velocidade $c-v$: um observador que corresse atrás do
+pulso o veria mais lento, e um que corresse com $v=c$ o veria parado. Duas
+coisas dizem que isso está errado. Uma é teórica: as equações de Maxwell
+fornecem a velocidade das ondas eletromagnéticas em termos de constantes do
+vácuo, sem qualquer referência a um observador --- para que \eqref{eq:galileu}
+valesse, elas teriam de mudar de forma de um referencial para outro, e nenhum
+experimento jamais mostrou isso. A outra é experimental: desde
+Michelson e Morley, medidas cada vez mais precisas procuram a variação de $c$
+com o movimento do laboratório e encontram sempre o mesmo valor.
+
+Einstein tomou esse resultado não como um problema a ser explicado, mas como
+ponto de partida. Os dois postulados da relatividade restrita são:
+
+\begin{enumerate}
+  \item as leis da física têm a mesma forma em todos os referenciais
+  inerciais --- o princípio da relatividade, que já valia para Newton;
+  \item a velocidade da luz no vácuo tem o mesmo valor $c$ em todos os
+  referenciais inerciais, independentemente do movimento da fonte ou do
+  observador.
+\end{enumerate}
+
+O segundo postulado é incompatível com \eqref{eq:galileu}, logo a
+transformação de Galileu está errada --- não como aproximação, mas como
+afirmação exata. E, como \eqref{eq:galileu} decorre diretamente de $t'=t$, o
+que está errado é o tempo absoluto.
+
+\begin{atencao}
+A culpada é a primeira equação de \eqref{eq:galileu}, e não a segunda. Enquanto
+$t'=t$ estiver fixo, o tempo não participa da transformação, e a única coisa
+que sobra para ajustar é a posição --- insuficiente para manter $c$ fixo.
+Salvar o segundo postulado exige que o tempo de um referencial dependa também
+da \emph{posição} no outro, isto é, que a simultaneidade deixe de ser
+absoluta. Esse é o preço, e é inegociável.
+\end{atencao}
+
+Nada disso torna \eqref{eq:galileu} inútil. Para $v\ll c$ a diferença entre a
+transformação correta e a de Galileu é pequena demais para ser notada, e é por
+isso que a mecânica newtoniana descreve tão bem um avião, um planeta ou uma
+bala de canhão. O que vem a seguir não joga a transformação de Galileu fora:
+encontra a transformação exata, da qual \eqref{eq:galileu} é o limite de
+baixas velocidades --- e, antes disso, identifica a grandeza que substitui o
+tempo absoluto no papel de referência comum a todos os observadores.
+
+\begin{activity}
+Um trem se move a $v$ e um passageiro caminha a $u'$ dentro dele, no sentido
+do movimento. Use \eqref{eq:galileu-velocidades} para obter a velocidade do
+passageiro em relação ao solo, e repita o raciocínio para um pulso de luz
+emitido de uma lanterna do passageiro. Aponte, em cada caso, qual afirmação
+experimental está sendo violada --- ou não.
+\end{activity}
+
 \section{Eventos, observadores e intervalo}
+\label{sec:eventos-intervalo}
 
 Um evento é algo que ocorre em um ponto do espaço e em um instante. Em um
 referencial inercial, escrevemos suas coordenadas como
@@ -393,28 +547,243 @@ O intervalo $\dd s^2$ é invariante sob transformações de Lorentz. Essa
 invariância substitui a noção newtoniana de tempo absoluto.
 \end{resultado}
 
+Essa afirmação é a base de tudo o que vem depois, e não é preciso esperar
+pelas transformações de Lorentz para justificá-la. Ela decorre do segundo
+postulado da Seção~\ref{sec:galileu} --- a luz tem a mesma velocidade em todos
+os referenciais inerciais --- somado ao teorema de Pitágoras. O argumento abaixo é físico e
+usa apenas álgebra elementar; a demonstração geral, válida para uma
+transformação de Lorentz qualquer, está no Apêndice~\ref{ap:invariancia} e
+pode ser lida depois da Seção~\ref{sec:transformacoes-lorentz}.
+
+\textbf{Primeiro caso: pares de eventos com $\dd s^2=0$.} Antes de falar em
+invariância, vale perguntar o que a equação $\dd s^2=0$ diz sobre dois
+eventos. Ela diz
+\[
+  -\dd t^2+\dd x^2+\dd y^2+\dd z^2=0
+  \qquad\Longleftrightarrow\qquad
+  \frac{\sqrt{\dd x^2+\dd y^2+\dd z^2}}{|\dd t|}=1 ,
+\]
+ou seja: a distância entre os dois eventos, dividida pelo tempo que os separa,
+vale $1$ --- que, nas unidades adotadas, é $c$. Repare que essa é uma
+identidade algébrica, e ainda não uma afirmação sobre luz: $\dd s^2=0$ é o
+critério para que os dois eventos possam ser ligados por um sinal que se
+propague exatamente com velocidade $c$, seja ele qual for.
+
+Quem liga esse critério à luz --- e é aqui que a física entra --- é o segundo
+postulado. Ele age nas duas direções:
+
+\begin{itemize}
+  \item se os dois eventos estão sobre a trajetória de um pulso de luz, então
+  esse pulso tem velocidade $c$ \emph{em qualquer} referencial inercial, que é
+  o que o postulado afirma; logo o quociente acima vale $1$ para todos eles, e
+  $\dd s^2=0$ em qualquer referencial;
+  \item reciprocamente, se algum observador encontra $\dd s^2=0$ para um par
+  de eventos, então um pulso de luz emitido no primeiro evento, na direção
+  certa, chega exatamente ao segundo --- e recai-se no item anterior.
+\end{itemize}
+
+Portanto o conjunto dos pares de eventos com $\dd s^2=0$ é o mesmo para todos
+os observadores: nesse caso a invariância do intervalo não é um teorema, é o
+postulado traduzido para a linguagem de $\dd s^2$. Mas convém ser preciso
+sobre o que isso ainda \emph{não} garante: apenas que $\dd s^2$ se anula, ou
+não, simultaneamente para todos. Quando $\dd s^2\ne0$, nada até aqui impede
+que dois observadores atribuam números diferentes ao mesmo par de eventos. É o
+próximo caso que fecha essa lacuna.
+
+\textbf{Segundo caso: um relógio de luz.} Construa um relógio com dois
+espelhos paralelos separados por uma distância $L$ e um pulso de luz que vai e
+volta entre eles; cada ida e volta é um tique. Oriente o relógio de modo que a
+linha que une os espelhos seja \emph{perpendicular} à direção do movimento
+(Figura~\ref{fig:relogio-luz}).
+
+No referencial $S'$ em que o relógio está parado, o pulso sobe e desce na
+vertical. Como a luz percorre a distância $2L$ com velocidade $1$, um tique
+dura
+\[
+  \Delta t'=2L ,
+\]
+e os dois eventos que o delimitam --- a emissão do pulso e o seu retorno ao
+espelho de baixo --- acontecem no \emph{mesmo lugar}, de modo que
+$\Delta x'=\Delta y'=\Delta z'=0$. O intervalo entre eles, calculado em $S'$, é
+simplesmente
+\[
+  \Delta s'^2=-\Delta t'^2=-(2L)^2 .
+\]
+
+Agora descreva o mesmo tique em $S$, referencial no qual o relógio desliza com
+velocidade $v$ ao longo de $x$. Durante o tique, o relógio avança
+$\Delta x=v\,\Delta t$, e o pulso, visto de $S$, não sobe na vertical: ele
+percorre dois lados de um triângulo isósceles, subindo na diagonal e descendo
+na diagonal. Cada diagonal é a hipotenusa de um triângulo retângulo de catetos
+$L$ e $\Delta x/2$, e o caminho total do pulso é
+\[
+  \text{caminho}
+  =2\sqrt{L^{2}+\Big(\tfrac{\Delta x}{2}\Big)^{2}}
+  =\sqrt{4L^{2}+\Delta x^{2}} .
+\]
+Aqui entra o postulado, e é a única vez que ele é usado: em $S$ a luz também
+viaja com velocidade $1$, então o caminho percorrido é numericamente igual ao
+tempo gasto, caminho${}=\Delta t$. Elevando ao quadrado,
+\[
+  \Delta t^{2}=4L^{2}+\Delta x^{2}
+  \qquad\Longrightarrow\qquad
+  -\Delta t^{2}+\Delta x^{2}=-(2L)^{2} .
+\]
+O lado esquerdo é $\Delta s^2$ calculado em $S$ (as direções transversas não
+contribuem, porque o relógio se move ao longo de $x$) e o lado direito é o
+$\Delta s'^2$ obtido no parágrafo anterior. Ou seja,
+\[
+  \Delta s^2=\Delta s'^2 .
+\]
+\begin{resultado}
+Dois observadores em movimento relativo, usando réguas e relógios diferentes e
+discordando tanto do tempo quanto da posição de cada evento, obtêm o mesmo
+número para essa combinação.
+\end{resultado}
+
+Uma hipótese ficou implícita: que a separação $L$ entre os espelhos, que é
+transversal ao movimento, seja a mesma em $S$ e em $S'$. Isso não é gratuito.
+Imagine dois anéis que, em repouso, são idênticos, aproximando-se um do outro
+ao longo do eixo comum. Se o movimento encolhesse comprimentos transversais, cada
+observador diria que o anel do outro é o menor e preveria que o \emph{seu}
+anel passa por fora; mas qual anel passou por dentro de qual é um fato
+absoluto, registrado por qualquer marca de raspagem. A única possibilidade
+consistente é que comprimentos perpendiculares ao movimento não mudem.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{cap02_relogio_luz.pdf}
+\caption{O relógio de luz. À esquerda, no referencial $S'$ em que ele está
+parado: o pulso sobe e desce entre os espelhos e o tique dura $\Delta t'=2L$.
+À direita, no referencial $S$, em que o relógio avança $\Delta x=v\,\Delta t$
+durante o mesmo tique: o pulso percorre duas hipotenusas de catetos $L$ e
+$\Delta x/2$. Como a velocidade da luz é a mesma nos dois quadros, o caminho
+mais longo à direita significa um tique mais demorado --- e Pitágoras aplicado
+ao triângulo destacado dá $\Delta t^2=(2L)^2+\Delta x^2$, isto é,
+$-\Delta t^2+\Delta x^2=-\Delta t'^2$.}
+\label{fig:relogio-luz}
+\end{figure}
+
+\textbf{Por que um único tique já basta.} O cálculo foi feito para uma ida e
+volta, mas nada muda se o relógio bater $n$ vezes: o zigue-zague passa a ter
+$2n$ lados, o caminho total vira $\sqrt{(2nL)^2+\Delta x^2}$ e a conclusão se
+repete com $\Delta t'=2nL$. E qualquer par de eventos com separação temporal
+pode ser posto nessa forma --- se uma partícula livre consegue estar presente
+nos dois eventos, basta imaginar o relógio embarcado nela. Nesse caso
+$-\Delta s^2=\Delta t'^2$ é o quadrado do tempo marcado \emph{pelo próprio
+relógio}, ou seja, o número de tiques que aparece no mostrador. Esse número é
+um fato físico, e não uma convenção de quem descreve: pode ser anotado num
+papel e mostrado a qualquer observador. A invariância do intervalo é a
+tradução matemática dessa obviedade.
+
+Sobram os pares com separação espacial, para os quais nenhum relógio consegue
+estar presente nos dois eventos. Eles ficam cobertos por continuidade: como
+nenhuma região do espaço-tempo é privilegiada, as coordenadas de $S'$ dependem
+\emph{linearmente} das de $S$, e portanto $\Delta s'^2$ é um polinômio de
+segundo grau nas diferenças $\Delta t,\Delta x,\Delta y,\Delta z$. Dois
+polinômios que coincidem em toda uma região --- aqui, em todas as separações
+temporais, que preenchem o interior do cone de luz --- coincidem em toda
+parte. O Apêndice~\ref{ap:invariancia} refaz esse último passo de forma
+direta, sem apelo à continuidade, e mostra além disso que a invariância não é
+uma propriedade acidental do relógio escolhido: dada a constância de $c$, ela
+é a única possibilidade.
+
+\begin{atencao}
+\emph{Invariante} não é \emph{constante}. Dizer que $\dd s^2$ é invariante
+significa que observadores diferentes, medindo o mesmo par de eventos com
+réguas e relógios diferentes, obtêm o mesmo número; não significa que $\dd
+s^2$ tenha o mesmo valor para pares de eventos diferentes. E a invariância é
+uma propriedade da \emph{combinação} $-\dd t^2+\dd x^2+\dd y^2+\dd z^2$:
+tomados isoladamente, $\dd t$ e $\dd x$ mudam de referencial para referencial,
+e é precisamente por isso que dilatação do tempo e contração do comprimento
+existem. Um erro relacionado é concluir de $\dd s'^2=\dd s^2$ que $\dd s^2>0$
+sempre; o sinal é invariante, mas pode ser dos três tipos.
+\end{atencao}
+
 Quando $\dd s^2<0$, a separação é temporal; quando $\dd s^2=0$, é nula; quando
 $\dd s^2>0$, é espacial. Partículas massivas percorrem curvas temporais. A luz
-percorre curvas nulas.
+percorre curvas nulas. A invariância recém-provada garante que essa
+classificação é absoluta: como o valor de $\dd s^2$ é o mesmo em todos os
+referenciais, o seu sinal também é, e dois observadores nunca discordam sobre
+se dois eventos podem ou não estar ligados por um sinal físico.
 
 \section{Tempo próprio}
 
-Para uma partícula massiva, define-se o tempo próprio $\tau$ por
+Ao longo da linha de mundo de uma partícula massiva a separação é temporal, de
+modo que $\dd s^2<0$ e $-\dd s^2$ é positivo. Define-se então o tempo próprio
+$\tau$ por
 \[
-  \dd \tau^2=-\dd s^2.
+  \dd \tau^2=-\dd s^2 .
 \]
-Se a partícula tem velocidade ordinária $v$, então
+O nome se justifica assim: no referencial que acompanha a partícula, ela está
+parada, $\dd x=\dd y=\dd z=0$, e sobra $\dd\tau^2=\dd t^2$. Ou seja, $\tau$ é
+o tempo marcado pelo relógio que viaja \emph{com} a partícula --- o relógio de
+luz da Seção~\ref{sec:eventos-intervalo} embarcado nela. E, como $\dd s^2$ é
+invariante, $\dd\tau$ também é: todos os observadores concordam sobre quanto
+esse relógio andou, ainda que discordem de $\dd t$.
+
+Falta saber quanto vale $\dd\tau$ para quem \emph{não} viaja com a partícula.
+Não é preciso conhecer as transformações de Lorentz para responder: basta a
+definição do intervalo e a definição de velocidade. Em um referencial em que a
+partícula se desloca com velocidade ordinária de módulo $v$, isto é
+$\dd x^2+\dd y^2+\dd z^2=v^2\,\dd t^2$, temos
 \[
-  \dd \tau=\dd t\sqrt{1-v^2}=\frac{\dd t}{\gamma},
-  \qquad
-  \gamma=\frac{1}{\sqrt{1-v^2}}.
+  \dd\tau^2=-\dd s^2=\dd t^2-\big(\dd x^2+\dd y^2+\dd z^2\big)
+           =\dd t^2-v^2\,\dd t^2=\big(1-v^2\big)\,\dd t^2 ,
 \]
-Assim, o relógio comóvel à partícula mede $\tau$, não $t$.
+e portanto
+\begin{equation}
+  \dd\tau=\dd t\,\sqrt{1-v^2} .
+  \label{eq:tempo-proprio}
+\end{equation}
+O fator $\sqrt{1-v^2}$ apareceu de uma conta de duas linhas, não de uma
+hipótese nova. Ele é menor que $1$ para qualquer $v\ne0$: o relógio que viaja
+marca menos do que o tempo coordenado. Como o seu inverso reaparece o tempo
+todo, ele ganha nome próprio,
+\[
+  \gamma\equiv\frac{1}{\sqrt{1-v^2}}\ \ge\ 1,
+  \qquad\text{de modo que}\qquad
+  \dd\tau=\frac{\dd t}{\gamma} .
+\]
+Por enquanto $\gamma$ é apenas uma abreviação para esse fator. Na
+Seção~\ref{sec:transformacoes-lorentz} o mesmo símbolo aparecerá como
+coeficiente da transformação de Lorentz, e não por coincidência: os dois vêm
+da mesma combinação $1-v^2$, que por sua vez vem da invariância do intervalo.
+
+Esse resultado não é novo. O relógio de luz da
+Seção~\ref{sec:eventos-intervalo} já o continha: lá, um tique durava
+$\Delta t'=2L$ no referencial do próprio relógio e $\Delta t$ no referencial
+em que ele se move, com $\Delta t^2=(2L)^2+v^2\Delta t^2$. Isolando,
+$(2L)^2=\Delta t^2(1-v^2)$, ou seja $\Delta t'=\Delta t\sqrt{1-v^2}$, que é
+exatamente \eqref{eq:tempo-proprio} com $\Delta t'=\Delta\tau$. A dilatação do
+tempo, portanto, não é um efeito à parte: é a leitura de
+\eqref{eq:tempo-proprio}, e o zigue-zague da Figura~\ref{fig:relogio-luz} é o
+seu retrato.
 
 \section{Transformações de Lorentz}
+\label{sec:transformacoes-lorentz}
 
-Em vez de simplesmente declarar a transformação, vale a pena deduzi-la: ela é
-a única mudança de coordenadas linear que preserva o intervalo $\dd s^2$ entre
+Agora que o intervalo está em mãos, dá para diagnosticar a transformação de
+Galileu com precisão, e não apenas dizer que ela contraria o postulado. Como
+\eqref{eq:galileu} dá $\dd t'=\dd t$ e $\dd x'=\dd x-v\,\dd t$,
+\[
+\begin{aligned}
+  \dd s'^2&=-\dd t'^2+\dd x'^2+\dd y'^2+\dd z'^2\\
+          &=-\dd t^2+\big(\dd x-v\,\dd t\big)^2+\dd y^2+\dd z^2\\
+          &=\underbrace{-\dd t^2+\dd x^2+\dd y^2+\dd z^2}_{\dd s^2}
+            \;-\;2v\,\dd t\,\dd x+v^2\dd t^2 .
+\end{aligned}
+\]
+Sobrou o termo $-2v\,\dd t\,\dd x+v^2\dd t^2$, que só se anula em situações
+particulares (por exemplo $\dd t=0$, ou $v=0$): a transformação de Galileu
+\emph{não} preserva o intervalo. E o vilão é o termo cruzado $\dd t\,\dd x$
+--- exatamente o tipo de termo cujo cancelamento fez a conta do relógio de luz
+fechar, na Seção~\ref{sec:eventos-intervalo}. Para eliminá-lo é preciso que a
+nova coordenada temporal também contenha um pedaço de $x$, e é isso que a
+transformação correta vai fazer.
+
+Em vez de simplesmente declará-la, vale a pena deduzi-la: ela é a única
+mudança de coordenadas linear que preserva o intervalo $\dd s^2$ entre
 referenciais inerciais. Essa dedução mostra que a forma de $\gamma$ não é um
 acidente, mas uma consequência direta de dois fatos geométricos.
 
@@ -439,14 +808,25 @@ $\dd t^2$, $\dd x^2$ e $\dd t\,\dd x$, obtém-se
 \[
   -A^2+C^2=-1,\qquad -B^2+D^2=1,\qquad -AB+CD=0.
 \]
-Usando $C=-Dv$ na primeira equação, $D^2v^2-A^2=-1$. A simetria entre os dois
-referenciais (o que $S$ vê como velocidade $v$, $S'$ vê como $-v$, e nenhum
-referencial é privilegiado) impõe $A=D$. Chamando esse valor comum de
-$\gamma(v)$, a primeira equação dá $\gamma^2(1-v^2)=1$, isto é,
+Usando $C=-Dv$, essas três equações ficam
 \[
-  \gamma=\frac{1}{\sqrt{1-v^2}}.
+  A^2-D^2v^2=1,\qquad D^2-B^2=1,\qquad AB=-D^2v.
 \]
-A terceira equação então fornece $B=-\gamma v$. O resultado é
+Elas já determinam tudo, e o caminho é curto: \emph{isole $B$ na terceira,
+substitua na segunda e fatore}. A primeira garante $A^2=1+D^2v^2\ge1$, logo
+$A\ne0$ e a terceira dá $B=-D^2v/A$. Levando à segunda e multiplicando por
+$A^2$,
+\[
+  D^2\bigl(A^2-D^2v^2\bigr)=A^2 ,
+\]
+e o parêntese vale $1$ pela primeira equação: sobra $D^2=A^2$. Dos dois
+sinais, $D=-A$ dá $x'=-A(x-vt)$, o mesmo movimento composto com a reflexão
+$x\to-x$, que não tende à identidade quando $v\to0$. Fica $A=D$. Chamando esse
+valor comum de $\gamma(v)$, a primeira equação dá $\gamma^2(1-v^2)=1$, isto é,
+\[
+  \gamma=\frac{1}{\sqrt{1-v^2}},
+\]
+com $\gamma>0$ pelo mesmo critério. Então $B=-D^2v/A=-\gamma v$:
 \[
   t'=\gamma(t-vx), \qquad
   x'=\gamma(x-vt), \qquad
@@ -458,10 +838,20 @@ Duas observações tornam essa dedução mais transparente. Primeiro, nenhuma
 hipótese sobre luz foi usada diretamente -- apenas linearidade e invariância
 de uma forma quadrática. A velocidade da luz aparece como a velocidade
 invariante permitida por essa geometria, não como um ingrediente extra.
-Segundo, no limite $v\ll1$ (em unidades com $c=1$, isso significa $v\ll c$),
-$\gamma\to1$ e a transformação se reduz à transformação de Galileu
-$t'\approx t$, $x'\approx x-vt$: a relatividade especial contém a mecânica
-newtoniana como caso limite.
+Segundo, a relatividade especial contém a mecânica newtoniana como caso
+limite --- com um cuidado que a notação $c=1$ esconde. Fazer $\gamma\to1$
+sozinho deixaria $t'=t-vx$, que não é \eqref{eq:galileu}. Restaurando $c$,
+\[
+  t'=\gamma\Bigl(t-\frac{vx}{c^2}\Bigr),\qquad
+  x'=\gamma\bigl(x-vt\bigr),
+\]
+os dois termos cruzados não são da mesma ordem: um carrega $1/c^2$, o outro
+não. O limite newtoniano é $c\to\infty$ com $v$ fixo --- e não $v\to0$, que
+daria a identidade. Aí $\gamma\to1$, o termo $vx/c^2$ desaparece e sobra
+exatamente \eqref{eq:galileu}. O que morre é justamente o termo de
+simultaneidade, em acordo com a Seção~\ref{sec:galileu}: $x'=x-vt$ é
+cinemática trivial e sobrevive intacta, enquanto $t'=t$ --- a hipótese forte
+--- só se recupera no limite.
 
 A transformação preserva o intervalo e mistura tempo com espaço. A
 relatividade da simultaneidade nasce desse acoplamento: eventos com $\dd t=0$
@@ -535,10 +925,11 @@ os eventos podem ser ligados por um raio luminoso.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.6\textwidth]{cap02_cone_luz.pdf}
+\includegraphics[width=0.68\textwidth]{cap02_cone_luz.pdf}
 \caption{Cone de luz do evento $O$ no plano $(x,ct)$. Eventos no futuro ou
-passado causal de $O$ têm separação temporal; eventos em ``alhures'' têm
-separação espacial e não podem ser causalmente ligados a $O$. Os três pontos
+passado causal de $O$ têm separação temporal; os eventos das duas cunhas
+laterais têm separação espacial e não podem ser causalmente ligados a $O$
+--- daí o rótulo ``não causal''. Os três pontos
 marcados retomam os Exemplos resolvidos desta seção.}
 \label{fig:cone-luz}
 \end{figure}
@@ -1294,6 +1685,7 @@ numericamente em que condição vale a igualdade. Interprete o excesso.
 
 
 \chapter{Tensores no espaço-tempo plano}
+\label{cap:tensores-plano}
 
 \begin{objetivos}
 Dominar a notação de índices, distinguir vetores de um-formas e compreender a
@@ -4529,6 +4921,218 @@ Antes de aceitar uma conta com índices, verifique:
 
 Esse checklist é simples, mas resolve a maior parte dos erros algébricos em
 relatividade geral introdutória.
+
+\chapter{A invariância do intervalo: demonstração geral}
+\label{ap:invariancia}
+
+A Seção~\ref{sec:eventos-intervalo} justifica a invariância de $\dd s^2$ com
+um relógio de luz e o teorema de Pitágoras. Aquele argumento é físico e
+suficiente para começar o curso, mas deixa duas lacunas: ele trata um par de
+eventos de cada vez, e supõe conhecida a transformação entre os referenciais.
+Este apêndice fecha as duas. A demonstração vem em quatro etapas: fixar o que
+exatamente significa \emph{invariante}, verificar a afirmação por cálculo
+direto no \emph{boost} ao longo de $x$, reescrever a verificação em forma
+matricial --- o que a estende de uma vez a todo o grupo de Lorentz --- e, por
+fim, mostrar que a invariância não é uma propriedade acidental da
+transformação escolhida, mas a única possibilidade compatível com a constância
+da velocidade da luz. Ele usa a convenção de soma de Einstein e a notação de
+índices do Capítulo~\ref{cap:tensores-plano}, e a leitura natural é depois da
+Seção~\ref{sec:transformacoes-lorentz}.
+
+\textbf{Etapa 0: o enunciado preciso.} Sejam $S$ e $S'$ referenciais inerciais
+com coordenadas $x^\mu=(t,x,y,z)$ e $x'^\mu=(t',x',y',z')$ relacionadas por
+uma transformação linear
+\begin{equation}
+  x'^\mu=\Lambda^\mu{}_\nu\,x^\nu+a^\mu,
+  \label{eq:poincare}
+\end{equation}
+com $\Lambda^\mu{}_\nu$ e $a^\mu$ constantes; a linearidade é consequência da
+homogeneidade do espaço-tempo e é retomada na
+Seção~\ref{sec:transformacoes-lorentz}. Com a métrica de Minkowski
+$\eta_{\mu\nu}=\mathrm{diag}(-1,1,1,1)$, o intervalo entre dois eventos
+separados por $\Delta x^\mu$ é
+\begin{equation}
+  \Delta s^2=\eta_{\mu\nu}\,\Delta x^\mu\Delta x^\nu
+  =-\Delta t^2+\Delta x^2+\Delta y^2+\Delta z^2 .
+  \label{eq:intervalo-finito}
+\end{equation}
+Provar a invariância é provar que $\Delta s'^2=\Delta s^2$ para \emph{todo}
+par de eventos --- não para um par particular, e sem supor nada sobre o sinal
+de $\Delta s^2$. Como \eqref{eq:poincare} é linear com coeficientes
+constantes, diferenças e diferenciais obedecem à mesma regra,
+\[
+  \Delta x'^\mu=\Lambda^\mu{}_\nu\,\Delta x^\nu,
+  \qquad
+  \dd x'^\mu=\Lambda^\mu{}_\nu\,\dd x^\nu,
+\]
+e a constante $a^\mu$ cancela nos dois casos. Duas consequências que usaremos
+sem comentário adicional: a prova para separações infinitesimais vale
+automaticamente para separações finitas, e vice-versa; e translações no espaço
+e no tempo são invariâncias de graça, porque só diferenças de coordenadas
+aparecem em \eqref{eq:intervalo-finito}.
+
+\textbf{Etapa 1: cálculo direto para o \emph{boost} ao longo de $x$.} Tome
+$S'$ movendo-se com velocidade $v$ na direção $+x$ de $S$. A transformação é
+\begin{equation}
+  t'=\gamma(t-vx),\quad x'=\gamma(x-vt),\quad y'=y,\quad z'=z,
+  \qquad \gamma=\frac{1}{\sqrt{1-v^2}} ,
+  \label{eq:boost-x}
+\end{equation}
+cuja dedução está na Seção~\ref{sec:transformacoes-lorentz}; aqui ela é o dado
+de entrada. Diferenciando (os coeficientes são constantes),
+\[
+  \dd t'=\gamma(\dd t-v\,\dd x),\qquad
+  \dd x'=\gamma(\dd x-v\,\dd t),\qquad
+  \dd y'=\dd y,\qquad \dd z'=\dd z.
+\]
+Calcule o bloco $(t,x)$ do intervalo em $S'$, sem descartar nenhum termo:
+\[
+\begin{aligned}
+  -\dd t'^2+\dd x'^2
+  &=-\gamma^2(\dd t-v\,\dd x)^2+\gamma^2(\dd x-v\,\dd t)^2\\[2pt]
+  &=\gamma^2\Big[-\big(\dd t^2-2v\,\dd t\,\dd x+v^2\dd x^2\big)
+                 +\big(\dd x^2-2v\,\dd t\,\dd x+v^2\dd t^2\big)\Big]\\[2pt]
+  &=\gamma^2\Big[-\dd t^2+v^2\dd t^2+\dd x^2-v^2\dd x^2
+                 \;\underbrace{+2v\,\dd t\,\dd x-2v\,\dd t\,\dd x}_{=\,0}\Big]\\[2pt]
+  &=\gamma^2(1-v^2)\big(-\dd t^2+\dd x^2\big)
+   =-\dd t^2+\dd x^2 ,
+\end{aligned}
+\]
+onde a última igualdade usa $\gamma^2(1-v^2)=1$, que é exatamente a definição
+de $\gamma$ em \eqref{eq:boost-x}. Somando as direções transversas, que não
+mudam,
+\[
+  \dd s'^2=-\dd t'^2+\dd x'^2+\dd y'^2+\dd z'^2
+         =-\dd t^2+\dd x^2+\dd y^2+\dd z^2=\dd s^2 .
+\]
+Vale isolar onde cada hipótese entrou. Os termos cruzados $\dd t\,\dd x$ se
+cancelam porque o \emph{mesmo} fator $\gamma$ multiplica as duas linhas de
+\eqref{eq:boost-x} --- se a transformação de $t$ e a de $x$ tivessem fatores
+diferentes, sobraria um termo cruzado e o intervalo não seria invariante. E o
+valor específico de $\gamma$ é usado uma única vez, no último passo. Nada mais
+foi suposto: em particular, o cálculo não distingue separações temporais,
+nulas ou espaciais.
+
+É instrutivo repetir a conta em termos da \emph{rapidez} $\varphi$, definida
+por $v=\tanh\varphi$, de modo que $\gamma=\cosh\varphi$ e
+$\gamma v=\sinh\varphi$. A transformação \eqref{eq:boost-x} vira
+\[
+  t'=t\cosh\varphi-x\sinh\varphi,\qquad
+  x'=x\cosh\varphi-t\sinh\varphi,
+\]
+e então
+\[
+  -t'^2+x'^2=(-t^2+x^2)\big(\cosh^2\varphi-\sinh^2\varphi\big)=-t^2+x^2 .
+\]
+A invariância do intervalo é, nessa linguagem, a identidade
+$\cosh^2-\sinh^2=1$, exatamente como a invariância de $x^2+y^2$ sob rotações é
+$\cos^2+\sin^2=1$. Um \emph{boost} é uma rotação hiperbólica no plano $(t,x)$.
+
+\textbf{Etapa 2: o critério matricial, válido para qualquer $\Lambda$.} O
+cálculo da Etapa 1 é uma verificação para uma matriz específica. Para cobrir
+todas as transformações de Lorentz de uma vez, substitua
+$\dd x'^\mu=\Lambda^\mu{}_\nu\,\dd x^\nu$ diretamente no intervalo:
+\[
+  \dd s'^2=\eta_{\mu\nu}\,\dd x'^\mu\dd x'^\nu
+         =\eta_{\mu\nu}\Lambda^\mu{}_\alpha\Lambda^\nu{}_\beta\,
+          \dd x^\alpha\dd x^\beta
+         \equiv M_{\alpha\beta}\,\dd x^\alpha\dd x^\beta .
+\]
+Exigir $\dd s'^2=\dd s^2$ para todo $\dd x^\alpha$ significa que as formas
+quadráticas $M_{\alpha\beta}$ e $\eta_{\alpha\beta}$ coincidem em todo vetor.
+Como ambas são simétricas, isso força a igualdade dos coeficientes, e não
+apenas dos valores: tomando $\dd x^\mu$ ao longo de um único eixo obtém-se
+$M_{\alpha\alpha}=\eta_{\alpha\alpha}$, e tomando-o ao longo da soma de dois
+eixos, $M_{\alpha\alpha}+2M_{\alpha\beta}+M_{\beta\beta}
+=\eta_{\alpha\alpha}+2\eta_{\alpha\beta}+\eta_{\beta\beta}$, o que deixa
+$M_{\alpha\beta}=\eta_{\alpha\beta}$ também fora da diagonal. Logo
+\begin{equation}
+  \eta_{\mu\nu}\,\Lambda^\mu{}_\alpha\Lambda^\nu{}_\beta=\eta_{\alpha\beta},
+  \qquad\text{ou, em matrizes,}\qquad
+  \Lambda^{\mathsf T}\eta\,\Lambda=\eta .
+  \label{eq:criterio-lorentz}
+\end{equation}
+Essa é a condição \emph{necessária e suficiente} para a invariância --- e é
+também a definição do grupo de Lorentz. Provar que uma dada transformação
+preserva o intervalo reduz-se, portanto, a verificar
+\eqref{eq:criterio-lorentz}. Para o \emph{boost} \eqref{eq:boost-x}, no bloco
+$(t,x)$,
+\[
+  \Lambda=\begin{pmatrix}\gamma & -\gamma v\\ -\gamma v & \gamma\end{pmatrix},
+  \qquad
+  \eta=\begin{pmatrix}-1 & 0\\ 0 & 1\end{pmatrix},
+\]
+\[
+  \Lambda^{\mathsf T}\eta\,\Lambda
+  =\begin{pmatrix}\gamma & -\gamma v\\ -\gamma v & \gamma\end{pmatrix}
+   \begin{pmatrix}-\gamma & \gamma v\\ -\gamma v & \gamma\end{pmatrix}
+  =\begin{pmatrix}-\gamma^2(1-v^2) & 0\\ 0 & \gamma^2(1-v^2)\end{pmatrix}
+  =\begin{pmatrix}-1 & 0\\ 0 & 1\end{pmatrix},
+\]
+que é a Etapa 1 em três linhas. Duas consequências imediatas de
+\eqref{eq:criterio-lorentz} valem registro. Primeiro, tomando determinantes,
+$(\det\Lambda)^2\det\eta=\det\eta$, ou seja $\det\Lambda=\pm1$: nenhuma
+transformação de Lorentz é degenerada, e todas são inversíveis. Segundo, se
+$\Lambda_1$ e $\Lambda_2$ satisfazem \eqref{eq:criterio-lorentz}, então
+$\Lambda_1\Lambda_2$ e $\Lambda_1^{-1}$ também satisfazem --- o conjunto das
+transformações que preservam o intervalo é um grupo.
+
+\textbf{Etapa 3: rotações e \emph{boosts} em direção arbitrária.} O critério
+\eqref{eq:criterio-lorentz} liquida os dois casos restantes sem conta nova.
+Uma rotação espacial $R$ deixa $t$ intacto e preserva
+$\dd x^2+\dd y^2+\dd z^2$, logo preserva $\dd s^2$ e satisfaz
+\eqref{eq:criterio-lorentz}. Um \emph{boost} com velocidade
+$\bm v$ em direção qualquer pode ser escrito como
+$\Lambda_{\bm v}=R\,\Lambda_x(v)\,R^{-1}$, onde $R$ é a rotação que leva o
+eixo $x$ à direção de $\bm v$; como cada fator satisfaz
+\eqref{eq:criterio-lorentz} e a condição é fechada por produto, $\Lambda_{\bm
+v}$ também satisfaz. Isso cobre todas as transformações de Lorentz próprias e
+ortócronas, que é o que se usa na prática, e junto com \eqref{eq:poincare}
+cobre também as translações. A invariância do intervalo está provada.
+
+\textbf{Etapa 4: por que tinha de ser assim.} Falta a pergunta mais
+interessante: a invariância é uma coincidência da forma
+\eqref{eq:boost-x}, ou é forçada pela física? É forçada --- e a única entrada
+física necessária é que a luz se propaga com a mesma velocidade em todo
+referencial inercial. Suponha apenas isso, mais a linearidade de
+\eqref{eq:poincare}. Nas coordenadas de $S'$, o intervalo é a forma quadrática
+$M_{\alpha\beta}\,\dd x^\alpha\dd x^\beta$ definida na Etapa 2, com
+coeficientes constantes. O postulado diz que um raio de luz em $S$ é um raio
+de luz em $S'$; isto é, sempre que $\eta_{\alpha\beta}\dd x^\alpha\dd x^\beta=0$,
+também $M_{\alpha\beta}\dd x^\alpha\dd x^\beta=0$. Tome então
+$\dd x^\mu=(1,\bm n)$ com $\bm n$ unitário arbitrário, que é nulo para
+$\eta$. A hipótese dá
+\[
+  M_{00}+2M_{0i}n^i+M_{ij}n^in^j=0 \qquad\text{para todo } |\bm n|=1 .
+\]
+Trocando $\bm n\to-\bm n$ e subtraindo as duas relações, $M_{0i}n^i=0$ para
+todo $\bm n$, ou seja $M_{0i}=0$. Somando-as, $M_{ij}n^in^j=-M_{00}$ para todo
+$\bm n$ unitário: a forma simétrica $M_{ij}$ é constante sobre a esfera
+unitária, e avaliando-a nos seus próprios autovetores conclui-se que os três
+autovalores são iguais, isto é $M_{ij}=-M_{00}\,\delta_{ij}$. Chamando
+$k=-M_{00}$, os três resultados juntos dizem
+\[
+  M_{\alpha\beta}=k\,\eta_{\alpha\beta},
+  \qquad\text{ou seja}\qquad
+  \dd s'^2=k\,\dd s^2 .
+\]
+Preservar o cone de luz já obriga o intervalo a ser preservado \emph{a menos
+de um fator}. Falta mostrar que $k=1$. Por isotropia, $k$ não pode depender da
+direção de $\bm v$, apenas de $v=|\bm v|$. Aplique agora a transformação
+inversa, que é o \emph{boost} com $-\bm v$: ela devolve $\dd s^2=k(v)\,\dd
+s'^2$, e combinando as duas relações, $k(v)^2=1$. Como $k$ é contínua e
+$k(0)=1$ (velocidade relativa nula é a identidade), a raiz $k=-1$ está
+excluída e resta
+\[
+  k=1,\qquad \dd s'^2=\dd s^2 .
+\]
+Ou seja: dada a constância de $c$, a homogeneidade do espaço-tempo e a
+isotropia do espaço, a invariância do intervalo não é uma hipótese adicional
+--- é um teorema. E, uma vez estabelecida, ela determina de volta a forma das
+transformações, que é o caminho percorrido na
+Seção~\ref{sec:transformacoes-lorentz}. Não há circularidade: o postulado
+físico é a constância de $c$; a invariância de $\dd s^2$ e a forma de
+$\Lambda$ são duas maneiras equivalentes de expressá-lo.
 
 \chapter{Resumo de fórmulas}
 
