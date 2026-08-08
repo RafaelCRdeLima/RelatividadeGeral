@@ -1587,23 +1587,39 @@ $2\times2$ por uma $4\times4$ e componha dois boosts em direções
 \emph{perpendiculares}, $\Lambda_x(v_1)\Lambda_y(v_2)$. Mostre
 numericamente que o produto não é um boost puro: ele preserva o intervalo,
 mas contém uma rotação espacial. Extraia o ângulo dessa rotação e verifique
-que, para $v_1=v_2=0{,}6$, ele é de alguns graus. Esse é o efeito que produz
-a precessão de Thomas no átomo.
+que, para $v_1=v_2=0{,}6$, ele vale $12{,}7^\circ$ --- compare com a fórmula
+fechada $\tan\theta=\gamma_1\gamma_2v_1v_2/(\gamma_1+\gamma_2)$. Esse é o
+efeito que produz a precessão de Thomas no átomo.
 
   \item \textbf{Qual perfil de viagem envelhece menos?} Em
 \arq{cap02\_tempo\_proprio.py}, o gêmeo viaja com
 $v(t)=v_0\sin(\pi t/T)$. Substitua por outros três perfis com o
 \emph{mesmo} $T$ e a \emph{mesma} velocidade máxima $v_0$: um trapézio, uma
 onda quadrada suavizada e $v_0\sin^2(\pi t/T)$. Calcule $\tau$ para cada um
-e ordene-os. Qual perfil minimiza o tempo próprio, e por quê? Relacione a
-resposta com o fato de $\sqrt{1-v^2}$ ser côncava.
+e ordene-os. Qual perfil minimiza o tempo próprio, e por quê? Cuidado com a
+justificativa: como todos têm o mesmo $v_0$, o que decide a ordem é
+$\sqrt{1-v^2}$ ser \emph{decrescente} em $|v|$ --- ganha quem passa mais
+tempo perto do máximo. A \emph{concavidade} de $\sqrt{1-v^2}$ responde a uma
+pergunta diferente, que o próprio script já ilustra: por que
+$T/\gamma(\bar v)$, calculado com a velocidade \emph{média}, superestima
+$\tau$. Explique as duas coisas separadamente.
 
   \item \textbf{O horizonte de Rindler.} Em \arq{cap02\_figuras.py}, acrescente
 ao diagrama do cone de luz a linha de mundo hiperbólica de um observador com
-aceleração própria constante $a_0$, $x^2-t^2=1/a_0^2$. Desenhe a assíntota
-$x=t$ e mostre, numericamente, que um fóton emitido da origem em $t=0$
-alcança o observador, mas um emitido de $x=-0{,}5$ nunca o alcança.
-Determine a posição limite e interprete-a como um horizonte.
+aceleração própria constante $a_0$, $x^2-t^2=1/a_0^2$ (a
+Seção~\ref{sec:aceleracao-propria} a deduziu). Desenhe também a assíntota
+$x=t$. Um fóton emitido em $t=0$ da posição $x_0$, rumo a $+x$, tem
+$x=x_0+t$: imponha o encontro com a hipérbole e mostre que ele ocorre em
+\[
+  t=\frac{1/a_0^2-x_0^2}{2x_0} .
+\]
+Verifique que esse tempo é positivo (o fóton alcança) somente para
+$0<x_0<1/a_0$, e que para $x_0\le0$ o encontro nunca acontece. Note que
+$x_0=0$ é o caso \emph{crítico}: o fóton emitido exatamente da origem
+persegue o observador para sempre sem jamais alcançá-lo, porque viaja
+paralelamente à assíntota. A reta $x=t$ é, portanto, um \emph{horizonte} ---
+nada emitido à esquerda dela chega ao observador acelerado, mesmo viajando à
+velocidade da luz e mesmo sem gravidade nenhuma.
 \end{enumerate}
 
 
