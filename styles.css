@@ -474,6 +474,13 @@ h2 {
 .dashboard-info p { margin:0; color:rgba(255,255,255,.63); font-size:.88rem; line-height:1.7; }
 .dashboard-info ul { margin:1.4rem 0 1.8rem; padding-left:1.2rem; color:rgba(255,255,255,.72); font-size:.78rem; line-height:1.8; }
 .dashboard-card + .dashboard-card { margin-top: 1.25rem; }
+/* Cartão do ODEROM: o halo puxa para o índigo #534AB7 da marca dele, em vez
+   do azul dos outros cartões — é outro programa, com identidade própria. */
+.oderom-preview { grid-template-rows:1fr auto auto auto; justify-items:center; gap:.7rem; background:radial-gradient(circle at 62% 34%,rgba(83,74,183,.34),transparent 40%),#09253a; }
+.oderom-marca { width:min(62%,220px); align-self:center; }
+.oderom-formula { color:#FFB627; font:500 1.5rem "DM Mono",monospace; }
+.oderom-legenda { color:rgba(255,255,255,.55); font-size:.72rem; letter-spacing:.04em; }
+.oderom-preview .preview-footer { align-self:end; width:100%; margin-top:.6rem; }
 .tensor-preview { background:radial-gradient(circle at 70% 30%,rgba(118,102,216,.24),transparent 32%),#09253a; }
 .tensor-preview-stage { min-height:330px; display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:.8rem; align-items:center; }
 .tensor-preview-stage>b { color:rgba(255,255,255,.4); font:500 2rem "Newsreader",serif; }

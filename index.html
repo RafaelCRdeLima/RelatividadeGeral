@@ -174,16 +174,18 @@
         </div>
 
         <article class="dashboard-card">
-          <div class="dashboard-preview" aria-hidden="true">
-            <div class="preview-top"><span>g<sub>μν</sub></span><i></i><span>K</span></div>
-            <div class="tensor-preview-stage">
-              <span class="tensor-object vector-object">R<sup>ρ</sup><sub>σμν</sub><small>Riemann</small></span>
-              <b>→</b>
-              <span class="tensor-object covector-object">R<sub>μν</sub><small>Ricci</small></span>
-              <b>→</b>
-              <span class="tensor-scalar">R</span>
-              <div class="tensor-metric">K = 48M²/r⁶ &nbsp;(Schwarzschild)</div>
-            </div>
+          <!--
+            A marca do ODEROM, e não um mock da interface: o símbolo é uma
+            órbita que precessiona — dez elipses giradas 7° uma da outra,
+            com a estrela no periélio. É o avanço do periélio, a assinatura
+            da Relatividade Geral, que é justamente o que o programa
+            calcula. Vale mais como abertura do cartão do que um desenho
+            genérico de tensores.
+          -->
+          <div class="dashboard-preview oderom-preview" aria-hidden="true">
+            <img class="oderom-marca" src="imagens/oderom-simbolo.svg" alt="">
+            <div class="oderom-formula">K = 48M²/r⁶</div>
+            <div class="oderom-legenda">Kretschmann de Schwarzschild, exato</div>
             <div class="preview-footer"><span>exato</span><span>no navegador</span><span>sem instalar</span></div>
           </div>
           <div class="dashboard-info">
