@@ -26,7 +26,7 @@
   citecolor=rgPetroleo,
   urlcolor=rgPetroClaro,
   pdftitle={Relatividade Geral: Apostila para 72 Aulas},
-  pdfauthor={Rafael -- UDESC/CCT}
+  pdfauthor={Rafael C. R. de Lima}
 }
 
 \graphicspath{{figuras/}}
@@ -102,44 +102,103 @@
 
 \frontmatter
 
+%  A capa usa margens próprias e fundo azul-noite. O \newgeometry vale só
+%  até o \restoregeometry logo abaixo; o resto do documento não é afetado.
+%  O fundo é um retângulo TikZ ancorado em current page, o que exige duas
+%  passadas de compilação (o documento já usa três).
+\newgeometry{top=2.2cm,bottom=2.0cm,left=2.4cm,right=2.4cm}
 \begin{titlepage}
 \thispagestyle{empty}
-\raggedright
-\vspace*{4cm}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[rgNoite] (current page.south west) rectangle (current page.north east);
+\end{tikzpicture}%
+\centering
 
-{\sffamily\footnotesize\color{rgGrafite}
-\MakeUppercase{Universidade do Estado de Santa Catarina}\\
-\MakeUppercase{Centro de Ciências Tecnológicas}}
+{\sffamily\footnotesize\color{rgBruma}\spaced{%
+\MakeUppercase{Universidade do Estado de Santa Catarina}}\\[4pt]
+\spaced{\MakeUppercase{Centro de Ciências Tecnológicas}}}
 
-\vspace{2.2cm}
-{\color{rgPetroleo}\rule{5.2cm}{2pt}}
+\vspace{1.0cm}
+{\color{rgFileteNoite}\rule{0.55\linewidth}{0.4pt}}
 
-\vspace{1.4cm}
-{\sffamily\bfseries\fontsize{44}{50}\selectfont\color{rgTinta}
-Relatividade\\ Geral\par}
+\vspace{0.9cm}
+{\sffamily\bfseries\fontsize{48}{54}\selectfont\color{white}
+Relatividade\\[2pt] Geral\par}
 
-\vspace{0.6cm}
-{\sffamily\large\color{rgGrafite}Apostila para um curso de 72 encontros
-de 50 minutos\par}
+\vspace{0.7cm}
+{\sffamily\normalsize\color{rgCeu}%
+Apostila para um curso de 72 encontros de 50 minutos\par}
 
-\vspace{3cm}
-{\color{rgLinha}\rule{\linewidth}{0.6pt}}
+\vspace{0.8cm}
+\includegraphics[width=0.575\linewidth]{figuras/capa_roseta.pdf}
 
-\vspace{0.5cm}
-\begin{minipage}[t]{0.72\linewidth}
-\small Material original de apoio didático. Referência principal:
-Bernard Schutz, \textit{A First Course in General Relativity}, 3ª ed.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.2\linewidth}
-\raggedleft{\sffamily\color{rgAmbar}2026}
-\end{minipage}
+\vspace{0.3cm}
+{\footnotesize\itshape\color{rgBruma}%
+A órbita que não fecha: a precessão do periélio em Schwarzschild,
+integrada da equação de campo.\\
+Nenhuma órbita newtoniana faz isso.\par}
 
 \vfill
-{\footnotesize\color{rgGrafite} Esta apostila foi preparada como material de
-ensino. Ela usa o livro de Bernard Schutz como guia de organização e
-referência bibliográfica, mas apresenta texto, exemplos e exercícios em
-formulação própria.\par}
+
+{\color{rgFileteNoite}\rule{\linewidth}{0.4pt}}
+\vspace{0.4cm}
+
+\begin{minipage}[b]{0.80\linewidth}
+\raggedright\color{rgBruma}
+{\sffamily\normalsize\color{white}Rafael C. R. de Lima}\\[2pt]
+{\footnotesize Material original de apoio didático}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.14\linewidth}
+\raggedleft{\sffamily\Large\color{rgOuro}2026}
+\end{minipage}
 \end{titlepage}
+\restoregeometry,
+%  logo abaixo, e não afeta o resto do documento.
+\newgeometry{top=2.2cm,bottom=2.0cm,left=2.4cm,right=2.4cm}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\sffamily\footnotesize\color{rgGrafite}\spaced{%
+\MakeUppercase{Universidade do Estado de Santa Catarina}}\\[4pt]
+\spaced{\MakeUppercase{Centro de Ciências Tecnológicas}}}
+
+\vspace{1.0cm}
+{\color{rgLinha}\rule{0.55\linewidth}{0.4pt}}
+
+\vspace{0.9cm}
+{\sffamily\bfseries\fontsize{48}{54}\selectfont\color{rgTinta}
+Relatividade\\[2pt] Geral\par}
+
+\vspace{0.7cm}
+{\sffamily\normalsize\color{rgPetroleo}%
+Apostila para um curso de 72 encontros de 50 minutos\par}
+
+\vspace{0.8cm}
+\includegraphics[width=0.575\linewidth]{figuras/capa_roseta.pdf}
+
+\vspace{0.3cm}
+{\footnotesize\itshape\color{rgGrafite}%
+A órbita que não fecha: a precessão do periélio em Schwarzschild,
+integrada da equação de campo.\\
+Nenhuma órbita newtoniana faz isso.\par}
+
+\vfill
+
+{\color{rgLinha}\rule{\linewidth}{0.4pt}}
+\vspace{0.4cm}
+
+\begin{minipage}[b]{0.80\linewidth}
+\raggedright\footnotesize\color{rgGrafite}
+Material original de apoio didático.\\
+Referência principal: Bernard Schutz,
+\textit{A First Course in General Relativity}, 3ª~ed.
+\end{minipage}\hfill
+\begin{minipage}[b]{0.14\linewidth}
+\raggedleft{\sffamily\Large\color{rgAmbar}2026}
+\end{minipage}
+\end{titlepage}
+\restoregeometry
 
 \chapter*{Prefácio}
 \addcontentsline{toc}{chapter}{Prefácio}
@@ -289,88 +348,90 @@ scripts acompanham a apostila em \texttt{codigo/} e rodam sem argumentos.
 \addcontentsline{toc}{section}{Calendário aula a aula}
 \label{sec:calendario}
 
+A coluna \emph{Seções} traz a numeração exata a cobrir em cada encontro. Ela não é escrita à mão: o script \arq{codigo/gerar\_calendario.py} declara o plano por título de seção e resolve os números no sumário da última compilação, de modo que a tabela acompanha qualquer mudança na estrutura do texto.
+
 \scriptsize
-\begin{longtable}{cp{4.2cm}p{8.0cm}}
+\begin{longtable}{cp{3.3cm}p{2.3cm}p{6.1cm}}
 \toprule
-Aula & Foco & Seções da apostila a cobrir \\
+Aula & Foco & Seções & Conteúdo \\
 \midrule
 \endfirsthead
 \toprule
-Aula & Foco & Seções da apostila a cobrir \\
+Aula & Foco & Seções & Conteúdo \\
 \midrule
 \endhead
-1 & Apresentação e escala física da RG & Plano do curso: Ementa expandida, Objetivos de aprendizagem, Distribuição dos 72 encontros, Avaliação sugerida. Leitura orientadora: Prefácio. \\
-2 & Newton, Einstein e o intervalo & Relatividade especial: Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
-3 & Tempo próprio e causalidade & Relatividade especial: Tempo próprio; Leitura física do intervalo. \\
-4 & Transformações de Lorentz & Relatividade especial: Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. \\
-5 & Contração, dilatação e simultaneidade & Relatividade especial: Contração e dilatação sem mistério; Exemplos resolvidos adicionais. \\
-6 & Paradoxo dos gêmeos & Relatividade especial: Paradoxo dos gêmeos; Problemas orientados. \\
-7 & Oficina computacional I & Relatividade especial: Resolução numérica (Python e Mathematica); Exercícios. \\
-8 & Quadrivelocidade & Vetores e momento relativístico: Quadrivelocidade; conectar com Relatividade especial: Tempo próprio. \\
-9 & Quadrimomento e conservação & Vetores e momento relativístico: Quadrimomento; Conservação. \\
-10 & Energia como componente temporal & Vetores e momento relativístico: Energia como componente temporal; massa invariante de sistemas. \\
-11 & Centro de momento e colisões & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
-12 & Compton, Doppler e foguete & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
-13 & Oficina computacional II & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
-14 & Um-formas e contrações & Tensores no espaço-tempo plano: Vetores, um-formas e contrações. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
-15 & Métrica e índices & Tensores no espaço-tempo plano: Métrica; A métrica como instrumento de medida. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
-16 & Equações tensoriais e mudança de base & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Mudança de base e transformação de componentes. \\
-17 & Erros comuns e prática & Tensores no espaço-tempo plano: Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
-18 & Oficina computacional III & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
-19 & Poeira e tensor energia-momento & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
-20 & Fluido perfeito e equações de estado & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
-21 & Conservação local e fechamento & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados; Exercícios. \\
-22 & Equivalência e marés & Da gravidade à curvatura: O princípio da equivalência; Marés como sinal de curvatura. \\
-23 & Coordenadas curvilíneas & Da gravidade à curvatura: Coordenadas curvilíneas; Christoffel não é força. \\
-24 & Bases não coordenadas & Da gravidade à curvatura: Bases coordenadas e bases não coordenadas. \\
-25 & Geodésicas e princípio variacional & Da gravidade à curvatura: Equação geodésica; Derivação por princípio variacional; Problemas orientados; Exercícios. \\
-26 & Variedades e derivada covariante & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
-27 & Compatibilidade métrica & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
-28 & Riemann e suas simetrias & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
-29 & Curvatura intrínseca e desvio geodésico & Variedades, derivada covariante e curvatura: Curvatura intrínseca e extrínseca; Desvio geodésico. \\
-30 & Oficina computacional IV & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
-31 & Movimento livre e energia medida & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
-32 & Simetrias e vetores de Killing & Física em espaço-tempo curvo: Simetrias e quantidades conservadas, com a equação de Killing e a demonstração da constante de movimento. \\
-33 & Observadores e tetradas & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais; Constantes de movimento e energia local. \\
-34 & Oficina de física em espaço-tempo curvo & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
-35 & A equação de campo & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
-36 & Ação de Einstein--Hilbert & Equações de Einstein: A ação de Einstein--Hilbert; definição variacional de $T_{\mu\nu}$. \\
-37 & Traço e conservação local & Equações de Einstein: Traço das equações de campo; Conservação local; Exemplos resolvidos adicionais. \\
-38 & Limite newtoniano & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
-39 & Constante cosmológica e fechamento & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados; Exercícios. Resumo de fórmulas: Einstein. \\
-40 & Campo fraco e gauge & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
-41 & Polarizações e partículas teste & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
-42 & Emissão e fórmula do quadrupolo & Ondas gravitacionais: Emissão. \\
-43 & Detectores e escalas & Ondas gravitacionais: Detecção; Escalas de detecção. \\
-44 & Binárias compactas & Ondas gravitacionais: Binárias compactas; Erros comuns e interpretação. \\
-45 & Oficina computacional V & Ondas gravitacionais: Resolução numérica, Python -- anel de partículas, fórmula do quadrupolo e teste de Hulse--Taylor. \\
-46 & Oficina computacional VI & Ondas gravitacionais: Resolução numérica, inspiral e bloco em Mathematica; Problemas orientados; Exercícios. \\
-47 & Métrica de Schwarzschild & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
-48 & Redshift gravitacional & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional. \\
-49 & Geodésicas e potencial efetivo & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
-50 & Órbitas circulares e de fótons & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
-51 & Estrelas relativísticas & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
-52 & Testes clássicos e lentes & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Lentes gravitacionais. \\
-53 & Oficina computacional VII & Soluções esféricas, estrelas e Schwarzschild: Resolução numérica; Problemas orientados; Erros comuns e interpretação; Exercícios. \\
-54 & Horizonte & Buracos negros: Horizonte; Horizonte versus singularidade. \\
-55 & Coordenadas regulares e diagramas causais & Buracos negros: Coordenadas regulares; Diagramas causais. \\
-56 & Kerr e buracos negros reais & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
-57 & Termodinâmica & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
-58 & Oficina computacional VIII & Buracos negros: Resolução numérica, Python -- cones de luz, diagrama de Kruskal e marés no horizonte. \\
-59 & Oficina computacional IX & Buracos negros: Resolução numérica, Hawking, Kerr e bloco em Mathematica; Problemas orientados; Erros comuns; Exercícios. Resumo de fórmulas: Schwarzschild. \\
-60 & Princípio cosmológico e redshift & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
-61 & Equações de Friedmann & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
-62 & Distâncias e horizontes & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
-63 & Parâmetros e problemas abertos & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
-64 & Oficina computacional X & Cosmologia relativística: Resolução numérica, Python -- escalas temporais, fator de escala e distâncias. \\
-65 & Oficina computacional XI & Cosmologia relativística: Resolução numérica, bloco em Mathematica; Problemas orientados; Erros comuns e interpretação; Exercícios. Resumo de fórmulas: Cosmologia. \\
-66 & Revisão técnica & Apêndice~\ref{ap:indices} integral, com ênfase no Checklist para não errar. Revisão de tensores, geodésicas, curvatura e equações de campo. \\
-67 & Projeto 1 & Projetos finais: geodésicas em Schwarzschild. Definição de grupos, escopo, equações e entregáveis. \\
-68 & Projeto 2 & Projetos finais: redshift gravitacional. \\
-69 & Projeto 3 & Projetos finais: ondas gravitacionais; discussão de formas de onda e sirene padrão. \\
-70 & Projeto 4 & Projetos finais: cosmologias simples; Friedmann numérico e critérios de avaliação. \\
-71 & Síntese conceitual & Cosmologia relativística: Síntese conceitual do curso. Resumo de fórmulas integral; Bibliografia comentada. \\
-72 & Seminários e fechamento & Apresentação dos projetos finais e fechamento da disciplina. \\
+1 & Apresentação e escala física da RG & --- & Plano do curso: Ementa expandida, Objetivos de aprendizagem, Distribuição dos 72 encontros, Avaliação sugerida. Leitura orientadora: Prefácio. \\
+2 & Newton, Einstein e o intervalo & 1.1, 1.2 & Relatividade especial: Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
+3 & Tempo próprio e Lorentz & 1.3, 1.4 & Relatividade especial: Tempo próprio; Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. \\
+4 & O que se mede & 1.5 & Relatividade especial: Consequências --- contração de Lorentz, reciprocidade e composição de velocidades, todas deduzidas de \eqref{eq:lorentz}. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. \\
+5 & Diagramas e gêmeos & 1.6, 1.7 & Relatividade especial: Diagramas de Minkowski, construção dos eixos de $S'$ e hipérboles invariantes; Paradoxo dos gêmeos. \\
+6 & Sem postular a luz & 1.8, 1.9, 1.10 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. \\
+7 & Oficina computacional I & 1.11, 1.12, 1.13 & Relatividade especial: Resolução numérica (Python e Mathematica); Exercícios. \\
+8 & Vetores e produto escalar & 2.1, 2.2 & Vetores e momento relativístico: o critério de transformação que define um quadrivetor; produto escalar e métrica de Minkowski. \\
+9 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
+10 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
+11 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
+12 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
+13 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
+14 & Um-formas e contrações & 3.1 & Tensores no espaço-tempo plano: Vetores, um-formas e contrações. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+15 & Métrica e índices & 3.2, 3.6 & Tensores no espaço-tempo plano: Métrica; A métrica como instrumento de medida. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+16 & Equações tensoriais e mudança de base & 3.3, 3.4, 3.5 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Mudança de base e transformação de componentes. \\
+17 & Erros comuns e prática & 3.7, 3.8, 3.9 & Tensores no espaço-tempo plano: Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
+18 & Oficina computacional III & 3.10, 3.11, 3.12 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
+19 & Poeira, fluxo e um-formas & 4.1, 4.2, 4.3, 4.4, 4.5 & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
+20 & Tensor energia-momento e fluido perfeito & 4.6, 4.7, 4.8, 4.9, 4.10 & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
+21 & Euler relativística e fechamento & 4.11, 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados; Exercícios. \\
+22 & Equivalência e marés & 5.1, 5.7 & Da gravidade à curvatura: O princípio da equivalência; Marés como sinal de curvatura. \\
+23 & Coordenadas curvilíneas & 5.2, 5.5 & Da gravidade à curvatura: Coordenadas curvilíneas; Christoffel não é força. \\
+24 & Bases não coordenadas & 5.3 & Da gravidade à curvatura: Bases coordenadas e bases não coordenadas. \\
+25 & Geodésicas e princípio variacional & 5.4, 5.6, 5.8, 5.9, 5.10 & Da gravidade à curvatura: Equação geodésica; Derivação por princípio variacional; Problemas orientados; Exercícios. \\
+26 & Variedades e derivada covariante & 6.1, 6.2 & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
+27 & Compatibilidade métrica & 6.4, 6.8 & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
+28 & Riemann e suas simetrias & 6.3, 6.5 & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
+29 & Curvatura intrínseca e desvio geodésico & 6.6, 6.7 & Variedades, derivada covariante e curvatura: Curvatura intrínseca e extrínseca; Desvio geodésico. \\
+30 & Oficina computacional IV & 6.9, 6.10, 6.11, 6.12 & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
+31 & Movimento livre e energia medida & 7.1, 7.2 & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
+32 & Simetrias e vetores de Killing & 7.3 & Física em espaço-tempo curvo: Simetrias e quantidades conservadas, com a equação de Killing e a demonstração da constante de movimento. \\
+33 & Observadores e tetradas & 7.4, 7.5, 7.6 & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais; Constantes de movimento e energia local. \\
+34 & Oficina de física em espaço-tempo curvo & 7.7, 7.8, 7.9 & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
+35 & A equação de campo & 8.1, 8.4 & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
+36 & Ação de Einstein--Hilbert & 8.5 & Equações de Einstein: A ação de Einstein--Hilbert; definição variacional de $T_{\mu\nu}$. \\
+37 & Traço e conservação local & 8.3, 8.6, 8.10 & Equações de Einstein: Traço das equações de campo; Conservação local; Exemplos resolvidos adicionais. \\
+38 & Limite newtoniano & 8.2, 8.7 & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
+39 & Constante cosmológica e fechamento & 8.8, 8.9, 8.11, 8.12 & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados; Exercícios. Resumo de fórmulas: Einstein. \\
+40 & Campo fraco e gauge & 9.1, 9.5 & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
+41 & Polarizações e partículas teste & 9.2, 9.6 & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
+42 & Emissão e fórmula do quadrupolo & 9.4 & Ondas gravitacionais: Emissão. \\
+43 & Detectores e escalas & 9.3, 9.7 & Ondas gravitacionais: Detecção; Escalas de detecção. \\
+44 & Binárias compactas & 9.8, 9.10 & Ondas gravitacionais: Binárias compactas; Erros comuns e interpretação. \\
+45 & Oficina computacional V & 9.11 & Ondas gravitacionais: Resolução numérica, Python -- anel de partículas, fórmula do quadrupolo e teste de Hulse--Taylor. \\
+46 & Oficina computacional VI & 9.9, 9.11, 9.12, 9.13 & Ondas gravitacionais: Resolução numérica, inspiral e bloco em Mathematica; Problemas orientados; Exercícios. \\
+47 & Métrica de Schwarzschild & 10.1, 10.5 & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
+48 & Redshift gravitacional & 10.2 & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional. \\
+49 & Geodésicas e potencial efetivo & 10.3 & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
+50 & Órbitas circulares e de fótons & 10.6, 10.7 & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
+51 & Estrelas relativísticas & 10.4 & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
+52 & Testes clássicos e lentes & 10.8, 10.9 & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Lentes gravitacionais. \\
+53 & Oficina computacional VII & 10.10, 10.11, 10.12, 10.13, 10.14 & Soluções esféricas, estrelas e Schwarzschild: Resolução numérica; Problemas orientados; Erros comuns e interpretação; Exercícios. \\
+54 & Horizonte & 11.1, 11.5 & Buracos negros: Horizonte; Horizonte versus singularidade. \\
+55 & Coordenadas regulares e diagramas causais & 11.2, 11.6 & Buracos negros: Coordenadas regulares; Diagramas causais. \\
+56 & Kerr e buracos negros reais & 11.3, 11.7 & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
+57 & Termodinâmica & 11.4, 11.8 & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
+58 & Oficina computacional VIII & 11.11 & Buracos negros: Resolução numérica, Python -- cones de luz, diagrama de Kruskal e marés no horizonte. \\
+59 & Oficina computacional IX & 11.9, 11.10, 11.11, 11.12, 11.13 & Buracos negros: Resolução numérica, Hawking, Kerr e bloco em Mathematica; Problemas orientados; Erros comuns; Exercícios. Resumo de fórmulas: Schwarzschild. \\
+60 & Princípio cosmológico e redshift & 12.1, 12.2 & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
+61 & Equações de Friedmann & 12.3, 12.6 & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
+62 & Distâncias e horizontes & 12.4, 12.5 & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
+63 & Parâmetros e problemas abertos & 12.7, 12.8 & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
+64 & Oficina computacional X & 12.12 & Cosmologia relativística: Resolução numérica, Python -- escalas temporais, fator de escala e distâncias. \\
+65 & Oficina computacional XI & 12.9, 12.10, 12.12, 12.13, 12.14 & Cosmologia relativística: Resolução numérica, bloco em Mathematica; Problemas orientados; Erros comuns e interpretação; Exercícios. Resumo de fórmulas: Cosmologia. \\
+66 & Revisão técnica & A.1, A.9 & Apêndice~\ref{ap:indices} integral, com ênfase no Checklist para não errar. Revisão de tensores, geodésicas, curvatura e equações de campo. \\
+67 & Projeto 1 & 13.1 & Projetos finais: geodésicas em Schwarzschild. Definição de grupos, escopo, equações e entregáveis. \\
+68 & Projeto 2 & 13.2 & Projetos finais: redshift gravitacional. \\
+69 & Projeto 3 & 13.3 & Projetos finais: ondas gravitacionais; discussão de formas de onda e sirene padrão. \\
+70 & Projeto 4 & 13.4 & Projetos finais: cosmologias simples; Friedmann numérico e critérios de avaliação. \\
+71 & Síntese conceitual & 12.11 & Cosmologia relativística: Síntese conceitual do curso. Resumo de fórmulas integral; Bibliografia comentada. \\
+72 & Seminários e fechamento & --- & Apresentação dos projetos finais e fechamento da disciplina. \\
 \bottomrule
 \end{longtable}
 \normalsize
@@ -707,6 +768,51 @@ classificação é absoluta: como o valor de $\dd s^2$ é o mesmo em todos os
 referenciais, o seu sinal também é, e dois observadores nunca discordam sobre
 se dois eventos podem ou não estar ligados por um sinal físico.
 
+Cada um dos três casos tem uma leitura operacional, e vale enunciá-la agora
+porque é dela que sai toda a intuição causal do curso. Se $\dd s^2<0$, existe
+um referencial no qual os dois eventos ocorrem no \emph{mesmo ponto} --- é o
+referencial de uma partícula massiva que consegue estar presente nos dois, e
+foi exatamente o relógio embarcado do argumento acima. Se $\dd s^2>0$, existe
+um referencial no qual eles são \emph{simultâneos}, e nenhum sinal limitado
+por $c$ pode ligar um ao outro: o que acontece em um não pode influenciar o
+outro. Se $\dd s^2=0$, um raio de luz vai de um ao outro, e nada mais rápido
+existe para tentar.
+
+A figura desse enunciado é o cone de luz.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.68\textwidth]{cap02_cone_luz.pdf}
+\caption{Cone de luz do evento $O$ no plano $(x,ct)$. Eventos no futuro ou
+passado causal de $O$ têm separação temporal; os eventos das duas cunhas
+laterais têm separação espacial e não podem ser causalmente ligados a $O$
+--- daí o rótulo ``não causal''. Os três pontos
+marcados retomam os Exemplos resolvidos desta seção.}
+\label{fig:cone-luz}
+\end{figure}
+
+\begin{example}
+Considere dois eventos separados por $\Delta t=5$ e $\Delta x=3$, em unidades
+com $c=1$. O intervalo é
+\[
+  \Delta s^2=-25+9=-16.
+\]
+A separação é temporal. O tempo próprio entre os eventos, ao longo da reta
+inercial que os conecta, é $\Delta\tau=4$. Esse número é o tempo medido por um
+relógio que passa pelos dois eventos sem aceleração.
+\end{example}
+
+\begin{example}
+Agora tome $\Delta t=2$ e $\Delta x=5$. Temos
+\[
+  \Delta s^2=-4+25=21.
+\]
+A separação é espacial. Não faz sentido perguntar qual partícula massiva liga
+esses eventos, pois isso exigiria velocidade maior que a da luz. Contudo, faz
+sentido procurar um referencial no qual os eventos sejam simultâneos --- e a
+Seção~\ref{sec:consequencias} mostra como encontrá-lo.
+\end{example}
+
 \section{Tempo próprio}
 
 Ao longo da linha de mundo de uma partícula massiva a separação é temporal, de
@@ -827,11 +933,12 @@ valor comum de $\gamma(v)$, a primeira equação dá $\gamma^2(1-v^2)=1$, isto �
   \gamma=\frac{1}{\sqrt{1-v^2}},
 \]
 com $\gamma>0$ pelo mesmo critério. Então $B=-D^2v/A=-\gamma v$:
-\[
+\begin{equation}
   t'=\gamma(t-vx), \qquad
   x'=\gamma(x-vt), \qquad
   y'=y,\qquad z'=z.
-\]
+  \label{eq:lorentz}
+\end{equation}
 \end{resultado}
 
 Duas observações tornam essa dedução mais transparente. Primeiro, nenhuma
@@ -874,6 +981,180 @@ são simultâneos em $S'$ se $v\ne0$. Use a Figura~\ref{fig:simultaneidade}
 como guia e refaça a construção geométrica para $v<0$.
 \end{activity}
 
+\section{Consequências: o que se mede}
+\label{sec:consequencias}
+
+A transformação de Lorentz não é um resultado final: é a ferramenta com que se
+respondem perguntas concretas. Esta seção usa \eqref{eq:lorentz} três vezes,
+para os três fatos que todo curso de relatividade precisa ter deduzido --- e
+não apenas anunciado.
+
+\textbf{Um comprimento é uma medida simultânea.} Uma barra em repouso em $S'$
+ocupa o intervalo entre $x'_A$ e $x'_B$; seu \emph{comprimento próprio} é
+$L_0=x'_B-x'_A$, e ele não depende de quando cada extremidade foi observada,
+porque a barra não se move em $S'$. Em $S$, onde a barra desliza, isso deixa
+de valer: anotar a ponta esquerda agora e a direita daqui a um segundo daria
+qualquer resposta que se quisesse. Medir o comprimento em $S$ é, por
+definição, registrar as \emph{duas} extremidades no mesmo instante de $S$.
+
+Essa exigência --- $\Delta t=0$ em $S$ --- é toda a conta. De
+\eqref{eq:lorentz}, $x'=\gamma(x-vt)$, tomada entre as duas extremidades com
+$\Delta t=0$:
+\begin{equation}
+  L_0=\Delta x'=\gamma\,\Delta x
+  \qquad\Longrightarrow\qquad
+  L=\Delta x=\frac{L_0}{\gamma}.
+  \label{eq:contracao}
+\end{equation}
+Como $\gamma\ge1$, a barra em movimento é medida \emph{mais curta} que em
+repouso.
+
+\begin{atencao}
+Repare que $\gamma$ aparece aqui \emph{dividindo}, enquanto em
+\eqref{eq:tempo-proprio} ele aparecia multiplicando o tempo próprio. A
+assimetria não é um descuido de notação, e sim a diferença entre as duas
+situações. Para o tempo, os dois eventos acontecem no mesmo lugar do
+referencial próprio ($\Delta x'=0$) e a pergunta é quanto tempo passou. Para o
+comprimento, os dois eventos acontecem ao mesmo tempo do referencial que mede
+($\Delta t=0$) e a pergunta é qual a distância. São condições diferentes
+impostas a lados diferentes da transformação --- daí os fatores em posições
+opostas. Quem tenta decorar ``$\gamma$ em cima ou embaixo'' erra; quem se
+pergunta ``o que está sendo mantido fixo?'' acerta sempre.
+\end{atencao}
+
+\textbf{Nenhum dos dois está enganado.} A contração é recíproca: uma barra
+parada em $S$ é medida mais curta por $S'$, pela mesma conta com os papéis
+trocados. Isso não é contradição, pela mesma razão que a dilatação recíproca
+do tempo não é: cada observador está medindo um \emph{par de eventos
+diferente}. Quando $S$ registra as duas pontas simultaneamente segundo o seu
+relógio, esses dois registros \emph{não} são simultâneos para $S'$ --- e o que
+$S'$ vê $S$ fazendo é medir a ponta da frente e a de trás em instantes
+distintos, o que naturalmente dá um número menor. A geometria de Minkowski
+organiza essas comparações sem precisar eleger um observador certo.
+
+\begin{atencao}
+Nada disso significa que ``o tempo realmente fica lento'' ou que ``a barra
+realmente encolhe'' em algum sentido absoluto. Tempo próprio e comprimento
+próprio são propriedades de objetos e de linhas de mundo, e ninguém discorda
+deles. O que depende do observador é o resultado de uma \emph{medida} que
+envolve simultaneidade --- e simultaneidade é justamente o que a
+Seção~\ref{sec:transformacoes-lorentz} mostrou não ser absoluto.
+\end{atencao}
+
+\textbf{Velocidades não se somam.} A pergunta que abriu este capítulo --- e se
+eu correr atrás da luz? --- agora tem resposta exata. Uma partícula tem
+velocidade $u=\dd x/\dd t$ em $S$; qual é a sua velocidade $u'=\dd x'/\dd t'$
+em $S'$? Basta dividir uma linha de \eqref{eq:lorentz} pela outra:
+\[
+  u'=\frac{\dd x'}{\dd t'}
+    =\frac{\gamma(\dd x-v\,\dd t)}{\gamma(\dd t-v\,\dd x)}
+    =\frac{\dd x/\dd t-v}{1-v\,\dd x/\dd t},
+\]
+onde os fatores $\gamma$ se cancelam --- eles são os mesmos em cima e embaixo.
+Logo
+\begin{equation}
+  u'=\frac{u-v}{1-uv}.
+  \label{eq:composicao}
+\end{equation}
+Para $u,v\ll1$ o denominador é praticamente $1$ e recupera-se
+\eqref{eq:galileu-velocidades}, a soma ingênua. É o denominador que carrega
+toda a diferença, e ele faz duas coisas notáveis.
+
+\emph{A primeira}: se $u=1$, então $u'=(1-v)/(1-v)=1$ para qualquer $v$. A
+velocidade $c$ é ponto fixo da composição --- correr atrás da luz não a
+alcança nem um pouco. Isso não é uma coincidência aritmética: é o segundo
+postulado reaparecendo do outro lado da dedução, agora como teorema.
+
+\emph{A segunda}: velocidades subluminais nunca compõem para dar uma
+superluminal. A verificação é uma identidade que vale a pena guardar,
+\begin{equation}
+  1-u'^2=\frac{(1-u^2)(1-v^2)}{(1-uv)^2},
+  \label{eq:identidade-composicao}
+\end{equation}
+obtida expandindo $(1-uv)^2-(u-v)^2=1+u^2v^2-u^2-v^2=(1-u^2)(1-v^2)$. Se
+$|u|<1$ e $|v|<1$, o lado direito é positivo, logo $|u'|<1$. A barreira da
+velocidade da luz não é imposta por decreto: ela é uma consequência algébrica
+da forma da transformação.
+
+\begin{activity}
+Duas naves partem da Terra em sentidos opostos, cada uma com $v=0{,}8$ medida
+da Terra. Use \eqref{eq:composicao} para calcular a velocidade de uma medida
+pela outra. Compare com $1{,}6$, que é o que a soma ingênua daria, e verifique
+\eqref{eq:identidade-composicao} nesse caso.
+\end{activity}
+
+\section{Diagramas de Minkowski e hipérboles invariantes}
+\label{sec:diagramas}
+
+Um diagrama de espaço-tempo desenha o tempo na vertical e uma direção espacial
+na horizontal, de modo que a linha de mundo de um objeto parado em $S$ é uma
+reta vertical e um raio de luz é uma reta a $45^\circ$. A pergunta útil é onde
+ficam, nesse mesmo papel, os eixos de um segundo observador.
+
+\textbf{Os dois eixos de $S'$.} Cada eixo é um lugar geométrico, e
+\eqref{eq:lorentz} o entrega de imediato:
+\begin{itemize}
+  \item o \emph{eixo $t'$} é o conjunto dos eventos com $x'=0$. Como
+  $x'=\gamma(x-vt)$, isso é a reta $x=vt$ --- a própria linha de mundo da
+  origem de $S'$, o que é natural: o eixo do tempo de alguém é a sua
+  história;
+  \item o \emph{eixo $x'$} é o conjunto dos eventos com $t'=0$, isto é, os
+  eventos que $S'$ considera simultâneos à origem. Como $t'=\gamma(t-vx)$,
+  isso é a reta $t=vx$.
+\end{itemize}
+As duas retas têm inclinações $1/v$ e $v$ no plano $(x,t)$: são simétricas em
+relação à reta $t=x$, e cada uma faz com o eixo correspondente de $S$ o mesmo
+ângulo $\arctan v$, mas em sentidos opostos. Os eixos de $S'$ se \emph{fecham}
+sobre a linha de luz, e tanto mais quanto maior $v$ --- no limite $v\to1$ eles
+colapsam sobre ela. É essa tesoura que a Figura~\ref{fig:simultaneidade}
+mostra, e é dela que sai visualmente a relatividade da simultaneidade: a reta
+de simultaneidade de $S'$ é inclinada, então eventos sobre uma horizontal
+(simultâneos em $S$) não estão sobre ela.
+
+\textbf{Falta a escala.} Saber a \emph{direção} dos eixos não basta para ler
+coordenadas: é preciso saber onde fica $t'=1$ sobre o eixo $t'$. E aqui a
+intuição euclidiana atrapalha, porque o papel é euclidiano e o espaço-tempo
+não é. Não se pode marcar a unidade com uma régua.
+
+Quem resolve isso é o próprio invariante. O lugar geométrico dos eventos que
+distam $\Delta s^2=-1$ da origem é
+\[
+  -t^2+x^2=-1
+  \qquad\Longleftrightarrow\qquad
+  t^2-x^2=1 ,
+\]
+uma hipérbole com assíntotas $t=\pm x$, isto é, o próprio cone de luz. Ela
+cruza o eixo $t$ em $t=1$. Mas o intervalo é invariante --- todos os eventos
+sobre essa curva estão à mesma ``distância'' de Minkowski da origem, para
+\emph{qualquer} observador. Logo ela cruza o eixo $t'$ exatamente onde
+$t'=1$. As \emph{hipérboles invariantes} são, portanto, o compasso desse
+desenho: elas transportam a unidade de um sistema de eixos para o outro.
+
+\begin{resultado}
+Para calibrar o eixo $t'$ de um diagrama, desenhe a hipérbole $t^2-x^2=1$ e
+marque sua interseção com o eixo $t'$: ali está $t'=1$. Analogamente,
+$x^2-t^2=1$ calibra o eixo $x'$.
+\end{resultado}
+
+\begin{atencao}
+No papel, a unidade de $t'$ aparece \emph{maior} que a de $t$ --- e isso não
+significa que o segundo de $S'$ seja mais longo. A interseção da hipérbole com
+o eixo $t'$ está, em coordenadas de $S$, no ponto $(t,x)=(\gamma,\gamma v)$,
+cuja distância euclidiana até a origem é $\gamma\sqrt{1+v^2}>1$. O papel mede
+comprimentos euclidianos; a física mede intervalos. Os dois segmentos valem um
+segundo próprio cada, e o desenho não tem como representar isso sem distorcer
+--- exatamente como um mapa-múndi não consegue preservar áreas e ângulos ao
+mesmo tempo.
+\end{atencao}
+
+\begin{activity}
+Desenhe os eixos de $S'$ para $v=0{,}5$ e a hipérbole $t^2-x^2=1$. Marque
+$t'=1$ e, a partir dele, a reta de simultaneidade de $S'$ que passa por esse
+ponto. Em seguida marque $t=1$ sobre o eixo $t$ e verifique graficamente que
+$S$ e $S'$ discordam sobre qual dos dois relógios está atrasado --- e que cada
+um está comparando um par de eventos diferente.
+\end{activity}
+
 \section{Paradoxo dos gêmeos}
 
 O paradoxo dos gêmeos não é uma contradição porque as duas linhas de mundo
@@ -905,78 +1186,118 @@ $\tau_{\rm viajante}$ é puramente geométrica: é a diferença entre o
 ``comprimento'' (no sentido de Minkowski) de duas curvas com os mesmos pontos
 extremos.
 
-\section{Leitura física do intervalo}
+\section{A velocidade invariante é única}
+\label{sec:velocidade-invariante}
 
-O intervalo é a primeira grande mudança conceitual do curso. Em mecânica
-newtoniana, dois observadores podem discordar das coordenadas espaciais de um
-evento, mas concordam sobre o intervalo de tempo entre eventos. Na
-relatividade especial, essa separação deixa de ser absoluta. O que permanece
-absoluto é uma combinação de tempo e espaço. A geometria que antes era
-euclidiana no espaço tridimensional passa a ser pseudo-euclidiana no
-espaço-tempo.
+Esta seção é um aprofundamento: nada do que vem depois depende dela, e uma
+primeira leitura pode pulá-la. Ela responde a uma pergunta que costuma
+incomodar quem já entendeu a dedução da
+Seção~\ref{sec:transformacoes-lorentz}: a velocidade da luz entrou ali como
+postulado, quase por decreto. Seria possível chegar à mesma estrutura
+\emph{sem} falar de luz?
 
-É útil insistir em uma frase: o sinal de $\Delta s^2$ tem conteúdo causal.
-Se $\Delta s^2<0$, existe um referencial no qual os dois eventos ocorrem no
-mesmo ponto espacial. Esse é o referencial momentaneamente comóvel a uma
-partícula massiva que poderia ligar os eventos. Se $\Delta s^2>0$, existe um
-referencial no qual os eventos são simultâneos. Nesse caso nenhum sinal causal,
-limitado pela velocidade da luz, pode conectar os eventos. Se $\Delta s^2=0$,
-os eventos podem ser ligados por um raio luminoso.
+A resposta é sim, e o que se ganha com ela é grande: a relatividade deixa de
+parecer uma teoria sobre eletromagnetismo e passa a ser o que de fato é --- uma
+afirmação sobre a estrutura do espaço-tempo, na qual a luz apenas
+\emph{ocupa} um lugar que já existia. Schutz não faz esta dedução; ela é o
+argumento clássico de Ignatowski, redescoberto várias vezes desde 1910.
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.68\textwidth]{cap02_cone_luz.pdf}
-\caption{Cone de luz do evento $O$ no plano $(x,ct)$. Eventos no futuro ou
-passado causal de $O$ têm separação temporal; os eventos das duas cunhas
-laterais têm separação espacial e não podem ser causalmente ligados a $O$
---- daí o rótulo ``não causal''. Os três pontos
-marcados retomam os Exemplos resolvidos desta seção.}
-\label{fig:cone-luz}
-\end{figure}
+\textbf{As hipóteses.} Nenhuma menciona luz:
+\begin{enumerate}
+  \item \emph{Homogeneidade} --- nenhum ponto ou instante é privilegiado, o
+  que já usamos para exigir que a transformação seja linear;
+  \item \emph{Isotropia} --- nenhuma direção é privilegiada, de modo que
+  inverter o eixo $x$ equivale a trocar $v$ por $-v$;
+  \item \emph{Princípio da relatividade} --- os referenciais inerciais são
+  todos equivalentes; em particular, a transformação de $S'$ para $S$ tem a
+  mesma forma que a de $S$ para $S'$, com $v$ trocado por $-v$.
+\end{enumerate}
 
-\begin{example}
-Considere dois eventos separados por $\Delta t=5$ e $\Delta x=3$, em unidades
-com $c=1$. O intervalo é
+\begin{resultado}
+\textbf{Dedução.} Pela hipótese 1 a transformação é linear, e pela condição de
+que a origem de $S'$ se mova com velocidade $v$ (a mesma
+\emph{Condição~1} da Seção~\ref{sec:transformacoes-lorentz}) ela tem
+necessariamente a forma
 \[
-  \Delta s^2=-25+9=-16.
+  x'=\gamma\,(x-vt),\qquad t'=\gamma\,(t-\beta x),
 \]
-A separação é temporal. O tempo próprio entre os eventos, ao longo da reta
-inercial que os conecta, é $\Delta\tau=4$. Esse número é o tempo medido por um
-relógio que passa pelos dois eventos sem aceleração.
-\end{example}
+onde $\gamma$ e $\beta$ dependem só de $v$ e o fator comum $\gamma$ foi posto
+em evidência por conveniência. Nada até aqui fixa $\beta$; em Galileu,
+$\beta=0$ e $\gamma=1$.
 
-\begin{example}
-Agora tome $\Delta t=2$ e $\Delta x=5$. Temos
+Pela hipótese 2, inverter a orientação do eixo mostra que $\gamma$ é uma
+função \emph{par} de $v$ e $\beta$ é \emph{ímpar}.
+
+Agora a hipótese 3. Em forma matricial a transformação é
 \[
-  \Delta s^2=-4+25=21.
+  \begin{pmatrix}t'\\x'\end{pmatrix}
+  =\gamma\begin{pmatrix}1&-\beta\\-v&1\end{pmatrix}
+  \begin{pmatrix}t\\x\end{pmatrix},
 \]
-A separação é espacial. Não faz sentido perguntar qual partícula massiva liga
-esses eventos, pois isso exigiria velocidade maior que a da luz. Contudo, faz
-sentido procurar um referencial no qual os eventos sejam simultâneos.
-\end{example}
+com determinante $\gamma^2(1-\beta v)$. Invertendo,
+\[
+  \begin{pmatrix}t\\x\end{pmatrix}
+  =\frac{1}{\gamma\,(1-\beta v)}
+  \begin{pmatrix}1&\beta\\v&1\end{pmatrix}
+  \begin{pmatrix}t'\\x'\end{pmatrix}.
+\]
+Mas o princípio da relatividade diz que essa inversa \emph{é} a transformação
+direta com $v\to-v$, que pela paridade da hipótese 2 vale
+$\gamma\left(\begin{smallmatrix}1&\beta\\v&1\end{smallmatrix}\right)$.
+Comparando os dois, o fator de fora tem de coincidir:
+\begin{equation}
+  \gamma^2\,(1-\beta v)=1 .
+  \label{eq:ignatowski-gamma}
+\end{equation}
 
-\section{Contração e dilatação sem mistério}
+Falta relacionar $\beta$ a $v$, e é aqui que entra a última exigência, também
+contida na hipótese 3: \emph{compor} duas dessas transformações tem de dar
+outra do mesmo tipo, porque o resultado de trocar duas vezes de referencial
+inercial é ainda uma troca de referencial inercial. Multiplicando as matrizes
+de $v_1$ e $v_2$ e impondo que o produto tenha de novo a forma acima --- isto
+é, que os dois elementos da diagonal sejam iguais entre si --- sobra a
+condição
+\[
+  \frac{\beta(v_1)}{v_1}=\frac{\beta(v_2)}{v_2}
+  \qquad\text{para quaisquer } v_1,v_2 ,
+\]
+ou seja, o quociente $\beta/v$ não depende de $v$. Chame-o de $K$:
+\[
+  \beta=K v,
+  \qquad\text{e de \eqref{eq:ignatowski-gamma}}\qquad
+  \gamma=\frac{1}{\sqrt{1-Kv^2}} .
+\]
+\end{resultado}
 
-A dilatação temporal não significa que ``o tempo realmente fica lento'' em
-sentido absoluto. Significa que, entre dois eventos sobre a linha de mundo de
-um relógio, o tempo próprio daquele relógio é menor que a diferença de tempo
-coordenado atribuída por um observador que vê o relógio se mover. A contração
-de comprimentos também depende de simultaneidade: medir o comprimento de uma
-barra em movimento exige registrar as posições de suas extremidades no mesmo
-instante do referencial do observador.
+E acabou: sem nunca mencionar luz, a estrutura ficou determinada a menos de
+\emph{uma única constante universal} $K$, com dimensão de inverso de
+velocidade ao quadrado. Restam três casos, e a natureza escolhe um deles por
+medida, não por dedução:
 
-Essa observação elimina muitos falsos paradoxos. Quando dois observadores em
-movimento relativo se descrevem mutuamente como tendo relógios dilatados, eles
-não estão fazendo afirmações contraditórias sobre um mesmo par de eventos. Cada
-um compara eventos diferentes, definidos por sua própria noção de
-simultaneidade. A geometria de Minkowski organiza essas comparações sem
-privilegiar um observador.
+\begin{itemize}
+  \item $K=0$. Então $\gamma=1$ e $t'=t$: é exatamente
+  \eqref{eq:galileu}. \emph{A transformação de Galileu não é rival da de
+  Lorentz --- é o caso particular $K=0$ da mesma família.}
+  \item $K>0$. Escreva $K=1/c^2$, o que define uma velocidade $c$. Substituindo
+  em \eqref{eq:composicao}, a composição fica $u'=(u-v)/(1-uv/c^2)$, e
+  $u=c$ dá $u'=c$: existe uma velocidade invariante, a mesma para todos os
+  observadores. Recupera-se tudo o que este capítulo deduziu.
+  \item $K<0$. Aí $\gamma=1/\sqrt{1+|K|v^2}$ nunca se anula e as
+  transformações são rotações euclidianas comuns num plano $(t,x)$. Uma
+  rotação suficientemente grande leva qualquer evento para o passado de
+  qualquer outro: não sobra ordem causal nenhuma, e causa e efeito perdem o
+  sentido. Este caso é descartado pela experiência mais banal.
+\end{itemize}
 
-\begin{activity}
-Desenhe uma barra em repouso em $S'$ e represente as linhas de mundo de suas
-extremidades. Marque dois eventos simultâneos em $S$ e use o diagrama para
-explicar por que o comprimento medido em $S$ é menor que o comprimento próprio.
-\end{activity}
+\begin{atencao}
+O ponto desta dedução não é dispensar o experimento --- $K$ tem de ser medido,
+e é. O ponto é \emph{onde} o experimento entra. Ele não determina a forma das
+equações, que já estava fixada por homogeneidade, isotropia e relatividade
+sozinhas; determina apenas o valor de um número. E, medido $K>0$, a existência
+de uma velocidade invariante é consequência, não hipótese: ela existiria mesmo
+que o fóton tivesse massa. A luz é rápida porque o fóton não tem massa; $c$ é
+invariante porque o espaço-tempo é assim.
+\end{atencao}
 
 \section{Problemas orientados}
 
@@ -987,10 +1308,16 @@ explicar por que o comprimento medido em $S$ é menor que o comprimento próprio
   quando o relógio se move com velocidade $v$. A pista é aplicar Pitágoras ao
   triângulo formado por metade do percurso.
 
-  \item \textbf{Comprimento próprio.} Uma barra está em repouso em $S'$ com
-  comprimento $L_0$. Use transformações de Lorentz para mostrar que eventos
-  simultâneos em $S$ nas extremidades da barra não são simultâneos em $S'$.
-  Conclua que $L=L_0/\gamma$.
+  \item \textbf{A barra e o celeiro.} Uma barra de comprimento próprio $L_0$
+  atravessa um celeiro de comprimento próprio $L_0/2$, com $v$ tal que
+  $\gamma=2$. Para o fazendeiro, a barra contraída mede $L_0/2$ e cabe
+  inteira, com as duas portas fechando ao mesmo tempo. Para o piloto da barra,
+  é o celeiro que mede $L_0/4$, e a barra não cabe de jeito nenhum. Os dois
+  não podem estar errados sobre um fato --- a barra ficou ou não ficou presa.
+  Resolva localizando os \emph{quatro} eventos (cada porta fechando, cada
+  ponta da barra passando por ela) e mostrando que ``as duas portas fecham ao
+  mesmo tempo'' vale em um referencial e não no outro. Conclua o que de fato
+  acontece.
 
   \item \textbf{Ordem temporal.} Escolha dois eventos com separação espacial.
   Encontre uma velocidade $v$ tal que a ordem temporal dos eventos seja
@@ -1000,12 +1327,19 @@ explicar por que o comprimento medido em $S$ é menor que o comprimento próprio
   uma trajetória formada por dois trechos retilíneos de velocidades opostas.
   Calcule o tempo próprio total e interprete a desigualdade resultante.
 
-  \item \label{item-adicao-velocidades} \textbf{Adição de velocidades.} Derive a fórmula
+  \item \label{item-adicao-velocidades} \textbf{Velocidades transversais e
+  aberração.} A Seção~\ref{sec:consequencias} compôs velocidades ao longo do
+  movimento. Refaça a conta para uma partícula que, em $S$, tem
+  \emph{também} componente $u_y$, lembrando que $y'=y$ mas $\dd t'\ne\dd t$,
+  e obtenha
   \[
-    u'=\frac{u-v}{1-uv}
+    u'_y=\frac{u_y}{\gamma\,(1-u_xv)} .
   \]
-  a partir das transformações de Lorentz. Verifique explicitamente que, se
-  $u=1$, então $u'=1$.
+  Note que $u'_y\ne u_y$ mesmo sem contração transversal: a diferença vem
+  inteira do tempo. Aplique a um raio de luz com $u_x=0$, $u_y=1$ e mostre que
+  em $S'$ ele chega inclinado --- este é o fenômeno da \emph{aberração
+  estelar}, que muda a posição aparente das estrelas ao longo do ano e foi
+  medido por Bradley em 1728, bem antes de haver relatividade para explicá-lo.
 
   \item \textbf{Rapidez.} Defina a rapidez $\varphi$ por $v=\tanh\varphi$.
   Mostre que transformações de Lorentz sucessivas na mesma direção somam
@@ -1135,57 +1469,66 @@ velocidade efetiva de dois boosts sucessivos e recupera
 \[
   w=\frac{v_1+v_2}{1+v_1v_2},
 \]
-fechando o ciclo: a fórmula de adição de velocidades, pedida no item
-\ref{item-adicao-velocidades} de Problemas orientados, é re-derivada aqui de
-modo puramente algébrico, sem qualquer apelo a diagramas ou limites físicos.
+fechando o ciclo: a fórmula de adição de velocidades \eqref{eq:composicao},
+deduzida na Seção~\ref{sec:consequencias} dividindo uma linha da
+transformação pela outra, reaparece aqui de modo puramente algébrico --- como
+a simples soma dos parâmetros de duas rotações hiperbólicas, sem qualquer
+apelo a diagramas ou limites físicos.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Múons atmosféricos.} Múons produzidos a $15$~km de altitude têm vida
-média própria $\tau_0=2{,}2\,\mu$s e velocidade $v=0{,}995$. Calcule a fração
-que chegaria ao solo (i) ignorando a relatividade e (ii) levando em conta a
-dilatação temporal. Explique o mesmo resultado no referencial do múon, onde
-não há dilatação alguma.
+\facil{1.6}
+Dois eventos têm coordenadas $A=(0,0)$ e $B=(4,3)$ em um referencial $S$, em
+unidades com $c=1$. Calcule $\Delta s^2$ e classifique a separação. Existe um
+referencial inercial em que os dois eventos sejam simultâneos? Se existir,
+determine sua velocidade em relação a $S$; se não, explique o que impede.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Barra e celeiro.} Uma barra de comprimento próprio $10$~m move-se com
-$v=0{,}8$ ao longo de um celeiro de comprimento próprio $8$~m, com portas nas
-duas extremidades. No referencial do celeiro a barra cabe inteira e as duas
-portas podem ser fechadas simultaneamente. No referencial da barra, o celeiro
-mede $4{,}8$~m e ela não cabe. Descreva os quatro eventos relevantes nos dois
-referenciais e mostre que não há contradição física.
+\facil{1.8}
+Uma régua de comprimento próprio $1{,}00$~m move-se com $v=0{,}60$ ao longo de
+seu próprio eixo. (a) Qual o comprimento medido no laboratório? (b) Um relógio
+preso à régua avança $1{,}00$~s entre dois eventos; quanto avança o relógio do
+laboratório entre os mesmos eventos? (c) Justifique por que as duas respostas
+usam fatores $\gamma$ em posições opostas.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Movimento superluminal aparente.} Um jato é emitido de um núcleo
-galáctico com velocidade $v$ e ângulo $\theta$ em relação à linha de visada.
-Mostre que a velocidade transversal aparente é
-\[
-  \beta_{\rm ap}=\frac{\beta\sin\theta}{1-\beta\cos\theta},
-\]
-que seu máximo sobre $\theta$ vale $\gamma\beta$, e calcule-o para
-$\beta=0{,}99$. Esse é o mecanismo pelo qual jatos parecem violar o limite de
-velocidade da luz sem violá-lo.
+\medio{1.10}
+Partindo das transformações de Lorentz, deduza a lei de composição de
+velocidades colineares $u'=(u-v)/(1-uv)$. Verifique que $u=1$ implica $u'=1$
+para qualquer $v$, e mostre que, se $|u|<1$ e $|v|<1$, então $|u'|<1$ --- isto
+é, nenhuma composição de velocidades subluminais produz uma velocidade
+superluminal.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Aberração da luz.} Um fóton faz ângulo $\theta$ com o eixo $x$ em $S$.
-Use a transformação do quadrimomento para obter
-$\cos\theta'=(\cos\theta-v)/(1-v\cos\theta)$. Mostre que, para
-$v\to1$, quase toda a esfera celeste se concentra num cone estreito à frente
---- o efeito de \emph{farol} que torna jatos relativísticos tão brilhantes
-quando apontados para nós.
+\medio{1.7}
+As hipérboles invariantes são o instrumento gráfico que calibra os eixos de um
+diagrama de Minkowski. (a) Mostre que o lugar geométrico dos eventos com
+$\Delta s^2=-1$ é uma hipérbole que cruza o eixo $t$ em $t=1$. (b) Desenhe o
+diagrama para $v=0{,}5$ e use a interseção da hipérbole com o eixo $t'$ para
+marcar a unidade de $t'$. (c) Explique por que essa unidade aparece
+\emph{maior} que a de $t$ no papel, embora ambas valham um segundo próprio.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Ordem causal e o cone.} Sejam dois eventos com $\Delta t$ e $\Delta x$
-dados. Determine a condição sobre $|\Delta x/\Delta t|$ para que exista um
-referencial em que a ordem temporal se inverta, e calcule explicitamente a
-velocidade mínima desse referencial. Conclua que a inversão só ocorre para
-pares de eventos que nenhum sinal causal pode ligar.
+\dificil{1.11}
+Duas naves partem da Terra simultaneamente em sentidos opostos, cada uma com
+$v=0{,}8$ medida da Terra. Cada capitão afirma que o relógio da outra nave
+atrasa. (a) Calcule a velocidade relativa entre as naves. (b) No referencial
+da nave~1, quanto tempo próprio decorre na nave~2 enquanto a nave~1 acumula
+$1$~ano? (c) As duas afirmações são contraditórias? Resolva o aparente
+paradoxo identificando explicitamente qual par de eventos cada capitão está
+comparando, e mostre em um diagrama de Minkowski que os dois pares são
+diferentes.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -1224,19 +1567,142 @@ Construir a linguagem de quadrivetores e usá-la para resolver problemas de
 cinemática e dinâmica relativística sem depender de componentes particulares.
 \end{objetivos}
 
+\section{Vetores no espaço-tempo}
+\label{sec:vetores-espacotempo}
+
+Antes de construir quadrivelocidade e quadrimomento, é preciso dizer o que é
+um vetor aqui --- porque a resposta não é ``uma lista de quatro números''.
+
+\textbf{O critério é a transformação.} Um evento tem coordenadas $x^\mu$ que
+mudam de $S$ para $S'$ pela transformação de Lorentz da
+Seção~\ref{sec:transformacoes-lorentz}, que podemos escrever de forma
+compacta como
+\begin{equation}
+  x'^\mu=\Lambda^\mu{}_\nu\,x^\nu ,
+  \label{eq:lorentz-matriz}
+\end{equation}
+onde $\Lambda^\mu{}_\nu$ é a matriz de coeficientes de \eqref{eq:lorentz} e
+está subentendida a \emph{convenção de soma}: um índice repetido, uma vez em
+cima e uma vez embaixo, indica soma de $0$ a $3$. \emph{Um quadrivetor é
+qualquer conjunto de quatro números que se transforme exatamente assim.} Essa
+é a definição inteira, e ela tem consequência prática imediata: quatro números
+juntos num parêntese não formam um vetor até que se verifique como eles mudam
+de referencial.
+
+O exemplo que interessa é $\dd x^\mu$, o deslocamento entre dois eventos
+vizinhos: por ser diferença de coordenadas, ele se transforma como
+\eqref{eq:lorentz-matriz}. Dividi-lo por um \emph{escalar} --- um número igual
+em todos os referenciais --- devolve outro vetor, porque a matriz $\Lambda$
+passa direto pela divisão. É essa observação, e só ela, que fará da
+quadrivelocidade um vetor na próxima seção.
+
+\begin{atencao}
+Dividir por $\dd t$ \emph{não} produziria um vetor: $\dd t$ é a componente
+temporal de $\dd x^\mu$, e muda de referencial para referencial. A velocidade
+ordinária $\bm v=\dd\bm x/\dd t$ não é, portanto, parte de nenhum
+quadrivetor --- é por isso que ela obedece à lei de composição desajeitada
+\eqref{eq:composicao}, em vez de se transformar linearmente. O que salva a
+construção é existir um escalar natural ao longo da linha de mundo: o tempo
+próprio.
+\end{atencao}
+
+\section{Produto escalar}
+\label{sec:produto-escalar}
+
+A operação que dá conteúdo geométrico a tudo o que vem a seguir é o produto
+escalar. Ele já existe, disfarçado: o intervalo
+$\dd s^2=-\dd t^2+\dd x^2+\dd y^2+\dd z^2$ é o produto de $\dd x^\mu$ consigo
+mesmo. Generalizando para dois vetores quaisquer $A^\mu$ e $B^\mu$,
+\begin{equation}
+  \bm A\cdot\bm B\;\equiv\;-A^0B^0+A^1B^1+A^2B^2+A^3B^3
+  \;=\;\eta_{\mu\nu}A^\mu B^\nu ,
+  \label{eq:produto-escalar}
+\end{equation}
+onde a última forma introduz a \emph{métrica de Minkowski}
+\[
+  \eta_{\mu\nu}=\operatorname{diag}(-1,1,1,1),
+\]
+que é apenas a tabela de sinais de \eqref{eq:produto-escalar} escrita como
+matriz. A convenção de soma faz o resto.
+
+\begin{resultado}
+O produto escalar é invariante: $\bm A\cdot\bm B$ tem o mesmo valor em todos
+os referenciais inerciais.
+\end{resultado}
+
+A demonstração é a mesma da invariância do intervalo, e nem precisa ser
+refeita: aplicada a $\bm A=\bm B=\dd\bm x$, \eqref{eq:produto-escalar} devolve
+$\dd s^2$, cuja invariância já foi estabelecida. O caso geral segue da
+identidade
+\[
+  \bm A\cdot\bm B=\tfrac12\Big[(\bm A+\bm B)\cdot(\bm A+\bm B)
+                    -\bm A\cdot\bm A-\bm B\cdot\bm B\Big],
+\]
+que escreve qualquer produto escalar em termos de três normas --- e normas são
+intervalos, portanto invariantes.
+
+\textbf{Por que isso é a ferramenta central.} Um produto escalar é um número
+que não depende de quem calcula. Sempre que uma pergunta física for
+respondida por um produto escalar, a resposta pode ser obtida no referencial
+mais conveniente e depois usada em qualquer outro. Boa parte da eficiência do
+formalismo relativístico é essa, e não outra.
+
+\textbf{Uma abreviação de notação.} Escrever $\eta_{\mu\nu}A^\mu B^\nu$ o
+tempo todo cansa, e é usual definir
+\begin{equation}
+  A_\mu\;\equiv\;\eta_{\mu\nu}A^\nu ,
+  \qquad\text{de modo que}\qquad
+  \bm A\cdot\bm B=A_\mu B^\mu .
+  \label{eq:abaixar-indice}
+\end{equation}
+Em componentes, isso apenas troca o sinal da componente temporal:
+$A_0=-A^0$ e $A_i=A^i$. Por ora trate \eqref{eq:abaixar-indice} como o que
+ela é --- uma abreviação cômoda. O objeto $A_\mu$ tem vida geométrica
+própria (é uma \emph{um-forma}, e a métrica é o que permite associá-la a
+$A^\mu$), mas isso é assunto do Capítulo~\ref{chap:tensores}; nada neste
+capítulo depende dessa leitura mais profunda.
+
+\textbf{Classificação.} O sinal da norma classifica vetores exatamente como
+classificava separações entre eventos:
+\[
+  \bm A\cdot\bm A<0\ \text{(temporal)},\qquad
+  \bm A\cdot\bm A=0\ \text{(nulo)},\qquad
+  \bm A\cdot\bm A>0\ \text{(espacial)}.
+\]
+Como o produto escalar é invariante, essa classificação também é: nenhum
+observador vê temporal o que outro vê espacial. E dois vetores são
+\emph{ortogonais} quando $\bm A\cdot\bm B=0$ --- palavra que aqui não
+significa ``perpendicular no papel'': um vetor nulo é ortogonal a si mesmo,
+coisa que nenhum vetor euclidiano não nulo consegue.
+
+\begin{activity}
+Sejam $\bm A=(2,1,0,0)$ e $\bm B=(1,1,0,0)$ em componentes de algum
+referencial. Classifique cada um, calcule $\bm A\cdot\bm B$ e verifique que
+$\bm B$ é ortogonal a si mesmo. Em seguida aplique um boost de $v=0{,}5$ às
+componentes dos dois e confirme, com números, que os três produtos escalares
+não mudaram.
+\end{activity}
+
 \section{Quadrivelocidade}
 
-A linha de mundo de uma partícula é parametrizada por $x^\mu(\tau)$. A
-quadrivelocidade é
+A linha de mundo de uma partícula é parametrizada por $x^\mu(\tau)$, e o tempo
+próprio é o escalar de que a Seção~\ref{sec:vetores-espacotempo} precisava: ele
+é o mesmo para todos os observadores. Dividir o deslocamento por ele produz,
+portanto, um quadrivetor legítimo --- a \emph{quadrivelocidade}
 \[
   U^\mu=\frac{\dd x^\mu}{\dd\tau}.
 \]
-Em componentes inerciais,
+Suas componentes num referencial inercial saem de
+$\dd\tau=\dd t/\gamma$, isto é, $\dd/\dd\tau=\gamma\,\dd/\dd t$:
 \[
-  U^\mu=\gamma(1,\bm v).
+  U^\mu=\gamma\frac{\dd}{\dd t}(t,\bm x)=\gamma(1,\bm v).
 \]
-Seu produto escalar consigo mesma é fixo. Usando a métrica de Minkowski
-$\eta_{\munu}={\rm diag}(-1,1,1,1)$,
+Note o contraste com o aviso da Seção~\ref{sec:vetores-espacotempo}: a
+velocidade ordinária $\bm v$ não era parte de vetor nenhum, e o único
+acréscimo que a torna vetorial é o fator $\gamma$ --- que é exatamente o
+preço de trocar $\dd t$ por $\dd\tau$.
+
+Sua norma, calculada com \eqref{eq:produto-escalar}, é fixa:
 \[
   U^\mu U_\mu=\etaab U^\alpha U^\beta
   =-\gamma^2+\gamma^2\bm v\cdot\bm v
@@ -1262,6 +1728,68 @@ quadrivelocidade. No referencial instantaneamente comóvel à partícula,
 $U^\mu=(1,0,0,0)$, e a ortogonalidade força $A^0=0$: naquele referencial a
 aceleração é puramente espacial, exatamente como se espera de uma força
 comum.
+
+\subsection*{Aceleração própria constante}
+\label{sec:aceleracao-propria}
+
+Vale gastar meia página no único movimento acelerado que se resolve
+exatamente, porque ele responde a uma pergunta que todo estudante faz --- ``e
+se eu simplesmente continuar acelerando?'' --- e porque a resposta reaparece,
+anos depois, no estudo de horizontes.
+
+Um foguete cujo motor mantém aceleração constante \emph{medida a bordo} tem,
+por definição, $A^\mu A_\mu=a_0^2$ com $a_0$ fixo (o número que um
+acelerômetro preso à parede registra). Restringindo-se a $1+1$ dimensões,
+duas condições valem simultaneamente:
+\[
+  U^\mu U_\mu=-1
+  \qquad\text{e}\qquad
+  A^\mu A_\mu=a_0^2 .
+\]
+A primeira diz que $U^\mu=(\cosh\varphi,\sinh\varphi)$ para alguma função
+$\varphi(\tau)$ --- essa é a parametrização geral de um vetor de norma $-1$,
+exatamente como $(\cos\theta,\sin\theta)$ é a de um vetor unitário
+euclidiano. É a rapidez da Seção~\ref{sec:consequencias} reaparecendo, agora
+como coordenada natural ao longo da linha de mundo.
+
+Derivando, $A^\mu=\dot\varphi\,(\sinh\varphi,\cosh\varphi)$, cuja norma é
+$A^\mu A_\mu=\dot\varphi^2(-\sinh^2\varphi+\cosh^2\varphi)=\dot\varphi^2$. A
+segunda condição dá então $\dot\varphi=a_0$, isto é
+\[
+  \varphi=a_0\tau
+\]
+a menos da origem de $\tau$. \emph{A rapidez cresce linearmente com o tempo
+próprio} --- e essa é a formulação correta de ``acelerar sempre igual''. A
+velocidade $v=\tanh(a_0\tau)$ cresce, mas satura em $1$: nenhuma quantidade de
+combustível a ultrapassa, e nada foi imposto para impedir isso além da
+geometria.
+
+Integrando $U^\mu=\dd x^\mu/\dd\tau$ uma vez mais, com $x^\mu(0)=(0,1/a_0)$,
+\[
+  t(\tau)=\frac{1}{a_0}\sinh(a_0\tau),
+  \qquad
+  x(\tau)=\frac{1}{a_0}\cosh(a_0\tau),
+\]
+e a identidade $\cosh^2-\sinh^2=1$ dá de imediato
+\begin{equation}
+  x^2-t^2=\frac{1}{a_0^{2}} .
+  \label{eq:rindler}
+\end{equation}
+A trajetória é uma \emph{hipérbole} --- e não uma parábola, como seria em
+Newton. Mais que isso: é uma das hipérboles invariantes da
+Seção~\ref{sec:diagramas}, agora com significado físico em vez de papel
+auxiliar de calibração.
+
+\begin{atencao}
+A hipérbole \eqref{eq:rindler} tem as retas $x=\pm t$ como assíntotas, e delas
+sai uma consequência que não tem análogo newtoniano. Um sinal de luz emitido
+da origem em $t=0$ alcança o foguete; um emitido de $x=0$ num instante
+$t\ge1/a_0$ \emph{nunca} o alcança, por mais que persiga. Existe portanto uma
+região do espaço-tempo da qual nenhuma notícia chega a quem acelera para
+sempre --- um \emph{horizonte}, produzido só por aceleração, sem gravidade
+nenhuma. É o horizonte de Rindler, e é o modelo mais simples do que
+acontecerá na superfície de um buraco negro.
+\end{atencao}
 
 \section{Quadrimomento}
 
@@ -1400,18 +1928,16 @@ que não há relógio físico comóvel com um fóton.
 \section{Problemas orientados}
 
 \begin{enumerate}
-  \item \label{item-aceleracao-propria} \textbf{Aceleração própria constante.}
-  Uma partícula tem quadriaceleração de norma fixa,
-  $A^\mu A_\mu=a_0^2$, com $a_0$ constante (o valor medido por um
-  acelerômetro preso à partícula). Restrinja-se a $1+1$ dimensões e mostre
-  que $A^\mu U_\mu=0$ (já demonstrado no texto) mais essa condição implicam
-  \[
-    U^\mu=(\cosh(a_0\tau),\sinh(a_0\tau))
-  \]
-  a menos de uma escolha de origem para $\tau$. Integre mais uma vez para
-  obter $t(\tau)$ e $x(\tau)$, e mostre que a trajetória no espaço-tempo é uma
-  hipérbole. Esse é o movimento ``uniformemente acelerado'' relativístico
-  (a base do problema do foguete relativístico).
+  \item \label{item-aceleracao-propria} \textbf{O foguete de 1\,g.} Use o
+  resultado \eqref{eq:rindler} para a viagem que a ficção científica gosta:
+  um foguete que mantém $a_0=g$ (gravidade artificial confortável) rumo a uma
+  estrela a $D=4{,}4$ anos-luz. (a) Mostre que, acelerando na primeira metade
+  e freando na segunda, o tempo próprio total é
+  $\tau=(2/g)\operatorname{arcosh}\!\big(1+gD/2\big)$, em unidades com
+  $c=1$. (b) Calcule $\tau$ e o tempo decorrido na Terra, sabendo que
+  $g\approx1{,}03$\,ano$^{-1}$ nessas unidades. (c) Repita para
+  $D=27\,000$ anos-luz (o centro da Galáxia) e comente: o que limita a
+  viagem não é o tempo do viajante.
 
   \item \label{item-energia-limiar} \textbf{Energia de limiar.} Uma partícula
   de massa $m$ atinge uma partícula idêntica em repouso e produz uma
@@ -1614,47 +2140,58 @@ massas do próton e do píon neutro reproduz o mesmo número obtido em Python
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Limiar de produção de antiprótons.} No Bevatron, prótons acelerados
-atingem um alvo de hidrogênio em repouso e produzem pares próton--antipróton
-pela reação $p+p\to p+p+p+\bar p$. Use o invariante $s$ para obter a energia
-cinética de limiar no laboratório e verifique que ela é aproximadamente
-$5{,}6$~GeV. Por que o limiar é tão maior que os $2m_pc^2=1{,}88$~GeV que a
-conta ingênua sugeriria?
+\facil{2.3}
+Uma partícula de massa de repouso $m$ move-se com $v=0{,}6$ na direção $x$.
+Escreva $U^\mu$ e $p^\mu$ em componentes e verifique explicitamente que
+$U^\mu U_\mu=-1$ e $p^\mu p_\mu=-m^2$. Qual é a energia cinética, isto é,
+$E-m$?
 \end{exercise}
 
 \begin{exercise}
-\textbf{Decaimento $\pi^0\to2\gamma$.} Um píon neutro de massa
-$m_\pi=135$~MeV e fator de Lorentz $\gamma$ decai em dois fótons. Mostre que
-o ângulo de abertura entre eles tem um valor \emph{mínimo}
-$\theta_{\min}=2\arcsin(1/\gamma)$, atingido quando os fótons saem
-simetricamente. Calcule $\theta_{\min}$ para $\gamma=10$.
+\facil{2.7}
+Um píon neutro em repouso decai em dois fótons. (a) Determine a energia de
+cada fóton em termos de $m_\pi$. (b) Agora o píon move-se com
+$\gamma=10$ e decai emitindo os fótons ao longo do eixo de movimento;
+determine as energias dos dois fótons no laboratório. (c) Verifique que a
+massa invariante do par continua sendo $m_\pi$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Um fóton só é impossível.} Mostre, usando apenas conservação de
-quadrimomento e a casca de massa, que um elétron e um pósitron não podem
-aniquilar-se em um único fóton, mas podem em dois. Mostre também que um fóton
-livre não pode decair em um par $e^+e^-$ no vácuo --- e explique por que a
-mesma reação ocorre normalmente na presença de um núcleo.
+\medio{2.6}
+Um fóton de energia $E$ colide frontalmente com um elétron de energia $E_e$
+que se move em sentido oposto (espalhamento Compton inverso, o mecanismo que
+produz raios X em jatos astrofísicos). Usando o invariante
+$s=-(p_\gamma+p_e)^2$, obtenha a energia máxima que o fóton pode ter após o
+espalhamento no limite $E_e\gg m_e\gg E$. Mostre que ela cresce como
+$\gamma_e^2$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Recuo e o efeito Mössbauer.} Um núcleo de massa $M$ em repouso emite
-um fóton de energia nominal $E_0\ll Mc^2$. Mostre que, por recuo, a energia do
-fóton emitido é menor por aproximadamente $E_0^2/(2Mc^2)$. Para o
-$^{57}$Fe, com $E_0=14{,}4$~keV, calcule esse deslocamento e compare com a
-largura natural da linha, $4{,}7\times10^{-9}$~eV. Por que a emissão em uma
-rede cristalina resolve o problema?
+\medio{2.6}
+Um próton de energia $E$ atinge um próton em repouso. (a) Calcule
+$\sqrt{s}$, a energia disponível no centro de momento. (b) Mostre que, para
+$E\gg m_p$, $\sqrt{s}\approx\sqrt{2m_pE}$, ao passo que em um colisor frontal
+com a mesma energia por feixe $\sqrt{s}=2E$. (c) Que energia de laboratório
+seria necessária, em um experimento de alvo fixo, para igualar o
+$\sqrt{s}=13$~TeV do LHC? Comente o resultado.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Corte GZK.} Um próton de raio cósmico colide frontalmente com um fóton
-da radiação cósmica de fundo, de energia típica $6\times10^{-4}$~eV, e produz
-um píon: $p+\gamma\to p+\pi^0$. Use o invariante $s$ para estimar a energia
-mínima do próton e verifique que ela é da ordem de $10^{20}$~eV. Esse é o
-limite que deveria cortar o espectro de raios cósmicos de altíssima energia.
+\dificil{2.4}
+Um foguete de massa inicial $M_0$ acelera ejetando fótons para trás
+(propulsão por radiação, a mais eficiente possível). (a) Impondo conservação
+de quadrimomento, mostre que a massa restante $M$ e a rapidez $\varphi$
+alcançada satisfazem $M/M_0=e^{-\varphi}$. (b) Reescreva em termos da
+velocidade final $v$ e mostre que
+$M/M_0=\sqrt{(1-v)/(1+v)}$. (c) Que fração da massa inicial resta ao atingir
+$v=0{,}9$? Comente a viabilidade.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -1685,6 +2222,7 @@ numericamente em que condição vale a igualdade. Interprete o excesso.
 
 
 \chapter{Tensores no espaço-tempo plano}
+\label{chap:tensores}
 \label{cap:tensores-plano}
 
 \begin{objetivos}
@@ -2001,44 +2539,57 @@ $M_{\mu\nu}$'' que os Problemas orientados pedem para demonstrar à mão.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{O tensor eletromagnético.} Escreva as componentes de $F_{\mu\nu}$ em
-termos de $\bm E$ e $\bm B$, com $F_{0i}=E_i$ e $F_{ij}=\epsilon_{ijk}B_k$.
-Calcule o escalar $F_{\mu\nu}F^{\mu\nu}$ e mostre que ele vale
-$2(B^2-E^2)$. Conclua que a afirmação ``este campo é puramente elétrico'' não
-é invariante, mas ``$B^2-E^2>0$'' é.
+\facil{3.8}
+Sejam $\omega_\mu=(-2,1,0,0)$ as componentes de uma um-forma e
+$V^\mu=(3,2,1,0)$ as de um vetor, em coordenadas de Minkowski. Calcule
+$\omega(V)=\omega_\mu V^\mu$. Em seguida obtenha $\omega^\mu$ e $V_\mu$ com a
+métrica, e verifique que $\omega^\mu V_\mu$ dá o mesmo número.
 \end{exercise}
 
 \begin{exercise}
-\textbf{O segundo invariante.} Usando o símbolo de Levi-Civita
-quadridimensional, mostre que
-$\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}\propto\bm E\cdot\bm B$.
-Conclua que, se $\bm E\perp\bm B$ em um referencial, isso vale em todos.
-Relacione com o caso da onda plana eletromagnética.
+\facil{3.7}
+Classifique cada expressão como escalar, vetor, um-forma, tensor de ordem
+dois ou expressão mal escrita, justificando pelos índices livres:
+$T^{\mu\nu}A_\nu$, $\;T^{\mu}{}_{\mu}$, $\;A_\mu B_\mu$, $\;R_{\mu\nu}A^\mu
+B^\nu$, $\;A^\mu=B_\mu$, $\;T^{\mu\nu}A_\mu B_\nu C^\rho$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{O projetor espacial.} Dado um observador de quadrivelocidade $U^\mu$,
-defina $h_{\mu\nu}=g_{\mu\nu}+U_\mu U_\nu$. Mostre que
-$h^\mu{}_\nu U^\nu=0$ e que $h^\mu{}_\nu h^\nu{}_\rho=h^\mu{}_\rho$. Interprete
-$h_{\mu\nu}$ como a métrica do espaço tridimensional que esse observador
-chama de ``agora''.
+\medio{3.3}
+Considere a mudança de coordenadas $x'=x+\alpha t$, $t'=t$ (uma transformação
+de Galileu). (a) Calcule $\partial x^\mu/\partial x'^\nu$ e escreva a lei de
+transformação das componentes de um vetor e de uma um-forma. (b) Mostre
+explicitamente que $\omega_\mu V^\mu$ é invariante sob essa transformação,
+\emph{embora} ela não preserve o intervalo. (c) O que isso ensina sobre a
+diferença entre invariância de contração e invariância métrica?
 \end{exercise}
 
 \begin{exercise}
-\textbf{Autovalores do fluido perfeito.} Escreva $T^\mu{}_\nu$ de um fluido
-perfeito com a métrica de Minkowski. Mostre que $U^\mu$ é autovetor com
-autovalor $-\rho$ e que qualquer vetor ortogonal a $U^\mu$ é autovetor com
-autovalor $p$. Explique por que essa é a definição invariante de densidade de
-energia e pressão, válida em qualquer referencial.
+\medio{3.5}
+O tensor eletromagnético tem componentes $F_{0i}=E_i$ e
+$F_{ij}=\epsilon_{ijk}B_k$. (a) Escreva a matriz $F_{\mu\nu}$ completa.
+(b) Calcule o escalar $F_{\mu\nu}F^{\mu\nu}$ e mostre que vale $2(B^2-E^2)$.
+(c) Um campo é puramente elétrico em um referencial. Usando o invariante,
+determine se pode existir outro referencial em que ele seja puramente
+magnético, e sob que condição.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Contagem de componentes.} Quantas componentes independentes tem um
-tensor totalmente antissimétrico de posto $p$ em $n$ dimensões? Aplique o
-resultado a $F_{\mu\nu}$ em $n=4$ e ao símbolo de Levi-Civita. Mostre que não
-existe tensor totalmente antissimétrico de posto $5$ em quatro dimensões.
+\dificil{3.7}
+Um tensor $T^{\mu\nu}$ é simétrico. (a) Mostre que a decomposição
+$T^{\mu\nu}=\rho\,U^\mu U^\nu+p\,h^{\mu\nu}+2q^{(\mu}U^{\nu)}+\pi^{\mu\nu}$,
+com $h^{\mu\nu}=\eta^{\mu\nu}+U^\mu U^\nu$, $q^\mu U_\mu=0$,
+$\pi^{\mu\nu}U_\nu=0$ e $\pi^\mu{}_\mu=0$, é sempre possível dado um
+observador $U^\mu$, e que ela é única. (b) Identifique o significado físico
+de $\rho$, $p$, $q^\mu$ e $\pi^{\mu\nu}$ para esse observador. (c) Conte os
+graus de liberdade dos dois lados e verifique que fecham em dez.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -2071,102 +2622,776 @@ ortonormais são preferíveis em qualquer cálculo numérico.
 \label{cap:fluidos}
 
 \begin{objetivos}
-Introduzir o tensor energia-momento como fonte da gravidade e como objeto que
-resume densidade de energia, fluxo de energia, densidade de momento e tensões.
+Construir o tensor energia-momento a partir de uma pergunta elementar ---
+quantas partículas há aqui, e para onde elas vão --- e chegar ao fluido
+perfeito, que é a fonte de gravidade usada em praticamente toda aplicação
+astrofísica da relatividade geral. Ao final, o estudante deve saber ler cada
+componente de $T^{\mu\nu}$ como um fluxo, justificar sua simetria e obter as
+equações de Euler relativísticas de $\nabla_\mu T^{\mu\nu}=0$.
 \end{objetivos}
 
-\section{Poeira}
+\begin{leitura}
+Este é o capítulo mais abstrato da primeira metade do curso, e vale dizer por
+quê. Até aqui, todo objeto novo tinha um análogo newtoniano imediato:
+quadrivelocidade é velocidade, quadrimomento é momento. O tensor
+energia-momento não tem: ele reúne, em um único objeto, coisas que a física
+newtoniana trata como não relacionadas --- densidade de massa, densidade de
+momento, fluxo de energia e pressão. A dificuldade não é técnica, é de
+reorganização mental.
 
-Uma poeira é um conjunto de partículas sem pressão em seu referencial local de
-repouso. Se $\rho$ é a densidade de energia própria e $U^\mu$ a
-quadrivelocidade, então
-\[
-  T^{\mu\nu}=\rho U^\mu U^\nu.
-\]
-No referencial comóvel, $U^\mu=(1,0,0,0)$ e apenas $T^{00}=\rho$ é diferente
-de zero.
+A estratégia aqui é subir um degrau de cada vez. Começamos contando
+partículas, que é concreto; descobrimos que densidade e fluxo são o mesmo
+objeto visto de ângulos diferentes; e só então repetimos o argumento
+trocando ``número de partículas'' por ``energia e momento''. Quem entender
+bem a Seção~\ref{sec:fluxo-temporal} terá entendido o capítulo inteiro: o
+resto é a mesma ideia aplicada a uma grandeza mais rica.
+\end{leitura}
 
-\section{Fluido perfeito}
+\section{O que é um fluido}
+\label{sec:o-que-e-fluido}
 
-Um fluido perfeito isotrópico tem densidade de energia $\rho$ e pressão $p$.
-Seu tensor energia-momento é
-\[
-  T^{\mu\nu}=(\rho+p)U^\mu U^\nu+p g^{\mu\nu}.
-\]
-No espaço plano, basta tomar $g^{\mu\nu}=\eta^{\mu\nu}$. Em relatividade geral,
-o mesmo formato vale localmente em um espaço-tempo curvo.
+Um \textbf{contínuo} é uma coleção de partículas tão numerosa que não faz
+sentido acompanhar cada uma. Abandonamos a descrição individual e ficamos com
+médias: número de partículas por unidade de volume, densidade de energia,
+densidade de momento, pressão, temperatura. O comportamento de um lago não
+depende de onde está uma molécula de água em particular.
 
-\begin{resultado}
-A conservação local de energia e momento é
-\[
-  \nabla_\mu T^{\mu\nu}=0.
-\]
-Em espaço-tempo plano e coordenadas cartesianas, isso se reduz a
-$\partial_\mu T^{\mu\nu}=0$.
-\end{resultado}
-
-\section{Como ler o tensor energia-momento}
-
-O tensor energia-momento é uma tabela de fluxos. A componente $T^{00}$ é
-densidade de energia. As componentes $T^{0i}$ representam fluxo de energia na
-direção $i$. As componentes $T^{i0}$ representam densidade de momento. As
-componentes $T^{ij}$ representam fluxo do momento $i$ através de uma superfície
-normal à direção $j$; por isso incluem pressão e tensões.
-
-No caso de um fluido perfeito em repouso local,
-\[
-  T^{\mu\nu}=
-  \begin{pmatrix}
-  \rho&0&0&0\\
-  0&p&0&0\\
-  0&0&p&0\\
-  0&0&0&p
-  \end{pmatrix}.
-\]
-Essa matriz mostra por que pressão gravita em relatividade geral. A fonte da
-geometria não é apenas massa no sentido newtoniano, mas todo o tensor
-energia-momento. Em situações não relativísticas, $p\ll\rho$ e a pressão pode
-ser desprezada como fonte gravitacional. Em estrelas de nêutrons, radiação no
-Universo primordial ou campos relativísticos, essa aproximação deixa de ser
-segura.
-
-\section{Equações de estado}
-
-Para fechar um problema de fluido, é necessário relacionar pressão e densidade.
-Uma forma simples é
-\[
-  p=w\rho.
-\]
-Poeira fria tem $w=0$. Radiação tem $w=1/3$, pois o traço do tensor
-energia-momento eletromagnético é nulo. Uma constante cosmológica efetiva tem
-$w=-1$. Esses valores reaparecerão em cosmologia, onde determinam como a
-densidade de energia evolui com a expansão.
+Mas essas médias variam de ponto a ponto --- a pressão no fundo do lago é
+maior que na superfície. Isso levanta a pergunta central da aproximação de
+contínuo: \emph{sobre quantas partículas devemos tirar média?} A coleção
+precisa ser grande o bastante para que a partícula individual não importe, e
+pequena o bastante para que dentro dela tudo seja homogêneo. Uma coleção
+assim se chama \textbf{elemento} de fluido.
 
 \begin{example}
-No referencial comóvel de um fluido de radiação,
-\[
-  T^\mu{}_\mu=-\rho+3p.
-\]
-Para radiação, $T^\mu{}_\mu=0$, logo $p=\rho/3$. Essa é uma maneira rápida de
-lembrar a equação de estado relativística para um gás de partículas sem massa.
+\textbf{Existe elemento? Três casos.} A aproximação de contínuo só vale se
+houver uma janela entre a escala microscópica e a escala em que as grandezas
+variam. Compare:
+
+\begin{itemize}
+  \item \emph{Ar ao nível do mar.} Livre caminho médio $\sim70$~nm,
+  $n\sim2{,}5\times10^{25}\,\mathrm{m^{-3}}$. Um cubo de $1\,\mu$m de lado
+  contém $2{,}5\times10^{7}$ moléculas e é minúsculo comparado com qualquer
+  escala de variação. A janela é enorme: o contínuo funciona muito bem.
+
+  \item \emph{Interior de uma estrela de nêutrons.} $n\sim10^{44}\,
+  \mathrm{m^{-3}}$; um cubo de $1$~fm de lado já contém $\sim10^{-1}$
+  nêutrons, mas um de $1\,\mu$m contém $10^{26}$, e a estrela tem $10$~km.
+  De novo há janela de sobra.
+
+  \item \emph{Gás intergaláctico.} $n\sim1\,\mathrm{m^{-3}}$ e escalas de
+  variação de megaparsecs. Um elemento precisa ter anos-luz de lado para
+  conter partículas suficientes --- e ainda assim é pequeno frente ao
+  problema. Funciona, mas por pouco.
+\end{itemize}
+Onde a janela não existe --- um gás muito rarefeito em um aparato de
+laboratório, por exemplo --- a descrição de fluido simplesmente não se
+aplica, e é preciso voltar à cinética.
 \end{example}
 
-\section{Conservação local e leis integrais}
+Cada elemento carrega consigo um referencial: o \textbf{MCRF}
+(\emph{momentarily comoving reference frame}), o referencial inercial que
+naquele instante acompanha o elemento. É a mesma construção feita para
+partículas no Capítulo~\ref{cap:tensores-plano}, e ela é o que permite definir
+grandezas \emph{próprias} do fluido.
 
-Em espaço plano, a equação $\partial_\mu T^{\mu\nu}=0$ pode ser integrada em
-um volume. A componente $\nu=0$ expressa conservação de energia: a variação da
-energia dentro do volume é igual ao fluxo líquido através da fronteira. As
-componentes espaciais expressam conservação de momento. Em espaço-tempo curvo,
-a forma local torna-se $\nabla_\mu T^{\mu\nu}=0$, mas a passagem para uma
-energia global conservada exige simetria temporal. Essa sutileza é uma das
-diferenças profundas entre gravitação relativística e teorias de campo em um
-fundo fixo.
+\begin{central}
+Toda grandeza escalar do fluido --- densidade própria de número, densidade
+própria de energia, pressão, temperatura --- é \emph{definida no MCRF}. É
+isso que a torna um escalar: não é ``a densidade medida por alguém'', é ``a
+densidade medida por quem acompanha o elemento''. Qualquer observador calcula
+o mesmo número para ela, ainda que meça uma densidade diferente em seu
+próprio referencial.
+\end{central}
 
-\begin{activity}
-Escolha três sistemas físicos: poeira fria, gás relativístico e energia escura.
-Para cada um, escreva uma matriz diagonal plausível para $T^{\mu}{}_{\nu}$ no
-referencial comóvel e discuta o sinal da pressão.
-\end{activity}
+Falta distinguir fluido de sólido. Dois elementos vizinhos exercem força um
+sobre o outro através da interface comum. Essa força pode ter uma componente
+\emph{perpendicular} à interface --- é o empurra-e-puxa que chamamos de
+pressão --- e uma componente \emph{paralela} a ela, que impede um elemento de
+deslizar sobre o outro. É essa segunda que dá rigidez. Um \textbf{fluido} é
+um contínuo em que as forças de deslizamento são fracas; um \textbf{fluido
+perfeito} é aquele em que elas são exatamente nulas, restando só a pressão.
+
+\begin{atencao}
+A divisão entre sólido e fluido não é nítida, e não precisa ser. Sob pressão
+suficiente quase todo sólido escoa --- o manto terrestre é rocha e se comporta
+como fluido em escalas de milhões de anos. O que a definição acima faz não é
+classificar substâncias, e sim isolar a \emph{única} propriedade que vai
+entrar na física: se há ou não força paralela à interface. Guarde essa
+pergunta; ela reaparecerá como a condição que anula as componentes fora da
+diagonal de $T^{\mu\nu}$.
+\end{atencao}
+
+\section{Poeira: densidade e fluxo}
+\label{sec:poeira-densidade}
+
+O fluido mais simples possível chama-se \textbf{poeira}: uma coleção de
+partículas que estão todas em repouso em algum referencial. Sem pressão, sem
+movimento térmico, sem interação. É pouco realista e pedagogicamente perfeito.
+
+\subsection*{A densidade depende de quem mede}
+
+Seja $n$ o número de partículas por unidade de volume medido no MCRF. Em um
+referencial $\bar O$ no qual as partículas se movem com velocidade $v$, o
+\emph{número} de partículas é o mesmo, mas o volume que elas ocupam não: a
+contração de Lorentz encolhe a dimensão paralela ao movimento por $1/\gamma$ e
+deixa as transversas intactas. Logo
+\begin{equation}
+  n_{\bar O}=\gamma\,n=\frac{n}{\sqrt{1-v^2}} .
+  \label{eq:densidade-contraida}
+\end{equation}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/cap04_densidade_fluxo.pdf}
+  \caption{À esquerda, a origem de \eqref{eq:densidade-contraida}: as mesmas
+  partículas, o mesmo número, ocupando um volume menor. À direita, a
+  construção do fluxo: em um intervalo $\Delta\bar t$, atravessam a área
+  $\Delta A$ exatamente as partículas contidas no paralelepípedo de altura
+  $v^{\bar x}\Delta\bar t$ --- as demais não chegam a tempo.}
+  \label{fig:cap04-densidade-fluxo}
+\end{figure}
+
+\subsection*{Fluxo através de uma superfície}
+
+A segunda pergunta natural é: quantas partículas atravessam uma dada
+superfície, por unidade de área e de tempo? Isso é o \textbf{fluxo}. Ele
+depende do referencial (área e tempo são conceitos dependentes de
+referencial) e da orientação da superfície --- uma superfície paralela à
+velocidade não é atravessada por ninguém.
+
+Tome em $\bar O$ uma superfície $S$ perpendicular a $\bar x$, de área
+$\Delta A$, e um intervalo $\Delta\bar t$. Atravessam $S$ nesse intervalo
+todas as partículas --- e somente elas --- que estejam a uma distância menor
+que $v^{\bar x}\Delta\bar t$ de $S$, do lado de trás. Essas partículas ocupam
+um paralelepípedo de volume $v^{\bar x}\Delta\bar t\,\Delta A$, e a densidade
+ali é $\gamma n$. O número que atravessa é $\gamma n\,v^{\bar
+x}\Delta\bar t\,\Delta A$, e portanto
+\begin{equation}
+  (\text{fluxo})^{\bar x}=\gamma\,n\,v^{\bar x} .
+  \label{eq:fluxo-x}
+\end{equation}
+
+\begin{atencao}
+Note que só a componente $v^{\bar x}$ entra em \eqref{eq:fluxo-x}. Se as
+partículas também tiverem velocidade em $\bar y$, o paralelepípedo fica
+inclinado, mas sua \emph{altura na direção $x$} continua sendo $v^{\bar
+x}\Delta\bar t$ --- e volume de paralelepípedo é área da base vezes altura.
+Deslocamento paralelo à superfície não faz ninguém atravessá-la.
+\end{atencao}
+
+\section{O vetor fluxo de número}
+\label{sec:vetor-fluxo}
+
+Olhe para \eqref{eq:densidade-contraida} e \eqref{eq:fluxo-x} lado a lado:
+\[
+  n_{\bar O}=\gamma n,\qquad (\text{fluxo})^{\bar i}=\gamma n v^{\bar i} .
+\]
+Isso é exatamente o padrão $\gamma(1,\bm v)$ da quadrivelocidade. Definimos
+então o \textbf{vetor fluxo de número}
+\begin{equation}
+  N^\mu = n\,U^\mu ,
+  \label{eq:vetor-N}
+\end{equation}
+cujas componentes em qualquer referencial são
+\begin{equation}
+  N^0=\gamma n=\text{densidade de número},
+  \qquad
+  N^{i}=\gamma n v^{i}=\text{fluxo na direção } i .
+  \label{eq:componentes-N}
+\end{equation}
+
+\begin{central}
+Densidade e fluxo não são duas grandezas: são a componente temporal e as
+componentes espaciais de \emph{um} quadrivetor. A física pré-relativística
+era obrigada a tratar o fluxo como um vetor tridimensional dependente do
+referencial, e a densidade como um escalar à parte. A relatividade os funde
+--- exatamente como fundiu energia e momento em $p^\mu$. Este é o tipo mais
+fundamental de progresso conceitual: duas noções aparentemente distintas
+viram uma só.
+\end{central}
+
+A norma de $N^\mu$ devolve a densidade própria:
+\begin{equation}
+  N^\mu N_\mu=n^2\,U^\mu U_\mu=-n^2,
+  \qquad
+  n=\sqrt{-N^\mu N_\mu} .
+  \label{eq:norma-N}
+\end{equation}
+Ou seja, $n$ é um \emph{escalar}, do mesmo modo que a massa de repouso é um
+escalar embora a energia dependa do observador. Adotaremos essa convenção
+para todas as grandezas do fluido: o símbolo sem adorno é sempre o valor no
+MCRF.
+
+\section{Densidade é um fluxo temporal}
+\label{sec:fluxo-temporal}
+
+Aqui está a ideia que organiza o capítulo, e vale ler devagar.
+
+Desenhe as linhas de mundo das partículas em um diagrama espaço-tempo. O
+fluxo através da superfície $\bar x=\text{const}$ é o número de linhas de
+mundo que cruzam essa superfície por unidade de tempo e de área --- isto é,
+por unidade de \emph{volume tridimensional} $\Delta\bar t\,\Delta\bar
+y\,\Delta\bar z$ da superfície.
+
+Agora repare que nada obriga esse volume tridimensional a conter a direção
+temporal. Tome, em vez dele, a fatia $\bar t=\text{const}$ e conte as linhas
+de mundo que a cruzam por unidade de volume $\Delta\bar x\,\Delta\bar
+y\,\Delta\bar z$. Mas cruzar uma fatia de tempo constante é simplesmente
+\emph{estar lá naquele instante}: esse número é a densidade.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/cap04_fluxo_temporal.pdf}
+  \caption{As mesmas linhas de mundo, contadas de duas maneiras. À esquerda,
+  quantas cruzam um pedaço da superfície $\bar x=$ const: isso é o fluxo. À
+  direita, quantas cruzam um pedaço da superfície $\bar t=$ const: isso é a
+  densidade. Uma única operação --- contar linhas de mundo que atravessam uma
+  hipersuperfície --- produz as duas grandezas, dependendo apenas de qual
+  hipersuperfície se escolhe.}
+  \label{fig:cap04-fluxo-temporal}
+\end{figure}
+
+\begin{central}
+Densidade \emph{é} um fluxo: o fluxo através de uma superfície de tempo
+constante. Essa é a razão profunda de $N^0$ e $N^i$ serem componentes do
+mesmo objeto, e não uma coincidência algébrica. Uma vez aceito isso, a
+estrutura de todo o resto do capítulo --- e do tensor energia-momento --- fica
+previsível.
+\end{central}
+
+\section{Um-formas, superfícies e o fluxo invariante}
+\label{sec:umaforma-superficie}
+
+Falta dizer, de modo independente de coordenadas, o que é ``a superfície''
+atravessada. A resposta usa a linguagem do Capítulo~\ref{cap:tensores-plano}:
+uma superfície é descrita por uma um-forma.
+
+Uma superfície é o lugar geométrico de $\varphi(t,x,y,z)=\text{const}$ para
+alguma função $\varphi$. O gradiente $\dd\varphi$ é uma um-forma, e ela
+determina a superfície: as direções tangentes a ela são exatamente as
+direções $V^\mu$ com $\dd\varphi(V)=0$. Como qualquer múltiplo de
+$\dd\varphi$ define a mesma superfície, normalizamos (para superfícies não
+nulas):
+\begin{equation}
+  \tilde n=\frac{\dd\varphi}{|\dd\varphi|},
+  \qquad
+  |\dd\varphi|=\bigl|\eta^{\mu\nu}\,\partial_\mu\varphi\,
+  \partial_\nu\varphi\bigr|^{1/2} .
+  \label{eq:normal-umaforma}
+\end{equation}
+
+\begin{atencao}
+O símbolo $\tilde n$ da um-forma normal e o símbolo $n$ da densidade própria
+não têm nada em comum --- é um acidente histórico infeliz que ambos usem a
+letra $n$. Mantemos a notação porque é a da literatura, mas o til é
+obrigatório.
+\end{atencao}
+
+Com isso, o fluxo através da superfície é simplesmente
+\begin{equation}
+  \boxed{\ \text{fluxo através de } \varphi=\text{const}
+  \;=\; \tilde n(N)=n_\mu N^\mu\ }
+  \label{eq:fluxo-invariante}
+\end{equation}
+Vale conferir os dois casos da seção anterior, que é o que torna a fórmula
+convincente:
+
+\begin{example}
+\textbf{As duas contas, de uma vez.}
+Para a superfície $\bar x=\text{const}$ tome $\varphi=\bar x$. Então
+$\partial_\mu\varphi=(0,1,0,0)$ e $|\dd\varphi|=|\eta^{xx}|^{1/2}=1$, de modo
+que $\tilde n$ tem componentes $(0,1,0,0)$ e
+\[
+  \tilde n(N)=n_\mu N^\mu=N^{\bar x}=\gamma n v^{\bar x},
+\]
+que é o fluxo \eqref{eq:fluxo-x}. Para a superfície $\bar t=\text{const}$
+tome $\varphi=\bar t$; então $\partial_\mu\varphi=(1,0,0,0)$,
+$|\dd\varphi|=|\eta^{tt}|^{1/2}=1$, e
+\[
+  \tilde n(N)=N^{\bar t}=\gamma n,
+\]
+que é a densidade \eqref{eq:densidade-contraida}. Uma única expressão,
+$n_\mu N^\mu$, produz as duas --- é a Figura~\ref{fig:cap04-fluxo-temporal}
+escrita em símbolos.
+\end{example}
+
+\section{Conservação do número de partículas}
+\label{sec:conservacao-numero}
+
+Se partículas não são criadas nem destruídas, a variação do número dentro de
+um volume tem de ser igual ao que entra menos o que sai pela fronteira. Em
+componentes, isso é
+\begin{equation}
+  \partial_\mu N^\mu=0 .
+  \label{eq:continuidade}
+\end{equation}
+
+Vale ver que \eqref{eq:continuidade} \emph{é} a equação de continuidade que já
+se conhece. Escrevendo as componentes com \eqref{eq:componentes-N},
+\[
+  \partial_t(\gamma n)+\partial_i(\gamma n\,v^i)=0 ,
+\]
+que, no limite $v\ll1$ (onde $\gamma\to1$), vira
+$\partial_t n+\nabla\!\cdot(n\bm v)=0$ --- a forma newtoniana. A versão
+relativística não é uma equação nova; é a mesma, escrita de modo que todo
+observador escreva a mesma coisa.
+
+\begin{central}
+Uma lei de conservação, na linguagem tensorial, é sempre a mesma frase: a
+divergência de um fluxo se anula. O conteúdo físico está em \emph{qual}
+grandeza está sendo transportada. Aqui é o número de partículas; adiante será
+energia e momento, e a estrutura da equação não mudará.
+\end{central}
+
+\section{O tensor energia-momento}
+\label{sec:tensor-em}
+
+Agora repetimos tudo trocando ``número de partículas'' por ``energia e
+momento''. A diferença é que número de partículas é um escalar, enquanto
+energia-momento é um quadrivetor --- e por isso o objeto que descreve seu
+fluxo tem um índice a mais.
+
+\begin{resultado}
+\textbf{Definição.} A componente $T^{\alpha\beta}$ do tensor energia-momento é
+o fluxo da componente $\alpha$ do quadrimomento através de uma superfície de
+$x^\beta$ constante.
+\end{resultado}
+
+Leia essa definição duas vezes. O primeiro índice diz \emph{qual} componente
+do momento está sendo transportada; o segundo diz \emph{através de qual
+superfície}. É a mesma estrutura de $N^\mu$, com um índice extra para dizer
+de qual das quatro componentes de $p^\mu$ estamos falando.
+
+\subsection*{O caso da poeira}
+
+Para poeira de partículas de massa de repouso $m$, cada partícula carrega
+$p^\alpha=mU^\alpha$, e o fluxo de partículas é $N^\beta=nU^\beta$. O fluxo de
+$p^\alpha$ é então o produto:
+\begin{equation}
+  T^{\alpha\beta}=m\,U^\alpha\,N^\beta=m\,n\,U^\alpha U^\beta
+  =\rho\,U^\alpha U^\beta ,
+  \qquad \rho\equiv mn ,
+  \label{eq:T-poeira}
+\end{equation}
+onde $\rho$ é a densidade própria de energia (para poeira, só massa de
+repouso). No MCRF, a única componente não nula é $T^{00}=\rho$: nenhuma
+energia flui, nenhum momento existe, nenhuma tensão atua. Poeira em repouso é
+o objeto mais simples que gravita.
+
+\subsection*{Os quatro blocos}
+
+Para um fluido qualquer, avalie $T^{\alpha\beta}$ no MCRF e separe os índices
+em temporal e espaciais. Saem quatro blocos com significados distintos:
+
+\begin{center}
+\small
+\begin{tabular}{llp{7.4cm}}
+\toprule
+componente & nome & o que é \\
+\midrule
+$T^{00}$ & densidade de energia & energia por unidade de volume \\
+$T^{0i}$ & fluxo de energia & energia atravessando a superfície $i$; no MCRF
+só pode vir de \emph{condução de calor} \\
+$T^{i0}$ & densidade de momento & momento por unidade de volume; no MCRF as
+partículas não têm momento líquido, mas energia em trânsito carrega momento \\
+$T^{ij}$ & tensões & fluxo da componente $i$ do momento através da superfície
+$j$; é a força por unidade de área entre elementos vizinhos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{atencao}
+$T^{0i}$ e $T^{i0}$ parecem a mesma coisa e não são: um é fluxo de
+\emph{energia}, o outro é densidade de \emph{momento}. Que eles acabem iguais
+é um resultado a ser demonstrado, não uma definição --- e a demonstração é o
+argumento de torque da Seção~\ref{sec:simetria-T}. Em teorias mais gerais
+(com spin, por exemplo) o tensor energia-momento pode não ser simétrico.
+\end{atencao}
+
+\section{Tensões e a simetria do tensor}
+\label{sec:simetria-T}
+
+As componentes espaciais merecem atenção porque são as menos intuitivas.
+Considere dois elementos vizinhos com interface comum $S$ de área $A$. O
+elemento $A$ exerce sobre $B$ uma força $\bm F$. Como força é taxa de variação
+de momento --- e no MCRF as velocidades são nulas, então a lei de Newton vale
+---, dizer que $A$ empurra $B$ com força $\bm F$ é dizer que $A$ despeja
+momento em $B$ à taxa $\bm F$. Há, portanto, um \emph{fluxo de momento}
+através de $S$ igual a $\bm F/A$. Se $S$ é uma superfície de $x^j$ constante,
+esse fluxo é precisamente $T^{ij}$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/cap04_tensoes.pdf}
+  \caption{À esquerda, as componentes espaciais como forças por unidade de
+  área sobre as faces de um elemento: na face de normal $x$, a componente
+  $T^{xx}$ é perpendicular (pressão) e $T^{yx}$ é paralela (cisalhamento). À
+  direita, o argumento que força a simetria: as componentes fora da diagonal
+  produzem um torque que não se cancela.}
+  \label{fig:cap04-tensoes}
+\end{figure}
+
+\begin{resultado}
+\textbf{Por que $T^{ij}=T^{ji}$.} Tome um elemento cúbico de lado $\ell$ e
+calcule o torque em torno do eixo $z$. A força sobre a face de normal $x$ é
+$F^i_{(x)}=T^{ix}\ell^2$; a sobre a face de normal $y$ é
+$F^i_{(y)}=T^{iy}\ell^2$. Cada uma age a uma distância $\ell/2$ do centro, e
+as faces opostas contribuem igualmente. O torque resultante é
+\[
+  \tau_z=\ell^3\bigl(T^{xy}-T^{yx}\bigr) .
+\]
+Agora compare com o momento de inércia do elemento, que escala como
+$I\propto\rho\,\ell^5$. A aceleração angular seria
+\[
+  \dot\omega=\frac{\tau_z}{I}\propto\frac{\ell^3}{\ell^5}
+  =\frac{1}{\ell^2}\xrightarrow[\ell\to0]{}\infty .
+\]
+Um elemento arbitrariamente pequeno giraria com aceleração angular
+arbitrariamente grande, o que é absurdo. Logo $T^{xy}=T^{yx}$, e o mesmo para
+os outros pares.
+\end{resultado}
+
+Como a simetria foi demonstrada em um referencial (o MCRF) e
+$T^{\alpha\beta}$ é um tensor, ela vale em todos. O argumento para
+$T^{0i}=T^{i0}$ é análogo e usa o fato de que energia em movimento carrega
+momento na mesma proporção.
+
+\section{Fluidos gerais: energia interna e a primeira lei}
+\label{sec:energia-interna}
+
+Poeira só tem energia de repouso. Um fluido de verdade tem também energia
+interna: agitação térmica, energia de ligação, energia de excitação. Escreve-se
+\begin{equation}
+  \rho=\rho_0\,(1+\Pi),
+  \qquad \rho_0=m n ,
+  \label{eq:energia-interna}
+\end{equation}
+onde $\Pi$ é a energia interna \emph{por unidade de massa de repouso}. A
+densidade de energia total $\rho$ é o que gravita; $\rho_0$ é apenas a parte
+de massa de repouso.
+
+A primeira lei da termodinâmica, aplicada a um elemento que troca calor e
+realiza trabalho, é $\Delta E=\Delta Q-p\,\Delta V$. Com $N$ partículas fixas
+no elemento, $V=N/n$ e $E=\rho V$, um cálculo direto leva a
+\begin{equation}
+  n\,\Delta q=\Delta\rho-\frac{\rho+p}{n}\,\Delta n ,
+  \label{eq:primeira-lei}
+\end{equation}
+com $q=Q/N$ o calor por partícula. Definindo temperatura e entropia
+específica pelo fator integrante da forma diferencial do lado direito, isso
+vira $\Delta q=T\Delta S$.
+
+\begin{central}
+Repare na combinação $\rho+p$ que aparece em \eqref{eq:primeira-lei}. Ela não
+é um acidente de álgebra: é a mesma combinação que aparecerá no tensor do
+fluido perfeito e, adiante, nas equações de Euler relativísticas, onde faz o
+papel de \emph{densidade de inércia}. Em relatividade, a pressão contribui
+para a inércia --- e, por consequência, para a gravidade. Guarde isso; é a
+diferença conceitual mais importante deste capítulo em relação à física
+newtoniana.
+\end{central}
+
+\section{O fluido perfeito}
+\label{sec:fluido-perfeito}
+
+Agora impomos a definição da Seção~\ref{sec:o-que-e-fluido}: um fluido
+perfeito não tem forças de deslizamento nem condução de calor. As
+consequências sobre $T^{\alpha\beta}$ no MCRF são imediatas:
+
+\begin{itemize}
+  \item \emph{Sem condução de calor} $\Rightarrow T^{0i}=T^{i0}=0$.
+  \item \emph{Sem forças paralelas às interfaces} $\Rightarrow T^{ij}=0$ para
+  $i\ne j$: as forças são todas perpendiculares às faces.
+  \item \emph{Isotropia} $\Rightarrow$ as três componentes diagonais são
+  iguais, e ao valor comum chamamos pressão: $T^{ij}=p\,\delta^{ij}$.
+\end{itemize}
+No MCRF, portanto,
+\begin{equation}
+  T^{\alpha\beta}=
+  \begin{pmatrix}
+    \rho&0&0&0\\ 0&p&0&0\\ 0&0&p&0\\ 0&0&0&p
+  \end{pmatrix} .
+  \label{eq:T-mcrf}
+\end{equation}
+
+Falta escrever isso de forma independente de referencial. Procuramos uma
+combinação de $U^\alpha U^\beta$ e $\eta^{\alpha\beta}$ que reproduza
+\eqref{eq:T-mcrf} no MCRF, onde $U^\alpha=(1,0,0,0)$. A resposta é
+\begin{equation}
+  \boxed{\ T^{\alpha\beta}=(\rho+p)\,U^\alpha U^\beta+p\,\eta^{\alpha\beta}\ }
+  \label{eq:T-fluido-perfeito}
+\end{equation}
+e a verificação é de uma linha: no MCRF, a componente $00$ vale
+$(\rho+p)(1)(1)+p(-1)=\rho$, e cada componente $ii$ vale $0+p(+1)=p$. Como os
+dois lados de \eqref{eq:T-fluido-perfeito} são tensores e coincidem em um
+referencial, coincidem em todos.
+
+\begin{atencao}
+Em relatividade geral basta trocar $\eta^{\alpha\beta}$ por
+$g^{\alpha\beta}$, e a expressão continua valendo --- localmente, em cada
+ponto. Esse é o padrão que se repetirá em todo o curso: escreva a física no
+referencial local em que ela é simples, ponha em forma tensorial, e a versão
+curva se obtém trocando a métrica.
+\end{atencao}
+
+\section{Conservação: continuidade e Euler}
+\label{sec:euler}
+
+A lei dinâmica do fluido é a conservação local de energia e momento,
+\begin{equation}
+  \partial_\alpha T^{\alpha\beta}=0 ,
+  \label{eq:conservacao-T}
+\end{equation}
+que são quatro equações. Vale extrair o que elas dizem. Substituindo
+\eqref{eq:T-fluido-perfeito},
+\[
+  \partial_\alpha\bigl[(\rho+p)U^\alpha U^\beta\bigr]+\partial^\beta p=0 .
+\]
+
+\subsection*{Projeção ao longo do movimento: a equação de energia}
+
+Contraia com $U_\beta$, lembrando que $U^\beta U_\beta=-1$ e portanto
+$U_\beta\,\partial_\alpha U^\beta=0$:
+\begin{equation}
+  U^\alpha\partial_\alpha\rho+(\rho+p)\,\partial_\alpha U^\alpha=0 .
+  \label{eq:energia-fluido}
+\end{equation}
+O primeiro termo é a variação de $\rho$ seguindo o elemento; o segundo é o
+trabalho de expansão. É a primeira lei da termodinâmica em forma de campo.
+
+\subsection*{Projeção perpendicular: as equações de Euler}
+
+O que sobra, projetado ortogonalmente a $U^\beta$, é
+\begin{equation}
+  (\rho+p)\,U^\alpha\partial_\alpha U^\beta
+  =-\bigl(\eta^{\beta\nu}+U^\beta U^\nu\bigr)\partial_\nu p .
+  \label{eq:euler-relativistica}
+\end{equation}
+Esta é a \textbf{equação de Euler relativística}. O operador
+$h^{\beta\nu}=\eta^{\beta\nu}+U^\beta U^\nu$ é o projetor sobre o espaço
+ortogonal a $U$: ele garante que só o gradiente de pressão \emph{transversal
+ao movimento} acelera o fluido, como tem de ser.
+
+\begin{central}
+Compare \eqref{eq:euler-relativistica} com a Euler newtoniana,
+$\rho\,(\partial_t\bm v+\bm v\cdot\nabla\bm v)=-\nabla p$. A estrutura é
+idêntica, com uma única diferença: onde Newton tem $\rho$, a relatividade tem
+$\rho+p$. A pressão contribui para a \emph{inércia} do fluido. Um gás muito
+quente é mais difícil de acelerar que um gás frio de mesma densidade de
+massa, e a diferença não é a energia térmica somada à massa --- é a pressão.
+No limite $p\ll\rho$ a distinção desaparece, e é por isso que a física
+newtoniana nunca precisou dela.
+\end{central}
+
+\section{Equações de estado}
+\label{sec:equacoes-estado}
+
+As equações \eqref{eq:continuidade}, \eqref{eq:energia-fluido} e
+\eqref{eq:euler-relativistica} não fecham o problema: há mais incógnitas
+($\rho$, $p$, $n$, $U^\mu$) que equações. Falta uma relação constitutiva, a
+\textbf{equação de estado}, que diga como a pressão responde à densidade. A
+forma mais simples é
+\begin{equation}
+  p=w\rho ,
+  \label{eq:eq-estado}
+\end{equation}
+com $w$ constante. Três valores dominam as aplicações:
+
+\begin{center}
+\small
+\begin{tabular}{clp{6.6cm}}
+\toprule
+$w$ & componente & justificativa \\
+\midrule
+$0$ & poeira fria & partículas sem movimento térmico apreciável: $p\ll\rho$ \\
+$1/3$ & radiação & o tensor energia-momento eletromagnético tem traço nulo, e
+$T^\mu{}_\mu=-\rho+3p$ \\
+$-1$ & constante cosmológica & pressão negativa; produz expansão acelerada \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{example}
+\textbf{Radiação, sem estatística.} O traço do tensor de um fluido perfeito é
+\[
+  T^\mu{}_\mu=\eta_{\mu\nu}T^{\mu\nu}
+  =(\rho+p)\,U^\mu U_\mu+p\,\delta^\mu{}_\mu=-(\rho+p)+4p=-\rho+3p .
+\]
+Para o campo eletromagnético, o tensor energia-momento tem traço
+identicamente nulo. Igualando, $p=\rho/3$. Nenhuma hipótese sobre
+distribuição de velocidades, nenhuma integral sobre modos: a equação de
+estado da radiação sai de uma propriedade algébrica.
+\end{example}
+
+\begin{atencao}
+Causalidade impõe um limite ao quanto a pressão pode crescer com a densidade.
+A velocidade do som é $c_s^2=\dd p/\dd\rho$, e exigir $c_s\le1$ dá
+$w\le1$. Equações de estado com $w>1$ propagariam perturbações mais rápido
+que a luz --- e por isso a matéria em estrelas de nêutrons, onde $p$ chega a
+frações apreciáveis de $\rho$, é um laboratório para o limite de rigidez da
+matéria.
+\end{atencao}
+
+\section{Lei de Gauss em quatro dimensões}
+\label{sec:gauss-4d}
+
+A forma diferencial $\partial_\mu N^\mu=0$ tem uma contrapartida integral, e
+é ela que dá o significado físico. O teorema de Gauss em quatro dimensões diz
+que, para qualquer região $\Omega$ do espaço-tempo com fronteira
+$\partial\Omega$,
+\begin{equation}
+  \int_\Omega \partial_\mu N^\mu\;\dd^4x
+  =\oint_{\partial\Omega} N^\mu\,n_\mu\;\dd^3S .
+  \label{eq:gauss-4d}
+\end{equation}
+Se a divergência é nula, o fluxo total através da fronteira é zero.
+
+Escolha para $\Omega$ um cilindro no espaço-tempo: uma região espacial $V$
+fixa, entre os instantes $t_1$ e $t_2$. A fronteira tem três pedaços --- a
+tampa em $t_2$, a tampa em $t_1$ e a lateral. Pelo que vimos na
+Seção~\ref{sec:fluxo-temporal}, a integral sobre cada tampa é o número de
+partículas dentro de $V$ naquele instante, e a integral sobre a lateral é o
+número que atravessou a fronteira espacial no intervalo. A
+Equação~\eqref{eq:gauss-4d} vira então
+\[
+  N(t_2)-N(t_1)=-\,(\text{número que saiu por } \partial V) ,
+\]
+que é a conservação do número de partículas escrita como todo mundo espera.
+
+\begin{central}
+Repare no que a linguagem quadridimensional fez: ``o que havia antes'', ``o
+que há depois'' e ``o que atravessou a fronteira'' deixaram de ser três
+coisas distintas e viraram três pedaços da \emph{mesma} integral sobre a
+fronteira de uma região do espaço-tempo. A mesma construção, aplicada a
+$T^{\mu\nu}$, dará a conservação de energia e momento --- e é ela que, no
+Capítulo~\ref{cap:einstein}, vai exigir que o lado geométrico das equações de
+campo tenha divergência nula.
+\end{central}
+
+\section{Por que isso importa para a relatividade geral}
+\label{sec:importancia-rg}
+
+Vale fechar dizendo para onde este capítulo aponta. Nas equações de Einstein,
+\[
+  G_{\mu\nu}=8\pi G\,T_{\mu\nu} ,
+\]
+o objeto construído aqui é \emph{a fonte da gravidade}. Três consequências
+merecem registro desde já.
+
+\begin{enumerate}
+  \item \textbf{A fonte não é a massa.} É o tensor inteiro. Densidade de
+  energia, densidade de momento, fluxo de energia e tensões gravitam todos.
+  A massa newtoniana é apenas o pedaço $T^{00}$ no limite de campo fraco e
+  velocidades pequenas.
+
+  \item \textbf{Pressão gravita.} A combinação $\rho+3p$ aparecerá na equação
+  que governa a aceleração da expansão cósmica e no interior de estrelas
+  relativísticas. Em uma estrela de nêutrons, a pressão que sustenta a
+  estrela também contribui para o peso que ela tem de sustentar --- e é essa
+  realimentação que produz uma massa máxima, coisa que a física newtoniana
+  não prevê.
+
+  \item \textbf{A conservação não é opcional.} A identidade geométrica
+  $\nabla_\mu G^{\mu\nu}=0$ força $\nabla_\mu T^{\mu\nu}=0$. As equações de
+  campo não apenas permitem a conservação local: elas a exigem. O movimento
+  do fluido não é uma hipótese à parte, está contido nas equações de campo.
+\end{enumerate}
+
+\begin{atencao}
+Uma limitação honesta: em espaço-tempo curvo, $\nabla_\mu T^{\mu\nu}=0$ é uma
+lei \emph{local}. Ela não produz, em geral, uma energia total conservada para
+o sistema inteiro --- isso exigiria uma simetria temporal que um espaço-tempo
+genérico não tem. Voltaremos a esse ponto no Capítulo~\ref{cap:einstein};
+por ora, basta notar que ``energia se conserva'' é uma frase que, em
+relatividade geral, precisa ser qualificada.
+\end{atencao}
+
+\section{Exemplos resolvidos adicionais}
+
+\begin{example}
+\textbf{Poeira em movimento, componente por componente.} Uma poeira de
+densidade própria de energia $\rho$ move-se com velocidade $v$ na direção
+$x$. Sua quadrivelocidade é $U^\mu=\gamma(1,v,0,0)$, e de
+\eqref{eq:T-poeira} vem $T^{\mu\nu}=\rho\,U^\mu U^\nu$, isto é
+\[
+  T^{\mu\nu}=\gamma^2\rho
+  \begin{pmatrix}
+    1 & v & 0 & 0\\ v & v^2 & 0 & 0\\ 0&0&0&0\\ 0&0&0&0
+  \end{pmatrix} .
+\]
+Vale ler cada entrada:
+\begin{itemize}
+  \item $T^{00}=\gamma^2\rho$. Dois fatores de $\gamma$, e não um: a energia
+  de cada partícula cresce por $\gamma$ \emph{e} a densidade de partículas
+  cresce por $\gamma$ (contração de Lorentz). É a mesma conta de
+  \eqref{eq:densidade-contraida}, agora aplicada à energia.
+  \item $T^{0x}=\gamma^2\rho v$ é o fluxo de energia; $T^{x0}$ é a densidade
+  de momento. Que sejam iguais é a simetria demonstrada na
+  Seção~\ref{sec:simetria-T}.
+  \item $T^{xx}=\gamma^2\rho v^2$. Cuidado: isso \emph{não} é pressão. Poeira
+  não tem pressão --- no MCRF, $T^{ij}=0$. Esta entrada é puro transporte de
+  momento pelo movimento coletivo, e desaparece se voltarmos ao MCRF.
+\end{itemize}
+A lição é que ``pressão'' é o valor de $T^{ij}$ \emph{no MCRF}, não em um
+referencial qualquer. Confundir os dois é o erro mais comum do capítulo.
+\end{example}
+
+\begin{example}
+\textbf{Por que a fonte newtoniana é a densidade de massa.} Tome um fluido
+perfeito com $v\ll1$ e $p\ll\rho$, e estime a ordem de grandeza de cada bloco
+de \eqref{eq:T-fluido-perfeito}, restaurando os fatores de $c$:
+\[
+  T^{00}\sim\rho c^2,\qquad
+  T^{0i}\sim\rho c\,v,\qquad
+  T^{ij}\sim\rho v^2+p .
+\]
+As razões entre eles são $T^{0i}/T^{00}\sim v/c$ e
+$T^{ij}/T^{00}\sim v^2/c^2$. Para a Terra em órbita, $v/c\approx10^{-4}$: o
+bloco de densidade de momento é dez mil vezes menor que o de energia, e o de
+tensões, cem milhões de vezes. Sobra $T^{00}$ sozinho, e a fonte da gravidade
+newtoniana é a densidade de massa.
+
+Isso responde a uma pergunta natural --- se o tensor inteiro gravita, por que
+Newton só precisou da massa? --- e ao mesmo tempo diz onde procurar desvios:
+em sistemas com $v/c$ apreciável ou com $p$ comparável a $\rho$.
+\end{example}
+
+\begin{example}
+\textbf{A radiação cósmica de fundo como fluido.} A CMB é um corpo negro a
+$T_0=2{,}725$~K. Sua densidade de energia é $\varepsilon=aT_0^4$, com
+$a=7{,}566\times10^{-16}\,\mathrm{J\,m^{-3}\,K^{-4}}$:
+\[
+  \varepsilon=7{,}566\times10^{-16}\times(2{,}725)^4
+  \approx4{,}17\times10^{-14}\ \mathrm{J\,m^{-3}} ,
+\]
+e a pressão, por $p=\varepsilon/3$, vale $1{,}39\times10^{-14}$~Pa. Para
+comparação, a densidade de energia da matéria hoje é da ordem de
+$2\times10^{-10}\,\mathrm{J\,m^{-3}}$ --- cerca de cinco mil vezes maior.
+
+Mas $\rho_r\propto a^{-4}$ e $\rho_m\propto a^{-3}$, de modo que a razão
+cresce como $(1+z)$ para trás no tempo. As duas se igualam em
+$1+z\approx5\times10^{3}$, que é a ordem de grandeza correta da igualdade
+matéria--radiação. Um fluido com pressão de $10^{-14}$~Pa dominou a dinâmica
+do Universo inteiro --- porque o que gravita não é a pressão isolada, e sim a
+densidade de energia.
+\end{example}
+
+\begin{example}
+\textbf{Quanto pesa a pressão.} Em uma estrela de nêutrons, $p/\rho$ chega a
+$0{,}1$ perto do centro. Pela equação de Euler relativística
+\eqref{eq:euler-relativistica}, a densidade de inércia é $\rho+p$, e não
+$\rho$: acelerar aquele material custa $10\,\%$ a mais do que a densidade de
+massa faria supor.
+
+O efeito reaparece, com sinal desfavorável, na estrutura estelar. A equação
+de Tolman--Oppenheimer--Volkoff, que o Capítulo~\ref{cap:schwarzschild}
+deduzirá, contém a combinação $(\rho+p)(m+4\pi r^3p)$: a pressão aparece duas
+vezes do lado que \emph{aumenta} o peso a sustentar. Uma estrela newtoniana
+sempre encontra equilíbrio aumentando a pressão; uma estrela relativística
+não, porque a pressão que ela gera também gravita. É dessa realimentação, e
+não de nenhum limite de material, que nasce a existência de uma massa máxima.
+\end{example}
 
 \section{Problemas orientados}
 
@@ -2200,51 +3425,56 @@ referencial comóvel e discuta o sinal da pressão.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Tensor energia-momento do campo eletromagnético.} Para
-\[
-  T^{\mu\nu}=F^{\mu\alpha}F^\nu{}_\alpha
-  -\tfrac14\eta^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta},
-\]
-mostre que $T^\mu{}_\mu=0$ e identifique $T^{00}$ com a densidade de energia
-$(E^2+B^2)/2$. Use o traço nulo para concluir que um gás de fótons tem
-$p=\rho/3$ sem nenhuma hipótese estatística.
+\facil{4.7}
+Um fluido perfeito tem densidade própria $\rho$ e pressão $p$. Escreva a
+matriz $T^{\mu\nu}$ no referencial de repouso e calcule o traço
+$T^\mu{}_\mu$. Aplique o resultado a poeira ($p=0$), radiação ($p=\rho/3$) e
+constante cosmológica ($p=-\rho$), comentando o sinal em cada caso.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Campo escalar como energia escura.} Para um campo escalar homogêneo
-$\varphi(t)$ com potencial $V(\varphi)$, valem
-$\rho=\tfrac12\dot\varphi^2+V$ e $p=\tfrac12\dot\varphi^2-V$. Obtenha
-$w=p/\rho$ e mostre que $w\to-1$ quando $\dot\varphi^2\ll V$. Que condição
-sobre a inclinação de $V$ isso impõe?
+\facil{4.2}
+Uma poeira tem densidade própria de número $n$ e quadrivelocidade $U^\mu$.
+(a) Escreva o vetor fluxo de número $N^\mu$. (b) Em um referencial onde a
+poeira se move com velocidade $v$ na direção $x$, calcule $N^0$ e $N^x$ e
+interprete cada um. (c) Verifique que $N^\mu N_\mu=-n^2$ é invariante e
+explique por que $N^0$ sozinho não é.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Mistura de componentes.} Um fluido é composto de poeira com densidade
-$\rho_m$ e radiação com densidade $\rho_r$. Escreva o $w$ efetivo da mistura
-em função de $x=\rho_r/\rho_m$ e mostre que ele interpola continuamente entre
-$0$ e $1/3$. Em que valor de $x$ temos $w=1/6$?
+\medio{4.6}
+A conservação local é $\partial_\mu T^{\mu\nu}=0$. (a) Escreva a componente
+$\nu=0$ para um fluido perfeito em movimento lento e mostre que ela se reduz
+à equação de continuidade newtoniana. (b) Escreva a componente $\nu=i$ e
+mostre que ela reproduz a equação de Euler, identificando o termo de pressão.
+(c) Onde aparece, nas duas, a diferença entre $\rho$ e $\rho+p$?
 \end{exercise}
 
 \begin{exercise}
-\textbf{Condições de energia.} A condição de energia fraca exige
-\[
-  T_{\mu\nu}V^\mu V^\nu\ge0
-  \quad\text{para todo vetor temporal } V^\mu .
-\]
-Mostre que, para um fluido perfeito, ela equivale a $\rho\ge0$ e
-$\rho+p\ge0$. Verifique quais
-dos casos $w=0$, $w=1/3$ e $w=-1$ a satisfazem, e explique por que a
-constante cosmológica passa no teste apesar da pressão negativa.
+\medio{4.5}
+Considere um gás de fótons em equilíbrio. (a) Use o fato de o tensor
+energia-momento eletromagnético ter traço nulo para concluir $p=\rho/3$ sem
+nenhum argumento estatístico. (b) A partir de
+$\dot\rho+3H(\rho+p)=0$ com $p=w\rho$, mostre que $\rho\propto a^{-3(1+w)}$.
+(c) Separe, no caso da radiação, a potência que vem da diluição de volume da
+que vem do redshift de cada fóton.
 \end{exercise}
 
 \begin{exercise}
-\textbf{A radiação cósmica de fundo como fluido.} A CMB é um corpo negro a
-$2{,}73$~K. Calcule sua densidade de energia $\rho_r c^2=aT^4$ em J\,m$^{-3}$
-e a pressão correspondente. Compare com a densidade de energia da matéria
-hoje, cerca de $2\times10^{-10}$~J\,m$^{-3}$, e diga em que redshift as duas
-eram iguais.
+\dificil{4.9}
+Uma casca esférica fina de poeira, de massa própria total $M$ e raio $R(t)$,
+colapsa sob a própria gravidade em regime newtoniano. (a) Escreva $T^{\mu\nu}$
+da casca. (b) Usando a conservação $\partial_\mu T^{\mu\nu}=0$ integrada sobre
+um volume que contenha a casca, obtenha a equação de movimento para $R(t)$.
+(c) Discuta que hipótese do tratamento newtoniano falha quando
+$2GM/Rc^2\to1$, antecipando o Capítulo~\ref{cap:schwarzschild}.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -2492,46 +3722,59 @@ proporcional à área envolvida. Essa é uma manifestação geométrica da curva
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Coordenadas cilíndricas.} Para
-$\dd\ell^2=\dd r^2+r^2\dd\phi^2+\dd z^2$, calcule todos os símbolos de
-Christoffel não nulos e verifique explicitamente que
-$R^\rho{}_{\sigma\mu\nu}=0$. Comente por que era obrigatório que desse zero.
+\facil{5.2}
+Em coordenadas polares no plano, $\dd\ell^2=\dd r^2+r^2\dd\phi^2$.
+(a) Escreva $g_{ij}$ e $g^{ij}$. (b) Use a fórmula de Christoffel para obter
+$\Gamma^r{}_{\phi\phi}$ e $\Gamma^\phi{}_{r\phi}$. (c) Explique por que
+símbolos de Christoffel não nulos aqui não significam curvatura.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Métrica de Rindler.} A métrica $\dd s^2=-(ax)^2\dd t^2+\dd x^2$
-descreve o espaço-tempo plano visto por observadores uniformemente
-acelerados. Calcule os Christoffel, verifique que a curvatura é nula e mostre
-que $x=0$ é um horizonte: nenhum sinal emitido de $x<0$ alcança os
-observadores em $x>0$. Compare com o horizonte de Schwarzschild --- o que é
-análogo e o que não é.
+\facil{5.1}
+Um elevador em queda livre no campo da Terra tem altura $h$. (a) Estime a
+aceleração relativa entre um objeto no teto e outro no piso, usando a maré
+newtoniana $2GM h/r^3$. (b) Determine o maior $h$ para que essa aceleração
+fique abaixo de $10^{-6}g$. (c) Enuncie, com base no resultado, em que sentido
+preciso o princípio da equivalência é \emph{local}.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Da base coordenada à ortonormal.} Usando a
-Seção~\ref{sec:bases-nao-coordenadas}, escreva o gradiente de uma função $f$
-em coordenadas polares nas duas bases. Mostre que a componente coordenada
-$(\dd f)_\phi=\partial_\phi f$ e a componente ortonormal
-$(\dd f)_{\hat\phi}=(1/r)\partial_\phi f$, e reconcilie com a fórmula do
-cálculo vetorial.
+\medio{5.4}
+Para a esfera de raio $a$, $\dd\ell^2=a^2(\dd\theta^2+\sin^2\theta\,
+\dd\phi^2)$. (a) Calcule todos os símbolos de Christoffel não nulos.
+(b) Escreva a equação geodésica e verifique que o equador
+($\theta=\pi/2$, $\dot\theta=0$) a satisfaz. (c) Mostre que um paralelo com
+$\theta\ne\pi/2$ \emph{não} é geodésica, identificando o termo que não se
+anula.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Quão local é ``local''?} Um laboratório em queda livre na Terra tem
-altura $h$. Estime, usando a maré newtoniana, a partir de que $h$ a
-aceleração relativa entre topo e base excede $10^{-6}g$. Repita para um
-laboratório em queda livre a $r=10M$ de um buraco negro de $10\,\Msol$.
-Discuta o que ``princípio da equivalência local'' significa quantitativamente.
+\medio{5.3}
+Uma geodésica pode ser obtida por princípio variacional a partir de
+$L=\tfrac12 g_{\mu\nu}\dot x^\mu\dot x^\nu$. (a) Escreva as equações de
+Euler--Lagrange e mostre que elas reproduzem a equação geodésica com a
+conexão de Levi-Civita. (b) Use esse método para obter as geodésicas da
+métrica $\dd s^2=-\dd t^2+a^2(t)\dd x^2$, identificando a quantidade
+conservada associada à independência de $x$. (c) Interprete-a fisicamente.
 \end{exercise}
 
 \begin{exercise}
-\textbf{O cone é plano.} Um cone de abertura $\alpha$ pode ser cortado e
-desenrolado no plano sem esticar. Conclua que sua curvatura intrínseca é nula
-em toda parte exceto no vértice, descreva suas geodésicas em termos do
-desenrolamento e mostre que duas geodésicas podem se cruzar duas vezes. O que
-está concentrado no vértice?
+\dificil{5.1}
+Considere a métrica bidimensional
+$\dd s^2=-(1+gz)^2\dd t^2+\dd z^2$, que descreve o espaço-tempo plano visto
+por um observador uniformemente acelerado. (a) Calcule os símbolos de
+Christoffel. (b) Mostre que o tensor de Riemann é identicamente nulo,
+confirmando que a métrica é plana. (c) Determine a trajetória de um raio de
+luz radial e mostre que ele leva tempo coordenado infinito para alcançar
+$z=-1/g$. Compare com o horizonte de Schwarzschild e diga o que é análogo e o
+que não é.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -2802,49 +4045,56 @@ As segundas derivadas, porém, permanecem e codificam a curvatura.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{O plano hiperbólico.} Para $\dd\ell^2=(\dd x^2+\dd y^2)/y^2$ com
-$y>0$, calcule os símbolos de Christoffel, o tensor de Ricci e o escalar de
-curvatura. Mostre que $R=-2$, constante e negativa, e que
-$R_{\mu\nu}=-g_{\mu\nu}$. Compare com o resultado análogo para a esfera
-unitária.
+\facil{6.3}
+A derivada covariante de um vetor é
+$\nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu{}_{\mu\alpha}V^\alpha$.
+(a) Escreva a regra correspondente para uma um-forma e justifique o sinal
+oposto. (b) Escreva a regra para um tensor $T^{\mu}{}_{\nu}$. (c) Verifique
+que $\nabla_\mu$ aplicado a um escalar coincide com $\partial_\mu$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Comutador sobre um-formas.} Sabendo que
-\[
-  [\nabla_\mu,\nabla_\nu]V^\rho=R^\rho{}_{\sigma\mu\nu}V^\sigma,
-\]
-deduza a regra correspondente para uma um-forma,
-\[
-  [\nabla_\mu,\nabla_\nu]\omega_\rho=-R^\sigma{}_{\rho\mu\nu}\omega_\sigma .
-\]
-A pista é aplicar o comutador ao escalar $\omega_\rho V^\rho$.
+\facil{6.5}
+Em quatro dimensões, o tensor de Riemann tem $20$ componentes independentes.
+(a) Liste as quatro simetrias que produzem essa contagem. (b) Quantas
+componentes independentes tem o tensor de Ricci? (c) Quantas sobram para o
+tensor de Weyl, e o que essa parte descreve fisicamente?
 \end{exercise}
 
 \begin{exercise}
-\textbf{De Bianchi a Einstein.} Parta da segunda identidade de Bianchi,
-$\nabla_{[\lambda}R_{\rho\sigma]\mu\nu}=0$, contraia duas vezes com a métrica
-e obtenha $\nabla_\mu G^{\mu\nu}=0$. Este é o cálculo que garante a
-consistência das equações de campo, e vale a pena fazê-lo uma vez na vida.
+\medio{6.2}
+Partindo da compatibilidade métrica $\nabla_\alpha g_{\mu\nu}=0$ e da ausência
+de torção: (a) mostre que $\nabla_\alpha g^{\mu\nu}=0$; (b) deduza a fórmula
+de Christoffel em termos de derivadas da métrica, explicitando onde cada
+hipótese entra; (c) mostre que o transporte paralelo preserva o produto
+escalar entre dois vetores.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Gravidade em 2+1 dimensões.} Em $n$ dimensões, o tensor de Riemann tem
-$n^2(n^2-1)/12$ componentes independentes e o de Ricci tem $n(n+1)/2$.
-Mostre que em $n=3$ os dois números coincidem, de modo que Riemann é
-inteiramente determinado por Ricci. Conclua que, em $2+1$ dimensões,
-$R_{\mu\nu}=0$ implica espaço-tempo plano --- e que portanto não existem ondas
-gravitacionais nessa dimensão.
+\medio{6.6}
+Para a esfera unitária: (a) calcule $R^\theta{}_{\phi\theta\phi}$;
+(b) obtenha $R_{\mu\nu}$ e mostre que $R_{\mu\nu}=g_{\mu\nu}$; (c) calcule o
+escalar $R$ e relacione-o à curvatura de Gauss $K=1$. (d) Repita o item (c)
+para a esfera de raio $a$ e verifique a dependência com $a$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Esfera de raio $a$ e o excesso angular.} Mostre que a esfera de raio
-$a$ tem $R=2/a^2$. Use o teorema de Gauss--Bonnet na forma
-$\sum\theta_i-\pi=\tfrac12\!\int\! R\,\dd A$ para recuperar o excesso de
-$90^\circ$ do triângulo com três ângulos retos discutido no texto, e
-verifique que a área desse triângulo é $\pi a^2/2$.
+\dificil{6.4}
+A equação de desvio geodésico é
+$\D^2\xi^\mu/\D\tau^2=-R^\mu{}_{\alpha\nu\beta}U^\alpha\xi^\nu U^\beta$.
+(a) Deduza-a a partir de uma família de geodésicas $x^\mu(\tau,s)$, com
+$\xi^\mu=\partial x^\mu/\partial s$. (b) Aplique-a a duas partículas em queda
+livre radial no campo newtoniano de uma massa $M$, e mostre que ela reproduz
+a maré $2GM/r^3$ para separação radial e $-GM/r^3$ para separação transversa.
+(c) Identifique quais componentes de $R^\mu{}_{\alpha\nu\beta}$ correspondem a
+cada caso.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -3048,49 +4298,57 @@ observadores na geometria.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Killing na esfera.} Verifique explicitamente que
-$\xi^\mu=(0,1)$ nas coordenadas $(\theta,\phi)$ satisfaz a equação de Killing
-para $\dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2$. Depois mostre que
-$\xi^\mu=(\sin\phi,\cot\theta\cos\phi)$ também é de Killing, e interprete
-geometricamente os dois campos.
+\facil{7.1}
+Uma partícula livre em espaço-tempo curvo satisfaz
+$U^\nu\nabla_\nu U^\mu=0$. (a) Escreva essa equação em componentes e mostre
+que ela é a equação geodésica. (b) Verifique que $U^\mu U_\mu=-1$ é
+preservado ao longo da curva. (c) Explique por que a luz exige um parâmetro
+afim diferente do tempo próprio.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Álgebra de Killing.} Sejam $\xi$ e $\eta$ dois vetores de Killing.
-Mostre que o comutador $[\xi,\eta]^\mu=\xi^\nu\partial_\nu\eta^\mu
--\eta^\nu\partial_\nu\xi^\mu$ também satisfaz a equação de Killing. Conclua
-que os vetores de Killing de uma variedade formam uma álgebra de Lie e
-identifique, para a esfera, de qual álgebra se trata.
+\facil{7.4}
+Em uma métrica estática e diagonal, $\xi^\mu=(1,0,0,0)$ é vetor de Killing.
+(a) Escreva a quantidade conservada $E=-\xi_\mu p^\mu$ para uma partícula.
+(b) Calcule-a explicitamente para a métrica de Schwarzschild. (c) Explique por
+que $E$ não coincide com a energia medida por um observador estático em
+$r$ finito.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Tetrada estática e redshift.} Para a métrica de Schwarzschild,
-construa a tetrada de um observador estático em $r$ fixo, cujo vetor
-temporal é $e_{\hat t}^\mu=(1-2M/r)^{-1/2}(1,0,0,0)$. Um fóton tem energia
-conservada $E=-p_t$. Mostre que a energia local medida é
-\[
-  E_{\rm loc}=E\left(1-\frac{2M}{r}\right)^{-1/2}
-\]
-e recupere daí a fórmula do redshift
-gravitacional do Capítulo~\ref{cap:schwarzschild}.
+\medio{7.2}
+A energia medida localmente é $E_{\rm obs}=-p_\mu U^\mu_{\rm obs}$.
+(a) Construa a tetrada de um observador estático em Schwarzschild.
+(b) Calcule $E_{\rm loc}(r)$ para um fóton com $E=-p_t$ conservada e mostre
+que $E_{\rm loc}=E(1-2M/r)^{-1/2}$. (c) Obtenha daí a fórmula do redshift
+gravitacional entre dois observadores estáticos em $r_1$ e $r_2$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Acoplamento mínimo.} Escreva as equações de Maxwell em espaço-tempo
-curvo como $\nabla_\mu F^{\mu\nu}=4\pi J^\nu$ e
-$\nabla_{[\lambda}F_{\mu\nu]}=0$. Mostre que a segunda equação é idêntica à
-versão com derivadas parciais, e explique por que --- a pista está na simetria
-dos Christoffel. Em seguida, use coordenadas normais para argumentar que a
-primeira também se reduz à forma plana em um ponto.
+\medio{7.4}
+Prove que, se $\xi^\mu$ satisfaz a equação de Killing
+$\nabla_{(\mu}\xi_{\nu)}=0$, então $\xi_\mu p^\mu$ é constante ao longo de
+qualquer geodésica. Em seguida: (a) mostre que a métrica FLRW \emph{não}
+possui vetor de Killing temporal; (b) explique, com base nisso, por que a
+energia de um fóton cosmológico não se conserva.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Simetria máxima.} Mostre que uma variedade de dimensão $n$ admite no
-máximo $n(n+1)/2$ vetores de Killing independentes. Verifique que Minkowski
-atinge esse máximo em $n=4$ (dez: quatro translações, três rotações e três
-boosts) e identifique quais desses dez sobrevivem em Schwarzschild.
+\dificil{7.1}
+O princípio do acoplamento mínimo manda trocar $\eta_{\mu\nu}\to g_{\mu\nu}$ e
+$\partial_\mu\to\nabla_\mu$. (a) Aplique-o às equações de Maxwell e escreva
+$\nabla_\mu F^{\mu\nu}=4\pi J^\nu$ e $\nabla_{[\lambda}F_{\mu\nu]}=0$.
+(b) Mostre que a segunda equação é idêntica à versão com derivadas parciais, e
+explique por quê. (c) Mostre que $\nabla_\mu F^{\mu\nu}=4\pi J^\nu$ implica
+$\nabla_\nu J^\nu=0$, e discuta a ambiguidade que surgiria se
+$F_{\mu\nu}$ não fosse antissimétrico.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -3397,45 +4655,60 @@ Universo primordial dominado por radiação.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{A variação do elemento de volume.} Prove a identidade
-$\delta\sqrt{-g}=-\tfrac12\sqrt{-g}\,g_{\mu\nu}\,\delta g^{\mu\nu}$, usada na
-dedução da Seção~\ref{sec:acao-hilbert}. A pista é a fórmula
-$\delta(\ln\det A)=\mathrm{tr}(A^{-1}\delta A)$.
+\facil{8.2}
+As equações de Einstein são $G_{\mu\nu}=8\pi G\,T_{\mu\nu}$.
+(a) Contraia-as com $g^{\mu\nu}$ em quatro dimensões e obtenha
+$R=-8\pi G\,T$. (b) Substitua de volta e escreva a forma equivalente
+$R_{\mu\nu}=8\pi G(T_{\mu\nu}-\tfrac12 T g_{\mu\nu})$. (c) Conclua que, no
+vácuo, $R_{\mu\nu}=0$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{$T_{\mu\nu}$ pela porta variacional.} Para a ação de um campo escalar,
-$S_{\rm m}=-\tfrac12\int(g^{\mu\nu}\partial_\mu\varphi\partial_\nu\varphi
-+2V(\varphi))\sqrt{-g}\,\dd^4x$, aplique a
-Equação~\eqref{eq:T-variacional} e obtenha
-$T_{\mu\nu}=\partial_\mu\varphi\partial_\nu\varphi
--g_{\mu\nu}(\tfrac12(\partial\varphi)^2+V)$. Compare com a forma de fluido
-perfeito do Capítulo~\ref{cap:fluidos}.
+\facil{8.4}
+Estime o parâmetro de campo fraco $GM/(Rc^2)$ para a Terra, o Sol, uma anã
+branca ($M\sim\Msol$, $R\sim10^4$~km) e uma estrela de nêutrons
+($M\sim1{,}4\,\Msol$, $R\sim10$~km). Organize em tabela e indique em quais
+desses objetos a relatividade geral é uma correção pequena e em quais é
+essencial.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Einstein em $D$ dimensões.} Refaça a contração das equações de campo
-em $D$ dimensões e mostre que $R=-\dfrac{16\pi G\,T}{D-2}$. Verifique que
-$D=4$ devolve $R=-8\pi GT$. O que acontece em $D=2$, e o que isso diz sobre
-gravidade bidimensional?
+\medio{8.3}
+Deduza o limite newtoniano. (a) Escreva $g_{00}=-(1+2\Phi)$ com
+$|\Phi|\ll1$ e mostre que a equação geodésica de uma partícula lenta se reduz
+a $\ddot x^i=-\partial_i\Phi$. (b) Mostre que a componente $00$ das equações
+de campo dá $\nabla^2\Phi=4\pi G\rho$. (c) Explique como esses dois resultados
+juntos fixam o fator $8\pi G$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{O valor de $\Lambda$.} Use $\Omega_\Lambda=0{,}685$ e
-$H_0=67{,}4$~km\,s$^{-1}$\,Mpc$^{-1}$ para calcular $\rho_\Lambda$ em
-J\,m$^{-3}$ e $\Lambda$ em m$^{-2}$. Compare $\rho_\Lambda$ com a estimativa
-ingênua de energia de vácuo em escala de Planck e quantifique a discrepância
-em ordens de grandeza. Esse é o problema da constante cosmológica.
+\medio{8.1}
+Justifique a escolha de $G_{\mu\nu}$ como lado geométrico. (a) Liste as
+propriedades exigidas do lado esquerdo. (b) Mostre que
+$\nabla_\mu G^{\mu\nu}=0$ segue da identidade de Bianchi contraída.
+(c) Mostre que a alternativa $R_{\mu\nu}=8\pi G\,T_{\mu\nu}$ levaria, via
+conservação de $T$, a $T=\text{const}$ em todo o espaço-tempo, e explique por
+que isso é inaceitável.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Por que não $R_{\mu\nu}=8\pi GT_{\mu\nu}$.} Suponha que essa fosse a
-equação de campo. Tome a divergência covariante dos dois lados e use
-$\nabla_\mu T^{\mu\nu}=0$ para mostrar que ela forçaria $\partial^\nu R=0$, ou
-seja, $R$ constante e portanto $T$ constante em todo o espaço-tempo. Explique
-por que isso é fisicamente inaceitável.
+\dificilforaschutz{}
+A ação de Einstein--Hilbert é
+$S=\frac{1}{16\pi G}\int R\sqrt{-g}\,\dd^4x$.
+(a) Prove a identidade $\delta\sqrt{-g}=-\tfrac12\sqrt{-g}\,g_{\mu\nu}
+\delta g^{\mu\nu}$. (b) Mostre que $g^{\mu\nu}\delta R_{\mu\nu}$ é uma
+divergência total e portanto não contribui para as equações de movimento no
+interior. (c) Conclua a variação e obtenha $G_{\mu\nu}=0$ no vácuo.
+(d) Acrescentando $S_{\rm m}$ e usando
+$T_{\mu\nu}=-\frac{2}{\sqrt{-g}}\frac{\delta S_{\rm m}}{\delta g^{\mu\nu}}$,
+recupere as equações completas.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -3658,47 +4931,61 @@ astronomia.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Contagem de graus de liberdade.} Uma perturbação simétrica
-$h_{\mu\nu}$ tem dez componentes. Mostre que o gauge de Lorenz impõe quatro
-condições e que ainda resta uma liberdade residual de quatro funções
-harmônicas, deixando $10-4-4=2$ graus físicos. Relacione esse $2$ com as duas
-polarizações e com o fato de o gráviton ter helicidade $\pm2$.
+\facil{9.2}
+Escreva $g_{\mu\nu}=\eta_{\mu\nu}+h_{\mu\nu}$ com $|h_{\mu\nu}|\ll1$.
+(a) Quantas componentes independentes tem $h_{\mu\nu}$? (b) Quantas são
+eliminadas pelo gauge de Lorenz? (c) Quantas restam após usar a liberdade de
+gauge residual, e como esse número se relaciona com as polarizações
+observadas?
 \end{exercise}
 
 \begin{exercise}
-\textbf{Energia total irradiada.} Integre a
-Equação~\eqref{eq:quadrupolo-binaria} ao longo do inspiral de uma binária de
-$36+29\,\Msol$, do infinito até a ISCO, e mostre que a energia emitida é da
-ordem de $3\,\Msol c^2$. Compare com a energia liberada por uma supernova
-($\sim10^{-3}\Msol c^2$ em fótons) e comente por que GW150914 foi, por alguns
-milésimos de segundo, mais luminosa que todo o Universo observável.
+\facil{9.3}
+Uma onda com $h\sim10^{-21}$ atravessa um interferômetro de braços
+$L=4$~km. (a) Calcule $\Delta L$. (b) Compare com o diâmetro de um próton
+($\sim10^{-15}$~m). (c) Explique, em uma frase cada, os três recursos que
+tornam a medida possível: cavidades ressonantes, medida de fase e filtragem
+casada.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Sirene padrão.} A amplitude satisfaz
-$h\propto\mathcal{M}_c^{5/3}f^{2/3}/d$, e tanto $\mathcal{M}_c$ quanto $f$ são
-medidos diretamente da fase do sinal. Conclua que $d$ é determinada sem
-nenhuma calibração externa e explique por que isso torna binárias compactas
-``sirenes padrão'' --- em contraste com as velas padrão, que dependem de uma
-escada de distâncias.
+\medio{9.2}
+Uma onda com polarização $+$ propaga-se ao longo de $z$. (a) Escreva
+$h^{\rm TT}_{ij}$. (b) Use a equação de desvio geodésico para obter o
+deslocamento de partículas de um anel no plano $xy$, e mostre que a
+deformação é $\delta x/x=+\tfrac12 h_+$ e $\delta y/y=-\tfrac12 h_+$.
+(c) Desenhe o anel em quatro instantes de um período e mostre que a
+polarização $\times$ dá o mesmo padrão girado de $45^\circ$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{A banda dos detectores.} Use $f_{\rm ISCO}=c^3/(6^{3/2}\pi GM)$ para
-determinar a faixa de massa total cuja fusão cai entre $10$ e $1000$~Hz, a
-banda dos interferômetros terrestres. Repita para a banda do LISA,
-$10^{-4}$ a $10^{-1}$~Hz, e identifique que classe de objetos ela seleciona.
+\medio{9.5}
+A fórmula do quadrupolo dá, para uma binária circular de massas $m_1$ e
+$m_2$ e separação $a$,
+$P=\frac{32}{5}\frac{G^4}{c^5}\frac{m_1^2m_2^2(m_1+m_2)}{a^5}$.
+(a) Aplique-a ao sistema Terra--Sol e obtenha a potência irradiada.
+(b) Estime o tempo de coalescência resultante e compare com a idade do
+Universo. (c) Explique, a partir da estrutura da fórmula, por que apenas
+objetos compactos e próximos produzem sinais detectáveis.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Diferença de tempo nos braços.} Uma onda com polarização $+$ incide
-perpendicularmente sobre um interferômetro de braços $L$ ao longo de $x$ e
-$y$. Mostre que a diferença de tempo de ida e volta da luz entre os dois
-braços é $\Delta t\approx hL/c$, e verifique que, para $h=10^{-21}$ e
-$L=4$~km, ela corresponde a uma diferença de fase mensurável quando a luz
-percorre $300$ vezes o braço em uma cavidade ressonante.
+\dificil{9.4}
+Sistemas isolados não irradiam nos multipolos mais baixos. (a) Mostre que a
+conservação da massa total impede radiação monopolar. (b) Mostre que a
+conservação do momento linear (equivalentemente, o movimento inercial do
+centro de massa) impede radiação dipolar de massa. (c) Mostre que a
+conservação do momento angular impede a radiação dipolar de corrente.
+(d) Conclua que o quadrupolo é o primeiro momento radiativo e explique por que
+um colapso esfericamente simétrico não emite ondas gravitacionais, por mais
+violento que seja.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -4031,54 +5318,56 @@ subjacente continua sendo geodésica em espaço-tempo curvo.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{Distância própria contra coordenada.} Calcule
-$\ell=\int_{2M}^{10M}(1-2M/r)^{-1/2}\dd r$ e compare com a diferença
-coordenada $\Delta r=8M$. Por quanto por cento a distância própria excede a
-coordenada? Mostre que a integral converge apesar de o integrando divergir em
-$r=2M$.
+\facil{10.2}
+A métrica de Schwarzschild tem $g_{rr}=(1-2M/r)^{-1}$. (a) Calcule o raio de
+Schwarzschild do Sol e da Terra. (b) Escreva a integral da distância própria
+radial entre $r_1$ e $r_2$. (c) Avalie-a numericamente entre $r=2M$ e
+$r=10M$ e compare com a diferença coordenada $\Delta r=8M$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Velocidade orbital local.} Um observador estático em $r$ mede a
-velocidade de uma partícula em órbita circular. Mostre que
-$v_{\rm loc}=\sqrt{M/(r-2M)}$ e que ela tende a $c$ quando $r\to3M$.
-Interprete: por que não existe órbita circular \emph{massiva} abaixo de $3M$,
-mesmo instável?
+\facil{10.4}
+Para observadores estáticos em Schwarzschild, o redshift entre $r_e$ e o
+infinito é $\nu_\infty/\nu_e=\sqrt{1-2M/r_e}$. (a) Expanda para
+$M/r\ll1$ e mostre que recupera $\Delta\nu/\nu\approx\Delta\Phi/c^2$.
+(b) Calcule o desvio para um fóton emitido na superfície do Sol.
+(c) Calcule-o para os $22{,}5$~m da torre do experimento de Pound e Rebka.
 \end{exercise}
 
 \begin{exercise}
-\textbf{TOV no limite newtoniano.} Mostre que, para $p\ll\rho$,
-$m\ll r$ e $4\pi r^3p\ll m$, a equação de Tolman--Oppenheimer--Volkoff se
-reduz a $\dd p/\dd r=-Gm\rho/r^2$. Identifique qual dos três termos
-relativísticos é o responsável por tornar o equilíbrio \emph{mais} difícil, e
-explique por que a pressão, que sustenta a estrela em Newton, também a puxa
-para dentro em Einstein.
+\medio{11.1}
+No plano equatorial, $\dot r^2+\Veff(r)=E^2$ com
+$\Veff=(1-2M/r)(1+L^2/r^2)$. (a) Obtenha a condição de órbita circular e
+mostre que $L^2=Mr^2/(r-3M)$. (b) Impondo também $\Veff''=0$, obtenha
+$r_{\rm ISCO}=6M$. (c) Calcule a energia por unidade de massa na ISCO e mostre
+que a eficiência de acreção $1-E$ vale $5{,}72\,\%$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Estrela de densidade uniforme.} Integre a equação TOV para
-$\rho=\mathrm{const}$ e obtenha a solução interior de Schwarzschild. Mostre
-que a pressão central diverge quando $2GM/Rc^2\to8/9$ e conclua que nenhuma
-estrela estática pode ser mais compacta que esse limite (limite de Buchdahl),
-independentemente da equação de estado.
+\medio{11.1}
+Deduza os testes clássicos. (a) A partir da equação radial, mostre que o
+avanço do periélio por órbita é
+$\Delta\phi=6\pi GM/[c^2a(1-e^2)]$ e avalie-o para Mercúrio em segundos de
+arco por século. (b) Para geodésicas nulas, mostre que a deflexão é
+$\delta=4GM/(c^2b)$ e avalie-a na borda do Sol. (c) Explique de onde vem o
+fator $2$ em relação ao cálculo newtoniano ingênuo.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Anel de Einstein.} Use a Equação~\eqref{eq:lente} para calcular
-$\theta_E$ de uma lente de $1\,\Msol$ a $4$~kpc com a fonte a $8$~kpc, e de
-um aglomerado de $10^{14}\,\Msol$ com $D_L=D_{LS}=1$~Gpc e $D_S=2$~Gpc.
-Compare com a resolução angular do Hubble ($0{,}05''$) e diga qual dos dois
-casos produz imagens resolvidas.
+\dificil{10.6}
+Considere uma estrela estática de densidade uniforme $\rho$.
+(a) Integre $\dd m/\dd r=4\pi r^2\rho$ e escreva a equação de
+Tolman--Oppenheimer--Volkoff para esse caso. (b) Resolva-a analiticamente para
+$p(r)$ com a condição $p(R)=0$. (c) Mostre que a pressão central diverge
+quando $2GM/Rc^2\to8/9$ e conclua que nenhuma estrela estática pode ser mais
+compacta que esse limite, qualquer que seja a equação de estado.
 \end{exercise}
 
-\begin{exercise}
-\textbf{Birkhoff qualitativo.} Uma casca esférica de matéria pulsa radialmente
-mantendo a simetria esférica. Argumente, a partir do teorema de Birkhoff, que
-a geometria externa permanece exatamente Schwarzschild com a mesma $M$, e
-conclua que a casca não emite ondas gravitacionais. Relacione com a ausência
-de radiação monopolar do Capítulo~\ref{cap:ondas}.
-\end{exercise}
 
 \section{Conteúdo extra}
 
@@ -4256,47 +5545,59 @@ clássica.
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{A coordenada tartaruga.} Verifique que
-$r_*=r+2M\ln|r/2M-1|$ satisfaz $\dd r_*/\dd r=(1-2M/r)^{-1}$ e que
-$r_*\to-\infty$ quando $r\to2M$. Mostre que, em termos de $v=t+r_*$, a
-métrica assume a forma da Equação~\eqref{eq:cap12-ef}, e explique como uma
-mudança de coordenada que diverge consegue produzir uma métrica regular.
+\facil{11.2}
+Em $r=2M$ a componente $g_{rr}$ diverge. (a) Calcule o escalar de Kretschmann
+$R_{\alpha\beta\gamma\delta}R^{\alpha\beta\gamma\delta}=48M^2/r^6$ em
+$r=2M$ e em $r\to0$. (b) Conclua qual das duas superfícies é singularidade
+física. (c) Explique em uma frase a diferença entre singularidade de
+coordenada e singularidade de curvatura.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Densidade média do horizonte.} Defina a densidade média como
-$M/(\tfrac43\pi r_s^3)$ e mostre que ela cai como $1/M^2$. Calcule-a para
-$10\,\Msol$ e para $10^9\,\Msol$, e verifique que no segundo caso ela é menor
-que a densidade da água. O que isso diz sobre a ideia de que buracos negros
-são ``matéria muito comprimida''?
+\facil{11.5}
+A temperatura de Hawking de um buraco negro de Schwarzschild é
+$T_H=\hbar c^3/(8\pi GMk_B)$. (a) Calcule $T_H$ para $M=\Msol$.
+(b) Determine a massa de um buraco negro cuja temperatura iguala a da radiação
+cósmica de fundo, $2{,}73$~K. (c) Conclua se algum buraco negro conhecido está
+evaporando hoje, e justifique.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Massa irredutível e o processo de Penrose.} Para Kerr,
-$A=8\pi M(M+\sqrt{M^2-a^2})$ e $M_{\rm irr}=\sqrt{A/16\pi}$. Mostre que
-$M^2=M_{\rm irr}^2+J^2/(4M_{\rm irr}^2)$ e conclua que, para um buraco negro
-extremo, a fração máxima de massa extraível sem violar o teorema da área é
-$1-1/\sqrt2\approx29\,\%$.
+\medio{11.2}
+Introduza a coordenada tartaruga $r_*=r+2M\ln|r/2M-1|$ e
+$v=t+r_*$. (a) Mostre que a métrica assume a forma
+$\dd s^2=-(1-2M/r)\dd v^2+2\,\dd v\,\dd r+r^2\dd\Omega^2$. (b) Calcule
+$\det g$ e mostre que ela é regular em $r=2M$. (c) Determine as duas direções
+nulas radiais e mostre que, para $r<2M$, ambas apontam para $r$
+decrescente.
 \end{exercise}
 
 \begin{exercise}
-\textbf{A sombra.} Mostre que o raio aparente do anel de fótons visto por um
-observador distante é $b_{\rm crit}=3\sqrt3\,GM/c^2$, e não $3GM/c^2$.
-Calcule o diâmetro angular correspondente para M87$^*$
-($M=6{,}5\times10^9\,\Msol$, $d=16{,}8$~Mpc) e para Sgr~A$^*$
-($M=4{,}3\times10^6\,\Msol$, $d=8{,}3$~kpc). Compare com os $42\,\mu$as
-medidos pelo Event Horizon Telescope.
+\medio{11.1}
+Uma partícula cai radialmente do repouso no infinito. (a) Mostre que
+$\dd r/\dd\tau=-\sqrt{2M/r}$ e integre para obter o tempo próprio até
+$r=0$. (b) Obtenha $\dd r/\dd t$ e mostre que diverge o tempo coordenado
+necessário para atingir $r=2M$. (c) Explique por que as duas descrições não se
+contradizem.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Segunda lei em ação.} Dois buracos negros de Schwarzschild de massa
-$M$ cada um se fundem, produzindo um único buraco negro de massa $M_f$ e
-irradiando o resto. Use o teorema da área para obter a cota
-$M_f\ge\sqrt2\,M$ e conclua que no máximo $29\,\%$ da massa total pode ser
-convertida em ondas gravitacionais. Compare com os $5\,\%$ efetivamente
-irradiados em GW150914.
+\dificil{11.3}
+Para o buraco negro de Kerr, a área do horizonte é
+$A=8\pi M(M+\sqrt{M^2-a^2})$ e a massa irredutível é
+$M_{\rm irr}=\sqrt{A/16\pi}$. (a) Mostre que
+$M^2=M_{\rm irr}^2+J^2/(4M_{\rm irr}^2)$, com $J=aM$. (b) Conclua que a
+fração máxima de massa extraível de um buraco negro extremo, sem violar o
+teorema da área, é $1-1/\sqrt2\approx29\,\%$. (c) Aplique o teorema da área à
+fusão de dois buracos negros iguais e sem spin e obtenha a cota superior da
+energia irradiável.
 \end{exercise}
+
 
 \section{Conteúdo extra}
 
@@ -4523,49 +5824,57 @@ artefatos de coordenadas?
 
 \clearpage
 \section{Exercícios}
+\begin{leitura}
+Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \emph{seção de leitura} do Schutz (3ª ed., 2022) que cobre o assunto --- use-a para localizar o apoio antes de tentar resolver. Os enunciados são próprios: seguem os tópicos e a ordem do livro, mas não reproduzem os problemas dele.
+\end{leitura}
+
 \begin{exercise}
-\textbf{A densidade crítica.} Calcule $\rho_c=3H_0^2/8\pi G$ para
-$H_0=67{,}4$~km\,s$^{-1}$\,Mpc$^{-1}$, em kg\,m$^{-3}$ e em prótons por metro
-cúbico. Comente o fato de o Universo ser, em média, um vácuo muito melhor que
-qualquer bomba de laboratório.
+\facil{13.2}
+A métrica FLRW é
+$\dd s^2=-\dd t^2+a^2(t)[\dd r^2/(1-kr^2)+r^2\dd\Omega^2]$.
+(a) Mostre que $1+z=a(t_0)/a(t_e)$. (b) Calcule $a(t_e)/a(t_0)$ para
+$z=1$, $z=3$ e $z=1100$. (c) Interprete fisicamente o último valor.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Temperatura e recombinação.} Da conservação do número de fótons e do
-redshift de energia, mostre que $T\propto1/a$, isto é, $T=T_0(1+z)$. Calcule
-$T$ em $z=1100$ e compare com a energia de ionização do hidrogênio,
-$13{,}6$~eV. Por que a recombinação ocorre a uma temperatura bem \emph{menor}
-que $13{,}6$~eV$/k_B$?
+\facil{13.3}
+Com $p=w\rho$ e $\dot\rho+3H(\rho+p)=0$: (a) mostre que
+$\rho\propto a^{-3(1+w)}$; (b) obtenha os expoentes para matéria, radiação e
+constante cosmológica; (c) explique por que a densidade de $\Lambda$ não
+diminui com a expansão.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Universo de de Sitter.} Para $\Omega_\Lambda=1$ e $k=0$, resolva a
-equação de Friedmann e obtenha $a\propto e^{H t}$. Mostre que existe um
-horizonte de eventos em distância própria $c/H$ e calcule seu valor em Gpc
-para o $H_0$ atual. O que acontece com uma galáxia que hoje está além dele?
+\medio{13.3}
+Para $k=0$ e uma única componente dominante: (a) resolva a equação de
+Friedmann e mostre que $a\propto t^{2/3}$ na era de matéria e
+$a\propto t^{1/2}$ na de radiação; (b) determine a idade do universo em cada
+caso em termos de $H_0$; (c) explique por que a idade de Einstein--de Sitter,
+$2/3H_0$, é menor que a idade observada, e como $\Lambda$ resolve a
+discrepância.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Parâmetro de desaceleração.} Defina $q=-\ddot a a/\dot a^2$ e mostre
-que hoje $q_0=\tfrac12\Omega_m-\Omega_\Lambda$ (desprezando radiação).
-Calcule $q_0$ para os parâmetros de Planck e determine o valor de
-$\Omega_\Lambda$ que daria $q_0=0$.
+\medio{13.2}
+As distâncias cosmológicas se distinguem em um universo em expansão.
+(a) Escreva $D_C$, $D_L$ e $D_A$ em termos de $\int\dd z/E(z)$.
+(b) Demonstre a relação de Etherington $D_L=(1+z)^2D_A$, indicando onde entram
+a conservação do número de fótons e a propagação em geodésicas nulas.
+(c) Mostre que $D_A$ tem um máximo e explique por que objetos muito distantes
+aparecem \emph{maiores} no céu.
 \end{exercise}
 
 \begin{exercise}
-\textbf{O problema do horizonte.} Estime o tamanho angular, no céu de hoje, do
-horizonte de partículas na época da recombinação. Conclua que a superfície de
-último espalhamento se divide em milhares de regiões que nunca estiveram em
-contato causal, e explique por que a uniformidade da CMB a
-$10^{-5}$ é então um problema --- e como a inflação o resolve.
+\dificil{13.4}
+O problema do horizonte. (a) Calcule o tamanho comóvel do horizonte de
+partículas na época da recombinação, $z\approx1100$, em um universo dominado
+por matéria. (b) Determine o ângulo que ele subtende no céu hoje. (c) Conclua
+quantas regiões causalmente desconexas cobrem a superfície de último
+espalhamento. (d) Explique por que a uniformidade da radiação cósmica de fundo
+a $10^{-5}$ é então um problema, e como uma fase de expansão acelerada no
+Universo primordial o resolve.
 \end{exercise}
 
-\begin{exercise}
-\textbf{Idade em alto redshift.} Obtenha $t(z)$ para Einstein--de Sitter e
-mostre que $t\propto(1+z)^{-3/2}$. Calcule a idade do Universo em $z=6$ para
-EdS e para $\Lambda$CDM, e comente a dificuldade de formar quasares de
-$10^9\,\Msol$ em tempo tão curto.
-\end{exercise}
 
 \section{Conteúdo extra}
 

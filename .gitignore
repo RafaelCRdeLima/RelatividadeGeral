@@ -15,4 +15,8 @@ apostila/fonte/*.toc
 apostila/fonte/*.synctex.gz
 apostila/fonte/*.fdb_latexmk
 apostila/fonte/*.fls
+apostila/fonte/*.xdv
 apostila/fonte/rg_72_aulas.pdf
+
+# livro de referência: obra protegida, não versionar
+bibliografia/

@@ -1,0 +1,315 @@
+% =====================================================================
+%  Nota suplementar à apostila de Relatividade Geral (UDESC/CCT)
+%  Por que A = D na dedução da transformação de Lorentz (Seção 1.4)
+%
+%  Compile de dentro desta pasta com:
+%     TEXINPUTS=../fonte: latexmk -xelatex nota_A_igual_D.tex
+% =====================================================================
+\documentclass[12pt,a4paper,oneside]{book}
+
+\usepackage[brazil]{babel}
+\usepackage{estilo-rg}
+
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{geometry}
+
+\geometry{top=2.8cm,bottom=2.8cm,left=3.0cm,right=3.0cm,
+          headheight=23pt,headsep=16pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=rgPetroleo,
+  urlcolor=rgPetroClaro,
+  pdftitle={Por que A = D: nota sobre a dedução da transformação de Lorentz},
+  pdfauthor={UDESC/CCT}
+}
+
+% numeração de seção sem capítulo
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theequation}{\arabic{equation}}
+
+\markboth{Nota suplementar}{Transformação de Lorentz}
+
+\begin{document}
+
+% ---------------------------------------------------------------------
+%  Cabeçalho da nota
+% ---------------------------------------------------------------------
+\thispagestyle{plain}
+
+\noindent
+{\sffamily\bfseries\footnotesize\color{rgAmbar}NOTA SUPLEMENTAR À SEÇÃO 1.4}
+
+\vspace{4pt}
+\noindent
+{\sffamily\bfseries\LARGE\color{rgPetroleo}Por que $A=D$?}
+
+\vspace{2pt}
+\noindent
+{\sffamily\large\color{rgGrafite}O papel da simetria $S\leftrightarrow S'$
+na dedução da transformação de Lorentz}
+
+\vspace{6pt}
+\noindent\textcolor{rgLinha}{\rule{\linewidth}{0.8pt}}
+
+\vspace{10pt}
+
+\noindent
+A caixa \textsc{Resultado Central} da p.~14 deduz a transformação de Lorentz
+a partir da invariância do intervalo e, em certo ponto, afirma:
+
+\begin{quote}\itshape\small\color{rgGrafite}
+``A simetria entre os dois referenciais (o que $S$ vê como velocidade $v$,
+$S'$ vê como $-v$, e nenhum referencial é privilegiado) impõe $A=D$.''
+\end{quote}
+
+\noindent
+Esta nota responde a duas perguntas que a frase deixa em aberto:
+\textbf{(i)} o que exatamente essa simetria tem a ver com a equação
+$D^2v^2-A^2=-1$, que aparece imediatamente antes; e \textbf{(ii)} qual é,
+de fato, o conteúdo lógico da hipótese --- que se revela bem menor do que
+parece.
+
+% =====================================================================
+\section{O sistema completo, e o que a caixa usa dele}
+% =====================================================================
+
+A transformação postulada é linear,
+\begin{equation}
+  t' = At + Bx, \qquad x' = Ct + Dx,
+  \label{eq:linear}
+\end{equation}
+com quatro incógnitas $A,B,C,D$, funções apenas de $v$. Sobre elas a caixa
+impõe quatro equações:
+
+\vspace{4pt}
+\begin{center}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{Origem} & \textbf{Equação} & \textbf{Usada na caixa?}\\
+\midrule
+Condição 1 (cinemática) & $C=-Dv$ & sim \\
+Condição 2, coef.\ de $\dd t^2$ \hspace{1em} & (E1)\quad $-A^2+C^2=-1$ & sim \\
+Condição 2, coef.\ de $\dd x^2$ & (E2)\quad $-B^2+D^2=1$  & \textcolor{rgTerracota}{\textbf{não}} \\
+Condição 2, coef.\ de $\dd t\,\dd x$ & (E3)\quad $-AB+CD=0$ & sim (no final) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{4pt}
+
+\noindent
+O texto usa a Condição 1 e (E1) para escrever $D^2v^2-A^2=-1$; invoca então
+a simetria para obter $A=D$; e só no fim recorre a (E3) para achar
+$B=-\gamma v$. A equação (E2) \emph{nunca é utilizada}. É aí que mora toda a
+questão.
+
+\begin{atencao}
+Antes de qualquer conta, uma observação de contagem. São
+\textbf{quatro incógnitas} e \textbf{quatro equações}. Um sistema assim não
+deixa nenhuma liberdade \emph{contínua} sobrando: o conjunto solução é
+discreto. Logo, qualquer hipótese física adicional --- inclusive a simetria
+--- não pode estar fixando um parâmetro livre. No máximo pode estar
+\textbf{escolhendo um sinal}. E é exatamente isso que ela faz.
+\end{atencao}
+
+% =====================================================================
+\section{Primeiro: o que a simetria realmente afirma}
+% =====================================================================
+
+Um esclarecimento antes da álgebra. A simetria \textbf{não age sobre} a
+equação $D^2v^2-A^2=-1$. Ela é uma hipótese independente, cujo resultado é
+\emph{substituído} naquela equação depois. As duas coisas aparecem na mesma
+frase da caixa, o que sugere --- erradamente --- que uma esteja sendo
+deduzida da outra.
+
+Em fórmula, a simetria é a imagem espelhada da Condição 1. Aquela fixou como
+a origem de $S'$ se move vista de $S$; esta fixa como a origem de $S$ se move
+vista de $S'$. Basta pôr $x=0$ (a linha de mundo da origem de $S$) em
+\eqref{eq:linear}:
+\begin{equation}
+  t' = At, \qquad x' = Ct = -Dvt,
+\end{equation}
+onde já se usou $C=-Dv$. A velocidade da origem de $S$ \emph{medida em $S'$}
+é portanto
+\begin{equation}
+  \frac{x'}{t'} \;=\; -\frac{D}{A}\,v .
+  \label{eq:reciproca}
+\end{equation}
+O postulado de que nenhum referencial é privilegiado exige que esse valor
+seja exatamente $-v$: se $S$ vê $S'$ afastar-se com velocidade $v$, então
+$S'$ deve ver $S$ afastar-se com a mesma velocidade, em sentido oposto.
+Impondo isso em \eqref{eq:reciproca},
+\begin{equation}
+  -\frac{D}{A}\,v = -v \qquad\Longrightarrow\qquad A=D .
+\end{equation}
+
+\noindent
+Esse é todo o argumento da caixa, agora explícito: uma segunda condição
+\emph{cinemática}, do mesmo tipo da primeira. Sem ela, ficaria a esquisitice
+de $S$ medir $v$ para $S'$ enquanto $S'$ mede, digamos, $-1{,}3\,v$ para $S$.
+Só depois disso se volta a $D^2v^2-A^2=-1$ com $A=D\equiv\gamma$, obtendo
+$\gamma^2(1-v^2)=1$.
+
+% =====================================================================
+\section{A conta que a caixa não faz}
+% =====================================================================
+
+Agora o ponto interessante: \textbf{a álgebra já entrega $D^2=A^2$ sozinha}.
+Substitua $C=-Dv$ nas três equações da invariância:
+\begin{align}
+  \text{(E1$'$)}&\qquad A^2 - D^2v^2 = 1, \label{eq:E1}\\
+  \text{(E2$'$)}&\qquad D^2 - B^2 = 1,    \label{eq:E2}\\
+  \text{(E3$'$)}&\qquad -AB + (-Dv)D = 0 \;\Longrightarrow\; AB = -D^2v.
+  \label{eq:E3}
+\end{align}
+
+\paragraph{Passo 0 --- pode-se dividir por $A$.}
+De \eqref{eq:E1}, $A^2 = 1 + D^2v^2 \ge 1$, logo $|A|\ge 1$ e em particular
+$A\neq 0$. Não é preciosismo: é o que legitima o passo seguinte.
+
+\paragraph{Passo 1 --- isole $B$ em \eqref{eq:E3}.}
+\begin{equation}
+  B = -\frac{D^2 v}{A}.
+\end{equation}
+
+\paragraph{Passo 2 --- leve isso em \eqref{eq:E2},} a equação que a caixa
+deixou de lado:
+\begin{equation}
+  D^2 - \frac{D^4v^2}{A^2} = 1 .
+\end{equation}
+
+\paragraph{Passo 3 --- multiplique por $A^2$ e fatore.}
+\begin{equation}
+  A^2D^2 - D^4v^2 = A^2
+  \qquad\Longrightarrow\qquad
+  D^2\bigl(A^2 - D^2v^2\bigr) = A^2 .
+\end{equation}
+
+\paragraph{Passo 4 --- reconheça o parêntese.}
+O termo entre parênteses é precisamente o lado esquerdo de \eqref{eq:E1},
+que vale $1$. Restam apenas
+
+\begin{central}
+\begin{equation}
+  \boxed{\;D^2 = A^2\;}
+\end{equation}
+obtido \emph{sem} nenhuma menção a simetria, a referenciais privilegiados ou
+à troca $S\leftrightarrow S'$. É puro encaixe entre as três equações da
+invariância do intervalo mais a Condição 1.
+\end{central}
+
+% =====================================================================
+\section{Os dois ramos, explicitamente}
+% =====================================================================
+
+De $D^2=A^2$ segue $D=\pm A$. Vale escrever os dois casos, porque o ramo
+descartado não é nenhum monstro algébrico --- é uma transformação
+perfeitamente legítima.
+
+\paragraph{Ramo $D=+A$.} Então $C=-Av$ e $B=-A^2v/A=-Av$, de modo que
+\begin{equation}
+  t' = A(t-vx), \qquad x' = A(x-vt),
+  \qquad \det = A^2 - A^2v^2 = +1 .
+\end{equation}
+Com \eqref{eq:E1}, $A^2(1-v^2)=1$; escolhendo $A>0$ obtém-se $A=\gamma$. É o
+boost usual.
+
+\paragraph{Ramo $D=-A$.} Então $C=+Av$ e $B=-A^2v/A=-Av$, de modo que
+\begin{equation}
+  t' = A(t-vx), \qquad x' = -A(x-vt),
+  \qquad \det = -A^2 + A^2v^2 = -1 .
+\end{equation}
+É o \emph{mesmo boost composto com a reflexão} $x\to-x$. Ele satisfaz todas
+as quatro equações, \textbf{inclusive a Condição 1}: a origem de $S'$
+($x'=0$) continua sobre $x=vt$. O que ele viola é uma convenção que nunca
+chegou a ser escrita --- a de que os eixos $x$ e $x'$ apontem para o mesmo
+lado. Em $v=0$ ele dá $t'=t$, $x'=-x$: não tende à identidade.
+
+% =====================================================================
+\section{Leitura estrutural: isso tinha que acontecer}
+% =====================================================================
+
+O resultado $D^2=A^2$ não é uma coincidência algébrica. Calcule o
+determinante da matriz da transformação,
+$M=\begin{pmatrix} A & B\\ C & D\end{pmatrix}$, usando $C=-Dv$ e
+$B=-D^2v/A$:
+\begin{align}
+  \det M &= AD - BC
+         = AD - \Bigl(-\frac{D^2v}{A}\Bigr)(-Dv)
+         = AD - \frac{D^3v^2}{A} \notag\\[4pt]
+         &= \frac{D}{A}\underbrace{\bigl(A^2-D^2v^2\bigr)}_{=\,1}
+         = \frac{D}{A}.
+\end{align}
+Ou seja, $\det M = D/A$, e portanto
+\begin{equation}
+  D^2=A^2 \iff \det M = \pm1,
+  \qquad\qquad
+  A = D \iff \det M = +1 .
+\end{equation}
+
+Mas $\det M=\pm1$ é automático para \emph{qualquer} transformação que
+preserve uma forma quadrática. De $M^{\mathsf T}\eta M=\eta$, tomando
+determinantes,
+\begin{equation}
+  (\det M)^2\,\det\eta = \det\eta
+  \qquad\Longrightarrow\qquad
+  (\det M)^2 = 1 .
+\end{equation}
+As equações (E1)--(E3) \emph{são} a afirmação $M^{\mathsf T}\eta M=\eta$: elas
+caracterizam o grupo $O(1,1)$ inteiro, com suas quatro componentes
+desconexas (identidade, $P$, $T$, $PT$). Não há como elas distinguirem $A=D$
+de $A=-D$ --- isso é informação de \emph{componente}, não de equação. Nenhuma
+manipulação algébrica poderia fornecê-la; é preciso um argumento físico, e é
+esse o serviço prestado pela simetria.
+
+% =====================================================================
+\section{Conclusão}
+% =====================================================================
+
+\begin{central}
+\textbf{(E2) e a hipótese de simetria são redundantes entre si.} A caixa faz
+uma escolha: invoca a simetria e deixa (E2) ociosa. Poderia ter feito a
+escolha oposta --- usar (E2) para obter $D^2=A^2$ e reservar a simetria
+apenas para o sinal. O que não se pode é achar que a simetria esteja sendo
+aplicada \emph{à} equação $D^2v^2-A^2=-1$: ela é um passo à parte, cujo
+resultado é substituído ali depois.
+\end{central}
+
+Que (E2) fique satisfeita no fim é fácil de conferir: com $A=D=\gamma$ e
+$B=-\gamma v$,
+\begin{equation}
+  D^2 - B^2 = \gamma^2 - \gamma^2v^2 = \gamma^2(1-v^2) = 1 \;\checkmark
+\end{equation}
+Ela não é falsa nem supérflua: é precisamente a equação que carrega a
+informação que a simetria foi chamada para fornecer.
+
+\paragraph{Ressalva sobre sinais.} O argumento de simetria, como enunciado em
+\eqref{eq:reciproca}, fixa $D=+A$, mas \emph{não} fixa o sinal de $A$. A
+solução $A=D=-\gamma$ também tem $\det=+1$ e também satisfaz tudo --- é o
+boost composto com $PT$. Excluí-la exige um terceiro ingrediente:
+preservação da orientação temporal, $\partial t'/\partial t>0$. Na prática,
+o critério
+
+\begin{center}\itshape
+em $v\to0$ a transformação deve reduzir-se à identidade
+\end{center}
+
+\noindent
+resolve os dois sinais de uma vez e é o mais econômico dos três argumentos:
+ele seleciona a componente de $O(1,1)$ conexa à identidade, que é o grupo de
+Lorentz próprio e ortocrono $SO^+(1,1)$ --- exatamente o conjunto dos boosts.
+
+\vspace{10pt}
+\noindent\textcolor{rgLinha}{\rule{\linewidth}{0.8pt}}
+\vspace{4pt}
+
+\noindent
+{\small\color{rgGrafite}
+\textbf{Resumo em uma linha.} A invariância do intervalo determina a
+transformação a menos de reflexões discretas; a simetria $S\leftrightarrow
+S'$ não fornece uma equação nova, apenas escolhe entre $D=+A$ e $D=-A$ ---
+equivalentemente, entre $\det M=+1$ e $\det M=-1$.}
+
+\end{document}

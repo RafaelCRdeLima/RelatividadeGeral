@@ -41,6 +41,14 @@
 \definecolor{rgCodigo}   {HTML}{F6F8F9}  % fundo de código
 \definecolor{rgLinha}    {HTML}{D6DEE1}  % filetes
 
+% --- paleta da capa: tudo sobre fundo azul-escuro --------------------
+\definecolor{rgNoite}     {HTML}{0B2838}  % fundo da capa
+\definecolor{rgNoiteFunda}{HTML}{061726}  % mais escura que o fundo
+\definecolor{rgCeu}       {HTML}{8DD7DC}  % ciano claro: subtítulo
+\definecolor{rgBruma}     {HTML}{9FB6C4}  % texto secundário sobre escuro
+\definecolor{rgOuro}      {HTML}{E6B75C}  % âmbar claro: acento
+\definecolor{rgFileteNoite}{HTML}{28556E} % filetes sobre escuro
+
 \AtBeginDocument{\color{rgTinta}}
 
 % ---------------------------------------------------------------------
@@ -249,6 +257,32 @@
 % ---------------------------------------------------------------------
 \newcommand{\rgsitecodigos}
   {https://rafaelcrdelima.github.io/RelatividadeGeral/codigos/}
+
+% ---------------------------------------------------------------------
+%  Marca de dificuldade dos exercícios, com a seção do Schutz que cobre
+%  o assunto. Uso:  \facil{1.6}  \medio{1.9}  \dificil{1.11}
+% ---------------------------------------------------------------------
+\newcommand{\rgnivel}[3]{%
+  \mbox{\sffamily\bfseries\scriptsize\color{#1}#2}%
+  \hspace{0.5em}\mbox{\sffamily\scriptsize\color{rgGrafite}Schutz \S#3}%
+  \par\nobreak\vspace{2pt}\nobreak}
+\newcommand{\facil}[1]{\rgnivel{rgPetroClaro}{FÁCIL}{#1}}
+\newcommand{\medio}[1]{\rgnivel{rgAmbar}{MÉDIO}{#1}}
+\newcommand{\dificil}[1]{\rgnivel{rgTerracota}{DIFÍCIL}{#1}}
+
+% variante para assunto que a apostila cobre e o Schutz não
+\newcommand{\rgnivelfora}[2]{%
+  \mbox{\sffamily\bfseries\scriptsize\color{#1}#2}%
+  \hspace{0.5em}\mbox{\sffamily\scriptsize\color{rgGrafite}assunto próprio
+  desta apostila}%
+  \par\nobreak\vspace{2pt}\nobreak}
+\newcommand{\facilforaschutz}{\rgnivelfora{rgPetroClaro}{FÁCIL}}
+\newcommand{\medioforaschutz}{\rgnivelfora{rgAmbar}{MÉDIO}}
+\newcommand{\dificilforaschutz}{\rgnivelfora{rgTerracota}{DIFÍCIL}}
+
+% texto com espacejamento aumentado, para as linhas institucionais da capa
+\newcommand{\spaced}[1]{%
+  \begingroup\addfontfeatures{LetterSpace=18}#1\endgroup}
 
 % nome de arquivo em mono, com quebra de linha permitida nos sublinhados
 \newcommand{\arq}[1]{{\ttfamily\small
