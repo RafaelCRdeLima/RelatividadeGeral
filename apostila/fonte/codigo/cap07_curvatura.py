@@ -172,35 +172,104 @@ holonomia_plano = lambda r: holonomia(g_polar, r)
 
 
 def figura_holonomia():
-    fig, axs = plt.subplots(1, 2, figsize=(9.2, 4.0))
+    # A esfera precisa de espaco: com paineis de mesma largura ela sai
+    # espremida, porque o painel dela e
+    fig, axs = plt.subplots(1, 2, figsize=(9.6, 4.5),
+                            gridspec_kw={"width_ratios": [1.0, 1.15]})
 
     # --- esquerda: o circuito na esfera, em projecao ortografica --------
+    #
+    # A versao anterior desenhava so' o contorno da esfera e preenchia o
+    # paralelo: o resultado parecia um disco flutuando dentro de um
+    # circulo, e o giro do vetor -- que e' o assunto da figura -- nao
+    # aparecia. Aqui a esfera ganha malha (com a face de tras tracejada,
+    # que e' o que da' a leitura de superficie), o circuito e' uma curva
+    # SOBRE ela, e o angulo de holonomia e' desenhado explicitamente no
+    # ponto de partida, comparando o vetor que saiu com o que voltou.
     ax = axs[0]
-    th0 = 1.0
+    th0 = 1.0                      # colatitude do paralelo percorrido
+    elev = np.radians(22.0)        # inclinacao da camera
+
+    def proj(v):
+        """(x,y,z) da esfera -> (X, Y) na tela e profundidade (>0 = frente)."""
+        x, y, z = v
+        return x, z * np.cos(elev) - y * np.sin(elev), y * np.cos(elev) + z * np.sin(elev)
+
+    PHI0 = np.pi / 2          # so' orienta a camera; o transporte segue de 0 a 2pi
+
+    def ponto(th, ph):
+        ph = ph + PHI0
+        return np.array([np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)])
+
+    # silhueta
     u = np.linspace(0, 2 * np.pi, 400)
-    ax.plot(np.cos(u), np.sin(u), color=LINHA, lw=1.2)          # contorno
-    # calota: circulo de colatitude th0, projetado
-    ax.plot(np.sin(th0) * np.cos(u), 0.42 * np.sin(th0) * np.sin(u) + np.cos(th0),
-            color=PETROLEO, lw=1.8)
-    ax.fill(np.sin(th0) * np.cos(u), 0.42 * np.sin(th0) * np.sin(u) + np.cos(th0),
-            color=PETROLEO, alpha=0.10, lw=0)
-    # vetor transportado em algumas posicoes
+    ax.plot(np.cos(u), np.sin(u), color=LINHA, lw=1.2, zorder=1)
+
+    # malha: paralelos e meridianos, com a face oculta em tracejado claro
+    def desenha(curva, cor, lw, z):
+        X, Y, P = np.array([proj(c) for c in curva]).T
+        frente = P >= 0
+        for mascara, estilo, alpha in ((frente, "solid", 1.0), (~frente, (0, (2, 2)), 0.45)):
+            seg = np.where(mascara, 1.0, np.nan)
+            ax.plot(X * seg, Y * seg, linestyle=estilo, color=cor, lw=lw,
+                    alpha=alpha, zorder=z)
+
+    for th in np.linspace(np.pi / 6, np.pi - np.pi / 6, 5):
+        desenha([ponto(th, p_) for p_ in u], LINHA, 0.7, 2)
+    for ph in np.linspace(0, np.pi, 7)[:-1]:
+        desenha([ponto(t_, ph) for t_ in np.linspace(0, np.pi, 200)] +
+                [ponto(t_, ph + np.pi) for t_ in np.linspace(np.pi, 0, 200)],
+                LINHA, 0.7, 2)
+
+    # o circuito
+    desenha([ponto(th0, p_) for p_ in u], PETROLEO, 2.2, 4)
+
+    # o vetor transportado, tangente a' esfera, em varias posicoes
     sol = transporta(g_esfera, lambda l: np.array([th0, l]),
                      lambda l: np.array([0.0, 1.0]), [1.0, 0.0])
-    for phi in np.linspace(0, 2 * np.pi, 9)[:-1]:
+    def direcao(phi):
+        """Direcao do vetor transportado, ja projetada na tela."""
         V = sol.sol(phi)
-        px = np.sin(th0) * np.cos(phi)
-        py = 0.42 * np.sin(th0) * np.sin(phi) + np.cos(th0)
-        # componentes ortonormais -> direcoes na projecao
-        vth, vph = V[0], np.sin(th0) * V[1]
-        dx = -vth * np.cos(th0) * np.cos(phi) - vph * np.sin(phi)
-        dy = 0.42 * (-vth * np.cos(th0) * np.sin(phi) + vph * np.cos(phi)) \
-            + vth * np.sin(th0)
-        nrm = 0.22 / np.hypot(dx, dy)
-        ax.arrow(px, py, dx * nrm, dy * nrm, color=AMBAR, lw=1.1,
-                 head_width=0.045, length_includes_head=True)
-    ax.set_xlim(-1.15, 1.15)
-    ax.set_ylim(-1.15, 1.25)
+        vth, vph = V[0], np.sin(th0) * V[1]      # componentes ortonormais
+        pv = phi + PHI0
+        e_th = np.array([np.cos(th0) * np.cos(pv), np.cos(th0) * np.sin(pv), -np.sin(th0)])
+        e_ph = np.array([-np.sin(pv), np.cos(pv), 0.0])
+        dX, dY, _ = proj(vth * e_th + vph * e_ph)
+        return np.array([dX, dY])
+
+    def seta(phi, cor, escala, lw, z):
+        X0, Y0, prof = proj(ponto(th0, phi))
+        d = direcao(phi)
+        d = d / np.hypot(*d) * escala
+        ax.annotate("", xy=(X0 + d[0], Y0 + d[1]), xytext=(X0, Y0),
+                    arrowprops=dict(arrowstyle="-|>", color=cor, lw=lw,
+                                    shrinkA=0, shrinkB=0, mutation_scale=9),
+                    zorder=z if prof >= 0 else 3)
+
+    # Poucas setas, e curtas: com onze delas o giro virava ruido visual.
+    for phi in np.linspace(0, 2 * np.pi, 9)[1:-1]:
+        seta(phi, AMBAR, 0.17, 1.0, 5)
+
+    # Partida e chegada NO MESMO ponto -- e' aqui que a holonomia se ve'.
+    seta(0.0, GRAFITE, 0.30, 2.0, 7)
+    seta(2 * np.pi, TERRACOTA, 0.30, 2.0, 7)
+
+    # O angulo entre as duas, como arco entre as direcoes projetadas.
+    X0, Y0, _ = proj(ponto(th0, 0.0))
+    a_ini = np.arctan2(*direcao(0.0)[::-1])
+    a_fim = np.arctan2(*direcao(2 * np.pi)[::-1])
+    d_ang = (a_fim - a_ini + np.pi) % (2 * np.pi) - np.pi     # menor arco
+    t_arc = a_ini + np.linspace(0, d_ang, 60)
+    ax.plot(X0 + 0.17 * np.cos(t_arc), Y0 + 0.17 * np.sin(t_arc),
+            color=TERRACOTA, lw=1.2, zorder=7)
+    m = a_ini + d_ang / 2
+    ax.text(X0 + 0.30 * np.cos(m), Y0 + 0.30 * np.sin(m), r"$\alpha$",
+            color=TERRACOTA, fontsize=11, ha="center", va="center", zorder=7)
+
+    ax.text(0, -1.30, r"o vetor volta girado de $\alpha = 2\pi(1-\cos\theta_0)$",
+            ha="center", fontsize=8.5, color=GRAFITE)
+    ax.set_xlim(-1.2, 1.2)
+    ax.set_ylim(-1.42, 1.2)
     ax.set_aspect("equal")
     ax.axis("off")
     ax.set_title("Transporte ao longo de um paralelo")
