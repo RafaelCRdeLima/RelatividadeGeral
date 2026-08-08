@@ -1164,8 +1164,55 @@ próprio acumulado é
   \tau=\int \sqrt{1-v(t)^2}\,\dd t.
 \]
 Entre dois eventos fixos em espaço-tempo plano, a linha de mundo inercial
-maximiza o tempo próprio. O gêmeo que acelera para retornar percorre uma linha
-de mundo com menor tempo próprio.
+maximiza o tempo próprio. Essa é a afirmação que resolve o paradoxo, e ela não
+precisa ser aceita de boa fé --- a prova é curta.
+
+\begin{resultado}
+\textbf{A linha de mundo inercial é a de maior tempo próprio.} Sejam $A$ e $B$
+dois eventos com separação temporal. Pela leitura operacional da
+Seção~\ref{sec:eventos-intervalo}, existe um referencial inercial em que os
+dois acontecem no \emph{mesmo lugar}; nele, $B$ está diretamente no futuro de
+$A$, separado por um tempo coordenado $T$. Trabalhar nesse referencial não
+custa generalidade nenhuma, porque $\tau$ é invariante: o número que sai é o
+mesmo que qualquer outro observador calcularia.
+
+Uma linha de mundo temporal qualquer ligando $A$ a $B$, parametrizada pelo
+tempo coordenado $t$ desse referencial, acumula, por \eqref{eq:tempo-proprio},
+\[
+  \tau=\int_0^{T}\sqrt{1-v(t)^2}\;\dd t .
+\]
+E acabou, porque o integrando nunca passa de $1$:
+\[
+  \sqrt{1-v^2}\le 1
+  \qquad\Longrightarrow\qquad
+  \tau\le\int_0^T\dd t=T ,
+\]
+com igualdade \emph{se e somente se} $v(t)=0$ em todo instante --- isto é,
+exatamente para a linha de mundo que fica parada nesse referencial, que é a
+reta inercial de $A$ a $B$. Qualquer desvio, por menor que seja, torna o
+integrando estritamente menor que $1$ em algum trecho e reduz $\tau$.
+\end{resultado}
+
+Vale notar o que essa desigualdade tem de estranho. No plano euclidiano, o
+caminho reto entre dois pontos é o mais \emph{curto}, e desviar sempre alonga.
+No espaço-tempo, a linha de mundo reta é a mais \emph{longa} em tempo próprio,
+e desviar sempre encurta: a desigualdade triangular vale invertida. O sinal
+menos de $\dd s^2=-\dd t^2+\dd x^2$ está por trás disso --- o termo espacial
+\emph{subtrai}, então mover-se no espaço custa tempo próprio.
+
+\begin{atencao}
+Isso reenquadra o paradoxo dos gêmeos, e vale mais que a discussão usual sobre
+quem acelerou. O viajante não envelhece menos \emph{por causa} da aceleração:
+ele envelhece menos porque \emph{desviou}, e desviar custa tempo próprio, como
+a conta acima mostra sem mencionar aceleração nenhuma. A aceleração entra
+apenas como aquilo que torna o desvio possível --- é o preço de ir e voltar,
+não a causa do efeito. Tanto assim que a diferença de idades pode ser
+calculada, como acima, sem saber quando ou com que intensidade ele acelerou:
+basta conhecer $v(t)$.
+\end{atencao}
+
+O gêmeo que acelera para retornar percorre, portanto, uma linha de mundo com
+menor tempo próprio.
 
 \begin{figure}[htb]
 \centering
@@ -4181,10 +4228,45 @@ a Seção~\ref{sec:geodesica-christoffel} já havia produzido por outro caminho:
   -\partial_\sigma g_{\mu\nu}\right).
 \]
 Essa \emph{conexão de Levi-Civita} é, portanto, a única compatível com as duas
-exigências --- e a coincidência com o resultado variacional não é acidente: as
-curvas que extremizam o tempo próprio são as mesmas que transportam
-paralelamente o próprio vetor tangente, e é essa igualdade que dá à palavra
-``geodésica'' um sentido só.
+exigências. E a coincidência com o resultado variacional da
+Seção~\ref{sec:geodesica-christoffel} não é acidente --- é um teorema de duas
+linhas, que fecha as duas definições possíveis de ``geodésica'' numa só.
+
+\begin{resultado}
+\textbf{Extremizar o tempo próprio é transportar paralelamente o próprio
+tangente.} Seja $U^\mu=\dd x^\mu/\dd\lambda$ o vetor tangente a uma curva.
+Transportá-lo paralelamente ao longo da própria curva significa
+$\nabla_U U=0$, e essa condição, escrita em componentes, é
+\[
+  U^\mu\nabla_\mu U^\sigma
+  =U^\mu\bigl(\partial_\mu U^\sigma+\Gamma^\sigma{}_{\mu\nu}U^\nu\bigr).
+\]
+O primeiro termo é a derivada de $U^\sigma$ ao longo da curva --- é a regra da
+cadeia lida ao contrário,
+\[
+  U^\mu\partial_\mu U^\sigma
+  =\frac{\dd x^\mu}{\dd\lambda}\frac{\partial U^\sigma}{\partial x^\mu}
+  =\frac{\dd U^\sigma}{\dd\lambda}
+  =\frac{\dd^2x^\sigma}{\dd\lambda^2} .
+\]
+Logo
+\[
+  \nabla_U U=0
+  \qquad\Longleftrightarrow\qquad
+  \frac{\dd^2 x^\sigma}{\dd\lambda^2}
+  +\Gamma^\sigma{}_{\mu\nu}
+   \frac{\dd x^\mu}{\dd\lambda}\frac{\dd x^\nu}{\dd\lambda}=0 ,
+\]
+que é, letra por letra, a equação geodésica \eqref{eq:geodesica} obtida lá
+atrás extremizando $\int\dd\tau$.
+\end{resultado}
+
+As duas maneiras de dizer ``a partícula vai reto'' --- \emph{ela não muda de
+direção} e \emph{ela leva o maior tempo próprio possível} --- descrevem a mesma
+curva. A primeira é local e se escreve com a conexão; a segunda é global e se
+escreve com uma integral. Que coincidam é uma propriedade da conexão de
+Levi-Civita, não uma obviedade: se a conexão tivesse torção, ou não fosse
+compatível com a métrica, as duas famílias de curvas se separariam.
 
 \section{Curvatura}
 
