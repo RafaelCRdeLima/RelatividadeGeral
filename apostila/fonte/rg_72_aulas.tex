@@ -2830,11 +2830,27 @@ com $\bm E\cdot\bm B\ne0$, procure numericamente o boost que torna $\bm E$
 paralelo a $\bm B$. Mostre que ele existe sempre que o segundo invariante é
 não nulo, e que não existe para uma onda plana.
 
-  \item \textbf{Base oblíqua em Minkowski.} Adapte a figura de base oblíqua de
-\arq{cap04\_figuras.py} para eixos de Minkowski inclinados (um boost com
-$v=0{,}5$) e desenhe as duas decomposições de um quadrivetor. Mostre que,
-diferentemente do caso euclidiano, a componente covariante temporal troca de
-sinal em relação à contravariante, e explique de onde vem esse sinal.
+  \item \textbf{Uma base genuinamente oblíqua em Minkowski.} Comece por uma
+armadilha: adapte a figura de \arq{cap04\_figuras.py} para os eixos $t'$ e
+$x'$ de um boost com $v=0{,}5$ e calcule a métrica \emph{nessa} base,
+$g_{\mu'\nu'}=\bm e_{\mu'}\cdot\bm e_{\nu'}$. Você vai obter exatamente
+$\eta_{\mu\nu}$ --- os eixos de $S'$ parecem oblíquos no papel, mas são
+\emph{ortonormais} em Minkowski. A inclinação é artefato de desenhar uma
+geometria de Minkowski numa folha euclidiana, e não obliquidade de verdade:
+um boost leva base ortonormal em base ortonormal.
+
+  Para obter obliquidade real, troque para as coordenadas de \emph{cone de
+luz}, $u=t-x$ e $w=t+x$. Mostre que agora
+\[
+  g=\begin{pmatrix}0&-2\\-2&0\end{pmatrix},
+\]
+com a diagonal \emph{nula}: os dois vetores de base são vetores nulos, cada
+um ortogonal a si mesmo --- exatamente a esquisitice que a
+Seção~\ref{sec:produto-escalar} anunciou e que nenhuma base euclidiana pode
+exibir. Desenhe as duas decomposições de um quadrivetor nessa base, obtenha
+$V_u$ e $V_w$ a partir de $V^u$ e $V^w$, e explique por que aqui subir e
+descer índices \emph{troca as componentes de lugar} em vez de apenas trocar
+um sinal.
 
   \item \textbf{Quando a base quase degenera.} Em \arq{cap04\_tensores.py}, faça
 o ângulo entre $\bm e_1$ e $\bm e_2$ tender a zero e acompanhe o número de
