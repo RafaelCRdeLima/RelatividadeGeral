@@ -373,11 +373,11 @@ Aula & Foco & Seções & Conteúdo \\
 11 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
 12 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
 13 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
-14 & Um-formas e contrações & 3.1 & Tensores no espaço-tempo plano: Vetores, um-formas e contrações. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
-15 & Métrica e índices & 3.2, 3.6 & Tensores no espaço-tempo plano: Métrica; A métrica como instrumento de medida. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
-16 & Equações tensoriais e mudança de base & 3.3, 3.4, 3.5 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Mudança de base e transformação de componentes. \\
-17 & Erros comuns e prática & 3.7, 3.8, 3.9 & Tensores no espaço-tempo plano: Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
-18 & Oficina computacional III & 3.10, 3.11, 3.12 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
+14 & Por que existem um-formas & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; tensores de tipo $(r,s)$. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+15 & A métrica como ponte & 3.3 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+16 & Equações tensoriais e bases oblíquas & 3.4, 3.5, 3.6 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Componentes em uma base oblíqua. \\
+17 & Derivar tensores, e prática & 3.7, 3.8, 3.9, 3.10 & Tensores no espaço-tempo plano: Derivada de um tensor (e por que ela deixa de funcionar em espaço curvo); Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
+18 & Oficina computacional III & 3.11, 3.12, 3.13 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
 19 & Poeira, fluxo e um-formas & 4.1, 4.2, 4.3, 4.4, 4.5 & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
 20 & Tensor energia-momento e fluido perfeito & 4.6, 4.7, 4.8, 4.9, 4.10 & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
 21 & Euler relativística e fechamento & 4.11, 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados; Exercícios. \\
@@ -1561,6 +1561,7 @@ Determine a posição limite e interprete-a como um horizonte.
 
 
 \chapter{Vetores e momento relativístico}
+\label{chap:vetores}
 
 \begin{objetivos}
 Construir a linguagem de quadrivetores e usá-la para resolver problemas de
@@ -2230,16 +2231,57 @@ Dominar a notação de índices, distinguir vetores de um-formas e compreender a
 métrica como o objeto que transforma uma coisa na outra.
 \end{objetivos}
 
-\section{Vetores, um-formas e contrações}
+\section{Um-formas: por que elas existem}
+\label{sec:umaformas}
 
-Um vetor $V$ age como derivada direcional; uma um-forma $\omega$ age sobre
-vetores e retorna escalares. Em componentes,
+O Capítulo~\ref{chap:vetores} tratou $A_\mu=\eta_{\mu\nu}A^\nu$ como uma
+abreviação cômoda, e prometeu que o objeto do lado esquerdo tem vida própria.
+Esta seção cumpre a promessa --- e o melhor caminho não é definir a um-forma e
+depois procurar exemplos, mas mostrar que você já usa uma há anos sem saber.
+
+\textbf{O gradiente não é um vetor.} Seja $f(x^\mu)$ um campo escalar --- a
+temperatura ao longo do espaço-tempo, digamos. Suas derivadas parciais
+$\partial_\mu f\equiv\partial f/\partial x^\mu$ formam quatro números, e a
+tentação é chamá-los de ``o vetor gradiente''. Mas quatro números só são um
+vetor se transformarem como \eqref{eq:lorentz-matriz}, e estes não
+transformam. Pela regra da cadeia,
+\begin{equation}
+  \frac{\partial f}{\partial x^{\mu'}}
+  =\frac{\partial x^\nu}{\partial x^{\mu'}}\,\frac{\partial f}{\partial x^\nu},
+  \label{eq:gradiente-transforma}
+\end{equation}
+enquanto as componentes de um vetor transformam com $\Lambda^{\mu'}{}_\nu$.
+As duas matrizes em jogo, $\partial x^\nu/\partial x^{\mu'}$ e
+$\Lambda^{\mu'}{}_\nu$, são \emph{inversas} uma da outra --- não iguais. O
+gradiente se transforma com a matriz errada para ser um vetor.
+
+\begin{resultado}
+Existem, portanto, dois tipos de objeto de quatro componentes no espaço-tempo,
+distinguidos por como mudam de base: os que transformam com $\Lambda$
+(\emph{vetores}, índice em cima) e os que transformam com $\Lambda^{-1}$
+(\emph{um-formas}, índice embaixo). O gradiente $\partial_\mu f$ é o exemplo
+mais natural de uma um-forma, e é anterior a qualquer métrica.
+\end{resultado}
+
+\textbf{E é por isso que a contração funciona.} Aplicar uma um-forma a um
+vetor,
 \[
-  \omega(V)=\omega_\mu V^\mu.
+  \omega(V)=\omega_\mu V^\mu ,
 \]
-Um tensor de tipo $(r,s)$ é multilinear: recebe $s$ vetores e $r$ um-formas, e
-retorna um número. Em física, componentes tensoriais são úteis porque suas
-transformações preservam a forma das equações.
+produz um número igual em todas as bases: as duas matrizes se cancelam,
+$\Lambda^{-1}\Lambda=\mathbb{1}$. Nenhuma métrica foi usada --- este é o ponto
+que o Exercício~3 desta lista explora. A contração de um índice em cima com um
+índice embaixo é a única operação que produz invariantes de graça, e é por
+isso que a notação insiste tanto na posição dos índices.
+
+\begin{atencao}
+Note a diferença de estatuto entre esta seção e o
+Capítulo~\ref{chap:vetores}. Lá, $A_\mu$ foi \emph{fabricada} a partir de
+$A^\mu$ usando a métrica. Aqui, $\partial_\mu f$ já nasce um-forma, sem que
+nenhuma métrica tenha sido invocada. Um-formas existem em variedades que não
+têm métrica nenhuma; o que a métrica faz --- e é o assunto da
+Seção~\ref{sec:metrica-ponte} --- é permitir traduzir umas nas outras.
+\end{atencao}
 
 Vale ter uma imagem geométrica de por que vetores e um-formas são objetos
 diferentes, e não apenas ``vetores com índice em cima ou embaixo''. Um vetor
@@ -2251,6 +2293,14 @@ Superfícies mais próximas entre si representam uma um-forma ``mais forte''
 (maior magnitude); a orientação das superfícies codifica a direção da
 um-forma.
 
+E as superfícies não são uma analogia escolhida a dedo: para
+$\omega=\partial_\mu f$, elas são \emph{literalmente} as superfícies de nível
+de $f$. Uma um-forma forte é um campo que varia rápido, com as superfícies de
+nível apertadas --- exatamente o que um mapa topográfico desenha com curvas de
+nível próximas onde a encosta é íngreme. O gradiente aponta ladeira acima
+porque as curvas de nível estão ali; a um-forma \emph{é} o conjunto de curvas,
+não a seta.
+
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.6\textwidth]{cap04_umaforma_pilha.pdf}
@@ -2258,31 +2308,132 @@ um-forma.
 (superfícies de nível de $\varphi=2x+y$, espaçadas de $\Delta\varphi=1$). O
 vetor $V=(3,4)$ vai de $\varphi=0$ a $\varphi=10$, perfurando exatamente $10$
 retas -- por isso $\omega(V)=10$. Esses são os mesmos $\omega$ e $V$ do
-Exemplo~\ref{ex:umaforma-contracao}, adiante.}
+Exemplo~\ref{ex:umaforma-contracao}.}
 \label{fig:umaforma-pilha}
 \end{figure}
+
+\begin{example}\label{ex:umaforma-contracao}
+Em duas dimensões euclidianas, seja $\omega=(2,1)$ e $V=(3,4)$ em uma base
+cartesiana. A contração é $\omega(V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma
+base rotacionada, as componentes individuais mudam --- as de $\omega$ com uma
+matriz, as de $V$ com a inversa --- mas o número obtido pela ação da um-forma
+sobre o vetor permanece o mesmo: é o mesmo número de superfícies perfuradas na
+Figura~\ref{fig:umaforma-pilha}, agora contado em coordenadas diferentes.
+Perfurar superfícies é um fato geométrico, e não depende de quem conta.
+\end{example}
 
 Para uma caixa de ferramentas prática sobre manipulação de índices, deltas,
 símbolos antissimétricos e contrações, consulte o Apêndice~\ref{ap:indices}.
 Ele foi escrito para ser usado como apoio de cálculo enquanto este capítulo é
 estudado.
 
-\section{Métrica}
+\section{Tensores de tipo $(r,s)$}
+\label{sec:tipos-tensor}
 
-No espaço-tempo de Minkowski,
+Vetores e um-formas são os dois primeiros casos de uma mesma construção. Um
+\emph{tensor de tipo $(r,s)$} é uma máquina linear em cada entrada que recebe
+$r$ um-formas e $s$ vetores e devolve um número. Suas componentes carregam $r$
+índices em cima e $s$ embaixo, e cada um deles transforma com a matriz que lhe
+cabe --- $\Lambda$ para os de cima, $\Lambda^{-1}$ para os de baixo:
 \[
-  \eta_{\mu\nu}=\mathrm{diag}(-1,1,1,1).
+  T^{\mu'\nu'}{}_{\rho'}
+  =\Lambda^{\mu'}{}_{\alpha}\,\Lambda^{\nu'}{}_{\beta}\,
+   \frac{\partial x^\gamma}{\partial x^{\rho'}}\;T^{\alpha\beta}{}_{\gamma}.
 \]
-A métrica define o produto escalar
+\emph{É essa lei, e apenas ela, que define um tensor.} Um arranjo de números
+com índices que não obedeça a ela não é tensor, por mais que se pareça com um
+--- e o exemplo mais importante disso aparecerá no
+Capítulo~\ref{cap:curvatura}, quando os símbolos de Christoffel
+$\Gamma^\mu{}_{\nu\rho}$, apesar dos três índices, não forem tensores.
+
+Nessa escala, os casos já vistos são:
+\begin{center}
+\small
+\begin{tabular}{llp{6.6cm}}
+\toprule
+Tipo & Componentes & Exemplo \\
+\midrule
+$(0,0)$ & $\phi$ & escalar: massa de repouso, tempo próprio \\
+$(1,0)$ & $V^\mu$ & vetor: quadrivelocidade, quadrimomento \\
+$(0,1)$ & $\omega_\mu$ & um-forma: gradiente $\partial_\mu f$ \\
+$(0,2)$ & $g_{\mu\nu}$ & métrica; tensor eletromagnético $F_{\mu\nu}$ \\
+$(2,0)$ & $T^{\mu\nu}$ & tensor de energia-momento (Capítulo~\ref{cap:fluidos}) \\
+$(1,1)$ & $T^\mu{}_\nu$ & qualquer aplicação linear de vetores em vetores \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Duas operações produzem tensores a partir de tensores. O \emph{produto
+tensorial} justapõe: de $A^\mu$ e $B^\nu$ sai o tensor $(2,0)$ de componentes
+$A^\mu B^\nu$. A \emph{contração} soma um índice de cima com um de baixo e
+baixa o tipo em $(1,1)$: de $T^{\mu}{}_{\nu}$ sai o escalar $T^\mu{}_\mu$, o
+\emph{traço}. Que o traço seja de fato um escalar não é óbvio e vale a conta
+--- é o item~\ref{item-traco-invariante} dos Problemas orientados.
+
+\section{A métrica como ponte}
+\label{sec:metrica-ponte}
+
+A Seção~\ref{sec:produto-escalar} já apresentou $\eta_{\mu\nu}$ como a tabela
+de sinais do produto escalar, e $A_\mu=\eta_{\mu\nu}A^\nu$ como abreviação.
+Com a Seção~\ref{sec:umaformas} em mãos, essa abreviação ganha o seu
+significado: \emph{$A_\mu$ é a um-forma que a métrica associa ao vetor
+$A^\mu$}. Concretamente, é a um-forma que, aplicada a um vetor $W$ qualquer,
+devolve o produto escalar:
 \[
-  A\cdot B=\eta_{\mu\nu}A^\mu B^\nu
+  A_\mu W^\mu=\bm A\cdot\bm W .
 \]
-e permite baixar índices:
+Dado $\bm A$, esse requisito determina $A_\mu$ sem ambiguidade --- e o
+resultado é a fórmula que já usávamos.
+
+\textbf{O caminho de volta.} Se a métrica traduz vetores em um-formas, a
+tradução inversa precisa existir, e para isso serve a \emph{métrica inversa}
+$\eta^{\mu\nu}$, definida por
+\begin{equation}
+  \eta^{\mu\alpha}\eta_{\alpha\nu}=\delta^\mu{}_\nu ,
+  \label{eq:metrica-inversa}
+\end{equation}
+onde $\delta^\mu{}_\nu$ vale $1$ se $\mu=\nu$ e $0$ caso contrário. Em
+coordenadas de Minkowski a conta é imediata, porque a matriz é diagonal e cada
+entrada é o seu próprio inverso:
 \[
-  A_\mu=\eta_{\mu\nu}A^\nu.
+  \eta^{\mu\nu}=\mathrm{diag}(-1,1,1,1),
 \]
-Com a convenção $(-,+,+,+)$, se $A^\mu=(A^0,A^1,A^2,A^3)$, então
-temos $A_\mu=(-A^0,A^1,A^2,A^3)$.
+numericamente igual a $\eta_{\mu\nu}$. \emph{Isso é uma coincidência da
+assinatura e das coordenadas, não uma regra}: já no Capítulo~\ref{cap:schwarzschild},
+com $g_{\mu\nu}$ dependendo da posição, $g^{\mu\nu}$ será uma matriz
+diferente, obtida invertendo a primeira de fato.
+
+Com ela, sobem-se índices:
+\begin{equation}
+  A^\mu=\eta^{\mu\nu}A_\nu ,
+  \qquad
+  T^{\mu}{}_{\nu}=\eta^{\mu\alpha}T_{\alpha\nu},
+  \qquad
+  F^{\mu\nu}=\eta^{\mu\alpha}\eta^{\nu\beta}F_{\alpha\beta},
+  \label{eq:subir-indice}
+\end{equation}
+um fator de métrica por índice movido. Em Minkowski, o efeito prático é
+apenas trocar o sinal de cada índice temporal levantado ou abaixado: se
+$A^\mu=(A^0,A^1,A^2,A^3)$, então $A_\mu=(-A^0,A^1,A^2,A^3)$.
+
+\begin{atencao}
+Subir e descer índices é reversível e não perde informação --- $A^\mu$ e
+$A_\mu$ carregam os mesmos fatos. Por isso é tentador tratá-los como o mesmo
+objeto escrito de dois jeitos, e em Minkowski isso raramente causa dano. Duas
+razões para não pegar o hábito. Primeiro, a tradução \emph{depende da
+métrica}: mude a métrica e $A_\mu$ muda, embora $A^\mu$ não. Segundo, a
+um-forma mais importante da física --- o gradiente --- não veio de vetor
+nenhum; ela já nasceu com o índice embaixo, e subi-lo é que é a operação
+artificial.
+\end{atencao}
+
+\begin{activity}
+Verifique \eqref{eq:metrica-inversa} multiplicando as duas matrizes em
+Minkowski. Em seguida tome $g_{\mu\nu}=\mathrm{diag}(-1,1,r^2,r^2\sin^2\theta)$
+(que é a métrica de Minkowski em coordenadas esféricas) e escreva
+$g^{\mu\nu}$. Note que agora ela \emph{não} é numericamente igual a
+$g_{\mu\nu}$ --- e que continua sendo a inversa.
+\end{activity}
 
 \section{Regra prática de índices}
 
@@ -2328,50 +2479,10 @@ vetores permanece. Em contraste, uma expressão como $A^\mu=B_\mu$ não é uma
 igualdade tensorial natural sem uma métrica especificada, pois os dois lados
 têm tipos diferentes.
 
-\section{Mudança de base e transformação de componentes}
+\section{Componentes em uma base oblíqua}
 
-Considere uma mudança linear de coordenadas
-\[
-  x^{\mu'}=\Lambda^{\mu'}{}_\nu x^\nu.
-\]
-As componentes de um vetor transformam como
-\[
-  V^{\mu'}=\Lambda^{\mu'}{}_\nu V^\nu.
-\]
-As componentes de uma um-forma transformam com a matriz inversa:
-\[
-  \omega_{\mu'}=\frac{\partial x^\nu}{\partial x^{\mu'}}\omega_\nu.
-\]
-Essa diferença é exatamente o que torna a contração $\omega_\mu V^\mu$
-invariante. A contração é a operação que junta um índice covariante e um
-contravariante, eliminando a dependência da base.
-
-\begin{example}\label{ex:umaforma-contracao}
-Em duas dimensões euclidianas, seja $\omega=(2,1)$ e $V=(3,4)$ em uma base
-cartesiana. A contração é $\omega(V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma
-base rotacionada, as componentes individuais mudam, mas o número obtido pela
-ação da um-forma sobre o vetor permanece o mesmo -- é o mesmo número de
-superfícies perfuradas na Figura~\ref{fig:umaforma-pilha}, agora contado em
-coordenadas diferentes.
-\end{example}
-
-\section{A métrica como instrumento de medida}
-
-A métrica tem duas funções simultâneas. Primeiro, ela mede produtos escalares e
-normas. Segundo, ela fornece uma identificação entre vetores e um-formas. Essa
-identificação não é automática em uma variedade; ela é informação geométrica
-adicional. Em relatividade geral, quando a métrica passa a depender da posição,
-essa informação geométrica torna-se dinâmica.
-
-Em notação de índices, baixar um índice parece uma operação simples:
-\[
-  V_\mu=g_{\mu\nu}V^\nu.
-\]
-Mas o significado é físico. O objeto $V_\mu$ é a um-forma que, ao agir sobre
-um vetor $W^\mu$, retorna o produto escalar $V\cdot W$. Essa leitura evita a
-ideia equivocada de que índices altos e baixos são meras posições tipográficas.
-
-Em uma base ortonormal essa distinção passa despercebida, porque
+Em uma base ortonormal a distinção entre $V^\mu$ e $V_\mu$ passa despercebida,
+porque
 $V^\mu=V_\mu$ a menos de sinais. Ela fica visível em uma base oblíqua (não
 ortogonal), como a que aparece naturalmente em coordenadas curvilíneas ou em
 diagramas de Minkowski com eixos inclinados (Figura~\ref{fig:simultaneidade}
@@ -2399,6 +2510,42 @@ $e_1=(1,0)$, $e_2=(0{,}4,1)$ e $V=(1{,}3,0{,}9)$: $V^1=0{,}94$,
 $V^2=0{,}9$, mas $V_1=1{,}3$, $V_2=1{,}42$.}
 \label{fig:base-obliqua}
 \end{figure}
+
+\section{Derivada de um tensor}
+\label{sec:derivada-tensor}
+
+Falta uma operação, e é a que abre o resto do curso: derivar.
+
+Em coordenadas de Minkowski a resposta é a mais simples possível. Derivar as
+componentes de um tensor acrescenta um índice \emph{embaixo} e produz outro
+tensor:
+\[
+  \partial_\alpha T^{\mu\nu}
+  \quad\text{é um tensor de tipo }(2,1).
+\]
+A razão é a mesma que fez do gradiente uma um-forma --- $\partial_\alpha$
+transforma com $\partial x^\beta/\partial x^{\alpha'}$ --- combinada com o
+fato de que os coeficientes $\Lambda$ são \emph{constantes} numa
+transformação de Lorentz, e portanto passam intactos pela derivada:
+\[
+  \partial_{\alpha'}T^{\mu'\nu'}
+  =\frac{\partial x^\beta}{\partial x^{\alpha'}}\,
+   \Lambda^{\mu'}{}_{\rho}\Lambda^{\nu'}{}_{\sigma}\,
+   \partial_\beta T^{\rho\sigma} .
+\]
+Cada índice recebeu o seu fator, que é exatamente a lei de transformação de um
+tensor $(2,1)$.
+
+\begin{atencao}
+Guarde a frase ``os coeficientes são constantes'', porque é ela que vai
+falhar. Em coordenadas curvilíneas --- e, mais tarde, em espaço-tempo curvo,
+onde \emph{nenhuma} escolha de coordenadas as torna constantes em toda parte
+--- a matriz de transformação varia de ponto a ponto, e derivá-la produz
+termos extras. Aí $\partial_\alpha T^{\mu\nu}$ \emph{deixa de ser um tensor},
+e é preciso corrigi-lo: essa correção é a derivada covariante, e os termos
+extras são os símbolos de Christoffel. Todo o Capítulo~\ref{cap:curvatura}
+sai daí. Por ora, aproveite a simplicidade --- ela é a última.
+\end{atencao}
 
 \section{Erros comuns com índices}
 
@@ -2432,9 +2579,17 @@ no início do curso.
   transformação de um tensor misto $T^\mu{}_\nu$ para mostrar que
   $T^\mu{}_\mu$ não depende da base.
 
-  \item \textbf{Gradiente.} Seja $f=t^2-x^2$. Calcule $\partial_\mu f$ e
-  depois eleve o índice com a métrica de Minkowski. Interprete por que o sinal
-  da componente temporal muda.
+  \item \textbf{Gradiente de um invariante.} Seja $f=-t^2+x^2+y^2+z^2$, o
+  intervalo até a origem. (a) Calcule a um-forma $\partial_\mu f$ e depois
+  $\partial^\mu f$ com \eqref{eq:subir-indice}; explique por que o sinal da
+  componente temporal muda. (b) Mostre que $\partial^\mu f$ é ortogonal às
+  superfícies $f=\text{const}$, no sentido de que
+  $\partial_\mu f\,V^\mu=0$ para todo $V$ tangente a uma delas. (c) Sobre o
+  cone de luz $f=0$, mostre que $\partial^\mu f$ é ele próprio um vetor
+  \emph{nulo} --- de modo que ali ``a normal está contida na superfície'',
+  coisa que nenhuma superfície euclidiana faz. Essa esquisitice é o que
+  caracteriza um horizonte, e reaparece no
+  Capítulo~\ref{cap:schwarzschild}.
 
   \item \textbf{Produto externo.} Dados dois vetores $A^\mu$ e $B^\nu$,
   construa $A^\mu B^\nu$. Separe sua parte simétrica e antissimétrica.

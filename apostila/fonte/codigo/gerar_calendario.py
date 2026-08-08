@@ -48,11 +48,11 @@ AULAS = {
     11: (VET, ["Centro de momento", "Partículas massivas e partículas sem massa"]),
     12: (VET, [EXA, POR]),
     13: (VET, [NUM, EXE, EXT]),
-    14: (TEN, ["Vetores, um-formas e contrações"]),
-    15: (TEN, ["Métrica", "A métrica como instrumento de medida"]),
+    14: (TEN, ["Um-formas: por que elas existem", "Tensores de tipo $(r,s)$"]),
+    15: (TEN, ["A métrica como ponte"]),
     16: (TEN, ["Regra prática de índices", "O que significa uma equação tensorial",
-               "Mudança de base e transformação de componentes"]),
-    17: (TEN, ["Erros comuns com índices", EXA, POR]),
+               "Componentes em uma base oblíqua"]),
+    17: (TEN, ["Derivada de um tensor", "Erros comuns com índices", EXA, POR]),
     18: (TEN, [NUM, EXE, EXT]),
     #  O capítulo 4 foi ampliado e hoje tem 14 seções de conteúdo para três
     #  encontros. A distribuição abaixo é coerente, mas apertada: a alocação
