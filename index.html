@@ -26,6 +26,7 @@
       <nav aria-label="Navegação principal">
         <a href="#apostila">Apostila</a>
         <a href="codigos/">Notebooks e programas</a>
+        <a href="#oderom">ODEROM</a>
         <a href="#dashboards">Dashboards</a>
         <a href="https://github.com/RafaelCRdeLima/RelatividadeGeral">GitHub</a>
       </nav>
@@ -157,6 +158,50 @@
             <span>Jupyter</span><span>Colab</span><span>SymPy</span><span>NumPy</span><span>SciPy</span><span>Matplotlib</span>
           </div>
         </div>
+      </section>
+
+      <section class="section dashboards-section" id="oderom">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Álgebra tensorial</p>
+            <h2>ODEROM</h2>
+          </div>
+          <p>
+            Escreva uma métrica e peça a curvatura. O ODEROM calcula
+            símbolos de Christoffel, Riemann, Ricci, escalar de curvatura e
+            Kretschmann de forma exata — sem aproximação numérica.
+          </p>
+        </div>
+
+        <article class="dashboard-card">
+          <div class="dashboard-preview" aria-hidden="true">
+            <div class="preview-top"><span>g<sub>μν</sub></span><i></i><span>K</span></div>
+            <div class="tensor-preview-stage">
+              <span class="tensor-object vector-object">R<sup>ρ</sup><sub>σμν</sub><small>Riemann</small></span>
+              <b>→</b>
+              <span class="tensor-object covector-object">R<sub>μν</sub><small>Ricci</small></span>
+              <b>→</b>
+              <span class="tensor-scalar">R</span>
+              <div class="tensor-metric">K = 48M²/r⁶ &nbsp;(Schwarzschild)</div>
+            </div>
+            <div class="preview-footer"><span>exato</span><span>no navegador</span><span>sem instalar</span></div>
+          </div>
+          <div class="dashboard-info">
+            <div class="tags"><span>Capítulos 6–8</span><span>Sem instalação</span><span>Cálculo exato</span></div>
+            <h3>Curvatura calculada no seu próprio navegador</h3>
+            <p>
+              O caderno abre com Reissner–Nordström pronto e nada executado.
+              Shift+Enter roda um bloco. A galeria traz Schwarzschild, FRW e
+              de Sitter; para uma métrica sua, basta escrevê-la.
+            </p>
+            <ul>
+              <li>roda na sua máquina, compilado para WebAssembly;</li>
+              <li>nada é enviado para servidor nenhum;</li>
+              <li>funciona onde não se pode instalar programas.</li>
+            </ul>
+            <a class="button button-primary" href="https://rafaelcrdelima.github.io/ODEROM/">Abrir o ODEROM ↗</a>
+          </div>
+        </article>
       </section>
 
       <section class="section dashboards-section" id="dashboards">
