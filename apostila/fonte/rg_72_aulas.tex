@@ -381,10 +381,10 @@ Aula & Foco & Seções & Conteúdo \\
 19 & Poeira, fluxo e um-formas & 4.1, 4.2, 4.3, 4.4, 4.5 & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
 20 & Tensor energia-momento e fluido perfeito & 4.6, 4.7, 4.8, 4.9, 4.10 & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
 21 & Euler relativística e fechamento & 4.11, 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados; Exercícios. \\
-22 & Equivalência e marés & 5.1, 5.7 & Da gravidade à curvatura: O princípio da equivalência; Marés como sinal de curvatura. \\
-23 & Coordenadas curvilíneas & 5.2, 5.5 & Da gravidade à curvatura: Coordenadas curvilíneas; Christoffel não é força. \\
-24 & Bases não coordenadas & 5.3 & Da gravidade à curvatura: Bases coordenadas e bases não coordenadas. \\
-25 & Geodésicas e princípio variacional & 5.4, 5.6, 5.8, 5.9, 5.10 & Da gravidade à curvatura: Equação geodésica; Derivação por princípio variacional; Problemas orientados; Exercícios. \\
+22 & Por que o espaço-tempo não é plano & 5.1 & Da gravidade à curvatura: O princípio da equivalência, e o argumento do redshift na torre --- se o quadrilátero não fecha, a geometria não é a de Minkowski. \\
+23 & Coordenadas curvilíneas e bases & 5.2, 5.3 & Da gravidade à curvatura: Coordenadas curvilíneas; bases coordenadas contra bases ortonormais, e por que as fórmulas do cálculo vetorial parecem diferentes. \\
+24 & Geodésicas e Christoffel & 5.4 & Da gravidade à curvatura: dedução da equação geodésica por princípio variacional, de onde sai a fórmula dos símbolos de Christoffel. \\
+25 & Christoffel não é força & 5.5, 5.6, 5.7, 5.8, 5.9 & Da gravidade à curvatura: Christoffel não é força; Marés como sinal de curvatura; Problemas orientados; Exercícios. \\
 26 & Variedades e derivada covariante & 6.1, 6.2 & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
 27 & Compatibilidade métrica & 6.4, 6.8 & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
 28 & Riemann e suas simetrias & 6.3, 6.5 & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
@@ -3669,6 +3669,7 @@ mas manifestação da geometria do espaço-tempo.
 \end{objetivos}
 
 \section{O princípio da equivalência}
+\label{sec:equivalencia}
 
 Localmente, um campo gravitacional uniforme pode ser eliminado pela escolha de
 um referencial em queda livre. Essa afirmação não diz que a gravidade desaparece
@@ -3680,7 +3681,82 @@ O conteúdo físico da curvatura está nos efeitos de maré. A conexão pode ser
 zerada em um ponto por uma escolha de coordenadas; o tensor de curvatura não.
 \end{resultado}
 
+\subsection*{Por que o espaço-tempo não pode ser plano}
+
+O princípio da equivalência faz mais do que permitir simplificar contas: ele
+\emph{obriga} a geometria a ser curva. O argumento é de Schutz
+(Seção~5.1 do livro) e cabe em uma figura --- vale a pena, porque é ele que
+justifica todo o resto do curso.
+
+\textbf{O ingrediente.} Considere uma torre estática de altura $h$ na
+superfície da Terra, onde a aceleração da gravidade é $g$. Um átomo na base
+emite luz de frequência $\nu$, que é recebida no topo com frequência $\nu'$
+menor: a luz \emph{perde} energia ao subir. Para $gh\ll c^2$,
+\begin{equation}
+  \frac{\nu'}{\nu}=1-\frac{gh}{c^2} .
+  \label{eq:redshift-torre}
+\end{equation}
+Isso não é especulação --- é o experimento de Pound e Rebka (1959), feito numa
+torre de $22{,}5$~m em Harvard, onde $gh/c^2\approx2{,}5\times10^{-15}$, e
+medido com essa precisão. E \eqref{eq:redshift-torre} sai do próprio princípio
+da equivalência: no referencial em queda livre não há gravidade nenhuma, mas o
+topo da torre está subindo em relação a ele, e a luz que chega lá sofre Doppler
+comum, com a velocidade que o topo adquiriu no tempo $h/c$ de voo.
+
+\textbf{O argumento.} Agora desenhe o diagrama de espaço-tempo do experimento
+(Figura~\ref{fig:torre}), com o tempo na vertical e a altura na horizontal.
+As linhas de mundo da base e do topo são duas retas verticais: a torre não se
+move. Emita da base \emph{duas} cristas de onda sucessivas, separadas por
+$\Delta t_{\text{base}}=1/\nu$. Cada uma sobe e é recebida no topo; as duas
+recepções ficam separadas por $\Delta t_{\text{topo}}=1/\nu'$. As quatro linhas
+--- duas verticais e duas de luz --- fecham um quadrilátero.
+
+Suponha, por absurdo, que a geometria fosse a de Minkowski. Nada nesse
+experimento depende de \emph{quando} ele é feito: a torre é estática e o campo
+é o mesmo a toda hora. Então a linha de mundo da segunda crista é
+simplesmente a da primeira \emph{transladada no tempo} --- as duas são
+congruentes. Mas uma translação no tempo preserva intervalos de tempo, e
+portanto os dois lados verticais do quadrilátero teriam de ser iguais:
+\[
+  \Delta t_{\text{topo}}=\Delta t_{\text{base}} .
+\]
+
+E não são. Por \eqref{eq:redshift-torre}, $\nu'<\nu$, logo
+$\Delta t_{\text{topo}}>\Delta t_{\text{base}}$: o quadrilátero \emph{não
+fecha}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.58\textwidth]{cap05_torre_redshift.pdf}
+\caption{O experimento da torre em um diagrama de espaço-tempo. As duas
+verticais são as linhas de mundo da base e do topo; as duas curvas são
+cristas de onda sucessivas subindo. Se a geometria fosse a de Minkowski, a
+segunda crista seria a primeira apenas transladada no tempo, e os dois lados
+verticais teriam de medir o mesmo. O redshift diz que o de cima é maior. O
+efeito está \emph{muito} exagerado no desenho: numa torre de laboratório ele
+é de uma parte em $10^{15}$.}
+\label{fig:torre}
+\end{figure} Em Minkowski, dois lados construídos assim são forçosamente iguais; a
+natureza diz que não são.
+
+\begin{resultado}
+A conclusão é inescapável: se o redshift gravitacional existe --- e ele foi
+medido ---, então a geometria do espaço-tempo \textbf{não} é a de Minkowski.
+Não se trata de escolher coordenadas ruins: nenhuma escolha de coordenadas
+muda se dois lados de um quadrilátero são iguais.
+\end{resultado}
+
+\begin{atencao}
+Note o que o argumento \emph{não} usa: nenhuma equação de campo, nenhum tensor
+de curvatura, nem sequer a expressão de $\Gamma$. Ele usa apenas o princípio da
+equivalência, um experimento de mesa e a geometria de um quadrilátero. É por
+isso que vale antes de qualquer maquinaria --- e é por isso que a curvatura,
+quando aparecer, não será uma hipótese elegante, e sim a única saída
+disponível.
+\end{atencao}
+
 \section{Coordenadas curvilíneas}
+\label{sec:coordenadas-curvilineas}
 
 Mesmo no plano euclidiano, coordenadas polares produzem símbolos de Christoffel
 não nulos. Com
@@ -3692,8 +3768,11 @@ os símbolos não nulos são
   \Gamma^r_{\phi\phi}=-r,\qquad
   \Gamma^\phi_{r\phi}=\Gamma^\phi_{\phi r}=\frac{1}{r}.
 \]
-Isso ensina uma lição importante: Christoffel não nulo não significa curvatura
-não nula. Ele pode ser apenas efeito de coordenadas.
+(A Seção~\ref{sec:geodesica-christoffel} deduz a fórmula que os produz; a
+Atividade de lá refaz esta conta em três linhas.) Isso ensina uma lição
+importante: Christoffel não nulo não significa curvatura não nula. Ele pode
+ser apenas efeito de coordenadas --- aqui, o plano euclidiano de sempre, visto
+por coordenadas que giram.
 
 \section{Bases coordenadas e bases não coordenadas}
 \label{sec:bases-nao-coordenadas}
@@ -3773,17 +3852,127 @@ entre $V^{\hat\phi}$ e $V^\phi$. Onde essa relação degenera, e o que isso diz
 sobre a base coordenada nos polos?
 \end{activity}
 
-\section{Equação geodésica}
+\section{Geodésicas e os símbolos de Christoffel}
+\label{sec:geodesica-christoffel}
 
-Uma geodésica satisfaz
+Uma partícula livre, no espaço plano, anda em linha reta --- e ``reta'' quer
+dizer que ela não muda de direção. Numa geometria qualquer, a generalização se
+chama \emph{geodésica}, e este é o capítulo em que ela e a conexão aparecem
+juntas, pela melhor razão possível: uma produz a outra.
+
+O caminho mais curto até as duas é o princípio variacional. Entre dois
+eventos, a partícula livre extremiza o tempo próprio --- que na
+Seção~\ref{sec:consequencias} já apareceu como o que o gêmeo inercial
+maximiza. Extremizar $\int\dd\tau$ é equivalente, e algebricamente muito mais
+cômodo, a extremizar a ação com a lagrangiana
+\begin{equation}
+  L=\tfrac12\,g_{\mu\nu}(x)\,\dot x^\mu\dot x^\nu ,
+  \label{eq:lagrangiana-geodesica}
+\end{equation}
+onde o ponto é derivada em relação a um parâmetro $\lambda$.
+
+\begin{resultado}
+\textbf{Dedução.} As equações de Euler--Lagrange para
+\eqref{eq:lagrangiana-geodesica} são
 \[
-  \frac{\dd^2 x^\mu}{\dd\lambda^2}
-  +\Gamma^\mu_{\alpha\beta}
-  \frac{\dd x^\alpha}{\dd\lambda}
-  \frac{\dd x^\beta}{\dd\lambda}=0,
+  \frac{\dd}{\dd\lambda}\!\left(\frac{\partial L}{\partial\dot x^\rho}\right)
+  -\frac{\partial L}{\partial x^\rho}=0 .
 \]
-onde $\lambda$ é parâmetro afim. Para partículas massivas, podemos escolher
-$\lambda=\tau$. Para luz, usa-se um parâmetro afim nulo.
+Os dois pedaços saem direto, lembrando que $g_{\mu\nu}$ depende de $\lambda$
+só através de $x(\lambda)$:
+\[
+  \frac{\partial L}{\partial\dot x^\rho}=g_{\rho\nu}\dot x^\nu,
+  \qquad
+  \frac{\partial L}{\partial x^\rho}=\tfrac12\,\partial_\rho g_{\mu\nu}\,
+  \dot x^\mu\dot x^\nu ,
+\]
+e a derivada total do primeiro traz um termo de cadeia:
+\begin{equation}
+  g_{\rho\nu}\ddot x^\nu
+  +\partial_\alpha g_{\rho\nu}\,\dot x^\alpha\dot x^\nu
+  -\tfrac12\,\partial_\rho g_{\alpha\nu}\,\dot x^\alpha\dot x^\nu=0 .
+  \label{eq:geodesica-crua}
+\end{equation}
+
+\emph{Aqui está o passo que importa.} O termo do meio tem $\partial_\alpha
+g_{\rho\nu}$ contraído com $\dot x^\alpha\dot x^\nu$, que é \emph{simétrico}
+em $\alpha\leftrightarrow\nu$. Uma contração com um objeto simétrico só
+enxerga a parte simétrica do outro fator, de modo que se pode trocar
+$\partial_\alpha g_{\rho\nu}$ pela sua própria simetrização sem alterar nada:
+\[
+  \partial_\alpha g_{\rho\nu}\,\dot x^\alpha\dot x^\nu
+  =\tfrac12\bigl(\partial_\alpha g_{\rho\nu}+\partial_\nu g_{\rho\alpha}\bigr)
+   \dot x^\alpha\dot x^\nu .
+\]
+Esse truque --- simetrizar de graça o que está contraído com algo simétrico ---
+aparece o curso inteiro; vale guardá-lo. Com ele,
+\eqref{eq:geodesica-crua} vira
+\[
+  g_{\rho\nu}\ddot x^\nu
+  +\tfrac12\bigl(\partial_\alpha g_{\rho\nu}+\partial_\nu g_{\rho\alpha}
+    -\partial_\rho g_{\alpha\nu}\bigr)\dot x^\alpha\dot x^\nu=0 ,
+\]
+agora com os três termos na mesma forma. Multiplicando por $g^{\sigma\rho}$ e
+usando $g^{\sigma\rho}g_{\rho\nu}=\delta^\sigma{}_\nu$:
+\begin{equation}
+  \ddot x^\sigma
+  +\underbrace{\tfrac12\,g^{\sigma\rho}
+   \bigl(\partial_\alpha g_{\rho\nu}+\partial_\nu g_{\rho\alpha}
+    -\partial_\rho g_{\alpha\nu}\bigr)}_{\textstyle \Gamma^\sigma{}_{\alpha\nu}}
+  \,\dot x^\alpha\dot x^\nu=0 .
+  \label{eq:geodesica}
+\end{equation}
+\end{resultado}
+
+O parêntese não foi batizado por decreto: ele \emph{apareceu}, como a única
+combinação capaz de fechar a conta. É a fórmula que o curso inteiro vai usar,
+e convém isolá-la:
+
+\begin{resultado}
+\textbf{Símbolos de Christoffel.}
+\begin{equation}
+  \Gamma^\sigma{}_{\mu\nu}
+  =\tfrac12\,g^{\sigma\rho}
+   \bigl(\partial_\mu g_{\rho\nu}+\partial_\nu g_{\rho\mu}
+    -\partial_\rho g_{\mu\nu}\bigr) .
+  \label{eq:christoffel}
+\end{equation}
+Com eles, a \emph{equação geodésica} é \eqref{eq:geodesica}:
+\[
+  \frac{\dd^2x^\sigma}{\dd\lambda^2}
+  +\Gamma^\sigma{}_{\mu\nu}\,
+   \frac{\dd x^\mu}{\dd\lambda}\frac{\dd x^\nu}{\dd\lambda}=0 .
+\]
+Para partículas massivas pode-se tomar $\lambda=\tau$; para a luz, o tempo
+próprio é nulo ao longo da trajetória e usa-se outro parâmetro afim.
+\end{resultado}
+
+Três leituras de \eqref{eq:christoffel} valem o registro. \emph{Primeira}: ela
+é simétrica nos dois índices de baixo, o que já era esperado ---
+$\dot x^\mu\dot x^\nu$ nunca poderia detectar uma parte antissimétrica.
+\emph{Segunda}: $\Gamma$ depende só da métrica e de suas primeiras derivadas,
+de modo que, uma vez escrita a métrica, não há mais nenhuma escolha a fazer.
+\emph{Terceira}: onde a métrica é constante --- em coordenadas cartesianas de
+Minkowski, por exemplo --- todos os $\Gamma$ se anulam e a geodésica vira
+$\ddot x^\sigma=0$, a linha reta de sempre.
+
+\begin{atencao}
+Aplicar \eqref{eq:christoffel} sem pensar dá $4^3=64$ componentes em quatro
+dimensões, mas a simetria em $\mu\nu$ reduz a $40$, e na prática a maioria se
+anula. Duas economias valem sempre: uma métrica \emph{diagonal} mata todo termo
+com $g^{\sigma\rho}$ fora da diagonal, e uma coordenada da qual a métrica
+\emph{não depende} zera toda derivada em relação a ela. Em Schwarzschild, as
+duas juntas deixam nove símbolos não nulos entre os quarenta.
+\end{atencao}
+
+\begin{activity}
+Confirme com \eqref{eq:christoffel} os símbolos da
+Seção~\ref{sec:coordenadas-curvilineas}, para
+$\dd\ell^2=\dd r^2+r^2\dd\phi^2$: $g_{rr}=1$, $g_{\phi\phi}=r^2$, e a única
+derivada não nula é $\partial_r g_{\phi\phi}=2r$. Verifique que sobram
+exatamente $\Gamma^r{}_{\phi\phi}=-r$ e
+$\Gamma^\phi{}_{r\phi}=\Gamma^\phi{}_{\phi r}=1/r$, e mais nada.
+\end{activity}
 
 \section{Christoffel não é força}
 
@@ -3799,34 +3988,6 @@ coordenadas curvilíneas, a mudança dos vetores de base introduz termos
 adicionais. Em uma geometria curva, termos semelhantes descrevem também a
 estrutura gravitacional local. A distinção entre efeito de coordenadas e
 efeito físico é feita pela curvatura.
-
-\section{Derivação por princípio variacional}
-
-Para uma curva $x^\mu(\lambda)$, considere a Lagrangiana
-\[
-  L=\frac{1}{2}g_{\mu\nu}(x)\dot x^\mu\dot x^\nu,
-\]
-onde ponto denota derivada em relação a $\lambda$. As equações de
-Euler-Lagrange são
-\[
-  \frac{\dd}{\dd\lambda}\left(\frac{\partial L}{\partial \dot x^\rho}\right)
-  -\frac{\partial L}{\partial x^\rho}=0.
-\]
-Como
-\[
-  \frac{\partial L}{\partial \dot x^\rho}=g_{\rho\nu}\dot x^\nu,
-\]
-temos
-\[
-  g_{\rho\nu}\ddot x^\nu+\partial_\alpha g_{\rho\nu}\dot x^\alpha\dot x^\nu
-  -\frac{1}{2}\partial_\rho g_{\mu\nu}\dot x^\mu\dot x^\nu=0.
-\]
-Multiplicando por $g^{\rho\sigma}$ e rearranjando índices, obtemos
-\[
-  \ddot x^\sigma+\Gamma^\sigma_{\mu\nu}\dot x^\mu\dot x^\nu=0.
-\]
-Assim, geodésicas podem ser vistas tanto como curvas de transporte paralelo do
-tangente quanto como extremantes do comprimento ou do tempo próprio.
 
 \section{Marés como sinal de curvatura}
 
@@ -3853,8 +4014,9 @@ proporcional à área envolvida. Essa é uma manifestação geométrica da curva
 
 \begin{enumerate}
   \item \textbf{Inversa da métrica polar.} Para
-  $\dd\ell^2=\dd r^2+r^2\dd\phi^2$, escreva $g_{ij}$ e $g^{ij}$. Use a fórmula
-  de Christoffel para obter os símbolos não nulos.
+  $\dd\ell^2=\dd r^2+r^2\dd\phi^2$, escreva $g_{ij}$ e $g^{ij}$. Use
+  \eqref{eq:christoffel} para obter os símbolos não nulos, e confira com os
+  valores da Seção~\ref{sec:coordenadas-curvilineas}.
 
   \item \textbf{Geodésica radial.} Mostre que curvas com $\phi=\mathrm{const}$
   são geodésicas no plano polar. Interprete o resultado geometricamente.
@@ -3884,7 +4046,7 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 \begin{exercise}
 \facil{5.2}
 Em coordenadas polares no plano, $\dd\ell^2=\dd r^2+r^2\dd\phi^2$.
-(a) Escreva $g_{ij}$ e $g^{ij}$. (b) Use a fórmula de Christoffel para obter
+(a) Escreva $g_{ij}$ e $g^{ij}$. (b) Use \eqref{eq:christoffel} para obter
 $\Gamma^r{}_{\phi\phi}$ e $\Gamma^\phi{}_{r\phi}$. (c) Explique por que
 símbolos de Christoffel não nulos aqui não significam curvatura.
 \end{exercise}
@@ -3993,20 +4155,36 @@ Para uma um-forma,
 O sinal muda porque a contração $\omega_\nu V^\nu$ deve ter derivada usual
 compatível.
 
-Para a conexão de Levi-Civita, impomos torção nula e compatibilidade métrica:
+Falta dizer \emph{qual} conexão. Até aqui, $\Gamma$ foi apenas um conjunto de
+coeficientes que corrige a derivada; nada obrigou a escolher um em particular.
+Duas exigências fixam a escolha:
 \[
-  \Gamma^\rho_{\mu\nu}=\Gamma^\rho_{\nu\mu},
+  \Gamma^\rho{}_{\mu\nu}=\Gamma^\rho{}_{\nu\mu}
+  \quad\text{(torção nula)},
   \qquad
-  \nabla_\alpha g_{\mu\nu}=0.
+  \nabla_\alpha g_{\mu\nu}=0
+  \quad\text{(compatibilidade métrica)} .
 \]
-Daí segue
+A primeira diz que não há uma torção intrínseca girando vetores transportados;
+a segunda, que o transporte paralelo preserva comprimentos e ângulos --- sem
+ela, medir com a métrica em dois pontos diferentes não teria sentido comum.
+
+Escrevendo $\nabla_\alpha g_{\mu\nu}=0$ nas três permutações dos índices e
+combinando-as (some duas, subtraia a terceira: a torção nula é o que permite
+os cancelamentos), obtém-se exatamente a expressão \eqref{eq:christoffel} que
+a Seção~\ref{sec:geodesica-christoffel} já havia produzido por outro caminho:
 \[
-  \Gamma^\rho_{\mu\nu}
-  =\frac{1}{2}g^{\rho\sigma}
-  \left(\partial_\mu g_{\nu\sigma}
-  +\partial_\nu g_{\mu\sigma}
+  \Gamma^\rho{}_{\mu\nu}
+  =\tfrac12\,g^{\rho\sigma}
+  \left(\partial_\mu g_{\sigma\nu}
+  +\partial_\nu g_{\sigma\mu}
   -\partial_\sigma g_{\mu\nu}\right).
 \]
+Essa \emph{conexão de Levi-Civita} é, portanto, a única compatível com as duas
+exigências --- e a coincidência com o resultado variacional não é acidente: as
+curvas que extremizam o tempo próprio são as mesmas que transportam
+paralelamente o próprio vetor tangente, e é essa igualdade que dá à palavra
+``geodésica'' um sentido só.
 
 \section{Curvatura}
 
