@@ -2270,12 +2270,20 @@ $\gamma+p\to p+\pi^0$ com um fóton da radiação cósmica de fundo. Verifique
 que o último cai perto de $10^{20}$~eV e comente o corte GZK.
 
   \item \textbf{Aceleração própria contra aceleração coordenada.} Em
-\arq{cap03\_compton\_foguete.py}, acrescente uma segunda estratégia de
-viagem: acelerar com $\dd^2x/\dd t^2$ constante (aceleração
-\emph{coordenada}) até atingir $v=0{,}9$ e depois seguir em movimento
-inercial. Compare $\tau_{\rm nave}$ e $t_{\rm Terra}$ com o caso de
-aceleração própria constante para a mesma distância. Qual estratégia é mais
-rápida para a tripulação? E para quem ficou?
+\arq{cap03\_compton\_foguete.py}, acrescente uma segunda estratégia para a
+\emph{mesma} viagem: acelerar com $\dd^2x/\dd t^2$ constante e igual a $g$
+(aceleração \emph{coordenada}, medida da Terra) até $v=0{,}9$, seguir em
+cruzeiro, e frear com $-g$ até parar no destino --- de modo que as duas
+estratégias partam do repouso e cheguem em repouso, e sejam portanto
+comparáveis. Compare $\tau_{\rm nave}$ e $t_{\rm Terra}$ nos dois casos.
+
+  A segunda parece vencer nos dois relógios, e é aí que está a lição:
+calcule também a aceleração \emph{própria} que a tripulação sente em cada
+estratégia, lembrando que $a_{\rm propria}=\gamma^3 a_{\rm coord}$ para
+movimento retilíneo. Quanto ela vale ao atingir $v=0{,}9$? Uma das duas
+viagens é impossível para gente de verdade --- diga qual, e por quê. Essa é
+a razão de a aceleração \emph{própria} constante ser o cenário padrão da
+literatura, e não a coordenada.
 
   \item \textbf{A desigualdade da massa invariante.} Acrescente a
 \arq{cap03\_quadrivetores.py} uma rotina que sorteia $N$ partículas com
