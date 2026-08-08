@@ -3427,6 +3427,7 @@ newtoniana nunca precisou dela.
 \end{central}
 
 \section{Equações de estado}
+\label{sec:eq-estado}
 \label{sec:equacoes-estado}
 
 As equações \eqref{eq:continuidade}, \eqref{eq:energia-fluido} e
@@ -3723,12 +3724,24 @@ $2GM/Rc^2\to1$, antecipando o Capítulo~\ref{cap:schwarzschild}.
 Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
 
 \begin{enumerate}
-  \item \textbf{A equação de estado efetiva de uma mistura.} Usando a função
-\texttt{Efunc} de \arq{cap13\_friedmann.py} como ponto de partida,
-escreva $w_{\rm ef}(a) = p_{\rm total}/\rho_{\rm total}$ para uma mistura de
-matéria, radiação e $\Lambda$ com os parâmetros de Planck. Faça o gráfico de
-$w_{\rm ef}$ contra o redshift e determine em que $z$ ele cruza $-1/3$ ---
-que é a fronteira entre expansão desacelerada e acelerada.
+  \item \textbf{Até onde a pressão pode ir.} Em \arq{cap04\_tensores.py},
+monte $T^{\mu\nu}$ de um fluido perfeito em repouso e, para cada observador
+com quadrivelocidade $u^\mu$, calcule o vetor fluxo de energia que ele mede,
+\[
+  J^\mu=-T^\mu{}_\nu\,u^\nu .
+\]
+Sorteie alguns milhares de observadores com velocidades aleatórias e teste se
+$J^\mu$ é sempre causal, isto é, $J\cdot J\le0$. Varie $p$ com $\rho$ fixo e
+descubra numericamente a fronteira: a energia é vista fluindo de modo causal
+por \emph{todos} os observadores exatamente quando $|p|\le\rho$ --- e para
+$|p|>\rho$ aparecem observadores que medem energia se propagando mais rápido
+que a luz.
+
+  Essa é a \emph{condição de energia dominante}, e ela não aparece nesta
+apostila. Compare com o limite $c_s\le1$ da Seção~\ref{sec:eq-estado}, que
+restringe a \emph{inclinação} $\dd p/\dd\rho$: são dois limites distintos, um
+sobre a equação de estado e outro sobre o próprio $T^{\mu\nu}$. Qual dos dois
+é violado primeiro por um fluido com $p=1{,}2\,\rho$?
 
   \item \textbf{O fluido perfeito visto de outro referencial.} Adapte
 \arq{cap04\_tensores.py} para montar $T^{\mu\nu}$ de um fluido perfeito
