@@ -160,50 +160,22 @@
         </div>
       </section>
 
-      <section class="section dashboards-section" id="oderom">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Álgebra tensorial</p>
-            <h2>ODEROM</h2>
-          </div>
+      <!--
+        Só o logotipo, uma frase e o botão. A versão anterior tinha
+        eyebrow, título, parágrafo de abertura, um painel com fórmula e
+        três etiquetas, mais três etiquetas, subtítulo, parágrafo e lista
+        de três itens — muito peso para o que é, no fundo, um link para
+        outro programa. Quem quiser saber mais abre e vê.
+      -->
+      <section class="section" id="oderom">
+        <div class="oderom-convite">
+          <img src="imagens/oderom-logo-branco.svg" alt="ODEROM">
           <p>
-            Escreva uma métrica e peça a curvatura. O ODEROM calcula
-            símbolos de Christoffel, Riemann, Ricci, escalar de curvatura e
-            Kretschmann de forma exata — sem aproximação numérica.
+            Escreva uma métrica e peça a curvatura. Cálculo exato, dentro
+            do seu navegador, sem instalar nada.
           </p>
+          <a class="button button-primary" href="https://rafaelcrdelima.github.io/ODEROM/">Abrir o ODEROM ↗</a>
         </div>
-
-        <article class="dashboard-card">
-          <!--
-            A marca do ODEROM, e não um mock da interface: o símbolo é uma
-            órbita que precessiona — dez elipses giradas 7° uma da outra,
-            com a estrela no periélio. É o avanço do periélio, a assinatura
-            da Relatividade Geral, que é justamente o que o programa
-            calcula. Vale mais como abertura do cartão do que um desenho
-            genérico de tensores.
-          -->
-          <div class="dashboard-preview oderom-preview" aria-hidden="true">
-            <img class="oderom-marca" src="imagens/oderom-simbolo.svg" alt="">
-            <div class="oderom-formula">K = 48M²/r⁶</div>
-            <div class="oderom-legenda">Kretschmann de Schwarzschild, exato</div>
-            <div class="preview-footer"><span>exato</span><span>no navegador</span><span>sem instalar</span></div>
-          </div>
-          <div class="dashboard-info">
-            <div class="tags"><span>Capítulos 6–8</span><span>Sem instalação</span><span>Cálculo exato</span></div>
-            <h3>Curvatura calculada no seu próprio navegador</h3>
-            <p>
-              O caderno abre com Reissner–Nordström pronto e nada executado.
-              Shift+Enter roda um bloco. A galeria traz Schwarzschild, FRW e
-              de Sitter; para uma métrica sua, basta escrevê-la.
-            </p>
-            <ul>
-              <li>roda na sua máquina, compilado para WebAssembly;</li>
-              <li>exporta o resultado como código SymPy ou Mathematica;</li>
-              <li>funciona onde não se pode instalar programas.</li>
-            </ul>
-            <a class="button button-primary" href="https://rafaelcrdelima.github.io/ODEROM/">Abrir o ODEROM ↗</a>
-          </div>
-        </article>
       </section>
 
       <section class="section dashboards-section" id="dashboards">
