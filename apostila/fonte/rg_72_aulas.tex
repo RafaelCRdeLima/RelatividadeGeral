@@ -297,9 +297,11 @@ A tabela abaixo e o \hyperref[sec:calendario]{calendário aula a aula} descrevem
 plano em duas resoluções: aqui por módulo, lá aula a aula. O número de
 encontros de cada módulo foi calibrado pela extensão real do capítulo
 correspondente, de modo que a média fica em torno de duas páginas por
-encontro. Os capítulos de 4 a 8 recebem proporcionalmente menos páginas por
+encontro. Os capítulos de 5 a 8 recebem proporcionalmente menos páginas por
 aula de propósito: são os mais densos conceitualmente, e neles o quadro-negro
-faz mais trabalho que o texto.
+faz mais trabalho que o texto. A apresentação da disciplina é feita na aula~1,
+junto com a Seção~1.1 --- que é o contraste entre Newton e Einstein, e serve de
+abertura melhor do que um encontro só de avisos.
 
 \begin{center}
 \small
@@ -307,20 +309,19 @@ faz mais trabalho que o texto.
 \toprule
 Encontros & Módulo & Conteúdo \\
 \midrule
-1 & Abertura & Apresentação da disciplina, escala física da relatividade geral e critérios de avaliação. \\
-2--7 & Relatividade especial & Postulados, intervalos, diagramas, transformações de Lorentz, paradoxo dos gêmeos. \\
-8--13 & Vetores relativísticos & Quadrivelocidade, quadrimomento, produto escalar, fótons, colisões e decaimentos. \\
-14--18 & Tensores em Minkowski & Um-formas, métrica, tensores mistos, mudança de base, derivadas. \\
-19--21 & Fluidos relativísticos & Fluxo de partículas, tensor energia-momento, fluido perfeito, conservação. \\
-22--25 & Da gravidade à curvatura & Equivalência, marés, coordenadas curvilíneas, bases não coordenadas, geodésicas. \\
-26--30 & Variedades curvas & Derivada covariante, transporte paralelo, tensor de Riemann, Ricci, escalar de curvatura, Bianchi. \\
-31--34 & Física em espaço-tempo curvo & Referenciais locais, tetradas, vetores de Killing e constantes de movimento. \\
-35--39 & Equações de Einstein & Motivação, ação de Einstein--Hilbert, traço, limite fraco, limite newtoniano, constante cosmológica. \\
-40--46 & Ondas gravitacionais & Perturbações lineares, gauge TT, polarizações, fórmula do quadrupolo, detectores, inspiral. \\
-47--53 & Estrelas e Schwarzschild & Simetria esférica, equações TOV, exterior de Schwarzschild, órbitas, testes clássicos, lentes. \\
-54--59 & Buracos negros & Horizonte, coordenadas regulares, Kruskal, Kerr, termodinâmica. \\
-60--65 & Cosmologia & Métrica FLRW, redshift cosmológico, Friedmann, distâncias, horizontes, parâmetros observacionais. \\
-66--72 & Revisão, projetos e síntese & Revisão técnica, desenvolvimento dos quatro projetos finais, síntese conceitual e seminários. \\
+1--4 & Relatividade especial & Apresentação da disciplina, postulados, intervalos, transformações de Lorentz, diagramas, paradoxo dos gêmeos. \\
+5--10 & Vetores relativísticos & Quadrivelocidade, quadrimomento, produto escalar, fótons, colisões e decaimentos. \\
+11--15 & Tensores em Minkowski & Um-formas, métrica, tensores mistos, mudança de base, derivadas. \\
+16--20 & Fluidos relativísticos & Fluxo de partículas, tensor energia-momento, fluido perfeito, conservação. \\
+21--24 & Da gravidade à curvatura & Equivalência, marés, coordenadas curvilíneas, bases não coordenadas, geodésicas. \\
+25--29 & Variedades curvas & Derivada covariante, transporte paralelo, tensor de Riemann, Ricci, escalar de curvatura, Bianchi. \\
+30--33 & Física em espaço-tempo curvo & Referenciais locais, tetradas, vetores de Killing e constantes de movimento. \\
+34--38 & Equações de Einstein & Motivação, ação de Einstein--Hilbert, traço, limite fraco, limite newtoniano, constante cosmológica. \\
+39--45 & Ondas gravitacionais & Perturbações lineares, gauge TT, polarizações, fórmula do quadrupolo, detectores, inspiral. \\
+46--52 & Estrelas e Schwarzschild & Simetria esférica, equações TOV, exterior de Schwarzschild, órbitas, testes clássicos, lentes. \\
+53--58 & Buracos negros & Horizonte, coordenadas regulares, Kruskal, Kerr, termodinâmica. \\
+59--64 & Cosmologia & Métrica FLRW, redshift cosmológico, Friedmann, distâncias, horizontes, parâmetros observacionais. \\
+65--72 & Revisão, projetos e síntese & Revisão técnica, desenvolvimento dos quatro projetos finais, síntese conceitual, seminários e duas aulas de reserva. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -328,7 +329,7 @@ Encontros & Módulo & Conteúdo \\
 \begin{roteiro}
 \textbf{As oficinas computacionais.} Oito capítulos trazem uma seção de
 resolução numérica, e o calendário reserva um ou dois encontros para cada uma
-delas (aulas 7, 13, 18, 30, 45--46, 53, 58--59 e 64--65). Elas não são material
+delas (aulas 4, 10, 15, 29, 44--45, 52, 57--58 e 63--64). Elas não são material
 complementar: são o lugar onde os resultados enunciados no texto viram números
 verificados, e alimentam diretamente os quatro projetos finais. Todos os
 scripts acompanham a apostila em \texttt{codigo/} e rodam sem argumentos.
@@ -360,78 +361,78 @@ Aula & Foco & Seções & Conteúdo \\
 Aula & Foco & Seções & Conteúdo \\
 \midrule
 \endhead
-1 & Apresentação e escala física da RG & --- & Plano do curso: Ementa expandida, Objetivos de aprendizagem, Distribuição dos 72 encontros, Avaliação sugerida. Leitura orientadora: Prefácio. \\
-2 & Newton, Einstein e o intervalo & 1.1, 1.2 & Relatividade especial: Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
-3 & Tempo próprio e Lorentz & 1.3, 1.4 & Relatividade especial: Tempo próprio; Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. \\
-4 & O que se mede & 1.5 & Relatividade especial: Consequências --- contração de Lorentz, reciprocidade e composição de velocidades, todas deduzidas de \eqref{eq:lorentz}. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. \\
-5 & Diagramas e gêmeos & 1.6, 1.7 & Relatividade especial: Diagramas de Minkowski, construção dos eixos de $S'$ e hipérboles invariantes; Paradoxo dos gêmeos. \\
-6 & Sem postular a luz & 1.8, 1.9, 1.10 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. \\
-7 & Oficina computacional I & 1.11, 1.12, 1.13 & Relatividade especial: Resolução numérica (Python e Mathematica); Exercícios. \\
-8 & Vetores e produto escalar & 2.1, 2.2 & Vetores e momento relativístico: o critério de transformação que define um quadrivetor; produto escalar e métrica de Minkowski. \\
-9 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
-10 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
-11 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
-12 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
-13 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
-14 & Por que existem um-formas & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; tensores de tipo $(r,s)$. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
-15 & A métrica como ponte & 3.3 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
-16 & Equações tensoriais e bases oblíquas & 3.4, 3.5, 3.6 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Componentes em uma base oblíqua. \\
-17 & Derivar tensores, e prática & 3.7, 3.8, 3.9, 3.10 & Tensores no espaço-tempo plano: Derivada de um tensor (e por que ela deixa de funcionar em espaço curvo); Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
-18 & Oficina computacional III & 3.11, 3.12, 3.13 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
-19 & Poeira, fluxo e um-formas & 4.1, 4.2, 4.3, 4.4, 4.5 & Fluidos relativísticos: Poeira; Como ler o tensor energia-momento. \\
-20 & Tensor energia-momento e fluido perfeito & 4.6, 4.7, 4.8, 4.9, 4.10 & Fluidos relativísticos: Fluido perfeito; Equações de estado. \\
-21 & Euler relativística e fechamento & 4.11, 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: Conservação local e leis integrais; Problemas orientados; Exercícios. \\
-22 & Por que o espaço-tempo não é plano & 5.1 & Da gravidade à curvatura: O princípio da equivalência, e o argumento do redshift na torre --- se o quadrilátero não fecha, a geometria não é a de Minkowski. \\
-23 & Coordenadas curvilíneas e bases & 5.2, 5.3 & Da gravidade à curvatura: Coordenadas curvilíneas; bases coordenadas contra bases ortonormais, e por que as fórmulas do cálculo vetorial parecem diferentes. \\
-24 & Geodésicas e Christoffel & 5.4 & Da gravidade à curvatura: dedução da equação geodésica por princípio variacional, de onde sai a fórmula dos símbolos de Christoffel. \\
-25 & Christoffel não é força & 5.5, 5.6, 5.7, 5.8, 5.9 & Da gravidade à curvatura: Christoffel não é força; Marés como sinal de curvatura; Problemas orientados; Exercícios. \\
-26 & Variedades e derivada covariante & 6.1, 6.2 & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
-27 & Compatibilidade métrica & 6.4, 6.8 & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
-28 & Riemann e suas simetrias & 6.3, 6.5 & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
-29 & Curvatura intrínseca e desvio geodésico & 6.6, 6.7 & Variedades, derivada covariante e curvatura: Curvatura intrínseca e extrínseca; Desvio geodésico. \\
-30 & Oficina computacional IV & 6.9, 6.10, 6.11, 6.12 & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
-31 & Movimento livre e energia medida & 7.1, 7.2 & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
-32 & Simetrias e vetores de Killing & 7.3 & Física em espaço-tempo curvo: Simetrias e quantidades conservadas, com a equação de Killing e a demonstração da constante de movimento. \\
-33 & Observadores e tetradas & 7.4, 7.5, 7.6 & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais; Constantes de movimento e energia local. \\
-34 & Oficina de física em espaço-tempo curvo & 7.7, 7.8, 7.9 & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
-35 & A equação de campo & 8.1, 8.4 & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
-36 & Ação de Einstein--Hilbert & 8.5 & Equações de Einstein: A ação de Einstein--Hilbert; definição variacional de $T_{\mu\nu}$. \\
-37 & Traço e conservação local & 8.3, 8.6, 8.10 & Equações de Einstein: Traço das equações de campo; Conservação local; Exemplos resolvidos adicionais. \\
-38 & Limite newtoniano & 8.2, 8.7 & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
-39 & Constante cosmológica e fechamento & 8.8, 8.9, 8.11, 8.12 & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados; Exercícios. Resumo de fórmulas: Einstein. \\
-40 & Campo fraco e gauge & 9.1, 9.5 & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
-41 & Polarizações e partículas teste & 9.2, 9.6 & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
-42 & Emissão e fórmula do quadrupolo & 9.4 & Ondas gravitacionais: Emissão. \\
-43 & Detectores e escalas & 9.3, 9.7 & Ondas gravitacionais: Detecção; Escalas de detecção. \\
-44 & Binárias compactas & 9.8, 9.10 & Ondas gravitacionais: Binárias compactas; Erros comuns e interpretação. \\
-45 & Oficina computacional V & 9.11 & Ondas gravitacionais: Resolução numérica, Python -- anel de partículas, fórmula do quadrupolo e teste de Hulse--Taylor. \\
-46 & Oficina computacional VI & 9.9, 9.11, 9.12, 9.13 & Ondas gravitacionais: Resolução numérica, inspiral e bloco em Mathematica; Problemas orientados; Exercícios. \\
-47 & Métrica de Schwarzschild & 10.1, 10.5 & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
-48 & Redshift gravitacional & 10.2 & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional. \\
-49 & Geodésicas e potencial efetivo & 10.3 & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
-50 & Órbitas circulares e de fótons & 10.6, 10.7 & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
-51 & Estrelas relativísticas & 10.4 & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
-52 & Testes clássicos e lentes & 10.8, 10.9 & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Lentes gravitacionais. \\
-53 & Oficina computacional VII & 10.10, 10.11, 10.12, 10.13, 10.14 & Soluções esféricas, estrelas e Schwarzschild: Resolução numérica; Problemas orientados; Erros comuns e interpretação; Exercícios. \\
-54 & Horizonte & 11.1, 11.5 & Buracos negros: Horizonte; Horizonte versus singularidade. \\
-55 & Coordenadas regulares e diagramas causais & 11.2, 11.6 & Buracos negros: Coordenadas regulares; Diagramas causais. \\
-56 & Kerr e buracos negros reais & 11.3, 11.7 & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
-57 & Termodinâmica & 11.4, 11.8 & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
-58 & Oficina computacional VIII & 11.11 & Buracos negros: Resolução numérica, Python -- cones de luz, diagrama de Kruskal e marés no horizonte. \\
-59 & Oficina computacional IX & 11.9, 11.10, 11.11, 11.12, 11.13 & Buracos negros: Resolução numérica, Hawking, Kerr e bloco em Mathematica; Problemas orientados; Erros comuns; Exercícios. Resumo de fórmulas: Schwarzschild. \\
-60 & Princípio cosmológico e redshift & 12.1, 12.2 & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
-61 & Equações de Friedmann & 12.3, 12.6 & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
-62 & Distâncias e horizontes & 12.4, 12.5 & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
-63 & Parâmetros e problemas abertos & 12.7, 12.8 & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
-64 & Oficina computacional X & 12.12 & Cosmologia relativística: Resolução numérica, Python -- escalas temporais, fator de escala e distâncias. \\
-65 & Oficina computacional XI & 12.9, 12.10, 12.12, 12.13, 12.14 & Cosmologia relativística: Resolução numérica, bloco em Mathematica; Problemas orientados; Erros comuns e interpretação; Exercícios. Resumo de fórmulas: Cosmologia. \\
-66 & Revisão técnica & A.1, A.9 & Apêndice~\ref{ap:indices} integral, com ênfase no Checklist para não errar. Revisão de tensores, geodésicas, curvatura e equações de campo. \\
-67 & Projeto 1 & 13.1 & Projetos finais: geodésicas em Schwarzschild. Definição de grupos, escopo, equações e entregáveis. \\
-68 & Projeto 2 & 13.2 & Projetos finais: redshift gravitacional. \\
-69 & Projeto 3 & 13.3 & Projetos finais: ondas gravitacionais; discussão de formas de onda e sirene padrão. \\
-70 & Projeto 4 & 13.4 & Projetos finais: cosmologias simples; Friedmann numérico e critérios de avaliação. \\
-71 & Síntese conceitual & 12.11 & Cosmologia relativística: Síntese conceitual do curso. Resumo de fórmulas integral; Bibliografia comentada. \\
-72 & Seminários e fechamento & --- & Apresentação dos projetos finais e fechamento da disciplina. \\
+1 & Apresentação, Newton e Einstein & 1.1, 1.2 & Plano do curso e critérios de avaliação, no primeiro tempo. Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
+2 & Tempo próprio e Lorentz & 1.3, 1.4 & Relatividade especial: Tempo próprio; Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. \\
+3 & O que se mede, diagramas e gêmeos & 1.5, 1.6, 1.7 & Relatividade especial: Consequências --- contração de Lorentz, reciprocidade e composição de velocidades, todas deduzidas de \eqref{eq:lorentz}. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. Diagramas de Minkowski, construção dos eixos de $S'$ e hipérboles invariantes; Paradoxo dos gêmeos. \\
+4 & Sem postular a luz, e oficina & 1.8, 1.9, 1.10, 1.11, 1.12, 1.13 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. Resolução numérica (Python e Mathematica); Exercícios. \\
+5 & Vetores e produto escalar & 2.1, 2.2 & Vetores e momento relativístico: o critério de transformação que define um quadrivetor; produto escalar e métrica de Minkowski. \\
+6 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
+7 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
+8 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
+9 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
+10 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
+11 & Por que existem um-formas & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; tensores de tipo $(r,s)$. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+12 & A métrica como ponte & 3.3 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+13 & Equações tensoriais e bases oblíquas & 3.4, 3.5, 3.6 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Componentes em uma base oblíqua. \\
+14 & Derivar tensores, e prática & 3.7, 3.8, 3.9, 3.10 & Tensores no espaço-tempo plano: Derivada de um tensor (e por que ela deixa de funcionar em espaço curvo); Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
+15 & Oficina computacional III & 3.11, 3.12, 3.13 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
+16 & O que é um fluido & 4.1, 4.2, 4.3 & Fluidos relativísticos: o que é um fluido; poeira como o caso mais simples, com densidade e fluxo; o vetor fluxo de número. \\
+17 & Fluxo de número e conservação & 4.4, 4.5, 4.6 & Fluidos relativísticos: densidade como um fluxo temporal; um-formas, superfícies e o fluxo invariante; conservação do número de partículas. \\
+18 & O tensor energia-momento & 4.7, 4.8 & Fluidos relativísticos: o tensor energia-momento componente a componente; tensões, e o argumento que força a simetria. \\
+19 & Fluido perfeito e Euler & 4.9, 4.10, 4.11 & Fluidos relativísticos: fluidos gerais, energia interna e a primeira lei; o fluido perfeito; a conservação que devolve continuidade e Euler. \\
+20 & Equações de estado e fechamento & 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: equações de estado; lei de Gauss em quatro dimensões; por que isso importa para a relatividade geral. Exemplos resolvidos, problemas orientados e exercícios. \\
+21 & Por que o espaço-tempo não é plano & 5.1 & Da gravidade à curvatura: O princípio da equivalência, e o argumento do redshift na torre --- se o quadrilátero não fecha, a geometria não é a de Minkowski. \\
+22 & Coordenadas curvilíneas e bases & 5.2, 5.3 & Da gravidade à curvatura: Coordenadas curvilíneas; bases coordenadas contra bases ortonormais, e por que as fórmulas do cálculo vetorial parecem diferentes. \\
+23 & Geodésicas e Christoffel & 5.4 & Da gravidade à curvatura: dedução da equação geodésica por princípio variacional, de onde sai a fórmula dos símbolos de Christoffel. \\
+24 & Christoffel não é força & 5.5, 5.6, 5.7, 5.8, 5.9 & Da gravidade à curvatura: Christoffel não é força; Marés como sinal de curvatura; Problemas orientados; Exercícios. \\
+25 & Variedades e derivada covariante & 6.1, 6.2 & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
+26 & Compatibilidade métrica & 6.4, 6.8 & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
+27 & Riemann e suas simetrias & 6.3, 6.5 & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
+28 & Curvatura intrínseca e desvio geodésico & 6.6, 6.7 & Variedades, derivada covariante e curvatura: Curvatura intrínseca e extrínseca; Desvio geodésico. \\
+29 & Oficina computacional IV & 6.9, 6.10, 6.11, 6.12 & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
+30 & Movimento livre e energia medida & 7.1, 7.2 & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
+31 & Simetrias e vetores de Killing & 7.3 & Física em espaço-tempo curvo: Simetrias e quantidades conservadas, com a equação de Killing e a demonstração da constante de movimento. \\
+32 & Observadores e tetradas & 7.4, 7.5, 7.6 & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais; Constantes de movimento e energia local. \\
+33 & Oficina de física em espaço-tempo curvo & 7.7, 7.8, 7.9 & Física em espaço-tempo curvo: Problemas orientados; Exercícios. \\
+34 & A equação de campo & 8.1, 8.4 & Equações de Einstein: A equação de campo; Por que o tensor de Einstein. \\
+35 & Ação de Einstein--Hilbert & 8.5 & Equações de Einstein: A ação de Einstein--Hilbert; definição variacional de $T_{\mu\nu}$. \\
+36 & Traço e conservação local & 8.3, 8.6, 8.10 & Equações de Einstein: Traço das equações de campo; Conservação local; Exemplos resolvidos adicionais. \\
+37 & Limite newtoniano & 8.2, 8.7 & Equações de Einstein: Limite newtoniano; O limite fraco com mais detalhe. \\
+38 & Constante cosmológica e fechamento & 8.8, 8.9, 8.11, 8.12 & Equações de Einstein: Constante cosmológica como fluido; Problemas orientados; Exercícios. Resumo de fórmulas: Einstein. \\
+39 & Campo fraco e gauge & 9.1, 9.5 & Ondas gravitacionais: Campo fraco; Gauge e graus de liberdade. \\
+40 & Polarizações e partículas teste & 9.2, 9.6 & Ondas gravitacionais: Polarizações; Efeito sobre partículas teste. \\
+41 & Emissão e fórmula do quadrupolo & 9.4 & Ondas gravitacionais: Emissão. \\
+42 & Detectores e escalas & 9.3, 9.7 & Ondas gravitacionais: Detecção; Escalas de detecção. \\
+43 & Binárias compactas & 9.8, 9.10 & Ondas gravitacionais: Binárias compactas; Erros comuns e interpretação. \\
+44 & Oficina computacional V & 9.11 & Ondas gravitacionais: Resolução numérica, Python -- anel de partículas, fórmula do quadrupolo e teste de Hulse--Taylor. \\
+45 & Oficina computacional VI & 9.9, 9.11, 9.12, 9.13 & Ondas gravitacionais: Resolução numérica, inspiral e bloco em Mathematica; Problemas orientados; Exercícios. \\
+46 & Métrica de Schwarzschild & 10.1, 10.5 & Soluções esféricas, estrelas e Schwarzschild: Métrica de Schwarzschild; Coordenada areal. \\
+47 & Redshift gravitacional & 10.2 & Soluções esféricas, estrelas e Schwarzschild: Redshift gravitacional. \\
+48 & Geodésicas e potencial efetivo & 10.3 & Soluções esféricas, estrelas e Schwarzschild: Geodésicas e potencial efetivo. \\
+49 & Órbitas circulares e de fótons & 10.6, 10.7 & Soluções esféricas, estrelas e Schwarzschild: Órbitas circulares; Órbita de fótons. \\
+50 & Estrelas relativísticas & 10.4 & Soluções esféricas, estrelas e Schwarzschild: Estrelas relativísticas. \\
+51 & Testes clássicos e lentes & 10.8, 10.9 & Soluções esféricas, estrelas e Schwarzschild: Testes clássicos; Lentes gravitacionais. \\
+52 & Oficina computacional VII & 10.10, 10.11, 10.12, 10.13, 10.14 & Soluções esféricas, estrelas e Schwarzschild: Resolução numérica; Problemas orientados; Erros comuns e interpretação; Exercícios. \\
+53 & Horizonte & 11.1, 11.5 & Buracos negros: Horizonte; Horizonte versus singularidade. \\
+54 & Coordenadas regulares e diagramas causais & 11.2, 11.6 & Buracos negros: Coordenadas regulares; Diagramas causais. \\
+55 & Kerr e buracos negros reais & 11.3, 11.7 & Buracos negros: Buracos negros em rotação; Buracos negros reais. \\
+56 & Termodinâmica & 11.4, 11.8 & Buracos negros: Termodinâmica; Leis da mecânica de buracos negros. \\
+57 & Oficina computacional VIII & 11.11 & Buracos negros: Resolução numérica, Python -- cones de luz, diagrama de Kruskal e marés no horizonte. \\
+58 & Oficina computacional IX & 11.9, 11.10, 11.11, 11.12, 11.13 & Buracos negros: Resolução numérica, Hawking, Kerr e bloco em Mathematica; Problemas orientados; Erros comuns; Exercícios. Resumo de fórmulas: Schwarzschild. \\
+59 & Princípio cosmológico e redshift & 12.1, 12.2 & Cosmologia relativística: Princípio cosmológico; Redshift cosmológico. \\
+60 & Equações de Friedmann & 12.3, 12.6 & Cosmologia relativística: Equações de Friedmann; Eras de dominação. \\
+61 & Distâncias e horizontes & 12.4, 12.5 & Cosmologia relativística: Distâncias em cosmologia; Horizontes cosmológicos. \\
+62 & Parâmetros e problemas abertos & 12.7, 12.8 & Cosmologia relativística: Parâmetros observacionais; Problemas conceituais. \\
+63 & Oficina computacional X & 12.12 & Cosmologia relativística: Resolução numérica, Python -- escalas temporais, fator de escala e distâncias. \\
+64 & Oficina computacional XI & 12.9, 12.10, 12.12, 12.13, 12.14 & Cosmologia relativística: Resolução numérica, bloco em Mathematica; Problemas orientados; Erros comuns e interpretação; Exercícios. Resumo de fórmulas: Cosmologia. \\
+65 & Revisão técnica & A.1, A.9 & Apêndice~\ref{ap:indices} integral, com ênfase no Checklist para não errar. Revisão de tensores, geodésicas, curvatura e equações de campo. \\
+66 & Projeto 1 & 13.1 & Projetos finais: geodésicas em Schwarzschild. Definição de grupos, escopo, equações e entregáveis. \\
+67 & Projeto 2 & 13.2 & Projetos finais: redshift gravitacional. \\
+68 & Projeto 3 & 13.3 & Projetos finais: ondas gravitacionais; discussão de formas de onda e sirene padrão. \\
+69 & Projeto 4 & 13.4 & Projetos finais: cosmologias simples; Friedmann numérico e critérios de avaliação. \\
+70 & Síntese conceitual & 12.11 & Cosmologia relativística: Síntese conceitual do curso. Resumo de fórmulas integral; Bibliografia comentada. \\
+71 & Reserva & --- & Seminários, recuperação de atraso ou avaliação. \\
+72 & Reserva & --- & Seminários, recuperação de atraso ou avaliação. \\
 \bottomrule
 \end{longtable}
 \normalsize
