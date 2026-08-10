@@ -41,7 +41,11 @@ jobs:
         run: |
           mkdir _site
           cp index.html styles.css favicon.svg .nojekyll _site/
-          cp -r apostila notebooks dashboards codigos _site/
+          # `imagens` estava faltando: a pagina referenciava o logotipo do
+          # ODEROM e ele saiu 404 no site, embora funcionasse ao servir o
+          # repositorio localmente -- porque local o diretorio esta la', e
+          # aqui a copia e' por lista explicita.
+          cp -r apostila notebooks dashboards codigos imagens _site/
           (cd apostila/fonte && zip -qr "$GITHUB_WORKSPACE/_site/codigos/codigos-relatividade-geral.zip" codigo)
           mkdir -p _site/dashboards/capitulo-4
           cp -r rg-interactive-lab/dist/. _site/dashboards/capitulo-4/
