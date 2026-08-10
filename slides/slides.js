@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const slides = Array.from(document.querySelectorAll("#palco section"));
+  const slides = Array.from(document.querySelectorAll("#quadro section"));
   const progresso = document.getElementById("progresso");
   const contador = document.getElementById("contador");
   let atual = 0;
@@ -22,6 +22,20 @@
     // topo -- senão o próximo aparece no meio, sem título.
     slides[atual].scrollTop = 0;
   }
+
+  // O quadro tem 1600x900 fixos; quem se ajusta à janela é a escala.
+  // `Math.min` das duas razões preserva a proporção 16:9 -- a dimensão
+  // que sobra vira margem, como a tarja preta de uma projeção.
+  const quadro = document.getElementById("quadro");
+  function ajustarEscala() {
+    const e = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    quadro.style.transform = "scale(" + e + ")";
+  }
+  window.addEventListener("resize", ajustarEscala);
+  // Entrar e sair de tela cheia muda o tamanho da janela sem disparar
+  // `resize` em todos os navegadores.
+  document.addEventListener("fullscreenchange", ajustarEscala);
+  ajustarEscala();
 
   const avancar = () => mostrar(atual + 1);
   const voltar = () => mostrar(atual - 1);
