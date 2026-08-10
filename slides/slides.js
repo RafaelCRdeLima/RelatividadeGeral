@@ -23,12 +23,17 @@
     slides[atual].scrollTop = 0;
   }
 
-  // O quadro tem 1600x900 fixos; quem se ajusta à janela é a escala.
+  // O quadro tem 1440x810 fixos; quem se ajusta à janela é a escala.
   // `Math.min` das duas razões preserva a proporção 16:9 -- a dimensão
   // que sobra vira margem, como a tarja preta de uma projeção.
+  //
+  // Diminuir esta referência aumenta tudo na tela na mesma proporção,
+  // porque a escala cresce junto: é o único lugar a mexer para dar mais
+  // corpo à apresentação numa sala grande.
+  const QUADRO_W = 1440, QUADRO_H = 810;
   const quadro = document.getElementById("quadro");
   function ajustarEscala() {
-    const e = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    const e = Math.min(window.innerWidth / QUADRO_W, window.innerHeight / QUADRO_H);
     quadro.style.transform = "scale(" + e + ")";
   }
   window.addEventListener("resize", ajustarEscala);

@@ -8,7 +8,7 @@
  * ficam com display:none, e não meramente escondidas, para que o
  * navegador não gaste layout com dezenas de slides fora da tela.
  *
- * O palco tem tamanho FIXO -- 1600x900 -- e é o JavaScript que o escala
+ * O palco tem tamanho FIXO -- 1440x810 -- e é o JavaScript que o escala
  * para caber na janela. Antes o layout era fluido, com `clamp()` na
  * tipografia e `min(1160px, 92vw)` na largura: numa tela de 1920 o
  * conteúdo travava nos tetos dos clamps e sobrava metade da tela vazia.
@@ -55,9 +55,9 @@ html, body {
    se adapta à tela é a escala aplicada ao quadro inteiro, e uma unidade
    de viewport aqui dentro ignoraria essa escala e brigaria com ela. */
 #quadro {
-  width: 1600px;
-  height: 900px;
-  padding: 56px 88px;
+  width: 1440px;
+  height: 810px;
+  padding: 48px 76px;
   display: grid;
   place-items: center;
   transform-origin: center center;
@@ -66,10 +66,10 @@ html, body {
 section {
   display: none;
   width: 100%;
-  /* 900 menos os 56px de padding em cima e embaixo. Escrito em px, e não
+  /* 810 menos os 48px de padding em cima e embaixo. Escrito em px, e não
      como `100%`: um percentual aqui depende de como o grid do #quadro
      resolveu seu track, o que muda se mais de um slide estiver visível. */
-  max-height: 788px;
+  max-height: 714px;
   overflow-y: auto;
 }
 
@@ -172,7 +172,7 @@ figure { margin: 0; }
 figure img {
   display: block;
   width: 100%;
-  max-height: 470px;
+  max-height: 430px;
   object-fit: contain;
   background: white;
   border-radius: 4px;
@@ -230,7 +230,7 @@ td:first-child { color: var(--grafite); }
 .zona.dir { right: 0; }
 
 /* Nada de reempacotar em uma coluna conforme a largura da JANELA: o
-   quadro tem sempre 1600px, então o layout interno não muda -- numa tela
+   quadro tem sempre 1440px, então o layout interno não muda -- numa tela
    estreita o que acontece é a apresentação inteira encolher, como em
    qualquer projeção 16:9. */
 
