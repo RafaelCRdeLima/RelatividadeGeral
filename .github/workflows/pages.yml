@@ -45,7 +45,7 @@ jobs:
           # ODEROM e ele saiu 404 no site, embora funcionasse ao servir o
           # repositorio localmente -- porque local o diretorio esta la', e
           # aqui a copia e' por lista explicita.
-          cp -r apostila notebooks dashboards codigos imagens _site/
+          cp -r apostila notebooks dashboards codigos imagens slides _site/
           (cd apostila/fonte && zip -qr "$GITHUB_WORKSPACE/_site/codigos/codigos-relatividade-geral.zip" codigo)
           mkdir -p _site/dashboards/capitulo-4
           cp -r rg-interactive-lab/dist/. _site/dashboards/capitulo-4/
