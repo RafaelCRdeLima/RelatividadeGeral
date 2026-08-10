@@ -43,8 +43,8 @@
         <tr><td>3</td><td>Tempo próprio · transformações de Lorentz</td></tr>
         <tr><td>4</td><td>O que se mede: contração e velocidades</td></tr>
         <tr><td>5</td><td>Diagramas de Minkowski · gêmeos</td></tr>
-        <tr><td>6</td><td>A velocidade invariante é única</td></tr>
-        <tr><td>7</td><td>Oficina computacional</td></tr>
+        <tr><td>6</td><td>A velocidade invariante é única · problemas e exemplos</td></tr>
+        <tr><td>7</td><td>Oficina computacional · exercícios</td></tr>
       </table>
     </div>
     <div class="destaque">
@@ -579,6 +579,152 @@
     <p>
       <strong>A luz é rápida porque o fóton não tem massa;
       <span class="m">c</span> é invariante porque o espaço-tempo é assim.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ================= 1.9 PROBLEMAS ORIENTADOS ======================= -->
+<section>
+  <p class="etiqueta">Aula 6 · Seção 1.9</p>
+  <h2>Problemas orientados</h2>
+  <p>Seis, feitos em aula ou em casa, cada um atacando um mal-entendido
+    específico.</p>
+  <table>
+    <tr><td>1</td><td><strong>Relógio de luz</strong> — refazer a dilatação usando apenas a invariância do intervalo</td></tr>
+    <tr><td>2</td><td><strong>A barra e o celeiro</strong> — quatro eventos, dois veredictos, nenhuma contradição</td></tr>
+    <tr><td>3</td><td><strong>Ordem temporal</strong> — inverter a ordem de dois eventos sem violar causalidade</td></tr>
+    <tr><td>4</td><td><strong>Tempo próprio máximo</strong> — a inercial contra uma linha de mundo qualquer</td></tr>
+    <tr><td>5</td><td><strong>Velocidades transversais</strong> — até a aberração estelar, medida em 1728</td></tr>
+    <tr><td>6</td><td><strong>Rapidez</strong> — o parâmetro que restaura a soma</td></tr>
+  </table>
+</section>
+
+<section>
+  <p class="etiqueta">Aula 6 · Seção 1.9 · problema 2</p>
+  <h2>A barra e o celeiro</h2>
+  <p>
+    Barra de comprimento próprio <span class="m">L_0</span>, celeiro de
+    <span class="m">L_0/2</span>, com <span class="m">\gamma=2</span>.
+  </p>
+  <div class="duas">
+    <div class="destaque">
+      <h3>O fazendeiro</h3>
+      <p>A barra contrai para <span class="m">L_0/2</span> e cabe exatamente.
+        As duas portas fecham <em>ao mesmo tempo</em>, com ela inteira dentro.</p>
+    </div>
+    <div class="alerta">
+      <h3>O piloto</h3>
+      <p>É o celeiro que contrai, para <span class="m">L_0/4</span>. A barra
+        mede <span class="m">L_0</span> e não cabe de jeito nenhum.</p>
+    </div>
+  </div>
+  <p>
+    Os dois não podem estar errados sobre um fato: a barra ficou presa ou não
+    ficou. <strong>E ficar presa não é o que eles discordam.</strong>
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Aula 6 · Seção 1.9 · problema 2</p>
+  <h2>A resolução está nos quatro eventos</h2>
+  <p>
+    No celeiro <span class="m">S</span>, com a porta de entrada em
+    <span class="m">x=0</span> e a de saída em <span class="m">x=L_0/2</span>,
+    ambas fecham em <span class="m">t=0</span>. Aplicando
+    <span class="m">t'=\gamma(t-vx)</span>:
+  </p>
+  <div class="M">t'_{\text{entrada}}=0,\qquad t'_{\text{saída}}=-\gamma v\,\frac{L_0}{2}\;&lt;\;0</div>
+  <div class="destaque">
+    <p>
+      Para o piloto, a porta da <strong>saída</strong> fecha e reabre
+      <em>antes</em> — bem antes de sua ponta dianteira chegar lá. Depois, já
+      com a barra atravessando, a porta da <strong>entrada</strong> fecha e
+      reabre atrás dela.
+    </p>
+    <p>
+      A barra nunca está inteira dentro para o piloto, e <strong>nunca é
+      atingida por porta nenhuma</strong>. Os dois relatos descrevem os mesmos
+      quatro eventos; o que difere é só quais deles são simultâneos.
+    </p>
+  </div>
+  <p class="legenda">
+    E se as portas ficassem trancadas? Aí há colisão — e nada de corpo rígido:
+    a notícia do impacto percorre a barra no máximo a <span class="m">c</span>,
+    de modo que a outra ponta ainda não sabe de nada.
+  </p>
+</section>
+
+<!-- ================ 1.10 EXEMPLOS RESOLVIDOS ======================== -->
+<section>
+  <p class="etiqueta">Aula 6 · Seção 1.10</p>
+  <h2>Rapidez: o parâmetro que soma</h2>
+  <p>Defina <span class="m">\varphi</span> por
+    <span class="m">v=\tanh\varphi</span>. Então
+    <span class="m">\gamma=\cosh\varphi</span> e
+    <span class="m">\gamma v=\sinh\varphi</span>, e a transformação vira</p>
+  <div class="M">t'=t\cosh\varphi-x\sinh\varphi,\qquad x'=x\cosh\varphi-t\sinh\varphi</div>
+  <div class="duas">
+    <div>
+      <p>
+        É uma <strong>rotação hiperbólica</strong> no plano
+        <span class="m">(t,x)</span> — a mesma forma de uma rotação euclidiana,
+        com seno e cosseno trocados por suas versões hiperbólicas.
+      </p>
+      <p class="legenda">
+        E a razão do sinal: rotações preservam
+        <span class="m">x^2+y^2</span>; estas preservam
+        <span class="m">-t^2+x^2</span>.
+      </p>
+    </div>
+    <div class="destaque">
+      <p>Boosts sucessivos <strong>somam rapidezes</strong>:</p>
+      <div class="M">\varphi=\varphi_1+\varphi_2</div>
+      <p class="legenda">
+        A lei estranha de composição de velocidades é só
+        <span class="m">\tanh(\varphi_1+\varphi_2)</span> reescrita. A soma
+        nunca sumiu — mudou de variável.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Aula 6 · Seção 1.10</p>
+  <h2>Mais dois exemplos resolvidos</h2>
+  <div class="duas">
+    <div class="destaque">
+      <h3>Simultaneidade relativa</h3>
+      <p>
+        Dois eventos com <span class="m">\Delta t=0</span> e
+        <span class="m">\Delta x=L</span> em <span class="m">S</span>. Em
+        <span class="m">S'</span>:
+      </p>
+      <div class="M">\Delta t'=-\gamma vL</div>
+      <p class="legenda">
+        Só é nulo se <span class="m">v=0</span> ou <span class="m">L=0</span>:
+        eventos simultâneos e separados <em>nunca</em> continuam simultâneos.
+      </p>
+    </div>
+    <div class="destaque">
+      <h3>Trajetória por partes</h3>
+      <p>
+        Ida com <span class="m">v</span> por <span class="m">T/2</span>, volta
+        com <span class="m">-v</span> por <span class="m">T/2</span>:
+      </p>
+      <div class="M">\tau=T\sqrt{1-v^2}</div>
+      <p class="legenda">
+        Contra <span class="m">T</span> na Terra. A diferença não vem do
+        instante da virada — vem de <em>todo</em> o trajeto em movimento.
+      </p>
+    </div>
+  </div>
+  <div class="alerta">
+    <p>
+      O terceiro exemplo, a <strong>invariância do cone de luz</strong>: se
+      <span class="m">\Delta x=\Delta t</span> em um referencial, o mesmo vale
+      em qualquer outro — porque <span class="m">\Delta s^2=0</span> é
+      invariante, e zero continua zero por mais que <span class="m">\gamma</span>
+      o multiplique.
     </p>
   </div>
 </section>
