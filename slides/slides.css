@@ -202,6 +202,13 @@ th, td {
   border-bottom: 1px solid var(--linha);
 }
 th { color: var(--cyan); font-weight: 600; }
+
+/* Quando a primeira coluna é uma fórmula, o KaTeX quebra a linha no
+   sinal de relação e o `0` de `ds^2 < 0` cai sozinho embaixo. `nowrap`
+   mantém a inequação inteira, e a coluna se alarga o necessário -- não há
+   largura fixa a acertar, e continua valendo se a fórmula mudar. */
+table.col-formula td:first-child,
+table.col-formula th:first-child { white-space: nowrap; padding-right: 1.6rem; }
 td:first-child { color: var(--grafite); }
 
 .katex { color: var(--areia); }
