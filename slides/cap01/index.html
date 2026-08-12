@@ -531,28 +531,37 @@
 <section>
   <p class="etiqueta">Aula 3 · Seção 1.6</p>
   <h2>As hipérboles em ação</h2>
-  <figure>
-    <!-- Escala pela ALTURA, não pela largura: a figura é panorâmica e o
-         padrão `width:100%` a encaixaria no meio de um fundo branco largo
-         demais, sobrando moldura vazia dos dois lados. -->
-    <img src="figuras/hiperboles_eixos.svg"
-         style="width:auto; height:424px; max-width:100%; margin:0 auto"
-         alt="Hipérboles invariantes calibrando os eixos de S', e a tesoura dos eixos para v crescente">
-  </figure>
-  <div class="duas">
-    <p class="legenda">
-      <strong>À esquerda</strong>, onde fica a unidade: a hipérbole azul marca
-      <span class="m">ct'=1</span> sobre o eixo <span class="m">ct'</span>, a
-      vermelha marca <span class="m">x'=1</span> sobre <span class="m">x'</span>.
-      O arco pontilhado é o raio euclidiano 1 — no papel, os pontos de
-      <span class="m">S'</span> estão <em>mais longe</em>.
-    </p>
-    <p class="legenda">
-      <strong>À direita</strong>, a tesoura: os dois eixos se fecham sobre a
-      linha de luz pelo mesmo ângulo, em sentidos opostos. A luz é a única
-      direção que o boost deixa parada, e por isso continua bissetriz em todo
-      referencial.
-    </p>
+  <div class="duas larga-esq">
+    <svg id="hiperboles" class="grafico" viewBox="0 0 560 560"
+         role="img" aria-label="Hipérboles invariantes fixas e os eixos de S' girando com a velocidade"></svg>
+    <div>
+      <div class="controle">
+        <label for="v-hiperboles">velocidade de <span class="m">S'</span></label>
+        <input type="range" id="v-hiperboles" min="0" max="95" step="1" value="60">
+        <p class="leitura">
+          <span class="m">v</span> = <span id="leitura-v">0,60</span>
+          &nbsp;·&nbsp;
+          <span class="m">\gamma</span> = <span id="leitura-gama">1,250</span>
+        </p>
+      </div>
+      <div class="destaque">
+        <p class="legenda">
+          Arraste e repare no que <strong>não</strong> se mexe: as hipérboles.
+          Elas são o lugar dos eventos à mesma distância de Minkowski da origem,
+          e essa distância é a mesma para todo observador.
+        </p>
+      </div>
+      <p class="legenda">
+        O que gira são os eixos, e as marcas de unidade <em>deslizam</em> sobre
+        hipérboles paradas. Não é que cada observador tenha a sua régua: é uma
+        régua só, lida de ângulos diferentes.
+      </p>
+      <p class="legenda">
+        Os ramos <span class="m">2</span> e <span class="m">3</span> estão
+        apagados de propósito — a família continua, mas quem calibra o eixo é o
+        primeiro.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -915,5 +924,6 @@
 
 <script src="../vendor/katex/katex.min.js"></script>
 <script src="../slides.js?v=3"></script>
+<script src="../interativo.js?v=1"></script>
 </body>
 </html>

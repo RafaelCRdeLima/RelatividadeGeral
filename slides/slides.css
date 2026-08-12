@@ -194,6 +194,35 @@ figcaption { margin-top: 0.6rem; color: var(--grafite); font-size: 16px; line-he
 }
 .citacao figcaption { margin-top: 0.9rem; font-size: 17px; }
 
+/* Gráficos interativos: o SVG é desenhado por `interativo.js`. Altura
+   fixa porque o slide inteiro já vive num palco de tamanho fixo -- aqui
+   não há nada a adaptar. */
+.grafico { width: 100%; max-height: 508px; display: block; }
+
+.controle {
+  margin-bottom: 1.1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(230, 183, 92, 0.1);
+  border-left: 3px solid var(--gold);
+}
+.controle label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--gold);
+  font-size: 18px;
+}
+.controle input[type="range"] {
+  width: 100%;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+.controle .leitura {
+  margin: 0.7rem 0 0;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 20px;
+  color: #fff;
+}
+
 table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
 th, td {
   padding: 0.62rem 0.8rem;
