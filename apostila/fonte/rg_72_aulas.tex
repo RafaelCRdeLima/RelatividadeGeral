@@ -1067,15 +1067,27 @@ alcança nem um pouco. Isso não é uma coincidência aritmética: é o segundo
 postulado reaparecendo do outro lado da dedução, agora como teorema.
 
 \emph{A segunda}: velocidades subluminais nunca compõem para dar uma
-superluminal. A verificação é uma identidade que vale a pena guardar,
+superluminal. Para ver isso, o que interessa não é $u'$ em si, mas o quanto
+falta para ela chegar a $1$. Eleve \eqref{eq:composicao} ao quadrado, subtraia
+de $1$ e reduza ao denominador comum:
+\[
+  1-u'^2=1-\frac{(u-v)^2}{(1-uv)^2}=\frac{(1-uv)^2-(u-v)^2}{(1-uv)^2}.
+\]
+O numerador que apareceu é a diferença entre o quadrado do denominador de
+\eqref{eq:composicao} e o quadrado do seu numerador, e ele se fatora:
+\[
+  (1-uv)^2-(u-v)^2=1+u^2v^2-u^2-v^2=(1-u^2)(1-v^2).
+\]
+Chega-se assim a uma identidade que vale a pena guardar,
 \begin{equation}
-  1-u'^2=\frac{(1-u^2)(1-v^2)}{(1-uv)^2},
+  1-u'^2=\frac{(1-u^2)(1-v^2)}{(1-uv)^2}.
   \label{eq:identidade-composicao}
 \end{equation}
-obtida expandindo $(1-uv)^2-(u-v)^2=1+u^2v^2-u^2-v^2=(1-u^2)(1-v^2)$. Se
-$|u|<1$ e $|v|<1$, o lado direito é positivo, logo $|u'|<1$. A barreira da
-velocidade da luz não é imposta por decreto: ela é uma consequência algébrica
-da forma da transformação.
+Agora a conclusão se lê de graça. Se $|u|<1$ e $|v|<1$, os dois fatores do
+numerador são positivos, o denominador é um quadrado, e o lado direito inteiro
+é positivo --- ou seja, $1-u'^2>0$, isto é, $|u'|<1$. A barreira da velocidade
+da luz não é imposta por decreto: ela é uma consequência algébrica da forma da
+transformação.
 
 \begin{activity}
 Duas naves partem da Terra em sentidos opostos, cada uma com $v=0{,}8$ medida
