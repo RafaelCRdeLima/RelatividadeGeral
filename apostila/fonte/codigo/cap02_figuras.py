@@ -252,10 +252,109 @@ def fig_relogio_luz(v=0.6, L=1.0):
     fig.savefig(OUTDIR / "cap02_relogio_luz.pdf", bbox_inches="tight")
     plt.close(fig)
 
+# ---------------------------------------------------------------------
+# Figura 5: hiperboles invariantes calibrando os eixos de S'
+# ---------------------------------------------------------------------
+def fig_hiperboles_eixos():
+    """Como os eixos de S' se comportam, e onde fica a unidade sobre eles.
+
+    Painel esquerdo -- a calibracao. As hiperboles t^2-x^2=1 e x^2-t^2=1
+    sao o lugar dos pontos a distancia de Minkowski 1 da origem, e essa
+    distancia e' a mesma para QUALQUER observador. Onde cada uma corta o
+    eixo correspondente esta a unidade daquele eixo; o arco pontilhado de
+    raio euclidiano 1 mostra o quanto isso difere do que a regua diria.
+
+    Painel direito -- o comportamento. Conforme v cresce, t' e x' se
+    fecham sobre a linha de luz pelo mesmo angulo, em sentidos opostos.
+    E' por isso que a bissetriz continua sendo a linha de luz em todo
+    referencial: e' a unica direcao que o boost deixa parada.
+    """
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.6, 4.8))
+
+    lim = 2.6
+    s = np.array([0.0, lim])
+    for ax in (ax1, ax2):
+        ax.set_xlim(-0.30, lim)
+        ax.set_ylim(-0.30, lim)
+        ax.set_aspect("equal")
+        ax.axhline(0, color="black", lw=0.6, zorder=1)
+        ax.axvline(0, color="black", lw=0.6, zorder=1)
+        ax.set_xlabel(r"$x$")
+        ax.set_ylabel(r"$ct$")
+        ax.plot([0, lim], [0, lim], color="0.35", lw=1.1, ls=(0, (6, 4)),
+                zorder=2)
+
+    # ------------------- painel esquerdo: a calibracao -------------------
+    v = 0.6
+    g = 1 / np.sqrt(1 - v**2)
+
+    # o arco euclidiano vem primeiro, por tras de tudo: e' so' referencia
+    a = np.linspace(0, np.pi / 2, 160)
+    ax1.plot(np.cos(a), np.sin(a), color="0.62", lw=0.9, ls=":", zorder=2)
+    ax1.plot([1, 0], [0, 1], "o", color="0.55", ms=4, zorder=3)
+    ax1.text(0.74, 0.60, "raio 1\n(euclidiano)", fontsize=8.6, color="0.45",
+             ha="center", va="center", rotation=-45, path_effects=HALO)
+
+    # as duas hiperboles invariantes
+    p = np.linspace(0, 1.85, 400)
+    ax1.plot(np.sinh(p), np.cosh(p), color="#4C72B0", lw=1.9, zorder=3)
+    ax1.plot(np.cosh(p), np.sinh(p), color="#B0413E", lw=1.9, zorder=3)
+
+    # os eixos de S'
+    ax1.plot(v * s, s, color="#C08A1E", lw=1.7, zorder=4)   # t': x = vt
+    ax1.plot(s, v * s, color="#C08A1E", lw=1.7, zorder=4)   # x': ct = vx
+    ax1.text(v * 2.42, 2.46, r"$ct'$", fontsize=12, color="#C08A1E",
+             ha="right", va="center", path_effects=HALO)
+    ax1.text(2.46, v * 2.42 + 0.16, r"$x'$", fontsize=12, color="#C08A1E",
+             ha="center", path_effects=HALO)
+
+    # a unidade de cada eixo, onde a hiperbole que o calibra o corta
+    ax1.plot([g * v], [g], "o", color="#4C72B0", ms=7, zorder=5)
+    ax1.plot([g], [g * v], "o", color="#B0413E", ms=7, zorder=5)
+    ax1.annotate(r"$ct'=1$", xy=(g * v, g), xytext=(-10, 6),
+                 textcoords="offset points", fontsize=10.5, color="#4C72B0",
+                 ha="right", path_effects=HALO)
+    ax1.annotate(r"$x'=1$", xy=(g, g * v), xytext=(9, -9),
+                 textcoords="offset points", fontsize=10.5, color="#B0413E",
+                 path_effects=HALO)
+
+    ax1.text(0.86, 2.16, r"$t^2-x^2=1$", fontsize=10.5, color="#4C72B0",
+             ha="center", path_effects=HALO)
+    ax1.text(2.16, 0.30, r"$x^2-t^2=1$", fontsize=10.5, color="#B0413E",
+             ha="center", path_effects=HALO)
+    ax1.set_title(r"A unidade de $S'$ ($v=0{,}6$) sai da hipérbole,"
+                  "\n" r"e não da régua", fontsize=10.5)
+
+    # ------------------- painel direito: o comportamento -----------------
+    for vv, cor in zip((0.3, 0.6, 0.9), ("#DD8452", "#C08A1E", "#B0413E")):
+        ax2.plot(vv * s, s, color=cor, lw=1.7, zorder=4)
+        ax2.plot(s, vv * s, color=cor, lw=1.7, zorder=4)
+        rot = f"$v={vv}$".replace(".", "{,}")
+        # o rotulo sai na ponta de cada raio, deslocado para fora da linha
+        ax2.text(vv * 2.50, 2.50, rot, fontsize=9.5, color=cor, ha="right",
+                 va="bottom", path_effects=HALO)
+        ax2.text(2.52, vv * 2.50, rot, fontsize=9.5, color=cor, ha="right",
+                 va="bottom", rotation=np.degrees(np.arctan(vv)),
+                 path_effects=HALO)
+
+    # A explicação em palavras fica na legenda de quem usa a figura: aqui
+    # dentro ela cruzava as linhas, e não há canto livre que a comporte
+    # sem encolher a escala do gráfico.
+    ax2.text(2.44, 0.14, r"$ct=x$", fontsize=10, color="0.35", ha="right",
+             rotation=45, path_effects=HALO)
+    ax2.set_title("Quanto maior $v$, mais fechada a tesoura\n"
+                  r"(no limite $v\to1$ os dois colapsam na luz)",
+                  fontsize=10.5)
+
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap02_hiperboles_eixos.pdf", bbox_inches="tight")
+    plt.close(fig)
+
 
 if __name__ == "__main__":
     fig_cone_luz()
     fig_simultaneidade()
     fig_paradoxo_gemeos()
     fig_relogio_luz()
+    fig_hiperboles_eixos()
     print("Figuras salvas em", OUTDIR)
