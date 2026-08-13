@@ -1423,6 +1423,61 @@ está somado de $0$ a $3$. O índice de cima numera a \emph{linha} e o de baixo 
 --- mas é ela que sobrevive ao capítulo de tensores e à relatividade geral,
 onde as matrizes deixam de ser constantes.
 
+\begin{resultado}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}CONVENÇÃO DE SOMA DE EINSTEIN}]
+\textbf{A regra.} Um índice que aparece \emph{duas vezes} no mesmo termo, uma
+vez em cima e uma vez embaixo, está somado de $0$ a $3$. O sinal de somatório
+não se escreve:
+\[
+  \Lambda^{\alpha}{}_{\beta}\,x^{\beta}
+  \;\equiv\;
+  \sum_{\beta=0}^{3}\Lambda^{\alpha}{}_{\beta}\,x^{\beta}
+  =\Lambda^{\alpha}{}_{0}x^{0}+\Lambda^{\alpha}{}_{1}x^{1}
+   +\Lambda^{\alpha}{}_{2}x^{2}+\Lambda^{\alpha}{}_{3}x^{3}.
+\]
+
+\textbf{Dois tipos de índice.} O $\beta$ acima é \emph{mudo}: ele desaparece na
+soma e seu nome não importa --- $\Lambda^{\alpha}{}_{\beta}x^{\beta}$ e
+$\Lambda^{\alpha}{}_{\mu}x^{\mu}$ são a mesma coisa. Já o $\alpha$ é
+\emph{livre}: aparece uma única vez e sobrevive, dizendo qual das quatro
+equações estamos escrevendo. A equação $x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}x^{\beta}$
+não é uma equação: são quatro, uma para cada valor de $\alpha$, cada uma com
+quatro termos somados.
+
+\textbf{Três verificações que pegam quase todo erro de índice.}
+\begin{enumerate}
+  \item Os índices \emph{livres} têm de ser os mesmos, e na mesma posição (em
+  cima ou embaixo), nos dois lados da igualdade e em cada termo de uma soma.
+  \item Um índice não pode aparecer \emph{três} vezes no mesmo termo. Se
+  apareceu, houve colisão de nomes: renomeie um dos mudos.
+  \item Todo índice repetido deve estar uma vez em cima e uma vez embaixo. Dois
+  índices repetidos na mesma altura são sinal de erro --- a posição vai
+  significar algo a partir do Capítulo~\ref{chap:tensores}.
+\end{enumerate}
+\end{resultado}
+
+Vale insistir no terceiro item. Por ora a distinção entre índice em cima e
+índice embaixo parece só uma regra de arrumação, e nada se perderia escrevendo
+tudo embaixo. A partir do capítulo de tensores ela passa a distinguir dois
+objetos genuinamente diferentes --- vetores e um-formas ---, e a convenção
+soma exatamente o par que produz um número independente de coordenadas. Escrever
+os índices na altura certa desde agora é o que evita ter de desaprender depois.
+
+\begin{roteiro}[title={\sffamily\bfseries\footnotesize\color{rgGrafite}UMA ANEDOTA}]
+Einstein introduziu a convenção em 1916, no artigo que apresentou a
+relatividade geral, com uma única frase de nota: ``uma olhada nas fórmulas
+deste parágrafo mostra que sempre se soma sobre índices que aparecem duas
+vezes''. Anos depois, segundo o colega Louis Kollros, teria comentado com um
+amigo:
+\begin{quote}
+\emph{``Fiz uma grande descoberta na matemática: suprimi o sinal de somatório
+toda vez que a soma deve ser feita sobre um índice que aparece duas vezes.''}
+\end{quote}
+A piada é boa porque é meio verdadeira. A convenção não prova nada --- mas
+enxuga tanto a página que torna praticável escrever à mão as equações de campo,
+onde os somatórios explícitos se contariam às dezenas. A frase é relatada de
+segunda mão, e vale como anedota, não como citação documentada.
+\end{roteiro}
+
 \subsection*{A condição que define uma transformação de Lorentz}
 
 O intervalo também tem forma matricial. Definindo a \emph{métrica de Minkowski}
