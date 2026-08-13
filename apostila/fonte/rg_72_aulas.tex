@@ -1307,8 +1307,31 @@ onde $\gamma$ e $\beta$ dependem só de $v$ e o fator comum $\gamma$ foi posto
 em evidência por conveniência. Nada até aqui fixa $\beta$; em Galileu,
 $\beta=0$ e $\gamma=1$.
 
-Pela hipótese 2, inverter a orientação do eixo mostra que $\gamma$ é uma
-função \emph{par} de $v$ e $\beta$ é \emph{ímpar}.
+Agora a hipótese 2. Para que lado o eixo $x$ aponta é convenção nossa, não
+física --- e uma convenção não pode alterar a forma da transformação. Vire o
+eixo, então: chame $X=-x$ e $X'=-x'$. Nas coordenadas novas $S'$ se afasta no
+sentido oposto, com velocidade $-v$, e a transformação tem de ter exatamente a
+mesma forma de antes:
+\[
+  X'=\gamma(-v)\,\bigl(X-(-v)\,t\bigr),\qquad
+  t'=\gamma(-v)\,\bigl(t-\beta(-v)\,X\bigr).
+\]
+Traduza de volta, com $X=-x$ e $X'=-x'$. A primeira vira
+$-x'=\gamma(-v)(-x+vt)$, ou seja $x'=\gamma(-v)(x-vt)$; comparada com a
+declarada, $x'=\gamma(v)(x-vt)$, ela obriga
+\[
+  \gamma(-v)=\gamma(v).
+\]
+Sabendo disso, a segunda vira $t'=\gamma(v)\bigl(t+\beta(-v)x\bigr)$; comparada
+com $t'=\gamma(v)(t-\beta(v)x)$, os fatores $\gamma$ cancelam e sobra
+\[
+  \beta(-v)=-\beta(v).
+\]
+Isto é: $\gamma$ é função \emph{par} de $v$, e $\beta$ é \emph{ímpar}. O
+resultado é razoável antes mesmo da conta. O fator $\gamma$ é uma escala, e uma
+escala não sabe distinguir esquerda de direita --- só pode depender de $v^2$. Já
+$\beta$ multiplica $x$, que \emph{trocou de sinal} quando o eixo foi virado; para
+o produto $\beta x$ sobreviver à troca, $\beta$ tem de trocar de sinal junto.
 
 Agora a hipótese 3. Em forma matricial a transformação é
 \[
@@ -1324,9 +1347,24 @@ com determinante $\gamma^2(1-\beta v)$. Invertendo,
   \begin{pmatrix}t'\\x'\end{pmatrix}.
 \]
 Mas o princípio da relatividade diz que essa inversa \emph{é} a transformação
-direta com $v\to-v$, que pela paridade da hipótese 2 vale
-$\gamma\left(\begin{smallmatrix}1&\beta\\v&1\end{smallmatrix}\right)$.
-Comparando os dois, o fator de fora tem de coincidir:
+direta com $v\to-v$. Escrevendo essa última e usando as duas paridades que a
+hipótese 2 acabou de estabelecer,
+\[
+  \gamma(-v)\begin{pmatrix}1&-\beta(-v)\\ v&1\end{pmatrix}
+  \;=\;
+  \gamma\begin{pmatrix}1&\beta\\ v&1\end{pmatrix}.
+\]
+Repare no que cada hipótese fez. Sem a paridade, o lado esquerdo ficaria preso a
+$\gamma(-v)$ e $\beta(-v)$, funções ainda desconhecidas, e não haveria o que
+comparar: é a hipótese 2 que \emph{prepara} a comparação, e a hipótese 3 que a
+\emph{autoriza}.
+
+Temos agora duas expressões para a mesma inversa, e elas têm a \emph{mesma
+matriz} --- só os fatores à frente diferem. Igualando-os,
+\[
+  \frac{1}{\gamma\,(1-\beta v)}=\gamma,
+\]
+ou seja
 \begin{equation}
   \gamma^2\,(1-\beta v)=1 .
   \label{eq:ignatowski-gamma}
