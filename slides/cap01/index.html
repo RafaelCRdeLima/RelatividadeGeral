@@ -762,9 +762,63 @@
   </div>
 </section>
 
-<!-- ================= 1.9 PROBLEMAS ORIENTADOS ======================= -->
+<!-- ================= 1.9 FORMA MATRICIAL ============================= -->
 <section>
   <p class="etiqueta">Aula 4 · Seção 1.9</p>
+  <h2>As transformações em forma matricial</h2>
+  <div class="duas">
+    <div>
+      <p>Quatro coordenadas numa coluna, a transformação numa matriz:</p>
+      <div class="M">\Lambda(v)=\begin{pmatrix}
+        \gamma & -\gamma v & 0 & 0\\
+        -\gamma v & \gamma & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1\end{pmatrix}</div>
+      <p class="legenda">
+        As duas últimas linhas são a identidade — o boost não mexe nas direções
+        transversais. Toda a física está no bloco <span class="m">2\times2</span>,
+        e é com ele que os programas trabalham.
+      </p>
+      <div class="M">x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}\,x^{\beta}</div>
+      <p class="legenda">
+        Índice repetido, um em cima e um embaixo, está somado. Parece
+        preciosismo para um boost — mas é esta notação que sobrevive aos
+        tensores e à relatividade geral.
+      </p>
+    </div>
+    <div>
+      <div class="alerta">
+        <h3>A definição, em uma linha</h3>
+        <div class="M">\Lambda^{T}\eta\,\Lambda=\eta</div>
+        <p class="legenda">
+          Com <span class="m">\eta=\operatorname{diag}(-1,1,1,1)</span>. Exigir isso
+          <em>é</em> exigir que o intervalo se preserve — e tudo o que deduzimos
+          na Seção 1.4 está contido aqui.
+        </p>
+      </div>
+      <div class="destaque">
+        <h3>Compor vira multiplicar</h3>
+        <div class="M">\Lambda(w)\,\Lambda(v)=\Lambda\!\left(\dfrac{v+w}{1+vw}\right)</div>
+        <p class="legenda">
+          O produto de dois boosts é um boost. Com a rapidez
+          <span class="m">v=\tanh\varphi</span> a conta some:
+          <span class="m">\Lambda(\varphi)\Lambda(\psi)=\Lambda(\varphi+\psi)</span>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <p class="legenda">
+    <strong>E matrizes não comutam — isso é física.</strong> Dois boosts em
+    direções diferentes não dão um boost puro: sobra uma rotação espacial, a
+    <em>rotação de Wigner</em>, que produz a precessão de Thomas do spin do
+    elétron. Sem forma matricial, compor boosts perpendiculares seria quase
+    impraticável.
+  </p>
+</section>
+
+<!-- ================= 1.9 PROBLEMAS ORIENTADOS ======================= -->
+<section>
+  <p class="etiqueta">Aula 4 · Seção 1.10</p>
   <h2>Problemas orientados</h2>
   <p>Seis, feitos em aula ou em casa, cada um atacando um mal-entendido
     específico.</p>
@@ -779,7 +833,7 @@
 </section>
 
 <section>
-  <p class="etiqueta">Aula 4 · Seção 1.9 · problema 2</p>
+  <p class="etiqueta">Aula 4 · Seção 1.10 · problema 2</p>
   <h2>A barra e o celeiro</h2>
   <p>
     Barra de comprimento próprio <span class="m">L_0</span>, celeiro de
@@ -804,7 +858,7 @@
 </section>
 
 <section>
-  <p class="etiqueta">Aula 4 · Seção 1.9 · problema 2</p>
+  <p class="etiqueta">Aula 4 · Seção 1.10 · problema 2</p>
   <h2>A resolução está nos quatro eventos</h2>
   <p>
     No celeiro <span class="m">S</span>, com a porta de entrada em
@@ -835,7 +889,7 @@
 
 <!-- ================ 1.10 EXEMPLOS RESOLVIDOS ======================== -->
 <section>
-  <p class="etiqueta">Aula 4 · Seção 1.10</p>
+  <p class="etiqueta">Aula 4 · Seção 1.11</p>
   <h2>Rapidez: o parâmetro que soma</h2>
   <p>Defina <span class="m">\varphi</span> por
     <span class="m">v=\tanh\varphi</span>. Então
@@ -868,7 +922,7 @@
 </section>
 
 <section>
-  <p class="etiqueta">Aula 4 · Seção 1.10</p>
+  <p class="etiqueta">Aula 4 · Seção 1.11</p>
   <h2>Mais dois exemplos resolvidos</h2>
   <div class="duas">
     <div class="destaque">
@@ -910,7 +964,7 @@
 
 <!-- ======================= 1.11 OFICINA ============================== -->
 <section>
-  <p class="etiqueta">Aula 4 · Seção 1.11</p>
+  <p class="etiqueta">Aula 4 · Seção 1.12</p>
   <h2>Oficina computacional</h2>
   <div class="duas larga-dir">
     <div>

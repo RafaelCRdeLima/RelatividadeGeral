@@ -364,7 +364,7 @@ Aula & Foco & Seções & Conteúdo \\
 1 & Apresentação, Newton e Einstein & 1.1, 1.2 & Plano do curso e critérios de avaliação, no primeiro tempo. Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
 2 & Tempo próprio e Lorentz & 1.3, 1.4 & Relatividade especial: Tempo próprio; Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. \\
 3 & O que se mede, diagramas e gêmeos & 1.5, 1.6, 1.7 & Relatividade especial: Consequências --- contração de Lorentz, reciprocidade e composição de velocidades, todas deduzidas de \eqref{eq:lorentz}. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. Diagramas de Minkowski, construção dos eixos de $S'$ e hipérboles invariantes; Paradoxo dos gêmeos. \\
-4 & Sem postular a luz, e oficina & 1.8, 1.9, 1.10, 1.11, 1.12, 1.13 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. Resolução numérica (Python e Mathematica); Exercícios. \\
+4 & Sem postular a luz, e oficina & 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. Resolução numérica (Python e Mathematica); Exercícios. \\
 5 & Vetores e produto escalar & 2.1, 2.2 & Vetores e momento relativístico: o critério de transformação que define um quadrivetor; produto escalar e métrica de Minkowski. \\
 6 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
 7 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
@@ -1381,6 +1381,147 @@ que o fóton tivesse massa. A luz é rápida porque o fóton não tem massa; $c$
 invariante porque o espaço-tempo é assim.
 \end{atencao}
 
+\section{As transformações em forma matricial}
+\label{sec:matricial}
+
+Até aqui a transformação de Lorentz apareceu como um par de equações. Isso
+basta enquanto há um boost só. Quando começarmos a compor transformações ---
+e a oficina computacional deste capítulo já pede isso --- escrever quatro
+equações a cada passo fica insustentável. A saída é a mesma da álgebra linear:
+uma transformação linear é uma matriz, e compor transformações é multiplicar
+matrizes.
+
+Reúna as quatro coordenadas de um evento em uma coluna e a
+transformação~\eqref{eq:lorentz} em uma matriz:
+\begin{equation}
+  x^\mu=\begin{pmatrix} t\\ x\\ y\\ z\end{pmatrix},
+  \qquad
+  \Lambda(v)=
+  \begin{pmatrix}
+    \gamma & -\gamma v & 0 & 0\\
+    -\gamma v & \gamma & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+  \end{pmatrix},
+  \label{eq:boost-matriz}
+\end{equation}
+de modo que $x'=\Lambda x$ reproduz, linha a linha, exatamente
+$t'=\gamma(t-vx)$, $x'=\gamma(x-vt)$, $y'=y$ e $z'=z$. As duas últimas linhas
+são a identidade porque o boost não mexe nas direções transversais; toda a
+física está no bloco $2\times2$ do canto superior esquerdo, e é por isso que os
+programas trabalham com uma matriz $2\times2$ quando o movimento é ao longo de
+um eixo só.
+
+Em componentes, escreve-se
+\begin{equation}
+  x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}\,x^{\beta},
+  \label{eq:lorentz-indices}
+\end{equation}
+com a convenção de soma: um índice repetido, uma vez em cima e uma vez embaixo,
+está somado de $0$ a $3$. O índice de cima numera a \emph{linha} e o de baixo a
+\emph{coluna}. Essa notação parece um preciosismo agora --- e é, para um boost
+--- mas é ela que sobrevive ao capítulo de tensores e à relatividade geral,
+onde as matrizes deixam de ser constantes.
+
+\subsection*{A condição que define uma transformação de Lorentz}
+
+O intervalo também tem forma matricial. Definindo a \emph{métrica de Minkowski}
+\begin{equation}
+  \eta=\operatorname{diag}(-1,+1,+1,+1),
+  \qquad
+  \Delta s^2=\Delta x^{T}\eta\,\Delta x
+  =\eta_{\alpha\beta}\,\Delta x^{\alpha}\Delta x^{\beta},
+  \label{eq:metrica-minkowski}
+\end{equation}
+o produto $\Delta x^{T}\eta\,\Delta x$ devolve $-\Delta t^2+\Delta x^2+\Delta
+y^2+\Delta z^2$, que é o intervalo com que trabalhamos desde a
+Seção~\ref{sec:eventos-intervalo}.
+
+Agora a pergunta central do capítulo tem uma resposta de uma linha. Exigir que
+$\Lambda$ preserve o intervalo é exigir que $\Delta x'^{T}\eta\,\Delta x'=\Delta
+x^{T}\eta\,\Delta x$ para \emph{todo} $\Delta x$. Como $\Delta x'=\Lambda\,\Delta
+x$, o lado esquerdo é $\Delta x^{T}(\Lambda^{T}\eta\,\Lambda)\Delta x$, e a
+igualdade para todo $\Delta x$ obriga
+\begin{equation}
+  \boxed{\;\Lambda^{T}\eta\,\Lambda=\eta\;}
+  \label{eq:condicao-lorentz}
+\end{equation}
+
+\begin{central}
+A equação~\eqref{eq:condicao-lorentz} \emph{é} a definição de transformação de
+Lorentz. Tudo o que deduzimos na Seção~\ref{sec:transformacoes-lorentz} --- a forma de
+$\gamma$, o termo $-vx$ no tempo, a impossibilidade de $t'=t$ --- está contido
+nela. Boosts em qualquer direção e rotações espaciais a satisfazem, e são as
+únicas transformações lineares que a satisfazem.
+\end{central}
+
+Vale conferir uma vez, à mão, que o boost~\eqref{eq:boost-matriz} cumpre a
+condição. Restringindo ao bloco $2\times2$, onde $\eta=\operatorname{diag}(-1,1)$:
+\[
+  \Lambda^{T}\eta\,\Lambda=
+  \begin{pmatrix}\gamma & -\gamma v\\ -\gamma v & \gamma\end{pmatrix}
+  \begin{pmatrix}-1 & 0\\ 0 & 1\end{pmatrix}
+  \begin{pmatrix}\gamma & -\gamma v\\ -\gamma v & \gamma\end{pmatrix}
+  =\gamma^2
+  \begin{pmatrix}-1+v^2 & 0\\ 0 & 1-v^2\end{pmatrix}
+  =\begin{pmatrix}-1 & 0\\ 0 & 1\end{pmatrix},
+\]
+onde o último passo usa $\gamma^2(1-v^2)=1$ --- a mesma identidade que define
+$\gamma$. Não é coincidência: foi exatamente a invariância do intervalo que
+fixou $\gamma$ lá atrás.
+
+\subsection*{Compor é multiplicar}
+
+O ganho aparece agora. Dois boosts colineares sucessivos são o produto
+$\Lambda(w)\Lambda(v)$, e o resultado é
+\begin{equation}
+  \Lambda(w)\,\Lambda(v)=\Lambda\!\left(\frac{v+w}{1+vw}\right),
+  \label{eq:composicao-matriz}
+\end{equation}
+que é a lei de composição~\eqref{eq:composicao} outra vez --- agora como uma
+propriedade de fechamento: \emph{o produto de dois boosts é um boost}. Verificar
+isso multiplicando as matrizes com $\gamma$ explícito é possível, mas
+desagradável. Com a rapidez do Exemplo~\ref{ex:rapidez}, $v=\tanh\varphi$, a
+matriz fica
+\begin{equation}
+  \Lambda(\varphi)=
+  \begin{pmatrix}
+    \cosh\varphi & -\sinh\varphi\\
+    -\sinh\varphi & \cosh\varphi
+  \end{pmatrix},
+  \label{eq:boost-rapidez}
+\end{equation}
+e a conta some: pelas fórmulas de adição de cossenos e senos hiperbólicos,
+\[
+  \Lambda(\varphi)\,\Lambda(\psi)=\Lambda(\varphi+\psi).
+\]
+Os boosts colineares formam um grupo de um parâmetro, e o parâmetro que soma é
+a rapidez --- não a velocidade. Comparada com a rotação usual, a única mudança
+foi trocar $\cos,\sin$ por $\cosh,\sinh$ e o sinal de um termo: uma rotação
+preserva $x^2+y^2$, esta preserva $-t^2+x^2$.
+
+Duas consequências saem de graça de~\eqref{eq:condicao-lorentz}. Tomando o
+determinante, $(\det\Lambda)^2=1$; os boosts têm $\det\Lambda=+1$. E a inversa é
+\begin{equation}
+  \Lambda(v)^{-1}=\Lambda(-v),
+  \label{eq:inversa-boost}
+\end{equation}
+que é a afirmação óbvia de que desfazer um boost é aplicar o boost contrário ---
+e a versão matricial da simetria que já usamos ao exigir que a transformação de
+$S'$ para $S$ tivesse a mesma forma com $v\to-v$.
+
+\begin{atencao}
+\textbf{Matrizes não comutam, e isso é física.} Para boosts colineares a ordem
+não importa, porque as rapidezes simplesmente somam. Para boosts em direções
+\emph{diferentes}, importa: $\Lambda_x(v_1)\Lambda_y(v_2)\ne\Lambda_y(v_2)\Lambda_x(v_1)$,
+e nenhum dos dois produtos é um boost puro --- cada um é um boost composto com
+uma rotação espacial. Essa rotação não é artifício de conta: é a
+\emph{rotação de Wigner}, responsável pela precessão de Thomas do spin do
+elétron no átomo. O primeiro problema do Conteúdo extra pede para encontrá-la
+numericamente, e é para isso que a forma matricial era necessária: com pares de
+equações soltas, compor dois boosts perpendiculares seria quase impraticável.
+\end{atencao}
+
 \section{Problemas orientados}
 
 \begin{enumerate}
@@ -1457,6 +1598,7 @@ qualquer observador inercial.
 \end{example}
 
 \begin{example}
+\label{ex:rapidez}
 \textbf{Rapidez e composição.} Escreva $v=\tanh\varphi$. Então
 $\gamma=\cosh\varphi$ e $\gamma v=\sinh\varphi$. A transformação de Lorentz em
 $1+1$ dimensões fica
