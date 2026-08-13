@@ -3,10 +3,10 @@
 (* =====================================================================
    Buracos negros: regularidade do horizonte, invariantes de curvatura,
    gravidade superficial e a primeira lei. Reaproveita as ferramentas de
-   cap11_schwarzschild_simbolico.wl.
+   cap10_schwarzschild_simbolico.wl.
    ===================================================================== *)
 
-Get["cap11_schwarzschild_simbolico.wl"];
+Get["cap10_schwarzschild_simbolico.wl"];
 ClearAll[x, g, Gam, Riem];
 
 (* --- 1. Eddington-Finkelstein entrante ------------------------------- *)

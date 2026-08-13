@@ -1,223 +1,217 @@
 % =====================================================================
-%  Capítulo 10 — Resolução numérica
-%  Inserir antes da seção de exercícios.
+%  Capítulo 11 — Resolução numérica
+%  Inserir depois da seção "Testes clássicos".
 % =====================================================================
 \section{Resolução numérica}
 \label{sec:cap10-numerica}
 
-Este capítulo enunciou a fórmula do quadrupolo como estimativa dimensional e
-descreveu o \emph{chirp} em palavras. Nenhuma das duas coisas é suficiente
-para conectar a teoria com um sinal real. Aqui fechamos essa lacuna: a
-constante da fórmula do quadrupolo é obtida derivando o momento de quadrupolo
-e conferida contra a forma fechada; a evolução da frequência é integrada; e o
-resultado é confrontado com dois sistemas medidos, PSR~B1913+16 e GW150914.
-Trabalhamos em unidades SI, convertendo apenas na impressão.
+Três resultados deste capítulo foram enunciados sem conta explícita: o valor
+da ISCO, a precessão do periélio e o comportamento do tempo coordenado perto
+do horizonte. Nenhum deles é acessível por integração em forma fechada
+elementar, e é justamente aí que o cálculo numérico deixa de ser ilustração e
+passa a ser método. Esta seção resolve os três, valida cada resultado contra
+um limite conhecido e produz as figuras usadas nas seções anteriores. Os
+scripts completos estão em \texttt{codigo/}; aqui reproduzimos apenas os
+trechos que carregam a física.
 
-\subsection{Python}
-
-\programa[Anel de partículas nas duas polarizações, verificação da fórmula do quadrupolo, teste de Hulse--Taylor e inspiral de uma binária compacta.]{codigo/cap10\_ondas.py}
-
-\subsubsection*{O anel de partículas}
-
-A equação de desvio geodésico em gauge TT, com a onda propagando-se em $z$,
-reduz-se a
+Trabalhamos com $G = c = 1$ e $M = 1$, de modo que $r$ é medido em massas
+gravitacionais: $r = 6$ significa $r = 6GM/c^2$. Para uma partícula massiva
+no plano equatorial, com $E$ e $L$ conservados por unidade de massa de
+repouso,
 \begin{equation}
-  \rd{^{2}\xi^{i}}{t^{2}} = \frac{1}{2}\,\rd{^{2}h^{\rm TT}_{ij}}{t^{2}}\,\xi^{j},
-  \qquad\text{cuja integral é}\qquad
-  \xi^{i}(t) = \left(\delta^{i}{}_{j} + \tfrac12 h^{\rm TT}_{ij}\right)\xi^{j}(0).
-  \label{eq:cap10-anel}
+  \left(\rd{r}{\tau}\right)^{2} = E^{2} - \Veff(r),
+  \qquad
+  \Veff(r) = \left(1 - \frac{2M}{r}\right)\left(1 + \frac{L^{2}}{r^{2}}\right).
+  \label{eq:cap11-veff}
 \end{equation}
 
 \begin{atencao}
-Em gauge TT as \emph{coordenadas} das partículas livres não mudam --- elas
-estão em queda livre e permanecem em repouso coordenado. O que muda é a
-distância própria entre elas. Dizer que a onda ``empurra'' as massas é a
-imagem errada; dizer que ela altera a régua é a certa. A elipse desenhada
-abaixo é o lugar geométrico dos pontos a distância própria constante, que é
-exatamente o que o interferômetro mede.
+Integrar diretamente $\dd r/\dd\tau = \pm\sqrt{E^{2}-\Veff}$ é a primeira
+tentativa de quase todo mundo, e ela falha: nos pontos de retorno o radicando
+passa por zero e o integrador ou trava ou escolhe o sinal errado. Derive a
+equação~\eqref{eq:cap11-veff} uma vez em $\tau$ e integre a forma de segunda
+ordem,
+\[
+  \rd{^{2}r}{\tau^{2}} = -\frac{M}{r^{2}} + \frac{L^{2}}{r^{3}}
+                          - \frac{3ML^{2}}{r^{4}},
+\]
+que é regular nos pontos de retorno e vale exatamente, sem aproximação de
+campo fraco.
 \end{atencao}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{figuras/cap10_anel_polarizacoes.pdf}
-  \caption{Deformação de um anel de partículas teste em quatro instantes de
-  um período, para as duas polarizações (amplitude exagerada para
-  $h=0{,}45$; o valor real é $10^{-21}$). O anel pontilhado é a
-  configuração sem onda. A polarização $\times$ produz exatamente o mesmo
-  padrão da $+$, girado de $45^\circ$ --- e não uma deformação de tipo
-  novo. Em $\omega t = \pi/2$ e $3\pi/2$ o anel volta a ser circular: a onda
-  não desloca as partículas em média, apenas oscila a distância entre elas.}
-  \label{fig:cap10-anel}
-\end{figure}
+\subsection{Python}
 
-\subsubsection*{A fórmula do quadrupolo}
+\programa[ISCO, precessão do periélio em campo forte, deflexão da luz e queda radial.]{codigo/cap10\_geodesicas\_schwarzschild.py}
 
-O texto deu apenas a escala $P\sim (G/c^{5})(\dddot Q)^{2}$. A expressão
-completa é
-\begin{equation}
-  P = \frac{G}{5c^{5}}\left\langle \dddot Q_{ij}\,\dddot Q^{ij}\right\rangle,
-  \qquad
-  Q_{ij} = \mu\left(x_{i}x_{j} - \tfrac13\delta_{ij}r^{2}\right),
-  \label{eq:cap10-quadrupolo}
-\end{equation}
-com $\mu = m_{1}m_{2}/(m_{1}+m_{2})$ a massa reduzida e $Q_{ij}$ o quadrupolo
-\emph{sem traço}. Para testar a constante $1/5$ e o fator $32/5$ da forma
-fechada, derivamos $Q_{ij}$ numericamente por um estêncil de sete pontos e
-comparamos.
+\subsubsection*{Órbitas circulares e a ISCO}
+
+Órbitas circulares são extremos de $\Veff$. A família de raios circulares sai
+de $\Veff'(r)=0$, que dá $L^{2} = Mr^{2}/(r-3M)$; a ISCO é o ponto em que
+mínimo e máximo se fundem, isto é, onde $\Veff''=0$ ao longo dessa família.
+Isso é uma raiz unidimensional, resolvida com \texttt{brentq}.
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
-    a [km]    P numerico [W]     P fechado [W]   erro rel.
-    100000      1.755723e+30      1.755723e+30    1.14e-07
-   1000000      1.755723e+25      1.755723e+25    1.14e-07
-  10000000      1.755723e+20      1.755723e+20    1.14e-07
-
--- para comparacao, o sistema Terra-Sol --
-P (Terra-Sol) = 196.4 W   (a luminosidade do Sol e' 3.8e26 W)
+r_ISCO (numerico) = 6.0000000000 M      (exato: 6 M)
+L_ISCO            = 3.4641016151 M      (exato: sqrt(12) = 3.4641016151)
+E_ISCO            = 0.9428090416        (exato: sqrt(8/9) = 0.9428090416)
+eficiencia de acrecao 1 - E_ISCO = 0.057191  (5.72 % da massa de repouso)
+orbita de fotons  = 3.0000000000 M      (exato: 3 M)
 \end{lstlisting}
 \end{saida}
-
-O erro de $10^{-7}$ é o truncamento do estêncil, não física: ele é o
-\emph{mesmo} nas três linhas, enquanto a potência varia por dez ordens de
-grandeza. Isso é o que se espera quando a expressão fechada está certa e a
-discrepância vem só da derivada numérica.
 
 \begin{central}
-O sistema Terra--Sol irradia $196\,$W em ondas gravitacionais --- a potência
-de algumas lâmpadas. A luminosidade eletromagnética do Sol é
-$3{,}8\times10^{26}\,$W, mais de $10^{24}$ vezes maior. O fator $c^{5}/G
-\approx 3{,}6\times10^{52}\,$W na fórmula é uma potência gigantesca dividindo
-tudo: só massas relativísticas e compactas conseguem produzir algo
-detectável. Não é que a gravidade ``não irradie''; é que a escala natural de
-luminosidade gravitacional é absurdamente alta.
+O número $1-E_{\rm ISCO} = 5{,}72\,\%$ não é um detalhe numérico: é a fração
+da massa de repouso que um disco fino pode irradiar antes que a matéria
+mergulhe no buraco negro. Compare com $\sim 0{,}7\,\%$ da fusão de hidrogênio.
+Acreção em buraco negro sem rotação já é quase uma ordem de grandeza mais
+eficiente que a fonte de energia das estrelas.
 \end{central}
 
-\subsubsection*{O teste de Hulse--Taylor}
+\subsubsection*{Precessão do periélio}
 
-Antes de qualquer detecção direta, a fórmula do quadrupolo já havia sido
-verificada. Um sistema binário perde energia e o período orbital encolhe a
-uma taxa que, para órbita excêntrica, é
-\begin{equation}
-  \rd{P_{b}}{t} = -\frac{192\pi}{5}
-    \left(\frac{2\pi G}{P_{b}}\right)^{5/3}
-    \frac{m_{1}m_{2}}{(m_{1}+m_{2})^{1/3}c^{5}}
-    \frac{1 + \tfrac{73}{24}e^{2} + \tfrac{37}{96}e^{4}}{(1-e^{2})^{7/2}}.
-  \label{eq:cap10-peters}
-\end{equation}
+Com $p$ (semi-latus rectum) e $e$ dados, as constantes de movimento ficam
+determinadas, e o periélio ocorre sempre que $\dot r$ muda de sinal de
+negativo para positivo. Localizamos esses instantes por interpolação linear e
+medimos a diferença azimutal entre periélios consecutivos.
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
-dP_b/dt previsto pela RG  = -2.4031e-12
-dP_b/dt observado (bruto) = -2.4230e-12
-dP_b/dt observado, ja' descontada a aceleracao galactica = -2.3980e-12
-razao previsto/observado = 1.0021
-realce por excentricidade f(e) = 11.86   (orbita circular irradiaria 12x menos)
+Delta phi por orbita, numerico = 1.231264 rad
+Delta phi por orbita, 6 pi M/p = 0.942478 rad
+exato para e -> 0: 2 pi [(1-6M/p)^(-1/2) - 1] = 1.226658 rad
+
+  p/M      numerico        6 pi M/p      razao
+    20   1.231264e+00   9.424778e-01     1.3064
+    50   4.151280e-01   3.769911e-01     1.1012
+   200   9.644314e-02   9.424778e-02     1.0233
+  1000   1.893557e-02   1.884956e-02     1.0046
+
+Mercurio: 5.0187e-07 rad/orbita  ->  42.98 arcsec/seculo
 \end{lstlisting}
 \end{saida}
 
-Duas coisas merecem atenção. A primeira é a concordância de $0{,}2\,\%$ entre
-uma fórmula deduzida de teoria linearizada e um pulsar a $6{,}4$~kpc --- o
-resultado que rendeu o Nobel de 1993. A segunda é o desconto da aceleração
-galáctica: o valor bruto medido difere do previsto em $0{,}8\,\%$, e a maior
-parte dessa diferença não é falha da relatividade, mas o efeito Doppler
-secular da aceleração relativa entre o sistema solar e o pulsar na Galáxia.
-Comparar teoria com observação exige, quase sempre, remover primeiro efeitos
-que nada têm a ver com o fenômeno estudado.
+Vale examinar essa saída com cuidado, porque ela contém três lições
+diferentes. Primeiro, em $p = 20M$ a fórmula $6\pi M/p$ erra por $31\,\%$:
+ela é apenas o termo de primeira ordem de uma série em $M/p$, e o campo ali
+não é fraco. Segundo, a última coluna mostra a razão tendendo a~$1$ conforme
+$p$ cresce --- é assim que se verifica que uma aproximação está sendo usada
+dentro do seu domínio de validade. Terceiro, o valor numérico $1{,}2313$ para
+$e = 0{,}4$ está próximo do resultado exato $1{,}2267$ obtido adiante para
+órbitas quase circulares; a diferença é o efeito da excentricidade, de ordem
+$e^{2}$.
 
-O fator $f(e) = 11{,}86$ explica por que esse sistema é tão bom laboratório:
-com $e = 0{,}617$, ele irradia doze vezes mais que uma binária circular de
-mesmo período, porque a emissão é fortemente concentrada na passagem pelo
-periastro.
-
-\subsubsection*{Inspiral e massa de chirp}
-
-Igualando a perda de energia à variação da energia orbital newtoniana,
-obtém-se uma equação para a frequência da onda, $f = 2f_{\rm orb}$:
-\begin{equation}
-  \rd{f}{t} = \frac{96}{5}\pi^{8/3}
-  \left(\frac{G\mathcal{M}_{c}}{c^{3}}\right)^{5/3} f^{11/3},
-  \qquad
-  \mathcal{M}_{c} = \frac{(m_{1}m_{2})^{3/5}}{(m_{1}+m_{2})^{1/5}}.
-  \label{eq:cap10-chirp}
-\end{equation}
-
-\begin{saida}
-\begin{lstlisting}[style=rgsaida]
-massa de chirp M_c = 28.10 M_sol
-f_gw na ISCO       = 67.6 Hz
-  f [Hz]   t ate coalescer [s]             h
-      20                 0.845     5.549e-22
-      35                 0.190     8.058e-22
-      70                 0.030     1.279e-21
-     130                 0.006     1.933e-21
-integracao numerica de 20 Hz ate' a ISCO: 0.812 s
-forma fechada (20 Hz -> infinito):        0.845 s
-\end{lstlisting}
-\end{saida}
-
-Compare com o evento real: GW150914 entrou na banda do LIGO em torno de
-$35$~Hz e durou cerca de $0{,}2$~segundo até a fusão, com amplitude de pico
-próxima de $10^{-21}$. As três colunas reproduzem isso sem nenhum ajuste ---
-massa de chirp, duração e amplitude saem todas da mesma equação de
-primeira ordem.
+E, ao fim, o mesmo código aplicado a Mercúrio devolve os $42{,}98''$ por
+século que Einstein calculou em novembro de 1915 --- o primeiro número que a
+teoria acertou.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{figuras/cap10_chirp.pdf}
-  \caption{Acima, a forma de onda $h(t)$ da binária de $36+29\,\Msol$ a
-  $410$~Mpc; abaixo, a frequência. Amplitude e frequência crescem juntas, e é
-  daí que vem o nome \emph{chirp}. A integração para em
-  $f_{\rm ISCO}=68$~Hz, onde a aproximação de órbita quase newtoniana deixa
-  de valer e só a relatividade numérica descreve o que acontece.}
-  \label{fig:cap10-chirp}
+  \includegraphics[width=\linewidth]{figuras/cap10_potencial_orbita.pdf}
+  \caption{À esquerda, o potencial efetivo~\eqref{eq:cap11-veff} para vários
+  valores de $L$. Abaixo de $L = \sqrt{12}\,M$ o poço desaparece e não há
+  órbita ligada; o ponto de inflexão marca a ISCO. À direita, a órbita
+  integrada com $p = 20M$ e $e = 0{,}4$: os periélios sucessivos (em âmbar)
+  não se repetem no mesmo ângulo, e a órbita não fecha. O disco central é o
+  horizonte.}
+  \label{fig:cap11-potencial}
 \end{figure}
 
-\begin{central}
-A frequência depende de $m_{1}$ e $m_{2}$ apenas pela combinação
-$\mathcal{M}_{c}$. Essa é a razão física de a massa de chirp ser o parâmetro
-mais bem medido em qualquer detecção: a fase do sinal, acumulada ao longo de
-centenas de ciclos, a determina com precisão de poucos por cento, enquanto as
-massas individuais só se separam por correções de ordem superior. Uma
-degenerescência na teoria vira, na prática, uma hierarquia de incertezas
-observacionais.
-\end{central}
+\subsubsection*{Deflexão da luz}
+
+Para geodésicas nulas convém trocar de variável para $u = 1/r$ e usar $\phi$
+como parâmetro, o que transforma o problema em
+$u'' + u = 3Mu^{2}$. O raio vem do infinito ($u=0$), passa pelo periastro e
+volta ao infinito; o evento de retorno a $u = 0$ é detectado pelo próprio
+integrador.
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+     b/M     numerico         4M/b   + 15 pi M^2/(4b^2)
+      10 5.903958e-01 4.000000e-01         5.178097e-01
+      50 8.508345e-02 8.000000e-02         8.471239e-02
+     200 2.029997e-02 2.000000e-02         2.029452e-02
+    1000 4.011823e-03 4.000000e-03         4.011781e-03
+
+borda do Sol: 1.751 arcsec
+\end{lstlisting}
+\end{saida}
+
+A terceira coluna inclui a correção de segunda ordem. Note como ela recupera
+quase todo o erro em $b = 50M$ e praticamente todo em $b \geq 200M$, mas
+ainda falha em $b = 10M$: perto da órbita de fótons nenhuma expansão em $M/b$
+sobrevive.
+
+\subsubsection*{Queda radial e a divergência do tempo coordenado}
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+tempo proprio ate' o horizonte  = 33.700870 M
+tempo proprio ate' r = 0        = 35.124074 M
+  ate' r =  3.000 M :  tau =   32.4099 M   t =      40.9383 M
+  ate' r =  2.100 M :  tau =   33.5873 M   t =      47.1540 M
+  ate' r =  2.010 M :  tau =   33.6897 M   t =      51.9068 M
+  ate' r =  2.001 M :  tau =   33.6998 M   t =      56.5266 M
+\end{lstlisting}
+\end{saida}
+
+Esta é a tabela mais eloquente do capítulo. A cada fator de dez que
+aproximamos o alvo do horizonte, o tempo próprio muda na quarta casa decimal
+--- a queda está praticamente terminada --- enquanto o tempo coordenado sobe
+mais cinco unidades de $M$, sem sinal de parar. A divergência é logarítmica,
+e o observador em queda não sente absolutamente nada de especial ao cruzar
+$r = 2M$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\linewidth]{figuras/cap10_queda_radial.pdf}
+  \caption{Queda radial a partir do repouso em $r = 10M$. Em tempo próprio a
+  trajetória cruza o horizonte e chega a $r=0$ em tempo finito; em tempo
+  coordenado ela se acumula assintoticamente sobre $r = 2M$. As duas curvas
+  descrevem a mesma queda, medida por relógios diferentes.}
+  \label{fig:cap11-queda}
+\end{figure}
 
 \subsection{Mathematica}
 
-\programa[Linearização das equações de Einstein, gauge de Lorenz, onda plana em gauge TT e dedução exata do fator $32/5$.]{codigo/cap10\_ondas\_simbolico.wl}
+\programa[Christoffel, Riemann e Ricci de Schwarzschild; Kretschmann; extração exata da ISCO e da precessão.]{codigo/cap10\_schwarzschild\_simbolico.wl}
 
-O papel do cálculo simbólico aqui é o de derivar o que o numérico apenas
-usa. O script parte de $g_{\mu\nu}=\eta_{\mu\nu}+\epsilon h_{\mu\nu}$, expande
-o tensor de Ricci em primeira ordem e mostra que, no gauge de Lorenz, ele
-colapsa no operador de onda.
+O papel do cálculo simbólico aqui é complementar, não redundante: ele fornece
+as expressões exatas contra as quais o resultado numérico é conferido. Os
+símbolos de Christoffel, o tensor de Riemann e o de Ricci são construídos a
+partir da métrica com as mesmas convenções de índice do
+Capítulo~\ref{cap:curvatura}.
 
-Imposto $\partial^{\mu}\bar h_{\mu\nu}=0$, as equações de campo linearizadas
-viram
-\[
-  \Box \bar h_{\mu\nu} = -16\pi G\,T_{\mu\nu},
-\]
-uma equação de onda com fonte, idêntica em estrutura à do potencial
-eletromagnético em gauge de Lorenz. O segundo bloco confirma que a matriz TT
-é solução, tem traço nulo e é transversal, e calcula a componente de
-curvatura que entra no desvio geodésico, $R_{1010}=-\tfrac12\ddot h_{+}$.
+O mesmo tensor de Riemann fornece o escalar de Kretschmann,
+$R_{\alpha\beta\gamma\delta}R^{\alpha\beta\gamma\delta} = 48M^{2}/r^{6}$,
+citado na Seção~\ref{sec:horizonte} para separar singularidade de coordenada
+de singularidade física.
 
-Note que $\Box h^{\rm TT}=0$ vale para \emph{qualquer} par de funções
-$h_{+}$ e $h_{\times}$ de $(t-z)$: a equação não escolhe uma forma de onda,
-apenas exige que ela se propague à velocidade da luz sem dispersão. E
-$R_{1010}=-\tfrac12\ddot h_{+}$ é a ponte com a
-Equação~\eqref{eq:cap10-anel}: o que o detector mede é curvatura, não
-deslocamento.
+A parte mais útil é a extração exata da ISCO e da precessão. Escrevendo
+$q = L^{2}$, o script resolve $\partial_r\Veff=0$ para obter a família de
+órbitas circulares, $q = Mr^{2}/(r-3M)$, impõe também $\partial_r^2\Veff=0$
+e recupera $r=6M$, $q=12M^{2}$; em seguida compara as frequências radial e
+azimutal.
 
-O último bloco deriva a Equação~\eqref{eq:cap10-quadrupolo} para a binária
-circular sem nenhuma aproximação numérica: monta $Q_{ij}$ da órbita, deriva
-três vezes em $t$ e simplifica, obtendo diretamente o fator $32/5$.
+O resultado é
+\begin{equation}
+  \Delta\phi_{\text{órbita}}
+  = 2\pi\left[\left(1 - \frac{6M}{r}\right)^{-1/2} - 1\right]
+  = \frac{6\pi M}{r} + \frac{27\pi M^{2}}{r^{2}} + \mathcal{O}\!\left(\frac{M^{3}}{r^{3}}\right),
+  \label{eq:cap11-precessao-exata}
+\end{equation}
+válido no limite de órbitas quase circulares. Duas leituras: o primeiro termo
+é exatamente a fórmula clássica usada para Mercúrio, e a expressão inteira
+diverge em $r = 6M$ --- na ISCO a frequência de oscilação radial vai a zero,
+a órbita deixa de precessar e passa a espiralar.
 
 \begin{central}
-O resultado simbólico e a derivação numérica concordam --- e é a combinação
-das duas que constitui a verificação. O Mathematica prova que o fator é
-exatamente $32/5$ para \emph{quaisquer} massas e separação; o Python
-confirma, com números independentes, que a implementação usada para produzir
-as figuras não tem erro de digitação. Nenhuma das duas checagens, sozinha,
-faria esse trabalho.
+A verificação cruzada é o produto real desta seção. O integrador devolveu
+$1{,}231264$ para uma órbita com $e = 0{,}4$; a expressão
+exata~\eqref{eq:cap11-precessao-exata} dá $1{,}226658$ no limite $e \to 0$; a
+fórmula de primeira ordem dá $0{,}942478$. Os dois primeiros concordam em
+três dígitos e discordam do terceiro por $30\,\%$. Um resultado numérico que
+não é confrontado com um limite analítico conhecido não é resultado: é
+palpite com casas decimais.
 \end{central}
 

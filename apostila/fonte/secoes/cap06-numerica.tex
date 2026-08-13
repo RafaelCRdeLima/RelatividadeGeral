@@ -3,7 +3,7 @@
 %  Inserir antes da seção de exercícios.
 % =====================================================================
 \section{Resolução numérica}
-\label{sec:cap07-numerica}
+\label{sec:cap06-numerica}
 
 Este capítulo afirmou três coisas que só ficam realmente convincentes quando
 viram número: que a conexão pode ser não nula sem haver curvatura, que o
@@ -15,7 +15,7 @@ mesma que será apontada para Schwarzschild nos capítulos seguintes.
 
 \subsection{Python}
 
-\programa[Transporte paralelo e holonomia, tensor de Riemann por diferenças finitas e desvio geodésico. Contém a máquina genérica que calcula $\Gamma$, Riemann, Ricci e Kretschmann de qualquer métrica.]{codigo/cap07\_curvatura.py}
+\programa[Transporte paralelo e holonomia, tensor de Riemann por diferenças finitas e desvio geodésico. Contém a máquina genérica que calcula $\Gamma$, Riemann, Ricci e Kretschmann de qualquer métrica.]{codigo/cap06\_curvatura.py}
 
 \subsubsection*{Transporte paralelo e holonomia}
 
@@ -67,7 +67,7 @@ curvatura''.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{figuras/cap07_holonomia.pdf}
+  \includegraphics[width=\linewidth]{figuras/cap06_holonomia.pdf}
   \caption{À esquerda, o vetor transportado ao longo de um paralelo da
   esfera: ele gira continuamente e não retorna à direção inicial. À direita,
   a holonomia medida contra a área envolvida pelo circuito. Os pontos da
@@ -141,7 +141,7 @@ métrica.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.82\linewidth]{figuras/cap07_desvio_geodesico.pdf}
+  \includegraphics[width=0.82\linewidth]{figuras/cap06_desvio_geodesico.pdf}
   \caption{Separação própria entre duas geodésicas que partem do mesmo ponto,
   para curvatura constante positiva, nula e negativa. Os pontos são a
   integração de~\eqref{eq:cap07-desvio} com $K$ extraído do Riemann numérico;
@@ -165,7 +165,7 @@ Capítulo~\ref{cap:ondas}, o anel de partículas deformado por uma onda.
 
 \subsection{Mathematica}
 
-\programa[Simetrias do Riemann, contagem de componentes e a divergência do tensor de Einstein. Define as rotinas reaproveitadas nos capítulos seguintes.]{codigo/cap07\_curvatura\_simbolico.wl}
+\programa[Simetrias do Riemann, contagem de componentes e a divergência do tensor de Einstein. Define as rotinas reaproveitadas nos capítulos seguintes.]{codigo/cap06\_curvatura\_simbolico.wl}
 
 O simbólico faz aqui o que o numérico não consegue: provar as simetrias em
 vez de conferi-las num ponto. O script define as rotinas

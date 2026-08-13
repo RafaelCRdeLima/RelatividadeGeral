@@ -1,189 +1,168 @@
 % =====================================================================
-%  Capítulo 12 — Resolução numérica
-%  Inserir antes da seção de exercícios.
+%  Capítulo 13 — Resolução numérica
+%  Inserir depois da seção "Parâmetros observacionais".
 % =====================================================================
 \section{Resolução numérica}
 \label{sec:cap12-numerica}
 
-As afirmações centrais deste capítulo foram feitas em palavras: que o
-horizonte é uma singularidade de coordenada, que quem cai não sente nada de
-especial ao cruzá-lo, que buracos negros maiores são mais frios. Cada uma
-delas vira um número aqui, e o resultado é menos intuitivo do que a versão
-verbal sugere. Os blocos geométricos usam $G=c=M=1$; os astrofísicos usam SI
-e imprimem em unidades solares.
+A cosmologia de fundo é, do ponto de vista computacional, uma única função:
+\begin{equation}
+  E(a) \equiv \frac{H(a)}{H_{0}}
+  = \sqrt{\frac{\Omega_{r}}{a^{4}} + \frac{\Omega_{m}}{a^{3}}
+          + \frac{\Omega_{k}}{a^{2}} + \Omega_{\Lambda}}\,,
+  \qquad
+  \Omega_{k} = 1 - \Omega_{r} - \Omega_{m} - \Omega_{\Lambda}.
+  \label{eq:cap13-E}
+\end{equation}
+Tudo o mais --- a evolução $a(t)$, a idade do universo, as distâncias, os
+horizontes --- são integrais dessa expressão. Nenhuma delas tem primitiva
+elementar quando mais de uma componente contribui, e é por isso que a
+cosmologia observacional é numérica desde sempre. Medimos tempo em unidades
+de $1/H_{0}$ e distância em $c/H_{0}$, convertendo apenas no fim. Os valores
+de fundo são próximos aos de Planck: $h = 0{,}674$, $\Omega_{m} = 0{,}315$,
+$\Omega_{\Lambda} = 0{,}685$, $\Omega_{r} = 9{,}24\times 10^{-5}$.
 
 \subsection{Python}
 
-\programa[Cones de luz, diagrama de Kruskal, marés no horizonte, termodinâmica de Hawking e a família de Kerr.]{codigo/cap12\_buracos\_negros.py}
+\programa[Idade do universo, evolução do fator de escala, distâncias cosmológicas e horizontes.]{codigo/cap12\_friedmann.py}
 
-\subsubsection*{Os cones de luz e o que a carta cobre}
+\subsubsection*{Escalas temporais}
 
-Em coordenadas de Schwarzschild, os raios nulos radiais satisfazem
-$\dd t/\dd r = \pm(1-2M/r)^{-1}$, que diverge em $r=2M$: o cone se fecha e a
-carta termina. Em Eddington--Finkelstein entrante, com $v = t+r_{*}$ e
-$r_{*} = r + 2M\ln|r/2M - 1|$, a métrica é
-\begin{equation}
-  \dd s^{2} = -\left(1-\frac{2M}{r}\right)\dd v^{2}
-              + 2\,\dd v\,\dd r + r^{2}\dd\Omega^{2},
-  \label{eq:cap12-ef}
-\end{equation}
-e os dois raios radiais são $\dd v/\dd r = 0$ (entrando) e
-$\dd v/\dd r = 2/(1-2M/r)$.
+A idade do universo é $t_{0} = \int_{0}^{1} \dd a/[a E(a)]$. O integrando
+diverge como $a^{-1}$ em $a \to 0$ na era de matéria e como $a^{-1}$ vezes
+$a$ na de radiação, de modo que a integral converge --- mas a quadratura
+adaptativa precisa ser avisada, e é por isso que passamos \texttt{limit=200}.
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+1/H_0 = 14.507 Gyr
+idade do universo t_0 = 0.95063/H_0 = 13.791 Gyr
+t_0 analitico (sem radiacao) = 0.95099/H_0 = 13.796 Gyr
+   [diferenca: 5.2 Myr, que e' o efeito da radiacao]
+igualdade materia-radiacao: z_eq = 3408.1, t = 0.051 Myr
+igualdade materia-Lambda:   z   = 0.2956, t = 10.294 Gyr
+inicio da aceleracao:       z   = 0.6323, t = 7.690 Gyr
+\end{lstlisting}
+\end{saida}
+
+\begin{central}
+A comparação entre as duas primeiras linhas é o melhor teste possível do
+código: a solução fechada para matéria mais $\Lambda$ (obtida adiante no
+bloco simbólico) difere da integração completa em $5$~Myr, num universo de
+$13{,}8$~Gyr. Essa diferença de $4\times 10^{-4}$ não é erro numérico --- é
+exatamente a contribuição da era de radiação, ausente da solução analítica.
+Quando a discrepância entre numérico e analítico tem interpretação física,
+o código está certo.
+\end{central}
+
+As três últimas linhas merecem ser lidas juntas. A igualdade
+matéria--radiação em $z \approx 3400$ ocorre aos $51$~mil anos; a matéria
+domina por quase dez bilhões de anos; a expansão passa a acelerar em
+$z \approx 0{,}63$, isto é, há cerca de $6$~Gyr, bem antes de $\Lambda$ se
+igualar à matéria em $z \approx 0{,}30$. A aceleração começa quando
+$\ddot a = 0$, ou seja, quando $\Omega_{m}/a^{3} = 2\Omega_{\Lambda}$ --- o
+fator~$2$ vem do termo de pressão em
+$\ddot a/a = -(4\pi/3)(\rho + 3p)$, e é uma boa pergunta de prova.
+
+\subsubsection*{Evolução do fator de escala}
+
+Integrar $\dd a/\dd t = a E(a)$ é direto, e vale a pena fazê-lo para vários
+universos ao mesmo tempo: as diferenças de forma são mais instrutivas que
+qualquer curva isolada.
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+Einstein-de Sitter em t = 0.5/H_0: a_num = 0.82548181, (3t/2)^(2/3) = 0.82548181
+dominio de radiacao em t = 0.5/H_0: a_num = 1.00000000, (2t)^(1/2)   = 1.00000000
+\end{lstlisting}
+\end{saida}
+
+Oito dígitos de concordância com $a \propto t^{2/3}$ e $a \propto t^{1/2}$.
+Só depois desse teste faz sentido confiar na curva de $\Lambda$CDM, para a
+qual não há solução elementar com radiação incluída.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/cap12_friedmann.pdf}
+  \caption{À esquerda, $a(t)$ para quatro universos. Todos passam pela mesma
+  origem, mas $\Lambda$CDM é o único que muda de concavidade: a curva
+  desacelera enquanto a matéria domina e volta a acelerar depois. O universo
+  aberto expande para sempre sem nunca acelerar. À direita, as três
+  distâncias: $D_{L}$ cresce sem limite, mas $D_{A}$ tem um máximo em
+  $z \approx 1{,}59$ --- objetos mais distantes que isso aparecem
+  \emph{maiores} no céu.}
+  \label{fig:cap13-friedmann}
+\end{figure}
+
+\subsubsection*{Distâncias e horizontes}
+
+\begin{saida}
+\begin{lstlisting}[style=rgsaida]
+     z    D_C [Mpc]    D_L [Mpc]    D_A [Mpc]
+   0.1        434.1        477.5        394.6
+   0.5       1951.3       2927.0       1300.9
+   1.0       3401.0       6802.1       1700.5
+   2.0       5311.3      15934.0       1770.4
+   5.0       7943.8      47662.6       1324.0
+1100.0      13866.3   15266789.6         12.6
+
+maximo de D_A em z = 1.5877, D_A = 1794.1 Mpc
+horizonte de particulas hoje = 14144.3 Mpc = 46.13 Glyr
+\end{lstlisting}
+\end{saida}
 
 \begin{atencao}
-O sinal de $f = 1-2M/r$ é a conta inteira. Para $r>2M$ o segundo raio tem
-$\dd r>0$ e escapa; em $r=2M$ ele fica com $\dd r=0$, parado sobre o
-horizonte para sempre; para $r<2M$ ele tem $\dd r<0$ e \emph{também} cai. Não
-há nada de singular nessa transição --- é uma mudança contínua de inclinação.
-O que muda é global: a partir de $r=2M$, nenhuma direção causal aponta para
-fora. O horizonte não é um lugar onde algo acontece; é o lugar a partir do
-qual o futuro tem uma propriedade diferente.
+A última linha da tabela é a que mais confunde. Na superfície de último
+espalhamento, $z \approx 1100$, a distância de diâmetro angular vale
+$13$~Mpc: a mesma superfície cuja distância comóvel é de $13{,}9$~Gpc. Não há
+contradição --- são grandezas diferentes, ligadas por
+$D_{A} = D_{C}/(1+z)$, e é $D_{A}$ que converte tamanho físico em ângulo
+observado. É por isso que o horizonte acústico da CMB, de cerca de
+$150$~Mpc comóveis, subtende aproximadamente um grau no céu. Trocar $D_{A}$
+por $D_{C}$ nessa conta erra o resultado por um fator de mil.
+
+Note ainda que o horizonte de partículas, $46$~Glyr, é maior que $c t_{0}
+= 13{,}8$~Glyr. Isso não viola nada: a luz percorreu $13{,}8$~Gyr de
+\emph{tempo}, mas o espaço por onde ela passou continuou se expandindo.
 \end{atencao}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{figuras/cap12_cones_luz.pdf}
-  \caption{A mesma geometria em duas cartas. À esquerda, Schwarzschild: os
-  cones se fecham ao se aproximarem de $r=2M$ e a região sombreada
-  simplesmente não é coberta pelas coordenadas. À direita,
-  Eddington--Finkelstein: os cones nunca se fecham, apenas tombam
-  progressivamente; em $r=2M$ o raio que ``sai'' fica vertical, e para dentro
-  os dois raios apontam para $r$ decrescente.}
-  \label{fig:cap12-cones}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.74\linewidth]{figuras/cap12_kruskal.pdf}
-  \caption{Diagrama de Kruskal--Szekeres, onde raios de luz radiais são
-  retas a $45^\circ$. As hipérboles tracejadas são $r$ constante e as retas
-  claras pela origem são $t$ constante --- note que todo o horizonte, para
-  $-\infty<t<\infty$, colapsa nas duas diagonais. A linha de mundo em âmbar
-  cruza o horizonte sem nada de particular e termina na singularidade, que é
-  uma \emph{hipérbole horizontal}: um instante no futuro, não um lugar no
-  espaço.}
-  \label{fig:cap12-kruskal}
-\end{figure}
-
-\subsubsection*{Marés no horizonte}
-
-A aceleração de maré radial entre dois pontos separados por $\Delta x$ é
-$2GM\Delta x/r^{3}$. Avaliada no próprio horizonte, $r=r_{s}=2GM/c^{2}$, ela
-vale $c^{6}\Delta x/(4G^{2}M^{2})$: cai como $1/M^{2}$.
-
-\begin{saida}
-\begin{lstlisting}[style=rgsaida]
-objeto                         M/M_sol    r_s [km]   mare em 1.8 m [g]
-estelar                             10       29.54            1.89e+07
-Cygnus X-1                          21       62.03            4.29e+06
-Sgr A*                         4.3e+06   1.269e+07            0.000102
-M87*                           6.5e+09    1.92e+10            4.47e-11
-\end{lstlisting}
-\end{saida}
-
-\begin{central}
-Um astronauta que cruzasse o horizonte de um buraco negro de $10\,\Msol$
-sofreria uma maré de $19$~milhões de $g$ entre a cabeça e os pés --- seria
-destruído muito antes de chegar lá. No horizonte de Sgr~A$^{*}$ a mesma maré
-é de $10^{-4}\,g$, imperceptível; no de M87$^{*}$, $4\times10^{-11}\,g$. A
-frase ``nada de especial acontece no horizonte'' é rigorosamente verdadeira
-como afirmação sobre a \emph{geometria local}, e ainda assim falsa como
-conselho prático para buracos negros estelares. O invariante que decide é o
-escalar de Kretschmann, $K = 48M^{2}/r^{6}$, que no horizonte vale
-$3/(4M^{4})$ --- e é por isso que a resposta depende da massa.
-\end{central}
-
-\subsubsection*{Termodinâmica}
-
-\begin{saida}
-\begin{lstlisting}[style=rgsaida]
-     M/M_sol       T_H [K]         S/k_B   t_evap [anos]
-           1     6.169e-08     1.049e+77       2.097e+67
-          10     6.169e-09     1.049e+79       2.097e+70
-   4.297e+06     1.436e-14     1.938e+90       1.664e+87
-buraco negro em equilibrio com a CMB (T = 2.7255 K):
-  M = 2.263e-08 M_sol = 4.502e+22 kg   (~0.613 massas lunares)
-\end{lstlisting}
-\end{saida}
-
-A entropia de um buraco negro de uma massa solar é $10^{77}k_{B}$. Para
-comparação, a entropia do Sol \emph{inteiro} é da ordem de $10^{58}k_{B}$:
-comprimir o Sol até o horizonte multiplicaria sua entropia por
-$10^{19}$. Buracos negros são, de longe, os objetos mais entrópicos do
-Universo, e é por isso que a segunda lei generalizada é uma restrição tão
-forte.
-
-A última linha inverte uma intuição comum. Um buraco negro só evapora se
-estiver mais quente que o ambiente, e o ambiente do Universo atual é a CMB a
-$2{,}73$~K. Isso exige $M < 4{,}5\times10^{22}$~kg, cerca de $0{,}6$ massa
-lunar. \emph{Todo} buraco negro conhecido está muitas ordens de grandeza
-acima disso: hoje todos eles absorvem mais do que irradiam. A evaporação de
-Hawking não é um processo em curso --- é um processo que só começará quando o
-Universo tiver esfriado o bastante, daqui a algo como $10^{100}$ anos.
-
-\subsubsection*{Kerr: o que a rotação muda}
-
-\begin{saida}
-\begin{lstlisting}[style=rgsaida]
-   a/M      r_+      r_-  r_ergo(eq)  ISCO prog  ISCO retr  eficiencia
- 0.000   2.0000   0.0000         2.0     6.0000     6.0000       5.72%
- 0.500   1.8660   0.1340         2.0     4.2330     7.5546       8.21%
- 0.900   1.4359   0.5641         2.0     2.3209     8.7174      15.58%
- 0.990   1.1411   0.8589         2.0     1.4545     8.9719      26.40%
- 0.998   1.0632   0.9368         2.0     1.2370     8.9944      32.10%
-limite extremo: 42.26%
-\end{lstlisting}
-\end{saida}
-
-A coluna da ergosfera é constante: no equador ela fica em $2M$ para qualquer
-spin, enquanto o horizonte encolhe de $2M$ até $M$. A ergosfera não é uma
-casca fina em torno do horizonte --- para $a$ grande, ela é uma região
-espessa, e é dentro dela que o arrastamento de referenciais permite extrair
-energia de rotação.
-
-\begin{central}
-A eficiência de acreção salta de $5{,}72\,\%$ (estático) para $42{,}26\,\%$
-no limite extremo $a\to M$, onde $1-E_{\rm ISCO} = 1-1/\sqrt3$. Compare com
-$0{,}7\,\%$ da fusão de hidrogênio: um disco em torno de um buraco negro em
-rotação rápida converte massa em radiação sessenta vezes mais eficientemente
-que uma estrela. É essa conta, e não a massa engolida, que explica por que
-quasares superam em brilho a galáxia inteira que os hospeda. O valor
-$32\,\%$ em $a=0{,}998$ é o limite de Thorne, o spin máximo que a própria
-acreção consegue sustentar.
-\end{central}
 
 \subsection{Mathematica}
 
-\programa[Regularidade de Eddington--Finkelstein no horizonte, gravidade superficial e a primeira lei.]{codigo/cap12\_buracos\_negros\_simbolico.wl}
+\programa[Derivação das equações de Friedmann a partir da métrica FLRW e a solução fechada em $\sinh^{2/3}$.]{codigo/cap12\_friedmann\_simbolico.wl}
 
-O bloco simbólico prova o que a Figura~\ref{fig:cap12-cones} apenas ilustra:
-que a Equação~\eqref{eq:cap12-ef} é regular no horizonte e descreve a mesma
-solução de vácuo.
+O bloco simbólico faz aqui o que o numérico não pode fazer: deriva as
+equações de Friedmann a partir da métrica, em vez de assumi-las. É o mesmo
+maquinário do Capítulo~\ref{cap:einstein}, aplicado à métrica de
+Robertson--Walker.
 
-O determinante é a chave: $\det g = -r^{4}\sin^{2}\theta$ vale
-$-16M^{4}\sin^{2}\theta$ em $r=2M$, isto é, a métrica continua invertível
-ali. Na forma de Schwarzschild, $g_{rr}=(1-2M/r)^{-1}$ diverge no mesmo
-ponto. \emph{A geometria é a mesma; o que era ruim era o mapa.} O termo
-cruzado $2\,\dd v\,\dd r$ é o que salva o determinante.
-
-O mesmo tensor de Riemann fornece o invariante que distingue as duas
-singularidades, $K = 48M^{2}/r^{6}$, finito em $r=2M$ e divergente em $r=0$.
-A gravidade superficial, $\kappa = \tfrac12\,\partial_r(1-2M/r)$ avaliada no
-horizonte, vale $1/4M$ --- e é ela que fecha a primeira lei:
+A componente $rr$, combinada com a anterior, devolve
+$\ddot a/a = -(4\pi/3)(\rho + 3p)$, e a divergência covariante de $T^{\mu\nu}$
+devolve $\dot\rho + 3H(\rho + p) = 0$.
 
 \begin{central}
-A última linha devolve exatamente $1$, isto é, $T\,\dd S = \dd M$. Para
-Schwarzschild, a primeira lei da mecânica de buracos negros não é uma
-analogia aproximada nem um resultado de teoria quântica: é uma identidade
-algébrica entre $\kappa = 1/4M$, $A = 16\pi M^{2}$ e a própria massa. O que a
-radiação Hawking acrescentou não foi a relação --- foi a constatação de que
-$T = \kappa/2\pi$ é uma temperatura de verdade, com radiação térmica de
-verdade, e não apenas um parâmetro com as unidades certas.
+A equação de continuidade \emph{não} é uma terceira equação independente.
+Ela sai das duas primeiras por causa da identidade de Bianchi contraída,
+$\nabla_{\mu}G^{\mu\nu} = 0$, provada no Capítulo~\ref{cap:curvatura}. Vale
+verificar isso explicitamente no notebook: é a demonstração mais concreta de
+que a conservação local da matéria está costurada na geometria, e não
+imposta por fora.
 \end{central}
 
-O último bloco trata de Kerr. A área do horizonte,
-$A = 4\pi(r_{+}^{2}+a^{2})$, vale $16\pi M^{2}$ para $a=0$ e apenas
-$8\pi M^{2}$ para $a=M$: extrair todo o momento angular de um buraco negro
-extremo, a massa irredutível mantida fixa, no máximo dobra a área --- e
-nunca a diminui, como exige o teorema da área.
+Por fim, a solução fechada para o caso plano com matéria e $\Lambda$, que
+serviu de referência para o teste numérico:
+\begin{equation}
+  a(t) = \left(\frac{\Omega_{m}}{\Omega_{\Lambda}}\right)^{1/3}
+         \sinh^{2/3}\!\left(\frac{3}{2}\sqrt{\Omega_{\Lambda}}\,H_{0}t\right),
+  \qquad
+  t_{0} = \frac{2}{3H_{0}\sqrt{\Omega_{\Lambda}}}
+          \operatorname{arcsinh}\sqrt{\frac{\Omega_{\Lambda}}{\Omega_{m}}}.
+  \label{eq:cap13-sinh}
+\end{equation}
+
+Vale contemplar essa expressão por um instante. O $\sinh^{2/3}$ contém as
+duas eras: para argumento pequeno, $\sinh x \approx x$ e recuperamos
+$a \propto t^{2/3}$ de Einstein--de Sitter; para argumento grande,
+$\sinh x \approx e^{x}/2$ e a expansão vira exponencial. A transição entre
+matéria e energia escura, que na figura aparece como uma inflexão discreta,
+está inteira nessa única função.
 

@@ -2,7 +2,7 @@
 
 (* =====================================================================
    Schwarzschild: Christoffel, Ricci, Kretschmann, ISCO e precessao.
-   Convencao de indices identica a do Capitulo 7 da apostila:
+   Convencao de indices identica a do Capitulo 6 da apostila:
       R^a_{bcd} = d_c Gamma^a_{bd} - d_d Gamma^a_{bc}
                   + Gamma^a_{cs} Gamma^s_{bd} - Gamma^a_{ds} Gamma^s_{bc}
    ===================================================================== *)

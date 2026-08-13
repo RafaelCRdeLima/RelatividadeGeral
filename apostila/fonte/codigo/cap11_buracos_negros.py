@@ -133,7 +133,7 @@ def figura_cones():
     ax.set_ylabel(r"$v/M$")
     ax.set_title("Eddington--Finkelstein: o cone apenas tomba")
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap12_cones_luz.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap11_cones_luz.pdf", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -206,7 +206,7 @@ def figura_kruskal():
     ax.set_ylabel(r"$T$")
     ax.set_title("Kruskal--Szekeres: raios de luz radiais a $45^\\circ$")
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap12_kruskal.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap11_kruskal.pdf", bbox_inches="tight")
     plt.close(fig)
 
 

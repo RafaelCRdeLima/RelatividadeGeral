@@ -714,7 +714,7 @@ consistente é que comprimentos perpendiculares ao movimento não mudem.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=\textwidth]{cap02_relogio_luz.pdf}
+\includegraphics[width=\textwidth]{cap01_relogio_luz.pdf}
 \caption{O relógio de luz. À esquerda, no referencial $S'$ em que ele está
 parado: o pulso sobe e desce entre os espelhos e o tique dura $\Delta t'=2L$.
 À direita, no referencial $S$, em que o relógio avança $\Delta x=v\,\Delta t$
@@ -783,7 +783,7 @@ A figura desse enunciado é o cone de luz.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.68\textwidth]{cap02_cone_luz.pdf}
+\includegraphics[width=0.68\textwidth]{cap01_cone_luz.pdf}
 \caption{Cone de luz do evento $O$ no plano $(x,ct)$. Eventos no futuro ou
 passado causal de $O$ têm separação temporal; os eventos das duas cunhas
 laterais têm separação espacial e não podem ser causalmente ligados a $O$
@@ -967,7 +967,7 @@ em $S$ têm, em geral, $\dd t'=-\gamma v\,\dd x\ne0$ em $S'$.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.62\textwidth]{cap02_simultaneidade.pdf}
+\includegraphics[width=0.62\textwidth]{cap01_simultaneidade.pdf}
 \caption{Diagrama de Minkowski: os eixos $ct'$ e $x'$ de $S'$ aparecem
 inclinados em relação aos eixos de $S$ pelo mesmo ângulo $\arctan v$. A reta
 tracejada liga dois eventos $A$ e $B$ simultâneos em $S$ (mesma $ct$); a reta
@@ -1251,7 +1251,7 @@ menor tempo próprio.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.62\textwidth]{cap02_paradoxo_gemeos.pdf}
+\includegraphics[width=0.62\textwidth]{cap01_paradoxo_gemeos.pdf}
 \caption{Diagrama de Minkowski do paradoxo dos gêmeos, com $v=0{,}8$. As
 marcas transversais indicam intervalos \emph{iguais} de tempo próprio ao
 longo de cada linha de mundo. O gêmeo viajante acumula visivelmente menos
@@ -1501,7 +1501,7 @@ numericamente, com velocidades aleatórias, que $\Lambda^{T}\eta\Lambda=\eta$
 e que a composição de dois boosts colineares reproduz a fórmula de adição de
 velocidades (e não $v_1+v_2$).
 
-\programa[Invariância do intervalo, composição de boosts e aditividade da rapidez, testadas com velocidades aleatórias.]{codigo/cap02\_boosts.py}
+\programa[Invariância do intervalo, composição de boosts e aditividade da rapidez, testadas com velocidades aleatórias.]{codigo/cap01\_boosts.py}
 
 A execução confirma as três propriedades com resíduo numérico da ordem de
 $10^{-16}$ (erro de arredondamento de ponto flutuante, não erro físico):
@@ -1513,7 +1513,7 @@ suave, $v(t)=v_0\sin(\pi t/T)$, que parte e retorna ao repouso continuamente
 (sem o salto instantâneo de velocidade do modelo idealizado). A integral do
 tempo próprio é calculada por quadratura adaptativa.
 
-\programa[Tempo próprio do gêmeo viajante por quadratura adaptativa, para um perfil de velocidade suave.]{codigo/cap02\_tempo\_proprio.py}
+\programa[Tempo próprio do gêmeo viajante por quadratura adaptativa, para um perfil de velocidade suave.]{codigo/cap01\_tempo\_proprio.py}
 
 Com $T=10$ e $v_0=0{,}8$, a integração numérica dá
 $\tau_{\rm viajante}\approx8{,}1255$, contra $T=10$ para o gêmeo que fica em
@@ -1526,7 +1526,7 @@ perfil de velocidade e o tempo próprio acumulado.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.62\textwidth]{cap02_tempo_proprio_numerico.pdf}
+\includegraphics[width=0.62\textwidth]{cap01_tempo_proprio_numerico.pdf}
 \caption{Acima: perfil de velocidade suave $v(t)=v_0\sin(\pi t/T)$ do gêmeo
 viajante. Abaixo: tempo próprio acumulado $\tau(t)$ (integração numérica,
 vermelho) comparado ao tempo coordenado $t$ do gêmeo em casa (tracejado).}
@@ -1540,7 +1540,7 @@ do Mathematica não é confirmar números, mas provar as identidades
 algebricamente para \emph{qualquer} $v_1,v_2$ no intervalo físico
 $(-1,1)$, sem depender de amostragem aleatória.
 
-\programa[As mesmas três identidades, provadas simbolicamente para $v_1$ e $v_2$ arbitrários.]{codigo/cap02\_boosts.wl}
+\programa[As mesmas três identidades, provadas simbolicamente para $v_1$ e $v_2$ arbitrários.]{codigo/cap01\_boosts.wl}
 
 Os três primeiros \texttt{Print} produzem a matriz nula $2\times2$: isso é a
 prova simbólica de que (i) o intervalo é invariante, (ii) a composição de
@@ -1617,7 +1617,7 @@ diferentes.
 Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
 
 \begin{enumerate}
-  \item \textbf{A rotação de Wigner.} Em \arq{cap02\_boosts.py}, troque a matriz
+  \item \textbf{A rotação de Wigner.} Em \arq{cap01\_boosts.py}, troque a matriz
 $2\times2$ por uma $4\times4$ e componha dois boosts em direções
 \emph{perpendiculares}, $\Lambda_x(v_1)\Lambda_y(v_2)$. Mostre
 numericamente que o produto não é um boost puro: ele preserva o intervalo,
@@ -1627,7 +1627,7 @@ fechada $\tan\theta=\gamma_1\gamma_2v_1v_2/(\gamma_1+\gamma_2)$. Esse é o
 efeito que produz a precessão de Thomas no átomo.
 
   \item \textbf{Qual perfil de viagem envelhece menos?} Em
-\arq{cap02\_tempo\_proprio.py}, o gêmeo viaja com
+\arq{cap01\_tempo\_proprio.py}, o gêmeo viaja com
 $v(t)=v_0\sin(\pi t/T)$. Substitua por outros três perfis com o
 \emph{mesmo} $T$ e a \emph{mesma} velocidade máxima $v_0$: um trapézio, uma
 onda quadrada suavizada e $v_0\sin^2(\pi t/T)$. Calcule $\tau$ para cada um
@@ -1639,7 +1639,7 @@ pergunta diferente, que o próprio script já ilustra: por que
 $T/\gamma(\bar v)$, calculado com a velocidade \emph{média}, superestima
 $\tau$. Explique as duas coisas separadamente.
 
-  \item \textbf{O horizonte de Rindler.} Em \arq{cap02\_figuras.py}, acrescente
+  \item \textbf{O horizonte de Rindler.} Em \arq{cap01\_figuras.py}, acrescente
 ao diagrama do cone de luz a linha de mundo hiperbólica de um observador com
 aceleração própria constante $a_0$, $x^2-t^2=1/a_0^2$ (a
 Seção~\ref{sec:aceleracao-propria} a deduziu). Desenhe também a assíntota
@@ -1989,7 +1989,7 @@ que colisores são muito mais eficientes que experimentos de alvo fixo.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.66\textwidth]{cap03_colisor_alvo_fixo.pdf}
+\includegraphics[width=0.66\textwidth]{cap02_colisor_alvo_fixo.pdf}
 \caption{Energia disponível no referencial de centro de momento,
 $\sqrt{s}$, em função da energia $E$ de cada partícula (mesma massa $m$ nos
 dois casos). No colisor, $\sqrt{s}=2E$ cresce linearmente com $E$. No alvo
@@ -2009,7 +2009,7 @@ uma partícula massiva é temporal; o de um fóton é nulo.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.55\textwidth]{cap03_casca_massa.pdf}
+\includegraphics[width=0.55\textwidth]{cap02_casca_massa.pdf}
 \caption{Casca de massa $E^2=|\bm p|^2+m^2$ no plano $(|\bm p|,E)$. Para
 $m>0$ a curva é um ramo de hipérbole que nunca toca a reta $E=|\bm p|$: por
 maior que seja o momento, $E>|\bm p|$ sempre. Para $m=0$ a casca degenera na
@@ -2111,7 +2111,7 @@ relatividade especial.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.62\textwidth]{cap03_compton.pdf}
+\includegraphics[width=0.62\textwidth]{cap02_compton.pdf}
 \caption{Fração de energia $E'/E$ do fóton espalhado em função do ângulo
 $\theta$, para três energias incidentes. Quanto maior $E/m_e$, mais forte o
 espalhamento (curva mais baixa): no limite $E\ll m_e$ (curva azul) o efeito
@@ -2172,7 +2172,7 @@ constante e explícita em vez de um salto instantâneo de velocidade.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.62\textwidth]{cap03_foguete.pdf}
+\includegraphics[width=0.62\textwidth]{cap02_foguete.pdf}
 \caption{Trajetória no plano $(t,x)$ do referencial da Terra para uma nave
 com aceleração própria constante $a_0=1g$, acelerando até o meio do percurso
 e desacelerando depois, para alcançar Proxima Centauri
@@ -2198,7 +2198,7 @@ relativístico da Figura~\ref{fig:foguete}. Os scripts completos estão em
 
 \subsection{Python}
 
-\programa[Normalização da quadrivelocidade, casca de massa, decaimento em dois corpos e energia de limiar.]{codigo/cap03\_quadrivetores.py}
+\programa[Normalização da quadrivelocidade, casca de massa, decaimento em dois corpos e energia de limiar.]{codigo/cap02\_quadrivetores.py}
 
 A energia de limiar calculada,
 $E_{\rm thr}\approx1217{,}9\,{\rm MeV}$ para $p+p_{\rm repouso}\to p+p+\pi^0$
@@ -2217,11 +2217,11 @@ confirma que os dois métodos concordam a $10^{-16}$; para o foguete, refaz a
 integração da trajetória hiperbólica e recupera exatamente
 $\tau_{\rm nave}\approx3{,}54$ anos e $t_{\rm Terra}\approx5{,}87$ anos.
 
-\programa[Compton por busca de raiz, sem a fórmula fechada, e a trajetória do foguete de aceleração própria constante.]{codigo/cap03\_compton\_foguete.py}
+\programa[Compton por busca de raiz, sem a fórmula fechada, e a trajetória do foguete de aceleração própria constante.]{codigo/cap02\_compton\_foguete.py}
 
 \subsection{Mathematica}
 
-\programa[Derivação simbólica da massa invariante de dois fótons e da energia de limiar.]{codigo/cap03\_quadrivetores.wl}
+\programa[Derivação simbólica da massa invariante de dois fótons e da energia de limiar.]{codigo/cap02\_quadrivetores.wl}
 
 O script deriva simbolicamente, em sequência: a normalização da
 quadrivelocidade para uma 3-velocidade genérica; a fórmula do
@@ -2298,14 +2298,14 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{Um limiar para qualquer reação.} Generalize a função de energia de
-limiar de \arq{cap03\_quadrivetores.py} para aceitar uma lista arbitrária
+limiar de \arq{cap02\_quadrivetores.py} para aceitar uma lista arbitrária
 de massas finais. Use-a para tabelar o limiar de laboratório de
 $p+p\to p+p+\pi^0$, de $p+p\to p+p+p+\bar p$ e de
 $\gamma+p\to p+\pi^0$ com um fóton da radiação cósmica de fundo. Verifique
 que o último cai perto de $10^{20}$~eV e comente o corte GZK.
 
   \item \textbf{Aceleração própria contra aceleração coordenada.} Em
-\arq{cap03\_compton\_foguete.py}, acrescente uma segunda estratégia para a
+\arq{cap02\_compton\_foguete.py}, acrescente uma segunda estratégia para a
 \emph{mesma} viagem: acelerar com $\dd^2x/\dd t^2$ constante e igual a $g$
 (aceleração \emph{coordenada}, medida da Terra) até $v=0{,}9$, seguir em
 cruzeiro, e frear com $-g$ até parar no destino --- de modo que as duas
@@ -2321,7 +2321,7 @@ a razão de a aceleração \emph{própria} constante ser o cenário padrão da
 literatura, e não a coordenada.
 
   \item \textbf{A desigualdade da massa invariante.} Acrescente a
-\arq{cap03\_quadrivetores.py} uma rotina que sorteia $N$ partículas com
+\arq{cap02\_quadrivetores.py} uma rotina que sorteia $N$ partículas com
 massas e momentos aleatórios e calcula a massa invariante do sistema.
 Verifique em mil sorteios que $M_{\rm sist}\ge\sum_a m_a$ e determine
 numericamente em que condição vale a igualdade. Interprete o excesso.
@@ -2409,7 +2409,7 @@ não a seta.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.6\textwidth]{cap04_umaforma_pilha.pdf}
+\includegraphics[width=0.6\textwidth]{cap03_umaforma_pilha.pdf}
 \caption{A um-forma $\omega=(2,1)$ representada como uma pilha de retas
 (superfícies de nível de $\varphi=2x+y$, espaçadas de $\Delta\varphi=1$). O
 vetor $V=(3,4)$ vai de $\varphi=0$ a $\varphi=10$, perfurando exatamente $10$
@@ -2607,7 +2607,7 @@ ortonormal.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.92\textwidth]{cap04_base_obliqua.pdf}
+\includegraphics[width=0.92\textwidth]{cap03_base_obliqua.pdf}
 \caption{O mesmo vetor $V$, na mesma base oblíqua $\{e_1,e_2\}$, decomposto
 de duas maneiras. À esquerda, a regra do paralelogramo dá as componentes
 contravariantes $V^i$. À direita, a projeção perpendicular sobre cada eixo
@@ -2775,7 +2775,7 @@ completos estão em \texttt{codigo/}.
 
 \subsection{Python}
 
-\programa[Base dual de uma base oblíqua, decomposição simétrica/antissimétrica e invariância do traço.]{codigo/cap04\_tensores.py}
+\programa[Base dual de uma base oblíqua, decomposição simétrica/antissimétrica e invariância do traço.]{codigo/cap03\_tensores.py}
 
 Dois pontos merecem destaque. Primeiro, a base dual $e^i$ é recuperada por
 $e^i=g^{ij}e_j$ -- a mesma operação de ``subir índice'' com a métrica que já
@@ -2788,7 +2788,7 @@ Lorentz usada nos capítulos anteriores.
 
 \subsection{Mathematica}
 
-\programa[As mesmas identidades com entradas simbólicas livres, válidas para quaisquer valores.]{codigo/cap04\_tensores.wl}
+\programa[As mesmas identidades com entradas simbólicas livres, válidas para quaisquer valores.]{codigo/cap03\_tensores.wl}
 
 Diferentemente do script em Python, aqui as entradas de $F$, $S$, $T$ e $L$
 são símbolos livres, não números sorteados: o \texttt{Simplify} resultando
@@ -2858,7 +2858,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{Os dois invariantes do campo eletromagnético.} Estenda
-\arq{cap04\_tensores.py} para montar $F_{\mu\nu}$ a partir de $\bm E$ e
+\arq{cap03\_tensores.py} para montar $F_{\mu\nu}$ a partir de $\bm E$ e
 $\bm B$ dados e calcular $F_{\mu\nu}F^{\mu\nu}$ e
 $\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}$. Depois, para um campo
 com $\bm E\cdot\bm B\ne0$, procure numericamente o boost que torna $\bm E$
@@ -2866,7 +2866,7 @@ paralelo a $\bm B$. Mostre que ele existe sempre que o segundo invariante é
 não nulo, e que não existe para uma onda plana.
 
   \item \textbf{Uma base genuinamente oblíqua em Minkowski.} Comece por uma
-armadilha: adapte a figura de \arq{cap04\_figuras.py} para os eixos $t'$ e
+armadilha: adapte a figura de \arq{cap03\_figuras.py} para os eixos $t'$ e
 $x'$ de um boost com $v=0{,}5$ e calcule a métrica \emph{nessa} base,
 $g_{\mu'\nu'}=\bm e_{\mu'}\cdot\bm e_{\nu'}$. Você vai obter exatamente
 $\eta_{\mu\nu}$ --- os eixos de $S'$ parecem oblíquos no papel, mas são
@@ -2887,7 +2887,7 @@ $V_u$ e $V_w$ a partir de $V^u$ e $V^w$, e explique por que aqui subir e
 descer índices \emph{troca as componentes de lugar} em vez de apenas trocar
 um sinal.
 
-  \item \textbf{Quando a base quase degenera.} Em \arq{cap04\_tensores.py}, faça
+  \item \textbf{Quando a base quase degenera.} Em \arq{cap03\_tensores.py}, faça
 o ângulo entre $\bm e_1$ e $\bm e_2$ tender a zero e acompanhe o número de
 condição da matriz da métrica e o erro numérico na recuperação da base dual.
 Faça um gráfico do erro contra o ângulo e explique por que referenciais
@@ -3759,7 +3759,7 @@ $2GM/Rc^2\to1$, antecipando o Capítulo~\ref{cap:schwarzschild}.
 Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
 
 \begin{enumerate}
-  \item \textbf{Até onde a pressão pode ir.} Em \arq{cap04\_tensores.py},
+  \item \textbf{Até onde a pressão pode ir.} Em \arq{cap03\_tensores.py},
 monte $T^{\mu\nu}$ de um fluido perfeito em repouso e, para cada observador
 com quadrivelocidade $u^\mu$, calcule o vetor fluxo de energia que ele mede,
 \[
@@ -3779,7 +3779,7 @@ sobre a equação de estado e outro sobre o próprio $T^{\mu\nu}$. Qual dos dois
 é violado primeiro por um fluido com $p=1{,}2\,\rho$?
 
   \item \textbf{O fluido perfeito visto de outro referencial.} Adapte
-\arq{cap04\_tensores.py} para montar $T^{\mu\nu}$ de um fluido perfeito
+\arq{cap03\_tensores.py} para montar $T^{\mu\nu}$ de um fluido perfeito
 com $\rho$ e $p$ dados e depois aplicar um boost de velocidade $v$. Verifique
 numericamente que os autovalores de $T^\mu{}_\nu$ não mudam e que o
 autovetor temporal é a quadrivelocidade transformada. Confirme que $T^{0i}$
@@ -4234,14 +4234,14 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{Rindler pela máquina de curvatura.} Baixe
-\arq{cap07\_curvatura.py} e aplique sua rotina \texttt{riemann} à métrica de
+\arq{cap06\_curvatura.py} e aplique sua rotina \texttt{riemann} à métrica de
 Rindler, $\dd s^2=-(ax)^2\dd t^2+\dd x^2$. Confirme que os símbolos de Christoffel
 são não nulos e que o tensor de Riemann se anula em toda parte, dentro do
 piso das diferenças finitas. Depois investigue o que acontece com
 $\Gamma^t{}_{tx}$ quando $x\to0$ e relacione com o horizonte.
 
   \item \textbf{A holonomia de um cone.} Modifique a rotina \texttt{transporta} de
-\arq{cap07\_curvatura.py} para a métrica de um cone,
+\arq{cap06\_curvatura.py} para a métrica de um cone,
 $\dd\ell^2=\dd\rho^2+k^2\rho^2\dd\phi^2$ com $0<k<1$. Transporte um vetor em
 torno do vértice e mostre que a holonomia é $2\pi(1-k)$, independente do
 raio do circuito. Como a curvatura pode ser nula em toda parte e a holonomia
@@ -4544,7 +4544,7 @@ As segundas derivadas, porém, permanecem e codificam a curvatura.
 \end{example}
 
 \clearpage
-\input{secoes/cap07-numerica}
+\input{secoes/cap06-numerica}
 
 \clearpage
 \section{Exercícios}
@@ -4605,7 +4605,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{O toro e Gauss--Bonnet.} Aplique a máquina de
-\arq{cap07\_curvatura.py} à métrica do toro,
+\arq{cap06\_curvatura.py} à métrica do toro,
 $\dd\ell^2=\dd u^2+(R+a\cos u)^2\dd v^2$. Mostre que a curvatura de Gauss é
 positiva na face externa, negativa na interna e nula nos dois círculos com
 $\cos u=0$. Integre $K$ sobre toda a superfície e verifique que o resultado
@@ -4859,7 +4859,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{Testando a equação de Killing.} Use a rotina \texttt{christoffel} de
-\arq{cap07\_curvatura.py} para montar $\nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu$
+\arq{cap06\_curvatura.py} para montar $\nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu$
 em Schwarzschild e verificar numericamente que $\xi=\partial_t$ e
 $\xi=\partial_\phi$ satisfazem a equação de Killing, enquanto
 $\xi=\partial_r$ não. Meça quanto vale o resíduo em cada caso e mostre que a
@@ -5219,7 +5219,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{As equações de campo, verificadas.} Estenda
-\arq{cap07\_curvatura.py} com uma rotina que devolva $G_{\mu\nu}$.
+\arq{cap06\_curvatura.py} com uma rotina que devolva $G_{\mu\nu}$.
 Aplique-a à solução interior de Schwarzschild para uma estrela de densidade
 uniforme e verifique numericamente que $G_{tt}=8\pi\rho$ e que as componentes
 espaciais reproduzem a pressão dada pela equação TOV. Este é o teste mais
@@ -5308,7 +5308,7 @@ Aplicada a duas massas em órbita circular de separação $a$, ela dá
   P=\frac{32}{5}\frac{G^4}{c^5}\frac{m_1^2m_2^2(m_1+m_2)}{a^5},
   \label{eq:quadrupolo-binaria}
 \end{equation}
-resultado deduzido na Seção~\ref{sec:cap10-numerica}. A presença de
+resultado deduzido na Seção~\ref{sec:cap09-numerica}. A presença de
 $c^5/G\approx3{,}6\times10^{52}\,$W mostra por que a emissão é ridícula para
 sistemas cotidianos e colossal para binárias compactas: essa é a escala
 natural de luminosidade gravitacional, e tudo o mais é medido contra ela.
@@ -5430,7 +5430,7 @@ observação direta do sinal passando pela Terra, abrindo uma forma nova de
 astronomia.
 
 \clearpage
-\input{secoes/cap10-numerica}
+\input{secoes/cap09-numerica}
 
 \clearpage
 \section{Exercícios}
@@ -5495,7 +5495,7 @@ violento que seja.
 Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
 
 \begin{enumerate}
-  \item \textbf{O pulsar duplo.} Em \arq{cap10\_ondas.py}, troque os parâmetros
+  \item \textbf{O pulsar duplo.} Em \arq{cap09\_ondas.py}, troque os parâmetros
 de PSR~B1913+16 pelos de PSR~J0737\textendash 3039
 ($m_1=1{,}338\,\Msol$, $m_2=1{,}249\,\Msol$, $P_b=2{,}45$~h, $e=0{,}088$) e
 compare a previsão com o valor medido, $-1{,}252\times10^{-12}$. Explique
@@ -5817,7 +5817,7 @@ visualizar pontos de retorno, órbitas circulares e estabilidade, mas a dinâmic
 subjacente continua sendo geodésica em espaço-tempo curvo.
 
 \clearpage
-\input{secoes/cap11-numerica}
+\input{secoes/cap10-numerica}
 
 \clearpage
 \section{Exercícios}
@@ -5878,7 +5878,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{O atraso de Shapiro.} Acrescente a
-\arq{cap11\_geodesicas\_schwarzschild.py} a integração do tempo
+\arq{cap10\_geodesicas\_schwarzschild.py} a integração do tempo
 coordenado de um sinal de radar que vai da Terra a Vênus rente ao Sol e
 volta. Compare com o tempo que o mesmo percurso levaria em geometria plana e
 verifique que a diferença é de cerca de $200\,\mu$s. Estude como o atraso
@@ -6044,7 +6044,7 @@ uma teoria completa testada experimentalmente para substituir a previsão
 clássica.
 
 \clearpage
-\input{secoes/cap12-numerica}
+\input{secoes/cap11-numerica}
 
 \clearpage
 \section{Exercícios}
@@ -6108,7 +6108,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{O buraco branco.} Refaça a figura de cones de luz de
-\arq{cap12\_buracos\_negros.py} para coordenadas de
+\arq{cap11\_buracos\_negros.py} para coordenadas de
 Eddington--Finkelstein \emph{saintes}, $u=t-r_*$. Mostre que agora a região
 $r<2M$ é aquela de onde tudo necessariamente \emph{sai}. Situe as duas
 cartas no diagrama de Kruskal e explique por que elas cobrem regiões
@@ -6323,7 +6323,7 @@ quantidades são invariantes, quais dependem do observador e quais são apenas
 artefatos de coordenadas?
 
 \clearpage
-\input{secoes/cap13-numerica}
+\input{secoes/cap12-numerica}
 
 \clearpage
 \section{Exercícios}
@@ -6385,7 +6385,7 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{Um universo que recolapsa.} Acrescente a
-\arq{cap13\_friedmann.py} um universo fechado com $\Omega_m=1{,}5$ e
+\arq{cap12\_friedmann.py} um universo fechado com $\Omega_m=1{,}5$ e
 $\Omega_\Lambda=0$. Determine numericamente o instante de expansão máxima e
 o de recolapso, e compare com o resultado analítico em termos da ciclóide.
 Mostre que o tempo total de vida é exatamente o dobro do tempo até a

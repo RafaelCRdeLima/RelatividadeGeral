@@ -231,7 +231,7 @@ ax2.spines["left"].set_visible(False); ax2.spines["bottom"].set_visible(False)
 ax2.tick_params(labelsize=7)
 
 fig.tight_layout()
-fig.savefig(OUTDIR / "cap11_potencial_orbita.pdf", bbox_inches="tight")
+fig.savefig(OUTDIR / "cap10_potencial_orbita.pdf", bbox_inches="tight")
 
 # queda radial
 fig2, ax = plt.subplots(figsize=(4.6, 2.9))
@@ -249,5 +249,5 @@ ax.set_xlabel("tempo decorrido $/M$"); ax.set_ylabel(r"$r/M$")
 ax.set_title("Queda radial a partir do repouso em $r=10M$")
 ax.legend(frameon=False, fontsize=8)
 fig2.tight_layout()
-fig2.savefig(OUTDIR / "cap11_queda_radial.pdf", bbox_inches="tight")
+fig2.savefig(OUTDIR / "cap10_queda_radial.pdf", bbox_inches="tight")
 print(f"\nFiguras salvas em {OUTDIR}")

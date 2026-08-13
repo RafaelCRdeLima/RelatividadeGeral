@@ -1,217 +1,189 @@
 % =====================================================================
-%  Capítulo 11 — Resolução numérica
-%  Inserir depois da seção "Testes clássicos".
+%  Capítulo 12 — Resolução numérica
+%  Inserir antes da seção de exercícios.
 % =====================================================================
 \section{Resolução numérica}
 \label{sec:cap11-numerica}
 
-Três resultados deste capítulo foram enunciados sem conta explícita: o valor
-da ISCO, a precessão do periélio e o comportamento do tempo coordenado perto
-do horizonte. Nenhum deles é acessível por integração em forma fechada
-elementar, e é justamente aí que o cálculo numérico deixa de ser ilustração e
-passa a ser método. Esta seção resolve os três, valida cada resultado contra
-um limite conhecido e produz as figuras usadas nas seções anteriores. Os
-scripts completos estão em \texttt{codigo/}; aqui reproduzimos apenas os
-trechos que carregam a física.
-
-Trabalhamos com $G = c = 1$ e $M = 1$, de modo que $r$ é medido em massas
-gravitacionais: $r = 6$ significa $r = 6GM/c^2$. Para uma partícula massiva
-no plano equatorial, com $E$ e $L$ conservados por unidade de massa de
-repouso,
-\begin{equation}
-  \left(\rd{r}{\tau}\right)^{2} = E^{2} - \Veff(r),
-  \qquad
-  \Veff(r) = \left(1 - \frac{2M}{r}\right)\left(1 + \frac{L^{2}}{r^{2}}\right).
-  \label{eq:cap11-veff}
-\end{equation}
-
-\begin{atencao}
-Integrar diretamente $\dd r/\dd\tau = \pm\sqrt{E^{2}-\Veff}$ é a primeira
-tentativa de quase todo mundo, e ela falha: nos pontos de retorno o radicando
-passa por zero e o integrador ou trava ou escolhe o sinal errado. Derive a
-equação~\eqref{eq:cap11-veff} uma vez em $\tau$ e integre a forma de segunda
-ordem,
-\[
-  \rd{^{2}r}{\tau^{2}} = -\frac{M}{r^{2}} + \frac{L^{2}}{r^{3}}
-                          - \frac{3ML^{2}}{r^{4}},
-\]
-que é regular nos pontos de retorno e vale exatamente, sem aproximação de
-campo fraco.
-\end{atencao}
+As afirmações centrais deste capítulo foram feitas em palavras: que o
+horizonte é uma singularidade de coordenada, que quem cai não sente nada de
+especial ao cruzá-lo, que buracos negros maiores são mais frios. Cada uma
+delas vira um número aqui, e o resultado é menos intuitivo do que a versão
+verbal sugere. Os blocos geométricos usam $G=c=M=1$; os astrofísicos usam SI
+e imprimem em unidades solares.
 
 \subsection{Python}
 
-\programa[ISCO, precessão do periélio em campo forte, deflexão da luz e queda radial.]{codigo/cap11\_geodesicas\_schwarzschild.py}
+\programa[Cones de luz, diagrama de Kruskal, marés no horizonte, termodinâmica de Hawking e a família de Kerr.]{codigo/cap11\_buracos\_negros.py}
 
-\subsubsection*{Órbitas circulares e a ISCO}
+\subsubsection*{Os cones de luz e o que a carta cobre}
 
-Órbitas circulares são extremos de $\Veff$. A família de raios circulares sai
-de $\Veff'(r)=0$, que dá $L^{2} = Mr^{2}/(r-3M)$; a ISCO é o ponto em que
-mínimo e máximo se fundem, isto é, onde $\Veff''=0$ ao longo dessa família.
-Isso é uma raiz unidimensional, resolvida com \texttt{brentq}.
+Em coordenadas de Schwarzschild, os raios nulos radiais satisfazem
+$\dd t/\dd r = \pm(1-2M/r)^{-1}$, que diverge em $r=2M$: o cone se fecha e a
+carta termina. Em Eddington--Finkelstein entrante, com $v = t+r_{*}$ e
+$r_{*} = r + 2M\ln|r/2M - 1|$, a métrica é
+\begin{equation}
+  \dd s^{2} = -\left(1-\frac{2M}{r}\right)\dd v^{2}
+              + 2\,\dd v\,\dd r + r^{2}\dd\Omega^{2},
+  \label{eq:cap12-ef}
+\end{equation}
+e os dois raios radiais são $\dd v/\dd r = 0$ (entrando) e
+$\dd v/\dd r = 2/(1-2M/r)$.
+
+\begin{atencao}
+O sinal de $f = 1-2M/r$ é a conta inteira. Para $r>2M$ o segundo raio tem
+$\dd r>0$ e escapa; em $r=2M$ ele fica com $\dd r=0$, parado sobre o
+horizonte para sempre; para $r<2M$ ele tem $\dd r<0$ e \emph{também} cai. Não
+há nada de singular nessa transição --- é uma mudança contínua de inclinação.
+O que muda é global: a partir de $r=2M$, nenhuma direção causal aponta para
+fora. O horizonte não é um lugar onde algo acontece; é o lugar a partir do
+qual o futuro tem uma propriedade diferente.
+\end{atencao}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/cap11_cones_luz.pdf}
+  \caption{A mesma geometria em duas cartas. À esquerda, Schwarzschild: os
+  cones se fecham ao se aproximarem de $r=2M$ e a região sombreada
+  simplesmente não é coberta pelas coordenadas. À direita,
+  Eddington--Finkelstein: os cones nunca se fecham, apenas tombam
+  progressivamente; em $r=2M$ o raio que ``sai'' fica vertical, e para dentro
+  os dois raios apontam para $r$ decrescente.}
+  \label{fig:cap12-cones}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.74\linewidth]{figuras/cap11_kruskal.pdf}
+  \caption{Diagrama de Kruskal--Szekeres, onde raios de luz radiais são
+  retas a $45^\circ$. As hipérboles tracejadas são $r$ constante e as retas
+  claras pela origem são $t$ constante --- note que todo o horizonte, para
+  $-\infty<t<\infty$, colapsa nas duas diagonais. A linha de mundo em âmbar
+  cruza o horizonte sem nada de particular e termina na singularidade, que é
+  uma \emph{hipérbole horizontal}: um instante no futuro, não um lugar no
+  espaço.}
+  \label{fig:cap12-kruskal}
+\end{figure}
+
+\subsubsection*{Marés no horizonte}
+
+A aceleração de maré radial entre dois pontos separados por $\Delta x$ é
+$2GM\Delta x/r^{3}$. Avaliada no próprio horizonte, $r=r_{s}=2GM/c^{2}$, ela
+vale $c^{6}\Delta x/(4G^{2}M^{2})$: cai como $1/M^{2}$.
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
-r_ISCO (numerico) = 6.0000000000 M      (exato: 6 M)
-L_ISCO            = 3.4641016151 M      (exato: sqrt(12) = 3.4641016151)
-E_ISCO            = 0.9428090416        (exato: sqrt(8/9) = 0.9428090416)
-eficiencia de acrecao 1 - E_ISCO = 0.057191  (5.72 % da massa de repouso)
-orbita de fotons  = 3.0000000000 M      (exato: 3 M)
+objeto                         M/M_sol    r_s [km]   mare em 1.8 m [g]
+estelar                             10       29.54            1.89e+07
+Cygnus X-1                          21       62.03            4.29e+06
+Sgr A*                         4.3e+06   1.269e+07            0.000102
+M87*                           6.5e+09    1.92e+10            4.47e-11
 \end{lstlisting}
 \end{saida}
 
 \begin{central}
-O número $1-E_{\rm ISCO} = 5{,}72\,\%$ não é um detalhe numérico: é a fração
-da massa de repouso que um disco fino pode irradiar antes que a matéria
-mergulhe no buraco negro. Compare com $\sim 0{,}7\,\%$ da fusão de hidrogênio.
-Acreção em buraco negro sem rotação já é quase uma ordem de grandeza mais
-eficiente que a fonte de energia das estrelas.
+Um astronauta que cruzasse o horizonte de um buraco negro de $10\,\Msol$
+sofreria uma maré de $19$~milhões de $g$ entre a cabeça e os pés --- seria
+destruído muito antes de chegar lá. No horizonte de Sgr~A$^{*}$ a mesma maré
+é de $10^{-4}\,g$, imperceptível; no de M87$^{*}$, $4\times10^{-11}\,g$. A
+frase ``nada de especial acontece no horizonte'' é rigorosamente verdadeira
+como afirmação sobre a \emph{geometria local}, e ainda assim falsa como
+conselho prático para buracos negros estelares. O invariante que decide é o
+escalar de Kretschmann, $K = 48M^{2}/r^{6}$, que no horizonte vale
+$3/(4M^{4})$ --- e é por isso que a resposta depende da massa.
 \end{central}
 
-\subsubsection*{Precessão do periélio}
-
-Com $p$ (semi-latus rectum) e $e$ dados, as constantes de movimento ficam
-determinadas, e o periélio ocorre sempre que $\dot r$ muda de sinal de
-negativo para positivo. Localizamos esses instantes por interpolação linear e
-medimos a diferença azimutal entre periélios consecutivos.
+\subsubsection*{Termodinâmica}
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
-Delta phi por orbita, numerico = 1.231264 rad
-Delta phi por orbita, 6 pi M/p = 0.942478 rad
-exato para e -> 0: 2 pi [(1-6M/p)^(-1/2) - 1] = 1.226658 rad
-
-  p/M      numerico        6 pi M/p      razao
-    20   1.231264e+00   9.424778e-01     1.3064
-    50   4.151280e-01   3.769911e-01     1.1012
-   200   9.644314e-02   9.424778e-02     1.0233
-  1000   1.893557e-02   1.884956e-02     1.0046
-
-Mercurio: 5.0187e-07 rad/orbita  ->  42.98 arcsec/seculo
+     M/M_sol       T_H [K]         S/k_B   t_evap [anos]
+           1     6.169e-08     1.049e+77       2.097e+67
+          10     6.169e-09     1.049e+79       2.097e+70
+   4.297e+06     1.436e-14     1.938e+90       1.664e+87
+buraco negro em equilibrio com a CMB (T = 2.7255 K):
+  M = 2.263e-08 M_sol = 4.502e+22 kg   (~0.613 massas lunares)
 \end{lstlisting}
 \end{saida}
 
-Vale examinar essa saída com cuidado, porque ela contém três lições
-diferentes. Primeiro, em $p = 20M$ a fórmula $6\pi M/p$ erra por $31\,\%$:
-ela é apenas o termo de primeira ordem de uma série em $M/p$, e o campo ali
-não é fraco. Segundo, a última coluna mostra a razão tendendo a~$1$ conforme
-$p$ cresce --- é assim que se verifica que uma aproximação está sendo usada
-dentro do seu domínio de validade. Terceiro, o valor numérico $1{,}2313$ para
-$e = 0{,}4$ está próximo do resultado exato $1{,}2267$ obtido adiante para
-órbitas quase circulares; a diferença é o efeito da excentricidade, de ordem
-$e^{2}$.
+A entropia de um buraco negro de uma massa solar é $10^{77}k_{B}$. Para
+comparação, a entropia do Sol \emph{inteiro} é da ordem de $10^{58}k_{B}$:
+comprimir o Sol até o horizonte multiplicaria sua entropia por
+$10^{19}$. Buracos negros são, de longe, os objetos mais entrópicos do
+Universo, e é por isso que a segunda lei generalizada é uma restrição tão
+forte.
 
-E, ao fim, o mesmo código aplicado a Mercúrio devolve os $42{,}98''$ por
-século que Einstein calculou em novembro de 1915 --- o primeiro número que a
-teoria acertou.
+A última linha inverte uma intuição comum. Um buraco negro só evapora se
+estiver mais quente que o ambiente, e o ambiente do Universo atual é a CMB a
+$2{,}73$~K. Isso exige $M < 4{,}5\times10^{22}$~kg, cerca de $0{,}6$ massa
+lunar. \emph{Todo} buraco negro conhecido está muitas ordens de grandeza
+acima disso: hoje todos eles absorvem mais do que irradiam. A evaporação de
+Hawking não é um processo em curso --- é um processo que só começará quando o
+Universo tiver esfriado o bastante, daqui a algo como $10^{100}$ anos.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{figuras/cap11_potencial_orbita.pdf}
-  \caption{À esquerda, o potencial efetivo~\eqref{eq:cap11-veff} para vários
-  valores de $L$. Abaixo de $L = \sqrt{12}\,M$ o poço desaparece e não há
-  órbita ligada; o ponto de inflexão marca a ISCO. À direita, a órbita
-  integrada com $p = 20M$ e $e = 0{,}4$: os periélios sucessivos (em âmbar)
-  não se repetem no mesmo ângulo, e a órbita não fecha. O disco central é o
-  horizonte.}
-  \label{fig:cap11-potencial}
-\end{figure}
-
-\subsubsection*{Deflexão da luz}
-
-Para geodésicas nulas convém trocar de variável para $u = 1/r$ e usar $\phi$
-como parâmetro, o que transforma o problema em
-$u'' + u = 3Mu^{2}$. O raio vem do infinito ($u=0$), passa pelo periastro e
-volta ao infinito; o evento de retorno a $u = 0$ é detectado pelo próprio
-integrador.
+\subsubsection*{Kerr: o que a rotação muda}
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
-     b/M     numerico         4M/b   + 15 pi M^2/(4b^2)
-      10 5.903958e-01 4.000000e-01         5.178097e-01
-      50 8.508345e-02 8.000000e-02         8.471239e-02
-     200 2.029997e-02 2.000000e-02         2.029452e-02
-    1000 4.011823e-03 4.000000e-03         4.011781e-03
-
-borda do Sol: 1.751 arcsec
+   a/M      r_+      r_-  r_ergo(eq)  ISCO prog  ISCO retr  eficiencia
+ 0.000   2.0000   0.0000         2.0     6.0000     6.0000       5.72%
+ 0.500   1.8660   0.1340         2.0     4.2330     7.5546       8.21%
+ 0.900   1.4359   0.5641         2.0     2.3209     8.7174      15.58%
+ 0.990   1.1411   0.8589         2.0     1.4545     8.9719      26.40%
+ 0.998   1.0632   0.9368         2.0     1.2370     8.9944      32.10%
+limite extremo: 42.26%
 \end{lstlisting}
 \end{saida}
 
-A terceira coluna inclui a correção de segunda ordem. Note como ela recupera
-quase todo o erro em $b = 50M$ e praticamente todo em $b \geq 200M$, mas
-ainda falha em $b = 10M$: perto da órbita de fótons nenhuma expansão em $M/b$
-sobrevive.
+A coluna da ergosfera é constante: no equador ela fica em $2M$ para qualquer
+spin, enquanto o horizonte encolhe de $2M$ até $M$. A ergosfera não é uma
+casca fina em torno do horizonte --- para $a$ grande, ela é uma região
+espessa, e é dentro dela que o arrastamento de referenciais permite extrair
+energia de rotação.
 
-\subsubsection*{Queda radial e a divergência do tempo coordenado}
-
-\begin{saida}
-\begin{lstlisting}[style=rgsaida]
-tempo proprio ate' o horizonte  = 33.700870 M
-tempo proprio ate' r = 0        = 35.124074 M
-  ate' r =  3.000 M :  tau =   32.4099 M   t =      40.9383 M
-  ate' r =  2.100 M :  tau =   33.5873 M   t =      47.1540 M
-  ate' r =  2.010 M :  tau =   33.6897 M   t =      51.9068 M
-  ate' r =  2.001 M :  tau =   33.6998 M   t =      56.5266 M
-\end{lstlisting}
-\end{saida}
-
-Esta é a tabela mais eloquente do capítulo. A cada fator de dez que
-aproximamos o alvo do horizonte, o tempo próprio muda na quarta casa decimal
---- a queda está praticamente terminada --- enquanto o tempo coordenado sobe
-mais cinco unidades de $M$, sem sinal de parar. A divergência é logarítmica,
-e o observador em queda não sente absolutamente nada de especial ao cruzar
-$r = 2M$.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.72\linewidth]{figuras/cap11_queda_radial.pdf}
-  \caption{Queda radial a partir do repouso em $r = 10M$. Em tempo próprio a
-  trajetória cruza o horizonte e chega a $r=0$ em tempo finito; em tempo
-  coordenado ela se acumula assintoticamente sobre $r = 2M$. As duas curvas
-  descrevem a mesma queda, medida por relógios diferentes.}
-  \label{fig:cap11-queda}
-\end{figure}
+\begin{central}
+A eficiência de acreção salta de $5{,}72\,\%$ (estático) para $42{,}26\,\%$
+no limite extremo $a\to M$, onde $1-E_{\rm ISCO} = 1-1/\sqrt3$. Compare com
+$0{,}7\,\%$ da fusão de hidrogênio: um disco em torno de um buraco negro em
+rotação rápida converte massa em radiação sessenta vezes mais eficientemente
+que uma estrela. É essa conta, e não a massa engolida, que explica por que
+quasares superam em brilho a galáxia inteira que os hospeda. O valor
+$32\,\%$ em $a=0{,}998$ é o limite de Thorne, o spin máximo que a própria
+acreção consegue sustentar.
+\end{central}
 
 \subsection{Mathematica}
 
-\programa[Christoffel, Riemann e Ricci de Schwarzschild; Kretschmann; extração exata da ISCO e da precessão.]{codigo/cap11\_schwarzschild\_simbolico.wl}
+\programa[Regularidade de Eddington--Finkelstein no horizonte, gravidade superficial e a primeira lei.]{codigo/cap11\_buracos\_negros\_simbolico.wl}
 
-O papel do cálculo simbólico aqui é complementar, não redundante: ele fornece
-as expressões exatas contra as quais o resultado numérico é conferido. Os
-símbolos de Christoffel, o tensor de Riemann e o de Ricci são construídos a
-partir da métrica com as mesmas convenções de índice do
-Capítulo~\ref{cap:curvatura}.
+O bloco simbólico prova o que a Figura~\ref{fig:cap12-cones} apenas ilustra:
+que a Equação~\eqref{eq:cap12-ef} é regular no horizonte e descreve a mesma
+solução de vácuo.
 
-O mesmo tensor de Riemann fornece o escalar de Kretschmann,
-$R_{\alpha\beta\gamma\delta}R^{\alpha\beta\gamma\delta} = 48M^{2}/r^{6}$,
-citado na Seção~\ref{sec:horizonte} para separar singularidade de coordenada
-de singularidade física.
+O determinante é a chave: $\det g = -r^{4}\sin^{2}\theta$ vale
+$-16M^{4}\sin^{2}\theta$ em $r=2M$, isto é, a métrica continua invertível
+ali. Na forma de Schwarzschild, $g_{rr}=(1-2M/r)^{-1}$ diverge no mesmo
+ponto. \emph{A geometria é a mesma; o que era ruim era o mapa.} O termo
+cruzado $2\,\dd v\,\dd r$ é o que salva o determinante.
 
-A parte mais útil é a extração exata da ISCO e da precessão. Escrevendo
-$q = L^{2}$, o script resolve $\partial_r\Veff=0$ para obter a família de
-órbitas circulares, $q = Mr^{2}/(r-3M)$, impõe também $\partial_r^2\Veff=0$
-e recupera $r=6M$, $q=12M^{2}$; em seguida compara as frequências radial e
-azimutal.
-
-O resultado é
-\begin{equation}
-  \Delta\phi_{\text{órbita}}
-  = 2\pi\left[\left(1 - \frac{6M}{r}\right)^{-1/2} - 1\right]
-  = \frac{6\pi M}{r} + \frac{27\pi M^{2}}{r^{2}} + \mathcal{O}\!\left(\frac{M^{3}}{r^{3}}\right),
-  \label{eq:cap11-precessao-exata}
-\end{equation}
-válido no limite de órbitas quase circulares. Duas leituras: o primeiro termo
-é exatamente a fórmula clássica usada para Mercúrio, e a expressão inteira
-diverge em $r = 6M$ --- na ISCO a frequência de oscilação radial vai a zero,
-a órbita deixa de precessar e passa a espiralar.
+O mesmo tensor de Riemann fornece o invariante que distingue as duas
+singularidades, $K = 48M^{2}/r^{6}$, finito em $r=2M$ e divergente em $r=0$.
+A gravidade superficial, $\kappa = \tfrac12\,\partial_r(1-2M/r)$ avaliada no
+horizonte, vale $1/4M$ --- e é ela que fecha a primeira lei:
 
 \begin{central}
-A verificação cruzada é o produto real desta seção. O integrador devolveu
-$1{,}231264$ para uma órbita com $e = 0{,}4$; a expressão
-exata~\eqref{eq:cap11-precessao-exata} dá $1{,}226658$ no limite $e \to 0$; a
-fórmula de primeira ordem dá $0{,}942478$. Os dois primeiros concordam em
-três dígitos e discordam do terceiro por $30\,\%$. Um resultado numérico que
-não é confrontado com um limite analítico conhecido não é resultado: é
-palpite com casas decimais.
+A última linha devolve exatamente $1$, isto é, $T\,\dd S = \dd M$. Para
+Schwarzschild, a primeira lei da mecânica de buracos negros não é uma
+analogia aproximada nem um resultado de teoria quântica: é uma identidade
+algébrica entre $\kappa = 1/4M$, $A = 16\pi M^{2}$ e a própria massa. O que a
+radiação Hawking acrescentou não foi a relação --- foi a constatação de que
+$T = \kappa/2\pi$ é uma temperatura de verdade, com radiação térmica de
+verdade, e não apenas um parâmetro com as unidades certas.
 \end{central}
+
+O último bloco trata de Kerr. A área do horizonte,
+$A = 4\pi(r_{+}^{2}+a^{2})$, vale $16\pi M^{2}$ para $a=0$ e apenas
+$8\pi M^{2}$ para $a=M$: extrair todo o momento angular de um buraco negro
+extremo, a massa irredutível mantida fixa, no máximo dobra a área --- e
+nunca a diminui, como exige o teorema da área.
 

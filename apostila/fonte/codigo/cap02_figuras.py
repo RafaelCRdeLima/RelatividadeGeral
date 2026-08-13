@@ -1,4 +1,4 @@
-"""Gera as figuras do Capitulo 2 (Relatividade especial) da apostila.
+"""Gera as figuras do Capitulo 2 (Vetores e momento relativistico).
 
 Uso:
     python3 cap02_figuras.py
@@ -8,8 +8,6 @@ Salva os PDFs em ../figuras/. Unidades geometrizadas (c=1).
 
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.patheffects as pe
 from pathlib import Path
 
 OUTDIR = Path(__file__).resolve().parent.parent / "figuras"
@@ -23,338 +21,151 @@ plt.rcParams.update({
 })
 
 
-# halo branco atras do texto: impede que rotulos se confundam com as
-# linhas (eixos, cone de luz) que passam por tras deles
-HALO = [pe.withStroke(linewidth=3.0, foreground="white")]
+# ---------------------------------------------------------------------
+# Figura 1: diagrama de massa (E vs |p|) -- casca de massa
+# ---------------------------------------------------------------------
+def fig_casca_de_massa():
+    fig, ax = plt.subplots(figsize=(4.8, 4.6))
 
+    p = np.linspace(0, 3, 300)
+    for m, cor in zip([0.0, 0.6, 1.2], ["black", "#4C72B0", "#B0413E"]):
+        E = np.sqrt(p**2 + m**2)
+        rotulo = r"$m=0$ (fóton)" if m == 0 else rf"$m={m}$"
+        estilo = "--" if m == 0 else "-"
+        ax.plot(p, E, estilo, color=cor, lw=1.6, label=rotulo)
 
-def novo_eixo(xlim=(-3, 3), ylim=(-3, 3), figsize=(4.6, 4.6)):
-    fig, ax = plt.subplots(figsize=figsize)
-    ax.set_xlim(*xlim)
-    ax.set_ylim(*ylim)
+    ax.set_xlim(0, 3)
+    ax.set_ylim(0, 3)
     ax.set_aspect("equal")
-    ax.axhline(0, color="black", lw=0.6, zorder=1)
-    ax.axvline(0, color="black", lw=0.6, zorder=1)
-    ax.set_xlabel(r"$x$")
-    ax.set_ylabel(r"$ct$")
-    return fig, ax
+    ax.set_xlabel(r"$|\mathbf{p}|$")
+    ax.set_ylabel(r"$E$")
+    ax.legend(fontsize=10, frameon=False, loc="upper left")
+    ax.set_title(r"Casca de massa $E^2=|\mathbf{p}|^2+m^2$", fontsize=12)
 
-
-# ---------------------------------------------------------------------
-# Figura 1: cone de luz e estrutura causal
-# ---------------------------------------------------------------------
-def fig_cone_luz():
-    fig, ax = novo_eixo((-3, 3), (-3, 3), figsize=(5.2, 5.2))
-
-    x = np.linspace(-3, 3, 200)
-    ax.plot(x, np.abs(x), color="0.15", lw=1.4)
-    ax.plot(x, -np.abs(x), color="0.15", lw=1.4)
-
-    # regiao causal futura/passada (preenchimento leve)
-    ax.fill_between(x, np.abs(x), 3, color="#4C72B0", alpha=0.12, lw=0)
-    ax.fill_between(x, -np.abs(x), -3, color="#4C72B0", alpha=0.12, lw=0)
-    # as duas cunhas espaciais, com a mesma cor: sao a mesma regiao causal
-    ax.fill_betweenx(x, np.abs(x), 3, color="#DD8452", alpha=0.10, lw=0)
-    ax.fill_betweenx(x, -3, -np.abs(x), color="#DD8452", alpha=0.10, lw=0)
-
-    ax.text(0, 2.55, "futuro causal", ha="center", fontsize=10.5,
-            path_effects=HALO)
-    ax.text(0, -2.75, "passado causal", ha="center", fontsize=10.5,
-            path_effects=HALO)
-    # fora do eixo horizontal: sobre ele, a linha reaparece no espaco
-    # entre as duas palavras, que o halo nao cobre
-    ax.text(2.05, -1.05, "não causal", ha="center", va="center", fontsize=10.5,
-            path_effects=HALO)
-    ax.text(-2.05, -1.05, "não causal", ha="center", va="center", fontsize=10.5,
-            path_effects=HALO)
-
-    # eventos de exemplo (retomam os Exemplos resolvidos do texto)
-    ax.plot([0], [0], "o", color="black", ms=4, zorder=5)
-    ax.annotate("$O$", (0, 0), textcoords="offset points", xytext=(-10, -14),
-                path_effects=HALO)
-
-    # rotulos afastados uns dos outros: cada um ocupa um setor vazio
-    ax.plot([0.6], [2.0], "o", color="#2E7D32", ms=5, zorder=5)
-    ax.annotate(r"temporal ($\Delta s^2<0$)", (0.6, 2.0), textcoords="offset points",
-                xytext=(-9, -3), ha="right", fontsize=9.5, color="#2E7D32",
-                path_effects=HALO)
-
-    ax.plot([1.4], [1.4], "o", color="black", ms=5, zorder=5)
-    ax.annotate(r"nula ($\Delta s^2=0$)", (1.4, 1.4), textcoords="offset points",
-                xytext=(4, -13), ha="left", fontsize=9.5,
-                path_effects=HALO)
-
-    ax.plot([2.0], [0.7], "o", color="#B0413E", ms=5, zorder=5)
-    ax.annotate(r"espacial ($\Delta s^2>0$)", (2.0, 0.7), textcoords="offset points",
-                xytext=(0, -15), ha="center", fontsize=9.5, color="#B0413E",
-                path_effects=HALO)
-
-    ax.set_title("Cone de luz e estrutura causal", fontsize=12)
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap02_cone_luz.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap02_casca_massa.pdf", bbox_inches="tight")
     plt.close(fig)
 
 
 # ---------------------------------------------------------------------
-# Figura 2: relatividade da simultaneidade (eixos de S e de S')
+# Figura 2: energia de centro de momento -- colisor vs. alvo fixo
 # ---------------------------------------------------------------------
-def fig_simultaneidade(v=0.5):
-    gamma = 1 / np.sqrt(1 - v**2)
-    fig, ax = novo_eixo((-3, 3), (-3, 3))
+def fig_colisor_vs_alvo_fixo(m=1.0):
+    fig, ax = plt.subplots(figsize=(5.0, 4.2))
 
-    # eixos de S: ja desenhados por novo_eixo (linhas pretas em x=0 e ct=0)
-    ax.text(2.85, -0.28, "$x$", fontsize=12)
-    ax.text(0.12, 2.75, "$ct$", fontsize=12)
+    E = np.linspace(m, 30 * m, 400)  # energia de cada feixe / energia de laboratorio
 
-    # eixo ct' (reta x = v*ct, ou seja x/ct = v) e eixo x' (reta ct = v*x)
-    s = np.linspace(-2.6, 2.6, 50)
-    ax.plot(v * s, s, color="#4C72B0", lw=1.3)
-    ax.plot(s, v * s, color="#4C72B0", lw=1.3)
-    ax.text(v * 2.6 + 0.08, 2.6, "$ct'$", color="#4C72B0", fontsize=12)
-    ax.text(2.7, v * 2.6 - 0.05, "$x'$", color="#4C72B0", fontsize=12)
+    sqrt_s_colisor = 2 * E
+    sqrt_s_alvo_fixo = np.sqrt(2 * m**2 + 2 * m * E)
 
-    # dois eventos simultaneos em S (mesma ct), unidos por uma reta de simultaneidade de S
-    ctA, xA = 1.2, -1.6
-    ctB, xB = 1.2, 1.6
-    ax.plot([xA, xB], [ctA, ctB], color="black", lw=1.1, ls="--")
-    ax.plot([xA, xB], [ctA, ctB], "o", color="black", ms=5, zorder=5)
-    ax.annotate("$A$", (xA, ctA), textcoords="offset points", xytext=(-14, 4))
-    ax.annotate("$B$", (xB, ctB), textcoords="offset points", xytext=(6, 4))
+    ax.plot(E / m, sqrt_s_colisor / m, color="#4C72B0", lw=1.8,
+            label=r"colisor: $\sqrt{s}=2E$")
+    ax.plot(E / m, sqrt_s_alvo_fixo / m, color="#B0413E", lw=1.8,
+            label=r"alvo fixo: $\sqrt{s}=\sqrt{2m^2+2mE}$")
 
-    # reta de simultaneidade de S' passando por A: ct - ctA = v (x - xA)
-    xs = np.linspace(-2.9, 2.9, 50)
-    cts = ctA + v * (xs - xA)
-    mask = (cts > -2.9) & (cts < 2.9)
-    ax.plot(xs[mask], cts[mask], color="#4C72B0", lw=1.1, ls=":")
+    ax.set_xlabel(r"$E/m$ (energia por partícula)")
+    ax.set_ylabel(r"$\sqrt{s}/m$ (energia disponível no CM)")
+    ax.legend(fontsize=10, frameon=False, loc="upper left")
+    ax.set_title("Energia de centro de momento: colisor vs. alvo fixo", fontsize=11)
 
-    ax.set_title(rf"Simultaneidade relativa ($v={v}\,c$)", fontsize=12)
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap02_simultaneidade.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap02_colisor_alvo_fixo.pdf", bbox_inches="tight")
     plt.close(fig)
 
 
 # ---------------------------------------------------------------------
-# Figura 3: paradoxo dos gemeos com marcacao de tempo proprio
+# Figura 3: espalhamento Compton -- E'/E em funcao do angulo
 # ---------------------------------------------------------------------
-def fig_paradoxo_gemeos(v=0.8, T=10.0, n_ticks=10):
-    gamma = 1 / np.sqrt(1 - v**2)
+def fig_compton(me=0.511):
+    """me em MeV (massa de repouso do eletron); E em MeV."""
+    fig, ax = plt.subplots(figsize=(5.0, 4.2))
 
-    fig, ax = plt.subplots(figsize=(4.8, 5.4))
-    ax.set_xlim(-4.5, 4.5)
-    ax.set_ylim(-0.5, T + 1)
-    ax.set_xlabel(r"$x$")
-    ax.set_ylabel(r"$ct$")
+    theta = np.linspace(0, np.pi, 300)
+    for E, cor in zip([0.1, 0.511, 2.0], ["#4C72B0", "#55A868", "#B0413E"]):
+        Ep = E * me / (E * (1 - np.cos(theta)) + me)
+        ax.plot(np.degrees(theta), Ep / E, color=cor, lw=1.8,
+                label=rf"$E={E}$ MeV ($E/m_e={E/me:.2f}$)")
 
-    # gemeo que fica em casa: x=0
-    ax.plot([0, 0], [0, T], color="#B0413E", lw=1.8, label="gêmeo que fica em casa")
-    for k in range(n_ticks + 1):
-        ct = k * T / n_ticks
-        ax.plot([-0.08, 0.08], [ct, ct], color="#B0413E", lw=1.2)
-
-    # gemeo viajante: vai com +v ate T/2, volta com -v
-    ct_out = np.array([0, T / 2])
-    x_out = v * ct_out
-    ct_in = np.array([T / 2, T])
-    x_in = v * (T - ct_in)
-    ax.plot(x_out, ct_out, color="#4C72B0", lw=1.8, label="gêmeo viajante")
-    ax.plot(x_in, ct_in, color="#4C72B0", lw=1.8)
-
-    # marcas de tempo proprio do viajante: espacadas por dtau = (T/n_ticks)/gamma em ct
-    dtau_ct = (T / n_ticks) / gamma
-    ct_marks = np.arange(0, T / 2 + 1e-9, dtau_ct)
-    for ct in ct_marks:
-        x = v * ct
-        ax.plot(x, ct, "|", color="#4C72B0", ms=10, mew=1.4)
-    ct_marks2 = T - np.arange(0, T / 2 + 1e-9, dtau_ct)[::-1]
-    for ct in ct_marks2:
-        x = v * (T - ct)
-        ax.plot(x, ct, "|", color="#4C72B0", ms=10, mew=1.4)
-
-    ax.plot([0], [0], "o", color="black", zorder=5)
-    ax.plot([0], [T], "o", color="black", zorder=5)
-    ax.annotate("partida", (0, 0), textcoords="offset points", xytext=(-40, -4))
-    ax.annotate("reencontro", (0, T), textcoords="offset points", xytext=(-45, 4))
-
-    tau_viajante = T * np.sqrt(1 - v**2)
-    ax.text(-4.3, T * 0.5, rf"$\tau_{{\rm casa}}={T:.0f}$" + "\n"
-            rf"$\tau_{{\rm viajante}}={tau_viajante:.2f}$", fontsize=10,
-            va="center", bbox=dict(boxstyle="round", fc="white", ec="0.6"))
-
-    ax.legend(loc="upper left", fontsize=9, frameon=False, bbox_to_anchor=(1.0, 0.65))
-    ax.set_title(rf"Paradoxo dos gêmeos ($v={v}\,c$)"
-                 "\n" r"marcas a intervalos iguais de $\tau$", fontsize=11)
-    fig.tight_layout()
-    fig.savefig(OUTDIR / "cap02_paradoxo_gemeos.pdf", bbox_inches="tight")
-    plt.close(fig)
-
-# ---------------------------------------------------------------------
-# Figura 4: relogio de luz (invariancia do intervalo, Secao 1.1)
-# ---------------------------------------------------------------------
-def fig_relogio_luz(v=0.6, L=1.0):
-    """Mesmo tique visto no referencial do relogio (S') e num referencial S."""
-    dt = 2 * L / np.sqrt(1 - v**2)   # duracao do tique em S
-    dx = v * dt                      # avanco do relogio em S
-
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.6, 3.6),
-                                   gridspec_kw={"width_ratios": [1, 1.9]})
-
-    def espelho(ax, x, y, meia=0.30, cor="0.25"):
-        ax.plot([x - meia, x + meia], [y, y], color=cor, lw=3, solid_capstyle="butt")
-
-    # ---------------- painel esquerdo: S' (relogio parado) ----------------
-    espelho(ax1, 0, 0)
-    espelho(ax1, 0, L)
-    ax1.annotate("", xy=(-0.07, L), xytext=(-0.07, 0),
-                 arrowprops=dict(arrowstyle="->", color="#C08A1E", lw=1.8))
-    ax1.annotate("", xy=(0.07, 0), xytext=(0.07, L),
-                 arrowprops=dict(arrowstyle="->", color="#C08A1E", lw=1.8))
-    ax1.annotate("", xy=(0.52, L), xytext=(0.52, 0),
-                 arrowprops=dict(arrowstyle="<->", color="0.45", lw=0.9))
-    ax1.text(0.60, L / 2, "$L$", fontsize=12, va="center")
-    ax1.text(0, -0.28, r"emissão e retorno:  $\Delta x'=0$",
-             ha="center", fontsize=10)
-    ax1.set_title(r"$S'$: relógio em repouso" "\n" r"$\Delta t'=2L$", fontsize=11)
-    ax1.set_xlim(-0.85, 1.05)
-    ax1.set_ylim(-0.55, L + 0.5)
-
-    # ---------------- painel direito: S (relogio em movimento) ------------
-    espelho(ax2, 0, 0)
-    espelho(ax2, dx / 2, L)
-    espelho(ax2, dx, 0)
-    ax2.plot([0, dx / 2, dx], [0, L, 0], color="#C08A1E", lw=2.0, zorder=3)
-    ax2.plot([0, dx / 2, dx], [0, L, 0], "o", color="#C08A1E", ms=4, zorder=4)
-
-    # triangulo retangulo destacado (primeira metade do percurso)
-    ax2.plot([0, dx / 2], [0, 0], color="0.45", lw=0.9, ls=":")
-    ax2.plot([dx / 2, dx / 2], [0, L], color="0.45", lw=0.9, ls=":")
-    ax2.fill([0, dx / 2, dx / 2], [0, 0, L], color="#4C72B0", alpha=0.10, lw=0)
-    ax2.text(dx / 4, -0.20, r"$\Delta x/2$", ha="center", fontsize=11)
-    ax2.text(dx / 2 + 0.06, L / 2, "$L$", fontsize=11, va="center")
-    ax2.text(dx / 4 - 0.12, L / 2 + 0.06, r"$\Delta t/2$", fontsize=11,
-             color="#C08A1E", rotation=np.degrees(np.arctan2(L, dx / 2)),
-             rotation_mode="anchor", ha="center")
-
-    # deslocamento total do relogio
-    ax2.annotate("", xy=(dx, -0.42), xytext=(0, -0.42),
-                 arrowprops=dict(arrowstyle="<->", color="0.45", lw=0.9))
-    ax2.text(dx / 2, -0.60, r"$\Delta x=v\,\Delta t$", ha="center", fontsize=11)
-
-    ax2.set_title(r"$S$: relógio com velocidade $v$" "\n"
-                  r"mesmo tique, caminho de luz mais longo", fontsize=11)
-    ax2.set_xlim(-0.5, dx + 0.5)
-    ax2.set_ylim(-0.80, L + 0.5)
-
-    for ax in (ax1, ax2):
-        ax.set_aspect("equal")
-        ax.axis("off")
+    ax.axhline(1.0, color="0.6", lw=0.7, ls=":")
+    ax.set_xlabel(r"ângulo de espalhamento $\theta$ (graus)")
+    ax.set_ylabel(r"$E'/E$")
+    ax.set_xlim(0, 180)
+    ax.legend(fontsize=9.5, frameon=False, loc="upper right")
+    ax.set_title("Espalhamento Compton: fração de energia do fóton espalhado",
+                 fontsize=11)
 
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap02_relogio_luz.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap02_compton.pdf", bbox_inches="tight")
     plt.close(fig)
 
+
 # ---------------------------------------------------------------------
-# Figura 5: hiperboles invariantes calibrando os eixos de S'
+# Figura 4: foguete relativistico com aceleracao propria constante
 # ---------------------------------------------------------------------
-def fig_hiperboles_eixos():
-    """Como os eixos de S' se comportam, e onde fica a unidade sobre eles.
+def fig_foguete(a0=1.0323, D=4.2465):
+    """a0 em 1/ano (1g), D em anos-luz (distancia até Proxima Centauri)."""
+    from scipy.optimize import brentq
 
-    Painel esquerdo -- a calibracao. As hiperboles t^2-x^2=1 e x^2-t^2=1
-    sao o lugar dos pontos a distancia de Minkowski 1 da origem, e essa
-    distancia e' a mesma para QUALQUER observador. Onde cada uma corta o
-    eixo correspondente esta a unidade daquele eixo; o arco pontilhado de
-    raio euclidiano 1 mostra o quanto isso difere do que a regua diria.
+    def meio_percurso(tau_h):
+        return (1 / a0) * (np.cosh(a0 * tau_h) - 1) - D / 2
 
-    Painel direito -- o comportamento. Conforme v cresce, t' e x' se
-    fecham sobre a linha de luz pelo mesmo angulo, em sentidos opostos.
-    E' por isso que a bissetriz continua sendo a linha de luz em todo
-    referencial: e' a unica direcao que o boost deixa parada.
-    """
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.6, 4.8))
+    tau_half = brentq(meio_percurso, 1e-3, 20)
 
-    lim = 2.6
-    s = np.array([0.0, lim])
-    for ax in (ax1, ax2):
-        ax.set_xlim(-0.30, lim)
-        ax.set_ylim(-0.30, lim)
-        ax.set_aspect("equal")
-        ax.axhline(0, color="black", lw=0.6, zorder=1)
-        ax.axvline(0, color="black", lw=0.6, zorder=1)
-        ax.set_xlabel(r"$x$")
-        ax.set_ylabel(r"$ct$")
-        ax.plot([0, lim], [0, lim], color="0.35", lw=1.1, ls=(0, (6, 4)),
-                zorder=2)
+    # perna de aceleracao: tau em [0, tau_half]
+    tau1 = np.linspace(0, tau_half, 200)
+    t1 = (1 / a0) * np.sinh(a0 * tau1)
+    x1 = (1 / a0) * (np.cosh(a0 * tau1) - 1)
 
-    # ------------------- painel esquerdo: a calibracao -------------------
-    v = 0.6
-    g = 1 / np.sqrt(1 - v**2)
+    # perna de desaceleracao, por simetria em torno do ponto medio
+    t_mid, x_mid = t1[-1], x1[-1]
+    tau2 = np.linspace(0, tau_half, 200)
+    t2 = t_mid + ((1 / a0) * np.sinh(a0 * tau_half) - (1 / a0) * np.sinh(a0 * (tau_half - tau2)))
+    x2 = x_mid + (x_mid - (1 / a0) * (np.cosh(a0 * (tau_half - tau2)) - 1))
 
-    # o arco euclidiano vem primeiro, por tras de tudo: e' so' referencia
-    a = np.linspace(0, np.pi / 2, 160)
-    ax1.plot(np.cos(a), np.sin(a), color="0.62", lw=0.9, ls=":", zorder=2)
-    ax1.plot([1, 0], [0, 1], "o", color="0.55", ms=4, zorder=3)
-    ax1.text(0.74, 0.60, "raio 1\n(euclidiano)", fontsize=8.6, color="0.45",
-             ha="center", va="center", rotation=-45, path_effects=HALO)
+    t = np.concatenate([t1, t2])
+    x = np.concatenate([x1, x2])
+    tau_total = 2 * tau_half
+    t_total = t[-1]
 
-    # as duas hiperboles invariantes
-    p = np.linspace(0, 1.85, 400)
-    ax1.plot(np.sinh(p), np.cosh(p), color="#4C72B0", lw=1.9, zorder=3)
-    ax1.plot(np.cosh(p), np.sinh(p), color="#B0413E", lw=1.9, zorder=3)
+    fig, ax = plt.subplots(figsize=(5.0, 5.2))
+    ax.plot(t, x, color="#4C72B0", lw=2.0)
+    ax.plot(t1[[0]], x1[[0]], "o", color="black", zorder=5)
+    ax.plot([t[-1]], [x[-1]], "o", color="black", zorder=5)
+    ax.plot(t1, t1, color="0.75", lw=1.0, ls="--")  # cone de luz t=x
 
-    # os eixos de S'
-    ax1.plot(v * s, s, color="#C08A1E", lw=1.7, zorder=4)   # t': x = vt
-    ax1.plot(s, v * s, color="#C08A1E", lw=1.7, zorder=4)   # x': ct = vx
-    ax1.text(v * 2.42, 2.46, r"$ct'$", fontsize=12, color="#C08A1E",
-             ha="right", va="center", path_effects=HALO)
-    ax1.text(2.46, v * 2.42 + 0.16, r"$x'$", fontsize=12, color="#C08A1E",
-             ha="center", path_effects=HALO)
+    ax.annotate("partida (Terra)", (t[0], x[0]), textcoords="offset points",
+                xytext=(10, 10), fontsize=9.5)
+    ax.annotate("chegada\n(Proxima Centauri)", (t[-1], x[-1]),
+                textcoords="offset points", xytext=(-120, -8), fontsize=9.5,
+                ha="left", va="top")
+    ax.annotate("meio do percurso\n(velocidade máxima)", (t_mid, x_mid),
+                textcoords="offset points", xytext=(10, -30), fontsize=8.5,
+                color="0.3")
+    ax.plot([t_mid], [x_mid], "o", color="0.4", ms=4)
 
-    # a unidade de cada eixo, onde a hiperbole que o calibra o corta
-    ax1.plot([g * v], [g], "o", color="#4C72B0", ms=7, zorder=5)
-    ax1.plot([g], [g * v], "o", color="#B0413E", ms=7, zorder=5)
-    ax1.annotate(r"$ct'=1$", xy=(g * v, g), xytext=(-10, 6),
-                 textcoords="offset points", fontsize=10.5, color="#4C72B0",
-                 ha="right", path_effects=HALO)
-    ax1.annotate(r"$x'=1$", xy=(g, g * v), xytext=(9, -9),
-                 textcoords="offset points", fontsize=10.5, color="#B0413E",
-                 path_effects=HALO)
+    ax.text(0.05, 0.82,
+            rf"$\tau_{{\rm nave}}={tau_total:.2f}$ anos" "\n"
+            rf"$t_{{\rm Terra}}={t_total:.2f}$ anos",
+            transform=ax.transAxes, fontsize=10,
+            bbox=dict(boxstyle="round", fc="white", ec="0.6"))
 
-    ax1.text(0.86, 2.16, r"$t^2-x^2=1$", fontsize=10.5, color="#4C72B0",
-             ha="center", path_effects=HALO)
-    ax1.text(2.16, 0.30, r"$x^2-t^2=1$", fontsize=10.5, color="#B0413E",
-             ha="center", path_effects=HALO)
-    ax1.set_title(r"A unidade de $S'$ ($v=0{,}6$) sai da hipérbole,"
-                  "\n" r"e não da régua", fontsize=10.5)
-
-    # ------------------- painel direito: o comportamento -----------------
-    for vv, cor in zip((0.3, 0.6, 0.9), ("#DD8452", "#C08A1E", "#B0413E")):
-        ax2.plot(vv * s, s, color=cor, lw=1.7, zorder=4)
-        ax2.plot(s, vv * s, color=cor, lw=1.7, zorder=4)
-        rot = f"$v={vv}$".replace(".", "{,}")
-        # o rotulo sai na ponta de cada raio, deslocado para fora da linha
-        ax2.text(vv * 2.50, 2.50, rot, fontsize=9.5, color=cor, ha="right",
-                 va="bottom", path_effects=HALO)
-        ax2.text(2.52, vv * 2.50, rot, fontsize=9.5, color=cor, ha="right",
-                 va="bottom", rotation=np.degrees(np.arctan(vv)),
-                 path_effects=HALO)
-
-    # A explicação em palavras fica na legenda de quem usa a figura: aqui
-    # dentro ela cruzava as linhas, e não há canto livre que a comporte
-    # sem encolher a escala do gráfico.
-    ax2.text(2.44, 0.14, r"$ct=x$", fontsize=10, color="0.35", ha="right",
-             rotation=45, path_effects=HALO)
-    ax2.set_title("Quanto maior $v$, mais fechada a tesoura\n"
-                  r"(no limite $v\to1$ os dois colapsam na luz)",
-                  fontsize=10.5)
+    ax.set_xlabel(r"$t$ (anos, referencial da Terra)")
+    ax.set_ylabel(r"$x$ (anos-luz)")
+    ax.set_ylim(-0.3, D * 1.28)
+    ax.set_title(r"Foguete com aceleração própria $a_0=1g$ constante",
+                 fontsize=11)
 
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap02_hiperboles_eixos.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap02_foguete.pdf", bbox_inches="tight")
     plt.close(fig)
+
+    return tau_total, t_total
 
 
 if __name__ == "__main__":
-    fig_cone_luz()
-    fig_simultaneidade()
-    fig_paradoxo_gemeos()
-    fig_relogio_luz()
-    fig_hiperboles_eixos()
+    fig_casca_de_massa()
+    fig_colisor_vs_alvo_fixo()
+    fig_compton()
+    tau_total, t_total = fig_foguete()
+    print(f"Foguete: tau_total={tau_total:.4f} anos, t_total={t_total:.4f} anos")
     print("Figuras salvas em", OUTDIR)

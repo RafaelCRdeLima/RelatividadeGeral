@@ -93,7 +93,7 @@ def figura_anel():
             if i == 0:
                 ax.set_title(rf"$\omega t = {frac:.2f}\times 2\pi$")
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap10_anel_polarizacoes.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap09_anel_polarizacoes.pdf", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -193,7 +193,7 @@ def figura_chirp(m1, m2, d):
     axs[1].set_ylabel(r"$f_{\rm gw}$ [Hz]")
     axs[1].set_xlabel("tempo até a coalescência [s]")
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap10_chirp.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap09_chirp.pdf", bbox_inches="tight")
     plt.close(fig)
     return tfim, Mc, ff
 

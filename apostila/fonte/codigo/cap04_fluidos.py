@@ -10,9 +10,6 @@ Tres figuras, todas conceituais (nao ha' calculo numerico aqui):
   3) tensoes em um elemento de fluido e o argumento de torque que prova
      T^{ij} = T^{ji}.
 
-Aviso sobre o prefixo do arquivo: 'cap04' aqui e' o capitulo 4 IMPRESSO
-(Fluidos relativisticos). Os arquivos cap02/cap03/cap04 mais antigos usam a
-numeracao anterior, de quando o Plano do curso era o capitulo 1.
 """
 
 import numpy as np

@@ -3,10 +3,10 @@
 (* =====================================================================
    Ondas gravitacionais: da equacao de Einstein linearizada a' formula
    do quadrupolo. Reaproveita Christoffel/Riemann/Ricci definidos em
-   cap11_schwarzschild_simbolico.wl.
+   cap10_schwarzschild_simbolico.wl.
    ===================================================================== *)
 
-Get["cap11_schwarzschild_simbolico.wl"];
+Get["cap10_schwarzschild_simbolico.wl"];
 ClearAll[x, g, h, hbar, Gam, Riem];
 
 x = {t, x1, x2, x3};

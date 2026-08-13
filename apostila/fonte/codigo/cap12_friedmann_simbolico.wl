@@ -3,10 +3,10 @@
 (* =====================================================================
    FLRW: das equacoes de Einstein as equacoes de Friedmann.
    Usa as mesmas funcoes Christoffel, Riemann e Ricci definidas em
-   cap11_schwarzschild_simbolico.wl.
+   cap10_schwarzschild_simbolico.wl.
    ===================================================================== *)
 
-Get["cap11_schwarzschild_simbolico.wl"];  (* reaproveita as ferramentas *)
+Get["cap10_schwarzschild_simbolico.wl"];  (* reaproveita as ferramentas *)
 ClearAll[x, g, Gam, Riem];
 
 (* --- metrica de Robertson-Walker ------------------------------------ *)

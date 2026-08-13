@@ -25,19 +25,19 @@ AQUI = Path(__file__).resolve().parent
 DESTINO = AQUI.parents[2] / "notebooks" / "programas"
 
 TITULOS = {
-    "cap02_boosts": ("Capítulo 2", "Invariância do intervalo e adição de velocidades"),
-    "cap02_tempo_proprio": ("Capítulo 2", "Tempo próprio do gêmeo viajante"),
-    "cap02_figuras": ("Capítulo 2", "Figuras: simultaneidade, gêmeos e cone de luz"),
-    "cap03_quadrivetores": ("Capítulo 3", "Quadrivetores, casca de massa e energia de limiar"),
-    "cap03_compton_foguete": ("Capítulo 3", "Espalhamento Compton e foguete relativístico"),
-    "cap03_figuras": ("Capítulo 3", "Figuras: colisor, casca de massa, Compton e foguete"),
-    "cap04_tensores": ("Capítulo 4", "Base dual, simetrias e invariância do traço"),
-    "cap04_figuras": ("Capítulo 4", "Figuras: um-forma como pilha e base oblíqua"),
-    "cap07_curvatura": ("Capítulo 7", "Holonomia, tensor de Riemann numérico e desvio geodésico"),
-    "cap10_ondas": ("Capítulo 10", "Anel de partículas, quadrupolo e inspiral"),
-    "cap11_geodesicas_schwarzschild": ("Capítulo 11", "ISCO, precessão, deflexão e queda radial"),
-    "cap12_buracos_negros": ("Capítulo 12", "Cones de luz, Kruskal, marés, Hawking e Kerr"),
-    "cap13_friedmann": ("Capítulo 13", "Idade do universo, fator de escala e distâncias"),
+    "cap01_boosts": ("Capítulo 1", "Invariância do intervalo e adição de velocidades"),
+    "cap01_tempo_proprio": ("Capítulo 1", "Tempo próprio do gêmeo viajante"),
+    "cap01_figuras": ("Capítulo 1", "Figuras: simultaneidade, gêmeos e cone de luz"),
+    "cap02_quadrivetores": ("Capítulo 2", "Quadrivetores, casca de massa e energia de limiar"),
+    "cap02_compton_foguete": ("Capítulo 2", "Espalhamento Compton e foguete relativístico"),
+    "cap02_figuras": ("Capítulo 2", "Figuras: colisor, casca de massa, Compton e foguete"),
+    "cap03_tensores": ("Capítulo 3", "Base dual, simetrias e invariância do traço"),
+    "cap03_figuras": ("Capítulo 3", "Figuras: um-forma como pilha e base oblíqua"),
+    "cap06_curvatura": ("Capítulo 6", "Holonomia, tensor de Riemann numérico e desvio geodésico"),
+    "cap09_ondas": ("Capítulo 9", "Anel de partículas, quadrupolo e inspiral"),
+    "cap10_geodesicas_schwarzschild": ("Capítulo 10", "ISCO, precessão, deflexão e queda radial"),
+    "cap11_buracos_negros": ("Capítulo 11", "Cones de luz, Kruskal, marés, Hawking e Kerr"),
+    "cap12_friedmann": ("Capítulo 12", "Idade do universo, fator de escala e distâncias"),
 }
 
 URL_APOSTILA = "https://rafaelcrdelima.github.io/RelatividadeGeral/"

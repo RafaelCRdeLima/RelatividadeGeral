@@ -292,7 +292,7 @@ def figura_holonomia():
     ax.legend(frameon=False, fontsize=8, loc="upper left")
     ax.set_title("A holonomia mede a curvatura, não a conexão")
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap07_holonomia.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap06_holonomia.pdf", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -368,7 +368,7 @@ def figura_desvio():
     ax.set_title(r"Desvio geodésico: solução de $\xi'' + K\,\xi = 0$")
     ax.set_ylim(0, 0.12)
     fig.tight_layout()
-    fig.savefig(OUTDIR / "cap07_desvio_geodesico.pdf", bbox_inches="tight")
+    fig.savefig(OUTDIR / "cap06_desvio_geodesico.pdf", bbox_inches="tight")
     plt.close(fig)
 
 

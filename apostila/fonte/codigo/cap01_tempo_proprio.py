@@ -59,5 +59,5 @@ ax2.set_ylabel(r"tempo próprio acumulado")
 ax2.legend(fontsize=9, frameon=False)
 
 fig.tight_layout()
-fig.savefig(OUTDIR / "cap02_tempo_proprio_numerico.pdf", bbox_inches="tight")
-print("Figura salva em", OUTDIR / "cap02_tempo_proprio_numerico.pdf")
+fig.savefig(OUTDIR / "cap01_tempo_proprio_numerico.pdf", bbox_inches="tight")
+print("Figura salva em", OUTDIR / "cap01_tempo_proprio_numerico.pdf")

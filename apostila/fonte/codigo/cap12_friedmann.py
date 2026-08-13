@@ -182,5 +182,5 @@ ax2.set_title("Distâncias em $\\Lambda$CDM")
 ax2.legend(frameon=False, fontsize=8, loc="upper left")
 
 fig.tight_layout()
-fig.savefig(OUTDIR / "cap13_friedmann.pdf", bbox_inches="tight")
+fig.savefig(OUTDIR / "cap12_friedmann.pdf", bbox_inches="tight")
 print(f"\nFiguras salvas em {OUTDIR}")
