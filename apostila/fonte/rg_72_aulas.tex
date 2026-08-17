@@ -1269,42 +1269,49 @@ $\tau_{\rm viajante}$ é puramente geométrica: é a diferença entre o
 extremos.
 
 \begin{example}
-\textbf{Oitenta anos contra vinte.} Dois gêmeos são separados ao nascer. Um
-permanece na Terra e chega ao reencontro com $80$ anos; o outro, que viajou,
-chega com $20$. Que viagem produz isso?
+\textbf{Ida a Arcturus, com escala.} Dois gêmeos são separados ao nascer. Um
+permanece na Terra. O outro parte para Arcturus, a $36{,}7$ anos-luz, viajando a
+$96{,}8\%$ da velocidade da luz; lá ele fica \emph{dois anos} e volta à mesma
+velocidade. Quantos anos tem cada um no reencontro?
 
-A razão entre os dois tempos próprios é exatamente o fator de Lorentz:
+O fator de Lorentz da viagem é
 \[
-  \gamma=\frac{\tau_{\rm casa}}{\tau_{\rm viajante}}=\frac{80}{20}=4 .
+  \gamma=\frac{1}{\sqrt{1-0{,}968^2}}\approx 3{,}98 .
 \]
-Invertendo $\gamma=1/\sqrt{1-v^2}$ sai a velocidade necessária:
-\[
-  v=\sqrt{1-\frac{1}{\gamma^2}}=\sqrt{1-\frac{1}{16}}=\frac{\sqrt{15}}{4}
-   \approx0{,}9682 ,
-\]
-ou seja, $96{,}8\%$ da velocidade da luz.
 
-Isso já diz onde ele foi. Os $80$ anos terrestres se repartem em $40$ de ida e
-$40$ de volta, de modo que o destino está a
+\emph{As duas pernas.} Medido da Terra, cada trecho leva
 \[
-  D=v\times 40\ \text{anos}\approx 38{,}7\ \text{anos-luz}
+  t=\frac{D}{v}=\frac{36{,}7}{0{,}968}\approx 37{,}9\ \text{anos},
 \]
-da Terra --- a ordem de grandeza da distância de estrelas como Arcturus, a
-$36{,}7$ anos-luz.
+e o relógio da nave, por \eqref{eq:tempo-proprio}, acumula nesse trecho
+$t/\gamma\approx 9{,}5$ anos.
 
-O detalhe que vale discutir em aula é o que o \emph{viajante} experimenta.
-Nada de estranho: seus $20$ anos passam um segundo após o outro, e a nave é um
-referencial inercial perfeitamente comum em cada perna da viagem. O que ele mede
-diferente é a \emph{distância}. Para ele o destino não está a $38{,}7$ anos-luz,
-e sim contraído por $\gamma$,
+\emph{A escala.} Aqui está o detalhe que o problema acrescenta. Parado em
+Arcturus, o viajante está em repouso em relação à Terra: não há velocidade
+relativa, logo não há dilatação nenhuma entre os dois. Os dois anos de escala
+são dois anos \emph{para ambos}. A diferença de idade não cresce um único dia
+enquanto ele está parado.
+
+\emph{O reencontro.} Somando:
 \[
-  D'=\frac{D}{\gamma}\approx\frac{38{,}7}{4}\approx 9{,}7\ \text{anos-luz},
+  \tau_{\rm casa}=2\times 37{,}9+2\approx 77{,}8\ \text{anos},
+  \qquad
+  \tau_{\rm viajante}=2\times 9{,}5+2\approx 21{,}0\ \text{anos}.
 \]
-que a $0{,}968$ da velocidade da luz se percorrem em cerca de $10$ anos ---
-exatamente a metade dos $20$ que o relógio dele acumulou. Os dois gêmeos
-concordam em tudo: apenas atribuem o mesmo fato a grandezas diferentes. Para
-quem ficou, o relógio da nave andou devagar; para quem viajou, o caminho é que
-era curto.
+O irmão que ficou reencontra um homem de $21$ anos com quase $78$ nas costas.
+Toda a diferença de $56{,}8$ anos foi acumulada nas duas pernas de viagem, e
+nenhuma na escala.
+
+\emph{E do lado da nave?} Nada de estranho aconteceu: os $21$ anos passaram um
+segundo após o outro. O que ele mede diferente é a \emph{distância} --- para
+ele, Arcturus não está a $36{,}7$ anos-luz, e sim contraída por $\gamma$,
+\[
+  D'=\frac{36{,}7}{3{,}98}\approx 9{,}2\ \text{anos-luz},
+\]
+que a $0{,}968$ da velocidade da luz se percorrem em $9{,}5$ anos --- exatamente
+o que o relógio dele marcou. Os dois gêmeos concordam sobre todos os fatos, e
+apenas os atribuem a grandezas diferentes: para quem ficou, o relógio da nave
+andou devagar; para quem viajou, o caminho é que era curto.
 \end{example}
 
 \section{A velocidade invariante é única}
