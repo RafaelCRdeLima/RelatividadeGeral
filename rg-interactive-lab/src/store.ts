@@ -52,8 +52,10 @@ export const useLabStore = create<LabState>((set, get) => ({
   },
   openActivity: index => set(state => {
     if (!state.session || state.session.locked || index < 0 || index >= activities.length) return state;
-    const previous = state.session.activities[index - 1];
-    if (index > 0 && previous.status !== "completed" && previous.status !== "skipped_after_error") return state;
+    // Sem pré-requisito: o aluno abre qualquer atividade, na ordem que
+    // quiser, tenha ou não acertado as anteriores. O percurso continua
+    // sendo registrado -- o que deixou de existir é a obrigação de
+    // percorrê-lo em fila.
     const session = structuredClone(state.session);
     const record = session.activities[index];
     if (record.status === "not_started") { record.status = "in_progress"; record.startedAt = new Date().toISOString(); }

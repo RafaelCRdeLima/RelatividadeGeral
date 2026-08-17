@@ -27,7 +27,7 @@ function answerIsCorrect(value: string, expected: string | number | boolean, def
 }
 
 export function ActivityPage() {
-  const { session,currentIndex,recordInteraction,submitAnswer,requestHint,restartActivity,continueAfterError,next }=useLabStore();
+  const { session,currentIndex,recordInteraction,submitAnswer,requestHint,restartActivity,continueAfterError,next,openActivity }=useLabStore();
   const definition=activities[currentIndex], record=session?.activities[currentIndex];
   const [visualState,setVisualState]=useState<LabVisualState>({...definition.initialState,...record?.finalState});
   const [answer,setAnswer]=useState(""); const [feedback,setFeedback]=useState<"idle"|"correct"|"incorrect">(()=>record?.status==="completed"?"correct":"idle"); const [showHint,setShowHint]=useState(false);
@@ -48,5 +48,10 @@ export function ActivityPage() {
       {feedback==="correct"&&<div className="feedback success"><strong>Correto.</strong><p>{definition.question.explanation}</p><button className="primary-button" onClick={next}>{currentIndex===activities.length-1?"Concluir laboratório":"Continuar para a próxima"} →</button></div>}
       {feedback==="incorrect"&&<div className="feedback error"><strong>Ainda não.</strong><p>{showHint?definition.question.hint:"Revise a visualização e escolha como deseja prosseguir."}</p><div className="feedback-actions"><button onClick={restart}>Refazer a atividade</button><button onClick={()=>{requestHint();setShowHint(true)}}>Ver uma pista</button><button className="quiet" onClick={()=>{continueAfterError();next()}}>Continuar mesmo assim</button></div></div>}
     </>}</section>
+    <nav className="activity-nav" aria-label="Navegação entre atividades">
+      <button onClick={()=>openActivity(currentIndex-1)} disabled={currentIndex===0}>← Atividade anterior</button>
+      <span>{String(currentIndex+1).padStart(2,"0")} de {String(activities.length).padStart(2,"0")}</span>
+      <button onClick={next}>{currentIndex===activities.length-1?"Concluir laboratório":"Próxima atividade →"}</button>
+    </nav>
   </motion.main>;
 }

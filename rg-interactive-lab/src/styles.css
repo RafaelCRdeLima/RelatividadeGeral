@@ -25,3 +25,38 @@
 @media(max-width:1050px){.welcome-hero{grid-template-columns:1fr;gap:3rem}.welcome-copy h1{font-size:6rem}.lab-shell{grid-template-columns:220px minmax(0,1fr)}.progress-rail button{grid-template-columns:24px 1fr}.visual-layout,.metric-layout,.split-object{grid-template-columns:1fr}.control-panel{border-left:0;border-top:1px solid var(--line)}.concept-card{grid-template-columns:1fr}.concept-card>.formula{grid-column:1;grid-row:auto}.summary-grid{grid-template-columns:1fr}.class-metrics{grid-template-columns:repeat(3,1fr)}.integrated-lab{grid-template-columns:1fr}}
 @media(max-width:760px){.app-header{height:auto;min-height:70px}.app-header nav>a:first-child{display:none}.app-header nav{gap:.5rem}.student-chip{display:none!important}.lab-brand div{display:none}.welcome-hero{padding-top:55px}.welcome-copy h1{font-size:clamp(4rem,19vw,6rem)}.welcome-form{padding:1.4rem}.form-row{grid-template-columns:1fr}.welcome-map>div{grid-template-columns:1fr 1fr}.welcome-map article:nth-child(2){border-right:0}.lab-shell{display:block}.progress-rail{position:relative;width:100%;height:auto;padding:.8rem;overflow-x:auto}.progress-rail ol{display:flex;min-width:max-content}.progress-rail button{width:54px;grid-template-columns:1fr}.progress-rail button div{display:none}.rail-heading,.progress-line{display:none}.activity-main{padding:45px 1rem 80px}.activity-heading{align-items:flex-start;flex-direction:column}.activity-stats{width:100%}.activity-stats span{flex:1}.concept-card,.question-card{padding:1.2rem}.answer-options{grid-template-columns:1fr}.visual-layout,.metric-layout,.split-object{min-height:0}.lab-svg{min-height:350px}.tensor-machine{padding:2rem 1rem}.object-chip{padding:1rem}.summary-hero{align-items:flex-start;flex-direction:column}.summary-numbers{grid-template-columns:1fr 1fr}.activity-table>div{grid-template-columns:35px 1fr}.activity-table small,.activity-table>div>strong{grid-column:2}.professor-hero{align-items:flex-start;flex-direction:column}.viewer-workbench{grid-template-columns:1fr}.viewer-workbench article+article{border-left:0;border-top:1px solid var(--line)}.class-metrics{grid-template-columns:1fr 1fr}.individual-view{grid-template-columns:1fr}.student-list{display:flex;overflow:auto}.student-list button{min-width:190px}.student-report{padding:1rem}.timeline>div{grid-template-columns:10px 25px 1fr}.timeline em{grid-column:3}.key-generator{grid-template-columns:1fr;gap:1rem}.app-footer{align-items:flex-start;flex-direction:column;gap:.5rem}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Navegação livre entre atividades. Existe porque o laboratório deixou de
+   exigir acerto para avançar: sem ela, quem não respondesse ficava sem
+   saída na página, dependendo só da trilha lateral. */
+.activity-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.activity-nav span {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+.activity-nav button {
+  padding: 0.6rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+.activity-nav button:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+}
+.activity-nav button:disabled { opacity: 0.32; cursor: default; }
