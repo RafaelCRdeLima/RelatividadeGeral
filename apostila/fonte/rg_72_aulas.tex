@@ -1419,15 +1419,41 @@ ou seja
 Falta relacionar $\beta$ a $v$, e é aqui que entra a última exigência, também
 contida na hipótese 3: \emph{compor} duas dessas transformações tem de dar
 outra do mesmo tipo, porque o resultado de trocar duas vezes de referencial
-inercial é ainda uma troca de referencial inercial. Multiplicando as matrizes
-de $v_1$ e $v_2$ e impondo que o produto tenha de novo a forma acima --- isto
-é, que os dois elementos da diagonal sejam iguais entre si --- sobra a
-condição
+inercial é ainda uma troca de referencial inercial.
+
+Multiplique então as matrizes de $v_1$ e de $v_2$:
+\[
+  \gamma_2\begin{pmatrix}1&-\beta_2\\-v_2&1\end{pmatrix}
+  \gamma_1\begin{pmatrix}1&-\beta_1\\-v_1&1\end{pmatrix}
+  =\gamma_1\gamma_2
+  \begin{pmatrix}
+    1+\beta_2v_1 & -(\beta_1+\beta_2)\\[2pt]
+    -(v_1+v_2) & 1+\beta_1v_2
+  \end{pmatrix}.
+\]
+Agora compare com a forma que o resultado precisa ter. Numa matriz do tipo
+$\gamma\left(\begin{smallmatrix}1&-\beta\\-v&1\end{smallmatrix}\right)$ os dois
+elementos da diagonal são \emph{o mesmo número}: ambos valem $\gamma$. No
+produto acima eles são $\gamma_1\gamma_2(1+\beta_2v_1)$ e
+$\gamma_1\gamma_2(1+\beta_1v_2)$, em geral diferentes --- e enquanto forem
+diferentes não há fator nenhum que se possa pôr em evidência para deixar
+$1$ nas duas posições. Ou seja: o produto \emph{não} seria uma transformação do
+mesmo tipo. Exigir que seja obriga
+\[
+  1+\beta_2v_1=1+\beta_1v_2
+  \qquad\Longleftrightarrow\qquad
+  \beta_2\,v_1=\beta_1\,v_2 ,
+\]
+e basta dividir por $v_1v_2$ para obter
 \[
   \frac{\beta(v_1)}{v_1}=\frac{\beta(v_2)}{v_2}
-  \qquad\text{para quaisquer } v_1,v_2 ,
+  \qquad\text{para quaisquer } v_1,v_2 .
 \]
-ou seja, o quociente $\beta/v$ não depende de $v$. Chame-o de $K$:
+Não há nada de especial no quociente $\beta/v$, e ele não foi escolhido: é
+simplesmente o que sobra ao igualar as duas diagonais. O que ele afirma, esse
+sim, é forte --- dois valores \emph{quaisquer} de velocidade produzem o mesmo
+quociente, e uma quantidade que não depende de $v$ é uma constante. Chame-a de
+$K$:
 \[
   \beta=K v,
   \qquad\text{e de \eqref{eq:ignatowski-gamma}}\qquad
