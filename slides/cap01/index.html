@@ -1047,6 +1047,87 @@
   </p>
 </section>
 
+
+<!-- ============ APÊNDICE INTERATIVO: as duas rotações ============== -->
+<section>
+  <p class="etiqueta">Apêndice interativo · Seção 1.9</p>
+  <h2>Rotação euclidiana: o ângulo soma, a inclinação não</h2>
+  <div class="duas larga-esq">
+    <div>
+      <!-- `height`, e não `max-height`: um SVG com viewBox ignora o
+           max-height e mantém a altura do seu aspect ratio. -->
+      <svg id="rot-euclidiana" class="grafico" style="height:330px" viewBox="0 0 520 520"
+           role="img" aria-label="Duas rotações compostas sobre o círculo unitário"></svg>
+      <div class="alerta">
+        <div class="M">m_3=\dfrac{m_1+m_2}{1-m_1m_2}</div>
+        <p class="leitura-formula">= <span id="eu-formula">1,192</span>
+          <span class="confere">e <span class="m">\tan(\theta_1{+}\theta_2)</span> = <span id="eu-tan">1,192</span></span></p>
+        <p class="legenda" id="eu-aviso" style="visibility:hidden">
+          <strong>Repare:</strong> em <span class="m">90^\circ</span> o denominador zera e a
+          inclinação <em>diverge</em> — mas o ângulo não tem nada de especial ali.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="controle">
+        <label for="ang1">primeira rotação <span class="m">\theta_1</span></label>
+        <input type="range" id="ang1" min="5" max="75" step="1" value="20">
+        <label for="ang2" style="margin-top:.6rem">segunda rotação <span class="m">\theta_2</span></label>
+        <input type="range" id="ang2" min="5" max="75" step="1" value="30">
+      </div>
+      <table class="col-formula compacta">
+        <tr><th>ângulos</th><th></th></tr>
+        <tr><td><span class="m">\theta_1</span></td><td><span id="eu-t1">20°</span></td></tr>
+        <tr><td><span class="m">\theta_2</span></td><td><span id="eu-t2">30°</span></td></tr>
+        <tr><td><span class="m">\theta_1+\theta_2</span></td><td><strong><span id="eu-soma">50°</span></strong> — soma trivial</td></tr>
+        <tr><th>inclinações <span class="m">m=\tan\theta</span></th><th></th></tr>
+        <tr><td><span class="m">m_1</span></td><td><span id="eu-m1">0,364</span></td></tr>
+        <tr><td><span class="m">m_2</span></td><td><span id="eu-m2">0,577</span></td></tr>
+        <tr><td><span class="m">m_1+m_2</span></td><td><span id="eu-ingenuo">0,941</span> — <em>errado</em></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Apêndice interativo · Seção 1.9</p>
+  <h2>Rotação hiperbólica: a rapidez soma, a velocidade não</h2>
+  <div class="duas larga-esq">
+    <div>
+      <svg id="rot-hiperbolica" class="grafico" style="height:330px" viewBox="0 0 520 520"
+           role="img" aria-label="Duas rapidezes compostas sobre a hipérbole invariante"></svg>
+      <div class="destaque">
+        <div class="M">v_3=\dfrac{v_1+v_2}{1+v_1v_2}</div>
+        <p class="leitura-formula">= <span id="hi-formula">0,9217</span>
+          <span class="confere">e <span class="m">\tanh(\varphi_1{+}\varphi_2)</span> = <span id="hi-tanh">0,9217</span></span></p>
+        <p class="legenda">
+          A fórmula ao lado com <strong>um sinal trocado</strong> — e é só isso que separa os dois
+          mundos. <span class="m">1+v_1v_2</span> <em>nunca</em> zera, e por isso nenhuma
+          composição de velocidades subluminais alcança a luz.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="controle">
+        <label for="rap1">primeira rapidez <span class="m">\varphi_1</span></label>
+        <input type="range" id="rap1" min="10" max="150" step="5" value="80">
+        <label for="rap2" style="margin-top:.6rem">segunda rapidez <span class="m">\varphi_2</span></label>
+        <input type="range" id="rap2" min="10" max="150" step="5" value="80">
+      </div>
+      <table class="col-formula compacta">
+        <tr><th>rapidezes</th><th></th></tr>
+        <tr><td><span class="m">\varphi_1</span></td><td><span id="hi-f1">0,80</span></td></tr>
+        <tr><td><span class="m">\varphi_2</span></td><td><span id="hi-f2">0,80</span></td></tr>
+        <tr><td><span class="m">\varphi_1+\varphi_2</span></td><td><strong><span id="hi-soma">1,60</span></strong> — soma trivial</td></tr>
+        <tr><th>velocidades <span class="m">v=\tanh\varphi</span></th><th></th></tr>
+        <tr><td><span class="m">v_1</span></td><td><span id="hi-v1">0,6640</span></td></tr>
+        <tr><td><span class="m">v_2</span></td><td><span id="hi-v2">0,6640</span></td></tr>
+        <tr><td><span class="m">v_1+v_2</span></td><td><span id="hi-ingenuo">1,3281</span> — <em>passaria de c</em></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
 </div>
 </main>
 

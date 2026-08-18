@@ -301,3 +301,22 @@ td:first-child { color: var(--grafite); }
   section.ativo { animation: none; }
   #progresso { transition: none; }
 }
+
+/* O valor que acompanha uma fórmula viva fora dela: o KaTeX reescreve o
+   conteúdo do elemento que renderiza, e um <span> de leitura colocado
+   dentro seria apagado na primeira renderização. */
+.leitura-formula {
+  margin: 0.2rem 0 0;
+  text-align: center;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 26px;
+  color: #fff;
+}
+
+/* Tabela compacta: usada nos painéis interativos, onde a tabela divide o
+   slide com um gráfico e um bloco de fórmula. */
+table.compacta { margin: 0.5rem 0; }
+table.compacta th, table.compacta td { padding: 0.3rem 0.7rem; font-size: 18px; }
+
+/* A conferência ao lado do resultado: mesma linha, peso menor. */
+.leitura-formula .confere { font-size: 19px; color: var(--grafite); }

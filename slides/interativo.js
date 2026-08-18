@@ -182,3 +182,184 @@
   controle.addEventListener("input", desenhar);
   desenhar();
 })();
+
+// ====================================================================
+// Composição de rotações: o ângulo soma, a inclinação não
+// ====================================================================
+//
+// O par destes dois gráficos existe para mostrar UMA coisa: a lei
+// esquisita de composição de velocidades não é uma esquisitice da
+// relatividade. Ela é o que qualquer rotação faz quando descrita pelo
+// parâmetro errado.
+//
+// No plano euclidiano, girar 20 graus e depois 30 é girar 50 -- soma
+// trivial. Mas a INCLINAÇÃO m = tan(theta) das mesmas rotações compõe
+// por (m1+m2)/(1-m1*m2). Do lado hiperbólico, a rapidez soma e a
+// velocidade v = tanh(phi) compõe por (v1+v2)/(1+v1*v2).
+//
+// A única diferença entre as duas fórmulas é o sinal do denominador --
+// e é esse sinal que decide se existe ou não velocidade limite.
+
+(function () {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+  const COR = {
+    eixo: "rgba(238,247,246,0.40)",
+    guia: "#8dd7dc",
+    um: "#7fb2ff",     // a primeira rotação
+    dois: "#e6b75c",   // o resultado das duas
+    curva: "rgba(238,247,246,0.55)",
+  };
+  const num = (x, casas) => x.toFixed(casas).replace(".", ",");
+
+  // ---------------- painel euclidiano ------------------------------
+  (function euclidiano() {
+    const svg = document.getElementById("rot-euclidiana");
+    const c1 = document.getElementById("ang1"), c2 = document.getElementById("ang2");
+    if (!svg || !c1 || !c2) return;
+
+    const L = 520, O = L / 2, R = 190;   // origem no centro, círculo de raio R
+    const fx = (x) => O + x * R, fy = (y) => O - y * R;
+
+    const fundo = cria("g", {});
+    svg.appendChild(fundo);
+    fundo.appendChild(cria("line", { x1: 18, y1: fy(0), x2: L - 18, y2: fy(0), stroke: COR.eixo, "stroke-width": 1.2 }));
+    fundo.appendChild(cria("line", { x1: fx(0), y1: 18, x2: fx(0), y2: L - 18, stroke: COR.eixo, "stroke-width": 1.2 }));
+    // o círculo é o que a rotação euclidiana preserva
+    fundo.appendChild(cria("circle", { cx: fx(0), cy: fy(0), r: R, fill: "none", stroke: COR.curva, "stroke-width": 1.8 }));
+    const rotC = cria("text", { x: fx(0) + 10, y: fy(1) - 12, fill: COR.curva, "font-size": 16 });
+    rotC.textContent = "x² + y² = 1";
+    fundo.appendChild(rotC);
+
+    const movel = cria("g", {});
+    svg.appendChild(movel);
+    const raio1 = cria("line", { stroke: COR.um, "stroke-width": 2.6 });
+    const raio2 = cria("line", { stroke: COR.dois, "stroke-width": 2.6 });
+    const arco1 = cria("path", { fill: "none", stroke: COR.um, "stroke-width": 2, opacity: 0.75 });
+    const arco2 = cria("path", { fill: "none", stroke: COR.dois, "stroke-width": 2, opacity: 0.75 });
+    const rot1 = cria("text", { fill: COR.um, "font-size": 17 });
+    const rot2 = cria("text", { fill: COR.dois, "font-size": 17 });
+    movel.append(arco1, arco2, raio1, raio2, rot1, rot2);
+
+    const arco = (de, ate, r) => {
+      const pts = [];
+      for (let i = 0; i <= 60; i++) {
+        const a = de + (ate - de) * (i / 60);
+        pts.push((i ? "L" : "M") + fx(r * Math.cos(a)) + " " + fy(r * Math.sin(a)));
+      }
+      return pts.join(" ");
+    };
+
+    const leituras = ["eu-t1","eu-t2","eu-soma","eu-m1","eu-m2","eu-ingenuo","eu-formula","eu-tan"]
+      .map(id => document.getElementById(id));
+    const aviso = document.getElementById("eu-aviso");
+
+    function desenhar() {
+      const t1 = Number(c1.value) * Math.PI / 180, t2 = Number(c2.value) * Math.PI / 180;
+      const t3 = t1 + t2;
+      raio1.setAttribute("x1", fx(0)); raio1.setAttribute("y1", fy(0));
+      raio1.setAttribute("x2", fx(Math.cos(t1))); raio1.setAttribute("y2", fy(Math.sin(t1)));
+      raio2.setAttribute("x1", fx(0)); raio2.setAttribute("y1", fy(0));
+      raio2.setAttribute("x2", fx(Math.cos(t3))); raio2.setAttribute("y2", fy(Math.sin(t3)));
+      arco1.setAttribute("d", arco(0, t1, 0.34));
+      arco2.setAttribute("d", arco(t1, t3, 0.52));
+      rot1.setAttribute("x", fx(0.40 * Math.cos(t1 / 2)) + 4);
+      rot1.setAttribute("y", fy(0.40 * Math.sin(t1 / 2)));
+      rot1.textContent = "θ₁";
+      rot2.setAttribute("x", fx(0.58 * Math.cos((t1 + t3) / 2)) + 4);
+      rot2.setAttribute("y", fy(0.58 * Math.sin((t1 + t3) / 2)));
+      rot2.textContent = "θ₂";
+
+      const m1 = Math.tan(t1), m2 = Math.tan(t2), den = 1 - m1 * m2;
+      const perto = Math.abs(den) < 0.06;
+      const val = [
+        num(Number(c1.value), 0) + "°", num(Number(c2.value), 0) + "°",
+        num(Number(c1.value) + Number(c2.value), 0) + "°",
+        num(m1, 3), num(m2, 3), num(m1 + m2, 3),
+        perto ? "→ ∞" : num((m1 + m2) / den, 3),
+        perto ? "→ ∞" : num(Math.tan(t3), 3),
+      ];
+      leituras.forEach((el, i) => { if (el) el.textContent = val[i]; });
+      if (aviso) aviso.style.visibility = perto ? "visible" : "hidden";
+    }
+    c1.addEventListener("input", desenhar);
+    c2.addEventListener("input", desenhar);
+    desenhar();
+  })();
+
+  // ---------------- painel hiperbólico -----------------------------
+  (function hiperbolico() {
+    const svg = document.getElementById("rot-hiperbolica");
+    const c1 = document.getElementById("rap1"), c2 = document.getElementById("rap2");
+    if (!svg || !c1 || !c2) return;
+
+    const L = 520, XMIN = -0.25, XMAX = 3.15;
+    const k = L / (XMAX - XMIN);
+    const fx = (x) => (x - XMIN) * k, fy = (y) => L - (y - XMIN) * k;
+
+    const fundo = cria("g", {});
+    svg.appendChild(fundo);
+    fundo.appendChild(cria("line", { x1: fx(XMIN), y1: fy(0), x2: fx(XMAX), y2: fy(0), stroke: COR.eixo, "stroke-width": 1.2 }));
+    fundo.appendChild(cria("line", { x1: fx(0), y1: fy(XMIN), x2: fx(0), y2: fy(XMAX), stroke: COR.eixo, "stroke-width": 1.2 }));
+    fundo.appendChild(cria("line", {
+      x1: fx(0), y1: fy(0), x2: fx(XMAX), y2: fy(XMAX),
+      stroke: COR.guia, "stroke-width": 1.6, "stroke-dasharray": "7 5", opacity: 0.8,
+    }));
+    // a hipérbole é o que a rotação hiperbólica preserva
+    const pts = [];
+    for (let i = 0; i <= 200; i++) {
+      const u = (i / 200) * Math.acosh(XMAX);
+      pts.push((i ? "L" : "M") + fx(Math.sinh(u)) + " " + fy(Math.cosh(u)));
+    }
+    fundo.appendChild(cria("path", { d: pts.join(" "), fill: "none", stroke: COR.curva, "stroke-width": 1.8 }));
+    const rotH = cria("text", { x: fx(0.16), y: fy(2.15), fill: COR.curva, "font-size": 16 });
+    rotH.textContent = "ct² − x² = 1";
+    fundo.appendChild(rotH);
+    const rotL = cria("text", { x: fx(2.72), y: fy(2.86), fill: COR.guia, "font-size": 15, "text-anchor": "end", opacity: 0.85 });
+    rotL.textContent = "ct = x";
+    fundo.appendChild(rotL);
+
+    const movel = cria("g", {});
+    svg.appendChild(movel);
+    const r1 = cria("line", { stroke: COR.um, "stroke-width": 2.6 });
+    const r2 = cria("line", { stroke: COR.dois, "stroke-width": 2.6 });
+    const p1 = cria("circle", { r: 7.5, fill: COR.um });
+    const p2 = cria("circle", { r: 7.5, fill: COR.dois });
+    const l1 = cria("text", { fill: COR.um, "font-size": 17 });
+    const l2 = cria("text", { fill: COR.dois, "font-size": 17 });
+    movel.append(r1, r2, p1, p2, l1, l2);
+
+    const leituras = ["hi-f1","hi-f2","hi-soma","hi-v1","hi-v2","hi-ingenuo","hi-formula","hi-tanh"]
+      .map(id => document.getElementById(id));
+
+    function desenhar() {
+      const f1 = Number(c1.value) / 100, f2 = Number(c2.value) / 100, f3 = f1 + f2;
+      const P = (f) => [Math.sinh(f), Math.cosh(f)];
+      const [x1, y1] = P(f1), [x2, y2] = P(f3);
+      r1.setAttribute("x1", fx(0)); r1.setAttribute("y1", fy(0));
+      r1.setAttribute("x2", fx(x1)); r1.setAttribute("y2", fy(y1));
+      r2.setAttribute("x1", fx(0)); r2.setAttribute("y1", fy(0));
+      r2.setAttribute("x2", fx(x2)); r2.setAttribute("y2", fy(y2));
+      p1.setAttribute("cx", fx(x1)); p1.setAttribute("cy", fy(y1));
+      p2.setAttribute("cx", fx(x2)); p2.setAttribute("cy", fy(y2));
+      l1.setAttribute("x", fx(x1) - 30); l1.setAttribute("y", fy(y1) - 12); l1.textContent = "φ₁";
+      l2.setAttribute("x", fx(x2) - 30); l2.setAttribute("y", fy(y2) - 12); l2.textContent = "φ₁+φ₂";
+
+      const v1 = Math.tanh(f1), v2 = Math.tanh(f2);
+      const val = [
+        num(f1, 2), num(f2, 2), num(f3, 2),
+        num(v1, 4), num(v2, 4), num(v1 + v2, 4),
+        num((v1 + v2) / (1 + v1 * v2), 4), num(Math.tanh(f3), 4),
+      ];
+      leituras.forEach((el, i) => { if (el) el.textContent = val[i]; });
+    }
+    c1.addEventListener("input", desenhar);
+    c2.addEventListener("input", desenhar);
+    desenhar();
+  })();
+})();
