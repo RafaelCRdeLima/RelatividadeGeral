@@ -1176,6 +1176,127 @@
   </p>
 </section>
 
+<section>
+  <p class="etiqueta">Apêndice · medir a rapidez (1 de 3)</p>
+  <h2>Doppler: a rapidez é o logaritmo</h2>
+  <div class="duas larga-dir">
+    <div>
+      <p>
+        Uma fonte que se afasta com <span class="m">v</span> tem suas frequências
+        multiplicadas pelo <strong>fator Doppler</strong>
+      </p>
+      <div class="M">k=\sqrt{\dfrac{1+v}{1-v}}=e^{\varphi}
+        \qquad\Longrightarrow\qquad \varphi=\ln k</div>
+      <div class="destaque">
+        <p class="legenda">
+          É uma medida <strong>local</strong>: compara-se a frequência recebida com a
+          conhecida da fonte — uma linha espectral, um pulso combinado — tudo
+          <em>num ponto só</em>. Não há régua a esticar nem relógio distante a
+          sincronizar, e é por isso que ela escapa da convenção de simultaneidade.
+        </p>
+      </div>
+    </div>
+    <div>
+      <table class="col-formula compacta">
+        <tr><th><span class="m">v</span></th><th><span class="m">\varphi</span></th><th><span class="m">k</span></th></tr>
+        <tr><td>0,2</td><td>0,2027</td><td>1,2247</td></tr>
+        <tr><td>0,6</td><td>0,6931</td><td>2,0000</td></tr>
+        <tr><td>0,8</td><td>1,0986</td><td>3,0000</td></tr>
+        <tr><td>0,99</td><td>2,6467</td><td>14,107</td></tr>
+      </table>
+      <div class="alerta">
+        <h3>Compor boosts é multiplicar fatores</h3>
+        <div class="M">k_1\,k_2=e^{\varphi_1}e^{\varphi_2}=e^{\varphi_1+\varphi_2}=k_3</div>
+        <p class="legenda">
+          Duas fontes a <span class="m">v=0{,}6</span> em série:
+          <span class="m">2\times2=4</span>, e <span class="m">4</span> é o fator de
+          <span class="m">v_3=0{,}882</span>. A soma de rapidezes vira produto de fatores
+          Doppler — é o <em>k-calculus</em> de Bondi, que constrói a relatividade inteira
+          contando sinais de luz.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Apêndice · medir a rapidez (2 de 3)</p>
+  <h2>Acelerômetro: a rapidez que se acumula a bordo</h2>
+  <div class="duas larga-dir">
+    <div>
+      <p>
+        Com aceleração própria <span class="m">a</span> — a que o acelerômetro de bordo
+        marca, e que o astronauta <em>sente</em> nos pés —
+      </p>
+      <div class="M">\varphi=\int a\,\mathrm{d}\tau
+        \qquad\xrightarrow{\;a\ \text{constante}\;}\qquad \varphi=a\,\tau</div>
+      <div class="destaque">
+        <p class="legenda">
+          As duas grandezas são medidas <strong>dentro da nave</strong>: um acelerômetro e
+          um relógio de pulso. O astronauta sabe a própria rapidez sem olhar pela janela.
+          A <em>velocidade</em>, não — ela exige dizer em relação a quem.
+        </p>
+      </div>
+    </div>
+    <div>
+      <p class="legenda">Viagem a <span class="m">1g</span>, que em unidades
+        geometrizadas vale <span class="m">1{,}03</span> por ano próprio:</p>
+      <table class="col-formula compacta">
+        <tr><th><span class="m">\tau</span> (anos)</th><th><span class="m">\varphi=a\tau</span></th><th><span class="m">v=\tanh\varphi</span></th></tr>
+        <tr><td>1</td><td>1,03</td><td>0,7748</td></tr>
+        <tr><td>2</td><td>2,06</td><td>0,9683</td></tr>
+        <tr><td>3</td><td>3,10</td><td>0,9959</td></tr>
+        <tr><td>5</td><td>5,16</td><td>0,999934</td></tr>
+        <tr><td>10</td><td>10,32</td><td>0,99999999</td></tr>
+      </table>
+      <p class="legenda">
+        <strong>A rapidez cresce em linha reta; a velocidade satura.</strong> O motor
+        empurra sempre igual, e é a rapidez — não a velocidade — que responde de forma
+        proporcional ao esforço.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Apêndice · medir a rapidez (3 de 3)</p>
+  <h2>Aceleradores: a variável que o detector reporta</h2>
+  <div class="duas">
+    <div>
+      <div class="M">y=\tfrac12\ln\dfrac{E+p_z}{E-p_z}</div>
+      <p class="legenda">
+        No LHC, cada colisão acontece entre dois <em>pártons</em> que carregam frações
+        diferentes do momento dos prótons. O referencial onde a colisão é simétrica
+        <strong>muda a cada evento</strong>, e não é o do laboratório.
+      </p>
+      <div class="alerta">
+        <p class="legenda">
+          Uma variável cujas <strong>diferenças</strong> não mudam sob boosts ao longo do
+          feixe vale ouro: a forma da distribuição em <span class="m">y</span> é a mesma,
+          apenas deslocada. Com velocidade não haveria como comparar dois eventos.
+        </p>
+      </div>
+    </div>
+    <div>
+      <p class="legenda">
+        Quando a massa não é conhecida — o caso comum — usa-se a <strong>pseudorapidez</strong>,
+        que sai <em>direto do ângulo</em> medido no detector:
+      </p>
+      <div class="M">\eta=-\ln\tan(\theta/2)</div>
+      <table class="col-formula compacta">
+        <tr><th><span class="m">\theta</span></th><th><span class="m">\eta</span></th><th></th></tr>
+        <tr><td>90°</td><td>0,00</td><td>transversal ao feixe</td></tr>
+        <tr><td>45°</td><td>0,88</td><td></td></tr>
+        <tr><td>10°</td><td>2,44</td><td></td></tr>
+        <tr><td>1°</td><td>4,74</td><td>quase ao longo do feixe</td></tr>
+      </table>
+      <p class="legenda">
+        A medida é geométrica: um ângulo. Nenhuma velocidade é medida em momento algum.
+      </p>
+    </div>
+  </div>
+</section>
+
 </div>
 </main>
 
