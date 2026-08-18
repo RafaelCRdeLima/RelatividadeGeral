@@ -1668,6 +1668,40 @@ a rapidez --- não a velocidade. Comparada com a rotação usual, a única mudan
 foi trocar $\cos,\sin$ por $\cosh,\sinh$ e o sinal de um termo: uma rotação
 preserva $x^2+y^2$, esta preserva $-t^2+x^2$.
 
+\begin{roteiro}[title={\sffamily\bfseries\footnotesize\color{rgGrafite}A RAPIDEZ TEM UNIDADE? DÁ PARA MEDI-LA?}]
+\textbf{Unidade: nenhuma.} Em $\varphi=\operatorname{artanh}(v/c)$ o argumento já
+é adimensional, e o resultado também --- a rapidez é um número puro, como o
+ângulo em radianos. E o paralelo é literal: assim como o ângulo em radianos é o
+\emph{dobro da área} do setor circular de raio $1$, a rapidez é o dobro da área
+do setor hiperbólico. Daí o nome das funções inversas: em $\operatorname{artanh}$
+e $\operatorname{arcosh}$, o ``ar'' é de \emph{área} --- ao contrário do
+$\arctan$, que tem arco. A rapidez é, literalmente, um ângulo hiperbólico.
+
+\textbf{Medida: mais direta que a da velocidade.} Medir velocidade a distância
+exige uma régua e \emph{dois relógios sincronizados}, isto é, exige escolher uma
+convenção de simultaneidade --- exatamente o que este capítulo mostrou depender
+do referencial. A rapidez escapa disso de três maneiras:
+
+\begin{itemize}
+  \item \textbf{Efeito Doppler.} O fator Doppler é $k=\sqrt{(1+v)/(1-v)}=e^{\varphi}$,
+  de modo que $\varphi=\ln k$. Medir uma razão de frequências é das medidas mais
+  precisas da física, e é feita \emph{em um ponto só}, sem sincronizar relógio
+  nenhum.
+  \item \textbf{Acelerômetro e relógio de bordo.} Com aceleração própria $a$, a
+  rapidez acumulada é $\varphi=\int a\,\dd\tau$. As duas grandezas são medidas a
+  bordo: o astronauta sabe a própria rapidez sem olhar pela janela. A
+  \emph{velocidade}, não --- ela precisa ser relativa a alguém.
+  \item \textbf{Física de partículas.} Aceleradores reportam rapidez,
+  $y=\tfrac12\ln\frac{E+p_z}{E-p_z}$, e não velocidade, porque \emph{diferenças}
+  de rapidez não mudam sob boosts ao longo do feixe. Quando a massa não é
+  conhecida usa-se a pseudorapidez $\eta=-\ln\tan(\theta/2)$, que sai direto do
+  ângulo medido no detector.
+\end{itemize}
+
+A intuição pede velocidade; o Doppler, o acelerômetro e o detector entregam
+rapidez.
+\end{roteiro}
+
 Duas consequências saem de graça de~\eqref{eq:condicao-lorentz}. Tomando o
 determinante, $(\det\Lambda)^2=1$; os boosts têm $\det\Lambda=+1$. E a inversa é
 \begin{equation}
