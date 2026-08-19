@@ -2250,16 +2250,39 @@ O produto escalar é invariante: $\bm A\cdot\bm B$ tem o mesmo valor em todos
 os referenciais inerciais.
 \end{resultado}
 
-A demonstração é a mesma da invariância do intervalo, e nem precisa ser
-refeita: aplicada a $\bm A=\bm B=\dd\bm x$, \eqref{eq:produto-escalar} devolve
-$\dd s^2$, cuja invariância já foi estabelecida. O caso geral segue da
-identidade
-\[
+Metade da demonstração já está pronta e nem precisa ser refeita. Aplicada a
+$\bm A=\bm B=\dd\bm x$, a definição \eqref{eq:produto-escalar} devolve
+$\dd s^2$, cuja invariância foi estabelecida no capítulo anterior. Ou seja: já
+sabemos que a \emph{norma} $\bm A\cdot\bm A$ --- um vetor consigo mesmo --- é a
+mesma em todos os referenciais.
+
+Falta a outra metade, e ela não vem de graça: queremos $\bm A\cdot\bm B$ com
+$\bm A$ e $\bm B$ \emph{diferentes}. Saber o valor de todas as normas parece
+dizer menos do que saber o produto de todos os pares --- e é justamente essa
+impressão que a identidade abaixo desfaz:
+\begin{equation}
   \bm A\cdot\bm B=\tfrac12\Big[(\bm A+\bm B)\cdot(\bm A+\bm B)
-                    -\bm A\cdot\bm A-\bm B\cdot\bm B\Big],
-\]
-que escreve qualquer produto escalar em termos de três normas --- e normas são
-intervalos, portanto invariantes.
+                    -\bm A\cdot\bm A-\bm B\cdot\bm B\Big].
+  \label{eq:polarizacao}
+\end{equation}
+Ela sai de expandir $(\bm A+\bm B)\cdot(\bm A+\bm B)
+=\bm A\cdot\bm A+2\,\bm A\cdot\bm B+\bm B\cdot\bm B$ e isolar o termo do meio.
+
+O lado direito de \eqref{eq:polarizacao} contém \emph{apenas normas}. Cada uma
+delas é um intervalo, portanto invariante; e uma combinação linear de três
+invariantes é invariante. Logo $\bm A\cdot\bm B$ também é --- sem nenhuma conta
+nova, e para todo par de vetores.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O QUE A IDENTIDADE ESTÁ FAZENDO ALI}]
+Ela não é um adorno algébrico: é o passo que \emph{reduz} o caso geral ao caso
+já provado. Sem ela, a invariância do intervalo garantiria apenas
+$\bm A\cdot\bm A$, e o produto de dois vetores distintos ficaria em aberto.
+
+Chama-se \emph{identidade de polarização}, e o truque é geral: recuperar uma
+forma bilinear --- que come dois vetores --- a partir da forma quadrática
+associada, que come um só. Vale em qualquer espaço com produto interno; no
+plano euclidiano, ela é a lei dos cossenos disfarçada.
+\end{atencao}
 
 \textbf{Por que isso é a ferramenta central.} Um produto escalar é um número
 que não depende de quem calcula. Sempre que uma pergunta física for
