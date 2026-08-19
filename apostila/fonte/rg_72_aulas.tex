@@ -2252,37 +2252,34 @@ os referenciais inerciais.
 
 Metade da demonstração já está pronta e nem precisa ser refeita. Aplicada a
 $\bm A=\bm B=\dd\bm x$, a definição \eqref{eq:produto-escalar} devolve
-$\dd s^2$, cuja invariância foi estabelecida no capítulo anterior. Ou seja: já
-sabemos que a \emph{norma} $\bm A\cdot\bm A$ --- um vetor consigo mesmo --- é a
-mesma em todos os referenciais.
+$\dd s^2$, cuja invariância foi estabelecida no capítulo anterior. Ou seja: a
+\emph{norma} $\bm A\cdot\bm A$ --- um vetor consigo mesmo --- é a mesma em
+todos os referenciais.
 
-Falta a outra metade, e ela não vem de graça: queremos $\bm A\cdot\bm B$ com
-$\bm A$ e $\bm B$ \emph{diferentes}. Saber o valor de todas as normas parece
-dizer menos do que saber o produto de todos os pares --- e é justamente essa
-impressão que a identidade abaixo desfaz:
+Falta o produto de dois vetores \emph{diferentes}, e o resto do argumento é
+curto. Se a norma de qualquer vetor é invariante, então a norma de
+$\bm A+\bm B$ também é --- afinal $\bm A+\bm B$ é um vetor como outro
+qualquer. Mas essa norma, expandida pela definição \eqref{eq:produto-escalar},
+vale
 \begin{equation}
-  \bm A\cdot\bm B=\tfrac12\Big[(\bm A+\bm B)\cdot(\bm A+\bm B)
-                    -\bm A\cdot\bm A-\bm B\cdot\bm B\Big].
-  \label{eq:polarizacao}
+  (\bm A+\bm B)\cdot(\bm A+\bm B)
+   =\bm A\cdot\bm A+\bm B\cdot\bm B+2\,\bm A\cdot\bm B .
+  \label{eq:soma-normas}
 \end{equation}
-Ela sai de expandir $(\bm A+\bm B)\cdot(\bm A+\bm B)
-=\bm A\cdot\bm A+2\,\bm A\cdot\bm B+\bm B\cdot\bm B$ e isolar o termo do meio.
 
-O lado direito de \eqref{eq:polarizacao} contém \emph{apenas normas}. Cada uma
-delas é um intervalo, portanto invariante; e uma combinação linear de três
-invariantes é invariante. Logo $\bm A\cdot\bm B$ também é --- sem nenhuma conta
-nova, e para todo par de vetores.
+Agora repare no que já sabemos sobre cada pedaço de \eqref{eq:soma-normas}. O
+lado esquerdo é invariante, por ser uma norma. Os dois primeiros termos da
+direita são invariantes, pelo mesmo motivo. Numa igualdade em que todas as
+parcelas menos uma já são as mesmas em qualquer referencial, a que sobra não
+tem escolha: $2\,\bm A\cdot\bm B$ é invariante, e portanto
+$\bm A\cdot\bm B$ também.
 
-\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O QUE A IDENTIDADE ESTÁ FAZENDO ALI}]
-Ela não é um adorno algébrico: é o passo que \emph{reduz} o caso geral ao caso
-já provado. Sem ela, a invariância do intervalo garantiria apenas
-$\bm A\cdot\bm A$, e o produto de dois vetores distintos ficaria em aberto.
-
-Chama-se \emph{identidade de polarização}, e o truque é geral: recuperar uma
-forma bilinear --- que come dois vetores --- a partir da forma quadrática
-associada, que come um só. Vale em qualquer espaço com produto interno; no
-plano euclidiano, ela é a lei dos cossenos disfarçada.
-\end{atencao}
+\begin{roteiro}[title={\sffamily\bfseries\footnotesize\color{rgGrafite}A MANOBRA, EM UMA FRASE}]
+Não foi preciso calcular nada: bastou somar dois vetores e olhar para a norma
+da soma. É um truque que vale a pena guardar, porque reaparece o curso inteiro
+--- \emph{quando uma soma é invariante e todas as parcelas menos uma também
+são, a última herda a invariância}.
+\end{roteiro}
 
 \textbf{Por que isso é a ferramenta central.} Um produto escalar é um número
 que não depende de quem calcula. Sempre que uma pergunta física for
