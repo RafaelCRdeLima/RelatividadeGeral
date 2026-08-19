@@ -364,7 +364,7 @@ Aula & Foco & Seções & Conteúdo \\
 1 & Apresentação, Newton e Einstein & 1.1, 1.2 & Plano do curso e critérios de avaliação, no primeiro tempo. Newton e Einstein: duas visões de mundo, com os dois postulados e a falha da transformação de Galileu; Eventos, observadores e intervalo, com a prova da invariância pelo relógio de luz. \\
 2 & Tempo próprio e Lorentz & 1.3, 1.4 & Relatividade especial: Tempo próprio; Transformações de Lorentz, com o teste da transformação de Galileu contra o intervalo e a dedução a partir da invariância. \\
 3 & O que se mede, diagramas e gêmeos & 1.5, 1.6, 1.7 & Relatividade especial: Consequências --- contração de Lorentz, reciprocidade e composição de velocidades, todas deduzidas de \eqref{eq:lorentz}. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. Diagramas de Minkowski, construção dos eixos de $S'$ e hipérboles invariantes; Paradoxo dos gêmeos. \\
-4 & Sem postular a luz, e oficina & 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. Resolução numérica (Python e Mathematica); Exercícios. \\
+4 & Sem postular a luz, e oficina & 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. Resolução numérica (Python e Mathematica); Exercícios. \\
 5 & Vetores e produto escalar & 2.1, 2.2 & Vetores e momento relativístico: o critério de transformação que define um quadrivetor; produto escalar e métrica de Minkowski. \\
 6 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
 7 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
@@ -2001,6 +2001,183 @@ nada emitido à esquerda dela chega ao observador acelerado, mesmo viajando à
 velocidade da luz e mesmo sem gravidade nenhuma.
 \end{enumerate}
 
+
+\section{Indo além: a rapidez e o fator Doppler}
+\label{sec:indo-alem}
+
+\begin{leitura}
+Esta seção é opcional em primeira leitura. Ela retoma a rapidez introduzida na
+Seção~\ref{sec:matricial}, mostra que a lei estranha de composição de
+velocidades é o que \emph{qualquer} rotação faz quando descrita pelo parâmetro
+errado, e deduz o fator Doppler --- que acaba sendo a maneira mais direta de
+medir a rapidez de uma fonte.
+\end{leitura}
+
+\subsection*{A rapidez como ângulo hiperbólico}
+
+Partindo das transformações na forma $t'=\gamma t-\gamma v x$ e
+$x'=\gamma x-\gamma v t$, faça a substituição
+\[
+  v=\tanh\varphi,\qquad \gamma=\cosh\varphi
+  \qquad\Longrightarrow\qquad \gamma v=\sinh\varphi,
+\]
+onde a última igualdade sai de $\cosh\varphi\tanh\varphi=\sinh\varphi$. A
+transformação fica
+\begin{equation}
+  t'=t\cosh\varphi-x\sinh\varphi,\qquad
+  x'=x\cosh\varphi-t\sinh\varphi,
+  \label{eq:rot-hiperbolica}
+\end{equation}
+uma \emph{rotação hiperbólica} de parâmetro $\varphi$ --- a \textbf{rapidez},
+adimensional. Compare com a rotação euclidiana usual,
+$x'=x\cos\theta+y\sin\theta$ e $y'=-x\sin\theta+y\cos\theta$: a única mudança
+foi trocar $\cos,\sin$ por $\cosh,\sinh$ e um sinal.
+
+Componha agora duas dessas transformações. Aplicando
+\eqref{eq:rot-hiperbolica} com $\varphi_2$ ao resultado da primeira,
+\[
+  t''=t'\cosh\varphi_2-x'\sinh\varphi_2
+     =(t\cosh\varphi_1-x\sinh\varphi_1)\cosh\varphi_2
+      -(x\cosh\varphi_1-t\sinh\varphi_1)\sinh\varphi_2,
+\]
+e reagrupando em $t$ e $x$:
+\[
+  t''=t\bigl(\cosh\varphi_1\cosh\varphi_2+\sinh\varphi_1\sinh\varphi_2\bigr)
+      -x\bigl(\sinh\varphi_1\cosh\varphi_2+\cosh\varphi_1\sinh\varphi_2\bigr).
+\]
+Os dois parênteses são exatamente $\cosh(\varphi_1+\varphi_2)$ e
+$\sinh(\varphi_1+\varphi_2)$, de modo que
+\[
+  t''=t\cosh(\varphi_1+\varphi_2)-x\sinh(\varphi_1+\varphi_2).
+\]
+
+\begin{central}
+Compor duas transformações de Lorentz é \emph{somar} as rapidezes. A
+velocidade, por sua vez, é a ``inclinação hiperbólica'' $v=\tanh\varphi$ --- e é
+por isso que a composição \emph{dela} tem uma forma complicada.
+\end{central}
+
+\subsection*{Em Euclides e no espaço-tempo}
+
+Vale ver os dois casos lado a lado, porque a semelhança desfaz a impressão de
+que a relatividade inventou uma regra bizarra.
+
+\textbf{No plano euclidiano.} Duas rotações de $\theta_1$ e $\theta_2$ compõem
+numa de $\theta_3=\theta_1+\theta_2$ --- soma trivial. Mas se cada uma for
+descrita pela \emph{inclinação} $m=\tan\theta$, então
+\[
+  m_3=\tan(\theta_1+\theta_2)
+     =\frac{\sin\theta_1\cos\theta_2+\sin\theta_2\cos\theta_1}
+            {\cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2},
+\]
+e dividindo numerador e denominador por $\cos\theta_1\cos\theta_2$:
+\begin{equation}
+  m_3=\frac{m_1+m_2}{1-m_1m_2}.
+  \label{eq:comp-euclidiana}
+\end{equation}
+
+\textbf{No espaço-tempo.} Com $v_1=\tanh\varphi_1$ e $v_2=\tanh\varphi_2$,
+\[
+  v_3=\tanh(\varphi_1+\varphi_2)
+     =\frac{\sinh\varphi_1\cosh\varphi_2+\sinh\varphi_2\cosh\varphi_1}
+            {\cosh\varphi_1\cosh\varphi_2+\sinh\varphi_1\sinh\varphi_2},
+\]
+e dividindo por $\cosh\varphi_1\cosh\varphi_2$:
+\begin{equation}
+  v_3=\frac{v_1+v_2}{1+v_1v_2}.
+  \label{eq:comp-hiperbolica}
+\end{equation}
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}UM SINAL, DUAS FÍSICAS}]
+As fórmulas \eqref{eq:comp-euclidiana} e \eqref{eq:comp-hiperbolica} diferem
+por \emph{um sinal} no denominador, e é esse sinal que decide tudo. Em
+$1-m_1m_2$ o denominador zera quando $\theta_1+\theta_2=90^\circ$, e a
+inclinação escapa para o infinito --- embora o ângulo não tenha nada de
+especial ali. Já $1+v_1v_2$ \emph{nunca} zera para $|v|<1$: nada diverge, e
+nenhuma composição de velocidades subluminais alcança a luz.
+\end{atencao}
+
+\subsection*{O fator Doppler, deduzido}
+
+Uma fonte emite pulsos a intervalos $T$ \emph{no relógio dela} e se afasta com
+velocidade $v$. Qual o intervalo $T_{\rm rec}$ entre as recepções, medido pelo
+observador? Três efeitos se somam, e vale separá-los:
+
+\begin{enumerate}
+  \item \textbf{O relógio da fonte bate mais devagar.} Para o observador, o
+  intervalo entre duas emissões não é $T$, e sim $\Delta t_{\rm em}=\gamma T$.
+  \item \textbf{A fonte recuou entre uma emissão e outra.} Nesse intervalo ela
+  percorreu $\Delta x=v\,\Delta t_{\rm em}=v\gamma T$, de modo que o segundo
+  pulso parte de mais longe e leva um tempo extra $\Delta x/c=v\gamma T$ (com
+  $c=1$) para chegar.
+  \item \textbf{Soma.} O intervalo entre as duas recepções é
+  \[
+    T_{\rm rec}=\gamma T+v\gamma T=\gamma T(1+v).
+  \]
+\end{enumerate}
+
+Definindo o \emph{fator Doppler} $k$ como a razão entre o intervalo recebido e
+o emitido,
+\begin{equation}
+  k\equiv\frac{T_{\rm rec}}{T}=\gamma\,(1+v)
+   =\frac{1+v}{\sqrt{(1+v)(1-v)}}
+   =\sqrt{\frac{1+v}{1-v}} .
+  \label{eq:fator-doppler}
+\end{equation}
+Como o intervalo entre pulsos é o inverso da frequência, o mesmo $k$ mede a
+razão das frequências: $k=\nu_{\rm em}/\nu_{\rm rec}$.
+
+\subsection*{Por que a rapidez é o que se mede}
+
+Escreva $k$ em termos da rapidez. De \eqref{eq:fator-doppler},
+$k=\gamma+\gamma v=\cosh\varphi+\sinh\varphi$, e como
+$\cosh\varphi=\tfrac12(e^{\varphi}+e^{-\varphi})$ e
+$\sinh\varphi=\tfrac12(e^{\varphi}-e^{-\varphi})$, a soma colapsa:
+\begin{equation}
+  \boxed{\;k=e^{\varphi}\;}
+  \qquad\Longleftrightarrow\qquad
+  \varphi=\ln k .
+  \label{eq:doppler-rapidez}
+\end{equation}
+
+\begin{central}
+A rapidez é o \emph{logaritmo} do fator Doppler. E $k=\nu_{\rm em}/\nu_{\rm rec}$
+é uma razão entre duas medidas \textbf{locais} --- uma feita por quem emite,
+outra por quem recebe. Não é preciso régua, nem sincronizar relógios
+distantes, nem escolher uma convenção de simultaneidade: o que se compara são
+duas frequências.
+\end{central}
+
+Isto também explica por que compor boosts fica tão simples nessa linguagem:
+como $k=e^{\varphi}$ e as rapidezes somam, os fatores Doppler
+\emph{multiplicam},
+\[
+  k_1k_2=e^{\varphi_1}e^{\varphi_2}=e^{\varphi_1+\varphi_2}=k_3 .
+\]
+Duas fontes a $v=0{,}6$ em série dão $2\times2=4$, que é o fator de
+$v_3=0{,}882$. É sobre essa observação que Bondi construiu uma apresentação
+inteira da relatividade especial contando apenas sinais de luz --- o chamado
+\emph{$k$-calculus}.
+
+\subsection*{Como se conhece $\nu_{\rm em}$: o espectro de um elemento}
+
+Fica uma pergunta honesta: para calcular $k=\nu_{\rm em}/\nu_{\rm rec}$ o
+observador precisa saber a frequência \emph{emitida}, e a fonte está longe. De
+onde ele a tira?
+
+Da estrutura do espectro. Cada elemento emite um conjunto característico de
+linhas, com posições conhecidas em laboratório. Quando a fonte se afasta,
+\eqref{eq:doppler-rapidez} multiplica \emph{todas} as frequências pelo mesmo
+fator $k$ --- e uma multiplicação global preserva as razões entre elas. O
+padrão desloca-se inteiro, sem se deformar.
+
+\begin{atencao}
+É por isso que se identifica hidrogênio numa galáxia distante mesmo com todas
+as linhas fora do lugar: o que identifica o elemento não é a posição absoluta
+de cada linha, e sim o \emph{espaçamento relativo} do conjunto, que o fator $k$
+não altera. Reconhecido o padrão, a comparação com o laboratório dá $k$, e
+\eqref{eq:doppler-rapidez} dá a rapidez da fonte.
+\end{atencao}
 
 \chapter{Vetores e momento relativístico}
 \label{chap:vetores}
