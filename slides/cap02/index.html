@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vetores e momento · Slides do Capítulo 2</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../slides.css?v=3">
+</head>
+<body>
+<div id="progresso"></div>
+<div class="zona esq" aria-hidden="true"></div>
+<div class="zona dir" aria-hidden="true"></div>
+
+<main id="palco">
+<div id="quadro">
+
+<section>
+  <p class="etiqueta">Relatividade Geral · UDESC/CCT · Capítulo 2</p>
+  <h1>Vetores e<br>momento</h1>
+  <p style="max-width:60ch">
+    A linguagem de quadrivetores, e como ela resolve cinemática e dinâmica
+    relativística sem depender de componentes particulares.
+  </p>
+  <p class="legenda" style="margin-top:2rem">
+    Aulas 5 a 10 · use <strong>→</strong> e <strong>←</strong> para navegar,
+    <strong>F</strong> para tela cheia
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Roteiro</p>
+  <h2>O caminho deste capítulo</h2>
+  <div class="duas">
+    <div>
+      <table>
+        <tr><th>Aula</th><th>Assunto</th></tr>
+        <tr><td>5</td><td>Vetores no espaço-tempo · produto escalar</td></tr>
+        <tr><td>6</td><td>Quadrivelocidade · quadrimomento</td></tr>
+        <tr><td>7</td><td>Conservação · energia como componente temporal</td></tr>
+        <tr><td>8</td><td>Centro de momento · massivas e sem massa</td></tr>
+        <tr><td>9</td><td>Exemplos resolvidos · problemas orientados</td></tr>
+        <tr><td>10</td><td>Oficina computacional · exercícios</td></tr>
+      </table>
+    </div>
+    <div class="destaque">
+      <h3>A pergunta que organiza tudo</h3>
+      <p>
+        Como escrever leis de conservação que valham, com a mesma forma, em
+        todos os referenciais?
+      </p>
+      <p class="legenda">
+        A resposta exige primeiro decidir o que é um vetor aqui — e a resposta
+        não é “uma lista de quatro números”.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2.1 VETORES ================================= -->
+<section>
+  <p class="etiqueta">Aula 5 · Seção 2.1</p>
+  <h2>O critério é a transformação</h2>
+  <p>
+    As coordenadas de um evento mudam de <span class="m">S</span> para
+    <span class="m">S'</span> pela transformação de Lorentz, que em forma
+    compacta é
+  </p>
+  <div class="M">x'^\mu=\Lambda^\mu{}_\nu\,x^\nu</div>
+  <div class="destaque">
+    <p>
+      <strong>Um quadrivetor é qualquer conjunto de quatro números que se
+      transforme exatamente assim.</strong> Essa é a definição inteira.
+    </p>
+    <p class="legenda">
+      Consequência prática imediata: quatro números juntos num parêntese
+      <em>não</em> formam um vetor até que se verifique como eles mudam de
+      referencial.
+    </p>
+  </div>
+  <p class="legenda">
+    O exemplo que interessa é <span class="m">\mathrm{d}x^\mu</span>, o
+    deslocamento entre dois eventos vizinhos: por ser diferença de coordenadas,
+    transforma-se assim. Dividi-lo por um <strong>escalar</strong> devolve outro
+    vetor — a matriz <span class="m">\Lambda</span> passa direto pela divisão.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Aula 5 · Seção 2.1</p>
+  <h2>Por que a velocidade comum não é um vetor</h2>
+  <div class="duas">
+    <div class="alerta">
+      <p>
+        Dividir por <span class="m">\mathrm{d}t</span> <strong>não</strong>
+        produz um vetor: <span class="m">\mathrm{d}t</span> é a
+        <em>componente temporal</em> de <span class="m">\mathrm{d}x^\mu</span>,
+        e muda de referencial para referencial.
+      </p>
+      <p>
+        Logo <span class="m">\bm v=\mathrm{d}\bm x/\mathrm{d}t</span> não é
+        parte de quadrivetor nenhum.
+      </p>
+    </div>
+    <div>
+      <p>
+        E isso <em>explica</em> algo do capítulo anterior: é por não ser
+        vetorial que a velocidade obedece àquela lei de composição desajeitada,
+      </p>
+      <div class="M">u'=\dfrac{u-v}{1-uv}</div>
+      <p class="legenda">
+        em vez de se transformar linearmente. O que salva a construção é existir
+        um escalar natural ao longo da linha de mundo: <strong>o tempo
+        próprio</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2.2 PRODUTO ESCALAR ========================= -->
+<section>
+  <p class="etiqueta">Aula 5 · Seção 2.2</p>
+  <h2>Produto escalar</h2>
+  <p>Ele já existia, disfarçado: o intervalo é o produto de
+    <span class="m">\mathrm{d}x^\mu</span> consigo mesmo. Generalizando,</p>
+  <div class="M">\bm A\cdot\bm B\equiv-A^0B^0+A^1B^1+A^2B^2+A^3B^3
+    =\eta_{\mu\nu}A^\mu B^\nu</div>
+  <div class="duas">
+    <div class="destaque">
+      <h3>É invariante</h3>
+      <p class="legenda">
+        E a prova não precisa ser refeita: aplicada a
+        <span class="m">\bm A=\bm B=\mathrm{d}\bm x</span>, a definição devolve
+        <span class="m">\mathrm{d}s^2</span>. O caso geral segue de
+        <span class="m">\bm A\cdot\bm B=\tfrac12[(\bm A+\bm B)^2-\bm A^2-\bm B^2]</span>
+        — três normas, e normas são intervalos.
+      </p>
+    </div>
+    <div class="alerta">
+      <h3>Por que é a ferramenta central</h3>
+      <p class="legenda">
+        Um produto escalar é um número que <strong>não depende de quem
+        calcula</strong>. Sempre que uma pergunta física for respondida por um
+        produto escalar, a resposta pode ser obtida no referencial mais
+        conveniente e usada em qualquer outro.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2.3 QUADRIVELOCIDADE ======================== -->
+<section>
+  <p class="etiqueta">Aula 6 · Seção 2.3</p>
+  <h2>Quadrivelocidade</h2>
+  <div class="duas">
+    <div>
+      <p>
+        O tempo próprio é o escalar de que precisávamos — o mesmo para todos os
+        observadores. Dividir o deslocamento por ele produz um vetor legítimo:
+      </p>
+      <div class="M">U^\mu=\dfrac{\mathrm{d}x^\mu}{\mathrm{d}\tau}
+        =\gamma\,(1,\bm v)</div>
+      <p class="legenda">
+        usando <span class="m">\mathrm{d}\tau=\mathrm{d}t/\gamma</span>. O único
+        acréscimo que torna <span class="m">\bm v</span> vetorial é o fator
+        <span class="m">\gamma</span> — exatamente o preço de trocar
+        <span class="m">\mathrm{d}t</span> por
+        <span class="m">\mathrm{d}\tau</span>.
+      </p>
+    </div>
+    <div class="destaque">
+      <h3>A norma é fixa</h3>
+      <div class="M">U^\mu U_\mu=-\gamma^2+\gamma^2v^2=-\gamma^2(1-v^2)=-1</div>
+      <p class="legenda">
+        Não é uma velocidade comum em quatro dimensões: seu “tamanho” é sempre
+        <span class="m">-1</span>. É o <strong>vetor tangente normalizado</strong>
+        à linha de mundo, parametrizada pelo tempo próprio.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2.4 QUADRIMOMENTO =========================== -->
+<section>
+  <p class="etiqueta">Aula 6 · Seção 2.4</p>
+  <h2>Quadrimomento e casca de massa</h2>
+  <div class="duas larga-esq">
+    <div>
+      <div class="M">p^\mu=mU^\mu=(E,\bm p),\qquad
+        E=\gamma m,\quad \bm p=\gamma m\bm v</div>
+      <p>A norma dá a relação de dispersão:</p>
+      <div class="M">p^\mu p_\mu=-m^2
+        \quad\Longrightarrow\quad E^2=\bm p^2+m^2</div>
+      <div class="alerta">
+        <p class="legenda">
+          Para fótons, <span class="m">m=0</span> e
+          <span class="m">E=|\bm p|</span> — a energia é o próprio módulo do
+          momento.
+        </p>
+      </div>
+    </div>
+    <figure>
+      <img src="figuras/casca_massa.svg" style="max-height:400px"
+           alt="Casca de massa: hipérbole E²=p²+m² no plano (p,E)">
+      <figcaption>Para <span class="m">m&gt;0</span> a curva nunca toca a reta
+        <span class="m">E=|\bm p|</span>: por maior que seja o momento,
+        <span class="m">E&gt;|\bm p|</span> sempre. Para <span class="m">m=0</span>
+        ela degenera na própria reta — não há folga entre energia e momento para
+        o fóton.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== 2.5 CONSERVAÇÃO ============================= -->
+<section>
+  <p class="etiqueta">Aula 7 · Seção 2.5</p>
+  <h2>Conservação, numa linha</h2>
+  <div class="M">\sum_{\rm inicial}p^\mu=\sum_{\rm final}p^\mu</div>
+  <div class="destaque">
+    <p>
+      Essa equação compacta contém <strong>conservação de energia e de
+      momento</strong> ao mesmo tempo. E a vantagem da forma tensorial é
+      decisiva: se ela vale em um referencial inercial, vale em
+      <em>todos</em>.
+    </p>
+  </div>
+  <div class="duas">
+    <div>
+      <h3>Decaimento <span class="m">M\to 2m</span></h3>
+      <p class="legenda">
+        No repouso da partícula inicial, por simetria os momentos finais têm
+        módulos iguais e sentidos opostos, e cada produto tem
+        <span class="m">E=M/2</span>:
+      </p>
+      <div class="M">|\bm p|=\sqrt{\dfrac{M^2}{4}-m^2}</div>
+    </div>
+    <div class="alerta">
+      <p>
+        O decaimento só é possível se <span class="m">M\ge 2m</span> — do
+        contrário o radicando fica negativo.
+      </p>
+      <p class="legenda">
+        A cinemática, sozinha, já proíbe processos: nenhuma dinâmica precisou
+        ser invocada.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 2.6 ENERGIA COMO COMPONENTE TEMPORAL =============== -->
+<section>
+  <p class="etiqueta">Aula 7 · Seção 2.6</p>
+  <h2>Energia é uma componente, não um objeto</h2>
+  <p>
+    Assim como tempo e espaço são partes de um mesmo objeto geométrico, energia
+    e momento também são. Uma colisão que parece envolver só energia num
+    referencial envolve os dois, inseparáveis, em outro.
+  </p>
+  <div class="duas">
+    <div class="destaque">
+      <div class="M">m^2=-p^\mu p_\mu</div>
+      <p class="legenda">
+        Mais fundamental que <span class="m">E=\gamma m</span>, porque não
+        depende do referencial: a energia de uma partícula depende do
+        observador, <strong>a massa de repouso não</strong>.
+      </p>
+    </div>
+    <div class="alerta">
+      <h3>Para um sistema</h3>
+      <div class="M">M_{\rm sist}^2=-P^\mu P_\mu,\qquad
+        P^\mu=\sum_a p_a^\mu</div>
+      <p class="legenda">
+        Essa massa <em>inclui</em> energia cinética interna. Um gás quente numa
+        caixa tem massa maior que o mesmo gás frio.
+      </p>
+    </div>
+  </div>
+  <p class="legenda">
+    <strong>Duas partículas sem massa</strong>, cada uma com energia
+    <span class="m">E</span>, em sentidos opostos:
+    <span class="m">p_1^\mu=(E,E,0,0)</span> e
+    <span class="m">p_2^\mu=(E,-E,0,0)</span> dão
+    <span class="m">P^\mu=(2E,0,0,0)</span>, logo
+    <span class="m">M_{\rm sist}=2E</span>. Cada uma tem massa zero; o sistema,
+    não.
+  </p>
+</section>
+
+<!-- ==================== 2.7 CENTRO DE MOMENTO ======================= -->
+<section>
+  <p class="etiqueta">Aula 8 · Seção 2.7</p>
+  <h2>Centro de momento</h2>
+  <div class="duas larga-dir">
+    <div>
+      <p>
+        O referencial do centro de momento é definido por
+        <span class="m">\bm P=0</span>. Nele, toda a energia disponível aparece
+        como <strong>massa invariante do sistema</strong> — e é por isso que ele
+        simplifica colisões.
+      </p>
+      <div class="destaque">
+        <p class="legenda">
+          A energia disponível para criar partículas novas não é a energia do
+          feixe: é <span class="m">\sqrt{s}=M_{\rm sist}</span>, e a diferença
+          entre as duas montagens experimentais é enorme.
+        </p>
+      </div>
+    </div>
+    <figure>
+      <img src="figuras/colisor_alvo_fixo.svg" style="max-height:400px"
+           alt="Comparação entre colisor e alvo fixo: energia disponível">
+      <figcaption>No colisor, <span class="m">\sqrt{s}=2E</span> cresce
+        linearmente. No alvo fixo, <span class="m">\sqrt{s}=\sqrt{2m^2+2mE}</span>
+        cresce só com <span class="m">\sqrt{E}</span>. A defasagem é a energia
+        desperdiçada em manter o centro de momento em movimento no
+        laboratório.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 2.8 MASSIVAS E SEM MASSA ============================ -->
+<section>
+  <p class="etiqueta">Aula 8 · Seção 2.8</p>
+  <h2>Massivas e sem massa</h2>
+  <table class="col-formula">
+    <tr><th></th><th>com massa</th><th>sem massa</th></tr>
+    <tr><td><span class="m">p^\mu p_\mu</span></td><td><span class="m">-m^2&lt;0</span> (temporal)</td><td><span class="m">0</span> (nulo)</td></tr>
+    <tr><td>energia</td><td><span class="m">E=\gamma m</span></td><td><span class="m">E=|\bm p|</span></td></tr>
+    <tr><td>velocidade</td><td><span class="m">v&lt;1</span> sempre</td><td><span class="m">v=1</span> sempre</td></tr>
+    <tr><td>tempo próprio</td><td>corre normalmente</td><td><span class="m">\mathrm{d}\tau=0</span> — não há</td></tr>
+    <tr><td>referencial de repouso</td><td>existe</td><td><strong>não existe</strong></td></tr>
+  </table>
+  <div class="alerta">
+    <p class="legenda">
+      A última linha é a que mais custa aceitar: não existe referencial que
+      acompanhe um fóton. Perguntar “o que o fóton vê” é perguntar por um
+      referencial que a teoria não tem — e a quadrivelocidade, cuja norma é
+      sempre <span class="m">-1</span>, sequer pode ser definida para ele.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== 2.10 EXEMPLOS =============================== -->
+<section>
+  <p class="etiqueta">Aula 9 · Seção 2.10</p>
+  <h2>Compton, sem calcular o elétron</h2>
+  <div class="duas larga-dir">
+    <div>
+      <p>
+        Da conservação <span class="m">p_\gamma+p_e=p_\gamma'+p_e'</span>,
+        isole <span class="m">p_e'</span> e tome a norma. Como
+        <span class="m">p_e'\cdot p_e'=-m_e^2</span> — a casca de massa —, o
+        elétron final <em>desaparece</em> da conta:
+      </p>
+      <div class="M">\boxed{\dfrac{1}{E'}-\dfrac{1}{E}
+        =\dfrac{1-\cos\theta}{m_e}}</div>
+      <p class="legenda">
+        A relação de Compton em energias, sem <span class="m">h</span> nem
+        <span class="m">\lambda</span>. <strong>Nunca foi preciso calcular o
+        quadrimomento do elétron espalhado</strong> — essa é a técnica padrão
+        para espalhamentos e decaimentos.
+      </p>
+    </div>
+    <figure>
+      <img src="figuras/compton.svg" style="max-height:400px"
+           alt="Fração de energia do fóton espalhado em função do ângulo">
+      <figcaption>Quanto maior <span class="m">E/m_e</span>, mais forte o
+        espalhamento. No limite <span class="m">E\ll m_e</span> recupera-se o
+        espalhamento Thomson clássico.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Aula 9 · Seção 2.10</p>
+  <h2>Doppler transversal: um efeito sem análogo clássico</h2>
+  <div class="duas">
+    <div>
+      <p>
+        Uma fonte passa e emite um fóton <em>perpendicularmente</em> à sua
+        velocidade, no instante em que o observador o recebe. A frequência
+        própria é a energia medida por quem viaja com a fonte,
+      </p>
+      <div class="M">\nu_0=-p_\mu U_{\rm fonte}^\mu=\gamma\nu
+        \quad\Longrightarrow\quad \nu=\dfrac{\nu_0}{\gamma}</div>
+    </div>
+    <div class="alerta">
+      <p>
+        <strong>Redshift puro, sem componente de aproximação nem de
+        afastamento.</strong> Classicamente não haveria efeito algum: não há
+        movimento ao longo da linha de visada.
+      </p>
+      <p class="legenda">
+        O que sobra é só a dilatação do tempo — em <span class="m">v=0{,}8</span>,
+        a frequência recebida é <span class="m">0{,}6\,\nu_0</span>.
+      </p>
+    </div>
+  </div>
+  <p class="legenda">
+    Repare no método: a frequência própria foi obtida como um
+    <strong>produto escalar</strong>,
+    <span class="m">-p_\mu U^\mu</span> — a energia de um fóton medida por um
+    observador de quadrivelocidade <span class="m">U^\mu</span>. É uma fórmula
+    que vale em qualquer referencial, e que voltará em espaço-tempo curvo.
+  </p>
+</section>
+
+<!-- ==================== 2.11 OFICINA ================================ -->
+<section>
+  <p class="etiqueta">Aula 10 · Seção 2.11</p>
+  <h2>Oficina computacional</h2>
+  <div class="duas larga-dir">
+    <div>
+      <p><strong>Quadrivetores</strong> — verificar numericamente que
+        <span class="m">U^\mu U_\mu=-1</span> e
+        <span class="m">p^\mu p_\mu=-m^2</span> se mantêm sob boosts
+        aleatórios, e montar a massa invariante de um sistema de várias
+        partículas.</p>
+      <p><strong>Compton e foguete</strong> — a relação de Compton conferida
+        contra a conservação bruta, e a equação do foguete relativístico
+        integrada numericamente.</p>
+      <div class="destaque">
+        <p class="legenda">
+          Os programas são <span class="m">\texttt{cap02\_quadrivetores.py}</span>
+          e <span class="m">\texttt{cap02\_compton\_foguete.py}</span>, com as
+          verificações simbólicas em
+          <span class="m">\texttt{cap02\_quadrivetores.wl}</span>.
+        </p>
+      </div>
+    </div>
+    <figure>
+      <img src="figuras/foguete.svg" style="max-height:400px"
+           alt="Foguete relativístico: fração de massa contra velocidade final">
+      <figcaption>Trajetória de uma nave com aceleração própria
+        <span class="m">a_0=1g</span>, acelerando até o meio do percurso e
+        desacelerando depois, para chegar a Proxima Centauri em repouso: 3,54
+        anos de bordo contra 5,87 na Terra. A tracejada é o cone de luz — a
+        trajetória nunca o alcança.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==================== FECHAMENTO ================================== -->
+<section>
+  <p class="etiqueta">Fechamento</p>
+  <h2>O que fica</h2>
+  <div class="duas">
+    <div>
+      <div class="destaque">
+        <h3>Uma definição</h3>
+        <p>Vetor é o que se transforma como
+          <span class="m">x'^\mu=\Lambda^\mu{}_\nu x^\nu</span>. Não é lista de
+          quatro números.</p>
+      </div>
+      <div class="destaque">
+        <h3>Uma ferramenta</h3>
+        <p>O produto escalar dá números que não dependem de quem calcula —
+          escolha o referencial conveniente e use a resposta em qualquer outro.</p>
+      </div>
+    </div>
+    <div>
+      <div class="destaque">
+        <h3>Um vínculo</h3>
+        <p><span class="m">p^\mu p_\mu=-m^2</span>. A casca de massa é o que
+          permite eliminar da conta a partícula que não interessa.</p>
+      </div>
+      <div class="alerta">
+        <h3>O que vem</h3>
+        <p>Vetores foram suficientes aqui. Para escrever a fonte da gravidade
+          será preciso um objeto com <em>dois</em> índices — e é o Capítulo 3
+          que o constrói.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Para a próxima aula</p>
+  <h2>Exercícios</h2>
+  <p class="legenda">
+    Cinco por capítulo, para entrega, com a marca indicando a seção do Schutz
+    que cobre o assunto — e três problemas de <strong>Conteúdo extra</strong>
+    que pedem para modificar os programas da página da disciplina.
+  </p>
+  <table>
+    <tr><th></th><th>Assunto</th></tr>
+    <tr><td>1</td><td>Verificar que um conjunto de quatro números é (ou não) um quadrivetor</td></tr>
+    <tr><td>2</td><td>Norma da quadrivelocidade e o significado de <span class="m">U^\mu U_\mu=-1</span></td></tr>
+    <tr><td>3</td><td>Decaimento em duas partículas: energias, momentos e o limiar <span class="m">M\ge2m</span></td></tr>
+    <tr><td>4</td><td>Massa invariante de um sistema de fótons</td></tr>
+    <tr><td>5</td><td>Colisor contra alvo fixo: quanta energia de feixe para o mesmo <span class="m">\sqrt{s}</span></td></tr>
+  </table>
+</section>
+
+</div>
+</main>
+
+<div id="contador"></div>
+<div id="ajuda">← → navegar · F tela cheia</div>
+
+<script src="../vendor/katex/katex.min.js"></script>
+<script src="../slides.js?v=3"></script>
+<script src="../interativo.js?v=1"></script>
+</body>
+</html>
