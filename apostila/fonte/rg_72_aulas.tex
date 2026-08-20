@@ -2390,8 +2390,44 @@ referencial de repouso da partícula, vale $-1$ para todo observador inercial,
 por mais depressa que a partícula passe por ele.
 
 \begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}CONFERINDO EM OUTRO REFERENCIAL}]
-Se quiser conferir num referencial em que a partícula se move, o resultado tem
-de ser o mesmo --- e é:
+Refazer a conta num referencial $S$ onde a partícula se move com velocidade
+$v$ ao longo de $x$ vale menos pelo resultado --- que não pode mudar --- do que
+pelo caminho, porque é o primeiro exercício de aplicar uma transformação de
+Lorentz a um vetor que não é o vetor posição. E é onde se erra o sinal.
+
+Parta das componentes no referencial de repouso, $U^{\nu'}=(1,0,0,0)$, e
+transforme para $S$. A matriz de que se precisa é a que vai de $S'$ para $S$
+--- e não a da equação~\eqref{eq:boost-matriz}, que faz o caminho contrário.
+Como a inversa de um \emph{boost} é o mesmo \emph{boost} com o sinal da
+velocidade trocado,
+\[
+  \Lambda^{\mu}{}_{\nu'}=
+  \begin{pmatrix}
+    \gamma & \gamma v & 0 & 0\\
+    \gamma v & \gamma & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+  \end{pmatrix},
+  \qquad
+  U^{\mu}=\Lambda^{\mu}{}_{\nu'}\,U^{\nu'}=(\gamma,\gamma v,0,0),
+\]
+que é o $\gamma(1,\bm v)$ de antes. Usar por engano a
+matriz~\eqref{eq:boost-matriz}, com $-v$, devolve $(\gamma,-\gamma v,0,0)$: a
+norma \emph{continua} dando $-1$, porque o sinal da parte espacial some no
+quadrado, e o engano passa despercebido --- só que a partícula fica viajando
+para o lado errado.
+
+Repare em como a conta se resolveu. Como $U^{\nu'}$ só tem componente temporal,
+a soma sobre $\nu'$ na
+convenção~\eqref{eq:lorentz-indices} tem um único termo sobrevivente, e o que
+resta de $\Lambda$ é apenas sua \emph{primeira coluna}:
+$U^\mu=\Lambda^\mu{}_{0'}$. Essa coluna é a inclinação do eixo $t'$ desenhada
+no diagrama de espaçotempo do Capítulo~\ref{chap:relatividade-especial} --- e
+tinha de ser: no seu próprio referencial a partícula não sai do lugar, avança
+só no tempo, então sua quadrivelocidade aponta ao longo de $t'$ e nada mais.
+Toda a estrutura de $U^\mu$ vista de $S$ é a inclinação daquele eixo.
+
+Fechando com a verificação direta:
 \[
   U^\mu U_\mu=-\gamma^2+\gamma^2\bm v\cdot\bm v=-\gamma^2(1-v^2)=-1,
 \]
