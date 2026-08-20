@@ -2369,19 +2369,42 @@ velocidade ordinária $\bm v$ não era parte de vetor nenhum, e o único
 acréscimo que a torna vetorial é o fator $\gamma$ --- que é exatamente o
 preço de trocar $\dd t$ por $\dd\tau$.
 
-Sua norma, calculada com \eqref{eq:produto-escalar}, é fixa:
+Sua norma é fixa, e o jeito mais curto de ver isso é escolher bem o
+referencial --- que é justamente o que a Seção~\ref{sec:produto-escalar}
+recomendou fazer. \emph{No referencial da própria partícula}, ela está parada:
+$\bm v=0$, $\gamma=1$, e a quadrivelocidade tem componentes
 \[
-  U^\mu U_\mu=\etaab U^\alpha U^\beta
-  =-\gamma^2+\gamma^2\bm v\cdot\bm v
-  =-\gamma^2(1-v^2)
-  =-1,
+  U^\mu=(1,0,0,0).
 \]
-onde a última igualdade usa $\gamma^2=1/(1-v^2)$. O resultado $U^\mu U_\mu=-1$
-não depende do referencial: é uma afirmação sobre a norma de um vetor
-geométrico, válida em qualquer base. Isso mostra que a quadrivelocidade não é
-uma velocidade comum em quatro dimensões -- seu ``tamanho'' é sempre o mesmo,
-$-1$ -- mas o vetor tangente normalizado à linha de mundo, parametrizada pelo
-tempo próprio.
+Ou seja: quem viaja com a partícula a vê avançar apenas no \emph{tempo}, à taxa
+de um segundo de tempo próprio por segundo de tempo próprio --- o que é uma
+tautologia, e é essa tautologia que faz a conta desaparecer. A norma sai por
+inspeção, sem nenhum $\gamma$:
+\[
+  U^\mu U_\mu=\eta_{\mu\nu}U^\mu U^\nu=-1\cdot 1\cdot 1=-1 .
+\]
+
+E aqui entra o argumento que dispensa refazer o cálculo em qualquer outro
+lugar: \textbf{o produto escalar é invariante}. Se $U^\mu U_\mu$ vale $-1$ no
+referencial de repouso da partícula, vale $-1$ para todo observador inercial,
+por mais depressa que a partícula passe por ele.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}CONFERINDO EM OUTRO REFERENCIAL}]
+Se quiser conferir num referencial em que a partícula se move, o resultado tem
+de ser o mesmo --- e é:
+\[
+  U^\mu U_\mu=-\gamma^2+\gamma^2\bm v\cdot\bm v=-\gamma^2(1-v^2)=-1,
+\]
+usando $\gamma^2=1/(1-v^2)$. Mas note que essa conta \emph{confirma}, não
+demonstra: a demonstração já estava feita no referencial de repouso, e é o
+produto escalar ser invariante que a transporta para os demais. É a primeira
+vez no curso em que se paga para ver a economia prometida pela
+Seção~\ref{sec:produto-escalar}, e não será a última.
+\end{atencao}
+
+Isso mostra que a quadrivelocidade não é uma velocidade comum em quatro
+dimensões --- seu ``tamanho'' é sempre o mesmo, $-1$ --- mas o vetor tangente
+normalizado à linha de mundo, parametrizada pelo tempo próprio.
 
 Uma consequência imediata aparece ao derivar essa identidade em relação a
 $\tau$. Como $U^\mu U_\mu$ é constante,
