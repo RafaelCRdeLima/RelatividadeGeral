@@ -363,3 +363,121 @@
     desenhar();
   })();
 })();
+
+// ====================================================================
+// Ortogonalidade em Minkowski: um vetor é o reflexo do outro
+// ====================================================================
+//
+// A frase "um vetor nulo é ortogonal a si mesmo" soa mística até se ver
+// o que ortogonalidade quer dizer aqui: A e B são ortogonais quando um é
+// o REFLEXO do outro na linha de luz. O vetor nulo está deitado sobre o
+// espelho, e por isso é o próprio reflexo -- não há mágica nenhuma.
+//
+// O controle move A; B acompanha como reflexo. Quando A se aproxima da
+// linha de luz, B se aproxima também, e no limite os dois colapsam sobre
+// ela: é o caso nulo.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("ortogonalidade");
+  const controle = document.getElementById("v-orto");
+  if (!svg || !controle) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+  const L = 520, XMIN = -0.28, XMAX = 2.6;
+  const k = L / (XMAX - XMIN);
+  const fx = (x) => (x - XMIN) * k, fy = (y) => L - (y - XMIN) * k;
+  const COR = { eixo: "rgba(238,247,246,0.40)", luz: "#7ee0a0",
+                a: "#7fb2ff", b: "#f2836b", texto: "rgba(238,247,246,0.62)" };
+
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  fundo.appendChild(cria("line", { x1: fx(XMIN), y1: fy(0), x2: fx(XMAX), y2: fy(0),
+                                   stroke: COR.eixo, "stroke-width": 1.2 }));
+  fundo.appendChild(cria("line", { x1: fx(0), y1: fy(XMIN), x2: fx(0), y2: fy(XMAX),
+                                   stroke: COR.eixo, "stroke-width": 1.2 }));
+  // o espelho
+  fundo.appendChild(cria("line", { x1: fx(0), y1: fy(0), x2: fx(XMAX), y2: fy(XMAX),
+                                   stroke: COR.luz, "stroke-width": 2.6 }));
+  const rotL = cria("text", { x: fx(2.34), y: fy(2.44), fill: COR.luz, "font-size": 17 });
+  rotL.textContent = "a linha de luz é o espelho";
+  rotL.setAttribute("text-anchor", "end");
+  fundo.appendChild(rotL);
+
+  const movel = cria("g", {});
+  svg.appendChild(movel);
+  const seta = (cor) => cria("line", { stroke: cor, "stroke-width": 3,
+                                       "marker-end": "url(#ponta-" + cor.slice(1) + ")" });
+  // marcadores de ponta de seta, um por cor
+  const defs = cria("defs", {});
+  for (const cor of [COR.a, COR.b, COR.luz]) {
+    const m = cria("marker", { id: "ponta-" + cor.slice(1), viewBox: "0 0 10 10",
+                               refX: 8, refY: 5, markerWidth: 5, markerHeight: 5,
+                               orient: "auto-start-reverse" });
+    m.appendChild(cria("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: cor }));
+    defs.appendChild(m);
+  }
+  svg.insertBefore(defs, svg.firstChild);
+
+  const vA = seta(COR.a), vB = seta(COR.b);
+  const arcoA = cria("path", { fill: "none", stroke: COR.a, "stroke-width": 2, opacity: 0.9 });
+  const arcoB = cria("path", { fill: "none", stroke: COR.b, "stroke-width": 2, opacity: 0.9 });
+  const rA = cria("text", { fill: COR.a, "font-size": 21, "font-style": "italic" });
+  const rB = cria("text", { fill: COR.b, "font-size": 21, "font-style": "italic" });
+  rA.textContent = "A"; rB.textContent = "B";
+  movel.append(arcoA, arcoB, vA, vB, rA, rB);
+
+  const lidoAng = document.getElementById("orto-ang");
+  const lidoProd = document.getElementById("orto-prod");
+  const lidoTipo = document.getElementById("orto-tipo");
+
+  function arco(de, ate, r) {
+    const p = [];
+    for (let i = 0; i <= 40; i++) {
+      const t = de + (ate - de) * (i / 40);
+      p.push((i ? "L" : "M") + fx(r * Math.cos(t)) + " " + fy(r * Math.sin(t)));
+    }
+    return p.join(" ");
+  }
+
+  function desenhar() {
+    const phi = Number(controle.value) / 100;
+    // A é temporal: (x, ct) = (senh, cosh). B é o reflexo: (cosh, senh).
+    const Ax = Math.sinh(phi), Ay = Math.cosh(phi);
+    const Bx = Math.cosh(phi), By = Math.sinh(phi);
+    const esc = 1.72 / Math.cosh(phi);   // mantém as setas dentro do quadro
+    const ax = Ax * esc, ay = Ay * esc, bx = Bx * esc, by = By * esc;
+
+    vA.setAttribute("x1", fx(0)); vA.setAttribute("y1", fy(0));
+    vA.setAttribute("x2", fx(ax)); vA.setAttribute("y2", fy(ay));
+    vB.setAttribute("x1", fx(0)); vB.setAttribute("y1", fy(0));
+    vB.setAttribute("x2", fx(bx)); vB.setAttribute("y2", fy(by));
+    rA.setAttribute("x", fx(ax) - 26); rA.setAttribute("y", fy(ay) - 6);
+    rB.setAttribute("x", fx(bx) + 10); rB.setAttribute("y", fy(by) + 4);
+
+    const aA = Math.atan2(ay, ax), aB = Math.atan2(by, bx), q = Math.PI / 4;
+    arcoA.setAttribute("d", arco(q, aA, 1.1));
+    arcoB.setAttribute("d", arco(aB, q, 1.1));
+
+    const grau = (aA - q) * 180 / Math.PI;
+    const prod = -ay * by + ax * bx;      // produto de Minkowski
+    if (lidoAng) lidoAng.textContent = grau.toFixed(1).replace(".", ",") + "°";
+    if (lidoProd) lidoProd.textContent = Math.abs(prod) < 1e-9 ? "0" : prod.toFixed(6).replace(".", ",");
+    // phi=0 dá A e B sobre os próprios eixos ct e x -- o único caso em que
+    // ortogonal COINCIDE com perpendicular no papel. phi grande fecha o par
+    // sobre o espelho, que é o limite nulo.
+    if (lidoTipo) {
+      lidoTipo.textContent =
+        phi < 0.05 ? "θ = 45°: aqui, e só aqui, ortogonal coincide com perpendicular no papel"
+        : phi > 1.15 ? "quase colapsados sobre o espelho — o limite nulo"
+        : "um temporal, um espacial";
+    }
+  }
+  controle.addEventListener("input", desenhar);
+  desenhar();
+})();

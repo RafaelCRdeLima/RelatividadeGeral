@@ -8,6 +8,7 @@ Salva os PDFs em ../figuras/. Unidades geometrizadas (c=1).
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 from pathlib import Path
 
 OUTDIR = Path(__file__).resolve().parent.parent / "figuras"
@@ -19,6 +20,10 @@ plt.rcParams.update({
     "font.size": 12,
     "axes.linewidth": 0.9,
 })
+
+# halo branco atras do texto, para os rotulos nao se confundirem
+# com as linhas que passam por tras
+HALO = [pe.withStroke(linewidth=3.0, foreground="white")]
 
 
 # ---------------------------------------------------------------------
@@ -162,10 +167,107 @@ def fig_foguete(a0=1.0323, D=4.2465):
     return tau_total, t_total
 
 
+# ---------------------------------------------------------------------
+# Figura 5: classificacao dos vetores e ortogonalidade em Minkowski
+# ---------------------------------------------------------------------
+def fig_ortogonalidade():
+    """Por que 'ortogonal' aqui nao quer dizer 'perpendicular no papel'.
+
+    Painel esquerdo: o cone de luz separa os tres tipos de vetor, e a
+    classificacao e' invariante porque o cone e' o mesmo para todos.
+
+    Painel direito: a leitura geometrica da ortogonalidade. Dois vetores
+    sao ortogonais quando um e' o REFLEXO do outro na linha de luz --
+    equivalentemente, quando fazem angulos iguais com ela, em lados
+    opostos. Dai o vetor nulo ser ortogonal a si mesmo: ele esta EM CIMA
+    do espelho, e portanto e' o seu proprio reflexo.
+    """
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.4, 4.7))
+    L = 2.35
+    for ax in (ax1, ax2):
+        ax.set_xlim(-L, L)
+        ax.set_ylim(-0.45, L)
+        ax.set_aspect("equal")
+        ax.axhline(0, color="black", lw=0.6, zorder=1)
+        ax.axvline(0, color="black", lw=0.6, zorder=1)
+        ax.set_xlabel(r"$x$")
+        ax.set_ylabel(r"$ct$")
+
+    # ---------------- painel esquerdo: a classificacao ----------------
+    ax1.plot([0, L], [0, L], color="0.45", lw=1.2, ls=(0, (6, 4)), zorder=2)
+    ax1.plot([0, -L], [0, L], color="0.45", lw=1.2, ls=(0, (6, 4)), zorder=2)
+    ax1.fill_between([-L, 0, L], [L, 0, L], [L, L, L], color="#4C72B0", alpha=0.07, zorder=0)
+
+    for (vx, vy), cor, nome, sinal in [
+        ((0.55, 1.75), "#4C72B0", "temporal", r"$\mathbf{A}\cdot\mathbf{A}<0$"),
+        ((1.55, 1.55), "#2E7D32", "nulo",     r"$\mathbf{A}\cdot\mathbf{A}=0$"),
+        ((1.95, 0.75), "#B0413E", "espacial", r"$\mathbf{A}\cdot\mathbf{A}>0$"),
+    ]:
+        ax1.annotate("", xy=(vx, vy), xytext=(0, 0),
+                     arrowprops=dict(arrowstyle="-|>", color=cor, lw=2.0))
+        ax1.annotate(f"{nome}\n{sinal}", xy=(vx, vy), xytext=(6, 4),
+                     textcoords="offset points", fontsize=9.5, color=cor,
+                     ha="left", va="bottom", path_effects=HALO)
+
+    ax1.text(0, 2.05, "futuro", ha="center", fontsize=9.5, color="0.4",
+             path_effects=HALO)
+    ax1.set_title("O cone separa os três tipos — e o cone\n"
+                  "é o mesmo para todo observador", fontsize=10.5)
+
+    # ---------------- painel direito: a ortogonalidade ----------------
+    # a linha de luz e' o ESPELHO: refletir nela troca (t,x) por (x,t)
+    ax2.plot([0, L], [0, L], color="#2E7D32", lw=2.4, zorder=3)
+    ax2.plot([0, -L], [0, L], color="0.78", lw=1.0, ls=(0, (6, 4)), zorder=2)
+
+    phi = 0.62
+    A = np.array([np.sinh(phi), np.cosh(phi)])      # (x, ct) temporal
+    B = np.array([np.cosh(phi), np.sinh(phi)])      # o reflexo: espacial
+    esc = 1.60
+    for vec, cor, rot in [(A, "#4C72B0", r"$\mathbf{A}$"), (B, "#B0413E", r"$\mathbf{B}$")]:
+        ax2.annotate("", xy=tuple(esc * vec), xytext=(0, 0),
+                     arrowprops=dict(arrowstyle="-|>", color=cor, lw=2.2))
+        ax2.annotate(rot, xy=tuple(esc * vec), xytext=(8, 4),
+                     textcoords="offset points", fontsize=13, color=cor,
+                     path_effects=HALO)
+
+    # o vetor nulo, desenhado SOBRE o espelho
+    N = np.array([1.0, 1.0]) / np.sqrt(2)
+    ax2.annotate("", xy=tuple(1.15 * N), xytext=(0, 0),
+                 arrowprops=dict(arrowstyle="-|>", color="#2E7D32", lw=2.2))
+    ax2.annotate(r"$\mathbf{N}$", xy=tuple(1.15 * N), xytext=(10, -12),
+                 textcoords="offset points", fontsize=13, color="#2E7D32",
+                 path_effects=HALO)
+
+    # os dois angulos ate' a bissetriz, iguais
+    a_A = np.arctan2(A[1], A[0])
+    a_B = np.arctan2(B[1], B[0])
+    for de, ate, cor in [(np.pi / 4, a_A, "#4C72B0"), (a_B, np.pi / 4, "#B0413E")]:
+        t = np.linspace(de, ate, 40)
+        ax2.plot(1.42 * np.cos(t), 1.42 * np.sin(t), color=cor, lw=1.6, alpha=0.9)
+    ax2.text(0.78, 1.68, r"$\theta$", fontsize=13, color="#4C72B0", path_effects=HALO)
+    ax2.text(1.68, 0.78, r"$\theta$", fontsize=13, color="#B0413E", path_effects=HALO)
+
+    ax2.text(-2.15, 1.66,
+             "reflita na linha de luz\ne um vetor vira o outro:\n"
+             r"$\mathbf{A}\cdot\mathbf{B}=0$",
+             fontsize=9.2, color="0.30", ha="left", va="top", path_effects=HALO)
+    ax2.text(-2.15, 0.62,
+             r"$\mathbf{N}$ está sobre o espelho," "\n"
+             "logo é o próprio reflexo\ne é ortogonal a si mesmo",
+             fontsize=9.2, color="#2E7D32", ha="left", va="top", path_effects=HALO)
+
+    ax2.set_title("Ortogonal aqui significa: um é o reflexo\ndo outro na linha de luz",
+                  fontsize=10.5)
+
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap02_ortogonalidade.pdf", bbox_inches="tight")
+    plt.close(fig)
+
 if __name__ == "__main__":
     fig_casca_de_massa()
     fig_colisor_vs_alvo_fixo()
     fig_compton()
+    fig_ortogonalidade()
     tau_total, t_total = fig_foguete()
     print(f"Foguete: tau_total={tau_total:.4f} anos, t_total={t_total:.4f} anos")
     print("Figuras salvas em", OUTDIR)

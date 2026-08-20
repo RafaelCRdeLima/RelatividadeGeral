@@ -2318,6 +2318,30 @@ tomar cuidado com a palavra, porque aqui ela não quer dizer ``perpendicular no
 papel''. Um vetor nulo, por exemplo, é ortogonal a si mesmo --- algo impossível
 no espaço euclidiano, onde o único vetor ortogonal a si próprio é o vetor zero.
 
+A Figura~\ref{fig:ortogonalidade} dá a leitura geométrica que torna isso menos
+estranho. Dois vetores são ortogonais em Minkowski quando um é o \emph{reflexo}
+do outro na linha de luz --- equivalentemente, quando fazem ângulos iguais com
+ela, em lados opostos. Um vetor nulo está \emph{sobre} essa linha, e portanto é
+o seu próprio reflexo: daí ser ortogonal a si mesmo, sem nenhuma mágica.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{cap02_ortogonalidade.pdf}
+\caption{À esquerda, a classificação: o cone de luz separa vetores temporais,
+nulos e espaciais, e é o mesmo para todo observador --- por isso a
+classificação é invariante. À direita, a ortogonalidade lida como reflexão:
+$\bm A$ e $\bm B$ fazem ângulos iguais com a linha de luz e satisfazem
+$\bm A\cdot\bm B=0$, enquanto o vetor nulo $\bm N$, deitado sobre ela, é o
+próprio reflexo.}
+\label{fig:ortogonalidade}
+\end{figure}
+
+Vale ligar isso ao capítulo anterior: os eixos $ct'$ e $x'$ de um observador,
+construídos na Seção~\ref{sec:diagramas}, são exatamente um par desses ---
+fecham-se sobre a linha de luz pelo mesmo ângulo, em sentidos opostos. Aquela
+``tesoura'' era, o tempo todo, a afirmação de que os dois eixos de um mesmo
+observador são ortogonais entre si.
+
 \begin{activity}
 Sejam $\bm A=(2,1,0,0)$ e $\bm B=(1,1,0,0)$ em componentes de algum
 referencial. Classifique cada um, calcule $\bm A\cdot\bm B$ e verifique que
