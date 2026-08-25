@@ -263,11 +263,95 @@ def fig_ortogonalidade():
     fig.savefig(OUTDIR / "cap02_ortogonalidade.pdf", bbox_inches="tight")
     plt.close(fig)
 
+# ---------------------------------------------------------------------
+# Figura 6: a hiperbole da aceleracao propria constante
+# ---------------------------------------------------------------------
+def fig_hiperbole_aceleracao():
+    """A linha de mundo de x^2 - t^2 = 1/a0^2, com a leitura geometrica.
+
+    O ponto da figura e' ver a particula PARTINDO DO REPOUSO -- no vertice a
+    linha de mundo sobe reta, U^mu = (1,0) -- e inclinando-se aos poucos ate
+    quase acompanhar a reta da luz, sem nunca alcanca-la.  Os pontos marcam
+    passos IGUAIS de tempo proprio: eles se espalham em t, que e' a dilatacao
+    temporal aparecendo na propria curva.
+    """
+    a0 = 1.0                       # unidades de a0: o vertice fica em x = 1
+    fig, ax = plt.subplots(figsize=(4.7, 5.9))
+
+    tau = np.linspace(-1.75, 1.75, 400)
+    t_c, x_c = np.sinh(a0 * tau) / a0, np.cosh(a0 * tau) / a0
+
+    # cone de luz: as assintotas x = +-t
+    L = 2.85
+    ax.plot([0, L], [0, L], color="0.62", lw=1.1, ls=(0, (6, 4)), zorder=1)
+    ax.plot([0, L], [0, -L], color="0.62", lw=1.1, ls=(0, (6, 4)), zorder=1)
+    ax.text(1.12, 1.12, "cone de luz", fontsize=9, color="0.42",
+            rotation=45, rotation_mode="anchor", ha="center", va="center",
+            path_effects=HALO, zorder=2)
+
+    ax.axhline(0, color="black", lw=0.6, zorder=1)
+    ax.axvline(0, color="black", lw=0.6, zorder=1)
+
+    ax.plot(x_c, t_c, color="#4C72B0", lw=2.2, zorder=3)
+
+    # passos iguais de tempo proprio
+    taus = np.array([-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5])
+    ax.plot(np.cosh(a0 * taus) / a0, np.sinh(a0 * taus) / a0, "o",
+            color="#4C72B0", ms=4.5, zorder=4)
+
+    # quadrivelocidade: tangente unitaria, em tres instantes
+    for tv in [0.0, 0.8, 1.5]:
+        px, pt = np.cosh(a0 * tv) / a0, np.sinh(a0 * tv) / a0
+        dx, dt = np.sinh(a0 * tv), np.cosh(a0 * tv)     # U = (cosh, sinh) em (t,x)
+        n = np.hypot(dx, dt)
+        ax.annotate("", xy=(px + 0.58 * dx / n, pt + 0.58 * dt / n), xytext=(px, pt),
+                    arrowprops=dict(arrowstyle="-|>", color="#B0413E", lw=1.9), zorder=5)
+    ax.text(1.78, 1.33, r"$U^\mu$", fontsize=12, color="#B0413E",
+            ha="left", va="center", path_effects=HALO)
+
+    # o vertice e a distancia 1/a0 ate' o vertice do cone
+    ax.plot([1 / a0], [0], "o", color="#16222B", ms=6, zorder=6)
+    ax.annotate("", xy=(1 / a0, -0.32), xytext=(0, -0.32),
+                arrowprops=dict(arrowstyle="<|-|>", color="#5A6B75", lw=1.0))
+    ax.text(0.80 / a0, -0.58, r"$1/a_0$", fontsize=11, color="#5A6B75",
+            ha="center", path_effects=HALO)
+
+    # comeco: o repouso
+    ax.annotate(r"$\tau=0$: parte do repouso," "\n" r"e $U^\mu=(1,0)$ sobe reta",
+                xy=(1.03, -0.05), xytext=(1.62, -0.42), fontsize=9.2,
+                color="0.25", ha="left", va="center",
+                arrowprops=dict(arrowstyle="-", color="0.55", lw=0.9),
+                path_effects=HALO)
+    # fim: a saturacao
+    ax.text(0.02, 2.30,
+            r"$v=\tanh(a_0\tau)\to1$:" "\n"
+            "a linha de mundo tende à\ninclinação da luz, sem\nnunca alcançá-la",
+            fontsize=9.2, color="0.25", ha="left", va="top", path_effects=HALO)
+    # os passos de tempo proprio
+    ax.annotate("pontos: passos iguais\nde tempo próprio",
+                xy=(1.60, -1.25), xytext=(3.00, -1.62), fontsize=8.8,
+                color="#4C72B0", ha="right", va="center",
+                arrowprops=dict(arrowstyle="-", color="#4C72B0", lw=0.8, alpha=.7),
+                path_effects=HALO)
+
+    ax.set_xlim(-0.45, 3.05)
+    ax.set_ylim(-2.85, 2.85)
+    ax.set_aspect("equal")
+    ax.set_xlabel(r"$x$")
+    ax.set_ylabel(r"$ct$")
+    ax.set_title(r"$x^2-t^2=1/a_0^{\,2}$: aceleração própria constante", fontsize=11)
+
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap02_hiperbole.pdf", bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_casca_de_massa()
     fig_colisor_vs_alvo_fixo()
     fig_compton()
     fig_ortogonalidade()
+    fig_hiperbole_aceleracao()
     tau_total, t_total = fig_foguete()
     print(f"Foguete: tau_total={tau_total:.4f} anos, t_total={t_total:.4f} anos")
     print("Figuras salvas em", OUTDIR)

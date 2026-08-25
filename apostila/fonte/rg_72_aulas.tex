@@ -2543,21 +2543,80 @@ velocidade $v=\tanh(a_0\tau)$ cresce, mas satura em $1$: nenhuma quantidade de
 combustível a ultrapassa, e nada foi imposto para impedir isso além da
 geometria.
 
-Integrando $U^\mu=\dd x^\mu/\dd\tau$ uma vez mais, com $x^\mu(0)=(0,1/a_0)$,
+\textbf{Da quadrivelocidade à linha de mundo.} Falta integrar $U^\mu$ mais uma
+vez. A integração é componente a componente, e o único ponto que pede atenção é
+a escolha das constantes. Com $\varphi=a_0\tau$, as componentes de
+$U^\mu=\dd x^\mu/\dd\tau$ são
+\[
+  \frac{\dd t}{\dd\tau}=\cosh(a_0\tau),
+  \qquad
+  \frac{\dd x}{\dd\tau}=\sinh(a_0\tau),
+\]
+duas quadraturas elementares --- e é a derivada interna $a_0$ que produz o
+fator $1/a_0$ em cada primitiva:
+\[
+  t(\tau)=\frac{1}{a_0}\sinh(a_0\tau)+C_1,
+  \qquad
+  x(\tau)=\frac{1}{a_0}\cosh(a_0\tau)+C_2 .
+\]
+A condição inicial $x^\mu(0)=(0,\,1/a_0)$ fixa as duas de uma vez. Em $\tau=0$
+vale $\sinh 0=0$, e a primeira equação deixa $C_1=0$; vale também
+$\cosh 0=1$, de modo que o primeiro termo de $x$ já entrega $1/a_0$ sozinho, e
+sobra $C_2=0$. Aí está o truque de bastidor: a posição inicial $1/a_0$ não foi
+escolhida por acaso --- ela é exatamente o valor que anula $C_2$ e deixa as duas
+expressões limpas. Qualquer outra escolha apenas desloca a hipérbole ao longo de
+$x$, e é disso que trata \eqref{eq:rindler-deslocado} logo adiante.
+
+Ficamos, portanto, com
 \[
   t(\tau)=\frac{1}{a_0}\sinh(a_0\tau),
   \qquad
   x(\tau)=\frac{1}{a_0}\cosh(a_0\tau),
 \]
-e a identidade $\cosh^2-\sinh^2=1$ dá de imediato
+e agora o tempo próprio se elimina sem esforço, porque as duas componentes são
+exatamente o par que a identidade hiperbólica combina:
+\[
+  x^2-t^2=\frac{1}{a_0^2}\cosh^2(a_0\tau)-\frac{1}{a_0^2}\sinh^2(a_0\tau)
+   =\frac{1}{a_0^2}
+    \underbrace{\bigl[\cosh^2(a_0\tau)-\sinh^2(a_0\tau)\bigr]}_{=\,1},
+\]
+isto é
 \begin{equation}
   x^2-t^2=\frac{1}{a_0^{2}} .
   \label{eq:rindler}
 \end{equation}
+O parâmetro desapareceu: \eqref{eq:rindler} é a linha de mundo em forma
+implícita, uma curva que já não precisa de $\tau$ para ser desenhada.
 A trajetória é uma \emph{hipérbole} --- e não uma parábola, como seria em
 Newton. Mais que isso: é uma das hipérboles invariantes da
 Seção~\ref{sec:diagramas}, agora com significado físico em vez de papel
 auxiliar de calibração.
+
+A Figura~\ref{fig:hiperbole} mostra o que \eqref{eq:rindler} está dizendo, e
+vale percorrê-la devagar, porque cada elemento do desenho corresponde a uma
+linha da conta. O número $1/a_0$ é a \emph{distância mínima ao vértice do cone
+de luz} --- quanto maior a aceleração, mais perto do vértice a curva passa. Ali,
+em $\tau=0$, a linha de mundo sobe \emph{reta}: é a partícula em repouso, com
+$U^\mu=(1,0)$ apontando só no tempo. Dali em diante ela se inclina, e a
+inclinação é a velocidade: a tangente vai se deitando na direção da reta da luz
+sem jamais alcançá-la, que é a versão geométrica de $v=\tanh(a_0\tau)$ saturar
+em $1$. E os pontos marcados sobre a curva estão igualmente espaçados em tempo
+\emph{próprio}: o modo como eles se espalham à medida que sobem é a dilatação
+temporal aparecendo sozinha no desenho, sem que se precise falar dela --- cada
+segundo de bordo custa cada vez mais tempo coordenado.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.56\textwidth]{cap02_hiperbole.pdf}
+\caption{A linha de mundo \eqref{eq:rindler} de um observador com aceleração
+própria constante. O vértice, à distância $1/a_0$ da origem, é o instante de
+repouso: ali $U^\mu=(1,0)$ e a linha de mundo sobe reta. As setas são a
+quadrivelocidade em três instantes --- ela se deita progressivamente em direção
+ao cone de luz, sem nunca alcançá-lo, que é $v=\tanh(a_0\tau)$ saturando em $1$.
+Os pontos são passos iguais de tempo próprio: espalham-se em $t$ porque cada
+segundo de bordo custa cada vez mais tempo coordenado.}
+\label{fig:hiperbole}
+\end{figure}
 
 Convém fixar agora duas leituras da mesma curva, porque trocar uma pela outra
 é o erro mais comum daqui em diante. A equação \eqref{eq:rindler} põe a
