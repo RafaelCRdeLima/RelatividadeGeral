@@ -435,6 +435,8 @@
   const lidoAng = document.getElementById("orto-ang");
   const lidoProd = document.getElementById("orto-prod");
   const lidoTipo = document.getElementById("orto-tipo");
+  const lidoNA = document.getElementById("orto-na");
+  const lidoNB = document.getElementById("orto-nb");
 
   function arco(de, ate, r) {
     const p = [];
@@ -446,12 +448,20 @@
   }
 
   function desenhar() {
-    const phi = Number(controle.value) / 100;
-    // A é temporal: (x, ct) = (senh, cosh). B é o reflexo: (cosh, senh).
-    const Ax = Math.sinh(phi), Ay = Math.cosh(phi);
-    const Bx = Math.cosh(phi), By = Math.sinh(phi);
-    const esc = 1.72 / Math.cosh(phi);   // mantém as setas dentro do quadro
-    const ax = Ax * esc, ay = Ay * esc, bx = Bx * esc, by = By * esc;
+    // O controle é o PRÓPRIO ângulo, e não a rapidez. Parametrizar pela
+    // rapidez, como antes, empilhava todo o fim do curso num canto: theta
+    // = arctan(coth phi) - 45° é assintótico, de modo que os últimos 30%
+    // do slider mudavam o ângulo em um grau e o par nunca colapsava. Quem
+    // arrastava via o controle "travar". Pelo ângulo o curso é linear no
+    // que se vê, e theta = 0 é alcançável -- que é o caso nulo prometido.
+    //
+    // É a mesma família de pares: A a 45°+theta, B a 45°-theta, um o
+    // reflexo do outro no espelho. E o produto continua saindo da conta,
+    // não da construção: é ele que tem de dar zero.
+    const theta = ((450 - Number(controle.value)) / 10) * Math.PI / 180;
+    const R = 1.72;                       // raio comum, mantém tudo no quadro
+    const ax = R * Math.cos(Math.PI / 4 + theta), ay = R * Math.sin(Math.PI / 4 + theta);
+    const bx = R * Math.cos(Math.PI / 4 - theta), by = R * Math.sin(Math.PI / 4 - theta);
 
     vA.setAttribute("x1", fx(0)); vA.setAttribute("y1", fy(0));
     vA.setAttribute("x2", fx(ax)); vA.setAttribute("y2", fy(ay));
@@ -464,18 +474,24 @@
     arcoA.setAttribute("d", arco(q, aA, 1.1));
     arcoB.setAttribute("d", arco(aB, q, 1.1));
 
-    const grau = (aA - q) * 180 / Math.PI;
-    const prod = -ay * by + ax * bx;      // produto de Minkowski
+    const grau = theta * 180 / Math.PI;
+    const prod = -ay * by + ax * bx;      // produto de Minkowski: tem de dar 0
+    const nA = -ay * ay + ax * ax;        // A é temporal:  < 0
+    const nB = -by * by + bx * bx;        // B é espacial:  > 0
+    const zero = (u) => (Math.abs(u) < 1e-9 ? "0" : u.toFixed(3).replace(".", ","));
+    const sinal = (u) => (u > 1e-9 ? "+" : "") + zero(u);
     if (lidoAng) lidoAng.textContent = grau.toFixed(1).replace(".", ",") + "°";
     if (lidoProd) lidoProd.textContent = Math.abs(prod) < 1e-9 ? "0" : prod.toFixed(6).replace(".", ",");
-    // phi=0 dá A e B sobre os próprios eixos ct e x -- o único caso em que
-    // ortogonal COINCIDE com perpendicular no papel. phi grande fecha o par
-    // sobre o espelho, que é o limite nulo.
+    if (lidoNA) lidoNA.textContent = sinal(nA);
+    if (lidoNB) lidoNB.textContent = sinal(nB);
+    // theta=45° põe A e B sobre os próprios eixos ct e x -- o único caso em
+    // que ortogonal COINCIDE com perpendicular no papel. theta=0 fecha o par
+    // sobre o espelho: as duas normas zeram junto, e sobra um vetor nulo.
     if (lidoTipo) {
       lidoTipo.textContent =
-        phi < 0.05 ? "θ = 45°: aqui, e só aqui, ortogonal coincide com perpendicular no papel"
-        : phi > 1.15 ? "quase colapsados sobre o espelho — o limite nulo"
-        : "um temporal, um espacial";
+        grau > 44.6 ? "θ = 45°: aqui, e só aqui, ortogonal coincide com perpendicular no papel"
+        : grau < 0.15 ? "colapsados sobre o espelho: A = B é nulo, e as duas normas zeraram junto"
+        : "um temporal (norma < 0), um espacial (norma > 0) — e o produto, zero";
     }
   }
   controle.addEventListener("input", desenhar);
