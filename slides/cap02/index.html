@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../vendor/katex/katex.min.css">
-<link rel="stylesheet" href="../slides.css?v=3">
+<link rel="stylesheet" href="../slides.css?v=4">
 </head>
 <body>
 <div id="progresso"></div>
@@ -535,6 +535,48 @@
   </p>
 </section>
 
+<section>
+  <p class="etiqueta">Apêndice interativo · Seção 2.3</p>
+  <h2>Acelerar sempre igual desenha uma <em>hipérbole</em></h2>
+  <div class="duas larga-esq">
+    <svg id="aceleracao" class="grafico" style="height:400px" viewBox="0 0 560 560"
+         role="img" aria-label="Linha de mundo de um observador com aceleração própria constante, construída a partir do repouso"></svg>
+    <div>
+      <div class="controle">
+        <label for="a0-acel">aceleração própria <span class="m">a_0</span></label>
+        <input type="range" id="a0-acel" min="50" max="310" step="2" value="104">
+        <p class="leitura">
+          <span class="m">a_0</span> = <span id="acel-g">1,0</span>&thinsp;g
+          &nbsp;·&nbsp; <span class="m">1/a_0</span> =
+          <span id="acel-vertice">0,97</span>&thinsp;al
+        </p>
+      </div>
+      <div class="controle">
+        <label for="tau-acel">tempo próprio decorrido <span class="m">\tau</span>
+          <button type="button" id="acel-play">▶&nbsp;animar</button></label>
+        <input type="range" id="tau-acel" min="0" max="1000" step="1" value="0">
+        <p class="leitura">
+          <span class="m">\tau</span> = <span id="acel-tau">0,00</span> a bordo
+          &nbsp;·&nbsp; <span class="m">t</span> = <span id="acel-t">0,00</span> na Terra
+        </p>
+        <p class="leitura">
+          <span class="m">v</span> = <span id="acel-v">0,000</span>&thinsp;c
+          &nbsp;·&nbsp; <span class="m">\gamma</span> = <span id="acel-gama">1,00</span>
+        </p>
+      </div>
+      <p class="legenda"><span id="acel-nota">Parada no vértice: a linha de mundo sobe reta.</span></p>
+    </div>
+  </div>
+  <p class="legenda">
+    <strong>O vértice fica a <span class="m">1/a_0</span> da origem</strong> — a distância
+    mínima ao vértice do cone de luz, e acelerar mais forte é passar mais perto dele. Mas a
+    linha de mundo <strong>nunca cruza a luz</strong>: com
+    <span class="m">v=\tanh(a_0\tau)</span>, a tangente só se <em>deita</em> na direção
+    dela. E os pontos deixados para trás são passos <em>iguais</em> de tempo próprio —
+    espalham-se porque cada ano de bordo custa cada vez mais tempo na Terra.
+  </p>
+</section>
+
 </div>
 </main>
 
@@ -543,6 +585,6 @@
 
 <script src="../vendor/katex/katex.min.js"></script>
 <script src="../slides.js?v=3"></script>
-<script src="../interativo.js?v=1"></script>
+<script src="../interativo.js?v=2"></script>
 </body>
 </html>

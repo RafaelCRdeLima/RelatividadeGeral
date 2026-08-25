@@ -481,3 +481,211 @@
   controle.addEventListener("input", desenhar);
   desenhar();
 })();
+
+
+// ====================================================================
+// Aceleração própria constante: a linha de mundo sendo construída
+// ====================================================================
+//
+// Duas coisas que a figura estática não consegue dizer, e esta consegue.
+//
+// A primeira é o começo: no vértice a partícula está PARADA, e a linha de
+// mundo sobe reta -- U aponta só no tempo. A animação parte dali, e o que
+// se vê é a tangente se deitando aos poucos na direção da luz, sem jamais
+// alcançá-la. É v = tanh(a0 tau) saturando em 1, desenhado.
+//
+// A segunda é o papel de a0. O quadro é fixo, então mexer no controle move
+// o vértice: acelerar mais forte é passar mais perto do vértice do cone de
+// luz. O 1/a0 deixa de ser um número na fórmula e vira uma distância.
+//
+// Os pontos deixados para trás marcam passos IGUAIS de tempo próprio. Eles
+// se espalham conforme sobem, e essa é a dilatação temporal aparecendo sem
+// que se precise falar dela.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("aceleracao");
+  const cA0 = document.getElementById("a0-acel");
+  const cTau = document.getElementById("tau-acel");
+  if (!svg || !cA0 || !cTau) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+  const br = (v, n) => v.toFixed(n).replace(".", ",");
+
+  const L = 560, XMIN = -0.35, XMAX = 3.15;
+  const k = L / (XMAX - XMIN);
+  const fx = (x) => (x - XMIN) * k, fy = (y) => L - (y - XMIN) * k;
+  // até onde a linha de mundo é desenhada: um pouco dentro da moldura, para
+  // que a seta da quadrivelocidade caiba no quadro no último instante.
+  const XFIM = 2.78;
+  const G = 1.0323;                      // 1g em ano^-1, com c = 1
+
+  const COR = {
+    eixo: "rgba(238,247,246,0.40)",
+    luz: "#8dd7dc",
+    trilho: "rgba(127,178,255,0.22)",
+    mundo: "#7fb2ff",
+    seta: "#f2836b",
+    ouro: "#e6b75c",
+    texto: "rgba(238,247,246,0.62)",
+  };
+
+  // ---------------- moldura, desenhada uma vez ----------------------
+  const defs = cria("defs", {});
+  const m = cria("marker", { id: "ponta-acel", viewBox: "0 0 10 10", refX: 8, refY: 5,
+                             markerWidth: 5, markerHeight: 5, orient: "auto-start-reverse" });
+  m.appendChild(cria("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: COR.seta }));
+  defs.appendChild(m);
+  const clip = cria("clipPath", { id: "quadro-acel" });
+  clip.appendChild(cria("rect", { x: 0, y: 0, width: L, height: L }));
+  defs.appendChild(clip);
+  svg.appendChild(defs);
+
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  fundo.appendChild(cria("line", { x1: fx(XMIN), y1: fy(0), x2: fx(XMAX), y2: fy(0),
+                                   stroke: COR.eixo, "stroke-width": 1.2 }));
+  fundo.appendChild(cria("line", { x1: fx(0), y1: fy(XMIN), x2: fx(0), y2: fy(XMAX),
+                                   stroke: COR.eixo, "stroke-width": 1.2 }));
+  fundo.appendChild(cria("line", { x1: fx(0), y1: fy(0), x2: fx(XMAX), y2: fy(XMAX),
+                                   stroke: COR.luz, "stroke-width": 2.2,
+                                   "stroke-dasharray": "7 5", opacity: 0.9 }));
+  const rot = (x, y, txt, cor, extra) => {
+    const t = cria("text", Object.assign({ x: x, y: y, fill: cor, "font-size": 17 }, extra || {}));
+    t.textContent = txt;
+    fundo.appendChild(t);
+    return t;
+  };
+  rot(fx(2.62), fy(2.72), "linha de luz", COR.luz, { "text-anchor": "end", opacity: 0.9 });
+  rot(fx(XMAX) - 4, fy(0) + 26, "x (anos-luz)", COR.eixo, { "text-anchor": "end" });
+  rot(fx(0) - 12, fy(XMAX) + 18, "ct (anos)", COR.eixo, { "text-anchor": "end" });
+
+  // ---------------- o que muda ---------------------------------------
+  const movel = cria("g", { "clip-path": "url(#quadro-acel)" });
+  svg.appendChild(movel);
+
+  const trilho = cria("path", { fill: "none", stroke: COR.trilho, "stroke-width": 2.4 });
+  const mundo = cria("path", { fill: "none", stroke: COR.mundo, "stroke-width": 3.4,
+                               "stroke-linecap": "round" });
+  const medida = cria("line", { stroke: COR.ouro, "stroke-width": 2, opacity: 0.85 });
+  const vertice = cria("circle", { r: 5, fill: COR.ouro });
+  const marcas = cria("g", {});
+  const agora = cria("circle", { r: 6.5, fill: COR.mundo, stroke: "#04121e", "stroke-width": 2 });
+  const seta = cria("line", { stroke: COR.seta, "stroke-width": 3.2,
+                              "marker-end": "url(#ponta-acel)" });
+  const rotU = cria("text", { fill: COR.seta, "font-size": 20, "font-style": "italic" });
+  rotU.textContent = "U";
+  const rotVert = cria("text", { fill: COR.ouro, "font-size": 17, "text-anchor": "middle" });
+  movel.append(trilho, medida, mundo, marcas, vertice, seta, agora, rotU, rotVert);
+
+  const lidoG = document.getElementById("acel-g");
+  const lidoVert = document.getElementById("acel-vertice");
+  const lidoTau = document.getElementById("acel-tau");
+  const lidoT = document.getElementById("acel-t");
+  const lidoV = document.getElementById("acel-v");
+  const lidoGama = document.getElementById("acel-gama");
+  const nota = document.getElementById("acel-nota");
+
+  const arco = (a0, de, ate) => {
+    const p = [];
+    for (let i = 0; i <= 90; i++) {
+      const f = de + (ate - de) * (i / 90);
+      p.push((i ? "L" : "M") + fx(Math.cosh(f) / a0) + " " + fy(Math.sinh(f) / a0));
+    }
+    return p.join(" ");
+  };
+
+  function desenhar() {
+    const a0 = Number(cA0.value) / 100;          // em ano^-1 (c = 1)
+    const fim = Math.acosh(XFIM * a0);            // rapidez em que sai do quadro
+    const s = Number(cTau.value) / 1000;
+    const phi = s * fim;
+
+    const tau = phi / a0, t = Math.sinh(phi) / a0, x = Math.cosh(phi) / a0;
+    const v = Math.tanh(phi), gama = Math.cosh(phi);
+
+    trilho.setAttribute("d", arco(a0, 0, fim));
+    mundo.setAttribute("d", arco(a0, 0, Math.max(phi, 1e-6)));
+
+    medida.setAttribute("x1", fx(0)); medida.setAttribute("y1", fy(0));
+    medida.setAttribute("x2", fx(1 / a0)); medida.setAttribute("y2", fy(0));
+    vertice.setAttribute("cx", fx(1 / a0)); vertice.setAttribute("cy", fy(0));
+    const curto = 1 / a0 < 0.8;
+    rotVert.setAttribute("x", fx(curto ? 1 / a0 : 0.5 / a0) + (curto ? 10 : 0));
+    rotVert.setAttribute("y", fy(0) + 26);
+    rotVert.setAttribute("text-anchor", curto ? "start" : "middle");
+    rotVert.textContent = "1/a₀";
+
+    // passos iguais de tempo próprio já percorridos
+    while (marcas.firstChild) marcas.removeChild(marcas.firstChild);
+    const passo = fim / 7;
+    for (let f = passo; f <= phi + 1e-9; f += passo) {
+      marcas.appendChild(cria("circle", {
+        cx: fx(Math.cosh(f) / a0), cy: fy(Math.sinh(f) / a0), r: 4.2,
+        fill: "#d7e7ff", stroke: "#04121e", "stroke-width": 1.4,
+      }));
+    }
+
+    agora.setAttribute("cx", fx(x)); agora.setAttribute("cy", fy(t));
+    // U = (cosh, sinh) em (t, x): no vértice aponta só no tempo, e vai se deitando
+    const dx = Math.sinh(phi), dt = Math.cosh(phi), n = Math.hypot(dx, dt);
+    const px = fx(x) + 62 * (dx / n), py = fy(t) - 62 * (dt / n);
+    seta.setAttribute("x1", fx(x)); seta.setAttribute("y1", fy(t));
+    seta.setAttribute("x2", px); seta.setAttribute("y2", py);
+    // perto da borda direita o rótulo sairia do quadro: passa para o outro lado
+    const rotDir = px < 470;
+    rotU.setAttribute("x", px + (rotDir ? 9 : -11));
+    rotU.setAttribute("y", py + 6);
+    rotU.setAttribute("text-anchor", rotDir ? "start" : "end");
+
+    if (lidoG) lidoG.textContent = br(a0 / G, 1);
+    if (lidoVert) lidoVert.textContent = br(1 / a0, 2);
+    if (lidoTau) lidoTau.textContent = br(tau, 2);
+    if (lidoT) lidoT.textContent = br(t, 2);
+    if (lidoV) lidoV.textContent = br(v, 3);
+    if (lidoGama) lidoGama.textContent = br(gama, 2);
+    if (nota) {
+      nota.textContent =
+        s < 0.02 ? "Parada no vértice: U aponta só no tempo, e a linha de mundo sobe reta."
+        : s > 0.93 ? "A tangente quase acompanha a luz — e a curva continua sem cruzá-la."
+        : "A tangente vai se deitando: a inclinação da linha de mundo é a velocidade.";
+    }
+  }
+
+  // ---------------- a animação ---------------------------------------
+  const botao = document.getElementById("acel-play");
+  const DURACAO = 7000;                     // ms para varrer o trecho inteiro
+  let pedido = null, t0 = 0, base = 0;
+
+  function parar() {
+    if (pedido) cancelAnimationFrame(pedido);
+    pedido = null;
+    if (botao) botao.textContent = "▶ animar";
+  }
+  function quadro(agoraMs) {
+    const s = base + (agoraMs - t0) / DURACAO;
+    cTau.value = String(Math.min(1000, Math.round(s * 1000)));
+    desenhar();
+    if (s >= 1) { parar(); return; }
+    pedido = requestAnimationFrame(quadro);
+  }
+  if (botao) {
+    botao.addEventListener("click", () => {
+      if (pedido) { parar(); return; }
+      // no fim da trilha, o play recomeça do vértice
+      if (Number(cTau.value) >= 1000) cTau.value = "0";
+      base = Number(cTau.value) / 1000;
+      t0 = performance.now();
+      botao.textContent = "⏸ pausar";
+      pedido = requestAnimationFrame(quadro);
+    });
+  }
+  cTau.addEventListener("input", () => { parar(); desenhar(); });
+  cA0.addEventListener("input", desenhar);   // mexer em a0 não interrompe a animação
+  desenhar();
+})();
