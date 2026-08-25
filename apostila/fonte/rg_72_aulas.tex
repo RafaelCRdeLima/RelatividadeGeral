@@ -2728,6 +2728,24 @@ invariante do sistema. Em uma colisão de duas partículas, a quantidade
 experimentos de altas energias, essa é a quantidade que determina quais
 partículas podem ser produzidas.
 
+\textbf{O critério de limiar.} Essa última frase pode ser afiada até virar uma
+regra de cálculo. Fabricar um conjunto de partículas de massas
+$m_1,\dots,m_n$ custa, no mínimo, a energia de fabricá-las --- e esse mínimo é
+atingido exatamente quando \emph{nenhuma} delas sai com sobra de energia
+cinética, isto é, quando todas ficam paradas no centro de momento. Nessa
+configuração o quadrimomento total é $P^\mu=\bigl(\sum_a m_a,\,\bm 0\bigr)$, e
+portanto
+\begin{equation}
+  s_{\rm limiar}=\Bigl(\,\sum_a m_a\Bigr)^{2}.
+  \label{eq:limiar}
+\end{equation}
+Daí em diante a conta é sempre a mesma, e é curta: calcule $s$ no referencial
+em que você conhece as energias --- o laboratório, quase sempre --- e iguale a
+\eqref{eq:limiar}. O que sobra é uma equação para a incógnita que interessa.
+Note que \eqref{eq:limiar} não sabe nada sobre \emph{quem} colidiu com quem:
+ela é uma afirmação sobre o estado final, e vale igual para dois prótons, para
+um fóton contra um elétron, ou para qualquer outro par.
+
 \begin{activity}
 Compare duas maneiras de obter uma grande energia de centro de massa: colidir
 duas partículas de mesma energia em sentidos opostos ou lançar uma partícula
@@ -2788,8 +2806,8 @@ que não há relógio físico comóvel com um fóton.
 
   \item \label{item-energia-limiar} \textbf{Energia de limiar.} Uma partícula
   de massa $m$ atinge uma partícula idêntica em repouso e produz uma
-  partícula de massa $M$ além dos produtos originais. Use o invariante $s$
-  para encontrar a energia mínima no laboratório.
+  partícula de massa $M$ além dos produtos originais. Use o critério
+  \eqref{eq:limiar} para encontrar a energia mínima no laboratório.
 
   \item \textbf{Decaimento em dois corpos.} Uma partícula de massa $M$ decai em
   partículas de massas $m_1$ e $m_2$. No referencial de repouso inicial, derive
@@ -2957,7 +2975,10 @@ corresponde a uma energia cinética de limiar de
 $E_{\rm thr}-m_p\approx279{,}7\,{\rm MeV}$ --- o valor conhecido
 experimentalmente para essa reação, que é o processo inelástico dominante
 quando prótons de alta energia colidem com prótons em repouso (por exemplo,
-raios cósmicos atingindo o meio interestelar).
+raios cósmicos atingindo o meio interestelar). O script não usa a fórmula
+fechada: ele monta $s$ no laboratório, iguala a \eqref{eq:limiar} e resolve,
+conferindo o resultado contra a fórmula no fim. É essa função,
+\texttt{energia\_de\_limiar}, que o \emph{Conteúdo extra} manda generalizar.
 
 O segundo script ataca os dois problemas dos Exemplos resolvidos por um
 caminho diferente do algébrico: para o espalhamento Compton, resolve a
@@ -2976,7 +2997,8 @@ $\tau_{\rm nave}\approx3{,}54$ anos e $t_{\rm Terra}\approx5{,}87$ anos.
 O script deriva simbolicamente, em sequência: a normalização da
 quadrivelocidade para uma 3-velocidade genérica; a fórmula do
 item~\ref{item-sistema-fotons} para a massa invariante de dois fótons; por
-eliminação direta (resolvendo $s=(2m+M)^2$ para $E$), a fórmula fechada
+eliminação direta (o critério \eqref{eq:limiar} com o estado final $2m+M$,
+resolvido para $E$), a fórmula fechada
 \[
   E_{\rm thr}=m+2M+\frac{M^2}{2m}
 \]
@@ -3011,6 +3033,7 @@ massa invariante do par continua sendo $m_\pi$.
 \end{exercise}
 
 \begin{exercise}
+\label{ex:compton-inverso}
 \medio{2.6}
 Um fóton de energia $E$ colide frontalmente com um elétron de energia $E_e$
 que se move em sentido oposto (espalhamento Compton inverso, o mecanismo que
@@ -3047,12 +3070,51 @@ $v=0{,}9$? Comente a viabilidade.
 Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
 
 \begin{enumerate}
-  \item \textbf{Um limiar para qualquer reação.} Generalize a função de energia de
-limiar de \arq{cap02\_quadrivetores.py} para aceitar uma lista arbitrária
-de massas finais. Use-a para tabelar o limiar de laboratório de
-$p+p\to p+p+\pi^0$, de $p+p\to p+p+p+\bar p$ e de
-$\gamma+p\to p+\pi^0$ com um fóton da radiação cósmica de fundo. Verifique
-que o último cai perto de $10^{20}$~eV e comente o corte GZK.
+  \item \textbf{Um limiar para qualquer reação.} A função
+\texttt{energia\_de\_limiar} de \arq{cap02\_quadrivetores.py} resolve o
+critério \eqref{eq:limiar} para um projétil que atinge um alvo \emph{em
+repouso}. Generalize-a em duas frentes --- e a segunda é a que dá trabalho.
+
+  \emph{(a) Um estado final qualquer.} Faça a função aceitar uma lista de
+massas finais em vez da massa final total, e tabele o limiar de laboratório de
+$p+p\to p+p+\pi^0$ (que deve reproduzir o número impresso acima, como
+conferência) e de $p+p\to p+p+p+\bar p$. Este segundo é o processo que produziu
+os primeiros antiprótons, em 1955, e o número que você obtiver explica por que
+a máquina que os produziu precisou ser projetada para $6$~GeV.
+
+  \emph{(b) Um estado inicial em que nada está parado.} A reação
+$p+\gamma\to p+\pi^0$ também acontece longe de qualquer laboratório: um próton
+de raio cósmico atinge um fóton da radiação cósmica de fundo. Aqui a função de
+(a) não serve, e não é por causa do estado final --- é porque \emph{nenhuma}
+das duas partículas está em repouso, e o fóton nem sequer poderia estar. Escreva
+uma segunda função para uma colisão frontal, que é a cinemática do
+Exercício~\ref{ex:compton-inverso}. Com $p^\mu=(E,|\bm p|,0,0)$ para o próton e
+$q^\mu=(\varepsilon,-\varepsilon,0,0)$ para o fóton que vem de frente,
+\[
+  s=m_p^2+2\varepsilon\bigl(E+|\bm p|\bigr),
+\]
+e igualar isso a \eqref{eq:limiar} deixa uma equação para $E$. Tome o fóton com
+energia $\varepsilon=6{,}3\times10^{-4}$~eV --- a energia média de um fóton de
+corpo negro à temperatura $T_0=2{,}725$~K da radiação de fundo --- e resolva
+para a energia do \emph{próton}. Verifique que ela cai perto de $10^{20}$~eV, e
+refaça com $\varepsilon=kT_0$ para medir o quanto a resposta depende dessa
+escolha.
+
+  \emph{Um aviso numérico, que vale a pena colher.} Não monte esse $s$ somando
+quadrivetores em ponto flutuante, como fizemos no resto do capítulo. Aqui
+$\varepsilon/E\sim10^{-30}$, a soma $E+\varepsilon$ devolve $E$ exatamente, e
+$s$ sai \emph{zero} --- qualquer busca de raiz falha em seguida, sem explicar
+por quê. É um caso limpo de cancelamento catastrófico, e a lição é geral:
+quando duas escalas do problema diferem por trinta ordens de grandeza, a
+álgebra tem de ser feita à mão \emph{antes} de o computador entrar. A expressão
+acima já é o resultado dessa simplificação.
+
+  Esse limiar tem nome: é o \emph{corte GZK}. Acima dele um próton que viaje
+pelo espaço perde energia produzindo píons contra a própria radiação de fundo,
+e não consegue percorrer mais que algumas dezenas de megaparsecs sem cair
+abaixo do corte. O universo deveria, portanto, ser praticamente opaco a raios
+cósmicos acima de $\sim10^{20}$~eV. Comente o que isso impõe sobre a origem dos
+poucos eventos já detectados acima desse valor.
 
   \item \textbf{Aceleração própria contra aceleração coordenada.} Em
 \arq{cap02\_compton\_foguete.py}, acrescente uma segunda estratégia para a
@@ -3069,6 +3131,13 @@ movimento retilíneo. Quanto ela vale ao atingir $v=0{,}9$? Uma das duas
 viagens é impossível para gente de verdade --- diga qual, e por quê. Essa é
 a razão de a aceleração \emph{própria} constante ser o cenário padrão da
 literatura, e não a coordenada.
+
+  Repare, de passagem, que a estratégia coordenada nem poderia continuar muito
+além do ponto em que a interrompemos: com $\dd^2x/\dd t^2=g$ fixo, $v=gt$
+ultrapassaria $1$ em $t=1/g\approx0{,}97$ ano. A fase de aceleração termina
+antes disso, e por isso o absurdo não chega a aparecer --- mas está a poucas
+semanas de distância, e é exatamente a objeção que a aceleração própria
+constante resolve de saída, com $v=\tanh(a_0\tau)$ saturando sozinha.
 
   \item \textbf{A desigualdade da massa invariante.} Acrescente a
 \arq{cap02\_quadrivetores.py} uma rotina que sorteia $N$ partículas com

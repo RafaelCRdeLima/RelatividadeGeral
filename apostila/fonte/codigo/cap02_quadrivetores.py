@@ -55,10 +55,25 @@ print(f"  |p| (formula) = {p_mag_formula:.6f}")
 print(f"  conservacao de quadrimomento: {np.allclose(p1 + p2, P_inicial)}")
 print(f"  casca de massa de p1: -p1.p1 = {-produto4(p1, p1):.6f} (esperado m^2={m**2:.6f})")
 
-# 4) Energia de limiar para producao de um piion neutro em p + p(repouso) -> p + p + pi0
+# 4) Energia de limiar para producao de um pion neutro em p + p(repouso) -> p + p + pi0.
+#    A conta sai do criterio de limiar, nao da formula fechada: no limiar todos
+#    os produtos ficam parados no centro de momento, logo s = (soma das massas
+#    finais)^2.  Com o alvo em repouso, s = m_proj^2 + m_alvo^2 + 2 m_alvo E.
+def energia_de_limiar(m_proj, m_alvo, massa_final_total):
+    """Energia MINIMA do projetil, no referencial em que o alvo esta parado.
+
+    m_proj, m_alvo       massas do projetil e do alvo
+    massa_final_total    soma das massas das particulas produzidas
+    """
+    return (massa_final_total**2 - m_proj**2 - m_alvo**2) / (2 * m_alvo)
+
+
 print("\nEnergia de limiar (p + p_repouso -> p + p + pi0):")
 m_p = 938.272     # MeV
 m_pi = 134.9768   # MeV
-E_thr = m_p + 2 * m_pi + m_pi**2 / (2 * m_p)
+E_thr = energia_de_limiar(m_p, m_p, 2 * m_p + m_pi)
+E_thr_formula = m_p + 2 * m_pi + m_pi**2 / (2 * m_p)   # fechada, do script .wl
 print(f"  E_thr = {E_thr:.3f} MeV   (energia cinetica de limiar = {E_thr - m_p:.3f} MeV)")
+print(f"  formula fechada m + 2M + M^2/2m: {E_thr_formula:.3f} MeV   "
+      f"(diferenca = {abs(E_thr - E_thr_formula):.2e})")
 print("  valor de referencia conhecido experimentalmente: ~279-280 MeV")
