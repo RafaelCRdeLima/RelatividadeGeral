@@ -42,10 +42,10 @@ def fig_casca_de_massa():
     ax.set_xlim(0, 3)
     ax.set_ylim(0, 3)
     ax.set_aspect("equal")
-    ax.set_xlabel(r"$|\mathbf{p}|$")
+    ax.set_xlabel(r"$|\boldsymbol{p}|$")
     ax.set_ylabel(r"$E$")
     ax.legend(fontsize=10, frameon=False, loc="upper left")
-    ax.set_title(r"Casca de massa $E^2=|\mathbf{p}|^2+m^2$", fontsize=12)
+    ax.set_title(r"Casca de massa $E^2=|\boldsymbol{p}|^2+m^2$", fontsize=12)
 
     fig.tight_layout()
     fig.savefig(OUTDIR / "cap02_casca_massa.pdf", bbox_inches="tight")
@@ -199,9 +199,9 @@ def fig_ortogonalidade():
     ax1.fill_between([-L, 0, L], [L, 0, L], [L, L, L], color="#4C72B0", alpha=0.07, zorder=0)
 
     for (vx, vy), cor, nome, sinal in [
-        ((0.55, 1.75), "#4C72B0", "temporal", r"$\mathbf{A}\cdot\mathbf{A}<0$"),
-        ((1.55, 1.55), "#2E7D32", "nulo",     r"$\mathbf{A}\cdot\mathbf{A}=0$"),
-        ((1.95, 0.75), "#B0413E", "espacial", r"$\mathbf{A}\cdot\mathbf{A}>0$"),
+        ((0.55, 1.75), "#4C72B0", "temporal", r"$\vec{A}\cdot\vec{A}<0$"),
+        ((1.55, 1.55), "#2E7D32", "nulo",     r"$\vec{A}\cdot\vec{A}=0$"),
+        ((1.95, 0.75), "#B0413E", "espacial", r"$\vec{A}\cdot\vec{A}>0$"),
     ]:
         ax1.annotate("", xy=(vx, vy), xytext=(0, 0),
                      arrowprops=dict(arrowstyle="-|>", color=cor, lw=2.0))
@@ -223,7 +223,7 @@ def fig_ortogonalidade():
     A = np.array([np.sinh(phi), np.cosh(phi)])      # (x, ct) temporal
     B = np.array([np.cosh(phi), np.sinh(phi)])      # o reflexo: espacial
     esc = 1.60
-    for vec, cor, rot in [(A, "#4C72B0", r"$\mathbf{A}$"), (B, "#B0413E", r"$\mathbf{B}$")]:
+    for vec, cor, rot in [(A, "#4C72B0", r"$\vec{A}$"), (B, "#B0413E", r"$\vec{B}$")]:
         ax2.annotate("", xy=tuple(esc * vec), xytext=(0, 0),
                      arrowprops=dict(arrowstyle="-|>", color=cor, lw=2.2))
         ax2.annotate(rot, xy=tuple(esc * vec), xytext=(8, 4),
@@ -234,7 +234,7 @@ def fig_ortogonalidade():
     N = np.array([1.0, 1.0]) / np.sqrt(2)
     ax2.annotate("", xy=tuple(1.15 * N), xytext=(0, 0),
                  arrowprops=dict(arrowstyle="-|>", color="#2E7D32", lw=2.2))
-    ax2.annotate(r"$\mathbf{N}$", xy=tuple(1.15 * N), xytext=(10, -12),
+    ax2.annotate(r"$\vec{N}$", xy=tuple(1.15 * N), xytext=(10, -12),
                  textcoords="offset points", fontsize=13, color="#2E7D32",
                  path_effects=HALO)
 
@@ -249,10 +249,10 @@ def fig_ortogonalidade():
 
     ax2.text(-2.15, 1.66,
              "reflita na linha de luz\ne um vetor vira o outro:\n"
-             r"$\mathbf{A}\cdot\mathbf{B}=0$",
+             r"$\vec{A}\cdot\vec{B}=0$",
              fontsize=9.2, color="0.30", ha="left", va="top", path_effects=HALO)
     ax2.text(-2.15, 0.62,
-             r"$\mathbf{N}$ está sobre o espelho," "\n"
+             r"$\vec{N}$ está sobre o espelho," "\n"
              "logo é o próprio reflexo\ne é ortogonal a si mesmo",
              fontsize=9.2, color="#2E7D32", ha="left", va="top", path_effects=HALO)
 

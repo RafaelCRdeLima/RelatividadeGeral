@@ -250,6 +250,46 @@ scripts, não valores transcritos. Se você alterar um programa e rodá-lo de
 novo, os números da apostila devem mudar de acordo --- e é exatamente isso
 que o \emph{Conteúdo extra} de cada capítulo pede que você faça.
 
+\section*{Convenções e notação}
+\phantomsection
+\addcontentsline{toc}{section}{Convenções e notação}
+\label{sec:convencoes}
+
+Para não repetir estas escolhas a cada capítulo, elas ficam declaradas aqui de
+uma vez.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.35em]
+  \item \textbf{Unidades.} Trabalhamos com $c=1$, de modo que tempo e
+  distância têm a mesma unidade e velocidades são números puros com $|v|<1$.
+  As constantes são restauradas apenas quando o resultado numérico as exige.
+
+  \item \textbf{Assinatura.} A métrica é $(-,+,+,+)$: vetores temporais têm
+  norma \emph{negativa}. A convenção oposta aparece em parte da literatura e
+  troca o sinal de várias fórmulas, nunca a física.
+
+  \item \textbf{Índices.} Letras gregas ($\mu,\nu,\alpha,\dots$) correm de $0$
+  a $3$ e incluem o tempo; letras latinas ($i,j,k,\dots$) correm de $1$ a $3$ e
+  são só espaciais. Índice repetido, uma vez em cima e uma vez embaixo, está
+  somado (convenção de Einstein).
+
+  \item \textbf{Vetores.} Quando o índice é suprimido, um \emph{quadrivetor}
+  leva seta --- $\vec A$, $\vec U$, $\vec p$ --- e um \emph{trivetor} vai em
+  negrito --- $\bm v$, $\bm p$, $\bm E$. Assim $\vec p\cdot\vec p=-m^2$ é o
+  produto de Minkowski do quadrimomento, enquanto $\bm p^2$ é o quadrado
+  euclidiano do trimomento; sem essa distinção, $p^2$ é ambíguo. Vetores de
+  espaços euclidianos auxiliares (a base $\{\bm e_1,\bm e_2\}$ de um plano,
+  por exemplo) também vão em negrito.
+
+  \item \textbf{Produto escalar.} $\vec A\cdot\vec B\equiv\eta_{\mu\nu}A^\mu
+  B^\nu=A_\mu B^\mu$ em espaço-tempo plano, e $g_{\mu\nu}A^\mu B^\nu$ em
+  espaço curvo. O ponto entre trivetores é sempre o produto euclidiano usual.
+
+  \item \textbf{Energia medida por um observador.} A energia de uma partícula
+  de quadrimomento $\vec p$, medida por um observador de quadrivelocidade
+  $\vec U$, é $E=-\vec p\cdot\vec U=-p_\mu U^\mu$. É a forma covariante de
+  ``componente temporal do quadrimomento'', e vale igual em espaço curvo.
+\end{itemize}
+
 \tableofcontents
 
 \mainmatter
@@ -369,8 +409,8 @@ Aula & Foco & Seções & Conteúdo \\
 6 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
 7 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
 8 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
-9 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Exemplos resolvidos adicionais; Problemas orientados. \\
-10 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios. \\
+9 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Problemas orientados; Exemplos resolvidos adicionais. \\
+10 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios; Conteúdo extra. \\
 11 & Por que existem um-formas & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; tensores de tipo $(r,s)$. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
 12 & A métrica como ponte & 3.3 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
 13 & Equações tensoriais e bases oblíquas & 3.4, 3.5, 3.6 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Componentes em uma base oblíqua. \\
@@ -2202,8 +2242,7 @@ compacta como
   \label{eq:lorentz-matriz}
 \end{equation}
 onde $\Lambda^\mu{}_\nu$ é a matriz de coeficientes de \eqref{eq:lorentz} e
-está subentendida a \emph{convenção de soma}: um índice repetido, uma vez em
-cima e uma vez embaixo, indica soma de $0$ a $3$. \emph{Um quadrivetor é
+vale a convenção de soma de \eqref{eq:lorentz-indices}. \emph{Um quadrivetor é
 qualquer conjunto de quatro números que se transforme exatamente assim.} Essa
 é a definição inteira, e ela tem consequência prática imediata: quatro números
 juntos num parêntese não formam um vetor até que se verifique como eles mudam
@@ -2218,10 +2257,12 @@ quadrivelocidade um vetor na próxima seção.
 
 \begin{atencao}
 Dividir por $\dd t$ \emph{não} produziria um vetor: $\dd t$ é a componente
-temporal de $\dd x^\mu$, e muda de referencial para referencial. A velocidade
-ordinária $\bm v=\dd\bm x/\dd t$ não é, portanto, parte de nenhum
-quadrivetor --- é por isso que ela obedece à lei de composição desajeitada
-\eqref{eq:composicao}, em vez de se transformar linearmente. O que salva a
+temporal de $\dd x^\mu$, e muda de referencial para referencial. O conjunto
+$\dd x^\mu/\dd t=(1,\bm v)$ não é, portanto, um quadrivetor --- é por isso que
+a velocidade ordinária $\bm v$ obedece à lei de composição desajeitada
+\eqref{eq:composicao}, em vez de se transformar linearmente. (Isso não quer
+dizer que $\bm v$ esteja banida do formalismo: ela reaparece, corrigida por um
+fator $\gamma$, como parte espacial da quadrivelocidade e do quadrimomento.) O que salva a
 construção é existir um escalar natural ao longo da linha de mundo: o tempo
 próprio.
 \end{atencao}
@@ -2234,7 +2275,7 @@ escalar. Ele já existe, disfarçado: o intervalo
 $\dd s^2=-\dd t^2+\dd x^2+\dd y^2+\dd z^2$ é o produto de $\dd x^\mu$ consigo
 mesmo. Generalizando para dois vetores quaisquer $A^\mu$ e $B^\mu$,
 \begin{equation}
-  \bm A\cdot\bm B\;\equiv\;-A^0B^0+A^1B^1+A^2B^2+A^3B^3
+  \vec A\cdot\vec B\;\equiv\;-A^0B^0+A^1B^1+A^2B^2+A^3B^3
   \;=\;\eta_{\mu\nu}A^\mu B^\nu ,
   \label{eq:produto-escalar}
 \end{equation}
@@ -2246,24 +2287,32 @@ que é apenas a tabela de sinais de \eqref{eq:produto-escalar} escrita como
 matriz. A convenção de soma faz o resto.
 
 \begin{resultado}
-O produto escalar é invariante: $\bm A\cdot\bm B$ tem o mesmo valor em todos
+O produto escalar é invariante: $\vec A\cdot\vec B$ tem o mesmo valor em todos
 os referenciais inerciais.
 \end{resultado}
 
 Metade da demonstração já está pronta e nem precisa ser refeita. Aplicada a
-$\bm A=\bm B=\dd\bm x$, a definição \eqref{eq:produto-escalar} devolve
-$\dd s^2$, cuja invariância foi estabelecida no capítulo anterior. Ou seja: a
-\emph{norma} $\bm A\cdot\bm A$ --- um vetor consigo mesmo --- é a mesma em
-todos os referenciais.
+$\vec A=\vec B=\dd\vec x$, a definição \eqref{eq:produto-escalar} devolve
+$\dd s^2$, cuja invariância foi estabelecida no capítulo anterior.
+
+Falta um passo que é curto mas não é vazio: passar de $\dd\vec x$ para um vetor
+\emph{qualquer}. Dizer que $\dd s^2$ é invariante para \emph{todo} deslocamento
+$\dd x^\mu$ é dizer algo sobre a matriz $\Lambda$, e só sobre ela ---
+precisamente que $\eta_{\alpha\beta}\Lambda^\alpha{}_\mu\Lambda^\beta{}_\nu
+=\eta_{\mu\nu}$. Mas essa é a única propriedade de $\Lambda$ que a conta usa, e
+todo quadrivetor se transforma com essa \emph{mesma} matriz --- é o que a
+Seção~\ref{sec:vetores-espacotempo} tomou como definição. Logo a \emph{norma}
+$\vec A\cdot\vec A$ --- um vetor consigo mesmo --- é a mesma em todos os
+referenciais, seja $\vec A$ um deslocamento ou não.
 
 Falta o produto de dois vetores \emph{diferentes}, e o resto do argumento é
 curto. Se a norma de qualquer vetor é invariante, então a norma de
-$\bm A+\bm B$ também é --- afinal $\bm A+\bm B$ é um vetor como outro
+$\vec A+\vec B$ também é --- afinal $\vec A+\vec B$ é um vetor como outro
 qualquer. Mas essa norma, expandida pela definição \eqref{eq:produto-escalar},
 vale
 \begin{equation}
-  (\bm A+\bm B)\cdot(\bm A+\bm B)
-   =\bm A\cdot\bm A+\bm B\cdot\bm B+2\,\bm A\cdot\bm B .
+  (\vec A+\vec B)\cdot(\vec A+\vec B)
+   =\vec A\cdot\vec A+\vec B\cdot\vec B+2\,\vec A\cdot\vec B .
   \label{eq:soma-normas}
 \end{equation}
 
@@ -2271,8 +2320,8 @@ Agora repare no que já sabemos sobre cada pedaço de \eqref{eq:soma-normas}. O
 lado esquerdo é invariante, por ser uma norma. Os dois primeiros termos da
 direita são invariantes, pelo mesmo motivo. Numa igualdade em que todas as
 parcelas menos uma já são as mesmas em qualquer referencial, a que sobra não
-tem escolha: $2\,\bm A\cdot\bm B$ é invariante, e portanto
-$\bm A\cdot\bm B$ também.
+tem escolha: $2\,\vec A\cdot\vec B$ é invariante, e portanto
+$\vec A\cdot\vec B$ também.
 
 \begin{roteiro}[title={\sffamily\bfseries\footnotesize\color{rgGrafite}A MANOBRA, EM UMA FRASE}]
 Não foi preciso calcular nada: bastou somar dois vetores e olhar para a norma
@@ -2292,7 +2341,7 @@ tempo todo cansa, e é usual definir
 \begin{equation}
   A_\mu\;\equiv\;\eta_{\mu\nu}A^\nu ,
   \qquad\text{de modo que}\qquad
-  \bm A\cdot\bm B=A_\mu B^\mu .
+  \vec A\cdot\vec B=A_\mu B^\mu .
   \label{eq:abaixar-indice}
 \end{equation}
 Em componentes, isso apenas troca o sinal da componente temporal:
@@ -2305,24 +2354,28 @@ capítulo depende dessa leitura mais profunda.
 \textbf{Classificação.} O sinal da norma classifica vetores exatamente como
 classificava separações entre eventos:
 \[
-  \bm A\cdot\bm A<0\ \text{(temporal)},\qquad
-  \bm A\cdot\bm A=0\ \text{(nulo)},\qquad
-  \bm A\cdot\bm A>0\ \text{(espacial)}.
+  \vec A\cdot\vec A<0\ \text{(temporal)},\qquad
+  \vec A\cdot\vec A=0\ \text{(nulo)},\qquad
+  \vec A\cdot\vec A>0\ \text{(espacial)}.
 \]
 Como o produto escalar é invariante, essa classificação não depende do
 observador: o que é temporal para um é temporal para todos, e o mesmo vale para
 espacial e para nulo.
 
-Dois vetores são ditos \emph{ortogonais} quando $\bm A\cdot\bm B=0$. Convém
+Dois vetores são ditos \emph{ortogonais} quando $\vec A\cdot\vec B=0$. Convém
 tomar cuidado com a palavra, porque aqui ela não quer dizer ``perpendicular no
 papel''. Um vetor nulo, por exemplo, é ortogonal a si mesmo --- algo impossível
 no espaço euclidiano, onde o único vetor ortogonal a si próprio é o vetor zero.
 
 A Figura~\ref{fig:ortogonalidade} dá a leitura geométrica que torna isso menos
-estranho. Dois vetores são ortogonais em Minkowski quando um é o \emph{reflexo}
-do outro na linha de luz --- equivalentemente, quando fazem ângulos iguais com
-ela, em lados opostos. Um vetor nulo está \emph{sobre} essa linha, e portanto é
-o seu próprio reflexo: daí ser ortogonal a si mesmo, sem nenhuma mágica.
+estranho. Dentro de um plano $t$--$x$, dois vetores são ortogonais em Minkowski
+quando um é o \emph{reflexo} do outro na linha de luz --- equivalentemente,
+quando fazem ângulos iguais com ela, em lados opostos. Um vetor nulo está
+\emph{sobre} essa linha, e portanto é o seu próprio reflexo: daí ser ortogonal
+a si mesmo, sem nenhuma mágica. (A restrição ao plano importa: em quatro
+dimensões há pares ortogonais que nada têm de reflexos um do outro, como
+$(0,1,0,0)$ e $(0,0,1,0)$, cujo produto escalar é zero pelo motivo euclidiano
+de sempre.)
 
 \begin{figure}[htb]
 \centering
@@ -2330,8 +2383,8 @@ o seu próprio reflexo: daí ser ortogonal a si mesmo, sem nenhuma mágica.
 \caption{À esquerda, a classificação: o cone de luz separa vetores temporais,
 nulos e espaciais, e é o mesmo para todo observador --- por isso a
 classificação é invariante. À direita, a ortogonalidade lida como reflexão:
-$\bm A$ e $\bm B$ fazem ângulos iguais com a linha de luz e satisfazem
-$\bm A\cdot\bm B=0$, enquanto o vetor nulo $\bm N$, deitado sobre ela, é o
+$\vec A$ e $\vec B$ fazem ângulos iguais com a linha de luz e satisfazem
+$\vec A\cdot\vec B=0$, enquanto o vetor nulo $\vec N$, deitado sobre ela, é o
 próprio reflexo.}
 \label{fig:ortogonalidade}
 \end{figure}
@@ -2343,9 +2396,9 @@ fecham-se sobre a linha de luz pelo mesmo ângulo, em sentidos opostos. Aquela
 observador são ortogonais entre si.
 
 \begin{activity}
-Sejam $\bm A=(2,1,0,0)$ e $\bm B=(1,1,0,0)$ em componentes de algum
-referencial. Classifique cada um, calcule $\bm A\cdot\bm B$ e verifique que
-$\bm B$ é ortogonal a si mesmo. Em seguida aplique um boost de $v=0{,}5$ às
+Sejam $\vec A=(2,1,0,0)$ e $\vec B=(1,1,0,0)$ em componentes de algum
+referencial. Classifique cada um, calcule $\vec A\cdot\vec B$ e verifique que
+$\vec B$ é ortogonal a si mesmo. Em seguida aplique um boost de $v=0{,}5$ às
 componentes dos dois e confirme, com números, que os três produtos escalares
 não mudaram.
 \end{activity}
@@ -2506,15 +2559,45 @@ Newton. Mais que isso: é uma das hipérboles invariantes da
 Seção~\ref{sec:diagramas}, agora com significado físico em vez de papel
 auxiliar de calibração.
 
+Convém fixar agora duas leituras da mesma curva, porque trocar uma pela outra
+é o erro mais comum daqui em diante. A equação \eqref{eq:rindler} põe a
+hipérbole na posição em que ela é mais simples --- centrada na origem, com o
+foguete partindo de $x(0)=1/a_0$. Já a \emph{distância percorrida}, que é o que
+se mede numa viagem, conta-se a partir do ponto de partida:
+\begin{equation}
+  \Delta x(\tau)\equiv x(\tau)-x(0)
+  =\frac{1}{a_0}\bigl[\cosh(a_0\tau)-1\bigr],
+  \label{eq:rindler-deslocado}
+\end{equation}
+que parte de zero e cresce. As duas descrevem o mesmo movimento e diferem só
+por onde se põe a origem espacial: \eqref{eq:rindler} é a forma geométrica, boa
+para falar de assíntotas e horizonte, e \eqref{eq:rindler-deslocado} é a forma
+de quem faz contas de viagem, que é a usada nos Problemas orientados, na
+Figura~\ref{fig:foguete} e nos programas.
+
 \begin{atencao}
 A hipérbole \eqref{eq:rindler} tem as retas $x=\pm t$ como assíntotas, e delas
-sai uma consequência que não tem análogo newtoniano. Um sinal de luz emitido
-da origem em $t=0$ alcança o foguete; um emitido de $x=0$ num instante
-$t\ge1/a_0$ \emph{nunca} o alcança, por mais que persiga. Existe portanto uma
-região do espaço-tempo da qual nenhuma notícia chega a quem acelera para
+sai uma consequência que não tem análogo newtoniano. Dispare um sinal de luz de
+trás do foguete --- do ponto $x_0$, no instante $t_0$, rumo a $+x$. Sua linha de
+mundo é
+\[
+  x=t+(x_0-t_0),
+\]
+uma reta \emph{paralela} à assíntota $x=t$, afastada dela exatamente por
+$x_0-t_0$. Se $x_0-t_0>0$ ela corre acima da assíntota e acaba cruzando a
+hipérbole; se $x_0-t_0\le0$, nunca cruza, por mais que persiga --- luz correndo
+paralela à assíntota jamais a atravessa.
+
+O critério é, portanto, desconfortavelmente simples: \emph{o sinal alcança o
+foguete se e somente se $x_0>t_0$}. Disparado de $x=0$, ele só chega se partir
+\emph{antes} de $t=0$; disparado exatamente da origem, em $t_0=0$, viaja sobre
+a própria assíntota e fica eternamente atrás. Esse é o caso crítico, e ele
+mostra onde está a fronteira: tudo o que está à esquerda da reta nula $x=t$ é
+uma região do espaço-tempo da qual nenhuma notícia chega a quem acelera para
 sempre --- um \emph{horizonte}, produzido só por aceleração, sem gravidade
 nenhuma. É o horizonte de Rindler, e é o modelo mais simples do que
-acontecerá na superfície de um buraco negro.
+acontecerá na superfície de um buraco negro. O \emph{Conteúdo extra} do
+Capítulo~\ref{chap:relatividade-especial} refaz essa conta em números.
 \end{atencao}
 
 \section{Quadrimomento}
@@ -2532,6 +2615,26 @@ A relação de dispersão é
   E^2=\bm p^2+m^2.
 \]
 Para fótons, $m=0$ e $E=|\bm p|$.
+
+\textbf{O que $E=\gamma m$ esconde quando $v$ é pequeno.} Vale abrir a
+expressão em potências de $v$ antes de seguir, porque é aí que aparece a
+afirmação mais famosa da relatividade:
+\begin{equation}
+  E=\frac{m}{\sqrt{1-v^2}}
+   =m+\tfrac12 mv^2+\tfrac38 mv^4+\dots
+  \label{eq:limite-newtoniano}
+\end{equation}
+O segundo termo é a energia cinética de Newton --- que não foi postulada em
+lugar nenhum, saiu sozinha de $E=\gamma m$. Quem chama a atenção é o primeiro:
+uma partícula \emph{parada} tem energia $E=m$. Essa \emph{energia de repouso} é
+invisível para a mecânica newtoniana, que só mede diferenças de energia, e é o
+que se lê, com as constantes restauradas, como $E=mc^2$. Daí a energia cinética
+relativística ser definida por
+\[
+  T\equiv E-m=(\gamma-1)m,
+\]
+e não por algum remendo da fórmula newtoniana: é o que sobra da energia quando
+se desconta o que a partícula tem por simplesmente existir.
 
 \section{Conservação}
 
@@ -2562,6 +2665,24 @@ momento se misturam sob transformações de Lorentz. Assim como tempo e espaço
 são partes de um mesmo objeto geométrico, energia e momento também são partes
 de um mesmo objeto. Uma colisão que parece envolver apenas energia em um
 referencial pode envolver energia e momento de modo inseparável em outro.
+
+\textbf{Componente temporal segundo quem?} A frase pressupõe um referencial, e
+é fácil dar a ela uma forma que não pressupõe nenhum. Se o observador tem
+quadrivelocidade $\vec U$, a energia que \emph{ele} mede para uma partícula de
+quadrimomento $\vec p$ é
+\begin{equation}
+  E=-\vec p\cdot\vec U=-p_\mu U^\mu .
+  \label{eq:energia-observador}
+\end{equation}
+A conferência é imediata no referencial de repouso do observador, onde
+$U^\mu=(1,0,0,0)$ e o lado direito devolve $-p_0=p^0=E$. Mas o lado esquerdo é
+um produto escalar, e portanto \emph{já está} escrito de um jeito que vale em
+qualquer referencial: \eqref{eq:energia-observador} é a versão covariante de
+``$E$ é a componente temporal de $p^\mu$'', e é ela, e não $E=\gamma m$, que
+resolve as perguntas do tipo ``que frequência este observador mede?''. É a
+ferramenta do item~\ref{item-doppler} e do Exemplo do Doppler transversal, e
+sobreviverá intacta ao espaço curvo: no Capítulo~\ref{cap:fisica-curva} ela é
+a \emph{definição} de energia medida localmente.
 
 A massa de repouso aparece como norma do quadrimomento:
 \[
@@ -2640,7 +2761,7 @@ uma partícula massiva é temporal; o de um fóton é nulo.
 \caption{Casca de massa $E^2=|\bm p|^2+m^2$ no plano $(|\bm p|,E)$. Para
 $m>0$ a curva é um ramo de hipérbole que nunca toca a reta $E=|\bm p|$: por
 maior que seja o momento, $E>|\bm p|$ sempre. Para $m=0$ a casca degenera na
-própria reta $E=|\bm p|$ -- não há ``folga'' entre energia e momento para o
+própria reta $E=|\bm p|$ --- não há ``folga'' entre energia e momento para o
 fóton.}
 \label{fig:casca-massa}
 \end{figure}
@@ -2655,9 +2776,9 @@ que não há relógio físico comóvel com um fóton.
 
 \begin{enumerate}
   \item \label{item-aceleracao-propria} \textbf{O foguete de 1\,g.} Use o
-  resultado \eqref{eq:rindler} para a viagem que a ficção científica gosta:
-  um foguete que mantém $a_0=g$ (gravidade artificial confortável) rumo a uma
-  estrela a $D=4{,}4$ anos-luz. (a) Mostre que, acelerando na primeira metade
+  resultado \eqref{eq:rindler-deslocado} para a viagem que a ficção científica
+  gosta: um foguete que mantém $a_0=g$ (gravidade artificial confortável) rumo
+  a Proxima Centauri, a $D=4{,}25$ anos-luz. (a) Mostre que, acelerando na primeira metade
   e freando na segunda, o tempo próprio total é
   $\tau=(2/g)\operatorname{arcosh}\!\big(1+gD/2\big)$, em unidades com
   $c=1$. (b) Calcule $\tau$ e o tempo decorrido na Terra, sabendo que
@@ -2698,7 +2819,7 @@ que não há relógio físico comóvel com um fóton.
 \textbf{Espalhamento Compton.} Um fóton de energia $E$ colide com um elétron
 em repouso (massa $m_e$) e é espalhado por um ângulo $\theta$, saindo com
 energia $E'$. O elétron recua com quadrimomento $p_e'$, que não medimos
-diretamente -- a estratégia é eliminá-lo usando $p_e'^\mu p_{e\,\mu}'=-m_e^2$.
+diretamente --- a estratégia é eliminá-lo usando $p_e'^\mu p_{e\,\mu}'=-m_e^2$.
 
 Conservação de quadrimomento dá $p_\gamma+p_e=p_\gamma'+p_e'$, ou seja
 $p_e'=p_\gamma+p_e-p_\gamma'$. Elevando ao quadrado (produto de Minkowski
@@ -2731,7 +2852,7 @@ equivalente à forma mais conhecida
   \lambda'-\lambda=\frac{h}{m_ec}(1-\cos\theta).
 \]
 Note a estrutura do método: nunca foi preciso calcular o quadrimomento do
-elétron espalhado -- ele foi eliminado usando apenas sua casca de massa. Essa
+elétron espalhado --- ele foi eliminado usando apenas sua casca de massa. Essa
 é a técnica padrão para resolver processos de espalhamento e decaimento em
 relatividade especial.
 \end{example}
@@ -2757,8 +2878,8 @@ fóton \emph{perpendicularmente} à velocidade da fonte, o quadrimomento do
 fóton em $S$ é $p^\mu=(\nu,0,\nu,0)$, onde $\nu$ é a frequência medida pelo
 observador.
 
-A frequência própria $\nu_0$ -- a que a fonte mediria em seu próprio
-referencial de repouso -- é a energia do fóton medida por um observador com
+A frequência própria $\nu_0$ --- a que a fonte mediria em seu próprio
+referencial de repouso --- é a energia do fóton medida por um observador com
 quadrivelocidade $U_{\rm fonte}^\mu$, ou seja $\nu_0=-p_\mu U_{\rm fonte}^\mu$:
 \[
   \nu_0=-\left[-\nu\cdot\gamma\cdot1+0\cdot\gamma v+\nu\cdot0+0\right]=\gamma\nu
@@ -2767,31 +2888,33 @@ quadrivelocidade $U_{\rm fonte}^\mu$, ou seja $\nu_0=-p_\mu U_{\rm fonte}^\mu$:
 \]
 O observador mede uma frequência \emph{menor} que a própria, mesmo sem
 nenhuma componente de velocidade ao longo da linha de visada. Esse
-redshift transversal é dilatação temporal pura -- não existe efeito Doppler
+redshift transversal é dilatação temporal pura --- não existe efeito Doppler
 clássico correspondente, e sua medição (por exemplo em experimentos com
 rotores, ou no efeito Ives--Stilwell) é um teste direto de $\dd\tau=\dd t/\gamma$.
 \end{example}
 
 \begin{example}
-\textbf{Foguete relativístico com aceleração própria constante.} O
-item~\ref{item-aceleracao-propria} mostra que, sob aceleração própria
-constante $a_0$, a trajetória em $1+1$ dimensões é
+\textbf{Foguete relativístico com aceleração própria constante.} Este é o
+item~\ref{item-aceleracao-propria} resolvido. Pela
+Seção~\ref{sec:aceleracao-propria}, sob aceleração própria constante $a_0$ a
+trajetória em $1+1$ dimensões é
 \[
   t(\tau)=\frac{1}{a_0}\sinh(a_0\tau),\qquad
-  x(\tau)=\frac{1}{a_0}\bigl[\cosh(a_0\tau)-1\bigr].
+  \Delta x(\tau)=\frac{1}{a_0}\bigl[\cosh(a_0\tau)-1\bigr],
 \]
-Considere uma nave que acelera a $a_0=1\,g$ durante metade da viagem e
-desacelera pelo mesmo tanto na segunda metade, chegando em repouso no
-destino. Para $a_0=1g\approx1{,}03$ ano-luz/ano$^2$ e uma distância
-$D=4{,}25$ anos-luz (Proxima Centauri), resolvendo $x(\tau_{1/2})=D/2$ para o
-tempo próprio de meia viagem $\tau_{1/2}$ e depois dobrando por simetria,
-obtém-se
+com $\Delta x$ contado a partir do ponto de partida, como em
+\eqref{eq:rindler-deslocado}. Considere uma nave que acelera a $a_0=1\,g$
+durante metade da viagem e desacelera pelo mesmo tanto na segunda metade,
+chegando em repouso no destino. Para $a_0=1g\approx1{,}03$ ano-luz/ano$^2$ e
+uma distância $D=4{,}25$ anos-luz (Proxima Centauri), resolvendo
+$\Delta x(\tau_{1/2})=D/2$ para o tempo próprio de meia viagem $\tau_{1/2}$ e
+depois dobrando por simetria, obtém-se
 \[
   \tau_{\rm nave}\approx3{,}54\text{ anos},\qquad
   t_{\rm Terra}\approx5{,}87\text{ anos}.
 \]
 A tripulação envelhece 3,54 anos; quem ficou na Terra espera 5,87 anos. A
-diferença não vem de nenhum efeito exótico -- é a mesma geometria do
+diferença não vem de nenhum efeito exótico --- é a mesma geometria do
 paradoxo dos gêmeos (Figura~\ref{fig:gemeos} do
 Capítulo~\ref{chap:relatividade-especial}), agora com aceleração própria
 constante e explícita em vez de um salto instantâneo de velocidade.
@@ -2831,7 +2954,7 @@ A energia de limiar calculada,
 $E_{\rm thr}\approx1217{,}9\,{\rm MeV}$ para $p+p_{\rm repouso}\to p+p+\pi^0$
 (com $m_p=938{,}272\,{\rm MeV}$ e $m_{\pi^0}=134{,}9768\,{\rm MeV}$),
 corresponde a uma energia cinética de limiar de
-$E_{\rm thr}-m_p\approx279{,}7\,{\rm MeV}$ -- o valor conhecido
+$E_{\rm thr}-m_p\approx279{,}7\,{\rm MeV}$ --- o valor conhecido
 experimentalmente para essa reação, que é o processo inelástico dominante
 quando prótons de alta energia colidem com prótons em repouso (por exemplo,
 raios cósmicos atingindo o meio interestelar).
@@ -2862,7 +2985,7 @@ quadrimomento do elétron usada no Exemplo de espalhamento Compton, resolvida
 agora simbolicamente para reproduzir
 $1/E'-1/E=(1-\cos\theta)/m_e$. A avaliação numérica de $E_{\rm thr}$ com as
 massas do próton e do píon neutro reproduz o mesmo número obtido em Python
--- uma checagem cruzada entre os dois ambientes.
+--- uma checagem cruzada entre os dois ambientes.
 
 \clearpage
 \section{Exercícios}
@@ -3113,9 +3236,9 @@ significado: \emph{$A_\mu$ é a um-forma que a métrica associa ao vetor
 $A^\mu$}. Concretamente, é a um-forma que, aplicada a um vetor $W$ qualquer,
 devolve o produto escalar:
 \[
-  A_\mu W^\mu=\bm A\cdot\bm W .
+  A_\mu W^\mu=\vec A\cdot\vec W .
 \]
-Dado $\bm A$, esse requisito determina $A_\mu$ sem ambiguidade --- e o
+Dado $\vec A$, esse requisito determina $A_\mu$ sem ambiguidade --- e o
 resultado é a fórmula que já usávamos.
 
 \textbf{O caminho de volta.} Se a métrica traduz vetores em um-formas, a
@@ -3495,7 +3618,7 @@ não nulo, e que não existe para uma onda plana.
   \item \textbf{Uma base genuinamente oblíqua em Minkowski.} Comece por uma
 armadilha: adapte a figura de \arq{cap03\_figuras.py} para os eixos $t'$ e
 $x'$ de um boost com $v=0{,}5$ e calcule a métrica \emph{nessa} base,
-$g_{\mu'\nu'}=\bm e_{\mu'}\cdot\bm e_{\nu'}$. Você vai obter exatamente
+$g_{\mu'\nu'}=\vec e_{\mu'}\cdot\vec e_{\nu'}$. Você vai obter exatamente
 $\eta_{\mu\nu}$ --- os eixos de $S'$ parecem oblíquos no papel, mas são
 \emph{ortonormais} em Minkowski. A inclinação é artefato de desenhar uma
 geometria de Minkowski numa folha euclidiana, e não obliquidade de verdade:
