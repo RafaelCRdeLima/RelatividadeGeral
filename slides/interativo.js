@@ -923,3 +923,196 @@
   c2.addEventListener("input", desenhar);
   desenhar();
 })();
+
+// ====================================================================
+// Por que a base anda ao contrário das componentes -- em Euclides
+// ====================================================================
+//
+// A lei e_beta = Lambda^alpha'_beta e_alpha' desconcerta porque parece
+// arbitrária: por que a base iria para o outro lado? A resposta não tem
+// nada de relativística, e é por isso que este laboratório abandona
+// Minkowski e desenha um plano cartesiano comum.
+//
+// Os controles mudam o TAMANHO de e_x e e_y, e com eles a malha inteira
+// -- que é a régua com que se mede. O vetor A é desenhado em coordenadas
+// absolutas e não se mexe. Então dobrar e_x é trocar a régua por uma duas
+// vezes maior, e o número de réguas que cabem em A cai pela metade.
+//
+// A coluna que não muda é a prova: A^x |e_x| é a projeção de A, e ela é
+// um fato sobre o vetor, não sobre quem o mede. Componente e base são
+// inversas uma da outra porque o produto das duas tem de sobreviver.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("base-euclidiana");
+  const cx = document.getElementById("ex-tam");
+  const cy = document.getElementById("ey-tam");
+  if (!svg || !cx || !cy) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+
+  // Coordenadas absolutas: o plano existe antes de qualquer base, e é
+  // isso que o gráfico precisa mostrar. A malha é que é escolha nossa.
+  const XMIN = -0.75, XMAX = 4.3, YMIN = -0.75, YMAX = 3.3;
+  const LARG = 560;
+  const k = LARG / (XMAX - XMIN);
+  const ALT = (YMAX - YMIN) * k;
+  const fx = (x) => (x - XMIN) * k;
+  const fy = (y) => ALT - (y - YMIN) * k;
+
+  const COR = {
+    eixo: "rgba(238,247,246,0.45)",
+    ex: "#e6b75c",                  // e_x e a malha que ele gera
+    ey: "#a9aef0",                  // e_y idem
+    vetor: "#7ee0a0",
+    texto: "rgba(238,247,246,0.55)",
+  };
+
+  const AX = 3, AY = 2;             // o vetor, em coordenadas absolutas
+
+  const defs = cria("defs", {});
+  for (const cor of [COR.ex, COR.ey, COR.vetor]) {
+    const m = cria("marker", { id: "euc-ponta-" + cor.slice(1), viewBox: "0 0 10 10",
+                               refX: 8, refY: 5, markerWidth: 5, markerHeight: 5,
+                               orient: "auto-start-reverse" });
+    m.appendChild(cria("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: cor }));
+    defs.appendChild(m);
+  }
+  svg.appendChild(defs);
+
+  // A malha vem primeiro, para ficar por trás de tudo o que importa.
+  const malhaX = cria("path", { fill: "none", stroke: COR.ex, "stroke-width": 1,
+                                opacity: 0.34 });
+  const malhaY = cria("path", { fill: "none", stroke: COR.ey, "stroke-width": 1,
+                                opacity: 0.34 });
+  const numeros = cria("g", {});
+  svg.append(malhaX, malhaY, numeros);
+
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  fundo.appendChild(cria("line", { x1: fx(XMIN), y1: fy(0), x2: fx(XMAX), y2: fy(0),
+                                   stroke: COR.eixo, "stroke-width": 1.4 }));
+  fundo.appendChild(cria("line", { x1: fx(0), y1: fy(YMIN), x2: fx(0), y2: fy(YMAX),
+                                   stroke: COR.eixo, "stroke-width": 1.4 }));
+
+  const movel = cria("g", {});
+  svg.appendChild(movel);
+
+  // as duas quedas de A sobre os eixos: absolutas, e por isso PARADAS
+  const guiaX = cria("line", { stroke: COR.vetor, "stroke-width": 1.3,
+                               "stroke-dasharray": "5 4", opacity: 0.6 });
+  const guiaY = cria("line", { stroke: COR.vetor, "stroke-width": 1.3,
+                               "stroke-dasharray": "5 4", opacity: 0.6 });
+  const setaEx = cria("line", { stroke: COR.ex, "stroke-width": 5,
+                                "marker-end": "url(#euc-ponta-" + COR.ex.slice(1) + ")" });
+  const setaEy = cria("line", { stroke: COR.ey, "stroke-width": 5,
+                                "marker-end": "url(#euc-ponta-" + COR.ey.slice(1) + ")" });
+  const vetor = cria("line", { stroke: COR.vetor, "stroke-width": 4,
+                               "marker-end": "url(#euc-ponta-" + COR.vetor.slice(1) + ")" });
+  const texto = (cor, tam, ancora) => {
+    const t = cria("text", { fill: cor, "font-size": tam, "font-style": "italic" });
+    if (ancora) t.setAttribute("text-anchor", ancora);
+    return t;
+  };
+  const rotEx = texto(COR.ex, 20), rotEy = texto(COR.ey, 20, "end");
+  const rotA = texto(COR.vetor, 24);
+  rotA.textContent = "A";
+  for (const [rot, letra, cor] of [[rotEx, "x", COR.ex], [rotEy, "y", COR.ey]]) {
+    rot.textContent = "e";
+    const sub = cria("tspan", { dy: 6, "font-size": 14, fill: cor });
+    sub.textContent = letra;
+    rot.appendChild(sub);
+  }
+  movel.append(guiaX, guiaY, setaEx, setaEy, vetor, rotEx, rotEy, rotA);
+
+  const num = (u, casas) => u.toFixed(casas).replace(".", ",");
+  const escreva = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+
+  function desenhar() {
+    const h = Number(cx.value) / 100;      // |e_x|, em unidades absolutas
+    const j = Number(cy.value) / 100;      // |e_y|
+
+    // A malha: uma linha por múltiplo da base. É ela que muda de passo
+    // quando a base muda de tamanho, e é olhando para ela que se vê o
+    // vetor ficar com "menos quadrados" sem ter mudado de lugar.
+    const linhas = (passo, vertical) => {
+      const d = [];
+      const de = Math.ceil((vertical ? XMIN : YMIN) / passo);
+      const ate = Math.floor((vertical ? XMAX : YMAX) / passo);
+      for (let n = de; n <= ate; n++) {
+        const u = n * passo;
+        d.push(vertical
+          ? "M" + fx(u) + " " + fy(YMIN) + "L" + fx(u) + " " + fy(YMAX)
+          : "M" + fx(XMIN) + " " + fy(u) + "L" + fx(XMAX) + " " + fy(u));
+      }
+      return d.join(" ");
+    };
+    malhaX.setAttribute("d", linhas(h, true));
+    malhaY.setAttribute("d", linhas(j, false));
+
+    // Os números da régua. Sem eles a malha é decorativa; com eles dá
+    // para contar quantos e_x cabem até A -- que é a componente.
+    while (numeros.firstChild) numeros.removeChild(numeros.firstChild);
+    const rotular = (passo, vertical) => {
+      const ate = Math.floor((vertical ? XMAX : YMAX) / passo);
+      const salto = ate > 8 ? 2 : 1;       // malha fina: numera de dois em dois
+      for (let n = salto; n <= ate; n += salto) {
+        const u = n * passo;
+        const t = cria("text", {
+          x: vertical ? fx(u) : fx(0) - 9,
+          y: vertical ? fy(0) + 19 : fy(u) + 5,
+          fill: COR.texto, "font-size": 13,
+          "text-anchor": vertical ? "middle" : "end",
+        });
+        t.textContent = String(n);
+        numeros.appendChild(t);
+      }
+    };
+    rotular(h, true);
+    rotular(j, false);
+
+    setaEx.setAttribute("x1", fx(0)); setaEx.setAttribute("y1", fy(0));
+    setaEx.setAttribute("x2", fx(h)); setaEx.setAttribute("y2", fy(0));
+    setaEy.setAttribute("x1", fx(0)); setaEy.setAttribute("y1", fy(0));
+    setaEy.setAttribute("x2", fx(0)); setaEy.setAttribute("y2", fy(j));
+    rotEx.setAttribute("x", fx(h) + 6); rotEx.setAttribute("y", fy(0) - 10);
+    rotEy.setAttribute("x", fx(0) - 12); rotEy.setAttribute("y", fy(j) - 6);
+
+    vetor.setAttribute("x1", fx(0)); vetor.setAttribute("y1", fy(0));
+    vetor.setAttribute("x2", fx(AX)); vetor.setAttribute("y2", fy(AY));
+    rotA.setAttribute("x", fx(AX) + 12); rotA.setAttribute("y", fy(AY) - 4);
+    guiaX.setAttribute("x1", fx(AX)); guiaX.setAttribute("y1", fy(AY));
+    guiaX.setAttribute("x2", fx(AX)); guiaX.setAttribute("y2", fy(0));
+    guiaY.setAttribute("x1", fx(AX)); guiaY.setAttribute("y1", fy(AY));
+    guiaY.setAttribute("x2", fx(0)); guiaY.setAttribute("y2", fy(AY));
+
+    const ax = AX / h, ay = AY / j;        // as componentes: inversas da base
+    escreva("euc-ex", num(h, 2));
+    escreva("euc-ey", num(j, 2));
+    escreva("euc-ax", num(ax, 2));
+    escreva("euc-ay", num(ay, 2));
+    escreva("euc-px", num(ax * h, 2));
+    escreva("euc-py", num(ay * j, 2));
+    escreva("euc-soma", "A = " + num(ax, 2) + " e" + "ₓ" + " + "
+                        + num(ay, 2) + " e" + "ᵧ");
+
+    // O comentário compara com a base padrão (|e| = 1), que é o caso em
+    // que componente e projeção coincidem e a distinção some de vista.
+    const fator = (u) => (u >= 1 ? "×" + num(u, 2) : "÷" + num(1 / u, 2));
+    escreva("euc-nota", Math.abs(h - 1) < 0.005 && Math.abs(j - 1) < 0.005
+      ? "com |e| = 1 nos dois eixos, componente e projeção coincidem — e é por isso "
+        + "que a distinção passa despercebida na base canônica."
+      : "e" + "ₓ" + " " + fator(h) + " ⇒ A" + "ˣ" + " " + fator(1 / h)
+        + " · e" + "ᵧ" + " " + fator(j) + " ⇒ A" + "ʸ" + " " + fator(1 / j)
+        + " — sempre ao contrário, e sempre pelo mesmo fator.");
+  }
+
+  cx.addEventListener("input", desenhar);
+  cy.addEventListener("input", desenhar);
+  desenhar();
+})();

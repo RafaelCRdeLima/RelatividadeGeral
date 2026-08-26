@@ -800,6 +800,55 @@
   </p>
 </section>
 
+<section>
+  <p class="etiqueta">Apêndice interativo · Interlúdio</p>
+  <h2>Aumente o vetor da base, e a componente <em>encolhe</em></h2>
+  <div class="duas">
+    <svg id="base-euclidiana" class="grafico" style="height:404px" viewBox="0 0 560 449"
+         role="img" aria-label="Plano cartesiano com a malha gerada pelos vetores da base; mudar o tamanho da base muda as componentes de um vetor fixo"></svg>
+    <div>
+      <div class="controle">
+        <label for="ex-tam">tamanho de <span class="m">\vec e_x</span></label>
+        <input type="range" id="ex-tam" min="35" max="160" step="5" value="50">
+      </div>
+      <div class="controle anil">
+        <label for="ey-tam">tamanho de <span class="m">\vec e_y</span></label>
+        <input type="range" id="ey-tam" min="35" max="160" step="5" value="50">
+      </div>
+      <table class="compacta">
+        <tr>
+          <th></th>
+          <th>tamanho</th>
+          <th>componente</th>
+          <th>produto</th>
+        </tr>
+        <tr class="fr1"><td><span class="m">\vec e_x</span></td>
+            <td id="euc-ex">0,50</td><td id="euc-ax">6,00</td>
+            <td id="euc-px">3,00</td></tr>
+        <tr class="fr2"><td><span class="m">\vec e_y</span></td>
+            <td id="euc-ey">0,50</td><td id="euc-ay">4,00</td>
+            <td id="euc-py">2,00</td></tr>
+      </table>
+      <p class="legenda"><span id="euc-nota">eₓ ÷2,00 ⇒ Aˣ ×2,00 · eᵧ ÷2,00 ⇒ Aʸ ×2,00
+        — sempre ao contrário, e sempre pelo mesmo fator.</span></p>
+    </div>
+  </div>
+  <p class="legenda">
+    <strong>A coluna da direita não se mexe</strong> — ela é a projeção de
+    <span class="m">\vec A</span> sobre cada eixo, um fato sobre o vetor e não sobre
+    quem o mede, e é ela que obriga componente e base a serem inversas uma da outra.
+    Nem é preciso relatividade para isso: aqui não há <span class="m">\gamma</span> nem
+    cone de luz, só a escolha da régua. Dobrar <span class="m">\vec e_x</span> é medir
+    com uma régua duas vezes maior, e então cabem <em>metade</em> das réguas no mesmo
+    <span class="m">\vec A</span>. É a mesma razão pela qual
+    <span class="m">\vec e_\beta=\Lambda^{\alpha'}{}_\beta\vec e_{\alpha'}</span> anda
+    para o lado contrário de
+    <span class="m">A^{\alpha'}=\Lambda^{\alpha'}{}_\beta A^\beta</span>: lá são
+    <span class="m">\Lambda</span> e <span class="m">\Lambda^{-1}</span>, aqui são
+    <span class="m">\lambda</span> e <span class="m">1/\lambda</span>.
+  </p>
+</section>
+
 </div>
 </main>
 
@@ -808,6 +857,6 @@
 
 <script src="../vendor/katex/katex.min.js"></script>
 <script src="../slides.js?v=3"></script>
-<script src="../interativo.js?v=4"></script>
+<script src="../interativo.js?v=5"></script>
 </body>
 </html>
