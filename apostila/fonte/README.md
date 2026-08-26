@@ -132,6 +132,7 @@ passadas de compilação. As cores da capa (`rgNoite`, `rgCeu`, `rgBruma`,
 | `rgAmbar`     | `#C1832F` | acento: resultados centrais, ênfase   |
 | `rgTerracota` | `#A6503C` | alerta: caixas "onde se erra"         |
 | `rgGrafite`   | `#5A6B75` | texto secundário, legendas, cabeçalho |
+| `rgAnil`      | `#4E5180` | interlúdios (blocos fora da numeração) |
 
 Só na capa, sobre fundo escuro:
 
@@ -156,7 +157,30 @@ Vindos de `estilo-rg.sty`:
 - `\programa[descrição]{arquivo}` — ponteiro para um programa no site; **é este que se usa hoje**
 - `caixacodigo` + `lstlisting` e `\rgcodigo{título}{linguagem}{arquivo}` — imprimem código no PDF; continuam definidos, mas não são mais usados
 
-Definidos no preâmbulo do `.tex`, na mesma paleta: `resultado`, `roteiro`, `leitura` e os ambientes de teorema `definition`, `example`, `exercise`, `activity`, `proposition`, `remark`.
+Definidos no preâmbulo do `.tex`, na mesma paleta: `resultado`, `roteiro`, `leitura`, `interludio` e os ambientes de teorema `definition`, `example`, `exercise`, `activity`, `proposition`, `remark`.
+
+### `interludio`: material fora da numeração
+
+A numeração das seções da apostila está emparelhada com a do Schutz, de modo
+que a coluna *Seções* do calendário e as marcas de dificuldade dos exercícios
+(`\facil{2.2}`) apontem para o mesmo lugar nos dois textos. Assunto que o
+livro cobre em outra ordem — ou que a apostila quer acrescentar entre duas
+seções — entra em um bloco `interludio`, que tem cor própria (`rgAnil`) e
+**não** recebe número:
+
+```latex
+\phantomsection
+\addcontentsline{toc}{section}{Interlúdio: os vetores da base}
+\label{sec:vetores-base}
+\begin{interludio}{Os vetores da base}
+...
+\end{interludio}
+```
+
+O primeiro (e por ora único) é o dos vetores da base, entre 2.3 e 2.4, que
+cobre a Seção 2.2 do Schutz. Como o bloco é uma `tcolorbox`, figuras dentro
+dele não podem flutuar: use `\includegraphics` dentro de um `center` com
+`\captionof{figure}{...}`.
 
 Capítulos de título longo devem usar título curto para o cabeçalho, como em
 `\chapter[Soluções esféricas e Schwarzschild]{Soluções esféricas, estrelas e Schwarzschild}`.

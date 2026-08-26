@@ -65,6 +65,16 @@
   coltitle=rgGrafite, colbacktitle=white, titlerule=0pt,
   attach title to upper=\par\vspace{2pt}, #1}
 
+% Interlúdio: bloco fora da numeração das seções, em cor própria.
+\newtcolorbox{interludio}[2][]{rgbase, parbox=false,
+  colback=rgAnilClaro, colframe=rgAnilClaro,
+  borderline west={2.4pt}{0pt}{rgAnil},
+  title={\sffamily\bfseries\footnotesize\color{rgAnil}%
+         INTERLÚDIO\hspace{0.7em}\textbullet\hspace{0.7em}%
+         \MakeUppercase{#2}},
+  coltitle=rgAnil, colbacktitle=rgAnilClaro, titlerule=0pt,
+  attach title to upper=\par\vspace{4pt}, #1}
+
 \newtcolorbox{leitura}[1][]{rgbase,
   colback=rgNevoa, colframe=rgNevoa,
   borderline west={2.4pt}{0pt}{rgPetroClaro},
@@ -96,6 +106,12 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\half}{\frac{1}{2}}
 \newcommand{\etaab}{\eta_{\alpha\beta}}
+
+% Notação de Schutz: o vetor, o referencial em que se leem as componentes,
+% e a seta que separa um do outro (\vec A \temcomp{\obs} (A^0,...)).
+\newcommand{\obs}{\mathcal{O}}
+\newcommand{\obsl}{\mathcal{O}'}
+\newcommand{\temcomp}[1]{\;\underset{#1}{\longrightarrow}\;}
 \newcommand{\munu}{\mu\nu}
 
 \begin{document}
@@ -406,7 +422,7 @@ Aula & Foco & Seções & Conteúdo \\
 3 & O que se mede, diagramas e gêmeos & 1.5, 1.6, 1.7 & Relatividade especial: Consequências --- contração de Lorentz, reciprocidade e composição de velocidades, todas deduzidas de \eqref{eq:lorentz}. Apoio opcional: Apêndice~\ref{ap:invariancia}, a demonstração geral da invariância. Diagramas de Minkowski, construção dos eixos de $S'$ e hipérboles invariantes; Paradoxo dos gêmeos. \\
 4 & Sem postular a luz, e oficina & 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15 & Relatividade especial: A velocidade invariante é única (aprofundamento, dispensável em primeira leitura); Problemas orientados; Exemplos resolvidos adicionais. Resolução numérica (Python e Mathematica); Exercícios. \\
 5 & Vetores e produto escalar & 2.1, 2.2 & Vetores e momento relativístico: o critério de transformação que define um quadrivetor; produto escalar e métrica de Minkowski. \\
-6 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; Quadrimomento. \\
+6 & Quadrivelocidade e quadrimomento & 2.3, 2.4 & Vetores e momento relativístico: Quadrivelocidade, incluindo a aceleração própria constante e o horizonte de Rindler; o Interlúdio sobre os vetores da base, com a métrica como tabela de produtos escalares (Schutz~\S2.2); Quadrimomento. \\
 7 & Conservação e energia & 2.5, 2.6 & Vetores e momento relativístico: Conservação do quadrimomento; Energia como componente temporal e massa invariante de sistemas. \\
 8 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
 9 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Problemas orientados; Exemplos resolvidos adicionais. \\
@@ -2404,6 +2420,7 @@ não mudaram.
 \end{activity}
 
 \section{Quadrivelocidade}
+\label{sec:quadrivelocidade}
 
 A linha de mundo de uma partícula é parametrizada por $x^\mu(\tau)$, e o tempo
 próprio é o escalar de que a Seção~\ref{sec:vetores-espacotempo} precisava: ele
@@ -2659,7 +2676,303 @@ acontecerá na superfície de um buraco negro. O \emph{Conteúdo extra} do
 Capítulo~\ref{chap:relatividade-especial} refaz essa conta em números.
 \end{atencao}
 
+\phantomsection
+\addcontentsline{toc}{section}{Interlúdio: os vetores da base}
+\label{sec:vetores-base}
+
+\begin{interludio}{Os vetores da base}
+
+\textbf{Por que este bloco não tem número.} Ele cobre o material da
+Seção~2.2 do Schutz --- \emph{Vector algebra} ---, que a apostila havia
+deixado de lado para chegar mais depressa à quadrivelocidade. Os números de
+seção daqui estão emparelhados com os do livro-texto, e criar uma seção nova
+neste ponto desalinharia todas as que vêm depois; por isso o assunto entra
+como interlúdio, sem número. Nada do que já foi feito depende dele. Tudo o que
+vem depois --- a começar pelo quadrimomento, na próxima seção --- fica mais
+curto com ele, e o Capítulo~\ref{chap:tensores} praticamente exige que ele
+tenha sido feito.
+
+\textbf{A seta que estava faltando.} Até aqui escrevemos coisas como
+$U^\mu=\gamma(1,\bm v)$, e não há erro nisso: o índice à mostra avisa que o
+lado esquerdo já são \emph{componentes}, e componentes podem ser igualadas a
+componentes. O problema aparece quando se quer dizer a mesma coisa a respeito
+do \emph{vetor}, sem índice. Escrever $\vec U=(\gamma,\gamma\bm v)$ seria
+falso: à esquerda está um objeto que não depende de referencial nenhum, à
+direita quatro números que só existem depois de escolhidos os eixos. O Schutz
+separa as duas coisas com um símbolo próprio,
+\[
+  \vec A \temcomp{\obs} (A^0,A^1,A^2,A^3),
+\]
+que se lê ``$\vec A$ \emph{tem componentes} $(A^0,A^1,A^2,A^3)$ no referencial
+$\obs$''. A letra embaixo da seta diz \emph{quem} está medindo. O vetor
+$\vec A$ é o objeto geométrico --- a flecha entre dois eventos, a tangente à
+linha de mundo --- e existe antes de qualquer referencial; a quádrupla é o que
+sobra dele depois que alguém escolhe eixos. Usar $=$ entre os dois esconde
+exatamente a distinção que o capítulo inteiro está tentando construir.
+
+Daqui em diante a seta aparece sempre que a distinção importar. Assim, para o
+mesmo vetor visto de dois referenciais,
+\[
+  \vec A \temcomp{\obs} (A^0,A^1,A^2,A^3),
+  \qquad
+  \vec A \temcomp{\obsl} (A^{0'},A^{1'},A^{2'},A^{3'}),
+\]
+e note que do lado esquerdo \emph{nada mudou}: é o mesmo $\vec A$ nas duas
+linhas.
+
+\textbf{Onde vai a marca do referencial.} O Schutz marca o segundo referencial
+com uma barra sobre o \emph{índice} --- $A^{\bar\alpha}$, $\vec e_{\bar\alpha}$
+---; esta apostila usa uma linha, $A^{\alpha'}$, e as duas convenções são a
+mesma coisa. O que não é indiferente é \emph{onde} a marca vai. Ela pertence
+ao índice, não ao símbolo: escrever $\vec A\,'$ sugeriria um segundo vetor, e é
+precisamente isso que não acontece. Por isso, daqui em diante, a linha migra do
+símbolo para o índice: a transformação de Lorentz \eqref{eq:lorentz-indices},
+que a Seção~\ref{sec:matricial} escreveu como
+$x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}x^{\beta}$, passa a ser
+\[
+  x^{\alpha'}=\Lambda^{\alpha'}{}_{\beta}\,x^{\beta} .
+\]
+É a mesma equação, com a marca no lugar certo --- e é assim que a
+Seção~\ref{sec:quadrivelocidade} já a usou, ao transformar $U^{\nu'}$. Um
+índice com linha e um sem linha nunca podem ser trocados um pelo outro, mesmo
+sendo mudos: $\{A^{\alpha'}\}$ e $\{A^\alpha\}$ são conjuntos diferentes de
+números, assim como $\{\vec e_{\alpha'}\}$ é um conjunto de vetores diferente
+de $\{\vec e_\alpha\}$.
+
+\textbf{Os quatro vetores da base.} Em qualquer referencial $\obs$ existem
+quatro vetores privilegiados, definidos pelas suas componentes \emph{nesse}
+referencial:
+\begin{equation}
+  \begin{aligned}
+    \vec e_0 &\temcomp{\obs} (1,0,0,0),\\
+    \vec e_1 &\temcomp{\obs} (0,1,0,0),\\
+    \vec e_2 &\temcomp{\obs} (0,0,1,0),\\
+    \vec e_3 &\temcomp{\obs} (0,0,0,1).
+  \end{aligned}
+  \label{eq:base-definicao}
+\end{equation}
+São os \emph{vetores da base} de $\obs$. A mesma receita em $\obsl$ produz
+outros quatro, $\vec e_{0'}\temcomp{\obsl}(1,0,0,0)$ e assim por diante --- e
+em geral $\vec e_{0'}\neq\vec e_0$, porque foram definidos em referenciais
+diferentes. A definição \eqref{eq:base-definicao} se resume a uma linha:
+\begin{equation}
+  (\vec e_\alpha)^\beta=\delta_\alpha{}^\beta ,
+  \label{eq:base-delta}
+\end{equation}
+isto é, a componente $\beta$ do vetor $\vec e_\alpha$ é o delta de Kronecker,
+que vale $1$ se $\beta=\alpha$ e $0$ caso contrário.
+
+Com eles, a quádrupla de números vira de novo um vetor: dado um $\vec A$ de
+componentes $(A^0,A^1,A^2,A^3)$ em $\obs$, tem-se
+\begin{equation}
+  \vec A=A^0\vec e_0+A^1\vec e_1+A^2\vec e_2+A^3\vec e_3
+        =A^\alpha\vec e_\alpha .
+  \label{eq:expansao-base}
+\end{equation}
+A segunda forma usa a convenção de soma, e é por isso que o índice de $\vec e$
+se escreve \emph{embaixo}: só assim ele se opõe ao índice de cima de $A^\alpha$
+e a soma fica implícita. Vale reparar no que \eqref{eq:expansao-base} arrumou.
+Um quadrivetor deixou de ser ``uma lista de quatro números que se transforma
+direito'' e passou a ser uma \emph{soma}: a componente $A^\alpha$ é quanto se
+toma do vetor $\vec e_\alpha$, e nada mais. Componente e vetor da base são as
+duas metades de uma mesma frase, e é a segunda metade que estava implícita
+desde a Seção~\ref{sec:vetores-espacotempo}.
+
+\textbf{Como a base muda de referencial.} O raciocínio de
+\eqref{eq:expansao-base} vale em qualquer referencial, então também
+$\vec A=A^{\alpha'}\vec e_{\alpha'}$. As duas somas têm parcelas diferentes,
+mas o total é o mesmo vetor:
+\begin{equation}
+  A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'} .
+  \label{eq:mesma-soma}
+\end{equation}
+Isso basta para descobrir como a base se transforma. Use
+$A^{\alpha'}=\Lambda^{\alpha'}{}_{\beta}A^{\beta}$ no lado direito de
+\eqref{eq:mesma-soma} e junte os fatores de outro modo --- são todos números,
+a ordem não importa:
+\[
+  A^{\alpha'}\vec e_{\alpha'}
+  =\Lambda^{\alpha'}{}_{\beta}A^{\beta}\,\vec e_{\alpha'}
+  =A^{\beta}\bigl(\Lambda^{\alpha'}{}_{\beta}\,\vec e_{\alpha'}\bigr).
+\]
+Comparando com o lado esquerdo de \eqref{eq:mesma-soma}, reescrito com o índice
+mudo chamado $\beta$, sobra
+$A^\beta\bigl(\Lambda^{\alpha'}{}_{\beta}\vec e_{\alpha'}-\vec e_\beta\bigr)=0$.
+E como $\vec A$ é arbitrário, o parêntese tem de se anular para cada $\beta$:
+\begin{equation}
+  \vec e_\beta=\Lambda^{\alpha'}{}_{\beta}\,\vec e_{\alpha'} .
+  \label{eq:base-transforma}
+\end{equation}
+
+Vale parar um instante em \eqref{eq:base-transforma}, porque ela \emph{não} é
+uma transformação de componentes, e o contraste com a lei que já conhecíamos é
+o ponto:
+\[
+  \underbrace{A^{\alpha'}=\Lambda^{\alpha'}{}_{\beta}\,A^{\beta}}
+    _{\text{componentes: de }\obs\text{ para }\obsl}
+  \qquad\qquad
+  \underbrace{\vec e_\beta=\Lambda^{\alpha'}{}_{\beta}\,\vec e_{\alpha'}}
+    _{\text{base: de }\obsl\text{ para }\obs}
+\]
+A mesma matriz $\Lambda$ aparece nas duas, mas levando em sentidos opostos: as
+componentes vão da base sem linha para a com linha, a base faz o caminho
+inverso. E tem de ser assim --- é exatamente esse cancelamento que mantém a
+soma $A^\alpha\vec e_\alpha$ igual a si mesma, isto é, que faz de $\vec A$ um
+objeto independente de quem o descreve. É daí que vêm os dois nomes: as
+componentes, de índice em cima, transformam-se \emph{contravariantemente}
+--- ao contrário da base ---, enquanto os objetos de índice embaixo, a começar
+pelos próprios $\vec e_\alpha$, transformam-se \emph{covariantemente}, isto é,
+junto com ela. O Capítulo~\ref{chap:tensores} volta a essa distinção quando ela
+deixar de ser questão de nomenclatura e passar a separar dois tipos de objeto.
+
+\textbf{Um exemplo, e é o de sempre.} Para um \emph{boost} de velocidade $v$ ao
+longo de $x$, a matriz $\Lambda^{\alpha'}{}_{\beta}$ é a de
+\eqref{eq:boost-matriz}, e \eqref{eq:base-transforma} dá a base de $\obs$
+escrita na de $\obsl$:
+\[
+  \vec e_0=\gamma\,\vec e_{0'}-\gamma v\,\vec e_{1'},
+  \qquad
+  \vec e_1=-\gamma v\,\vec e_{0'}+\gamma\,\vec e_{1'},
+  \qquad
+  \vec e_2=\vec e_{2'},\qquad \vec e_3=\vec e_{3'} .
+\]
+Mais útil para desenhar é a leitura inversa, com $v\to-v$: as componentes da
+base de $\obsl$ \emph{medidas em} $\obs$ são
+\begin{equation}
+  \vec e_{0'}\temcomp{\obs}\gamma(1,v,0,0),
+  \qquad
+  \vec e_{1'}\temcomp{\obs}\gamma(v,1,0,0).
+  \label{eq:base-linha-em-O}
+\end{equation}
+Esses números não são novidade nenhuma: são as duas primeiras colunas da
+matriz do \emph{boost} inverso, a mesma que a Seção~\ref{sec:quadrivelocidade}
+usou para transformar $U^\mu$. O que é novo é a leitura. $\gamma(1,v,0,0)$ é a
+inclinação do eixo $t'$ e $\gamma(v,1,0,0)$ é a do eixo $x'$: os vetores da
+base de $\obsl$ apontam ao longo dos eixos de $\obsl$, e a ``tesoura'' da
+Seção~\ref{sec:diagramas} era, o tempo todo, o desenho de
+\eqref{eq:base-linha-em-O}.
+
+\begin{center}
+\includegraphics[width=0.98\linewidth]{cap02_base.pdf}
+\captionof{figure}{As duas bases e o mesmo vetor, tudo desenhado no papel de
+$\obs$, com $v=0{,}5$. À esquerda, $\vec e_{0'}$ e $\vec e_{1'}$ apontam ao
+longo dos eixos $t'$ e $x'$ e têm as pontas \emph{sobre} as hipérboles
+invariantes --- parecem mais longos que $\vec e_0$ e $\vec e_1$ numa folha
+euclidiana, mas são igualmente unitários em Minkowski. À direita, a regra do
+paralelogramo nas duas bases devolve o mesmo $\vec A$, que é todo o conteúdo
+de $\vec A=A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'}$. Numericamente, para o
+$\vec A$ de componentes $(1{,}5;\,1{,}35;\,0;\,0)$ em $\obs$, isso dá
+$A^{0'}=0{,}953$ e $A^{1'}=0{,}693$.}
+\label{fig:base}
+\end{center}
+
+\textbf{Releitura: a quadrivelocidade é um vetor da base.} Compare
+\eqref{eq:base-linha-em-O} com a quadrivelocidade da
+Seção~\ref{sec:quadrivelocidade}, $\vec U\temcomp{\obs}\gamma(1,\bm v)$. São o
+mesmo objeto:
+\begin{equation}
+  \vec U=\vec e_{0'},
+  \qquad\text{com }\obsl\text{ o referencial de repouso da partícula.}
+  \label{eq:U-e-base}
+\end{equation}
+A quadrivelocidade de uma partícula é o vetor \emph{temporal} da base do
+referencial que viaja com ela --- e é só isso. As duas afirmações que custaram
+meia página lá atrás tornam-se leituras diretas de \eqref{eq:U-e-base}: que
+$U^\mu=(1,0,0,0)$ no referencial próprio é a definição
+\eqref{eq:base-definicao} de $\vec e_{0'}$, e que $\vec U\cdot\vec U=-1$ é a
+norma de um vetor de base, que o próximo parágrafo calcula de uma vez para
+todos.
+
+\textbf{Base e métrica: o fecho.} Agora o produto escalar. Escreva os dois
+vetores na base e use que ele é bilinear:
+\begin{equation}
+  \vec A\cdot\vec B=(A^\alpha\vec e_\alpha)\cdot(B^\beta\vec e_\beta)
+   =A^\alpha B^\beta\,(\vec e_\alpha\cdot\vec e_\beta).
+  \label{eq:produto-na-base}
+\end{equation}
+O que \eqref{eq:produto-na-base} está dizendo é que o produto escalar de dois
+vetores \emph{quaisquer} está inteiramente determinado por dezesseis números:
+os produtos escalares dos vetores da base entre si. Esses dezesseis já podem
+ser calculados, porque as componentes da base são conhecidas ---
+\eqref{eq:base-definicao} --- e a regra do produto é
+\eqref{eq:produto-escalar}:
+\[
+  \vec e_0\cdot\vec e_0=-1,\qquad
+  \vec e_1\cdot\vec e_1=\vec e_2\cdot\vec e_2=\vec e_3\cdot\vec e_3=+1,
+  \qquad
+  \vec e_\alpha\cdot\vec e_\beta=0\ \ (\alpha\neq\beta),
+\]
+que é uma \emph{tétrade ortonormal}: quatro vetores mutuamente ortogonais e de
+norma unitária --- entendido que ``unitário'' para um vetor temporal quer
+dizer norma $-1$. As três linhas cabem em uma:
+\begin{equation}
+  \boxed{\ \vec e_\alpha\cdot\vec e_\beta=\eta_{\alpha\beta}\ }
+  \label{eq:base-metrica}
+\end{equation}
+
+E aqui o interlúdio se paga. A métrica de Minkowski entrou na
+Seção~\ref{sec:produto-escalar} como ``apenas a tabela de sinais escrita como
+matriz'' --- correto, mas insatisfatório: uma tabela de sinais vinda de onde?
+A resposta é \eqref{eq:base-metrica}. \emph{A métrica é a tabela dos produtos
+escalares dos vetores da base.} Ela não foi imposta de fora; ela é o que
+sobra quando se pergunta como os quatro eixos de um observador se relacionam
+entre si. Substituída em \eqref{eq:produto-na-base}, devolve
+$\vec A\cdot\vec B=\eta_{\alpha\beta}A^\alpha B^\beta$, que era a definição
+\eqref{eq:produto-escalar} --- só que agora deduzida, e não postulada.
+
+Duas consequências que se colhem de graça. A primeira dá sentido geométrico à
+abreviação \eqref{eq:abaixar-indice}: projetando $\vec A$ sobre um vetor da
+base,
+\[
+  \vec A\cdot\vec e_\alpha=A^\beta\,\vec e_\beta\cdot\vec e_\alpha
+   =A^\beta\eta_{\beta\alpha}=A_\alpha ,
+\]
+isto é, \emph{a componente de índice baixo é a projeção do vetor sobre o eixo
+correspondente}. Baixar um índice deixa de ser uma manobra de sinais e passa a
+ser uma operação com desenho. (Numa base ortonormal, $A_\alpha$ e $A^\alpha$
+diferem só pelo sinal da componente temporal, e a distinção parece supérflua.
+Ela deixa de parecer na Seção~\ref{sec:base-obliqua}, com uma base oblíqua, e
+é o que o Capítulo~\ref{chap:tensores} vai precisar.)
+
+A segunda é a ponte para a seção seguinte. Junte \eqref{eq:U-e-base} com a
+projeção que acabamos de obter: para um observador de quadrivelocidade
+$\vec U=\vec e_{0'}$,
+\[
+  -\vec p\cdot\vec U=-\vec p\cdot\vec e_{0'}=-p_{0'}=p^{0'} ,
+\]
+que é a componente temporal do quadrimomento \emph{na base desse observador}.
+A fórmula $E=-\vec p\cdot\vec U$ das convenções (p.~\pageref{sec:convencoes})
+não é, portanto, uma definição nova de energia: é a componente temporal de
+sempre, escrita sem mencionar componentes. É o primeiro exemplo de uma
+manobra que o curso repete até o fim --- \emph{trocar ``a componente $0$ no
+referencial de fulano'' por ``o produto escalar com a quadrivelocidade de
+fulano''} ---, e é o que permite que a Seção~\ref{sec:quadrimomento} escreva
+resultados válidos também em espaço curvo.
+
+\textbf{O que muda em espaço curvo (e o que não muda).} Nada em
+\eqref{eq:expansao-base}, \eqref{eq:produto-na-base} ou
+\eqref{eq:base-metrica} usou que o espaço-tempo é plano. Em espaço curvo a
+definição da métrica é a \emph{mesma},
+$g_{\mu\nu}=\vec e_\mu\cdot\vec e_\nu$; o que se perde é o direito de dizer que
+essa tabela vale $\operatorname{diag}(-1,1,1,1)$ em toda parte, com os mesmos
+números em todo ponto. É essa perda, e só ela, que o Capítulo~\ref{cap:curvatura}
+chama de curvatura.
+
+\begin{activity}
+Com $v=0{,}5$, tome $\vec e_{0'}$ e $\vec e_{1'}$ nas componentes
+\eqref{eq:base-linha-em-O} e verifique que
+$\vec e_{0'}\cdot\vec e_{0'}=-1$, $\vec e_{1'}\cdot\vec e_{1'}=+1$ e
+$\vec e_{0'}\cdot\vec e_{1'}=0$ --- dois vetores que a Figura~\ref{fig:base}
+desenha em ângulo bem agudo. Em seguida, para o $\vec A$ de componentes
+$(1{,}5;\,1{,}35;\,0;\,0)$ em $\obs$, obtenha $A^{0'}$ e $A^{1'}$ e
+confirme, somando $A^{0'}\vec e_{0'}+A^{1'}\vec e_{1'}$ em componentes de
+$\obs$, que se recupera $\vec A$.
+\end{activity}
+
+\end{interludio}
+
 \section{Quadrimomento}
+\label{sec:quadrimomento}
 
 Para massa de repouso $m$,
 \[
@@ -3464,6 +3777,7 @@ igualdade tensorial natural sem uma métrica especificada, pois os dois lados
 têm tipos diferentes.
 
 \section{Componentes em uma base oblíqua}
+\label{sec:base-obliqua}
 
 Em uma base ortonormal a distinção entre $V^\mu$ e $V_\mu$ passa despercebida,
 porque

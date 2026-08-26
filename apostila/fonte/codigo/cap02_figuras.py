@@ -346,12 +346,128 @@ def fig_hiperbole_aceleracao():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------------
+# Figura 7: os vetores da base de dois referenciais (interludio do cap. 2)
+# ---------------------------------------------------------------------
+def fig_vetores_da_base(v=0.5):
+    """Os vetores da base de O e de O', ambos desenhados no papel de O.
+
+    Painel esquerdo: e_0' e e_1' apontam ao longo dos eixos t' e x' e tem as
+    pontas SOBRE as hiperboles invariantes -- ou seja, sao tao unitarios
+    quanto e_0 e e_1, embora parecam mais longos numa folha euclidiana.
+
+    Painel direito: o mesmo vetor A, duas decomposicoes.  A regra do
+    paralelogramo nas duas bases devolve o MESMO vetor: e' o conteudo de
+    A = A^alpha e_alpha = A^alpha' e_alpha'.
+    """
+    g = 1.0 / np.sqrt(1.0 - v**2)
+    AZUL, VERM, CINZA = "#4C72B0", "#B0413E", "0.45"
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.6, 4.9))
+    L = 2.05
+    for ax in (ax1, ax2):
+        ax.set_xlim(-0.55, L + 0.22)
+        ax.set_ylim(-0.55, L + 0.22)
+        ax.set_aspect("equal")
+        ax.axhline(0, color="black", lw=0.7, zorder=1)
+        ax.axvline(0, color="black", lw=0.7, zorder=1)
+        ax.set_xlabel(r"$x$")
+        ax.set_ylabel(r"$ct$")
+        # a linha de luz
+        ax.plot([0, L], [0, L], color="0.70", lw=1.0, ls=(0, (6, 4)), zorder=1)
+        # os eixos inclinados de O'
+        ax.plot([0, v * L], [0, L], color=VERM, lw=0.9, ls=(0, (5, 3)), zorder=1)
+        ax.plot([0, L], [0, v * L], color=VERM, lw=0.9, ls=(0, (5, 3)), zorder=1)
+        ax.annotate(r"$ct'$", xy=(v * L, L), xytext=(-16, -2),
+                    textcoords="offset points", fontsize=11, color=VERM,
+                    path_effects=HALO)
+        ax.annotate(r"$x'$", xy=(L, v * L), xytext=(2, -14),
+                    textcoords="offset points", fontsize=11, color=VERM,
+                    path_effects=HALO)
+
+    # base de O e base de O', em componentes de O: (x, ct)
+    e0 = np.array([0.0, 1.0]);      e1 = np.array([1.0, 0.0])
+    e0l = np.array([g * v, g]);     e1l = np.array([g, g * v])
+
+    def seta(ax, vec, cor, rot, dx=8, dy=4, tam=13):
+        ax.annotate("", xy=tuple(vec), xytext=(0, 0),
+                    arrowprops=dict(arrowstyle="-|>", color=cor, lw=2.2),
+                    zorder=4)
+        ax.annotate(rot, xy=tuple(vec), xytext=(dx, dy),
+                    textcoords="offset points", fontsize=tam, color=cor,
+                    path_effects=HALO, zorder=5)
+
+    # ---------------- painel esquerdo: as duas bases -------------------
+    # hiperboles invariantes: onde vivem as pontas de TODA base ortonormal
+    s = np.linspace(-1.15, 1.15, 200)
+    ax1.plot(np.sinh(s), np.cosh(s), color="0.78", lw=1.0, zorder=1)
+    ax1.plot(np.cosh(s), np.sinh(s), color="0.78", lw=1.0, zorder=1)
+
+    seta(ax1, e0, AZUL, r"$\vec{e}_0$", dx=-26, dy=-2)
+    seta(ax1, e1, AZUL, r"$\vec{e}_1$", dx=2, dy=-20)
+    seta(ax1, e0l, VERM, r"$\vec{e}_{0'}$", dx=6, dy=2)
+    seta(ax1, e1l, VERM, r"$\vec{e}_{1'}$", dx=6, dy=-6)
+
+    ax1.text(-0.50, 2.24,
+             "as pontas caem sobre\nas hipérboles invariantes",
+             fontsize=9.0, color="0.30", ha="left", va="top",
+             path_effects=HALO)
+    ax1.set_title("As duas bases, desenhadas em " + r"$\mathcal{O}$",
+                  fontsize=10.5)
+
+    # ---------------- painel direito: uma so decomposicao por base -----
+    A = np.array([1.35, 1.5])                   # (x, ct) em O
+    A0, A1 = A[1], A[0]                         # componentes em O
+    A0l = g * (A[1] - v * A[0])                 # componentes em O'
+    A1l = g * (A[0] - v * A[1])
+
+    # paralelogramo na base de O
+    for de, ate in [(A0 * e0, A), (A1 * e1, A)]:
+        ax2.plot([de[0], ate[0]], [de[1], ate[1]], color=AZUL, lw=0.9,
+                 ls=(0, (3, 3)), zorder=2)
+    # paralelogramo na base de O'
+    for de, ate in [(A0l * e0l, A), (A1l * e1l, A)]:
+        ax2.plot([de[0], ate[0]], [de[1], ate[1]], color=VERM, lw=0.9,
+                 ls=(0, (3, 3)), zorder=2)
+
+    for vec, cor in [(A0 * e0, AZUL), (A1 * e1, AZUL),
+                     (A0l * e0l, VERM), (A1l * e1l, VERM)]:
+        ax2.annotate("", xy=tuple(vec), xytext=(0, 0),
+                     arrowprops=dict(arrowstyle="-|>", color=cor, lw=1.7,
+                                     alpha=0.85), zorder=3)
+
+    seta(ax2, A, "#2E7D32", r"$\vec{A}$", dx=6, dy=4, tam=14)
+    ax2.annotate(r"$A^{0}\vec{e}_{0}$", xy=tuple(A0 * e0), xytext=(-34, -4),
+                 textcoords="offset points", fontsize=10, color=AZUL,
+                 path_effects=HALO, zorder=5)
+    ax2.annotate(r"$A^{1}\vec{e}_{1}$", xy=tuple(A1 * e1), xytext=(-14, -20),
+                 textcoords="offset points", fontsize=10, color=AZUL,
+                 path_effects=HALO, zorder=5)
+    ax2.annotate(r"$A^{0'}\vec{e}_{0'}$", xy=tuple(A0l * e0l), xytext=(-52, -8),
+                 textcoords="offset points", fontsize=10, color=VERM,
+                 path_effects=HALO, zorder=5)
+    ax2.annotate(r"$A^{1'}\vec{e}_{1'}$", xy=tuple(A1l * e1l), xytext=(4, -20),
+                 textcoords="offset points", fontsize=10, color=VERM,
+                 path_effects=HALO, zorder=5)
+
+    ax2.set_title(r"$\vec{A}=A^{\alpha}\vec{e}_{\alpha}"
+                  r"=A^{\alpha'}\vec{e}_{\alpha'}$", fontsize=11.5)
+
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap02_base.pdf", bbox_inches="tight",
+                transparent=True)
+    plt.close(fig)
+    return (A0, A1, A0l, A1l)
+
+
 if __name__ == "__main__":
     fig_casca_de_massa()
     fig_colisor_vs_alvo_fixo()
     fig_compton()
     fig_ortogonalidade()
     fig_hiperbole_aceleracao()
+    comp = fig_vetores_da_base()
     tau_total, t_total = fig_foguete()
     print(f"Foguete: tau_total={tau_total:.4f} anos, t_total={t_total:.4f} anos")
+    print("Base: A^0=%.4f A^1=%.4f | A^0'=%.4f A^1'=%.4f" % comp)
     print("Figuras salvas em", OUTDIR)
