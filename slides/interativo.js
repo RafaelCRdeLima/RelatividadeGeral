@@ -705,3 +705,221 @@
   cA0.addEventListener("input", desenhar);   // mexer em a0 não interrompe a animação
   desenhar();
 })();
+
+// ====================================================================
+// Um vetor, três referenciais: as componentes mudam, o vetor não
+// ====================================================================
+//
+// É o interlúdio dos vetores da base posto para funcionar. O vetor A é
+// desenhado UMA vez e nunca mais se mexe -- é o objeto geométrico. O que
+// os dois controles giram são as bases: os eixos de O′ e de O″, e com
+// eles os dois paralelogramos que reconstroem o MESMO A.
+//
+// Os números na tabela são o outro lado da mesma afirmação: as colunas
+// A⁰ e A¹ mudam com os controles, a coluna A·A não muda nunca. É a
+// diferença entre o que depende de quem olha e o que não depende.
+//
+// Um achado que vale procurar com o slider: em v = A¹/A⁰ a componente
+// espacial zera, e o vetor fica puramente temporal. Esse é o referencial
+// de repouso de quem tem A como quadrivelocidade -- a mesma manobra da
+// Seção 2.3, agora à mão.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("tres-bases");
+  const c1 = document.getElementById("v-base1");
+  const c2 = document.getElementById("v-base2");
+  if (!svg || !c1 || !c2) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+
+  // A janela é generosa dos quatro lados porque o paralelogramo cresce
+  // depressa: em v = -0,5 o vértice temporal de A sobe a ct = 3,3 e o
+  // espacial desce a ct = -1,3. Cortar isso seria pior do que zoom
+  // nenhum -- o desenho existe para mostrar o paralelogramo FECHANDO, e
+  // um vértice fora do quadro não fecha nada. É também por isso que os
+  // controles param em ±0,5: além disso a construção sai da página, e a
+  // escala teria de mudar junto, o que estragaria a única coisa que o
+  // gráfico afirma -- que o vetor não se mexe.
+  //
+  // A escala k é uma só para os dois eixos: 45° tem de continuar sendo a
+  // linha de luz.
+  const XMIN = -1.9, XMAX = 2.9, YMIN = -1.5, YMAX = 3.5;
+  const LARG = 560;
+  const k = LARG / (XMAX - XMIN);
+  const ALT = (YMAX - YMIN) * k;
+  const fx = (x) => (x - XMIN) * k;
+  const fy = (y) => ALT - (y - YMIN) * k;
+
+  const COR = {
+    eixo: "rgba(238,247,246,0.45)",
+    luz: "#8dd7dc",
+    o0: "rgba(238,247,246,0.62)",   // o laboratório
+    o1: "#e6b75c",                  // O′
+    o2: "#a9aef0",                  // O″
+    vetor: "#7ee0a0",
+  };
+
+  // O vetor, de uma vez por todas. (2,1) não é escolha inocente: A¹/A⁰ =
+  // 0,5 é um valor redondo, então o referencial em que A fica puramente
+  // temporal é alcançável com o slider e cai num número que se reconhece.
+  const A0 = 2, A1 = 1;
+
+  const defs = cria("defs", {});
+  for (const cor of [COR.o1, COR.o2, COR.vetor]) {
+    const m = cria("marker", { id: "base-ponta-" + cor.slice(1), viewBox: "0 0 10 10",
+                               refX: 8, refY: 5, markerWidth: 5, markerHeight: 5,
+                               orient: "auto-start-reverse" });
+    m.appendChild(cria("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: cor }));
+    defs.appendChild(m);
+  }
+  svg.appendChild(defs);
+
+  // ---------------- moldura, desenhada uma vez ----------------------
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  fundo.appendChild(cria("line", { x1: fx(XMIN), y1: fy(0), x2: fx(XMAX), y2: fy(0),
+                                   stroke: COR.eixo, "stroke-width": 1.2 }));
+  fundo.appendChild(cria("line", { x1: fx(0), y1: fy(YMIN), x2: fx(0), y2: fy(YMAX),
+                                   stroke: COR.eixo, "stroke-width": 1.2 }));
+  // as duas linhas de luz, cada uma até onde o quadro permite
+  for (const s of [1, -1]) {
+    const limite = s > 0 ? Math.min(XMAX, YMAX) : Math.min(-XMIN, YMAX);
+    fundo.appendChild(cria("line", {
+      x1: fx(0), y1: fy(0), x2: fx(s * limite), y2: fy(limite),
+      stroke: COR.luz, "stroke-width": 1.4, "stroke-dasharray": "7 5", opacity: 0.7,
+    }));
+  }
+  const rotulo = (x, y, texto, cor, tam, ancora) => {
+    const t = cria("text", { x: x, y: y, fill: cor, "font-size": tam || 18,
+                             "font-style": "italic" });
+    if (ancora) t.setAttribute("text-anchor", ancora);
+    t.textContent = texto;
+    return t;
+  };
+  fundo.appendChild(rotulo(fx(XMAX) - 4, fy(0) + 24, "x", COR.o0, 19, "end"));
+  fundo.appendChild(rotulo(fx(0) - 10, fy(YMAX) + 16, "ct", COR.o0, 19, "end"));
+
+  // ---------------- o que muda com os controles ---------------------
+  // Um grupo por referencial. O do laboratório também é um deles: tem
+  // velocidade zero e paralelogramo retangular, mas é um referencial como
+  // os outros dois, e desenhá-lo pela mesma função é o que impede que
+  // pareça privilegiado.
+  const movel = cria("g", {});
+  svg.appendChild(movel);
+
+  function grupo(cor, nomeT, nomeX, comEixos) {
+    const g = {
+      eixoT: cria("line", { stroke: cor, "stroke-width": 2, opacity: comEixos ? 0.95 : 0 }),
+      eixoX: cria("line", { stroke: cor, "stroke-width": 2, opacity: comEixos ? 0.95 : 0 }),
+      rotT: rotulo(0, 0, nomeT, cor, 19, "end"),
+      rotX: rotulo(0, 0, nomeX, cor, 19),
+      guia0: cria("line", { stroke: cor, "stroke-width": 1.4, "stroke-dasharray": "5 4",
+                            opacity: 0.75 }),
+      guia1: cria("line", { stroke: cor, "stroke-width": 1.4, "stroke-dasharray": "5 4",
+                            opacity: 0.75 }),
+      p0: cria("circle", { r: 5.5, fill: cor }),
+      p1: cria("circle", { r: 5.5, fill: cor }),
+    };
+    movel.append(g.eixoT, g.eixoX, g.guia0, g.guia1, g.p0, g.p1, g.rotT, g.rotX);
+    return g;
+  }
+  const gO = grupo(COR.o0, "", "", false);
+  const g1 = grupo(COR.o1, "ct′", "x′", true);
+  const g2 = grupo(COR.o2, "ct″", "x″", true);
+
+  const vetor = cria("line", { stroke: COR.vetor, "stroke-width": 4,
+                               "marker-end": "url(#base-ponta-" + COR.vetor.slice(1) + ")" });
+  const rotA = rotulo(0, 0, "A", COR.vetor, 24);
+  movel.append(vetor, rotA);
+
+  // Até onde a semirreta que sai da origem na direção (dx,dy) cabe no
+  // quadro. Sem isso, um eixo com v próximo de ±0,9 sai pela lateral e o
+  // rótulo vai parar fora do SVG.
+  function alcance(dx, dy) {
+    let t = Infinity;
+    if (dx > 1e-9) t = Math.min(t, XMAX / dx);
+    if (dx < -1e-9) t = Math.min(t, XMIN / dx);
+    if (dy > 1e-9) t = Math.min(t, YMAX / dy);
+    if (dy < -1e-9) t = Math.min(t, YMIN / dy);
+    return t === Infinity ? 0 : t * 0.97;
+  }
+
+  function eixo(linha, rot, dx, dy, folgaX, folgaY) {
+    const t = alcance(dx, dy);
+    linha.setAttribute("x1", fx(0)); linha.setAttribute("y1", fy(0));
+    linha.setAttribute("x2", fx(t * dx)); linha.setAttribute("y2", fy(t * dy));
+    rot.setAttribute("x", fx(t * dx) + folgaX);
+    rot.setAttribute("y", fy(t * dy) + folgaY);
+  }
+
+  const num = (u, casas) => u.toFixed(casas).replace(".", ",");
+  const leia = (id) => document.getElementById(id);
+  const escreva = (id, texto) => { const el = leia(id); if (el) el.textContent = texto; };
+
+  // Desenha um referencial e devolve suas componentes. É a mesma conta do
+  // interlúdio: e_0′ e e_1′ em componentes do laboratório, e A^0′ e A^1′
+  // como quanto se toma de cada um.
+  function referencial(g, v) {
+    const gama = 1 / Math.sqrt(1 - v * v);
+    const e0 = [gama * v, gama];          // (x, ct)
+    const e1 = [gama, gama * v];
+    const a0 = gama * (A0 - v * A1);
+    const a1 = gama * (A1 - v * A0);
+    const P0 = [a0 * e0[0], a0 * e0[1]];
+    const P1 = [a1 * e1[0], a1 * e1[1]];
+
+    eixo(g.eixoT, g.rotT, v, 1, -8, 18);
+    eixo(g.eixoX, g.rotX, 1, v, 8, 6);
+    g.p0.setAttribute("cx", fx(P0[0])); g.p0.setAttribute("cy", fy(P0[1]));
+    g.p1.setAttribute("cx", fx(P1[0])); g.p1.setAttribute("cy", fy(P1[1]));
+    g.guia0.setAttribute("x1", fx(P0[0])); g.guia0.setAttribute("y1", fy(P0[1]));
+    g.guia0.setAttribute("x2", fx(A1)); g.guia0.setAttribute("y2", fy(A0));
+    g.guia1.setAttribute("x1", fx(P1[0])); g.guia1.setAttribute("y1", fy(P1[1]));
+    g.guia1.setAttribute("x2", fx(A1)); g.guia1.setAttribute("y2", fy(A0));
+    return { gama: gama, a0: a0, a1: a1, norma: -a0 * a0 + a1 * a1 };
+  }
+
+  function desenhar() {
+    const v1 = Number(c1.value) / 100;
+    const v2 = Number(c2.value) / 100;
+
+    vetor.setAttribute("x1", fx(0)); vetor.setAttribute("y1", fy(0));
+    vetor.setAttribute("x2", fx(A1)); vetor.setAttribute("y2", fy(A0));
+    rotA.setAttribute("x", fx(A1) + 12);
+    rotA.setAttribute("y", fy(A0) + 4);
+
+    const r0 = referencial(gO, 0);
+    const r1 = referencial(g1, v1);
+    const r2 = referencial(g2, v2);
+
+    escreva("base-v1", num(v1, 2));
+    escreva("base-g1", num(r1.gama, 2));
+    escreva("base-v2", num(v2, 2));
+    escreva("base-g2", num(r2.gama, 2));
+    for (const [suf, r] of [["0", r0], ["1", r1], ["2", r2]]) {
+      escreva("base-a0" + suf, num(r.a0, 2));
+      escreva("base-a1" + suf, num(r.a1, 2));
+      escreva("base-n" + suf, num(r.norma, 2));
+    }
+
+    // A nota comenta o que está na tela, e o caso que vale caçar é o
+    // v = A¹/A⁰: ali a componente espacial some e sobra a norma pura.
+    const puro = (r, nome) => Math.abs(r.a1) < 0.015 ? nome : null;
+    const achado = puro(r1, "O′") || puro(r2, "O″");
+    escreva("base-nota", achado
+      ? "em " + achado + " o vetor ficou puramente temporal: A¹ = 0 e A⁰ = √3 = 1,73, "
+        + "a própria norma. É o referencial de repouso de quem tem A como quadrivelocidade."
+      : "as seis componentes mudam com os controles; a coluna A·A não muda nunca — "
+        + "é o mesmo vetor, lido de três ângulos.");
+  }
+
+  c1.addEventListener("input", desenhar);
+  c2.addEventListener("input", desenhar);
+  desenhar();
+})();

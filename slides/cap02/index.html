@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../vendor/katex/katex.min.css">
-<link rel="stylesheet" href="../slides.css?v=5">
+<link rel="stylesheet" href="../slides.css?v=6">
 </head>
 <body>
 <div id="progresso"></div>
@@ -744,6 +744,62 @@
   </p>
 </section>
 
+<section>
+  <p class="etiqueta">Apêndice interativo · Interlúdio</p>
+  <h2>Um vetor, três referenciais</h2>
+  <div class="duas">
+    <svg id="tres-bases" class="grafico" style="height:404px" viewBox="0 0 560 583"
+         role="img" aria-label="O mesmo quadrivetor decomposto nas bases de três referenciais, com os eixos de dois deles controlados por sliders"></svg>
+    <div>
+      <div class="controle">
+        <label for="v-base1">velocidade de
+          <span class="m">\mathcal{O}'</span> · <span class="m">v'</span></label>
+        <input type="range" id="v-base1" min="-50" max="50" step="1" value="30">
+        <p class="leitura">
+          <span class="m">v'</span> = <span id="base-v1">0,30</span>&thinsp;c
+          &nbsp;·&nbsp; <span class="m">\gamma'</span> = <span id="base-g1">1,05</span>
+        </p>
+      </div>
+      <div class="controle anil">
+        <label for="v-base2">velocidade de
+          <span class="m">\mathcal{O}''</span> · <span class="m">v''</span></label>
+        <input type="range" id="v-base2" min="-50" max="50" step="1" value="-35">
+        <p class="leitura">
+          <span class="m">v''</span> = <span id="base-v2">-0,35</span>&thinsp;c
+          &nbsp;·&nbsp; <span class="m">\gamma''</span> = <span id="base-g2">1,07</span>
+        </p>
+      </div>
+      <table class="compacta">
+        <tr>
+          <th>base</th>
+          <th><span class="m">A^0</span></th>
+          <th><span class="m">A^1</span></th>
+          <th><span class="m">\vec A\cdot\vec A</span></th>
+        </tr>
+        <tr><td><span class="m">\{\vec e_\alpha\}</span></td>
+            <td id="base-a00">2,00</td><td id="base-a10">1,00</td>
+            <td id="base-n0">-3,00</td></tr>
+        <tr class="fr1"><td><span class="m">\{\vec e_{\alpha'}\}</span></td>
+            <td id="base-a01">1,78</td><td id="base-a11">0,42</td>
+            <td id="base-n1">-3,00</td></tr>
+        <tr class="fr2"><td><span class="m">\{\vec e_{\alpha''}\}</span></td>
+            <td id="base-a02">2,51</td><td id="base-a12">1,82</td>
+            <td id="base-n2">-3,00</td></tr>
+      </table>
+      <p class="legenda"><span id="base-nota">as seis componentes mudam com os
+        controles; a coluna A·A não muda nunca — é o mesmo vetor, lido de três
+        ângulos.</span></p>
+    </div>
+  </div>
+  <p class="legenda">
+    <strong>A seta verde nunca se mexe</strong> — o que os controles giram são as
+    <em>bases</em>, e com elas os três paralelogramos, que continuam fechando no
+    mesmo ponto. É
+    <span class="m">\vec A=A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'}
+    =A^{\alpha''}\vec e_{\alpha''}</span> com a mão.
+  </p>
+</section>
+
 </div>
 </main>
 
@@ -752,6 +808,6 @@
 
 <script src="../vendor/katex/katex.min.js"></script>
 <script src="../slides.js?v=3"></script>
-<script src="../interativo.js?v=3"></script>
+<script src="../interativo.js?v=4"></script>
 </body>
 </html>

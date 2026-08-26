@@ -240,6 +240,21 @@ figcaption { margin-top: 0.6rem; color: var(--grafite); font-size: 16px; line-he
   color: var(--gold);
   font-size: 18px;
 }
+/* Variante anil do controle. No laboratório dos três referenciais cada
+   slider move um deles, e a cor do controle é a mesma da base que ele
+   gira no gráfico -- sem isso é preciso testar para descobrir qual
+   slider é qual. */
+.controle.anil {
+  background: rgba(169, 174, 240, 0.1);
+  border-left-color: var(--anil);
+}
+.controle.anil label { color: var(--anil); }
+.controle.anil input[type="range"] { accent-color: var(--anil); }
+
+/* Linhas da tabela pintadas com a cor do referencial a que pertencem. */
+tr.fr1 td { color: var(--gold); }
+tr.fr2 td { color: var(--anil); }
+
 .controle input[type="range"] {
   width: 100%;
   accent-color: var(--gold);
