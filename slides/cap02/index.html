@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../vendor/katex/katex.min.css">
-<link rel="stylesheet" href="../slides.css?v=4">
+<link rel="stylesheet" href="../slides.css?v=5">
 </head>
 <body>
 <div id="progresso"></div>
@@ -40,7 +40,7 @@
       <table>
         <tr><th>Aula</th><th>Assunto</th></tr>
         <tr><td>5</td><td>Vetores no espaço-tempo · produto escalar</td></tr>
-        <tr><td>6</td><td>Quadrivelocidade · quadrimomento</td></tr>
+        <tr><td>6</td><td>Quadrivelocidade · vetores da base · quadrimomento</td></tr>
         <tr><td>7</td><td>Conservação · energia como componente temporal</td></tr>
         <tr><td>8</td><td>Centro de momento · massivas e sem massa</td></tr>
         <tr><td>9</td><td>Exemplos resolvidos · problemas orientados</td></tr>
@@ -180,6 +180,168 @@
         <span class="m">-1</span>. É o <strong>vetor tangente normalizado</strong>
         à linha de mundo, parametrizada pelo tempo próprio.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERLÚDIO · OS VETORES DA BASE ===================== -->
+<!-- Fora da numeração de propósito: os números de seção acompanham os do
+     Schutz, e estes quatro slides cobrem a Seção 2.2 dele, que a apostila
+     havia atravessado depressa para chegar à quadrivelocidade. A cor anil
+     é o sinal, na projeção, de que o fio 2.3 → 2.4 foi interrompido. -->
+<section class="interludio">
+  <p class="etiqueta">Aula 6 · Interlúdio, fora da numeração · Schutz §2.2</p>
+  <h2>Os vetores da base</h2>
+  <div class="duas">
+    <div>
+      <p>
+        <span class="m">U^\mu=\gamma(1,\bm v)</span> está certo: o índice à
+        mostra avisa que aquilo já são <strong>componentes</strong>. Mas
+        <span class="m">\vec U=(\gamma,\gamma\bm v)</span> seria falso — à
+        esquerda, um objeto que não depende de referencial nenhum; à direita,
+        quatro números que só existem depois de escolhidos os eixos.
+      </p>
+      <div class="M">\vec A\;\underset{\mathcal{O}}{\longrightarrow}\;(A^0,A^1,A^2,A^3)</div>
+      <p class="legenda">
+        Lê-se “<span class="m">\vec A</span> <em>tem componentes</em>
+        <span class="m">(A^0,A^1,A^2,A^3)</span> no referencial
+        <span class="m">\mathcal{O}</span>”. A letra embaixo da seta diz quem
+        está medindo.
+      </p>
+      <div class="alerta">
+        <p class="legenda">
+          A marca do outro referencial vai no <strong>índice</strong> — linha
+          aqui, barra no Schutz —, nunca no símbolo:
+          <span class="m">\vec A\,'</span> sugeriria um segundo vetor, e é
+          exatamente isso que não acontece.
+        </p>
+      </div>
+    </div>
+    <div class="destaque anil">
+      <h3>Quatro vetores privilegiados, um por eixo</h3>
+      <div class="M">\vec e_0\underset{\mathcal{O}}{\to}(1,0,0,0),\quad
+        \vec e_1\underset{\mathcal{O}}{\to}(0,1,0,0),\ \dots</div>
+      <div class="M">(\vec e_\alpha)^\beta=\delta_\alpha{}^\beta</div>
+      <div class="M">\vec A=A^\alpha\vec e_\alpha</div>
+      <p class="legenda">
+        Um quadrivetor deixa de ser “uma lista de quatro números” e passa a ser
+        uma <strong>soma</strong>: <span class="m">A^\alpha</span> é quanto se
+        toma de <span class="m">\vec e_\alpha</span>. Componente e vetor da base
+        são as duas metades de uma mesma frase — e a segunda estava implícita
+        desde a Seção 2.1.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="interludio">
+  <p class="etiqueta">Aula 6 · Interlúdio · Schutz §2.2</p>
+  <h2>A base anda para o lado contrário</h2>
+  <p>
+    O mesmo vetor, somado em duas bases:
+    <span class="m">A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'}</span>.
+    Troque <span class="m">A^{\alpha'}</span> por
+    <span class="m">\Lambda^{\alpha'}{}_\beta A^\beta</span>, junte os fatores de
+    outro modo e exija que valha para todo <span class="m">\vec A</span>:
+  </p>
+  <div class="duas">
+    <div class="destaque anil">
+      <h3>Componentes</h3>
+      <div class="M">A^{\alpha'}=\Lambda^{\alpha'}{}_\beta\,A^\beta</div>
+      <p class="legenda">sem linha <strong>&rarr;</strong> com linha</p>
+    </div>
+    <div class="destaque anil">
+      <h3>Base</h3>
+      <div class="M">\vec e_\beta=\Lambda^{\alpha'}{}_\beta\,\vec e_{\alpha'}</div>
+      <p class="legenda">com linha <strong>&rarr;</strong> sem linha</p>
+    </div>
+  </div>
+  <p class="legenda">
+    A mesma matriz, em sentidos opostos — e é esse cancelamento que mantém
+    <span class="m">A^\alpha\vec e_\alpha</span> igual a si mesma. Daí os dois
+    nomes: componentes <em>contravariantes</em>, base <em>covariante</em>.
+  </p>
+  <div class="alerta">
+    <p>
+      <strong>De brinde:</strong> em componentes de <span class="m">\mathcal{O}</span>,
+      <span class="m">\vec e_{0'}\to\gamma(1,v,0,0)</span> e
+      <span class="m">\vec e_{1'}\to\gamma(v,1,0,0)</span> — as inclinações dos
+      eixos <span class="m">t'</span> e <span class="m">x'</span>. E
+      <span class="m">\vec U=\vec e_{0'}</span>: a quadrivelocidade é o vetor
+      temporal da base do referencial que viaja com a partícula.
+    </p>
+  </div>
+</section>
+
+<section class="interludio">
+  <p class="etiqueta">Aula 6 · Interlúdio · Schutz §2.2</p>
+  <h2>As duas bases, no papel de <span class="m">\mathcal{O}</span></h2>
+  <figure>
+    <img src="figuras/base.svg" style="max-height:470px"
+         alt="À esquerda, as bases de O e de O' desenhadas no diagrama de O; à direita, o mesmo vetor decomposto nas duas bases">
+    <figcaption>
+      À esquerda: <span class="m">\vec e_{0'}</span> e
+      <span class="m">\vec e_{1'}</span> apontam ao longo dos eixos
+      <span class="m">t'</span> e <span class="m">x'</span>, com as pontas
+      <em>sobre</em> as hipérboles invariantes — parecem mais longos numa folha
+      euclidiana, mas são tão unitários quanto <span class="m">\vec e_0</span> e
+      <span class="m">\vec e_1</span>. À direita: a regra do paralelogramo nas
+      duas bases devolve o mesmo <span class="m">\vec A</span>, que é todo o
+      conteúdo de
+      <span class="m">\vec A=A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'}</span>.
+      A “tesoura” do Capítulo 1 era, o tempo todo, o desenho da base de <span class="m">\mathcal{O}'</span>.
+    </figcaption>
+  </figure>
+</section>
+
+<section class="interludio">
+  <p class="etiqueta">Aula 6 · Interlúdio · Schutz §2.2</p>
+  <h2>A métrica é a tabela da base</h2>
+  <div class="duas">
+    <div>
+      <div class="M">\vec A\cdot\vec B=A^\alpha B^\beta\,(\vec e_\alpha\cdot\vec e_\beta)</div>
+      <p class="legenda">
+        O produto escalar de dois vetores <em>quaisquer</em> está inteiramente
+        determinado por dezesseis números: os produtos escalares da base entre
+        si. E esses já são conhecidos — as componentes da base são
+        <span class="m">\delta_\alpha{}^\beta</span>.
+      </p>
+      <div class="M">\boxed{\ \vec e_\alpha\cdot\vec e_\beta=\eta_{\alpha\beta}\ }</div>
+      <p class="legenda">
+        Uma <em>tétrade ortonormal</em> — entendido que “unitário”, para um
+        vetor temporal, quer dizer norma <span class="m">-1</span>. Em espaço
+        curvo a definição é a <strong>mesma</strong>,
+        <span class="m">g_{\mu\nu}=\vec e_\mu\cdot\vec e_\nu</span>; o que se
+        perde é o direito de dizer que a tabela vale
+        <span class="m">\mathrm{diag}(-1,1,1,1)</span> em todo ponto.
+      </p>
+    </div>
+    <div>
+      <div class="destaque anil">
+        <h3>A tabela de sinais vinha de onde?</h3>
+        <p class="legenda">
+          Da base. <span class="m">\eta_{\mu\nu}</span> não foi imposta de fora:
+          é o que sobra quando se pergunta como os quatro eixos de um observador
+          se relacionam entre si.
+        </p>
+      </div>
+      <div class="destaque anil">
+        <h3>Baixar índice ganha desenho</h3>
+        <div class="M">A_\alpha=\vec A\cdot\vec e_\alpha</div>
+        <p class="legenda">
+          a componente de índice baixo é a <strong>projeção</strong> do vetor
+          sobre o eixo correspondente.
+        </p>
+      </div>
+      <div class="alerta">
+        <p class="legenda">
+          E a ponte para 2.4: com <span class="m">\vec U=\vec e_{0'}</span>,
+          <span class="m">-\vec p\cdot\vec U=p^{0'}</span>. Trocar “a componente
+          <span class="m">0</span> no referencial de fulano” por “o produto
+          escalar com a quadrivelocidade de fulano” é a manobra que o curso
+          repete até o fim.
+        </p>
+      </div>
     </div>
   </div>
 </section>

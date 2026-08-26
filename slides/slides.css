@@ -23,6 +23,10 @@
   --areia: #f6f3ec;
   --grafite: rgba(238, 247, 246, 0.62);
   --linha: rgba(141, 215, 220, 0.22);
+  /* Anil: material fora da numeração das seções (os interlúdios). Mais
+     claro que o `rgAnil` da apostila -- o mesmo tom que funciona sobre
+     papel branco some sobre este fundo azul-noite. */
+  --anil: #a9aef0;
 }
 
 * { box-sizing: border-box; }
@@ -74,6 +78,31 @@ section {
 }
 
 section.ativo { display: block; animation: entra 260ms ease-out; }
+
+/* Interlúdio: um bloco que interrompe de propósito a sequência numerada
+   das seções (aqui, a Seção 2.2 do Schutz entre 2.3 e 2.4). A faixa anil
+   à esquerda e a etiqueta na mesma cor dizem isso à distância, sem que
+   ninguém precise ler o rótulo: o que está na tela não é a próxima
+   seção. */
+section.interludio {
+  position: relative;
+  padding-left: 30px;
+}
+section.interludio::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 5px;
+  border-radius: 3px;
+  background: var(--anil);
+}
+section.interludio .etiqueta { color: var(--anil); }
+section.interludio h3 { color: var(--anil); }
+
+.destaque.anil {
+  background: rgba(169, 174, 240, 0.1);
+  border-left-color: var(--anil);
+}
 
 @keyframes entra {
   from { opacity: 0; transform: translateY(10px); }
@@ -310,6 +339,8 @@ td:first-child { color: var(--grafite); }
   section { display: block !important; page-break-after: always; max-height: none; width: 100%; }
   h1, h2, h3, p, li, td, .katex { color: black; }
   .etiqueta { color: #0E5A6B; }
+  section.interludio .etiqueta, section.interludio h3 { color: #4E5180; }
+  section.interludio::before { background: #4E5180; }
 }
 
 /* Quem pede menos movimento no sistema operacional recebe os slides sem
