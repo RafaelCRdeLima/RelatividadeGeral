@@ -460,6 +460,100 @@ def fig_vetores_da_base(v=0.5):
     return (A0, A1, A0l, A1l)
 
 
+# ---------------------------------------------------------------------
+# Figura 8: antes e depois -- duas colisoes separadas por intervalo
+#           tipo-espaco, e as fatias de simultaneidade de dois observadores
+# ---------------------------------------------------------------------
+def fig_conservacao_fatias(v=0.5):
+    """Por que 'antes' e 'depois' nao estragam a conservacao do quadrimomento.
+
+    Duas colisoes, A e B, separadas por intervalo tipo-espaco.  Na fatia de
+    simultaneidade de O (horizontal) A ja aconteceu e B ainda nao; na fatia
+    de O' (inclinada) as duas ja aconteceram.  Os dois observadores somam
+    conjuntos DIFERENTES de particulas -- e obtem o mesmo vetor P, porque
+    cada colisao, isoladamente, conserva o quadrimomento.
+    """
+    g = 1.0 / np.sqrt(1.0 - v**2)
+    AZUL, VERM, GRAFITE = "#4C72B0", "#B0413E", "#16222B"
+
+    fig, ax = plt.subplots(figsize=(7.2, 5.0))
+    XL, XR, YB, YT = -3.0, 3.0, -2.1, 2.1
+
+    A = np.array([-1.5, -1.0])      # (x, ct)
+    B = np.array([1.5, 0.45])
+
+    ax.axhline(0, color="0.85", lw=0.7, zorder=1)
+    ax.axvline(0, color="0.85", lw=0.7, zorder=1)
+
+    # as duas fatias de simultaneidade
+    ax.plot([XL, XR], [0, 0], color=AZUL, lw=1.9, zorder=3)
+    ax.plot([XL, XR], [v * XL, v * XR], color=VERM, lw=1.9, zorder=3)
+    ax.text(XL + 0.08, 0.11, r"$t=\,$const  $(\mathcal{O})$", fontsize=10.5,
+            color=AZUL, ha="left", va="bottom", path_effects=HALO, zorder=6)
+    ax.text(XL + 0.08, v * XL - 0.13, r"$t'=\,$const  $(\mathcal{O}')$",
+            fontsize=10.5, color=VERM, ha="left", va="top",
+            path_effects=HALO, zorder=6)
+
+    # os vetores temporais das duas bases: cada fatia e' ortogonal ao seu e_0
+    for vec, cor, rot, dx, dy in [((0.0, 1.0), AZUL, r"$\vec{e}_0$", -25, -8),
+                                  ((g * v, g), VERM, r"$\vec{e}_{0'}$", 6, 1)]:
+        ax.annotate("", xy=vec, xytext=(0, 0),
+                    arrowprops=dict(arrowstyle="-|>", color=cor, lw=2.0), zorder=5)
+        ax.annotate(rot, xy=vec, xytext=(dx, dy), textcoords="offset points",
+                    fontsize=11.5, color=cor, path_effects=HALO, zorder=6)
+
+    # as duas colisoes: duas linhas de mundo entrando, duas saindo
+    def colisao(E, rotulo, lado, Lin, Lout):
+        for dx_ in (0.30, -0.34):
+            ax.annotate("", xy=tuple(E), xytext=(E[0] - dx_ * Lin, E[1] - Lin),
+                        arrowprops=dict(arrowstyle="-|>", color=GRAFITE, lw=1.3),
+                        zorder=4)
+        for dx_ in (0.42, -0.40):
+            ax.annotate("", xy=(E[0] + dx_ * Lout, E[1] + Lout), xytext=tuple(E),
+                        arrowprops=dict(arrowstyle="-|>", color=GRAFITE, lw=1.3),
+                        zorder=4)
+        ax.plot([E[0]], [E[1]], "o", color=GRAFITE, ms=7, zorder=6)
+        ax.annotate(rotulo, xy=tuple(E), xytext=(lado * 16, -4),
+                    textcoords="offset points", fontsize=13, color=GRAFITE,
+                    ha="center", va="center", path_effects=HALO, zorder=6)
+
+    colisao(A, "A", lado=+1, Lin=0.85, Lout=1.30)
+    colisao(B, "B", lado=-1, Lin=1.00, Lout=1.10)
+
+    # o que cada par de linhas de mundo carrega
+    rot = dict(fontsize=9.3, color=GRAFITE, path_effects=HALO, zorder=6)
+    ax.text(A[0], A[1] + 1.55, r"$\vec{p}_3+\vec{p}_4$",
+            ha="center", va="center", **rot)
+    ax.text(A[0] + 0.38, A[1] - 0.88, r"$\vec{p}_1+\vec{p}_2$",
+            ha="left", va="center", **rot)
+    ax.text(B[0] + 0.50, B[1] + 1.20, r"$\vec{p}_7+\vec{p}_8$",
+            ha="left", va="center", **rot)
+    ax.text(B[0] - 0.52, B[1] - 0.75, r"$\vec{p}_5+\vec{p}_6$",
+            ha="right", va="center", **rot)
+
+    # o que cada observador soma na sua fatia
+    ax.text(XL + 0.10, YT - 0.08,
+            r"$\mathcal{O}$ soma $\ \vec{p}_3+\vec{p}_4\ $ e $\ \vec{p}_5+\vec{p}_6$",
+            fontsize=9.6, color=AZUL, ha="left", va="top",
+            path_effects=HALO, zorder=6)
+    ax.text(XL + 0.10, YT - 0.36,
+            r"$\mathcal{O}'$ soma $\ \vec{p}_3+\vec{p}_4\ $ e $\ \vec{p}_7+\vec{p}_8$",
+            fontsize=9.6, color=VERM, ha="left", va="top",
+            path_effects=HALO, zorder=6)
+
+    ax.set_xlim(XL, XR)
+    ax.set_ylim(YB, YT)
+    ax.set_aspect("equal")
+    ax.set_xlabel(r"$x$")
+    ax.set_ylabel(r"$ct$")
+    ax.set_title("Duas colisões, duas fatias de simultaneidade", fontsize=11)
+
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap02_conservacao.pdf", bbox_inches="tight",
+                transparent=True)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_casca_de_massa()
     fig_colisor_vs_alvo_fixo()
@@ -467,6 +561,7 @@ if __name__ == "__main__":
     fig_ortogonalidade()
     fig_hiperbole_aceleracao()
     comp = fig_vetores_da_base()
+    fig_conservacao_fatias()
     tau_total, t_total = fig_foguete()
     print(f"Foguete: tau_total={tau_total:.4f} anos, t_total={t_total:.4f} anos")
     print("Base: A^0=%.4f A^1=%.4f | A^0'=%.4f A^1'=%.4f" % comp)

@@ -2250,7 +2250,8 @@ Antes de construir quadrivelocidade e quadrimomento, é preciso dizer o que é
 um vetor aqui --- porque a resposta não é ``uma lista de quatro números''.
 
 \textbf{O critério é a transformação.} Um evento tem coordenadas $x^\mu$ que
-mudam de $S$ para $S'$ pela transformação de Lorentz da
+mudam de um referencial $\obs$ para outro, $\obsl$, pela transformação de
+Lorentz da
 Seção~\ref{sec:transformacoes-lorentz}, que podemos escrever de forma
 compacta como
 \begin{equation}
@@ -2269,7 +2270,7 @@ vizinhos: por ser diferença de coordenadas, ele se transforma como
 \eqref{eq:lorentz-matriz}. Dividi-lo por um \emph{escalar} --- um número igual
 em todos os referenciais --- devolve outro vetor, porque a matriz $\Lambda$
 passa direto pela divisão. É essa observação, e só ela, que fará da
-quadrivelocidade um vetor na próxima seção.
+quadrivelocidade um vetor na Seção~\ref{sec:quadrivelocidade}.
 
 \begin{atencao}
 Dividir por $\dd t$ \emph{não} produziria um vetor: $\dd t$ é a componente
@@ -2412,8 +2413,8 @@ fecham-se sobre a linha de luz pelo mesmo ângulo, em sentidos opostos. Aquela
 observador são ortogonais entre si.
 
 \begin{activity}
-Sejam $\vec A=(2,1,0,0)$ e $\vec B=(1,1,0,0)$ em componentes de algum
-referencial. Classifique cada um, calcule $\vec A\cdot\vec B$ e verifique que
+Sejam $\vec A$ e $\vec B$ os vetores de componentes $(2,1,0,0)$ e
+$(1,1,0,0)$ em algum referencial. Classifique cada um, calcule $\vec A\cdot\vec B$ e verifique que
 $\vec B$ é ortogonal a si mesmo. Em seguida aplique um boost de $v=0{,}5$ às
 componentes dos dois e confirme, com números, que os três produtos escalares
 não mudaram.
@@ -2460,13 +2461,14 @@ referencial de repouso da partícula, vale $-1$ para todo observador inercial,
 por mais depressa que a partícula passe por ele.
 
 \begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}CONFERINDO EM OUTRO REFERENCIAL}]
-Refazer a conta num referencial $S$ onde a partícula se move com velocidade
+Refazer a conta num referencial $\obs$ onde a partícula se move com velocidade
 $v$ ao longo de $x$ vale menos pelo resultado --- que não pode mudar --- do que
 pelo caminho, porque é o primeiro exercício de aplicar uma transformação de
 Lorentz a um vetor que não é o vetor posição. E é onde se erra o sinal.
 
 Parta das componentes no referencial de repouso, $U^{\nu'}=(1,0,0,0)$, e
-transforme para $S$. A matriz de que se precisa é a que vai de $S'$ para $S$
+transforme para $\obs$. A matriz de que se precisa é a que vai de $\obsl$
+para $\obs$
 --- e não a da equação~\eqref{eq:boost-matriz}, que faz o caminho contrário.
 Como a inversa de um \emph{boost} é o mesmo \emph{boost} com o sinal da
 velocidade trocado,
@@ -2495,7 +2497,7 @@ $U^\mu=\Lambda^\mu{}_{0'}$. Essa coluna é a inclinação do eixo $t'$ desenhada
 no diagrama de espaçotempo do Capítulo~\ref{chap:relatividade-especial} --- e
 tinha de ser: no seu próprio referencial a partícula não sai do lugar, avança
 só no tempo, então sua quadrivelocidade aponta ao longo de $t'$ e nada mais.
-Toda a estrutura de $U^\mu$ vista de $S$ é a inclinação daquele eixo.
+Toda a estrutura de $U^\mu$ vista de $\obs$ é a inclinação daquele eixo.
 
 Fechando com a verificação direta:
 \[
@@ -2545,7 +2547,7 @@ duas condições valem simultaneamente:
 A primeira diz que $U^\mu=(\cosh\varphi,\sinh\varphi)$ para alguma função
 $\varphi(\tau)$ --- essa é a parametrização geral de um vetor de norma $-1$,
 exatamente como $(\cos\theta,\sin\theta)$ é a de um vetor unitário
-euclidiano. É a rapidez da Seção~\ref{sec:consequencias} reaparecendo, agora
+euclidiano. É a rapidez do Exemplo~\ref{ex:rapidez} reaparecendo, agora
 como coordenada natural ao longo da linha de mundo.
 
 Derivando, $A^\mu=\dot\varphi\,(\sinh\varphi,\cosh\varphi)$, cuja norma é
@@ -2924,7 +2926,7 @@ diferem só pelo sinal da componente temporal, e a distinção parece supérflua
 Ela deixa de parecer na Seção~\ref{sec:base-obliqua}, com uma base oblíqua, e
 é o que o Capítulo~\ref{chap:tensores} vai precisar.)
 
-A segunda é a ponte para a seção seguinte. Junte \eqref{eq:U-e-base} com a
+A segunda é a ponte para a Seção~\ref{sec:energia-temporal}. Junte \eqref{eq:U-e-base} com a
 projeção que acabamos de obter: para um observador de quadrivelocidade
 $\vec U=\vec e_{0'}$,
 \[
@@ -2936,8 +2938,8 @@ não é, portanto, uma definição nova de energia: é a componente temporal de
 sempre, escrita sem mencionar componentes. É o primeiro exemplo de uma
 manobra que o curso repete até o fim --- \emph{trocar ``a componente $0$ no
 referencial de fulano'' por ``o produto escalar com a quadrivelocidade de
-fulano''} ---, e é o que permite que a Seção~\ref{sec:quadrimomento} escreva
-resultados válidos também em espaço curvo.
+fulano''} ---, e é o que permite que a Seção~\ref{sec:energia-temporal}
+escreva resultados válidos também em espaço curvo.
 
 \textbf{O que muda em espaço curvo (e o que não muda).} Nada em
 \eqref{eq:expansao-base}, \eqref{eq:produto-na-base} ou
@@ -2964,19 +2966,99 @@ $\obs$, que se recupera $\vec A$.
 \section{Quadrimomento}
 \label{sec:quadrimomento}
 
-Para massa de repouso $m$,
-\[
-  p^\mu=mU^\mu=(E,\bm p),
-  \qquad
-  E=\gamma m,\quad \bm p=\gamma m\bm v.
-\]
-A relação de dispersão é
-\[
-  p^\mu p_\mu=-m^2
-  \quad\Longrightarrow\quad
-  E^2=\bm p^2+m^2.
-\]
-Para fótons, $m=0$ e $E=|\bm p|$.
+\textbf{A definição não tem índices.} A massa de repouso $m$ --- a massa que se
+mede no referencial em que a partícula está parada --- é um \emph{escalar}: um
+único número, o mesmo para todos os observadores, por construção. E multiplicar
+um vetor por um escalar devolve outro vetor. É só disso que a definição do
+\emph{quadrimomento} precisa:
+\begin{equation}
+  \boxed{\ \vec p=m\,\vec U\ }
+  \label{eq:quadrimomento}
+\end{equation}
+Repare no que \eqref{eq:quadrimomento} \emph{não} tem: nenhum índice, nenhum
+referencial, nenhuma componente. Ela é uma afirmação sobre dois objetos
+geométricos --- a flecha $\vec U$ tangente à linha de mundo, e a flecha $\vec p$,
+que aponta na mesma direção e é $m$ vezes mais comprida. Tudo o que vem a
+seguir nesta seção é a leitura de \eqref{eq:quadrimomento} em algum
+referencial; a equação em si já está pronta, e já vale em todos eles.
+
+\textbf{As componentes, e o nome da primeira.} Escolhido um observador $\obs$,
+o vetor se expande na base dele, $\vec p=p^\alpha\vec e_\alpha$, e a quádrupla
+que sobra é
+\begin{equation}
+  \vec p\temcomp{\obs}(p^0,p^1,p^2,p^3)\equiv(E,\bm p).
+  \label{eq:p-componentes}
+\end{equation}
+A componente temporal ganha nome próprio --- \emph{energia da partícula em
+$\obs$}, $E\equiv p^0$ --- e as três espaciais formam o trimomento $\bm p$. Por
+ora são apenas nomes; o que os justifica é o limite de $v$ pequeno, calculado
+no fim desta seção. E a seta de \eqref{eq:p-componentes} está trabalhando:
+trocá-la por um sinal de igual diria que o vetor \emph{é} aquela lista, quando
+a lista muda de observador para observador e o vetor não.
+
+\textbf{Os números saem sozinhos.} Aqui o interlúdio se paga. Não é preciso
+transformar nada à mão: pela releitura \eqref{eq:U-e-base}, a quadrivelocidade
+é o vetor temporal da base do referencial próprio $\obsl$ da partícula --- o
+instantaneamente comóvel, se ela acelera --- e portanto
+\begin{equation}
+  \vec p=m\,\vec e_{0'} .
+  \label{eq:p-base}
+\end{equation}
+O quadrimomento é o vetor temporal da base de quem viaja com a partícula,
+esticado por $m$, e nada mais. Suas componentes em $\obs$ já estão calculadas:
+são as de $\vec e_{0'}$, dadas por \eqref{eq:base-linha-em-O}. Para um
+\emph{boost} de velocidade $v$ ao longo de $x$,
+\begin{equation}
+  p^{\alpha}=m\,(\vec e_{0'})^{\alpha}=m\,\Lambda^{\alpha}{}_{0'}
+  \qquad\Longrightarrow\qquad
+  \vec p\temcomp{\obs}\gamma m\,(1,v,0,0),
+  \label{eq:p-componentes-boost}
+\end{equation}
+e, para uma direção qualquer de $\bm v$,
+\begin{equation}
+  \vec p\temcomp{\obs}\gamma m\,(1,\bm v),
+  \qquad\text{isto é}\qquad
+  E=\gamma m,\quad \bm p=\gamma m\bm v .
+  \label{eq:E-e-p}
+\end{equation}
+Nenhuma conta nova apareceu. $\Lambda^{\alpha}{}_{0'}$ é a primeira coluna da
+matriz do \emph{boost} inverso --- a mesma que a Seção~\ref{sec:quadrivelocidade}
+já havia encontrado ao transformar $U^\mu$, e a mesma que o diagrama de
+Minkowski desenha como inclinação do eixo $t'$. O que mudou foi a leitura:
+\emph{a energia e o momento que $\obs$ mede são a coluna temporal da
+transformação que leva de $\obs$ ao referencial da partícula}. Dizer que uma
+partícula é energética, para $\obs$, é dizer que o eixo do tempo dela está
+muito inclinado em relação ao dele.
+
+\begin{atencao}
+Um cuidado com \eqref{eq:E-e-p}: o fator $\gamma$ pertence à \emph{componente},
+não à massa. É tentador ler $E=\gamma m$ como ``a massa aumentou para $\gamma
+m$'' --- a chamada massa relativística, que sobrevive em textos de divulgação
+---, mas isso confunde as duas metades de \eqref{eq:p-componentes}. Em
+$\vec p=m\vec U$, $m$ é o escalar, fixo; quem depende do referencial é a
+expansão de $\vec U$ na base de quem mede. Neste curso $m$ é sempre a massa de
+repouso, e é um invariante.
+\end{atencao}
+
+\textbf{A norma, e a massa de volta.} O produto de \eqref{eq:quadrimomento}
+consigo mesma custa uma linha, porque a norma $\vec U\cdot\vec U=-1$ já veio
+da Seção~\ref{sec:quadrivelocidade}:
+\begin{equation}
+  \vec p\cdot\vec p=m^2\,(\vec U\cdot\vec U)=-m^2 .
+  \label{eq:norma-quadrimomento}
+\end{equation}
+Em componentes de $\obs$, com \eqref{eq:p-componentes} e a regra
+\eqref{eq:produto-escalar}, isso é $-E^2+\bm p^2=-m^2$, ou seja
+\begin{equation}
+  E^2=\bm p^2+m^2,
+  \label{eq:dispersao}
+\end{equation}
+a \emph{relação de dispersão}. As duas equações dizem a mesma coisa; a
+diferença é que \eqref{eq:norma-quadrimomento} a diz sem escolher observador e
+\eqref{eq:dispersao} a diz depois de escolher um. Esse par --- afirmação
+geométrica de um lado, leitura em componentes do outro --- é a forma que os
+resultados vão tomar daqui até o fim do curso, e a Seção~\ref{sec:energia-temporal}
+faz a mesma ponte para a energia.
 
 \textbf{O que $E=\gamma m$ esconde quando $v$ é pequeno.} Vale abrir a
 expressão em potências de $v$ antes de seguir, porque é aí que aparece a
@@ -2987,39 +3069,203 @@ afirmação mais famosa da relatividade:
   \label{eq:limite-newtoniano}
 \end{equation}
 O segundo termo é a energia cinética de Newton --- que não foi postulada em
-lugar nenhum, saiu sozinha de $E=\gamma m$. Quem chama a atenção é o primeiro:
-uma partícula \emph{parada} tem energia $E=m$. Essa \emph{energia de repouso} é
-invisível para a mecânica newtoniana, que só mede diferenças de energia, e é o
-que se lê, com as constantes restauradas, como $E=mc^2$. Daí a energia cinética
-relativística ser definida por
+lugar nenhum, saiu sozinha de $E=\gamma m$; e, com ela, fica justificado o nome
+\emph{energia} dado à componente $p^0$, assim como $\bm p\simeq m\bm v$
+justifica o nome \emph{momento} dado às outras três. Quem chama a atenção é o
+primeiro termo: uma partícula \emph{parada} tem energia $E=m$. Essa
+\emph{energia de repouso} é invisível para a mecânica newtoniana, que só mede
+diferenças de energia, e é o que se lê, com as constantes restauradas, como
+$E=mc^2$. Daí a energia cinética relativística ser definida por
 \[
   T\equiv E-m=(\gamma-1)m,
 \]
 e não por algum remendo da fórmula newtoniana: é o que sobra da energia quando
 se desconta o que a partícula tem por simplesmente existir.
 
-\section{Conservação}
+\textbf{E os fótons?} Pondo $m=0$ em \eqref{eq:norma-quadrimomento} e
+\eqref{eq:dispersao}, o quadrimomento fica \emph{nulo}, $\vec p\cdot\vec p=0$,
+com $E=|\bm p|$. Mas note que a definição \eqref{eq:quadrimomento} não é o
+caminho até lá: um fóton não tem referencial de repouso, seu tempo próprio não
+corre, não há $\vec e_{0'}$ para ele --- $\vec U$ simplesmente não existe. Para
+partículas sem massa o quadrimomento é o objeto primário, definido diretamente
+como o vetor nulo tangente ao raio de luz, e $m=0$ é consequência da norma, não
+hipótese. A Seção~\ref{sec:massivas-sem-massa} volta a isso.
 
-Em uma interação local no espaço-tempo plano,
+\begin{activity}
+Uma partícula de massa $m$ move-se com $v=0{,}5$ ao longo de $x$ em $\obs$.
+Escreva o mesmo $\vec p$ nas duas bases --- $\vec p=p^\alpha\vec e_\alpha$ em
+$\obs$ e $\vec p=p^{\alpha'}\vec e_{\alpha'}$ no referencial de repouso ---,
+usando \eqref{eq:base-linha-em-O} para as componentes de $\vec e_{0'}$ e
+$\vec e_{1'}$ em $\obs$. Confirme que a segunda soma tem uma única parcela,
+$m\vec e_{0'}$, e que ela reproduz a primeira. Em seguida verifique
+\eqref{eq:norma-quadrimomento} nas duas leituras, e note que a segunda dispensa
+qualquer $\gamma$.
+\end{activity}
+
+\section{Conservação}
+\label{sec:conservacao}
+
+\textbf{A lei, e o que ela soma.} Numa interação --- uma colisão, um
+decaimento, uma captura ---, some os quadrimomentos de todas as partículas
+envolvidas. O resultado é um único vetor,
+\begin{equation}
+  \vec P\equiv\sum_a\vec p_a ,
+  \label{eq:P-total}
+\end{equation}
+e a lei de conservação afirma que ele é o mesmo antes e depois:
+\begin{equation}
+  \boxed{\ \vec P_{\rm antes}=\vec P_{\rm depois}\ }
+  \label{eq:conservacao}
+\end{equation}
+De novo, nenhum índice e nenhum referencial --- e, de novo, é isso que dá
+força ao enunciado. Mas vale reparar em uma hipótese que \eqref{eq:P-total}
+usa sem dizer: somar $\vec p_a$ é somar \emph{flechas ancoradas em eventos
+diferentes}, e isso só faz sentido porque o espaço-tempo é plano. Num
+espaço-tempo curvo não há como transportar um vetor de um ponto a outro sem
+que o resultado dependa do caminho, e a conservação sobrevive apenas na forma
+\emph{local} $\nabla_\mu T^{\mu\nu}=0$, do Capítulo~\ref{cap:fluidos}. Aqui,
+no plano, o transporte é trivial e a soma é livre.
+
+\textbf{Quatro leis pelo preço de uma.} Escolha um observador $\obs$ e escreva
+\eqref{eq:conservacao} na base dele, com \eqref{eq:expansao-base}. Os
+$\vec e_\alpha$ são os mesmos dos dois lados --- o observador não troca de
+referencial no meio da colisão ---, então a diferença entre antes e depois é
 \[
-  \sum_{\rm inicial}p^\mu=\sum_{\rm final}p^\mu.
+  \bigl(P^\alpha_{\rm antes}-P^\alpha_{\rm depois}\bigr)\vec e_\alpha=\vec 0 ,
 \]
-Essa equação compacta contém conservação de energia e de momento. A vantagem
-da forma tensorial é que, se ela é verdadeira em um referencial inercial, é
-verdadeira em todos.
+e como os quatro vetores da base são linearmente independentes, cada parêntese
+tem de se anular por conta própria:
+\begin{equation}
+  P^\alpha_{\rm antes}=P^\alpha_{\rm depois}
+  \qquad\text{para cada }\alpha .
+  \label{eq:conservacao-componentes}
+\end{equation}
+A componente $\alpha=0$ é a conservação da energia; as três espaciais, a do
+momento. As duas leis que a mecânica newtoniana enunciava separadamente ---
+com dimensões diferentes, deduzidas de argumentos diferentes --- são as quatro
+componentes de uma só. É o mesmo movimento do Capítulo~\ref{chap:relatividade-especial},
+que fez de espaço e tempo as componentes de um evento; aqui ele se repete com
+energia e momento.
+
+\textbf{Cada observador conserva a sua energia.} A energia que um observador
+de quadrivelocidade $\vec U$ atribui ao sistema é $-\vec P\cdot\vec U$, pela
+convenção da p.~\pageref{sec:convencoes}. Se $\vec U$ é fixo --- o observador
+não acelera durante o processo ---, o produto escalar com \eqref{eq:conservacao}
+dá imediatamente
+\[
+  -\vec P_{\rm antes}\cdot\vec U=-\vec P_{\rm depois}\cdot\vec U .
+\]
+Cada observador inercial mede a \emph{sua} energia, e cada um a vê conservada.
+Os números são diferentes de observador para observador; o que todos partilham
+é o vetor. Repare que essa versão da conservação da energia não menciona
+componente nem base: é a manobra que o interlúdio anunciou, trocar ``a
+componente $0$ de fulano'' por ``o produto escalar com a quadrivelocidade de
+fulano'', e é ela que atravessa intacta para o espaço curvo.
+
+\textbf{É um postulado, não um teorema.} Nada do que veio antes \emph{demonstra}
+\eqref{eq:conservacao}. O que se sabe é que as componentes de $\vec p$ se
+reduzem, para $v$ pequeno, à energia e ao momento de Newton, que são
+conservados --- mas isso não basta para fixar a lei relativística, porque
+muitas leis diferentes têm o mesmo limite newtoniano. A escolha de conservar o
+quadrivetor inteiro é um postulado a mais, de mesmo estatuto que os dois
+postulados do Capítulo~\ref{chap:relatividade-especial}, e o que o sustenta é
+o experimento: nenhuma colisão jamais violou \eqref{eq:conservacao}.
+
+\textbf{O que não se conserva: a soma das massas.} Uma consequência que não
+existia em Newton. Some as massas de repouso das partículas antes e depois:
+$\sum_a m_a$ \emph{não} é conservada --- e não há por que ser, já que ela nem
+aparece em \eqref{eq:conservacao}. O que se conserva, além do vetor, é a norma
+dele,
+\begin{equation}
+  M_{\rm sist}^2=-\vec P\cdot\vec P ,
+  \label{eq:massa-sistema}
+\end{equation}
+a massa invariante do sistema, de que a Seção~\ref{sec:energia-temporal}
+volta a tratar. E $M_{\rm sist}\neq\sum_a m_a$ sempre que houver movimento
+relativo, porque a norma de uma soma de vetores não é a soma das normas. A
+diferença é exatamente a energia cinética interna --- e a possibilidade de
+convertê-la: massa de repouso pode diminuir, e o que sobra sai como energia
+cinética e, depois, como calor. É o que acontece todo dia numa usina nuclear e
+no interior do Sol. A afirmação newtoniana ``a massa se conserva'' não é uma
+lei; é o que \eqref{eq:conservacao} parece dizer quando todas as velocidades
+são pequenas e a conversão é pequena demais para se notar.
+
+\textbf{``Antes'' e ``depois'' segundo quem?} Há um ponto que
+\eqref{eq:conservacao} passou por cima, e vale enfrentá-lo, porque a mesma
+dificuldade reaparece toda vez que uma lei de conservação for escrita neste
+curso. Somar os quadrimomentos ``num certo instante'' exige escolher um
+instante --- isto é, uma fatia de simultaneidade --- e o
+Capítulo~\ref{chap:relatividade-especial} mostrou que observadores diferentes
+fatiam o espaço-tempo de modos diferentes. Em linguagem de base: a fatia de um
+observador é o conjunto de eventos simultâneos para ele, e ela é o plano
+ortogonal ao seu $\vec e_0$. Bases diferentes, fatias diferentes.
+
+Considere então duas colisões, A e B, separadas por um intervalo tipo-espaço,
+como na Figura~\ref{fig:conservacao}. Para $\obs$, A já aconteceu e B ainda
+não: ele soma os produtos de A com os reagentes de B. Para $\obsl$, as duas já
+aconteceram: ele soma os produtos de A com os produtos de B. São conjuntos
+\emph{diferentes} de partículas --- e há até referenciais em que a ordem de A
+e B se inverte, porque nenhum sinal pode ligar dois eventos separados por
+intervalo tipo-espaço, e portanto a ordem entre eles não é um fato absoluto.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\linewidth]{cap02_conservacao.pdf}
+\caption{Duas colisões, A e B, separadas por intervalo tipo-espaço, e as
+fatias de simultaneidade de dois observadores --- cada uma ortogonal ao
+$\vec e_0$ do seu. A fatia de $\obs$ (azul) passa depois de A e antes de B, e
+cruza as linhas de mundo de $\vec p_3,\vec p_4$ e $\vec p_5,\vec p_6$; a de
+$\obsl$ (vermelha) passa depois das duas, e cruza $\vec p_3,\vec p_4$ e
+$\vec p_7,\vec p_8$. Os dois somam listas diferentes de partículas e obtêm o
+mesmo vetor $\vec P$, porque a colisão em B, sozinha, garante
+$\vec p_5+\vec p_6=\vec p_7+\vec p_8$.}
+\label{fig:conservacao}
+\end{figure}
+
+E, ainda assim, não há problema nenhum. A colisão em B conserva o
+quadrimomento por conta própria, isto é, $\vec p_5+\vec p_6=\vec p_7+\vec p_8$;
+trocar um par pelo outro na soma não muda o total. Os dois observadores somam
+listas diferentes de partículas e chegam ao \emph{mesmo} vetor $\vec P$ --- com
+componentes diferentes, ligadas por $P^{\alpha'}=\Lambda^{\alpha'}{}_\beta
+P^\beta$, mas o mesmo vetor. Qualquer observador pode escolher a sua fatia,
+somar tudo o que a atravessa e obter o mesmo objeto geométrico. É isso que
+torna \eqref{eq:conservacao} uma afirmação sobre o espaço-tempo, e não sobre
+um referencial em particular.
 
 \begin{example}
-Considere o decaimento de uma partícula de massa $M$ em duas partículas
-idênticas de massa $m$, no referencial de repouso da partícula inicial. Por
-simetria, os momentos finais têm módulos iguais e direções opostas. A energia
-de cada produto é $E=M/2$, logo
+\textbf{Decaimento em duas partículas iguais.} Uma partícula de massa $M$ decai
+em duas de massa $m$. Trabalhe no referencial de repouso da inicial: lá, por
+\eqref{eq:p-base}, o quadrimomento inicial é o próprio vetor temporal da base,
+esticado por $M$, e a conservação \eqref{eq:conservacao} fica
 \[
-  |\bm p|=\sqrt{\frac{M^2}{4}-m^2}.
+  \vec p_1+\vec p_2=M\,\vec e_0 .
 \]
-O decaimento só é possível se $M\ge 2m$.
+Essa única igualdade já resolve o problema, lida componente a componente. A
+parte espacial do lado direito é nula --- é a definição \eqref{eq:base-definicao}
+de $\vec e_0$ ---, logo $\bm p_1=-\bm p_2$: os produtos saem em sentidos
+opostos e com o mesmo módulo, sem que se precise invocar simetria. A parte
+temporal dá $E_1+E_2=M$; como as massas são iguais e os módulos dos momentos
+também, a relação de dispersão \eqref{eq:dispersao} força $E_1=E_2=M/2$, e daí
+\[
+  |\bm p|=\sqrt{\frac{M^2}{4}-m^2},
+\]
+que só é um número real se $M\ge 2m$. O decaimento não acontece se a massa da
+partícula inicial não cobrir a das filhas, e o excedente $M-2m$ é o que sai
+como energia cinética --- massa virando movimento, no caso mais simples
+possível.
 \end{example}
 
+\begin{activity}
+Uma partícula de massa $m$ e velocidade $v$ atinge outra idêntica em repouso, e
+as duas emergem grudadas num único corpo. Use \eqref{eq:conservacao} para
+mostrar que a massa desse corpo é $M=m\sqrt{2(1+\gamma)}$, e verifique que
+$M>2m$ sempre que $v\neq 0$. Para onde foi a energia cinética que
+``desapareceu''? Confira o resultado calculando $\vec P\cdot\vec P$ dos dois
+lados.
+\end{activity}
+
 \section{Energia como componente temporal}
+\label{sec:energia-temporal}
 
 No formalismo relativístico, energia não é uma quantidade isolada: ela é a
 componente temporal do quadrimomento. Isso ajuda a entender por que energia e
@@ -3046,22 +3292,20 @@ ferramenta do item~\ref{item-doppler} e do Exemplo do Doppler transversal, e
 sobreviverá intacta ao espaço curvo: no Capítulo~\ref{cap:fisica-curva} ela é
 a \emph{definição} de energia medida localmente.
 
-A massa de repouso aparece como norma do quadrimomento:
-\[
-  m^2=-p^\mu p_\mu.
-\]
-Essa equação é mais fundamental que $E=\gamma m$, pois não depende do
-referencial escolhido. Em particular, a energia de uma partícula depende do
-observador, mas a massa de repouso não. Para um sistema de várias partículas, a
-massa invariante total é obtida a partir do quadrimomento total,
-\[
-  M_{\rm sist}^2=-P^\mu P_\mu,
-  \qquad
-  P^\mu=\sum_a p_a^\mu.
-\]
-Essa massa inclui energia cinética interna. Por isso um gás quente confinado em
-uma caixa tem massa total ligeiramente maior que o mesmo gás frio, se o número
-de partículas for o mesmo.
+\textbf{O contraste com a massa.} Vale pôr as duas lado a lado, porque é o
+contraste que fixa a ideia. A energia depende do observador --- ela tem o
+$\vec U$ de alguém do lado direito de \eqref{eq:energia-observador} ---,
+enquanto a massa é a norma \eqref{eq:norma-quadrimomento}, que não tem
+observador nenhum do lado de dentro. Nesse sentido $m$ é mais fundamental que
+$E=\gamma m$: uma é propriedade da partícula, a outra é propriedade da relação
+entre a partícula e quem a mede.
+
+O mesmo par vale para um sistema inteiro. A energia total que $\vec U$ mede é
+$-\vec P\cdot\vec U$, com o $\vec P$ de \eqref{eq:P-total}, e a massa
+invariante do sistema é \eqref{eq:massa-sistema} --- que, como a
+Seção~\ref{sec:conservacao} mostrou, inclui a energia cinética interna. Daí um
+gás quente confinado em uma caixa ter massa total ligeiramente maior que o
+mesmo gás frio, com o mesmo número de partículas: o calor tem peso.
 
 \begin{example}
 Duas partículas sem massa, cada uma com energia $E$, movem-se em direções
@@ -3080,13 +3324,20 @@ nula.
 \section{Centro de momento}
 \label{sec:centro-momento}
 
-O referencial do centro de momento é definido por $\bm P=0$. Ele simplifica
-problemas de colisão porque toda a energia total disponível aparece como massa
-invariante do sistema. Em uma colisão de duas partículas, a quantidade
-\[
-  s=-(p_1+p_2)^2
-\]
-é invariante. No centro de momento, $\sqrt{s}$ é a energia total. Em
+O referencial do centro de momento é definido por $\bm P=0$: nele o
+quadrimomento total aponta só no tempo,
+$\vec P\temcomp{\mathrm{CM}}(E_{\rm tot},\bm 0)$. Ele simplifica problemas de
+colisão porque toda a energia disponível aparece como massa invariante do
+sistema. Em uma colisão de duas partículas, a física de partículas dá um nome
+próprio a essa norma:
+\begin{equation}
+  s\equiv-(\vec p_1+\vec p_2)\cdot(\vec p_1+\vec p_2)=M_{\rm sist}^2 ,
+  \label{eq:mandelstam-s}
+\end{equation}
+que é a mesma quantidade \eqref{eq:massa-sistema} da
+Seção~\ref{sec:conservacao}, com outro nome. Por ser um produto escalar, $s$ é
+invariante; e no centro de momento, onde $\bm P=0$, $\sqrt{s}$ é simplesmente
+a energia total. Em
 experimentos de altas energias, essa é a quantidade que determina quais
 partículas podem ser produzidas.
 
@@ -3109,10 +3360,14 @@ ela é uma afirmação sobre o estado final, e vale igual para dois prótons, pa
 um fóton contra um elétron, ou para qualquer outro par.
 
 \begin{activity}
-Compare duas maneiras de obter uma grande energia de centro de massa: colidir
-duas partículas de mesma energia em sentidos opostos ou lançar uma partícula
-contra um alvo em repouso. Use conservação de quadrimomento para mostrar por
-que colisores são muito mais eficientes que experimentos de alvo fixo.
+Deduza as duas curvas da Figura~\ref{fig:colisor-alvo-fixo}, que são duas
+maneiras de obter uma grande energia de centro de momento com partículas de
+mesma massa $m$. No \emph{colisor}, as duas chegam com energia $E$ em sentidos
+opostos; no \emph{alvo fixo}, uma chega com energia $E$ e a outra está em
+repouso. Monte $\vec P$ em cada arranjo, calcule $s=-\vec P\cdot\vec P$ e
+obtenha $\sqrt s=2E$ no primeiro caso e $\sqrt s=\sqrt{2m^2+2mE}$ no segundo.
+Em seguida explique, em uma frase, para onde vai no alvo fixo a energia que
+\emph{não} aparece como $\sqrt s$.
 \end{activity}
 
 \begin{figure}[htb]
@@ -3128,12 +3383,20 @@ manter o centro de momento em movimento no laboratório.}
 \end{figure}
 
 \section{Partículas massivas e partículas sem massa}
+\label{sec:massivas-sem-massa}
 
 Para partículas massivas, existe referencial de repouso. Nesse referencial
 $\bm p=0$ e $E=m$. Para partículas sem massa, não há referencial de repouso:
 qualquer transformação de Lorentz admissível ainda observa a partícula se
 movendo à velocidade da luz. Essa diferença é geométrica. O quadrimomento de
 uma partícula massiva é temporal; o de um fóton é nulo.
+
+A relação de dispersão \eqref{eq:dispersao} põe essa diferença em desenho. O
+lugar dos pares $(|\bm p|,E)$ acessíveis a uma partícula de massa $m$ chama-se
+a \emph{casca de massa} dela, e a Figura~\ref{fig:casca-massa} mostra as duas
+formas que ela toma. Dizer que uma partícula ``está na casca de massa'' é
+apenas outro modo de dizer $\vec p\cdot\vec p=-m^2$ --- e é esse vínculo que o
+Exemplo do espalhamento Compton usa para eliminar o elétron que não se mede.
 
 \begin{figure}[htb]
 \centering
@@ -3158,11 +3421,11 @@ que não há relógio físico comóvel com um fóton.
   \item \label{item-aceleracao-propria} \textbf{O foguete de 1\,g.} Use o
   resultado \eqref{eq:rindler-deslocado} para a viagem que a ficção científica
   gosta: um foguete que mantém $a_0=g$ (gravidade artificial confortável) rumo
-  a Proxima Centauri, a $D=4{,}25$ anos-luz. (a) Mostre que, acelerando na primeira metade
+  a Proxima Centauri, a $D=4{,}2465$ anos-luz. (a) Mostre que, acelerando na primeira metade
   e freando na segunda, o tempo próprio total é
   $\tau=(2/g)\operatorname{arcosh}\!\big(1+gD/2\big)$, em unidades com
   $c=1$. (b) Calcule $\tau$ e o tempo decorrido na Terra, sabendo que
-  $g\approx1{,}03$\,ano$^{-1}$ nessas unidades. (c) Repita para
+  $g\approx1{,}0323$\,ano$^{-1}$ nessas unidades. (c) Repita para
   $D=27\,000$ anos-luz (o centro da Galáxia) e comente: o que limita a
   viagem não é o tempo do viajante.
 
@@ -3198,28 +3461,45 @@ que não há relógio físico comóvel com um fóton.
 \begin{example}
 \textbf{Espalhamento Compton.} Um fóton de energia $E$ colide com um elétron
 em repouso (massa $m_e$) e é espalhado por um ângulo $\theta$, saindo com
-energia $E'$. O elétron recua com quadrimomento $p_e'$, que não medimos
-diretamente --- a estratégia é eliminá-lo usando $p_e'^\mu p_{e\,\mu}'=-m_e^2$.
+energia $E'$. O elétron recua com quadrimomento $\vec p_e{}'$, que não medimos
+diretamente --- a estratégia é eliminá-lo usando
+$\vec p_e{}'\cdot\vec p_e{}'=-m_e^2$.
 
-Conservação de quadrimomento dá $p_\gamma+p_e=p_\gamma'+p_e'$, ou seja
-$p_e'=p_\gamma+p_e-p_\gamma'$. Elevando ao quadrado (produto de Minkowski
-consigo mesmo) e usando $p_\gamma^2=p_\gamma'^2=0$ (fótons) e $p_e^2=-m_e^2$,
+\emph{Um aviso de notação.} Neste exemplo a linha marca \emph{depois da
+colisão}, e não outro referencial: tudo se passa num único referencial, o do
+elétron inicialmente em repouso, e $\vec p_\gamma$ e $\vec p_\gamma{}'$ são
+mesmo dois vetores diferentes. É o uso corrente na literatura de colisões, e
+não tem relação com a linha do interlúdio, que ia no \emph{índice} e trocava
+de observador.
+
+Conservação de quadrimomento dá
+$\vec p_\gamma+\vec p_e=\vec p_\gamma{}'+\vec p_e{}'$, ou seja
+$\vec p_e{}'=\vec p_\gamma+\vec p_e-\vec p_\gamma{}'$. Tomando o produto de
+Minkowski de cada lado consigo mesmo e usando
+$\vec p_\gamma\cdot\vec p_\gamma=\vec p_\gamma{}'\cdot\vec p_\gamma{}'=0$
+(fótons) e $\vec p_e\cdot\vec p_e=-m_e^2$,
 \begin{align*}
-  p_e'^2 &= p_\gamma^2+p_e^2+p_\gamma'^2+2p_\gamma\cdot p_e-2p_\gamma\cdot
-           p_\gamma'-2p_e\cdot p_\gamma'\\
+  \vec p_e{}'\cdot\vec p_e{}' &=
+    \vec p_\gamma\cdot\vec p_\gamma+\vec p_e\cdot\vec p_e
+    +\vec p_\gamma{}'\cdot\vec p_\gamma{}'
+    +2\,\vec p_\gamma\cdot\vec p_e
+    -2\,\vec p_\gamma\cdot\vec p_\gamma{}'
+    -2\,\vec p_e\cdot\vec p_\gamma{}'\\
   &\Longrightarrow\quad
-  p_\gamma\cdot p_e=p_\gamma\cdot p_\gamma'+p_e\cdot p_\gamma'.
+  \vec p_\gamma\cdot\vec p_e=\vec p_\gamma\cdot\vec p_\gamma{}'
+   +\vec p_e\cdot\vec p_\gamma{}'.
 \end{align*}
 Nas coordenadas em que o elétron está inicialmente em repouso e o fóton
 incidente se move ao longo de $x$,
 \[
-  p_\gamma^\mu=(E,E,0,0),\qquad
-  p_e^\mu=(m_e,0,0,0),\qquad
-  p_\gamma'^\mu=(E',E'\cos\theta,E'\sin\theta,0).
+  \vec p_\gamma\temcomp{\obs}(E,E,0,0),\qquad
+  \vec p_e\temcomp{\obs}(m_e,0,0,0),\qquad
+  \vec p_\gamma{}'\temcomp{\obs}(E',E'\cos\theta,E'\sin\theta,0),
 \]
-Calculando os três produtos ($p_\gamma\cdot p_e=-Em_e$,
-$p_\gamma\cdot p_\gamma'=-EE'(1-\cos\theta)$, $p_e\cdot p_\gamma'=-m_eE'$) e
-substituindo,
+onde as componentes temporais são as energias. Calculando os três produtos
+($\vec p_\gamma\cdot\vec p_e=-Em_e$,
+$\vec p_\gamma\cdot\vec p_\gamma{}'=-EE'(1-\cos\theta)$,
+$\vec p_e\cdot\vec p_\gamma{}'=-m_eE'$) e substituindo,
 \[
   -Em_e=-EE'(1-\cos\theta)-m_eE'
   \quad\Longrightarrow\quad
@@ -3252,11 +3532,17 @@ $E'\approx E$.}
 \textbf{Efeito Doppler transversal.} O item~\ref{item-doppler} pede o efeito
 Doppler quando fonte e observador se movem ao longo da \emph{mesma linha}.
 Aqui tratamos o caso perpendicular, que não tem análogo clássico. Uma fonte
-tem quadrivelocidade $U_{\rm fonte}^\mu=\gamma(1,v,0,0)$ no referencial $S$ do
-observador. No instante em que o observador (em repouso em $S$) recebe o
-fóton \emph{perpendicularmente} à velocidade da fonte, o quadrimomento do
-fóton em $S$ é $p^\mu=(\nu,0,\nu,0)$, onde $\nu$ é a frequência medida pelo
-observador.
+tem quadrivelocidade $\vec U_{\rm fonte}\temcomp{\obs}\gamma(1,v,0,0)$ no
+referencial $\obs$ do observador. No instante em que o observador (em repouso
+em $\obs$) recebe o fóton \emph{perpendicularmente} à velocidade da fonte, o
+quadrimomento do fóton é
+\[
+  \vec p\temcomp{\obs}(\nu,0,\nu,0),
+\]
+onde $\nu$ é a frequência medida pelo observador. Aqui a energia do fóton está
+escrita \emph{em unidades de frequência}: como $E=h\nu$ com o mesmo $h$ para
+todos, o fator de Planck cancela na razão entre duas frequências, que é tudo o
+que este exemplo calcula.
 
 A frequência própria $\nu_0$ --- a que a fonte mediria em seu próprio
 referencial de repouso --- é a energia do fóton medida por um observador com
@@ -3285,8 +3571,8 @@ trajetória em $1+1$ dimensões é
 com $\Delta x$ contado a partir do ponto de partida, como em
 \eqref{eq:rindler-deslocado}. Considere uma nave que acelera a $a_0=1\,g$
 durante metade da viagem e desacelera pelo mesmo tanto na segunda metade,
-chegando em repouso no destino. Para $a_0=1g\approx1{,}03$ ano-luz/ano$^2$ e
-uma distância $D=4{,}25$ anos-luz (Proxima Centauri), resolvendo
+chegando em repouso no destino. Para $a_0=1g\approx1{,}0323$\,ano$^{-1}$ e
+uma distância $D=4{,}2465$ anos-luz (Proxima Centauri), resolvendo
 $\Delta x(\tau_{1/2})=D/2$ para o tempo próprio de meia viagem $\tau_{1/2}$ e
 depois dobrando por simetria, obtém-se
 \[
@@ -3400,9 +3686,12 @@ massa invariante do par continua sendo $m_\pi$.
 Um fóton de energia $E$ colide frontalmente com um elétron de energia $E_e$
 que se move em sentido oposto (espalhamento Compton inverso, o mecanismo que
 produz raios X em jatos astrofísicos). Usando o invariante
-$s=-(p_\gamma+p_e)^2$, obtenha a energia máxima que o fóton pode ter após o
-espalhamento no limite $E_e\gg m_e\gg E$. Mostre que ela cresce como
-$\gamma_e^2$.
+\eqref{eq:mandelstam-s}, obtenha a energia máxima que o fóton pode ter após o
+espalhamento no regime de Thomson --- aquele em que a energia do fóton
+\emph{vista pelo elétron} ainda é pequena, $\gamma_eE\ll m_e$, com
+$E_e=\gamma_em_e\gg m_e$. Mostre que ela cresce como $\gamma_e^2$. Verifique
+também que a hipótese $\gamma_eE\ll m_e$ é indispensável: quando ela falha, o
+fóton espalhado não pode passar de $E_e$, e o crescimento satura.
 \end{exercise}
 
 \begin{exercise}
