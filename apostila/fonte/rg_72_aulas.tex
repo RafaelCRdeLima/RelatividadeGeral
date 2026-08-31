@@ -4008,41 +4008,48 @@ folhas. A seta $V$ ficou idêntica; foi a régua que mudou.
 
 \begin{activity}[no ÁLETRA]
 \label{atv:pilha-aletra}
-O \href{\rgsitealetra}{ÁLETRA} desenha exatamente esta figura e deixa arrastar
-a seta: as folhas dele são os níveis inteiros de $\omega$, e o numeral no alto
-é o número de folhas atravessadas. Roda no navegador, sem instalar nada. Abra
-e escolha \textsf{Plano euclidiano} no seletor de superfície.
+O \href{\rgsitealetra}{ÁLETRA} desenha exatamente esta figura: as folhas dele
+são os níveis inteiros de $\omega$, e o numeral no alto é o número de folhas
+que a seta atravessa. Roda no navegador, sem instalar nada. Abra, escolha
+\textsf{Plano euclidiano} no seletor de superfície e deixe a leitura em
+\textsf{$\langle\omega,v\rangle$ --- contar folhas}. A um-forma e o vetor se
+escrevem por extenso nos campos do painel, de modo que nada aqui depende de
+acertar um arrasto.
 
-\textbf{(a) A seta cresce, a pilha não.} Deixe a leitura em
-\textsf{$\langle\omega,v\rangle$ --- contar folhas} e ponha os controles da
-um-forma em $\omega_0=2{,}0$ e $\omega_1=0{,}0$: a pilha vira um pente de retas
-verticais, espaçadas de $1/2$ pela \eqref{eq:espacamento-pilha}. Arraste a seta
-na horizontal até o numeral marcar $2{,}00$ e confira contando: são duas folhas
-atravessadas. Agora estique a seta até o numeral marcar $4{,}00$. A única coisa
-que mudou na tela foi o comprimento da seta.
+\textbf{(a) A seta cresce, a pilha não.} No bloco \textsf{One-form $\omega$}
+escreva $\omega_x=2$ e $\omega_y=0$: a pilha vira um pente de retas verticais,
+espaçadas de $1/2$ pela \eqref{eq:espacamento-pilha}. No bloco
+\textsf{Vetor $v$} escreva $v^x=1$ e $v^y=0$. O numeral marca $2{,}00$, e as
+duas folhas atravessadas dão para contar no dedo. Agora dobre a seta, com
+$v^x=2$: o numeral vai a $4{,}00$ e a pilha continua com as mesmas $13$ retas
+na tela. Só a seta mudou.
 
-\textbf{(b) A pilha aperta, a seta não.} Volte a seta ao tamanho de antes
-(numeral em $2{,}00$) e ponha $\omega_0=4{,}0$. O numeral marca $4{,}00$ de
-novo --- só que agora a seta é a mesma e são as folhas que estão duas vezes
-mais juntas. Os itens (a) e (b) dão o mesmo número por razões geométricas
-diferentes: é a distinção que nenhuma conta faz e a figura faz.
+\textbf{(b) A pilha aperta, a seta não.} Volte a $v^x=1$ e escreva
+$\omega_x=4$. O numeral marca $4{,}00$ de novo --- mas a seta é a mesma de (a),
+e as retas passaram de $13$ para $25$. Desta vez foi a pilha que mudou. Os
+itens (a) e (b) dão o mesmo número por razões geométricas diferentes, e é a
+distinção que nenhuma conta faz e a figura faz.
 
 \textbf{(c) A pilha vinda de uma função.} Troque a leitura para
 \textsf{$\dd\omega(u,v)$ --- circulação}, escreva \texttt{2*x + y} no campo
 $f$ e marque \textsf{usar $\omega=\dd f$}. A pilha desenhada passa a ser a de
 $\dd f$: as curvas de nível de $f$, que são a um-forma $(2,1)$ da
 Figura~\ref{fig:umaforma-pilha}. Troque $f$ para \texttt{4*x + 2*y} --- mesma
-inclinação, metade do espaçamento. (O numeral marca zero, e vai marcar
-zero sempre: uma pilha que veio de uma função não circula, o que é o teorema
-$\dd^2f=0$ e está fora do programa deste curso. Aqui o que interessa é a
-pilha desenhada, não o numeral.)
+inclinação, e as folhas passam de $17$ para $35$. (O numeral marca zero, e vai
+marcar zero sempre: uma pilha que veio de uma função não circula, o que é o
+teorema $\dd^2f=0$ e está fora do programa deste curso. Aqui o que interessa é
+a pilha desenhada, não o numeral.)
 
 \textbf{(d) Um campo, e não uma um-forma só.} Ainda com \textsf{usar
-$\omega=\dd f$}, escreva \texttt{x*x + y*y}: as folhas viram círculos, e
-arrastar o ponto para longe da origem fecha a pilha, porque $|\dd f|=2r$.
-Depois escreva \texttt{x*y} e leve o ponto até a origem, onde $\dd f=0$: a
-pilha \emph{desaparece} da tela. Não é defeito do programa --- não há folha
-nenhuma para atravessar, e por isso o número é zero para qualquer seta.
+$\omega=\dd f$}, escreva \texttt{x*x + y*y}. \emph{A tela fica sem folha
+nenhuma} --- e é esse o conteúdo do item, não um defeito do programa:
+$\dd f=(2x,2y)$ se anula na origem, que é justamente onde o ponto começa.
+Arraste o ponto --- a alça no meio da carta --- para longe da origem, e as
+folhas aparecem, circulares, fechando conforme o ponto se afasta: a densidade
+dobra cada vez que a distância dobra, porque $|\dd f|=2r$. Depois escreva
+\texttt{x*y} e leve o ponto de volta à origem. A pilha some outra vez, agora
+porque $\dd f=(y,x)$ também se anula ali --- não há folha nenhuma para
+atravessar, e o número é zero para qualquer seta.
 \end{activity}
 
 \section{A base dual}
