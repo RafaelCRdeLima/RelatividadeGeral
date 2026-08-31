@@ -3848,7 +3848,7 @@ vetor,
 \]
 produz um número igual em todas as bases: as duas matrizes se cancelam,
 $\Lambda^{-1}\Lambda=\mathbb{1}$. Nenhuma métrica foi usada --- este é o ponto
-que o Exercício~3 desta lista explora. A contração de um índice em cima com um
+que o terceiro dos Exercícios, no fim do capítulo, explora. A contração de um índice em cima com um
 índice embaixo é a única operação que produz invariantes de graça, e é por
 isso que a notação insiste tanto na posição dos índices.
 
@@ -4063,14 +4063,26 @@ têm tipos diferentes.
 Em uma base ortonormal a distinção entre $V^\mu$ e $V_\mu$ passa despercebida,
 porque
 $V^\mu=V_\mu$ a menos de sinais. Ela fica visível em uma base oblíqua (não
-ortogonal), como a que aparece naturalmente em coordenadas curvilíneas ou em
-diagramas de Minkowski com eixos inclinados (Figura~\ref{fig:simultaneidade}
-do Capítulo~\ref{chap:relatividade-especial}). Dada uma base $\{\bm e_1,\bm
-e_2\}$ qualquer, um mesmo vetor $V$ admite duas decomposições naturais e
+ortogonal), como a que aparece naturalmente em coordenadas
+curvilíneas ou, em Minkowski, nas coordenadas de cone de luz do
+\hyperref[sec:extra-tensores]{Conteúdo extra} deste capítulo.
+
+Antes disso, um exemplo tentador que \emph{não} serve. Os eixos inclinados
+$t'$ e $x'$ de um diagrama de Minkowski
+(Figura~\ref{fig:simultaneidade} do
+Capítulo~\ref{chap:relatividade-especial}) parecem uma base oblíqua, e não
+são: a inclinação é artefato de desenhar Minkowski numa folha euclidiana. Um
+\emph{boost} leva base ortonormal em base ortonormal, e a métrica calculada na
+base de $S'$ dá de volta $\eta_{\mu\nu}$, sem termos cruzados --- é o
+item~2 do Conteúdo extra que manda verificar isso. Obliquidade de verdade em
+Minkowski exige uma base que \emph{não} esteja ligada à original por uma
+transformação de Lorentz.
+
+Dada uma base $\{\vec e_1,\vec e_2\}$ qualquer, um mesmo vetor $V$ admite duas decomposições naturais e
 geometricamente distintas:
 \begin{align*}
   V &= V^ie_i && \text{(regra do paralelogramo)},\\
-  V_i &= V\cdot e_i && \text{(projeção perpendicular sobre cada eixo)}.
+  V_i &= V\cdot\vec e_i && \text{(projeção sobre cada eixo)}.
 \end{align*}
 As componentes contravariantes $V^i$ respondem à pergunta ``quanto de cada
 vetor de base preciso somar para reconstruir $V$?''. As componentes
@@ -4078,13 +4090,21 @@ covariantes $V_i$ respondem a uma pergunta diferente: ``qual é a projeção de
 $V$ ao longo de cada eixo?''. As duas só coincidem quando a base é
 ortonormal.
 
+Um cuidado com a palavra ``projeção''. O produto $V\cdot\vec e_i$ é o
+comprimento da projeção \emph{multiplicado} por $|\vec e_i|$, e só é a
+projeção medida com régua quando os vetores de base têm comprimento $1$. Na
+Figura~\ref{fig:base-obliqua}, $|\vec e_2|=1{,}08$: a projeção de $V$ sobre
+aquele eixo mede $1{,}32$, enquanto a componente covariante vale
+$V_2=1{,}42$.
+
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.92\textwidth]{cap03_base_obliqua.pdf}
 \caption{O mesmo vetor $V$, na mesma base oblíqua $\{e_1,e_2\}$, decomposto
 de duas maneiras. À esquerda, a regra do paralelogramo dá as componentes
-contravariantes $V^i$. À direita, a projeção perpendicular sobre cada eixo
-dá as componentes covariantes $V_i=V\cdot e_i$. Numericamente, com
+contravariantes $V^i$. À direita, a projeção perpendicular sobre cada eixo,
+medida em unidades de $|\vec e_i|$, dá as componentes covariantes
+$V_i=V\cdot\vec e_i$. Numericamente, com
 $e_1=(1,0)$, $e_2=(0{,}4,1)$ e $V=(1{,}3,0{,}9)$: $V^1=0{,}94$,
 $V^2=0{,}9$, mas $V_1=1{,}3$, $V_2=1{,}42$.}
 \label{fig:base-obliqua}
@@ -4326,6 +4346,7 @@ graus de liberdade dos dois lados e verifique que fecham em dez.
 
 
 \section{Conteúdo extra}
+\label{sec:extra-tensores}
 
 Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
 
@@ -4350,7 +4371,8 @@ um boost leva base ortonormal em base ortonormal.
   Para obter obliquidade real, troque para as coordenadas de \emph{cone de
 luz}, $u=t-x$ e $w=t+x$. Mostre que agora
 \[
-  g=\begin{pmatrix}0&-2\\-2&0\end{pmatrix},
+  g_{\mu\nu}=\begin{pmatrix}0&-\tfrac12\\[2pt]-\tfrac12&0\end{pmatrix},
+  \qquad\text{ou seja}\qquad \dd s^2=-\dd u\,\dd w,
 \]
 com a diagonal \emph{nula}: os dois vetores de base são vetores nulos, cada
 um ortogonal a si mesmo --- exatamente a esquisitice que a
@@ -4361,7 +4383,7 @@ descer índices \emph{troca as componentes de lugar} em vez de apenas trocar
 um sinal.
 
   \item \textbf{Quando a base quase degenera.} Em \arq{cap03\_tensores.py}, faça
-o ângulo entre $\bm e_1$ e $\bm e_2$ tender a zero e acompanhe o número de
+o ângulo entre $\vec e_1$ e $\vec e_2$ tender a zero e acompanhe o número de
 condição da matriz da métrica e o erro numérico na recuperação da base dual.
 Faça um gráfico do erro contra o ângulo e explique por que referenciais
 ortonormais são preferíveis em qualquer cálculo numérico.
