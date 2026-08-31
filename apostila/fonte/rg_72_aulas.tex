@@ -65,6 +65,11 @@
   coltitle=rgGrafite, colbacktitle=white, titlerule=0pt,
   attach title to upper=\par\vspace{2pt}, #1}
 
+% Notação de Dirac, usada no interlúdio de álgebra linear.
+\newcommand{\ket}[1]{\lvert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \rvert}
+\newcommand{\braket}[2]{\langle #1 \vert #2 \rangle}
+
 % Interlúdio: bloco fora da numeração das seções, em cor própria.
 \newtcolorbox{interludio}[2][]{rgbase, parbox=false,
   colback=rgAnilClaro, colframe=rgAnilClaro,
@@ -427,11 +432,11 @@ Aula & Foco & Seções & Conteúdo \\
 8 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
 9 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Problemas orientados; Exemplos resolvidos adicionais. \\
 10 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios; Conteúdo extra. \\
-11 & Por que existem um-formas & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; tensores de tipo $(r,s)$. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
-12 & A métrica como ponte & 3.3 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
-13 & Equações tensoriais e bases oblíquas & 3.4, 3.5, 3.6 & Tensores no espaço-tempo plano: Regra prática de índices; O que significa uma equação tensorial; Componentes em uma base oblíqua. \\
-14 & Derivar tensores, e prática & 3.7, 3.8, 3.9, 3.10 & Tensores no espaço-tempo plano: Derivada de um tensor (e por que ela deixa de funcionar em espaço curvo); Erros comuns com índices; Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
-15 & Oficina computacional III & 3.11, 3.12, 3.13 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
+11 & Um-formas e a base dual & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; a pilha de superfícies, e o que muda ao dobrar a seta ou dobrar a pilha; o Interlúdio sobre os axiomas de espaço vetorial, com o paralelo entre um-formas e os bras da mecânica quântica; a base dual. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+12 & Tensores, índices e simetrias & 3.3, 3.4, 3.5 & Tensores no espaço-tempo plano: tensores de tipo $(r,s)$ e a lei que os define; a regra dos índices e os três erros que dela decorrem; simetria e antissimetria, e a contração que se anula de graça. Apoio: Apêndice~\ref{ap:indices}, Índices mudos e troca de nomes. \\
+13 & A métrica como ponte & 3.6, 3.7 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices; o que significa, afinal, uma equação tensorial. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+14 & Bases oblíquas e a derivada & 3.8, 3.9, 3.10, 3.11 & Tensores no espaço-tempo plano: componentes em uma base oblíqua e a base recíproca; Derivada de um tensor (e por que ela deixa de funcionar em espaço curvo); Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
+15 & Oficina computacional III & 3.12, 3.13, 3.14 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
 16 & O que é um fluido & 4.1, 4.2, 4.3 & Fluidos relativísticos: o que é um fluido; poeira como o caso mais simples, com densidade e fluxo; o vetor fluxo de número. \\
 17 & Fluxo de número e conservação & 4.4, 4.5, 4.6 & Fluidos relativísticos: densidade como um fluxo temporal; um-formas, superfícies e o fluxo invariante; conservação do número de partículas. \\
 18 & O tensor energia-momento & 4.7, 4.8 & Fluidos relativísticos: o tensor energia-momento componente a componente; tensões, e o argumento que força a simetria. \\
@@ -4051,6 +4056,161 @@ dobra cada vez que a distância dobra, porque $|\dd f|=2r$. Depois escreva
 porque $\dd f=(y,x)$ também se anula ali --- não há folha nenhuma para
 atravessar, e o número é zero para qualquer seta.
 \end{activity}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Interlúdio: o mínimo de álgebra linear}
+\label{sec:interludio-algebra}
+
+\begin{interludio}{O mínimo que você precisa lembrar de álgebra linear}
+
+A próxima seção começa afirmando que as um-formas ``formam um espaço vetorial
+próprio''. É uma frase que se lê rápido e se aceita sem conferir --- e não
+deveria, porque é justamente ela que autoriza tudo o que vem depois: falar em
+base, em dimensão, em componentes. Vale gastar duas páginas relembrando o que
+a afirmação quer dizer, porque a definição é bem menor do que a memória
+costuma guardar.
+
+\textbf{Os axiomas.} Um \emph{espaço vetorial sobre os reais} é um conjunto $V$
+munido de duas operações --- somar dois elementos de $V$, e multiplicar um
+elemento de $V$ por um número real --- que obedecem, para quaisquer
+$u,v,w\in V$ e $a,b\in\mathbb{R}$:
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{5.4cm}@{}}
+\toprule
+\multicolumn{3}{@{}l}{\emph{Da soma}}\\
+\midrule
+A1 & $u+v=v+u$ & comutativa \\
+A2 & $(u+v)+w=u+(v+w)$ & associativa \\
+A3 & existe $0\in V$ com $v+0=v$ & há um elemento neutro \\
+A4 & para cada $v$ existe $-v$ com $v+(-v)=0$ & todo elemento tem oposto \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Do produto por escalar}}\\
+\midrule
+M1 & $a(bv)=(ab)v$ & os escalares se compõem \\
+M2 & $1\,v=v$ & o $1$ não faz nada \\
+M3 & $a(u+v)=au+av$ & distributiva sobre a soma de vetores \\
+M4 & $(a+b)v=av+bv$ & distributiva sobre a soma de escalares \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+São oito. Se você lembrava de sete, ou de dez, os dois são defensáveis: alguns
+livros contam à parte as duas condições de \emph{fechamento} --- que $u+v$ e
+$av$ ainda estejam em $V$ ---, e outros dobram axiomas um no outro. O número
+não importa; a lista importa.
+
+\textbf{E repare no que a lista \emph{não} diz.} Não há uma palavra sobre
+setas, comprimento, ângulo ou direção. Nada ali permite perguntar ``qual é o
+tamanho de $v$?''. Um espaço vetorial é apenas um conjunto onde somar e
+escalar funcionam como se espera --- e é por isso que a definição pega tanta
+coisa que não se parece nem um pouco com uma flecha:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+O ``vetor'' é\dots & somar é\dots & o zero é\dots \\
+\midrule
+uma $n$-upla $(x_1,\dots,x_n)$ & somar entrada a entrada & $(0,\dots,0)$ \\
+um polinômio de grau $\le n$ & somar os coeficientes & o polinômio nulo \\
+uma função contínua em $[a,b]$ & $(f+g)(x)=f(x)+g(x)$ & a função nula \\
+uma matriz $m\times n$ & somar entrada a entrada & a matriz nula \\
+uma solução de $y''+\omega^2y=0$ & somar as soluções & $y\equiv0$ \\
+uma um-forma & $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$ & a um-forma nula \\
+um ket $\ket{\psi}$ & a superposição & o vetor nulo \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A quinta linha merece um segundo olhar. As soluções de $y''+\omega^2y=0$
+formam um espaço vetorial de dimensão \emph{dois}: uma base é
+$\{\cos\omega t,\ \sin\omega t\}$, e as ``componentes'' de uma solução nessa
+base são a amplitude e a fase. Quando você resolveu o oscilador harmônico e
+escreveu ``a solução geral é combinação linear das duas'', estava expandindo um
+vetor numa base --- e o vetor era uma \emph{função}.
+
+\textbf{Por que isso resolve a afirmação da próxima seção.} Some duas
+um-formas definindo $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$, e multiplique por
+escalar com $(a\omega)(V)=a\,\omega(V)$. Os oito axiomas caem de graça, porque
+do lado direito estão números reais, que já os obedecem. Logo as um-formas
+formam um espaço vetorial, e portanto têm base, dimensão e componentes --- que
+é tudo o que a Seção~\ref{sec:base-dual} vai usar. O mesmo argumento vale para
+qualquer $V$: o conjunto das aplicações lineares de $V$ nos reais é um espaço
+vetorial, chamado \emph{espaço dual} $V^*$, e em dimensão finita
+$\dim V^*=\dim V$.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O QUE OS AXIOMAS NÃO DÃO}]
+Nenhum dos oito axiomas menciona produto escalar. Ser espaço vetorial é de
+graça; poder medir comprimentos e ângulos é estrutura \emph{extra}, que se
+acrescenta por cima --- e no nosso caso essa estrutura é a métrica. É por isso
+que a um-forma $\partial_\mu f$ existe antes de qualquer métrica, e é por isso
+que a métrica é o que \emph{traduz} vetores em um-formas, não o que as cria.
+\end{atencao}
+
+\textbf{Bras e kets são a mesma construção.} Quem já viu mecânica quântica já
+usou uma um-forma, com outro nome. Na notação de Dirac, um estado é um ket
+$\ket{\psi}$, elemento de um espaço vetorial (complexo) $\mathcal{H}$. Um bra
+$\bra{\phi}$ não é outro estado: é uma \emph{aplicação linear} que come um ket
+e devolve um número --- ou seja, um elemento de $\mathcal{H}^*$. E o
+``bracket'' $\braket{\phi}{\psi}$ é literalmente a aplicação de um no outro,
+que é a nossa contração $\omega_\mu V^\mu$ escrita de outro jeito. A tradução é
+termo a termo:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+& Neste curso & Mecânica quântica \\
+\midrule
+vetor              & $\vec V$, componentes $V^\mu$ & ket $\ket{\psi}$ \\
+elemento do dual   & um-forma $\omega$, $\omega_\mu$ & bra $\bra{\phi}$ \\
+o número           & $\omega(\vec V)=\omega_\mu V^\mu$ & $\braket{\phi}{\psi}$ \\
+base               & $\vec e_\mu$ & $\ket{n}$ \\
+base dual          & $\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$ &
+                     $\braket{m}{n}=\delta_{mn}$ \\
+componentes        & $V^\mu=\tilde\omega^\mu(\vec V)$ &
+                     $c_n=\braket{n}{\psi}$ \\
+reconstruir        & $\vec V=V^\mu\vec e_\mu$ &
+                     $\ket{\psi}=\sum_n\braket{n}{\psi}\ket{n}$ \\
+a régua que traduz & a métrica, $\omega_\mu=g_{\mu\nu}V^\nu$ &
+                     a conjugação hermitiana, $\ket{\psi}\mapsto\bra{\psi}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A penúltima linha é a relação de completeza $\sum_n\ket{n}\bra{n}=\hat1$, que
+todo curso de quântica usa dezenas de vezes: ela é exatamente
+$\vec V=\tilde\omega^\mu(\vec V)\,\vec e_\mu$, a identidade escrita como
+``soma sobre a base dual vezes a base''. O mesmo teorema, duas notações.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}ONDE O PARALELO TRINCA}]
+A analogia é estrutural, não literal, e vale saber onde ela para. Primeiro, os
+escalares da quântica são \emph{complexos}, e a passagem de ket para bra é
+\emph{antilinear}: $\lambda\ket{\psi}$ vira $\bar\lambda\bra{\psi}$. A nossa
+métrica é linear, porque os escalares aqui são reais. Segundo, o produto
+interno da quântica é \emph{positivo definido} --- $\braket{\psi}{\psi}>0$ para
+todo estado não nulo ---, e $\eta_{\mu\nu}$ não é: existem vetores não nulos de
+norma zero, os vetores nulos, e nenhum espaço de Hilbert admite isso. Minkowski
+tem uma forma bilinear, não um produto interno no sentido estrito.
+\end{atencao}
+
+O que os dois casos têm em comum, e que é o motivo de trazer o assunto aqui,
+é uma coisa só: \textbf{ambas as notações escondem a distinção entre o espaço e
+o seu dual, e escondem pelo mesmo motivo} --- na base padrão a régua que
+traduz um no outro é trivial. Em Minkowski ela troca no máximo um sinal; numa
+base ortonormal de Hilbert, $\braket{m}{n}=\delta_{mn}$, ela não faz
+absolutamente nada. Por isso ninguém precisa da distinção enquanto fica na base
+de sempre, e por isso ela volta a importar assim que a base deixa de ser
+ortonormal --- na quântica, ao mudar de base ou lidar com espectro contínuo;
+aqui, a partir do momento em que a métrica passa a depender do ponto e o
+Capítulo~\ref{cap:curvatura} começa.
+
+\end{interludio}
+
+\clearpage
 
 \section{A base dual}
 \label{sec:base-dual}
