@@ -372,7 +372,7 @@ Encontros & Módulo & Conteúdo \\
 \midrule
 1--4 & Relatividade especial & Apresentação da disciplina, postulados, intervalos, transformações de Lorentz, diagramas, paradoxo dos gêmeos. \\
 5--10 & Vetores relativísticos & Quadrivelocidade, quadrimomento, produto escalar, fótons, colisões e decaimentos. \\
-11--15 & Tensores em Minkowski & Um-formas, métrica, tensores mistos, mudança de base, derivadas. \\
+11--15 & Tensores em Minkowski & 1-formas, métrica, tensores mistos, mudança de base, derivadas. \\
 16--20 & Fluidos relativísticos & Fluxo de partículas, tensor energia-momento, fluido perfeito, conservação. \\
 21--24 & Da gravidade à curvatura & Equivalência, marés, coordenadas curvilíneas, bases não coordenadas, geodésicas. \\
 25--29 & Variedades curvas & Derivada covariante, transporte paralelo, tensor de Riemann, Ricci, escalar de curvatura, Bianchi. \\
@@ -432,13 +432,13 @@ Aula & Foco & Seções & Conteúdo \\
 8 & Centro de momento e colisões & 2.7, 2.8 & Vetores e momento relativístico: Centro de momento; Partículas massivas e partículas sem massa. \\
 9 & Compton, Doppler e foguete & 2.9, 2.10 & Vetores e momento relativístico: Problemas orientados; Exemplos resolvidos adicionais. \\
 10 & Oficina computacional II & 2.11, 2.12, 2.13 & Vetores e momento relativístico: Resolução numérica; Exercícios; Conteúdo extra. \\
-11 & Um-formas e a base dual & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; a pilha de superfícies, e o que muda ao dobrar a seta ou dobrar a pilha; o Interlúdio sobre os axiomas de espaço vetorial, com o paralelo entre um-formas e os bras da mecânica quântica; a base dual. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
+11 & 1-formas e a base dual & 3.1, 3.2 & Tensores no espaço-tempo plano: o gradiente transforma com a matriz inversa e por isso não é vetor; a pilha de superfícies, e o que muda ao dobrar a seta ou dobrar a pilha; o Interlúdio sobre os axiomas de espaço vetorial, com o paralelo entre 1-formas e os bras da mecânica quântica; a base dual. Apoio: Apêndice~\ref{ap:indices}, A filosofia dos índices e Delta de Kronecker. \\
 12 & Tensores, índices e simetrias & 3.3, 3.4, 3.5 & Tensores no espaço-tempo plano: tensores de tipo $(r,s)$ e a lei que os define; a regra dos índices e os três erros que dela decorrem; simetria e antissimetria, e a contração que se anula de graça. Apoio: Apêndice~\ref{ap:indices}, Índices mudos e troca de nomes. \\
-13 & A métrica como ponte & 3.6, 3.7 & Tensores no espaço-tempo plano: a métrica traduz vetores em um-formas; métrica inversa e subida de índices; o que significa, afinal, uma equação tensorial. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
+13 & A métrica como ponte & 3.6, 3.7 & Tensores no espaço-tempo plano: a métrica traduz vetores em 1-formas; métrica inversa e subida de índices; o que significa, afinal, uma equação tensorial. Apoio: Apêndice~\ref{ap:indices}, Tradução para relatividade. \\
 14 & Bases oblíquas e a derivada & 3.8, 3.9, 3.10, 3.11 & Tensores no espaço-tempo plano: componentes em uma base oblíqua e a base recíproca; Derivada de um tensor (e por que ela deixa de funcionar em espaço curvo); Exemplos resolvidos adicionais; Problemas orientados. Apoio: Apêndice~\ref{ap:indices}, Checklist para não errar. \\
 15 & Oficina computacional III & 3.12, 3.13, 3.14 & Tensores no espaço-tempo plano: Resolução numérica; Exercícios. Apoio opcional: Apêndice~\ref{ap:indices}, Símbolo de Levi-Civita e A identidade fundamental. \\
 16 & O que é um fluido & 4.1, 4.2, 4.3 & Fluidos relativísticos: o que é um fluido; poeira como o caso mais simples, com densidade e fluxo; o vetor fluxo de número. \\
-17 & Fluxo de número e conservação & 4.4, 4.5, 4.6 & Fluidos relativísticos: densidade como um fluxo temporal; um-formas, superfícies e o fluxo invariante; conservação do número de partículas. \\
+17 & Fluxo de número e conservação & 4.4, 4.5, 4.6 & Fluidos relativísticos: densidade como um fluxo temporal; 1-formas, superfícies e o fluxo invariante; conservação do número de partículas. \\
 18 & O tensor energia-momento & 4.7, 4.8 & Fluidos relativísticos: o tensor energia-momento componente a componente; tensões, e o argumento que força a simetria. \\
 19 & Fluido perfeito e Euler & 4.9, 4.10, 4.11 & Fluidos relativísticos: fluidos gerais, energia interna e a primeira lei; o fluido perfeito; a conservação que devolve continuidade e Euler. \\
 20 & Equações de estado e fechamento & 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: equações de estado; lei de Gauss em quatro dimensões; por que isso importa para a relatividade geral. Exemplos resolvidos, problemas orientados e exercícios. \\
@@ -1633,7 +1633,7 @@ quatro termos somados.
 Vale insistir no terceiro item. Por ora a distinção entre índice em cima e
 índice embaixo parece só uma regra de arrumação, e nada se perderia escrevendo
 tudo embaixo. A partir do capítulo de tensores ela passa a distinguir dois
-objetos genuinamente diferentes --- vetores e um-formas ---, e a convenção
+objetos genuinamente diferentes --- vetores e 1-formas ---, e a convenção
 soma exatamente o par que produz um número independente de coordenadas. Escrever
 os índices na altura certa desde agora é o que evita ter de desaprender depois.
 
@@ -2369,7 +2369,7 @@ tempo todo cansa, e é usual definir
 Em componentes, isso apenas troca o sinal da componente temporal:
 $A_0=-A^0$ e $A_i=A^i$. Por ora trate \eqref{eq:abaixar-indice} como o que
 ela é --- uma abreviação cômoda. O objeto $A_\mu$ tem vida geométrica
-própria (é uma \emph{um-forma}, e a métrica é o que permite associá-la a
+própria (é uma \emph{1-forma}, e a métrica é o que permite associá-la a
 $A^\mu$), mas isso é assunto do Capítulo~\ref{chap:tensores}; nada neste
 capítulo depende dessa leitura mais profunda.
 
@@ -3810,7 +3810,7 @@ numericamente em que condição vale a igualdade. Interprete o excesso.
 \label{cap:tensores-plano}
 
 \begin{objetivos}
-Dominar a notação de índices, distinguir vetores de um-formas, reconhecer
+Dominar a notação de índices, distinguir vetores de 1-formas, reconhecer
 simetrias e compreender a métrica como o objeto que traduz uma coisa na outra
 --- e ver, na derivada, por que tudo isso ainda é fácil enquanto o
 espaço-tempo é plano.
@@ -3820,7 +3820,7 @@ espaço-tempo é plano.
 As marcas dos exercícios remetem ao Capítulo~3 do Schutz, mas a ordem aqui é
 outra, de propósito. Ele abre pela métrica e pela definição abstrata de tensor,
 e só chega ao gradiente na Seção~3.4; aqui o gradiente vem primeiro, porque é
-um objeto que você já usa há anos, e assim a um-forma \emph{aparece} em vez de
+um objeto que você já usa há anos, e assim a 1-forma \emph{aparece} em vez de
 ser postulada. A correspondência, para quem for consultar o livro:
 Seção~\ref{sec:umaformas} $\leftrightarrow$ Schutz 3.3--3.4;
 Seção~\ref{sec:base-dual} $\leftrightarrow$ 3.3;
@@ -3831,12 +3831,12 @@ Seção~\ref{sec:derivada-tensor} $\leftrightarrow$ 3.9. A base oblíqua da
 Seção~\ref{sec:base-obliqua} ele só trata no Capítulo~5.
 \end{leitura}
 
-\section{Um-formas: por que elas existem}
+\section{1-formas: por que elas existem}
 \label{sec:umaformas}
 
 O Capítulo~\ref{chap:vetores} tratou $A_\mu=\eta_{\mu\nu}A^\nu$ como uma
 abreviação cômoda, e prometeu que o objeto do lado esquerdo tem vida própria.
-Esta seção cumpre a promessa --- e o melhor caminho não é definir a um-forma e
+Esta seção cumpre a promessa --- e o melhor caminho não é definir a 1-forma e
 depois procurar exemplos, mas mostrar que você já usa uma há anos sem saber.
 
 \textbf{O gradiente não é um vetor.} Seja $f(x^\mu)$ um campo escalar --- a
@@ -3875,11 +3875,11 @@ com linha; linha em cima, chega nele. Com esse nome,
 Existem, portanto, dois tipos de objeto de quatro componentes no espaço-tempo,
 distinguidos por como mudam de base: os que transformam com $\Lambda$
 (\emph{vetores}, índice em cima) e os que transformam com $\Lambda^{-1}$
-(\emph{um-formas}, índice embaixo). O gradiente $\partial_\mu f$ é o exemplo
-mais natural de uma um-forma, e é anterior a qualquer métrica.
+(\emph{1-formas}, índice embaixo). O gradiente $\partial_\mu f$ é o exemplo
+mais natural de uma 1-forma, e é anterior a qualquer métrica.
 \end{resultado}
 
-\textbf{E é por isso que a contração funciona.} Aplicar uma um-forma a um
+\textbf{E é por isso que a contração funciona.} Aplicar uma 1-forma a um
 vetor,
 \[
   \omega(V)=\omega_\mu V^\mu ,
@@ -3893,8 +3893,8 @@ isso que a notação insiste tanto na posição dos índices.
 \begin{atencao}
 Note a diferença de estatuto entre esta seção e o
 Capítulo~\ref{chap:vetores}. Lá, $A_\mu$ foi \emph{fabricada} a partir de
-$A^\mu$ usando a métrica. Aqui, $\partial_\mu f$ já nasce um-forma, sem que
-nenhuma métrica tenha sido invocada. Um-formas existem em variedades que não
+$A^\mu$ usando a métrica. Aqui, $\partial_\mu f$ já nasce 1-forma, sem que
+nenhuma métrica tenha sido invocada. 1-formas existem em variedades que não
 têm métrica nenhuma; o que a métrica faz --- e é o assunto da
 Seção~\ref{sec:metrica-ponte} --- é permitir traduzir umas nas outras.
 \end{atencao}
@@ -3902,28 +3902,28 @@ Seção~\ref{sec:metrica-ponte} --- é permitir traduzir umas nas outras.
 \subsection{A imagem: uma pilha de superfícies}
 \label{sec:pilha}
 
-Vale ter uma imagem geométrica de por que vetores e um-formas são objetos
+Vale ter uma imagem geométrica de por que vetores e 1-formas são objetos
 diferentes, e não apenas ``vetores com índice em cima ou embaixo''. Um vetor
-é uma seta: tem magnitude e direção. Uma um-forma é melhor visualizada como
+é uma seta: tem magnitude e direção. Uma 1-forma é melhor visualizada como
 uma \emph{pilha de superfícies} -- as superfícies de nível de uma função
 linear $\varphi(x)=\omega_\mu x^\mu$. O valor $\omega(V)$ é, literalmente, o
 número de superfícies que a seta $V$ perfura ao ir da origem até sua ponta.
-Superfícies mais próximas entre si representam uma um-forma ``mais forte''
+Superfícies mais próximas entre si representam uma 1-forma ``mais forte''
 (maior magnitude); a orientação das superfícies codifica a direção da
-um-forma.
+1-forma.
 
 E as superfícies não são uma analogia escolhida a dedo: para
 $\omega=\partial_\mu f$, elas são \emph{literalmente} as superfícies de nível
-de $f$. Uma um-forma forte é um campo que varia rápido, com as superfícies de
+de $f$. Uma 1-forma forte é um campo que varia rápido, com as superfícies de
 nível apertadas --- exatamente o que um mapa topográfico desenha com curvas de
 nível próximas onde a encosta é íngreme. O gradiente aponta ladeira acima
-porque as curvas de nível estão ali; a um-forma \emph{é} o conjunto de curvas,
+porque as curvas de nível estão ali; a 1-forma \emph{é} o conjunto de curvas,
 não a seta.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.6\textwidth]{cap03_umaforma_pilha.pdf}
-\caption{A um-forma $\omega=(2,1)$ representada como uma pilha de retas
+\caption{A 1-forma $\omega=(2,1)$ representada como uma pilha de retas
 (superfícies de nível de $\varphi=2x+y$, espaçadas de $\Delta\varphi=1$). O
 vetor $V=(3,4)$ vai de $\varphi=0$ a $\varphi=10$, perfurando exatamente $10$
 retas -- por isso $\omega(V)=10$. Esses são os mesmos $\omega$ e $V$ do
@@ -3935,7 +3935,7 @@ Exemplo~\ref{ex:umaforma-contracao}.}
 Em duas dimensões euclidianas, seja $\omega=(2,1)$ e $V=(3,4)$ em uma base
 cartesiana. A contração é $\omega(V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma
 base rotacionada, as componentes individuais mudam --- as de $\omega$ com uma
-matriz, as de $V$ com a inversa --- mas o número obtido pela ação da um-forma
+matriz, as de $V$ com a inversa --- mas o número obtido pela ação da 1-forma
 sobre o vetor permanece o mesmo: é o mesmo número de superfícies perfuradas na
 Figura~\ref{fig:umaforma-pilha}, agora contado em coordenadas diferentes.
 Perfurar superfícies é um fato geométrico, e não depende de quem conta.
@@ -3955,8 +3955,8 @@ função $\varphi(x)=\omega_\mu x^\mu$, e duas folhas vizinhas distam
 uma da outra. Essa fórmula curta carrega toda a diferença entre os dois
 objetos:
 
-\begin{central}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}A MAGNITUDE DE UMA UM-FORMA É O INVERSO DO ESPAÇAMENTO}]
-Uma um-forma \emph{forte} tem folhas \emph{apertadas} --- não folhas grandes,
+\begin{central}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}A MAGNITUDE DE UMA 1-FORMA É O INVERSO DO ESPAÇAMENTO}]
+Uma 1-forma \emph{forte} tem folhas \emph{apertadas} --- não folhas grandes,
 nem folhas compridas. Quem chega das setas espera o contrário, e é aí que se
 erra: dobrar $\omega$ não estica nada, aperta a pilha pela metade.
 \end{central}
@@ -3968,7 +3968,7 @@ pilha}. E há dois jeitos de dobrar esse número, geometricamente distintos:
 \begin{itemize}
   \item \textbf{dobrar o vetor}, $V\to2V$: a seta fica duas vezes mais
   comprida, a pilha não muda, e a seta atravessa duas vezes mais folhas;
-  \item \textbf{dobrar a um-forma}, $\omega\to2\omega$: a seta é exatamente a
+  \item \textbf{dobrar a 1-forma}, $\omega\to2\omega$: a seta é exatamente a
   mesma, mas a régua encolheu pela metade --- as folhas ficam duas vezes mais
   juntas, e a mesma seta atravessa duas vezes mais.
 \end{itemize}
@@ -3976,7 +3976,7 @@ pilha}. E há dois jeitos de dobrar esse número, geometricamente distintos:
 Os dois dão $2\,\omega(V)$, e nenhuma conta os distingue. A figura distingue --
 e essa é a razão de a imagem valer a pena.
 
-\textbf{Escolhendo a um-forma por uma função.} O jeito mais econômico de
+\textbf{Escolhendo a 1-forma por uma função.} O jeito mais econômico de
 produzir exemplos é dar a função e deixar $\omega=\dd f$, porque aí as folhas
 são as curvas de nível de $f$ e não é preciso desenhar nada à mão. Quatro
 casos, no plano:
@@ -3992,10 +3992,10 @@ retas paralelas, espaçadas de $1/\sqrt5$: é a
 Figura~\ref{fig:umaforma-pilha}. \\
 $4x+2y$ & $(4,2)$ &
 as \emph{mesmas} retas, na mesma direção, com metade do espaçamento. Dobrar a
-função dobra a um-forma. \\
+função dobra a 1-forma. \\
 $x^2+y^2$ & $(2x,2y)$ &
 folhas circulares, e $|\dd f|=2r$: a pilha vai \emph{fechando} conforme se
-afasta da origem. Um campo de um-formas não tem uma densidade, tem uma em
+afasta da origem. Um campo de 1-formas não tem uma densidade, tem uma em
 cada ponto. \\
 $xy$ & $(y,x)$ &
 na origem $\dd f=0$ e não existe folha nenhuma --- todo vetor atravessa zero
@@ -4017,7 +4017,7 @@ O \href{\rgsitealetra}{ÁLETRA} desenha exatamente esta figura: as folhas dele
 são os níveis inteiros de $\omega$, e o numeral no alto é o número de folhas
 que a seta atravessa. Roda no navegador, sem instalar nada. Abra, escolha
 \textsf{Plano euclidiano} no seletor de superfície e deixe a leitura em
-\textsf{$\langle\omega,v\rangle$ --- contar folhas}. A um-forma e o vetor se
+\textsf{$\langle\omega,v\rangle$ --- contar folhas}. A 1-forma e o vetor se
 escrevem por extenso nos campos do painel, de modo que nada aqui depende de
 acertar um arrasto.
 
@@ -4038,14 +4038,14 @@ distinção que nenhuma conta faz e a figura faz.
 \textbf{(c) A pilha vinda de uma função.} Troque a leitura para
 \textsf{$\dd\omega(u,v)$ --- circulação}, escreva \texttt{2*x + y} no campo
 $f$ e marque \textsf{usar $\omega=\dd f$}. A pilha desenhada passa a ser a de
-$\dd f$: as curvas de nível de $f$, que são a um-forma $(2,1)$ da
+$\dd f$: as curvas de nível de $f$, que são a 1-forma $(2,1)$ da
 Figura~\ref{fig:umaforma-pilha}. Troque $f$ para \texttt{4*x + 2*y} --- mesma
 inclinação, e as folhas passam de $17$ para $35$. (O numeral marca zero, e vai
 marcar zero sempre: uma pilha que veio de uma função não circula, o que é o
 teorema $\dd^2f=0$ e está fora do programa deste curso. Aqui o que interessa é
 a pilha desenhada, não o numeral.)
 
-\textbf{(d) Um campo, e não uma um-forma só.} Ainda com \textsf{usar
+\textbf{(d) Um campo, e não uma 1-forma só.} Ainda com \textsf{usar
 $\omega=\dd f$}, escreva \texttt{x*x + y*y}. \emph{A tela fica sem folha
 nenhuma} --- e é esse o conteúdo do item, não um defeito do programa:
 $\dd f=(2x,2y)$ se anula na origem, que é justamente onde o ponto começa.
@@ -4064,7 +4064,7 @@ atravessar, e o número é zero para qualquer seta.
 
 \begin{interludio}{O mínimo que você precisa lembrar de álgebra linear}
 
-A próxima seção começa afirmando que as um-formas ``formam um espaço vetorial
+A próxima seção começa afirmando que as 1-formas ``formam um espaço vetorial
 próprio''. É uma frase que se lê rápido e se aceita sem conferir --- e não
 deveria, porque é justamente ela que autoriza tudo o que vem depois: falar em
 base, em dimensão, em componentes. Vale gastar duas páginas relembrando o que
@@ -4118,7 +4118,7 @@ um polinômio de grau $\le n$ & somar os coeficientes & o polinômio nulo \\
 uma função contínua em $[a,b]$ & $(f+g)(x)=f(x)+g(x)$ & a função nula \\
 uma matriz $m\times n$ & somar entrada a entrada & a matriz nula \\
 uma solução de $y''+\omega^2y=0$ & somar as soluções & $y\equiv0$ \\
-uma um-forma & $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$ & a um-forma nula \\
+uma 1-forma & $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$ & a 1-forma nula \\
 um ket $\ket{\psi}$ & a superposição & o vetor nulo \\
 \bottomrule
 \end{tabular}
@@ -4132,9 +4132,9 @@ escreveu ``a solução geral é combinação linear das duas'', estava expandind
 vetor numa base --- e o vetor era uma \emph{função}.
 
 Some duas
-um-formas definindo $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$, e multiplique por
+1-formas definindo $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$, e multiplique por
 escalar com $(a\omega)(V)=a\,\omega(V)$. Os oito axiomas são testados ao mesmo tempo, porque
-do lado direito estão números reais, que já os obedecem. Logo as um-formas
+do lado direito estão números reais, que já os obedecem. Logo as 1-formas
 formam um espaço vetorial, e portanto têm base, dimensão e componentes --- que
 é tudo o que a Seção~\ref{sec:base-dual} vai usar. O mesmo argumento vale para
 qualquer $V$: o conjunto das aplicações lineares de $V$ nos reais é um espaço
@@ -4145,12 +4145,12 @@ $\dim V^*=\dim V$.
 Nenhum dos oito axiomas menciona produto escalar. Ser espaço vetorial é de
 graça; poder medir comprimentos e ângulos é estrutura \emph{extra}, que se
 acrescenta por cima --- e no nosso caso essa estrutura é a métrica. É por isso
-que a um-forma $\partial_\mu f$ existe antes de qualquer métrica, e é por isso
-que a métrica é o que \emph{traduz} vetores em um-formas, não o que as cria.
+que a 1-forma $\partial_\mu f$ existe antes de qualquer métrica, e é por isso
+que a métrica é o que \emph{traduz} vetores em 1-formas, não o que as cria.
 \end{atencao}
 
 \textbf{Bras e kets são a mesma construção.} Quem já viu mecânica quântica já
-usou uma um-forma, com outro nome. Na notação de Dirac, um estado é um ket
+usou uma 1-forma, com outro nome. Na notação de Dirac, um estado é um ket
 $\ket{\psi}$, elemento de um espaço vetorial (complexo) $\mathcal{H}$. Um bra
 $\bra{\phi}$ não é outro estado: é uma \emph{aplicação linear} que come um ket
 e devolve um número --- ou seja, um elemento de $\mathcal{H}^*$. E o
@@ -4165,7 +4165,7 @@ termo a termo:
 & Neste curso & Mecânica quântica \\
 \midrule
 vetor              & $\vec V$, componentes $V^\mu$ & ket $\ket{\psi}$ \\
-elemento do dual   & um-forma $\omega$, $\omega_\mu$ & bra $\bra{\phi}$ \\
+elemento do dual   & 1-forma $\omega$, $\omega_\mu$ & bra $\bra{\phi}$ \\
 o número           & $\omega(\vec V)=\omega_\mu V^\mu$ & $\braket{\phi}{\psi}$ \\
 base               & $\vec e_\mu$ & $\ket{n}$ \\
 base dual          & $\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$ &
@@ -4214,14 +4214,14 @@ Capítulo~\ref{cap:curvatura} começa.
 \section{A base dual}
 \label{sec:base-dual}
 
-Um-formas se somam e se multiplicam por número: a soma de duas um-formas é uma
-um-forma, e $\lambda\,\omega$ também. Elas formam, portanto, um espaço vetorial
+1-formas se somam e se multiplicam por número: a soma de duas 1-formas é uma
+1-forma, e $\lambda\,\omega$ também. Elas formam, portanto, um espaço vetorial
 próprio --- de quatro dimensões, como o dos vetores --- e todo espaço vetorial
 tem bases. Falta escolher uma.
 
 A escolha natural não é livre: uma vez fixada a base de vetores
-$\{\vec e_\mu\}$ do Capítulo~\ref{chap:vetores}, a base de um-formas fica
-determinada. Pedimos as quatro um-formas $\{\tilde\omega^\mu\}$ que satisfazem
+$\{\vec e_\mu\}$ do Capítulo~\ref{chap:vetores}, a base de 1-formas fica
+determinada. Pedimos as quatro 1-formas $\{\tilde\omega^\mu\}$ que satisfazem
 \begin{equation}
   \tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu ,
   \label{eq:base-dual}
@@ -4239,8 +4239,8 @@ $\omega=\omega_\mu\tilde\omega^\mu$ e $\vec V=V^\nu\vec e_\nu$,
 \]
 que é a contração de sempre. Isto é: \eqref{eq:base-dual} é precisamente a
 condição para que ``multiplicar componente por componente e somar'' seja de
-fato a aplicação da um-forma ao vetor. E, do mesmo modo, as componentes de uma
-um-forma são os seus valores sobre os vetores de base,
+fato a aplicação da 1-forma ao vetor. E, do mesmo modo, as componentes de uma
+1-forma são os seus valores sobre os vetores de base,
 \[
   \omega_\mu=\omega(\vec e_\mu),
 \]
@@ -4253,7 +4253,7 @@ exatamente uma dessas superfícies --- daí o $1$ --- e $\vec e_1$, $\vec e_2$,
 $\vec e_3$ correm ao longo delas sem atravessar nenhuma, daí os zeros.
 
 \begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}UMA COLISÃO DE NOTAÇÃO}]
-Muitos livros escrevem $\dd x^\mu$ para as um-formas de base, e faz sentido:
+Muitos livros escrevem $\dd x^\mu$ para as 1-formas de base, e faz sentido:
 $\tilde\omega^\mu$ é o gradiente da função coordenada $x^\mu$. Aqui isso seria
 desastroso, porque o Capítulo~\ref{chap:vetores} já usa $\dd x^\mu$ para o
 \emph{deslocamento} entre dois eventos, que é um vetor, com o índice em cima
@@ -4263,7 +4263,7 @@ existe para não deixar confundi-los.
 
 Duas observações que rendem mais adiante. A primeira: \eqref{eq:base-dual}
 relaciona as \emph{bases}, e não pares individuais. Mexer só em $\vec e_0$ em
-geral altera as quatro um-formas $\tilde\omega^\mu$, e não apenas
+geral altera as quatro 1-formas $\tilde\omega^\mu$, e não apenas
 $\tilde\omega^0$. A segunda: numa base ortonormal a base dual passa
 despercebida, porque $\tilde\omega^\mu$ acaba correspondendo a $\vec e_\mu$ a
 menos de sinais, e é numa base oblíqua que as duas se separam de modo visível
@@ -4272,9 +4272,9 @@ menos de sinais, e é numa base oblíqua que as duas se separam de modo visível
 \section{Tensores de tipo $(r,s)$}
 \label{sec:tipos-tensor}
 
-Vetores e um-formas são os dois primeiros casos de uma mesma construção. Um
+Vetores e 1-formas são os dois primeiros casos de uma mesma construção. Um
 \emph{tensor de tipo $(r,s)$} é uma máquina linear em cada entrada que recebe
-$r$ um-formas e $s$ vetores e devolve um número. Suas componentes carregam $r$
+$r$ 1-formas e $s$ vetores e devolve um número. Suas componentes carregam $r$
 índices em cima e $s$ embaixo, e cada um deles transforma com a matriz que lhe
 cabe --- $\Lambda$ para os de cima, $\Lambda^{-1}$ para os de baixo:
 \[
@@ -4297,7 +4297,7 @@ Tipo & Componentes & Exemplo \\
 \midrule
 $(0,0)$ & $\phi$ & escalar: massa de repouso, tempo próprio \\
 $(1,0)$ & $V^\mu$ & vetor: quadrivelocidade, quadrimomento \\
-$(0,1)$ & $\omega_\mu$ & um-forma: gradiente $\partial_\mu f$ \\
+$(0,1)$ & $\omega_\mu$ & 1-forma: gradiente $\partial_\mu f$ \\
 $(0,2)$ & $g_{\mu\nu}$ & métrica; tensor eletromagnético $F_{\mu\nu}$ \\
 $(2,0)$ & $T^{\mu\nu}$ & tensor de energia-momento (Capítulo~\ref{cap:fluidos}) \\
 $(1,1)$ & $T^\mu{}_\nu$ & qualquer aplicação linear de vetores em vetores \\
@@ -4334,7 +4334,7 @@ Dessa regra única saem os três erros que mais aparecem nas provas.
   dos mudos.
   \item \textbf{Trocar o nome de um índice livre} de um lado da equação para o
   outro, ou de um termo para o seguinte.
-  \item \textbf{Somar tipos diferentes}, como em $A_\mu+B^\mu$. Um é um-forma e
+  \item \textbf{Somar tipos diferentes}, como em $A_\mu+B^\mu$. Um é 1-forma e
   o outro é vetor; sem uma métrica não há nem como compará-los.
 \end{enumerate}
 
@@ -4347,7 +4347,7 @@ contrações mais frequentes, o Apêndice~\ref{ap:indices} serve de mesa de
 trabalho enquanto este capítulo é estudado.
 
 \begin{activity}
-Classifique cada expressão como escalar, vetor, um-forma, tensor de ordem dois
+Classifique cada expressão como escalar, vetor, 1-forma, tensor de ordem dois
 ou expressão inválida, dizendo em cada caso quais índices ficaram livres:
 \[
   A_\mu B^\mu,\qquad
@@ -4411,8 +4411,8 @@ tensor de Riemann, que tem simetrias em três pares diferentes.
 A Seção~\ref{sec:produto-escalar} já apresentou $\eta_{\mu\nu}$ como a tabela
 de sinais do produto escalar, e $A_\mu=\eta_{\mu\nu}A^\nu$ como abreviação.
 Com a Seção~\ref{sec:umaformas} em mãos, essa abreviação ganha o seu
-significado: \emph{$A_\mu$ é a um-forma que a métrica associa ao vetor
-$A^\mu$}. Concretamente, é a um-forma que, aplicada a um vetor $W$ qualquer,
+significado: \emph{$A_\mu$ é a 1-forma que a métrica associa ao vetor
+$A^\mu$}. Concretamente, é a 1-forma que, aplicada a um vetor $W$ qualquer,
 devolve o produto escalar:
 \[
   A_\mu W^\mu=\vec A\cdot\vec W .
@@ -4420,7 +4420,7 @@ devolve o produto escalar:
 Dado $\vec A$, esse requisito determina $A_\mu$ sem ambiguidade --- e o
 resultado é a fórmula que já usávamos.
 
-\textbf{O caminho de volta.} Se a métrica traduz vetores em um-formas, a
+\textbf{O caminho de volta.} Se a métrica traduz vetores em 1-formas, a
 tradução inversa precisa existir, e para isso serve a \emph{métrica inversa}
 $\eta^{\mu\nu}$, definida por
 \begin{equation}
@@ -4457,7 +4457,7 @@ $A_\mu$ carregam os mesmos fatos. Por isso é tentador tratá-los como o mesmo
 objeto escrito de dois jeitos, e em Minkowski isso raramente causa dano. Duas
 razões para não pegar o hábito. Primeiro, a tradução \emph{depende da
 métrica}: mude a métrica e $A_\mu$ muda, embora $A^\mu$ não. Segundo, a
-um-forma mais importante da física --- o gradiente --- não veio de vetor
+1-forma mais importante da física --- o gradiente --- não veio de vetor
 nenhum; ela já nasceu com o índice embaixo, e subi-lo é que é a operação
 artificial.
 \end{atencao}
@@ -4541,7 +4541,7 @@ dual}:
   \qquad
   \vec e^{\,i}=g^{ij}\vec e_j ,
 \]
-onde $\vec e^{\,i}$ é o vetor que a métrica associa à um-forma
+onde $\vec e^{\,i}$ é o vetor que a métrica associa à 1-forma
 $\tilde\omega^i$. A condição $\tilde\omega^i(\vec e_j)=\delta^i{}_j$ vira
 $\vec e^{\,i}\cdot\vec e_j=\delta^i{}_j$, e é ela que explica a figura: como
 $\vec e^{\,1}\cdot\vec e_2=0$, o eixo recíproco $\vec e^{\,1}$ é
@@ -4575,7 +4575,7 @@ tensor:
   \partial_\alpha T^{\mu\nu}
   \quad\text{é um tensor de tipo }(2,1).
 \]
-A razão é a mesma que fez do gradiente uma um-forma --- $\partial_\alpha$
+A razão é a mesma que fez do gradiente uma 1-forma --- $\partial_\alpha$
 transforma com $\Lambda^{\beta}{}_{\alpha'}$ --- combinada com o
 fato de que os coeficientes $\Lambda$ são \emph{constantes} numa
 transformação de Lorentz, e portanto passam intactos pela derivada:
@@ -4620,7 +4620,7 @@ sai daí. Por ora, aproveite a simplicidade --- ela é a última.
   $T^\mu{}_\mu$ não depende da base.
 
   \item \textbf{Gradiente de um invariante.} Seja $f=-t^2+x^2+y^2+z^2$, o
-  intervalo até a origem. (a) Calcule a um-forma $\partial_\mu f$ e depois
+  intervalo até a origem. (a) Calcule a 1-forma $\partial_\mu f$ e depois
   $\partial^\mu f$ com \eqref{eq:subir-indice}; explique por que o sinal da
   componente temporal muda. (b) Mostre que $\partial^\mu f$ é ortogonal às
   superfícies $f=\text{const}$, no sentido de que
@@ -4668,19 +4668,19 @@ Logo a contração é igual ao seu negativo e, portanto, vale zero.
 \end{example}
 
 \begin{example}
-\textbf{Transformação de uma um-forma.} Em duas dimensões, tome $x'=2x$ e
+\textbf{Transformação de uma 1-forma.} Em duas dimensões, tome $x'=2x$ e
 $y'=y$ --- apenas uma troca de unidade no eixo $x$. O vetor de base acompanha
 pela inversa,
 \[
   \vec e_{x'}=\Lambda^{\nu}{}_{x'}\vec e_\nu=\tfrac12\,\vec e_x ,
 \]
 porque agora basta meio $\vec e_x$ para avançar uma unidade de $x'$. Tome a
-um-forma de base $\omega=\tilde\omega^x$, de componentes $(1,0)$ no sistema
+1-forma de base $\omega=\tilde\omega^x$, de componentes $(1,0)$ no sistema
 original. Pela definição de componente,
 \[
   \omega_{x'}=\omega(\vec e_{x'})=\tfrac12\,\omega(\vec e_x)=\tfrac12 .
 \]
-A componente da um-forma encolheu pelo mesmo fator que o vetor de base,
+A componente da 1-forma encolheu pelo mesmo fator que o vetor de base,
 enquanto a componente de um vetor \emph{dobrou} ($V^{x'}=2V^{x}$). É essa
 oposição que preserva $\omega_\mu V^\mu$: um fator sobe, o outro desce, e o
 produto sobrevive.
@@ -4692,7 +4692,7 @@ vetores e devolve um número:
 \[
   T(A,B)=T_{\mu\nu}A^\mu B^\nu.
 \]
-Se fixamos apenas o segundo vetor, obtemos uma um-forma:
+Se fixamos apenas o segundo vetor, obtemos uma 1-forma:
 \[
   \alpha_\mu=T_{\mu\nu}B^\nu.
 \]
@@ -4793,7 +4793,7 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 
 \begin{exercise}
 \facil{3.8}
-Sejam $\omega_\mu=(-2,1,0,0)$ as componentes de uma um-forma e
+Sejam $\omega_\mu=(-2,1,0,0)$ as componentes de uma 1-forma e
 $V^\mu=(3,2,1,0)$ as de um vetor, em coordenadas de Minkowski. Calcule
 $\omega(V)=\omega_\mu V^\mu$. Em seguida obtenha $\omega^\mu$ e $V_\mu$ com a
 métrica, e verifique que $\omega^\mu V_\mu$ dá o mesmo número.
@@ -4801,7 +4801,7 @@ métrica, e verifique que $\omega^\mu V_\mu$ dá o mesmo número.
 
 \begin{exercise}
 \facil{3.7}
-Classifique cada expressão como escalar, vetor, um-forma, tensor de ordem
+Classifique cada expressão como escalar, vetor, 1-forma, tensor de ordem
 dois ou expressão mal escrita, justificando pelos índices livres:
 $T^{\mu\nu}A_\nu$, $\;T^{\mu}{}_{\mu}$, $\;A_\mu B_\mu$, $\;R_{\mu\nu}A^\mu
 B^\nu$, $\;A^\mu=B_\mu$, $\;T^{\mu\nu}A_\mu B_\nu C^\rho$.
@@ -4811,7 +4811,7 @@ B^\nu$, $\;A^\mu=B_\mu$, $\;T^{\mu\nu}A_\mu B_\nu C^\rho$.
 \medio{3.4}
 Considere a mudança de coordenadas $x'=x+\alpha t$, $t'=t$ (uma transformação
 de Galileu). (a) Calcule $\partial x^\mu/\partial x'^\nu$ e escreva a lei de
-transformação das componentes de um vetor e de uma um-forma. (b) Mostre
+transformação das componentes de um vetor e de uma 1-forma. (b) Mostre
 explicitamente que $\omega_\mu V^\mu$ é invariante sob essa transformação,
 \emph{embora} ela não preserve o intervalo. (c) O que isso ensina sobre a
 diferença entre invariância de contração e invariância métrica?
@@ -5129,15 +5129,15 @@ estrutura de todo o resto do capítulo --- e do tensor energia-momento --- fica
 previsível.
 \end{central}
 
-\section{Um-formas, superfícies e o fluxo invariante}
+\section{1-formas, superfícies e o fluxo invariante}
 \label{sec:umaforma-superficie}
 
 Falta dizer, de modo independente de coordenadas, o que é ``a superfície''
 atravessada. A resposta usa a linguagem do Capítulo~\ref{cap:tensores-plano}:
-uma superfície é descrita por uma um-forma.
+uma superfície é descrita por uma 1-forma.
 
 Uma superfície é o lugar geométrico de $\varphi(t,x,y,z)=\text{const}$ para
-alguma função $\varphi$. O gradiente $\dd\varphi$ é uma um-forma, e ela
+alguma função $\varphi$. O gradiente $\dd\varphi$ é uma 1-forma, e ela
 determina a superfície: as direções tangentes a ela são exatamente as
 direções $V^\mu$ com $\dd\varphi(V)=0$. Como qualquer múltiplo de
 $\dd\varphi$ define a mesma superfície, normalizamos (para superfícies não
@@ -5151,7 +5151,7 @@ nulas):
 \end{equation}
 
 \begin{atencao}
-O símbolo $\tilde n$ da um-forma normal e o símbolo $n$ da densidade própria
+O símbolo $\tilde n$ da 1-forma normal e o símbolo $n$ da densidade própria
 não têm nada em comum --- é um acidente histórico infeliz que ambos usem a
 letra $n$. Mantemos a notação porque é a da literatura, mas o til é
 obrigatório.
@@ -6275,7 +6275,7 @@ Para um vetor,
 \[
   \nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu_{\mu\alpha}V^\alpha.
 \]
-Para uma um-forma,
+Para uma 1-forma,
 \[
   \nabla_\mu \omega_\nu=\partial_\mu \omega_\nu-\Gamma^\alpha_{\mu\nu}\omega_\alpha.
 \]
@@ -6548,7 +6548,7 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 \facil{6.3}
 A derivada covariante de um vetor é
 $\nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu{}_{\mu\alpha}V^\alpha$.
-(a) Escreva a regra correspondente para uma um-forma e justifique o sinal
+(a) Escreva a regra correspondente para uma 1-forma e justifique o sinal
 oposto. (b) Escreva a regra para um tensor $T^{\mu}{}_{\nu}$. (c) Verifique
 que $\nabla_\mu$ aplicado a um escalar coincide com $\partial_\mu$.
 \end{exercise}
