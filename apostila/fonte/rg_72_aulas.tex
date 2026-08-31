@@ -3894,6 +3894,9 @@ têm métrica nenhuma; o que a métrica faz --- e é o assunto da
 Seção~\ref{sec:metrica-ponte} --- é permitir traduzir umas nas outras.
 \end{atencao}
 
+\subsection{A imagem: uma pilha de superfícies}
+\label{sec:pilha}
+
 Vale ter uma imagem geométrica de por que vetores e um-formas são objetos
 diferentes, e não apenas ``vetores com índice em cima ou embaixo''. Um vetor
 é uma seta: tem magnitude e direção. Uma um-forma é melhor visualizada como
@@ -3932,6 +3935,115 @@ sobre o vetor permanece o mesmo: é o mesmo número de superfícies perfuradas n
 Figura~\ref{fig:umaforma-pilha}, agora contado em coordenadas diferentes.
 Perfurar superfícies é um fato geométrico, e não depende de quem conta.
 \end{example}
+
+\subsection{Dobrar a seta não é dobrar a pilha}
+\label{sec:dobrar-pilha}
+
+A imagem só rende de verdade quando se pergunta o que acontece ao
+\emph{multiplicar} cada um dos dois objetos por um número. Comece medindo o
+espaçamento. As folhas de $\omega$ são as superfícies $\varphi=0,1,2,\dots$ da
+função $\varphi(x)=\omega_\mu x^\mu$, e duas folhas vizinhas distam
+\begin{equation}
+  \Delta\ell=\frac{1}{|\omega|}
+  \label{eq:espacamento-pilha}
+\end{equation}
+uma da outra. Essa fórmula curta carrega toda a diferença entre os dois
+objetos:
+
+\begin{central}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}A MAGNITUDE DE UMA UM-FORMA É O INVERSO DO ESPAÇAMENTO}]
+Uma um-forma \emph{forte} tem folhas \emph{apertadas} --- não folhas grandes,
+nem folhas compridas. Quem chega das setas espera o contrário, e é aí que se
+erra: dobrar $\omega$ não estica nada, aperta a pilha pela metade.
+\end{central}
+
+Com \eqref{eq:espacamento-pilha} o número $\omega(V)$ ganha uma leitura só: é o
+comprimento de $V$ \emph{medido com uma régua cujo passo é o espaçamento da
+pilha}. E há dois jeitos de dobrar esse número, geometricamente distintos:
+
+\begin{itemize}
+  \item \textbf{dobrar o vetor}, $V\to2V$: a seta fica duas vezes mais
+  comprida, a pilha não muda, e a seta atravessa duas vezes mais folhas;
+  \item \textbf{dobrar a um-forma}, $\omega\to2\omega$: a seta é exatamente a
+  mesma, mas a régua encolheu pela metade --- as folhas ficam duas vezes mais
+  juntas, e a mesma seta atravessa duas vezes mais.
+\end{itemize}
+
+Os dois dão $2\,\omega(V)$, e nenhuma conta os distingue. A figura distingue --
+e essa é a razão de a imagem valer a pena.
+
+\textbf{Escolhendo a um-forma por uma função.} O jeito mais econômico de
+produzir exemplos é dar a função e deixar $\omega=\dd f$, porque aí as folhas
+são as curvas de nível de $f$ e não é preciso desenhar nada à mão. Quatro
+casos, no plano:
+
+\begin{center}
+\small
+\begin{tabular}{llp{6.9cm}}
+\toprule
+$f$ & $\omega=\dd f$ & O que se vê \\
+\midrule
+$2x+y$ & $(2,1)$ &
+retas paralelas, espaçadas de $1/\sqrt5$: é a
+Figura~\ref{fig:umaforma-pilha}. \\
+$4x+2y$ & $(4,2)$ &
+as \emph{mesmas} retas, na mesma direção, com metade do espaçamento. Dobrar a
+função dobra a um-forma. \\
+$x^2+y^2$ & $(2x,2y)$ &
+folhas circulares, e $|\dd f|=2r$: a pilha vai \emph{fechando} conforme se
+afasta da origem. Um campo de um-formas não tem uma densidade, tem uma em
+cada ponto. \\
+$xy$ & $(y,x)$ &
+na origem $\dd f=0$ e não existe folha nenhuma --- todo vetor atravessa zero
+delas. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Um exemplo físico fecha a ideia, e é o mesmo com que a seção começou. Se $f$ é
+a temperatura, as folhas de $\dd f$ são as isotermas de grau em grau, e
+$\dd f(V)$ é quantos graus se ganham ao caminhar por $V$. Meça a mesma
+temperatura em meios-graus: o campo físico não mudou nada, mas $\dd f$ dobrou,
+as isotermas dobraram de densidade e o mesmo passo $V$ atravessa o dobro de
+folhas. A seta $V$ ficou idêntica; foi a régua que mudou.
+
+\begin{activity}[no ÁLETRA]
+\label{atv:pilha-aletra}
+O \href{\rgsitealetra}{ÁLETRA} desenha exatamente esta figura e deixa arrastar
+a seta: as folhas dele são os níveis inteiros de $\omega$, e o numeral no alto
+é o número de folhas atravessadas. Roda no navegador, sem instalar nada. Abra
+e escolha \textsf{Plano euclidiano} no seletor de superfície.
+
+\textbf{(a) A seta cresce, a pilha não.} Deixe a leitura em
+\textsf{$\langle\omega,v\rangle$ --- contar folhas} e ponha os controles da
+um-forma em $\omega_0=2{,}0$ e $\omega_1=0{,}0$: a pilha vira um pente de retas
+verticais, espaçadas de $1/2$ pela \eqref{eq:espacamento-pilha}. Arraste a seta
+na horizontal até o numeral marcar $2{,}00$ e confira contando: são duas folhas
+atravessadas. Agora estique a seta até o numeral marcar $4{,}00$. A única coisa
+que mudou na tela foi o comprimento da seta.
+
+\textbf{(b) A pilha aperta, a seta não.} Volte a seta ao tamanho de antes
+(numeral em $2{,}00$) e ponha $\omega_0=4{,}0$. O numeral marca $4{,}00$ de
+novo --- só que agora a seta é a mesma e são as folhas que estão duas vezes
+mais juntas. Os itens (a) e (b) dão o mesmo número por razões geométricas
+diferentes: é a distinção que nenhuma conta faz e a figura faz.
+
+\textbf{(c) A pilha vinda de uma função.} Troque a leitura para
+\textsf{$\dd\omega(u,v)$ --- circulação}, escreva \texttt{2*x + y} no campo
+$f$ e marque \textsf{usar $\omega=\dd f$}. A pilha desenhada passa a ser a de
+$\dd f$: as curvas de nível de $f$, que são a um-forma $(2,1)$ da
+Figura~\ref{fig:umaforma-pilha}. Troque $f$ para \texttt{4*x + 2*y} --- mesma
+inclinação, metade do espaçamento. (O numeral marca zero, e vai marcar
+zero sempre: uma pilha que veio de uma função não circula, o que é o teorema
+$\dd^2f=0$ e está fora do programa deste curso. Aqui o que interessa é a
+pilha desenhada, não o numeral.)
+
+\textbf{(d) Um campo, e não uma um-forma só.} Ainda com \textsf{usar
+$\omega=\dd f$}, escreva \texttt{x*x + y*y}: as folhas viram círculos, e
+arrastar o ponto para longe da origem fecha a pilha, porque $|\dd f|=2r$.
+Depois escreva \texttt{x*y} e leve o ponto até a origem, onde $\dd f=0$: a
+pilha \emph{desaparece} da tela. Não é defeito do programa --- não há folha
+nenhuma para atravessar, e por isso o número é zero para qualquer seta.
+\end{activity}
 
 \section{A base dual}
 \label{sec:base-dual}
