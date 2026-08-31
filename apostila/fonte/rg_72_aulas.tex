@@ -3805,9 +3805,26 @@ numericamente em que condição vale a igualdade. Interprete o excesso.
 \label{cap:tensores-plano}
 
 \begin{objetivos}
-Dominar a notação de índices, distinguir vetores de um-formas e compreender a
-métrica como o objeto que transforma uma coisa na outra.
+Dominar a notação de índices, distinguir vetores de um-formas, reconhecer
+simetrias e compreender a métrica como o objeto que traduz uma coisa na outra
+--- e ver, na derivada, por que tudo isso ainda é fácil enquanto o
+espaço-tempo é plano.
 \end{objetivos}
+
+\begin{leitura}
+As marcas dos exercícios remetem ao Capítulo~3 do Schutz, mas a ordem aqui é
+outra, de propósito. Ele abre pela métrica e pela definição abstrata de tensor,
+e só chega ao gradiente na Seção~3.4; aqui o gradiente vem primeiro, porque é
+um objeto que você já usa há anos, e assim a um-forma \emph{aparece} em vez de
+ser postulada. A correspondência, para quem for consultar o livro:
+Seção~\ref{sec:umaformas} $\leftrightarrow$ Schutz 3.3--3.4;
+Seção~\ref{sec:base-dual} $\leftrightarrow$ 3.3;
+Seção~\ref{sec:tipos-tensor} $\leftrightarrow$ 3.2 e 3.7;
+Seção~\ref{sec:simetrias} $\leftrightarrow$ 3.5;
+Seção~\ref{sec:metrica-ponte} $\leftrightarrow$ 3.1, 3.6 e 3.8;
+Seção~\ref{sec:derivada-tensor} $\leftrightarrow$ 3.9. A base oblíqua da
+Seção~\ref{sec:base-obliqua} ele só trata no Capítulo~5.
+\end{leitura}
 
 \section{Um-formas: por que elas existem}
 \label{sec:umaformas}
@@ -3833,6 +3850,22 @@ As duas matrizes em jogo, $\partial x^\nu/\partial x^{\mu'}$ e
 $\Lambda^{\mu'}{}_\nu$, são \emph{inversas} uma da outra --- não iguais. O
 gradiente se transforma com a matriz errada para ser um vetor.
 
+Vale dar nome a essa inversa agora, para não ter de arrastar um quociente de
+derivadas pelo resto do capítulo:
+\begin{equation}
+  \Lambda^{\nu}{}_{\mu'}\equiv\frac{\partial x^\nu}{\partial x^{\mu'}},
+  \label{eq:lambda-inversa}
+\end{equation}
+a mesma letra, com a ordem dos índices trocada. Não é símbolo novo: é a matriz
+que a caixa da Seção~\ref{sec:quadrivelocidade} usou para levar a
+quadrivelocidade do referencial de repouso da partícula para $S$. A posição da
+linha diz sozinha em que sentido ela age --- linha embaixo, sai do referencial
+com linha; linha em cima, chega nele. Com esse nome,
+\eqref{eq:gradiente-transforma} fica
+\[
+  \partial_{\mu'}f=\Lambda^{\nu}{}_{\mu'}\,\partial_\nu f .
+\]
+
 \begin{resultado}
 Existem, portanto, dois tipos de objeto de quatro componentes no espaço-tempo,
 distinguidos por como mudam de base: os que transformam com $\Lambda$
@@ -3847,7 +3880,7 @@ vetor,
   \omega(V)=\omega_\mu V^\mu ,
 \]
 produz um número igual em todas as bases: as duas matrizes se cancelam,
-$\Lambda^{-1}\Lambda=\mathbb{1}$. Nenhuma métrica foi usada --- este é o ponto
+$\Lambda^{\nu}{}_{\mu'}\Lambda^{\mu'}{}_{\rho}=\delta^\nu{}_\rho$. Nenhuma métrica foi usada --- este é o ponto
 que o terceiro dos Exercícios, no fim do capítulo, explora. A contração de um índice em cima com um
 índice embaixo é a única operação que produz invariantes de graça, e é por
 isso que a notação insiste tanto na posição dos índices.
@@ -3900,10 +3933,63 @@ Figura~\ref{fig:umaforma-pilha}, agora contado em coordenadas diferentes.
 Perfurar superfícies é um fato geométrico, e não depende de quem conta.
 \end{example}
 
-Para uma caixa de ferramentas prática sobre manipulação de índices, deltas,
-símbolos antissimétricos e contrações, consulte o Apêndice~\ref{ap:indices}.
-Ele foi escrito para ser usado como apoio de cálculo enquanto este capítulo é
-estudado.
+\section{A base dual}
+\label{sec:base-dual}
+
+Um-formas se somam e se multiplicam por número: a soma de duas um-formas é uma
+um-forma, e $\lambda\,\omega$ também. Elas formam, portanto, um espaço vetorial
+próprio --- de quatro dimensões, como o dos vetores --- e todo espaço vetorial
+tem bases. Falta escolher uma.
+
+A escolha natural não é livre: uma vez fixada a base de vetores
+$\{\vec e_\mu\}$ do Capítulo~\ref{chap:vetores}, a base de um-formas fica
+determinada. Pedimos as quatro um-formas $\{\tilde\omega^\mu\}$ que satisfazem
+\begin{equation}
+  \tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu ,
+  \label{eq:base-dual}
+\end{equation}
+ou seja: $\tilde\omega^0$ vale $1$ sobre $\vec e_0$ e zero sobre os outros três
+vetores de base, e assim por diante. Esse conjunto se chama \emph{base dual} a
+$\{\vec e_\mu\}$.
+
+A razão de pedir exatamente isso cabe em uma linha. Escrevendo
+$\omega=\omega_\mu\tilde\omega^\mu$ e $\vec V=V^\nu\vec e_\nu$,
+\[
+  \omega(\vec V)=\omega_\mu V^\nu\,\tilde\omega^\mu(\vec e_\nu)
+                =\omega_\mu V^\nu\,\delta^\mu{}_\nu
+                =\omega_\mu V^\mu ,
+\]
+que é a contração de sempre. Isto é: \eqref{eq:base-dual} é precisamente a
+condição para que ``multiplicar componente por componente e somar'' seja de
+fato a aplicação da um-forma ao vetor. E, do mesmo modo, as componentes de uma
+um-forma são os seus valores sobre os vetores de base,
+\[
+  \omega_\mu=\omega(\vec e_\mu),
+\]
+assim como os $V^\mu$ eram os coeficientes que reconstroem $\vec V$ a partir
+de $\{\vec e_\mu\}$.
+
+A pilha de superfícies dá a imagem: $\tilde\omega^0$ é a família de superfícies
+de $x^0$ constante, espaçadas de uma unidade. O vetor $\vec e_0$ atravessa
+exatamente uma dessas superfícies --- daí o $1$ --- e $\vec e_1$, $\vec e_2$,
+$\vec e_3$ correm ao longo delas sem atravessar nenhuma, daí os zeros.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}UMA COLISÃO DE NOTAÇÃO}]
+Muitos livros escrevem $\dd x^\mu$ para as um-formas de base, e faz sentido:
+$\tilde\omega^\mu$ é o gradiente da função coordenada $x^\mu$. Aqui isso seria
+desastroso, porque o Capítulo~\ref{chap:vetores} já usa $\dd x^\mu$ para o
+\emph{deslocamento} entre dois eventos, que é um vetor, com o índice em cima
+por bom motivo. São dois objetos diferentes, e o til de $\tilde\omega^\mu$
+existe para não deixar confundi-los.
+\end{atencao}
+
+Duas observações que rendem mais adiante. A primeira: \eqref{eq:base-dual}
+relaciona as \emph{bases}, e não pares individuais. Mexer só em $\vec e_0$ em
+geral altera as quatro um-formas $\tilde\omega^\mu$, e não apenas
+$\tilde\omega^0$. A segunda: numa base ortonormal a base dual passa
+despercebida, porque $\tilde\omega^\mu$ acaba correspondendo a $\vec e_\mu$ a
+menos de sinais, e é numa base oblíqua que as duas se separam de modo visível
+--- o que é o assunto da Seção~\ref{sec:base-obliqua}.
 
 \section{Tensores de tipo $(r,s)$}
 \label{sec:tipos-tensor}
@@ -3916,7 +4002,7 @@ cabe --- $\Lambda$ para os de cima, $\Lambda^{-1}$ para os de baixo:
 \[
   T^{\mu'\nu'}{}_{\rho'}
   =\Lambda^{\mu'}{}_{\alpha}\,\Lambda^{\nu'}{}_{\beta}\,
-   \frac{\partial x^\gamma}{\partial x^{\rho'}}\;T^{\alpha\beta}{}_{\gamma}.
+   \Lambda^{\gamma}{}_{\rho'}\;T^{\alpha\beta}{}_{\gamma}.
 \]
 \emph{É essa lei, e apenas ela, que define um tensor.} Um arranjo de números
 com índices que não obedeça a ela não é tensor, por mais que se pareça com um
@@ -3947,6 +4033,99 @@ $A^\mu B^\nu$. A \emph{contração} soma um índice de cima com um de baixo e
 baixa o tipo em $(1,1)$: de $T^{\mu}{}_{\nu}$ sai o escalar $T^\mu{}_\mu$, o
 \emph{traço}. Que o traço seja de fato um escalar não é óbvio e vale a conta
 --- é o item~\ref{item-traco-invariante} dos Problemas orientados.
+
+\section{Índices: a regra e os erros}
+\label{sec:regra-indices}
+
+A regra é curta. Um índice repetido uma vez em cima e uma vez embaixo no mesmo
+termo é somado e desaparece --- é um índice \emph{mudo}, e seu nome não
+importa. Os que sobram são \emph{livres}, e são eles que dizem o tipo do
+objeto: têm de aparecer de modo idêntico, mesma letra e mesma posição, nos dois
+lados da equação e em todos os termos de uma soma. Assim
+\[
+  A^\mu=B^\mu+C^\mu
+\]
+é uma equação vetorial legítima, enquanto $A^\mu=B^\nu$ não é equação nenhuma.
+
+Dessa regra única saem os três erros que mais aparecem nas provas.
+
+\begin{enumerate}
+  \item \textbf{Repetir um índice três vezes} no mesmo termo, como em
+  $A_\mu B^\mu C^\mu$. A convenção da soma não diz o que fazer com isso, e a
+  expressão simplesmente não significa nada; o conserto é sempre renomear um
+  dos mudos.
+  \item \textbf{Trocar o nome de um índice livre} de um lado da equação para o
+  outro, ou de um termo para o seguinte.
+  \item \textbf{Somar tipos diferentes}, como em $A_\mu+B^\mu$. Um é um-forma e
+  o outro é vetor; sem uma métrica não há nem como compará-los.
+\end{enumerate}
+
+O hábito que previne os três é ler os índices em voz alta antes de escrever o
+próximo passo: os repetidos somem por soma, os livres nomeiam o resultado. Se
+depois de uma contração ainda sobram $\alpha$ e $\beta$, o resultado é um
+tensor com esses dois índices livres --- e é assim que ele tem de aparecer do
+outro lado do sinal de igual. Para deltas, símbolos antissimétricos e as
+contrações mais frequentes, o Apêndice~\ref{ap:indices} serve de mesa de
+trabalho enquanto este capítulo é estudado.
+
+\begin{activity}
+Classifique cada expressão como escalar, vetor, um-forma, tensor de ordem dois
+ou expressão inválida, dizendo em cada caso quais índices ficaram livres:
+\[
+  A_\mu B^\mu,\qquad
+  T^{\mu\nu}V_\nu,\qquad
+  R_{\mu\nu}A^\rho,\qquad
+  A_\mu+B^\mu,\qquad
+  T^{\mu\nu}{}_{\nu}.
+\]
+\end{activity}
+
+\section{Simetria e antissimetria}
+\label{sec:simetrias}
+
+Um tensor de tipo $(0,2)$ recebe dois vetores \emph{em ordem}, e a ordem
+importa: nada obriga $T(\vec A,\vec B)$ a valer o mesmo que $T(\vec B,\vec A)$.
+Os dois casos extremos têm nome. O tensor é \emph{simétrico} se
+$T(\vec A,\vec B)=T(\vec B,\vec A)$ para todos os vetores, o que em componentes
+--- basta tomar $\vec A=\vec e_\mu$ e $\vec B=\vec e_\nu$ --- é
+\[
+  T_{\mu\nu}=T_{\nu\mu},
+\]
+e \emph{antissimétrico} se $T(\vec A,\vec B)=-T(\vec B,\vec A)$, isto é
+$T_{\mu\nu}=-T_{\nu\mu}$.
+
+Os dois exemplos que o curso mais usa já apareceram. A métrica é simétrica,
+porque o produto escalar é: $\vec A\cdot\vec B=\vec B\cdot\vec A$. O tensor
+eletromagnético $F_{\mu\nu}$ é antissimétrico --- e é a antissimetria que faz
+caberem numa matriz $4\times4$ apenas os seis números de $\bm E$ e $\bm B$.
+
+Qualquer tensor $(0,2)$ se separa nas duas partes, e a notação é padrão:
+\begin{equation}
+  M_{(\mu\nu)}=\tfrac12\!\left(M_{\mu\nu}+M_{\nu\mu}\right),\qquad
+  M_{[\mu\nu]}=\tfrac12\!\left(M_{\mu\nu}-M_{\nu\mu}\right),
+  \label{eq:sim-antisim}
+\end{equation}
+parênteses para simetrizar, colchetes para antissimetrizar. Somando as duas,
+$M_{\mu\nu}=M_{(\mu\nu)}+M_{[\mu\nu]}$, e a separação é única --- é o
+item~\ref{item-sim-antisim} dos Problemas orientados. A contagem fecha: das
+$16$ entradas de uma matriz $4\times4$, $10$ vão para a parte simétrica e $6$
+para a antissimétrica.
+
+\begin{resultado}
+A contração de um tensor simétrico com um antissimétrico é sempre zero:
+$S^{\mu\nu}A_{\mu\nu}=0$ (a demonstração é o Exemplo~\ref{ex:sim-antisim}).
+A consequência prática é maior do que parece. Quando algo simétrico multiplica
+algo de simetria desconhecida, só a parte simétrica do segundo sobrevive --- de
+modo que se pode \emph{simetrizar de graça} o outro fator, sem alterar nada. É
+esse truque que deduz os símbolos de Christoffel no
+Capítulo~\ref{cap:curvatura}, e é a razão de valer a pena reconhecer simetrias
+\emph{antes} de começar qualquer conta.
+\end{resultado}
+
+Os colchetes valem para qualquer par de índices de um tensor de qualquer ordem:
+$R_{\mu[\nu\rho]\sigma}$ antissimetriza apenas $\nu$ e $\rho$, deixando $\mu$ e
+$\sigma$ intocados. O Capítulo~\ref{cap:curvatura} vai precisar disso com o
+tensor de Riemann, que tem simetrias em três pares diferentes.
 
 \section{A métrica como ponte}
 \label{sec:metrica-ponte}
@@ -4013,27 +4192,6 @@ $g^{\mu\nu}$. Note que agora ela \emph{não} é numericamente igual a
 $g_{\mu\nu}$ --- e que continua sendo a inversa.
 \end{activity}
 
-\section{Regra prática de índices}
-
-Índices repetidos uma vez acima e uma vez abaixo são somados. Índices livres
-devem aparecer de modo idêntico nos dois lados da equação. Por exemplo,
-\[
-  A^\mu=B^\mu+C^\mu
-\]
-é uma equação vetorial válida, enquanto $A^\mu=B^\nu$ é mal escrita, pois
-$\mu$ e $\nu$ são índices livres diferentes.
-
-\begin{activity}
-Classifique cada expressão como escalar, vetor, um-forma, tensor de ordem dois
-ou expressão inválida:
-\[
-  A_\mu B^\mu,\qquad
-  T^{\mu\nu}V_\nu,\qquad
-  R_{\mu\nu}A^\rho,\qquad
-  A_\mu+B^\mu.
-\]
-\end{activity}
-
 \section{O que significa uma equação tensorial}
 
 Uma equação tensorial bem escrita é uma afirmação independente de coordenadas.
@@ -4097,6 +4255,23 @@ Figura~\ref{fig:base-obliqua}, $|\vec e_2|=1{,}08$: a projeção de $V$ sobre
 aquele eixo mede $1{,}32$, enquanto a componente covariante vale
 $V_2=1{,}42$.
 
+É aqui que a base dual da Seção~\ref{sec:base-dual} deixa de ser um detalhe
+formal. As componentes covariantes são as componentes de $V$ \emph{na base
+dual}:
+\[
+  \vec V=V_i\,\vec e^{\,i},
+  \qquad
+  \vec e^{\,i}=g^{ij}\vec e_j ,
+\]
+onde $\vec e^{\,i}$ é o vetor que a métrica associa à um-forma
+$\tilde\omega^i$. A condição $\tilde\omega^i(\vec e_j)=\delta^i{}_j$ vira
+$\vec e^{\,i}\cdot\vec e_j=\delta^i{}_j$, e é ela que explica a figura: como
+$\vec e^{\,1}\cdot\vec e_2=0$, o eixo recíproco $\vec e^{\,1}$ é
+\emph{perpendicular a $\vec e_2$}, e não paralelo a $\vec e_1$. Numa base
+ortonormal os dois conjuntos coincidem, as duas decomposições viram a mesma e
+não há o que notar. É essa base recíproca que o programa da
+Seção~\ref{sec:numerica-tensores} constrói.
+
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.92\textwidth]{cap03_base_obliqua.pdf}
@@ -4123,13 +4298,13 @@ tensor:
   \quad\text{é um tensor de tipo }(2,1).
 \]
 A razão é a mesma que fez do gradiente uma um-forma --- $\partial_\alpha$
-transforma com $\partial x^\beta/\partial x^{\alpha'}$ --- combinada com o
+transforma com $\Lambda^{\beta}{}_{\alpha'}$ --- combinada com o
 fato de que os coeficientes $\Lambda$ são \emph{constantes} numa
 transformação de Lorentz, e portanto passam intactos pela derivada:
 \[
   \partial_{\alpha'}T^{\mu'\nu'}
-  =\frac{\partial x^\beta}{\partial x^{\alpha'}}\,
-   \Lambda^{\mu'}{}_{\rho}\Lambda^{\nu'}{}_{\sigma}\,
+  =\Lambda^{\beta}{}_{\alpha'}\,
+   \Lambda^{\mu'}{}_{\rho}\,\Lambda^{\nu'}{}_{\sigma}\,
    \partial_\beta T^{\rho\sigma} .
 \]
 Cada índice recebeu o seu fator, que é exatamente a lei de transformação de um
@@ -4146,19 +4321,6 @@ extras são os símbolos de Christoffel. Todo o Capítulo~\ref{cap:curvatura}
 sai daí. Por ora, aproveite a simplicidade --- ela é a última.
 \end{atencao}
 
-\section{Erros comuns com índices}
-
-Há três erros frequentes. O primeiro é repetir um índice mais de duas vezes em
-um mesmo termo, como em $A_\mu B^\mu C^\mu$. O segundo é mudar o nome de um
-índice livre entre os lados de uma equação. O terceiro é somar objetos de tipos
-diferentes, como $A_\mu+B^\mu$, sem uma métrica ou identificação explícita.
-
-Um bom hábito é ler os índices em voz alta: índices repetidos desaparecem por
-soma; índices livres nomeiam o tipo do objeto resultante. Se depois de uma
-contração ainda sobram índices $\alpha$ e $\beta$, o resultado é um tensor com
-esses índices livres. Essa regra simples previne a maioria dos erros técnicos
-no início do curso.
-
 \section{Problemas orientados}
 
 \begin{enumerate}
@@ -4166,13 +4328,14 @@ no início do curso.
   liste todas as contrações escalares que podem ser formadas com um único
   $T$, um $A$ e um $B$. Explique quais expressões deixam índices livres.
 
-  \item \label{item-sim-antisim} \textbf{Parte simétrica e antissimétrica.}
-  Para um tensor $M_{\mu\nu}$, defina
-  \[
-    M_{(\mu\nu)}=\frac12(M_{\mu\nu}+M_{\nu\mu}),\qquad
-    M_{[\mu\nu]}=\frac12(M_{\mu\nu}-M_{\nu\mu}).
-  \]
-  Mostre que $M_{\mu\nu}=M_{(\mu\nu)}+M_{[\mu\nu]}$.
+  \item \label{item-sim-antisim} \textbf{Unicidade da decomposição.} A
+  Seção~\ref{sec:simetrias} afirma que a separação
+  $M_{\mu\nu}=M_{(\mu\nu)}+M_{[\mu\nu]}$ é única. Demonstre: se
+  $M_{\mu\nu}=S_{\mu\nu}+A_{\mu\nu}$ com $S$ simétrico e $A$ antissimétrico,
+  então necessariamente $S_{\mu\nu}=M_{(\mu\nu)}$ e $A_{\mu\nu}=M_{[\mu\nu]}$.
+  (Sugestão: troque $\mu\leftrightarrow\nu$ e some; depois subtraia.) Em
+  seguida confirme a contagem $16=10+6$ exibindo quais entradas são
+  independentes em cada parte.
 
   \item \label{item-traco-invariante} \textbf{Traço invariante.} Use a lei de
   transformação de um tensor misto $T^\mu{}_\nu$ para mostrar que
@@ -4214,7 +4377,7 @@ O vetor é temporal. Se fosse quadrimomento, corresponderia a uma partícula
 massiva com massa invariante $\sqrt{5}$.
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex:sim-antisim}
 \textbf{Contração de tensor antissimétrico.} Se $F_{\mu\nu}=-F_{\nu\mu}$ e
 $S^{\mu\nu}=S^{\nu\mu}$, então
 \[
@@ -4227,14 +4390,22 @@ Logo a contração é igual ao seu negativo e, portanto, vale zero.
 \end{example}
 
 \begin{example}
-\textbf{Transformação de uma um-forma.} Em duas dimensões, tome
-$x'=2x$, $y'=y$. Se $\omega=\dd x$, então
+\textbf{Transformação de uma um-forma.} Em duas dimensões, tome $x'=2x$ e
+$y'=y$ --- apenas uma troca de unidade no eixo $x$. O vetor de base acompanha
+pela inversa,
 \[
-  \dd x=\frac{1}{2}\dd x'.
+  \vec e_{x'}=\Lambda^{\nu}{}_{x'}\vec e_\nu=\tfrac12\,\vec e_x ,
 \]
-Assim, a componente da um-forma na coordenada $x'$ é metade da componente
-original. Vetores e um-formas transformam de modos inversos para preservar
-$\omega(V)$.
+porque agora basta meio $\vec e_x$ para avançar uma unidade de $x'$. Tome a
+um-forma de base $\omega=\tilde\omega^x$, de componentes $(1,0)$ no sistema
+original. Pela definição de componente,
+\[
+  \omega_{x'}=\omega(\vec e_{x'})=\tfrac12\,\omega(\vec e_x)=\tfrac12 .
+\]
+A componente da um-forma encolheu pelo mesmo fator que o vetor de base,
+enquanto a componente de um vetor \emph{dobrou} ($V^{x'}=2V^{x}$). É essa
+oposição que preserva $\omega_\mu V^\mu$: um fator sobe, o outro desce, e o
+produto sobrevive.
 \end{example}
 
 \begin{example}
@@ -4251,8 +4422,53 @@ Essa leitura ajuda a lembrar que contração parcial reduz o tipo tensorial do
 objeto.
 \end{example}
 
+\begin{example}\label{ex:boost-campo}
+\textbf{Um tensor sendo transformado de verdade.} Os exemplos acima são
+identidades algébricas. Este é a lei de transformação em ação, e o resultado é
+um dos mais bonitos da física. O tensor eletromagnético tem, num referencial
+$S$, as componentes $F_{i0}=E_i$ e $F_{ij}=\epsilon_{ijk}B_k$:
+\[
+  F_{\mu\nu}=\begin{pmatrix}
+    0   & -E_x & -E_y & -E_z\\
+    E_x & 0    & B_z  & -B_y\\
+    E_y & -B_z & 0    & B_x\\
+    E_z & B_y  & -B_x & 0
+  \end{pmatrix},
+\]
+antissimétrica, como a Seção~\ref{sec:simetrias} pedia --- seis entradas
+independentes para seis números de campo.
+
+Sendo de tipo $(0,2)$, cada índice recebe um fator da matriz inversa:
+$F_{\mu'\nu'}=\Lambda^{\alpha}{}_{\mu'}\Lambda^{\beta}{}_{\nu'}F_{\alpha\beta}$,
+que em forma matricial é $F'=\Lambda^{\mathsf T}F\Lambda$. Para um
+\emph{boost} de velocidade $v$ ao longo de $x$, o produto devolve
+\begin{align*}
+  E'_x&=E_x, & E'_y&=\gamma(E_y-vB_z), & E'_z&=\gamma(E_z+vB_y),\\
+  B'_x&=B_x, & B'_y&=\gamma(B_y+vE_z), & B'_z&=\gamma(B_z-vE_y).
+\end{align*}
+As componentes ao longo do \emph{boost} não mudam; as transversais se
+misturam, e se misturam \emph{entre} $\bm E$ e $\bm B$.
+
+O caso limpo é o campo puramente elétrico $\bm E=(0,E,0)$ com $\bm B=0$. Em
+$S'$,
+\[
+  \bm E'=(0,\gamma E,0),\qquad \bm B'=(0,0,-\gamma v E).
+\]
+Apareceu campo magnético onde não havia nenhum, só por trocar de referencial.
+É neste sentido preciso que o magnetismo é a eletricidade vista de um
+referencial em movimento --- e é por isso que $\bm E$ e $\bm B$ separados
+\emph{não} podem ser tensores, enquanto $F_{\mu\nu}$ é. Perguntar ``qual é o
+campo magnético'' sem dizer o referencial é tão malposto quanto perguntar
+``qual é a componente $x$'' sem dizer os eixos.
+
+Como conferência, o escalar $F_{\mu\nu}F^{\mu\nu}=2(B^2-E^2)$ tem de valer o
+mesmo nos dois referenciais: em $S$ dá $-2E^2$, e em $S'$,
+$2(\gamma^2v^2E^2-\gamma^2E^2)=-2\gamma^2E^2(1-v^2)=-2E^2$.
+\end{example}
+
 \clearpage
 \section{Resolução numérica}
+\label{sec:numerica-tensores}
 
 As identidades deste capítulo são de álgebra linear/tensorial pura -- não
 dependem de nenhuma física específica -- e por isso se prestam bem a
@@ -4314,7 +4530,7 @@ B^\nu$, $\;A^\mu=B_\mu$, $\;T^{\mu\nu}A_\mu B_\nu C^\rho$.
 \end{exercise}
 
 \begin{exercise}
-\medio{3.3}
+\medio{3.4}
 Considere a mudança de coordenadas $x'=x+\alpha t$, $t'=t$ (uma transformação
 de Galileu). (a) Calcule $\partial x^\mu/\partial x'^\nu$ e escreva a lei de
 transformação das componentes de um vetor e de uma um-forma. (b) Mostre
@@ -4324,9 +4540,11 @@ diferença entre invariância de contração e invariância métrica?
 \end{exercise}
 
 \begin{exercise}
-\medio{3.5}
-O tensor eletromagnético tem componentes $F_{0i}=E_i$ e
-$F_{ij}=\epsilon_{ijk}B_k$. (a) Escreva a matriz $F_{\mu\nu}$ completa.
+\medio{3.8}
+O tensor eletromagnético do Exemplo~\ref{ex:boost-campo} tem componentes
+$F_{i0}=E_i$ e $F_{ij}=\epsilon_{ijk}B_k$. (a) Confirme, contando, que a
+antissimetria reduz as dezesseis entradas de $F_{\mu\nu}$ aos seis números de
+$\bm E$ e $\bm B$, e escreva $F^{\mu\nu}$ com os dois índices em cima.
 (b) Calcule o escalar $F_{\mu\nu}F^{\mu\nu}$ e mostre que vale $2(B^2-E^2)$.
 (c) Um campo é puramente elétrico em um referencial. Usando o invariante,
 determine se pode existir outro referencial em que ele seja puramente
@@ -4334,7 +4552,7 @@ magnético, e sob que condição.
 \end{exercise}
 
 \begin{exercise}
-\dificil{3.7}
+\dificil{3.5}
 Um tensor $T^{\mu\nu}$ é simétrico. (a) Mostre que a decomposição
 $T^{\mu\nu}=\rho\,U^\mu U^\nu+p\,h^{\mu\nu}+2q^{(\mu}U^{\nu)}+\pi^{\mu\nu}$,
 com $h^{\mu\nu}=\eta^{\mu\nu}+U^\mu U^\nu$, $q^\mu U_\mu=0$,
@@ -4352,7 +4570,8 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{Os dois invariantes do campo eletromagnético.} Estenda
-\arq{cap03\_tensores.py} para montar $F_{\mu\nu}$ a partir de $\bm E$ e
+\arq{cap03\_tensores.py} para montar $F_{\mu\nu}$ (com a convenção do
+Exemplo~\ref{ex:boost-campo}) a partir de $\bm E$ e
 $\bm B$ dados e calcular $F_{\mu\nu}F^{\mu\nu}$ e
 $\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma}$. Depois, para um campo
 com $\bm E\cdot\bm B\ne0$, procure numericamente o boost que torna $\bm E$
