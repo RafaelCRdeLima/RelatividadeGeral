@@ -3882,7 +3882,7 @@ mais natural de uma 1-forma, e é anterior a qualquer métrica.
 \textbf{E é por isso que a contração funciona.} Aplicar uma 1-forma a um
 vetor,
 \[
-  \omega(V)=\omega_\mu V^\mu ,
+  \tilde\omega(\vec V)=\omega_\mu V^\mu ,
 \]
 produz um número igual em todas as bases: as duas matrizes se cancelam,
 $\Lambda^{\nu}{}_{\mu'}\Lambda^{\mu'}{}_{\rho}=\delta^\nu{}_\rho$. Nenhuma métrica foi usada --- este é o ponto
@@ -3906,14 +3906,15 @@ Vale ter uma imagem geométrica de por que vetores e 1-formas são objetos
 diferentes, e não apenas ``vetores com índice em cima ou embaixo''. Um vetor
 é uma seta: tem magnitude e direção. Uma 1-forma é melhor visualizada como
 uma \emph{pilha de superfícies} -- as superfícies de nível de uma função
-linear $\varphi(x)=\omega_\mu x^\mu$. O valor $\omega(V)$ é, literalmente, o
-número de superfícies que a seta $V$ perfura ao ir da origem até sua ponta.
+linear $\varphi(x)=\omega_\mu x^\mu$. O valor $\tilde\omega(\vec V)$ é,
+literalmente, o número de superfícies que a seta $\vec V$ perfura ao ir da
+origem até sua ponta.
 Superfícies mais próximas entre si representam uma 1-forma ``mais forte''
 (maior magnitude); a orientação das superfícies codifica a direção da
 1-forma.
 
-E as superfícies não são uma analogia escolhida a dedo: para
-$\omega=\partial_\mu f$, elas são \emph{literalmente} as superfícies de nível
+E as superfícies não são uma analogia escolhida a dedo: para a 1-forma de
+componentes $\partial_\mu f$, elas são \emph{literalmente} as superfícies de nível
 de $f$. Uma 1-forma forte é um campo que varia rápido, com as superfícies de
 nível apertadas --- exatamente o que um mapa topográfico desenha com curvas de
 nível próximas onde a encosta é íngreme. O gradiente aponta ladeira acima
@@ -3923,19 +3924,21 @@ não a seta.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.6\textwidth]{cap03_umaforma_pilha.pdf}
-\caption{A 1-forma $\omega=(2,1)$ representada como uma pilha de retas
-(superfícies de nível de $\varphi=2x+y$, espaçadas de $\Delta\varphi=1$). O
-vetor $V=(3,4)$ vai de $\varphi=0$ a $\varphi=10$, perfurando exatamente $10$
-retas -- por isso $\omega(V)=10$. Esses são os mesmos $\omega$ e $V$ do
+\caption{A 1-forma $\tilde\omega$, de componentes $(2,1)$, representada como
+uma pilha de retas (superfícies de nível de $\varphi=2x+y$, espaçadas de
+$\Delta\varphi=1$). O vetor $\vec V$, de componentes $(3,4)$, vai de
+$\varphi=0$ a $\varphi=10$, perfurando exatamente $10$ retas -- por isso
+$\tilde\omega(\vec V)=10$. Esses são os mesmos $\tilde\omega$ e $\vec V$ do
 Exemplo~\ref{ex:umaforma-contracao}.}
 \label{fig:umaforma-pilha}
 \end{figure}
 
 \begin{example}\label{ex:umaforma-contracao}
-Em duas dimensões euclidianas, seja $\omega=(2,1)$ e $V=(3,4)$ em uma base
-cartesiana. A contração é $\omega(V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma
-base rotacionada, as componentes individuais mudam --- as de $\omega$ com uma
-matriz, as de $V$ com a inversa --- mas o número obtido pela ação da 1-forma
+Em duas dimensões euclidianas, seja $\tilde\omega$ de componentes $(2,1)$ e
+$\vec V$ de componentes $(3,4)$ em uma base cartesiana. A contração é
+$\tilde\omega(\vec V)=2\cdot3+1\cdot4=10$. Se mudarmos para uma base
+rotacionada, as componentes individuais mudam --- as de $\tilde\omega$ com uma
+matriz, as de $\vec V$ com a inversa --- mas o número obtido pela ação da 1-forma
 sobre o vetor permanece o mesmo: é o mesmo número de superfícies perfuradas na
 Figura~\ref{fig:umaforma-pilha}, agora contado em coordenadas diferentes.
 Perfurar superfícies é um fato geométrico, e não depende de quem conta.
@@ -3946,10 +3949,10 @@ Perfurar superfícies é um fato geométrico, e não depende de quem conta.
 
 A imagem só rende de verdade quando se pergunta o que acontece ao
 \emph{multiplicar} cada um dos dois objetos por um número. Comece medindo o
-espaçamento. As folhas de $\omega$ são as superfícies $\varphi=0,1,2,\dots$ da
+espaçamento. As folhas de $\tilde\omega$ são as superfícies $\varphi=0,1,2,\dots$ da
 função $\varphi(x)=\omega_\mu x^\mu$, e duas folhas vizinhas distam
 \begin{equation}
-  \Delta\ell=\frac{1}{|\omega|}
+  \Delta\ell=\frac{1}{|\tilde\omega|}
   \label{eq:espacamento-pilha}
 \end{equation}
 uma da outra. Essa fórmula curta carrega toda a diferença entre os dois
@@ -3958,26 +3961,26 @@ objetos:
 \begin{central}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}A MAGNITUDE DE UMA 1-FORMA É O INVERSO DO ESPAÇAMENTO}]
 Uma 1-forma \emph{forte} tem folhas \emph{apertadas} --- não folhas grandes,
 nem folhas compridas. Quem chega das setas espera o contrário, e é aí que se
-erra: dobrar $\omega$ não estica nada, aperta a pilha pela metade.
+erra: dobrar $\tilde\omega$ não estica nada, aperta a pilha pela metade.
 \end{central}
 
-Com \eqref{eq:espacamento-pilha} o número $\omega(V)$ ganha uma leitura só: é o
+Com \eqref{eq:espacamento-pilha} o número $\tilde\omega(\vec V)$ ganha uma leitura só: é o
 comprimento de $V$ \emph{medido com uma régua cujo passo é o espaçamento da
 pilha}. E há dois jeitos de dobrar esse número, geometricamente distintos:
 
 \begin{itemize}
-  \item \textbf{dobrar o vetor}, $V\to2V$: a seta fica duas vezes mais
+  \item \textbf{dobrar o vetor}, $\vec V\to2\vec V$: a seta fica duas vezes mais
   comprida, a pilha não muda, e a seta atravessa duas vezes mais folhas;
-  \item \textbf{dobrar a 1-forma}, $\omega\to2\omega$: a seta é exatamente a
+  \item \textbf{dobrar a 1-forma}, $\tilde\omega\to2\tilde\omega$: a seta é exatamente a
   mesma, mas a régua encolheu pela metade --- as folhas ficam duas vezes mais
   juntas, e a mesma seta atravessa duas vezes mais.
 \end{itemize}
 
-Os dois dão $2\,\omega(V)$, e nenhuma conta os distingue. A figura distingue --
+Os dois dão $2\,\tilde\omega(\vec V)$, e nenhuma conta os distingue. A figura distingue --
 e essa é a razão de a imagem valer a pena.
 
 \textbf{Escolhendo a 1-forma por uma função.} O jeito mais econômico de
-produzir exemplos é dar a função e deixar $\omega=\dd f$, porque aí as folhas
+produzir exemplos é dar a função e deixar $\tilde\omega=\dd f$, porque aí as folhas
 são as curvas de nível de $f$ e não é preciso desenhar nada à mão. Quatro
 casos, no plano:
 
@@ -3985,7 +3988,7 @@ casos, no plano:
 \small
 \begin{tabular}{llp{6.9cm}}
 \toprule
-$f$ & $\omega=\dd f$ & O que se vê \\
+$f$ & $\tilde\omega=\dd f$ & O que se vê \\
 \midrule
 $2x+y$ & $(2,1)$ &
 retas paralelas, espaçadas de $1/\sqrt5$: é a
@@ -4014,8 +4017,9 @@ folhas. A seta $V$ ficou idêntica; foi a régua que mudou.
 \begin{activity}[no ÁLETRA]
 \label{atv:pilha-aletra}
 O \href{\rgsitealetra}{ÁLETRA} desenha exatamente esta figura: as folhas dele
-são os níveis inteiros de $\omega$, e o numeral no alto é o número de folhas
-que a seta atravessa. Roda no navegador, sem instalar nada. Abra, escolha
+são os níveis inteiros de $\tilde\omega$, e o numeral no alto é o número de
+folhas que a seta atravessa. Nos rótulos da tela ela aparece sem o til, só
+como $\omega$, e é assim que eles são citados aqui. Roda no navegador, sem instalar nada. Abra, escolha
 \textsf{Plano euclidiano} no seletor de superfície e deixe a leitura em
 \textsf{$\langle\omega,v\rangle$ --- contar folhas}. A 1-forma e o vetor se
 escrevem por extenso nos campos do painel, de modo que nada aqui depende de
@@ -4118,7 +4122,7 @@ um polinômio de grau $\le n$ & somar os coeficientes & o polinômio nulo \\
 uma função contínua em $[a,b]$ & $(f+g)(x)=f(x)+g(x)$ & a função nula \\
 uma matriz $m\times n$ & somar entrada a entrada & a matriz nula \\
 uma solução de $y''+\omega^2y=0$ & somar as soluções & $y\equiv0$ \\
-uma 1-forma & $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$ & a 1-forma nula \\
+uma 1-forma & $(\tilde\omega+\tilde\sigma)(\vec V)=\tilde\omega(\vec V)+\tilde\sigma(\vec V)$ & a 1-forma nula \\
 um ket $\ket{\psi}$ & a superposição & o vetor nulo \\
 \bottomrule
 \end{tabular}
@@ -4132,8 +4136,9 @@ escreveu ``a solução geral é combinação linear das duas'', estava expandind
 vetor numa base --- e o vetor era uma \emph{função}.
 
 Some duas
-1-formas definindo $(\omega+\sigma)(V)=\omega(V)+\sigma(V)$, e multiplique por
-escalar com $(a\omega)(V)=a\,\omega(V)$. Os oito axiomas são testados ao mesmo tempo, porque
+1-formas definindo
+$(\tilde\omega+\tilde\sigma)(\vec V)=\tilde\omega(\vec V)+\tilde\sigma(\vec V)$,
+e multiplique por escalar com $(a\tilde\omega)(\vec V)=a\,\tilde\omega(\vec V)$. Os oito axiomas são testados ao mesmo tempo, porque
 do lado direito estão números reais, que já os obedecem. Logo as 1-formas
 formam um espaço vetorial, e portanto têm base, dimensão e componentes --- que
 é tudo o que a Seção~\ref{sec:base-dual} vai usar. O mesmo argumento vale para
@@ -4165,8 +4170,8 @@ termo a termo:
 & Neste curso & Mecânica quântica \\
 \midrule
 vetor              & $\vec V$, componentes $V^\mu$ & ket $\ket{\psi}$ \\
-elemento do dual   & 1-forma $\omega$, $\omega_\mu$ & bra $\bra{\phi}$ \\
-o número           & $\omega(\vec V)=\omega_\mu V^\mu$ & $\braket{\phi}{\psi}$ \\
+elemento do dual   & 1-forma $\tilde\omega$, $\omega_\mu$ & bra $\bra{\phi}$ \\
+o número           & $\tilde\omega(\vec V)=\omega_\mu V^\mu$ & $\braket{\phi}{\psi}$ \\
 base               & $\vec e_\mu$ & $\ket{n}$ \\
 base dual          & $\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$ &
                      $\braket{m}{n}=\delta_{mn}$ \\
@@ -4215,7 +4220,7 @@ Capítulo~\ref{cap:curvatura} começa.
 \label{sec:base-dual}
 
 1-formas se somam e se multiplicam por número: a soma de duas 1-formas é uma
-1-forma, e $\lambda\,\omega$ também. Elas formam, portanto, um espaço vetorial
+1-forma, e $\lambda\,\tilde\omega$ também. Elas formam, portanto, um espaço vetorial
 próprio, no sentido exato dos oito axiomas do Interlúdio da
 página~\pageref{sec:interludio-algebra} --- de quatro dimensões, como o dos
 vetores --- e todo espaço vetorial tem bases. Falta escolher uma.
@@ -4232,9 +4237,9 @@ vetores de base, e assim por diante. Esse conjunto se chama \emph{base dual} a
 $\{\vec e_\mu\}$.
 
 A razão de pedir exatamente isso cabe em uma linha. Escrevendo
-$\omega=\omega_\mu\tilde\omega^\mu$ e $\vec V=V^\nu\vec e_\nu$,
+$\tilde\omega=\omega_\mu\tilde\omega^\mu$ e $\vec V=V^\nu\vec e_\nu$,
 \[
-  \omega(\vec V)=\omega_\mu V^\nu\,\tilde\omega^\mu(\vec e_\nu)
+  \tilde\omega(\vec V)=\omega_\mu V^\nu\,\tilde\omega^\mu(\vec e_\nu)
                 =\omega_\mu V^\nu\,\delta^\mu{}_\nu
                 =\omega_\mu V^\mu ,
 \]
@@ -4243,7 +4248,7 @@ condição para que ``multiplicar componente por componente e somar'' seja de
 fato a aplicação da 1-forma ao vetor. E, do mesmo modo, as componentes de uma
 1-forma são os seus valores sobre os vetores de base,
 \[
-  \omega_\mu=\omega(\vec e_\mu),
+  \omega_\mu=\tilde\omega(\vec e_\mu),
 \]
 assim como os $V^\mu$ eram os coeficientes que reconstroem $\vec V$ a partir
 de $\{\vec e_\mu\}$.
@@ -4676,10 +4681,10 @@ pela inversa,
   \vec e_{x'}=\Lambda^{\nu}{}_{x'}\vec e_\nu=\tfrac12\,\vec e_x ,
 \]
 porque agora basta meio $\vec e_x$ para avançar uma unidade de $x'$. Tome a
-1-forma de base $\omega=\tilde\omega^x$, de componentes $(1,0)$ no sistema
+1-forma de base $\tilde\omega=\tilde\omega^x$, de componentes $(1,0)$ no sistema
 original. Pela definição de componente,
 \[
-  \omega_{x'}=\omega(\vec e_{x'})=\tfrac12\,\omega(\vec e_x)=\tfrac12 .
+  \omega_{x'}=\tilde\omega(\vec e_{x'})=\tfrac12\,\tilde\omega(\vec e_x)=\tfrac12 .
 \]
 A componente da 1-forma encolheu pelo mesmo fator que o vetor de base,
 enquanto a componente de um vetor \emph{dobrou} ($V^{x'}=2V^{x}$). É essa
@@ -4796,7 +4801,7 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 \facil{3.8}
 Sejam $\omega_\mu=(-2,1,0,0)$ as componentes de uma 1-forma e
 $V^\mu=(3,2,1,0)$ as de um vetor, em coordenadas de Minkowski. Calcule
-$\omega(V)=\omega_\mu V^\mu$. Em seguida obtenha $\omega^\mu$ e $V_\mu$ com a
+$\tilde\omega(\vec V)=\omega_\mu V^\mu$. Em seguida obtenha $\omega^\mu$ e $V_\mu$ com a
 métrica, e verifique que $\omega^\mu V_\mu$ dá o mesmo número.
 \end{exercise}
 
