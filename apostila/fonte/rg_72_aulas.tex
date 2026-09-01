@@ -4364,6 +4364,132 @@ ou expressão inválida, dizendo em cada caso quais índices ficaram livres:
 \]
 \end{activity}
 
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Interlúdio: o Tessera}
+\label{sec:interludio-tessera}
+
+\begin{interludio}{O Tessera, e a álgebra que não encaixa}
+
+A seção anterior deu uma regra e três erros, e um hábito para evitá-los: ler os
+índices em voz alta. Existe uma segunda maneira de conferir, e ela não depende
+de disciplina nenhuma --- basta que a expressão errada \emph{não caiba}.
+
+O \href{\rgsitetessera}{Tessera} faz isso. Cada tensor é uma peça de encaixe, no
+modelo \emph{T-mosaic} de Giancarlo Bernacchi: um índice em cima é um pino, um
+índice embaixo é um furo, e a forma da peça é a valência do tensor. Contrair é
+encaixar pino em furo. A tese do programa cabe numa frase:
+
+\begin{center}
+\emph{verificar validade algébrica é detectar colisão.}
+\end{center}
+
+Se a expressão não é bem formada, as peças não encaixam --- e o programa diz por
+quê, citando a passagem do livro. Roda no navegador, em português, sem instalar
+nada.
+
+\begin{center}
+\includegraphics[width=\linewidth]{cap03_tessera_tela.png}
+\captionof{figure}{O Tessera com $V_\alpha=g_{\alpha\mu}V^\mu$ montado --- a
+Seção~\ref{sec:metrica-ponte} desenhada. À esquerda a paleta, com as peças
+agrupadas por valência; no meio o canvas, onde o pino $\mu$ de $V$ está
+encaixado no furo de $g$; à direita o painel, que lê a montagem de volta:
+valência $(0,1)$, índice livre $\alpha$, índice mudo $\mu$, e a conexão
+nomeada. O rodapé confirma: \textsf{expressão bem formada}.}
+\label{fig:tessera-tela}
+\end{center}
+
+\textbf{Os três erros da seção anterior, na tela.} Não é coincidência que sejam
+os mesmos: as duas listas saem da mesma regra.
+
+O primeiro --- repetir um índice três vezes --- é recusado antes de virar peça
+alguma. O canvas fica vazio e a mensagem é literal
+(Figura~\ref{fig:tessera-tres}).
+
+\begin{center}
+\begin{minipage}[b]{0.44\linewidth}
+\centering
+\captionsetup{width=\linewidth}
+\includegraphics[width=\linewidth]{cap03_tessera_tres.png}
+\captionof{figure}{$A_\mu B^\mu C^\mu$ não monta: ``o índice $\mu$ aparece 3
+vezes; o máximo é duas''.}
+\label{fig:tessera-tres}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.50\linewidth}
+\centering
+\captionsetup{width=\linewidth}
+\includegraphics[width=0.80\linewidth]{cap03_tessera_soma.png}
+\captionof{figure}{$A_\mu+B^\mu$ monta, e o painel recusa: os dois termos têm
+índices livres diferentes. Abaixo da mensagem, a referência ao livro.}
+\label{fig:tessera-soma}
+\end{minipage}
+\end{center}
+
+O segundo --- trocar o nome de um índice livre entre os lados --- produz
+\textsf{os dois lados têm índices livres diferentes: \{$\mu$:up\} contra
+\{$\nu$:up\}}, e um botão que oferece corrigir o outro lado. O terceiro ---
+somar tipos diferentes --- dá a mensagem da Figura~\ref{fig:tessera-soma}.
+Repare que o programa não diz apenas ``errado'': ele diz \emph{qual} índice,
+\emph{em que posição} e \emph{por qual regra}.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O QUE A APOSTILA AFIRMA, O PROGRAMA IMPÕE}]
+Na paleta há um grupo chamado \textsf{não são tensores}, com duas peças
+desenhadas em tracejado: o conversor de base $\Lambda$ e os símbolos de
+Christoffel $\Gamma$. Monte $\Gamma^\mu{}_{\nu\rho}V^\nu$ e o painel avisa:
+\textsf{$\Gamma$ não é tensor --- esta parcela sozinha não se transforma como
+tensor, só a soma completa volta a ser}. É exatamente a ressalva que a
+Seção~\ref{sec:tipos-tensor} faz sobre $\Gamma^\mu{}_{\nu\rho}$, e que só vai
+ser cobrada no Capítulo~\ref{cap:curvatura} --- aqui ela já é uma restrição que
+o programa não deixa violar.
+\end{atencao}
+
+\begin{activity}[no Tessera]
+\label{atv:tessera}
+Abra o \href{\rgsitetessera}{Tessera}, confira que a língua está em
+\textsf{Português} e use o campo \textsf{por texto} com o botão
+\textsf{Montar}. As expressões vão em \LaTeX{}, e os índices mudos se contraem
+sozinhos --- não é preciso dizer quais peças se ligam.
+
+\textbf{(a) O que deve encaixar.} Monte \texttt{A\_\{\textbackslash mu\}
+B\^{}\{\textbackslash mu\}}. Duas peças, uma conexão, e o painel resume o
+resultado da melhor maneira possível: \textsf{índices livres: nenhum --- peça
+lisa, é um escalar}. É a Seção~\ref{sec:umaformas} dita em outra língua.
+
+\textbf{(b) O que não deve.} Passe pelos três erros:
+\texttt{A\_\{\textbackslash mu\} B\^{}\{\textbackslash mu\}
+C\^{}\{\textbackslash mu\}},
+\texttt{A\^{}\{\textbackslash mu\} = B\^{}\{\textbackslash nu\}} e
+\texttt{A\_\{\textbackslash mu\} + B\^{}\{\textbackslash mu\}}. Depois tente
+\texttt{A\_\{\textbackslash mu\} B\_\{\textbackslash mu\}}, com os dois índices
+embaixo: a resposta é ``o índice $\mu$ aparece duas vezes na mesma posição; um
+mudo é uma vez em cima e uma embaixo''. Essa é a expressão mal escrita do
+segundo dos Exercícios, e vale conferir a sua resposta contra a do programa.
+
+\textbf{(c) Contar índices livres.} Monte
+\texttt{T\^{}\{\textbackslash mu\textbackslash nu\} A\_\{\textbackslash mu\}
+B\_\{\textbackslash nu\} C\^{}\{\textbackslash rho\}} e leia a valência no
+painel: posto $1$, um índice livre em cima. Foi o que o hábito de ler os
+índices em voz alta deveria ter previsto --- $\mu$ e $\nu$ somem, $\rho$ fica.
+
+\textbf{(d) A métrica se aniquilando.} Monte
+\texttt{g\_\{\textbackslash alpha\textbackslash mu\}
+g\^{}\{\textbackslash mu\textbackslash beta\} = \textbackslash delta\_\{%
+\textbackslash alpha\}\{\}\^{}\{\textbackslash beta\}} e aperte
+\textsf{Simplificar}. O programa cancela $g$ com $g^{-1}$ e lista a
+justificativa --- é a equação~\eqref{eq:metrica-inversa} da
+Seção~\ref{sec:metrica-ponte} feita com as mãos.
+
+\textbf{(e) Doze equações prontas.} Em \textsf{montagens prontas} há doze
+equações do livro, de $g\,g^{-1}=\delta$ até $G_{\mu\nu}=\kappa T_{\mu\nu}$.
+As últimas ainda não fazem sentido --- são o Capítulo~\ref{cap:einstein} ---,
+mas vale montar a de Einstein agora e voltar a ela no fim do curso, para ver
+o que mudou não na tela, e sim em você.
+\end{activity}
+
+\end{interludio}
+
+\clearpage
+
 \section{Simetria e antissimetria}
 \label{sec:simetrias}
 
