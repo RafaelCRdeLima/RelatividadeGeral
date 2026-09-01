@@ -3871,6 +3871,50 @@ com linha; linha em cima, chega nele. Com esse nome,
   \partial_{\mu'}f=\Lambda^{\nu}{}_{\mu'}\,\partial_\nu f .
 \]
 
+\begin{resultado}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}POR QUE O JACOBIANO É A MATRIZ DE LORENTZ}]
+A equação~\eqref{eq:lambda-inversa} tem cara de definição, e não é: é uma conta
+de uma linha --- e ela só fecha porque a transformação de Lorentz é
+\emph{linear}.
+
+Parta da transformação em índices, \eqref{eq:lorentz-indices}, e da sua
+inversa, $x^\nu=\Lambda^{\nu}{}_{\alpha'}x^{\alpha'}$. Derive a segunda em
+relação a $x^{\mu'}$:
+\[
+  \frac{\partial x^\nu}{\partial x^{\mu'}}
+  =\frac{\partial}{\partial x^{\mu'}}
+   \Bigl(\Lambda^{\nu}{}_{\alpha'}\,x^{\alpha'}\Bigr)
+  =\Lambda^{\nu}{}_{\alpha'}\,\frac{\partial x^{\alpha'}}{\partial x^{\mu'}}
+  =\Lambda^{\nu}{}_{\alpha'}\,\delta^{\alpha'}{}_{\mu'}
+  =\Lambda^{\nu}{}_{\mu'} .
+\]
+Dois passos fizeram o trabalho, e vale saber qual é qual. O primeiro foi tirar
+$\Lambda^{\nu}{}_{\alpha'}$ de dentro da derivada, o que só se pode fazer
+porque as entradas de $\Lambda$ são \emph{números fixos}: dependem apenas da
+velocidade relativa, não do evento em que se está. O segundo foi
+$\partial x^{\alpha'}/\partial x^{\mu'}=\delta^{\alpha'}{}_{\mu'}$, que vale
+porque as quatro coordenadas são independentes entre si --- derivar $x'$ em
+relação a $t'$ dá zero.
+
+\textbf{Em números.} Para um \emph{boost} de velocidade $v$ ao longo de $x$ a
+relação inversa é $t=\gamma(t'+vx')$ e $x=\gamma(x'+vt')$, e as quatro
+derivadas dão
+\[
+  \frac{\partial x^\nu}{\partial x^{\mu'}}
+  =\begin{pmatrix}\gamma & \gamma v\\[2pt] \gamma v & \gamma\end{pmatrix},
+\]
+que é exatamente a matriz da caixa da Seção~\ref{sec:quadrivelocidade} --- e
+que não depende nem de $t'$ nem de $x'$, em nenhuma entrada.
+
+\textbf{E é aqui que a igualdade vai falhar.} Em coordenadas curvilíneas a
+relação entre os dois sistemas deixa de ser linear: o jacobiano
+$\partial x^\nu/\partial x^{\mu'}$ passa a depender do ponto, e não existe
+matriz constante $\Lambda$ nenhuma para batizá-lo. O jacobiano é o objeto
+geral; $\Lambda$ é o caso particular em que ele é o mesmo em toda parte. Vale
+guardar a distinção agora, porque é dela que a
+Seção~\ref{sec:derivada-tensor} e todo o Capítulo~\ref{cap:curvatura} vão
+depender.
+\end{resultado}
+
 \begin{resultado}
 Existem, portanto, dois tipos de objeto de quatro componentes no espaço-tempo,
 distinguidos por como mudam de base: os que transformam com $\Lambda$
