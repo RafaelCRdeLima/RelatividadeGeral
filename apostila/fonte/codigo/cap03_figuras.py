@@ -137,9 +137,55 @@ def fig_base_obliqua():
     return g, Vcontra, Vco
 
 
+# ---------------------------------------------------------------------
+# Figura 3: a base coordenada das polares, em tres pontos. O ponto e' que
+# ela muda de ponto a ponto -- em direcao E em comprimento -- embora o
+# plano seja o mesmo plano euclidiano de sempre.
+# ---------------------------------------------------------------------
+def fig_base_polar():
+    # Dois pontos no mesmo raio angular (r = 1 e 3) mostram o COMPRIMENTO
+    # crescendo com r; o terceiro, noutro angulo, mostra a DIRECAO mudando.
+    pontos = [(1.0, 0.25), (3.0, 0.25), (2.0, 0.75)]
+
+    fig, ax = plt.subplots(figsize=(6.2, 5.6))
+
+    # linhas coordenadas: as curvas cujas tangentes sao os vetores de base
+    for rc in (1.0, 2.0, 3.0, 3.6):
+        t = np.linspace(0, np.pi / 2, 200)
+        ax.plot(rc * np.cos(t), rc * np.sin(t), color="0.87", lw=0.8, zorder=0)
+    for tc in np.linspace(0, np.pi / 2, 7):
+        ax.plot([0, 3.9 * np.cos(tc)], [0, 3.9 * np.sin(tc)],
+                color="0.87", lw=0.8, zorder=0)
+
+    for k, (r, th) in enumerate(pontos):
+        P = np.array([r * np.cos(th), r * np.sin(th)])
+        er = np.array([np.cos(th), np.sin(th)])           # |e_r| = 1 sempre
+        et = np.array([-r * np.sin(th), r * np.cos(th)])  # |e_theta| = r
+        ax.annotate("", xy=tuple(P + er), xytext=tuple(P),
+                    arrowprops=dict(arrowstyle="-|>", color="#B0413E", lw=2.0), zorder=5)
+        ax.annotate("", xy=tuple(P + et), xytext=tuple(P),
+                    arrowprops=dict(arrowstyle="-|>", color="#4C72B0", lw=2.0), zorder=5)
+        ax.plot(*P, "o", color="0.15", ms=4.5, zorder=6)
+        ax.text(*(P + er + [0.05, -0.22]), r"$\vec e_r$", color="#B0413E", fontsize=11)
+        ax.text(*(P + et + [-0.16, 0.10]), r"$\vec e_\theta$", color="#4C72B0", fontsize=11)
+        ax.text(*(P + [-0.52, -0.30]), f"$r={r:g}$", color="0.35", fontsize=9.5)
+
+    ax.set_xlim(-0.25, 4.0)
+    ax.set_ylim(-0.25, 4.0)
+    ax.set_aspect("equal")
+    ax.set_xlabel("$x$")
+    ax.set_ylabel("$y$")
+    ax.set_title("A base coordenada das polares muda de ponto a ponto:\n"
+                 "direção e comprimento", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap03_base_polar.pdf", bbox_inches="tight")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_umaforma_pilha()
     g, Vcontra, Vco = fig_base_obliqua()
+    fig_base_polar()
     print("g =", g.tolist())
     print("V^i =", Vcontra.tolist())
     print("V_i =", Vco.tolist())

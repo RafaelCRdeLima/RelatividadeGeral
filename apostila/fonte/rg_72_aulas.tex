@@ -4669,14 +4669,130 @@ vetores permanece. Em contraste, uma expressão como $A^\mu=B_\mu$ não é uma
 igualdade tensorial natural sem uma métrica especificada, pois os dois lados
 têm tipos diferentes.
 
-\section{Componentes em uma base oblíqua}
+\section{Componentes fora de uma base ortonormal}
 \label{sec:base-obliqua}
 
 Em uma base ortonormal a distinção entre $V^\mu$ e $V_\mu$ passa despercebida,
-porque
-$V^\mu=V_\mu$ a menos de sinais. Ela fica visível em uma base oblíqua (não
-ortogonal), como a que aparece naturalmente em coordenadas
-curvilíneas ou, em Minkowski, nas coordenadas de cone de luz do
+porque $V^\mu=V_\mu$ a menos de sinais. Para vê-la é preciso sair da base
+ortonormal --- e há \emph{duas} maneiras independentes de sair, que convém não
+misturar:
+
+\begin{enumerate}
+  \item os vetores de base deixam de ter comprimento $1$, mas continuam
+  perpendiculares entre si;
+  \item os vetores de base deixam de ser perpendiculares.
+\end{enumerate}
+
+A primeira já basta para separar $V^\mu$ de $V_\mu$, e é a mais fácil de ver,
+porque acontece num sistema de coordenadas que você usa desde o ensino médio.
+Começamos por ela.
+
+\subsection{Uma base curvilínea: as coordenadas polares}
+\label{sec:base-polar}
+
+No plano, $x=r\cos\theta$ e $y=r\sin\theta$.
+
+\textbf{A base sai do jacobiano.} Os vetores de base de um sistema de
+coordenadas apontam ao longo das linhas coordenadas, e se obtêm com a matriz
+que a Seção~\ref{sec:umaformas} batizou: $\vec e_{\mu'}=\Lambda^{\nu}{}_{\mu'}
+\vec e_\nu$, com $\Lambda^{\nu}{}_{\mu'}=\partial x^\nu/\partial x^{\mu'}$.
+Aqui,
+\[
+  \vec e_r=\cos\theta\,\vec e_x+\sin\theta\,\vec e_y,
+  \qquad
+  \vec e_\theta=-r\sin\theta\,\vec e_x+r\cos\theta\,\vec e_y .
+\]
+Repare no que acabou de acontecer. A caixa que acompanha
+\eqref{eq:lambda-inversa} avisou que, em coordenadas curvilíneas, o jacobiano
+deixa de ser uma matriz de números fixos e passa a depender do ponto. É a
+primeira vez que se vê: $r$ e $\theta$ estão dentro das entradas.
+
+\textbf{O que muda de ponto a ponto.} Duas coisas, e vale separá-las
+(Figura~\ref{fig:base-polar}). A direção, porque os eixos acompanham as linhas
+coordenadas. E o comprimento:
+\[
+  |\vec e_r|=1,\qquad |\vec e_\theta|=r .
+\]
+O segundo não é acidente de álgebra. O vetor $\vec e_\theta$ tem componentes
+$(0,1)$ em $(r,\theta)$: ele é o deslocamento de \emph{um radiano}. E um
+radiano é um arco mais comprido longe da origem do que perto dela --- por isso
+a seta precisa crescer para dar conta do mesmo radiano.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.68\textwidth]{cap03_base_polar.pdf}
+\caption{A base coordenada das polares em três pontos. Os dois de baixo estão
+no mesmo ângulo e mostram o comprimento: $|\vec e_\theta|=r$ cresce com o raio,
+enquanto $|\vec e_r|=1$ em toda parte. O terceiro está noutro ângulo e mostra a
+direção mudando. As linhas cinzas são as curvas coordenadas, às quais os
+vetores de base são tangentes.}
+\label{fig:base-polar}
+\end{figure}
+
+\textbf{A métrica é a tabela dos produtos escalares.} Com
+$g_{\mu\nu}=\vec e_\mu\cdot\vec e_\nu$,
+\[
+  g_{rr}=1,\qquad g_{\theta\theta}=r^2,\qquad g_{r\theta}=0 .
+\]
+Diagonal, portanto \emph{ortogonal}: os dois eixos se cruzam em ângulo reto em
+todo ponto. Mas não ortonormal, porque $g_{\theta\theta}\ne1$. É a mesma
+métrica da atividade da Seção~\ref{sec:metrica-ponte}, uma dimensão a menos.
+
+\textbf{E isso já basta.} Tome o ponto $r=2$, $\theta=0$, onde
+$\vec e_r=\vec e_x$ e $\vec e_\theta=2\,\vec e_y$, e o vetor
+$\vec V=\vec e_x+\vec e_y$. Reconstruí-lo a partir da base pede
+\[
+  V^r=1,\qquad V^\theta=\tfrac12 ,
+\]
+porque é preciso meio $\vec e_\theta$ para andar uma unidade em $y$. Já as
+projeções dão
+\[
+  V_r=\vec V\cdot\vec e_r=1,\qquad V_\theta=\vec V\cdot\vec e_\theta=2 .
+\]
+Quatro vezes mais --- que é $g_{\theta\theta}=r^2$ em ação.
+
+\begin{central}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}NÃO É SOBRE ÂNGULO, É SOBRE RÉGUA}]
+As componentes de cima e as de baixo diferiram por um fator $4$ com os eixos
+\emph{perpendiculares}. Ou seja: a distinção entre $V^\mu$ e $V_\mu$ não nasce
+da obliquidade. Basta a base não ser unitária. A obliquidade é uma segunda
+razão, independente desta, e é o assunto da subseção seguinte.
+\end{central}
+
+\textbf{A base dual, e o inverso outra vez.} A condição
+\eqref{eq:base-dual}, $\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$, dá
+\[
+  \tilde\omega^r=\cos\theta\,\tilde\omega^x+\sin\theta\,\tilde\omega^y,
+  \qquad
+  \tilde\omega^\theta=-\frac{\sin\theta}{r}\,\tilde\omega^x
+                      +\frac{\cos\theta}{r}\,\tilde\omega^y ,
+\]
+e daí $|\tilde\omega^r|=1$ e $|\tilde\omega^\theta|=1/r$. Compare com
+$|\vec e_\theta|=r$: onde a seta de base é longa, as folhas da 1-forma de base
+são raras, e o produto dos dois comprimentos é sempre $1$. É a
+Seção~\ref{sec:dobrar-pilha} de volta, agora com uma base que muda de lugar
+para lugar.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O QUE ISTO ANUNCIA}]
+Se os vetores de base variam de ponto a ponto, derivar um vetor passa a exigir
+derivar também a base, e aparecem termos extras. Esses termos são os símbolos
+de Christoffel --- e no plano, em coordenadas polares, eles não são nulos:
+\[
+  \Gamma^r{}_{\theta\theta}=-r,
+  \qquad
+  \Gamma^\theta{}_{r\theta}=\Gamma^\theta{}_{\theta r}=\frac1r .
+\]
+E o plano continua sendo o plano: curvatura zero em toda parte. Guarde as duas
+coisas juntas, porque a conclusão apressada é a errada --- \textbf{$\Gamma\ne0$
+não é sinal de curvatura, é sinal de base que muda}. A
+Seção~\ref{sec:derivada-tensor} volta a isso em algumas páginas, e o
+Capítulo~\ref{cap:curvatura} separa de vez uma coisa da outra.
+\end{atencao}
+
+\subsection{Uma base genuinamente oblíqua}
+\label{sec:base-obliqua-mesmo}
+
+Agora a segunda maneira de sair da base ortonormal: os eixos deixarem de ser
+perpendiculares. Em Minkowski isso aparece nas coordenadas de cone de luz do
 \hyperref[sec:extra-tensores]{Conteúdo extra} deste capítulo.
 
 Antes disso, um exemplo tentador que \emph{não} serve. Os eixos inclinados

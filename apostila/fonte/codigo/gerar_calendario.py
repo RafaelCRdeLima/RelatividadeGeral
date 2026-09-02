@@ -57,7 +57,7 @@ AULAS = {
     12: (TEN, ["Tensores de tipo $(r,s)$", "Índices: a regra e os erros",
                "Simetria e antissimetria"]),
     13: (TEN, ["A métrica como ponte", "O que significa uma equação tensorial"]),
-    14: (TEN, ["Componentes em uma base oblíqua", "Derivada de um tensor", EXA, POR]),
+    14: (TEN, ["Componentes fora de uma base ortonormal", "Derivada de um tensor", EXA, POR]),
     15: (TEN, [NUM, EXE, EXT]),
     16: (FLU, ["O que é um fluido", "Poeira: densidade e fluxo", "O vetor fluxo de número"]),
     17: (FLU, ["Densidade é um fluxo temporal",
