@@ -5163,6 +5163,166 @@ ortonormais são preferíveis em qualquer cálculo numérico.
 \end{enumerate}
 
 
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Leitura extra: derivadas e diferenciais}
+\label{sec:leitura-derivadas}
+
+\begin{leitura}[title={\sffamily\bfseries\footnotesize\color{rgPetroClaro}LEITURA EXTRA\hspace{0.7em}\textbullet\hspace{0.7em}VETORES SÃO DERIVADAS, 1-FORMAS SÃO DIFERENCIAIS}]
+
+Boa parte da literatura moderna escreve os objetos deste capítulo com outros
+símbolos:
+\[
+  \vec e_\mu \;=\; \frac{\partial}{\partial x^\mu},
+  \qquad
+  \tilde\omega^\mu \;=\; \dd x^\mu .
+\]
+Não é troca de nome por gosto. É uma identificação que faz várias contas do
+capítulo virarem regra da cadeia --- e o resto desta página existe para mostrar
+onde ela poupa trabalho.
+
+\textbf{Aviso de notação.} Só aqui dentro $\dd x^\mu$ significa a 1-forma de
+base, e não o deslocamento do Capítulo~\ref{chap:vetores}. É a convenção do
+Misner, do Carroll e do Wald, e é a que você vai encontrar ao ler qualquer
+coisa além desta apostila; da próxima seção em diante voltamos a
+$\tilde\omega^\mu$.
+
+\medskip
+\textbf{Por que um vetor pode ser uma derivada.} Um vetor num ponto é
+determinado por aquilo que ele faz com funções: ele as deriva na sua direção.
+Dado $\vec V$ de componentes $V^\mu$ e uma função $f$,
+\[
+  \vec V(f)\;=\;V^\mu\frac{\partial f}{\partial x^\mu},
+\]
+que é a derivada direcional de sempre. Escrever $\vec V=V^\mu\partial_\mu$ é só
+registrar isso. E do outro lado,
+\[
+  \dd f(\vec V)=\frac{\partial f}{\partial x^\mu}\,\dd x^\mu(\vec V)
+              =\frac{\partial f}{\partial x^\mu}\,V^\mu ,
+\]
+o \emph{mesmo número}. As duas leituras da Seção~\ref{sec:umaformas} --- ``o
+gradiente é uma 1-forma'' e ``um vetor deriva ao longo de si'' --- são um fato
+só, visto de dois lados.
+
+\medskip
+\textbf{A dualidade sai em uma linha.} A condição \eqref{eq:base-dual}, que na
+Seção~\ref{sec:base-dual} exigiu um parágrafo de justificativa, aqui é uma
+derivada parcial:
+\[
+  \dd x^\mu\!\left(\frac{\partial}{\partial x^\nu}\right)
+  =\frac{\partial x^\mu}{\partial x^\nu}
+  =\delta^\mu{}_\nu .
+\]
+As coordenadas são independentes entre si; não há mais nada a provar.
+
+\medskip
+\textbf{A lei de transformação é a regra da cadeia.} Os dois comportamentos
+opostos que a Seção~\ref{sec:umaformas} deduziu comparando matrizes viram uma
+linha cada:
+\[
+  \frac{\partial}{\partial x^{\mu'}}
+  =\frac{\partial x^\nu}{\partial x^{\mu'}}\frac{\partial}{\partial x^\nu}
+  \;\Longrightarrow\;
+  \vec e_{\mu'}=\Lambda^{\nu}{}_{\mu'}\vec e_\nu ,
+  \qquad
+  \dd x^{\mu'}=\frac{\partial x^{\mu'}}{\partial x^\nu}\,\dd x^\nu
+  \;\Longrightarrow\;
+  \tilde\omega^{\mu'}=\Lambda^{\mu'}{}_{\nu}\,\tilde\omega^\nu .
+\]
+Repare que as duas matrizes aparecem sozinhas, uma em cada, e que são a mesma
+regra da cadeia lida nos dois sentidos. Não há o que memorizar: quem transforma
+com $\Lambda$ e quem transforma com a inversa é decidido por onde o índice está
+no quociente de derivadas.
+
+\medskip
+\textbf{Onde isso poupa trabalho de verdade: mudar de coordenadas.} A
+Seção~\ref{sec:base-polar} obteve a métrica das polares calculando os vetores
+de base e depois seus produtos escalares. Com diferenciais, basta substituir e
+multiplicar. De $x=r\cos\theta$ e $y=r\sin\theta$,
+\[
+  \dd x=\cos\theta\,\dd r-r\sin\theta\,\dd\theta,
+  \qquad
+  \dd y=\sin\theta\,\dd r+r\cos\theta\,\dd\theta,
+\]
+e então
+\[
+  \dd s^2=\dd x^2+\dd y^2=\dd r^2+r^2\dd\theta^2 ,
+\]
+porque os termos cruzados se cancelam. Saíram $g_{rr}=1$, $g_{\theta\theta}=r^2$
+e $g_{r\theta}=0$ de uma vez, em três linhas, sem calcular base nenhuma. É
+assim que todo mundo converte métrica na prática.
+
+E a base dual das polares sai igualmente rápido, diferenciando as funções
+coordenadas $r=\sqrt{x^2+y^2}$ e $\theta=\arctan(y/x)$:
+\[
+  \dd r=\cos\theta\,\dd x+\sin\theta\,\dd y,
+  \qquad
+  \dd\theta=-\frac{\sin\theta}{r}\,\dd x+\frac{\cos\theta}{r}\,\dd y ,
+\]
+que são exatamente os $\tilde\omega^r$ e $\tilde\omega^\theta$ daquela seção ---
+agora \emph{derivados}, e não conferidos contra a definição.
+
+\medskip
+\textbf{Um caso em que a economia é grande.} O item~2 do Conteúdo extra pede a
+métrica nas coordenadas de cone de luz $u=t-x$ e $w=t+x$. Pelo caminho da
+Seção~\ref{sec:base-polar} seria preciso montar a base, inverter e contrair.
+Com diferenciais são duas linhas:
+\[
+  \dd u\,\dd w=(\dd t-\dd x)(\dd t+\dd x)=\dd t^2-\dd x^2=-\dd s^2 ,
+\]
+logo $\dd s^2=-\dd u\,\dd w$, e comparando com
+$\dd s^2=2g_{uw}\,\dd u\,\dd w$ sai $g_{uw}=-\tfrac12$ --- que é a resposta que
+o exercício cobra.
+
+\medskip
+\textbf{A colisão de notação, e por que ela sobrevive.} A caixa da
+Seção~\ref{sec:base-dual} avisou que $\dd x^\mu$ já significava o deslocamento.
+Os dois sentidos convivem na literatura por uma razão específica, e vale vê-la:
+aplicando a 1-forma de base ao vetor deslocamento
+$\dd\vec x=\dd x^\nu\vec e_\nu$,
+\[
+  \dd x^\mu(\dd\vec x)=\dd x^\nu\,\delta^\mu{}_\nu=\dd x^\mu .
+\]
+O resultado é o próprio símbolo. A 1-forma de base devolve a componente
+$\mu$ do deslocamento, então usar o mesmo nome para as duas coisas quase nunca
+produz conta errada --- e é por isso que o abuso pegou. Os dois objetos, porém,
+são de tipos diferentes: um é uma máquina linear, o outro é aquilo que ela come.
+
+\medskip
+\textbf{Para ler adiante.} O Schutz enuncia essa identificação de passagem na
+Seção~5.2 --- ``a visão moderna é que um vetor é a tangente a alguma curva'' ---
+e segue adiante sem construir nada sobre ela. Quem quiser o desenvolvimento:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+  \item Bernard Schutz, \textit{Geometrical Methods of Mathematical Physics},
+  Cambridge University Press, 1980. O \emph{outro} livro do mesmo autor, e o
+  lugar onde ele desenvolve o que o \textit{First Course} só menciona. Capítulo
+  2 para vetores como derivadas, capítulo 4 para formas. É o ponteiro mais
+  natural para quem já está lendo o Schutz.
+
+  \item Sean Carroll, \textit{Spacetime and Geometry}, capítulo 2. Adota
+  $\hat e_{(\mu)}=\partial_\mu$ e $\hat\theta^{(\mu)}=\dd x^\mu$ sem cerimônia,
+  e usa isso o livro inteiro. A exposição mais curta e mais direta da lista.
+
+  \item Misner, Thorne e Wheeler, \textit{Gravitation}. É de onde vem a imagem
+  da 1-forma como pilha de superfícies da Seção~\ref{sec:pilha}, e o tratamento
+  é o mais visual que existe --- ao custo de um livro de mil e tantas páginas.
+
+  \item Robert Wald, \textit{General Relativity}, capítulo 2. A versão
+  rigorosa: o vetor tangente é \emph{definido} como uma derivação, e a
+  identificação deixa de ser analogia para virar definição.
+
+  \item Theodore Frankel, \textit{The Geometry of Physics}. Escrito para
+  físicos, cuidadoso justamente com as armadilhas de notação desta página.
+
+  \item Michael Spivak, \textit{Calculus on Manifolds}. Curto, clássico, e
+  anterior a toda a relatividade: é onde a diferencial de uma função vira um
+  objeto de pleno direito, e não uma quantidade pequena.
+\end{itemize}
+
+\end{leitura}
+
 \chapter{Fluidos relativísticos}
 \label{cap:fluidos}
 
