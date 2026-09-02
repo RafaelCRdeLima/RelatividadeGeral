@@ -4009,7 +4009,7 @@ erra: dobrar $\tilde W$ não estica nada, aperta a pilha pela metade.
 \end{central}
 
 Com \eqref{eq:espacamento-pilha} o número $\tilde W(\vec V)$ ganha uma leitura só: é o
-comprimento de $V$ \emph{medido com uma régua cujo passo é o espaçamento da
+comprimento de $\vec V$ \emph{medido com uma régua cujo passo é o espaçamento da
 pilha}. E há dois jeitos de dobrar esse número, geometricamente distintos:
 
 \begin{itemize}
@@ -4053,10 +4053,10 @@ delas. \\
 
 Um exemplo físico fecha a ideia, e é o mesmo com que a seção começou. Se $f$ é
 a temperatura, as folhas de $\dd f$ são as isotermas de grau em grau, e
-$\dd f(V)$ é quantos graus se ganham ao caminhar por $V$. Meça a mesma
+$\dd f(\vec V)$ é quantos graus se ganham ao caminhar por $\vec V$. Meça a mesma
 temperatura em meios-graus: o campo físico não mudou nada, mas $\dd f$ dobrou,
-as isotermas dobraram de densidade e o mesmo passo $V$ atravessa o dobro de
-folhas. A seta $V$ ficou idêntica; foi a régua que mudou.
+as isotermas dobraram de densidade e o mesmo passo $\vec V$ atravessa o dobro
+de folhas. A seta $\vec V$ ficou idêntica; foi a régua que mudou.
 
 \begin{activity}[no ÁLETRA]
 \label{atv:pilha-aletra}
@@ -4790,27 +4790,27 @@ item~2 do Conteúdo extra que manda verificar isso. Obliquidade de verdade em
 Minkowski exige uma base que \emph{não} esteja ligada à original por uma
 transformação de Lorentz.
 
-Dada uma base $\{\vec e_1,\vec e_2\}$ qualquer, um mesmo vetor $V$ admite duas decomposições naturais e
-geometricamente distintas:
+Dada uma base $\{\vec e_1,\vec e_2\}$ qualquer, um mesmo vetor $\vec V$ admite
+duas decomposições naturais e geometricamente distintas:
 \begin{align*}
-  V &= V^ie_i && \text{(regra do paralelogramo)},\\
-  V_i &= V\cdot\vec e_i && \text{(projeção sobre cada eixo)}.
+  \vec V &= V^i\,\vec e_i && \text{(regra do paralelogramo)},\\
+  V_i &= \vec V\cdot\vec e_i && \text{(projeção sobre cada eixo)}.
 \end{align*}
 As componentes contravariantes $V^i$ respondem à pergunta ``quanto de cada
-vetor de base preciso somar para reconstruir $V$?''. As componentes
+vetor de base preciso somar para reconstruir $\vec V$?''. As componentes
 covariantes $V_i$ respondem a uma pergunta diferente: ``qual é a projeção de
-$V$ ao longo de cada eixo?''. As duas só coincidem quando a base é
+$\vec V$ ao longo de cada eixo?''. As duas só coincidem quando a base é
 ortonormal.
 
-Um cuidado com a palavra ``projeção''. O produto $V\cdot\vec e_i$ é o
+Um cuidado com a palavra ``projeção''. O produto $\vec V\cdot\vec e_i$ é o
 comprimento da projeção \emph{multiplicado} por $|\vec e_i|$, e só é a
 projeção medida com régua quando os vetores de base têm comprimento $1$. Na
-Figura~\ref{fig:base-obliqua}, $|\vec e_2|=1{,}08$: a projeção de $V$ sobre
+Figura~\ref{fig:base-obliqua}, $|\vec e_2|=1{,}08$: a projeção de $\vec V$ sobre
 aquele eixo mede $1{,}32$, enquanto a componente covariante vale
 $V_2=1{,}42$.
 
 É aqui que a base dual da Seção~\ref{sec:base-dual} deixa de ser um detalhe
-formal. As componentes covariantes são as componentes de $V$ \emph{na base
+formal. As componentes covariantes são as componentes de $\vec V$ \emph{na base
 dual}:
 \[
   \vec V=V_i\,\vec e^{\,i},
@@ -4829,12 +4829,13 @@ Seção~\ref{sec:numerica-tensores} constrói.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.92\textwidth]{cap03_base_obliqua.pdf}
-\caption{O mesmo vetor $V$, na mesma base oblíqua $\{e_1,e_2\}$, decomposto
-de duas maneiras. À esquerda, a regra do paralelogramo dá as componentes
-contravariantes $V^i$. À direita, a projeção perpendicular sobre cada eixo,
-medida em unidades de $|\vec e_i|$, dá as componentes covariantes
-$V_i=V\cdot\vec e_i$. Numericamente, com
-$e_1=(1,0)$, $e_2=(0{,}4,1)$ e $V=(1{,}3,0{,}9)$: $V^1=0{,}94$,
+\caption{O mesmo vetor $\vec V$, na mesma base oblíqua
+$\{\vec e_1,\vec e_2\}$, decomposto de duas maneiras. À esquerda, a regra do
+paralelogramo dá as componentes contravariantes $V^i$. À direita, a projeção
+perpendicular sobre cada eixo, medida em unidades de $|\vec e_i|$, dá as
+componentes covariantes $V_i=\vec V\cdot\vec e_i$. Numericamente, com
+$\vec e_1$ de componentes $(1,0)$, $\vec e_2$ de $(0{,}4,1)$ e $\vec V$ de
+$(1{,}3,0{,}9)$: $V^1=0{,}94$,
 $V^2=0{,}9$, mas $V_1=1{,}3$, $V_2=1{,}42$.}
 \label{fig:base-obliqua}
 \end{figure}
@@ -4900,7 +4901,7 @@ sai daí. Por ora, aproveite a simplicidade --- ela é a última.
   $\partial^\mu f$ com \eqref{eq:subir-indice}; explique por que o sinal da
   componente temporal muda. (b) Mostre que $\partial^\mu f$ é ortogonal às
   superfícies $f=\text{const}$, no sentido de que
-  $\partial_\mu f\,V^\mu=0$ para todo $V$ tangente a uma delas. (c) Sobre o
+  $\partial_\mu f\,V^\mu=0$ para todo $\vec V$ tangente a uma delas. (c) Sobre o
   cone de luz $f=0$, mostre que $\partial^\mu f$ é ele próprio um vetor
   \emph{nulo} --- de modo que ali ``a normal está contida na superfície'',
   coisa que nenhuma superfície euclidiana faz. Essa esquisitice é o que
@@ -4966,7 +4967,7 @@ produto sobrevive.
 \textbf{Tensor como máquina multilinear.} Um tensor $T_{\mu\nu}$ recebe dois
 vetores e devolve um número:
 \[
-  T(A,B)=T_{\mu\nu}A^\mu B^\nu.
+  T(\vec A,\vec B)=T_{\mu\nu}A^\mu B^\nu.
 \]
 Se fixamos apenas o segundo vetor, obtemos uma 1-forma:
 \[
@@ -5028,8 +5029,8 @@ As identidades deste capítulo são de álgebra linear/tensorial pura -- não
 dependem de nenhuma física específica -- e por isso se prestam bem a
 verificação por computador com números ou símbolos genéricos, em vez de um
 único exemplo à mão. Esta seção trata três problemas: (i) construir a base
-dual de uma base oblíqua e confirmar a biortogonalidade $e^i\cdot e_j=
-\delta^i_j$, reproduzindo os números da Figura~\ref{fig:base-obliqua}; (ii)
+dual de uma base oblíqua e confirmar a biortogonalidade
+$\vec e^{\,i}\cdot\vec e_j=\delta^i{}_j$, reproduzindo os números da Figura~\ref{fig:base-obliqua}; (ii)
 confirmar a decomposição simétrica/antissimétrica e a identidade do
 item~\ref{item-sim-antisim} para tensores genéricos; (iii) confirmar a
 invariância do traço (item~\ref{item-traco-invariante}) sob uma mudança de
@@ -5040,8 +5041,8 @@ completos estão em \texttt{codigo/}.
 
 \programa[Base dual de uma base oblíqua, decomposição simétrica/antissimétrica e invariância do traço.]{codigo/cap03\_tensores.py}
 
-Dois pontos merecem destaque. Primeiro, a base dual $e^i$ é recuperada por
-$e^i=g^{ij}e_j$ -- a mesma operação de ``subir índice'' com a métrica que já
+Dois pontos merecem destaque. Primeiro, a base dual $\vec e^{\,i}$ é
+recuperada por $\vec e^{\,i}=g^{ij}\vec e_j$ -- a mesma operação de ``subir índice'' com a métrica que já
 usamos para passar de $V_\mu$ a $V^\mu$, agora aplicada aos próprios vetores
 de base. Segundo, a invariância do traço é testada sob matrizes $L$
 \emph{aleatórias e não ortogonais} -- não apenas rotações ou boosts --, o
