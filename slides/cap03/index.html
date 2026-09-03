@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tensores no espaço-tempo plano · Slides do Capítulo 3</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../slides.css?v=6">
+</head>
+<body>
+<div id="progresso"></div>
+<div class="zona esq" aria-hidden="true"></div>
+<div class="zona dir" aria-hidden="true"></div>
+
+<main id="palco">
+<div id="quadro">
+
+<section>
+  <p class="etiqueta">Relatividade Geral · UDESC/CCT · Capítulo 3</p>
+  <h1>Tensores no<br>espaço-tempo plano</h1>
+  <p style="max-width:60ch">
+    A gramática que separa a física da descrição — e a última vez no curso
+    em que derivar um tensor é fácil.
+  </p>
+  <p class="legenda" style="margin-top:2rem">
+    Aulas 11 a 15 · use <strong>→</strong> e <strong>←</strong> para navegar,
+    <strong>F</strong> para tela cheia
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Roteiro</p>
+  <h2>O caminho deste capítulo</h2>
+  <div class="duas">
+    <div>
+      <table>
+        <tr><th>Aula</th><th>Assunto</th></tr>
+        <tr><td>11</td><td>1-formas, e a base dual</td></tr>
+        <tr><td>12</td><td>Tensores <span class="m">(r,s)</span>, índices, simetrias</td></tr>
+        <tr><td>13</td><td>A métrica como ponte</td></tr>
+        <tr><td>14</td><td>Bases não ortonormais, e a derivada</td></tr>
+        <tr><td>15</td><td>Oficina computacional III</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="destaque">
+        <p class="legenda">
+          <strong>Uma frase organiza o capítulo:</strong> existem dois tipos de
+          objeto de quatro componentes, distinguidos por como mudam de base — e
+          a métrica é o que traduz um no outro.
+        </p>
+      </div>
+      <p class="legenda">
+        A ordem aqui não é a do Schutz. Ele abre pela métrica e pela definição
+        abstrata de tensor; nós abrimos pelo <em>gradiente</em>, que é um objeto
+        que você já usa há anos. Assim a 1-forma <em>aparece</em> em vez de ser
+        postulada.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.1</p>
+  <h2>O gradiente não é um vetor</h2>
+  <p>
+    Seja <span class="m">f(x^\mu)</span> um campo escalar — a temperatura ao
+    longo do espaço-tempo. As derivadas parciais
+    <span class="m">\partial_\mu f</span> formam quatro números, e a tentação é
+    chamá-los de “o vetor gradiente”.
+  </p>
+  <p class="M">\frac{\partial f}{\partial x^{\mu'}}
+     =\frac{\partial x^\nu}{\partial x^{\mu'}}\,\frac{\partial f}{\partial x^\nu}</p>
+  <div class="alerta">
+    <p>
+      Mas quatro números só são um vetor se transformarem com
+      <span class="m">\Lambda</span>, e estes transformam com a
+      <strong>inversa</strong>. As duas matrizes em jogo são inversas uma da
+      outra — não iguais. O gradiente se transforma com a matriz errada para
+      ser um vetor.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.1 · resultado</p>
+  <h2>Duas espécies de objeto</h2>
+  <table class="col-formula">
+    <tr><th>Transforma com</th><th>Nome</th><th>Índice</th><th>Exemplo</th></tr>
+    <tr><td><span class="m">\Lambda</span></td><td>vetor</td>
+        <td>em cima</td><td><span class="m">U^\mu</span>, <span class="m">p^\mu</span></td></tr>
+    <tr><td><span class="m">\Lambda^{-1}</span></td><td>1-forma</td>
+        <td>embaixo</td><td><span class="m">\partial_\mu f</span></td></tr>
+  </table>
+  <p>
+    E é por isso que a contração funciona: aplicar uma 1-forma a um vetor,
+  </p>
+  <p class="M">\tilde W(\vec V)=W_\mu V^\mu ,</p>
+  <p>
+    produz um número igual em todas as bases, porque as duas matrizes se
+    cancelam. <strong>Nenhuma métrica foi usada.</strong> A contração de um
+    índice em cima com um embaixo é a única operação que produz invariantes de
+    graça — e é por isso que a notação insiste tanto na posição dos índices.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.1 · a conta que costuma faltar</p>
+  <h2>Por que o jacobiano <em>é</em> a matriz de Lorentz</h2>
+  <p>
+    Batizar <span class="m">\Lambda^{\nu}{}_{\mu'}\equiv\partial x^\nu/\partial x^{\mu'}</span>
+    parece definição, e é uma conta de uma linha. Da relação inversa
+    <span class="m">x^\nu=\Lambda^{\nu}{}_{\alpha'}x^{\alpha'}</span>:
+  </p>
+  <p class="M">\frac{\partial x^\nu}{\partial x^{\mu'}}
+    =\Lambda^{\nu}{}_{\alpha'}\,\frac{\partial x^{\alpha'}}{\partial x^{\mu'}}
+    =\Lambda^{\nu}{}_{\alpha'}\,\delta^{\alpha'}{}_{\mu'}
+    =\Lambda^{\nu}{}_{\mu'}</p>
+  <div class="duas">
+    <div>
+      <p class="legenda">
+        Dois passos fizeram o trabalho. Tirar <span class="m">\Lambda</span> de
+        dentro da derivada só se pode porque as entradas dele são
+        <strong>números fixos</strong> — dependem da velocidade relativa, não do
+        evento. E <span class="m">\partial x^{\alpha'}/\partial x^{\mu'}=\delta</span>
+        vale porque as coordenadas são independentes entre si.
+      </p>
+    </div>
+    <div>
+      <div class="alerta">
+        <p class="legenda">
+          <strong>E é aqui que a igualdade vai falhar.</strong> Em coordenadas
+          curvilíneas o jacobiano depende do ponto, e não existe matriz
+          constante <span class="m">\Lambda</span> nenhuma. O jacobiano é o
+          objeto geral; <span class="m">\Lambda</span> é o caso particular em
+          que ele é o mesmo em toda parte.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.1.1</p>
+  <h2>Uma 1-forma é uma pilha de superfícies</h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="figuras/umaforma_pilha.svg" style="max-height:420px"
+           alt="A 1-forma (2,1) como pilha de retas, perfurada por um vetor">
+    </figure>
+    <div>
+      <p>
+        Um vetor é uma seta: magnitude e direção. Uma 1-forma se visualiza
+        melhor como uma <em>pilha de superfícies</em> — as de nível de
+        <span class="m">\varphi(x)=W_\mu x^\mu</span>.
+      </p>
+      <div class="destaque">
+        <p class="legenda">
+          <span class="m">\tilde W(\vec V)</span> é, literalmente, o
+          <strong>número de superfícies que a seta perfura</strong>. Aqui
+          <span class="m">\tilde W=(2,1)</span>, <span class="m">\vec V=(3,4)</span>,
+          e a seta vai de <span class="m">\varphi=0</span> a
+          <span class="m">\varphi=10</span>.
+        </p>
+      </div>
+      <p class="legenda">
+        E as superfícies não são analogia escolhida a dedo: para o gradiente
+        elas são <em>literalmente</em> as curvas de nível de
+        <span class="m">f</span> — o que um mapa topográfico desenha.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.1.2</p>
+  <h2>Dobrar a seta não é dobrar a pilha</h2>
+  <p class="M">\Delta\ell=\frac{1}{|\tilde W|}</p>
+  <div class="duas">
+    <div>
+      <div class="destaque">
+        <p><strong>A magnitude de uma 1-forma é o inverso do espaçamento.</strong>
+        Uma 1-forma forte tem folhas <em>apertadas</em> — não folhas grandes.
+        Quem chega das setas espera o contrário.</p>
+      </div>
+      <p class="legenda">
+        Com isso <span class="m">\tilde W(\vec V)</span> tem uma leitura só: é o
+        comprimento de <span class="m">\vec V</span> medido com uma régua cujo
+        passo é o espaçamento da pilha.
+      </p>
+    </div>
+    <div>
+      <table>
+        <tr><th>Dobrar</th><th>O que acontece</th></tr>
+        <tr><td><span class="m">\vec V\to2\vec V</span></td>
+            <td>a seta estica; a pilha não muda</td></tr>
+        <tr><td><span class="m">\tilde W\to2\tilde W</span></td>
+            <td>a seta é a mesma; as folhas apertam pela metade</td></tr>
+      </table>
+      <p class="legenda">
+        Os dois dão <span class="m">2\,\tilde W(\vec V)</span>, e nenhuma conta
+        os distingue. <strong>A figura distingue</strong> — e essa é a razão de a
+        imagem valer a pena.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Interlúdio</p>
+  <h2>O mínimo de álgebra linear</h2>
+  <div class="duas">
+    <div>
+      <table class="compacta">
+        <tr><th colspan="2">Da soma</th></tr>
+        <tr><td>A1</td><td><span class="m">u+v=v+u</span></td></tr>
+        <tr><td>A2</td><td><span class="m">(u+v)+w=u+(v+w)</span></td></tr>
+        <tr><td>A3</td><td>existe <span class="m">0</span> com <span class="m">v+0=v</span></td></tr>
+        <tr><td>A4</td><td>existe <span class="m">-v</span> com <span class="m">v+(-v)=0</span></td></tr>
+        <tr><th colspan="2">Do produto por escalar</th></tr>
+        <tr><td>M1</td><td><span class="m">a(bv)=(ab)v</span></td></tr>
+        <tr><td>M2</td><td><span class="m">1\,v=v</span></td></tr>
+        <tr><td>M3</td><td><span class="m">a(u+v)=au+av</span></td></tr>
+        <tr><td>M4</td><td><span class="m">(a+b)v=av+bv</span></td></tr>
+      </table>
+    </div>
+    <div>
+      <p>
+        São oito, e <strong>repare no que a lista não diz</strong>: nenhuma
+        palavra sobre setas, comprimento, ângulo ou direção.
+      </p>
+      <div class="alerta">
+        <p class="legenda">
+          Ser espaço vetorial é de graça; <em>medir</em> é estrutura extra. É por
+          isso que <span class="m">\partial_\mu f</span> existe antes de
+          qualquer métrica — e por isso que a métrica é o que
+          <strong>traduz</strong> vetores em 1-formas, não o que as cria.
+        </p>
+      </div>
+      <p class="legenda">
+        Obedecem aos axiomas sem parecer flecha: polinômios, funções contínuas,
+        matrizes, as soluções de
+        <span class="m">y''+\omega^2y=0</span> (dimensão dois, base
+        <span class="m">\{\cos\omega t,\ \sin\omega t\}</span>), 1-formas — e os
+        kets da mecânica quântica.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Interlúdio · o paralelo</p>
+  <h2>Bras e kets são a mesma construção</h2>
+  <table class="compacta">
+    <tr><th></th><th>Neste curso</th><th>Mecânica quântica</th></tr>
+    <tr><td>vetor</td><td><span class="m">\vec V</span>, componentes <span class="m">V^\mu</span></td>
+        <td>ket <span class="m">|\psi\rangle</span></td></tr>
+    <tr><td>elemento do dual</td><td>1-forma <span class="m">\tilde W</span>, <span class="m">W_\mu</span></td>
+        <td>bra <span class="m">\langle\phi|</span></td></tr>
+    <tr><td>o número</td><td><span class="m">\tilde W(\vec V)=W_\mu V^\mu</span></td>
+        <td><span class="m">\langle\phi|\psi\rangle</span></td></tr>
+    <tr><td>base dual</td><td><span class="m">\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu</span></td>
+        <td><span class="m">\langle m|n\rangle=\delta_{mn}</span></td></tr>
+    <tr><td>reconstruir</td><td><span class="m">\vec V=V^\mu\vec e_\mu</span></td>
+        <td><span class="m">|\psi\rangle=\sum_n\langle n|\psi\rangle|n\rangle</span></td></tr>
+    <tr><td>a régua que traduz</td><td>a métrica, <span class="m">W_\mu=g_{\mu\nu}V^\nu</span></td>
+        <td>a conjugação hermitiana</td></tr>
+  </table>
+  <p class="legenda">
+    <strong>Onde o paralelo quebra:</strong> os escalares da quântica são
+    complexos e a passagem ket <span class="m">\to</span> bra é
+    <em>antilinear</em>; e o produto interno de Hilbert é positivo definido,
+    enquanto <span class="m">\eta_{\mu\nu}</span> não é — Minkowski tem vetores
+    não nulos de norma zero, que nenhum espaço de Hilbert admite. O que os dois
+    casos têm em comum é o motivo de trazer o assunto: <strong>ambas as notações
+    escondem a distinção entre o espaço e o seu dual</strong>, e escondem pelo
+    mesmo motivo — na base padrão a régua que traduz um no outro é trivial.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.2</p>
+  <h2>A base dual</h2>
+  <p>
+    1-formas se somam e se multiplicam por número: formam um espaço vetorial
+    próprio, e todo espaço vetorial tem bases. Fixada
+    <span class="m">\{\vec e_\mu\}</span>, a base de 1-formas fica
+    <em>determinada</em>:
+  </p>
+  <p class="M">\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu</p>
+  <div class="duas">
+    <div>
+      <p class="legenda">
+        A razão de pedir exatamente isso cabe em uma linha. Escrevendo
+        <span class="m">\tilde W=W_\mu\tilde\omega^\mu</span> e
+        <span class="m">\vec V=V^\nu\vec e_\nu</span>, sai
+        <span class="m">\tilde W(\vec V)=W_\mu V^\mu</span>: é a condição para
+        que “multiplicar componente por componente e somar” seja de fato a
+        aplicação da 1-forma ao vetor.
+      </p>
+    </div>
+    <div>
+      <div class="destaque">
+        <p class="legenda">
+          Pela pilha: <span class="m">\tilde\omega^0</span> é a família de
+          superfícies de <span class="m">x^0</span> constante, espaçadas de uma
+          unidade. O vetor <span class="m">\vec e_0</span> atravessa exatamente
+          uma — daí o <span class="m">1</span> — e os outros três correm ao
+          longo delas sem atravessar nenhuma, daí os zeros.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.3</p>
+  <h2>Tensores de tipo <span class="m">(r,s)</span></h2>
+  <p>
+    Uma máquina linear em cada entrada, que recebe <span class="m">r</span>
+    1-formas e <span class="m">s</span> vetores e devolve um número. Cada índice
+    transforma com a matriz que lhe cabe:
+  </p>
+  <p class="M">T^{\mu'\nu'}{}_{\rho'}
+    =\Lambda^{\mu'}{}_{\alpha}\,\Lambda^{\nu'}{}_{\beta}\,
+     \Lambda^{\gamma}{}_{\rho'}\;T^{\alpha\beta}{}_{\gamma}</p>
+  <div class="alerta">
+    <p>
+      <strong>É essa lei, e apenas ela, que define um tensor.</strong> Um
+      arranjo de números com índices que não a obedeça não é tensor, por mais
+      que se pareça com um — e o exemplo mais importante são os símbolos de
+      Christoffel <span class="m">\Gamma^\mu{}_{\nu\rho}</span>, que têm três
+      índices e não são tensores.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.4</p>
+  <h2>Índices: a regra, e os três erros</h2>
+  <p>
+    A regra é uma. Índice repetido uma vez em cima e uma embaixo é somado e
+    desaparece; os que sobram são <strong>livres</strong>, e têm de aparecer de
+    modo idêntico nos dois lados e em todos os termos de uma soma.
+  </p>
+  <table class="col-formula">
+    <tr><th>Erro</th><th>Por quê</th></tr>
+    <tr><td><span class="m">A_\mu B^\mu C^\mu</span></td>
+        <td>índice três vezes: a convenção não diz o que fazer</td></tr>
+    <tr><td><span class="m">A^\mu=B^\nu</span></td>
+        <td>índice livre troca de nome entre os lados</td></tr>
+    <tr><td><span class="m">A_\mu+B^\mu</span></td>
+        <td>tipos diferentes: um é 1-forma, o outro vetor</td></tr>
+  </table>
+  <p class="legenda">
+    O hábito que previne os três é ler os índices em voz alta antes de escrever
+    o próximo passo: os repetidos somem por soma, os livres nomeiam o resultado.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Interlúdio · o Tessera</p>
+  <h2>A álgebra que não encaixa</h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="../../imagens/tessera-logo-branco.svg" style="max-height:120px;background:none;padding:0"
+           alt="Tessera">
+      <figcaption>
+        Cada tensor é peça de encaixe, no modelo T-mosaic de Bernacchi: índice
+        em cima é pino, embaixo é furo. <strong>Verificar validade algébrica é
+        detectar colisão.</strong>
+      </figcaption>
+    </figure>
+    <div>
+      <p class="legenda">
+        Existe uma segunda maneira de conferir os índices, e ela não depende de
+        disciplina nenhuma — basta que a expressão errada <em>não caiba</em>. E
+        os três erros do slide anterior são exatamente os três que o programa
+        recusa, o que não é coincidência: saem da mesma regra.
+      </p>
+      <table class="compacta">
+        <tr><td><span class="m">A_\mu B^\mu C^\mu</span></td>
+            <td>“o índice μ aparece 3 vezes; o máximo é duas”</td></tr>
+        <tr><td><span class="m">A^\mu=B^\nu</span></td>
+            <td>“os dois lados têm índices livres diferentes”</td></tr>
+        <tr><td><span class="m">A_\mu+B^\mu</span></td>
+            <td>“todos os termos de uma soma precisam ter os mesmos índices livres”</td></tr>
+      </table>
+      <p class="legenda">
+        E na paleta há um grupo chamado <em>não são tensores</em>, com
+        <span class="m">\Lambda</span> e <span class="m">\Gamma</span>
+        tracejados: montar <span class="m">\Gamma^\mu{}_{\nu\rho}V^\nu</span>
+        faz o programa avisar que aquela parcela sozinha não se transforma como
+        tensor.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.5</p>
+  <h2>Simetria e antissimetria</h2>
+  <p class="M">M_{(\mu\nu)}=\tfrac12(M_{\mu\nu}+M_{\nu\mu}),
+    \qquad
+    M_{[\mu\nu]}=\tfrac12(M_{\mu\nu}-M_{\nu\mu})</p>
+  <div class="duas">
+    <div>
+      <p class="legenda">
+        Qualquer tensor <span class="m">(0,2)</span> se separa nas duas partes, e
+        a separação é única. A contagem fecha: das <span class="m">16</span>
+        entradas, <span class="m">10</span> vão para a simétrica e
+        <span class="m">6</span> para a antissimétrica.
+      </p>
+      <p class="legenda">
+        A métrica é simétrica porque o produto escalar é. E é a antissimetria de
+        <span class="m">F_{\mu\nu}</span> que faz caberem numa matriz
+        <span class="m">4\times4</span> apenas os seis números de
+        <span class="m">\bm E</span> e <span class="m">\bm B</span>.
+      </p>
+    </div>
+    <div>
+      <div class="destaque">
+        <p>
+          <strong>Simétrico contra antissimétrico dá zero:</strong>
+          <span class="m">S^{\mu\nu}A_{\mu\nu}=0</span>.
+        </p>
+        <p class="legenda">
+          A consequência é maior do que parece. Quando algo simétrico multiplica
+          algo de simetria desconhecida, só a parte simétrica sobrevive — de modo
+          que se pode <em>simetrizar de graça</em> o outro fator. É esse truque
+          que deduz os símbolos de Christoffel, e é a razão de reconhecer
+          simetrias <em>antes</em> de começar qualquer conta.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.6</p>
+  <h2>A métrica como ponte</h2>
+  <p>
+    <span class="m">A_\mu=\eta_{\mu\nu}A^\nu</span> deixa de ser abreviação:
+    <span class="m">A_\mu</span> é <em>a 1-forma que a métrica associa ao vetor</em>
+    <span class="m">A^\mu</span> — a que, aplicada a um vetor
+    <span class="m">\vec B</span> qualquer, devolve o produto escalar.
+  </p>
+  <p class="M">\eta^{\mu\alpha}\eta_{\alpha\nu}=\delta^\mu{}_\nu ,
+     \qquad A^\mu=\eta^{\mu\nu}A_\nu</p>
+  <div class="alerta">
+    <p class="legenda">
+      Em Minkowski <span class="m">\eta^{\mu\nu}</span> é numericamente igual a
+      <span class="m">\eta_{\mu\nu}</span>, e o efeito de subir ou descer é só
+      trocar o sinal da componente temporal. <strong>Isso é coincidência da
+      assinatura e das coordenadas, não uma regra</strong> — com
+      <span class="m">g_{\mu\nu}</span> dependendo da posição,
+      <span class="m">g^{\mu\nu}</span> será uma matriz diferente, obtida
+      invertendo a primeira de fato.
+    </p>
+  </div>
+  <p class="legenda">
+    E duas razões para não tratar <span class="m">A^\mu</span> e
+    <span class="m">A_\mu</span> como o mesmo objeto: a tradução
+    <em>depende da métrica</em>; e a 1-forma mais importante da física — o
+    gradiente — não veio de vetor nenhum.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.7</p>
+  <h2>O que significa uma equação tensorial</h2>
+  <p>
+    Uma afirmação independente de coordenadas. <strong>Isso não quer dizer que
+    as componentes sejam iguais em todos os referenciais</strong> — quer dizer
+    que qualquer observador que escreva a relação nas suas próprias componentes
+    obterá uma equação da mesma forma.
+  </p>
+  <div class="duas">
+    <div>
+      <p class="M">p^\mu p_\mu=-m^2</p>
+      <p class="legenda">
+        Escalar: cada observador atribui valores diferentes a
+        <span class="m">E</span> e <span class="m">\bm p</span>, e todos obtêm o
+        mesmo <span class="m">E^2-\bm p^2</span>.
+      </p>
+    </div>
+    <div>
+      <p class="M">A^\mu=B^\mu+C^\mu</p>
+      <p class="legenda">
+        Vetorial: as componentes mudam de referencial, e a relação entre os
+        vetores permanece.
+      </p>
+    </div>
+  </div>
+  <p class="legenda">
+    É a razão profunda para preferirmos tensores em relatividade: <strong>eles
+    separam física de descrição</strong>. O apêndice interativo deste capítulo
+    volta a isso desenhando a mesma física em duas folhas diferentes.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.8.1</p>
+  <h2>Fora da base ortonormal: as polares</h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="figuras/base_polar.svg" style="max-height:410px"
+           alt="A base coordenada das polares em três pontos">
+    </figure>
+    <div>
+      <p>
+        Há <em>duas</em> maneiras independentes de sair da base ortonormal, e
+        convém não misturá-las: a base pode deixar de ter comprimento
+        <span class="m">1</span>, ou deixar de ser perpendicular. A primeira já
+        basta.
+      </p>
+      <p class="M">|\vec e_r|=1,\qquad |\vec e_\theta|=r</p>
+      <div class="destaque">
+        <p class="legenda">
+          <span class="m">\vec e_\theta</span> tem componentes
+          <span class="m">(0,1)</span>: é o deslocamento de <em>um radiano</em>.
+          E um radiano é um arco mais comprido longe da origem — por isso a seta
+          cresce.
+        </p>
+      </div>
+      <p class="legenda">
+        A métrica sai da tabela de produtos escalares:
+        <span class="m">g_{rr}=1</span>,
+        <span class="m">g_{\theta\theta}=r^2</span>,
+        <span class="m">g_{r\theta}=0</span>. Ortogonal, mas não ortonormal.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.8.1 · o ponto</p>
+  <h2>Não é sobre ângulo, é sobre régua</h2>
+  <p>
+    No ponto <span class="m">r=2</span>, <span class="m">\theta=0</span>, com
+    <span class="m">\vec V=\vec e_x+\vec e_y</span>:
+  </p>
+  <div class="duas">
+    <div>
+      <p class="M">V^r=1,\qquad V^\theta=\tfrac12</p>
+      <p class="legenda">Reconstruir <span class="m">\vec V</span> pede
+      <em>meio</em> <span class="m">\vec e_\theta</span> para andar uma unidade
+      em <span class="m">y</span>.</p>
+    </div>
+    <div>
+      <p class="M">V_r=1,\qquad V_\theta=2</p>
+      <p class="legenda">Projetar dá quatro vezes mais no slot
+      <span class="m">\theta</span> — que é
+      <span class="m">g_{\theta\theta}=r^2</span> em ação.</p>
+    </div>
+  </div>
+  <p class="M">V_\theta=\vec V\cdot\vec e_\theta
+    =V^r\,(\vec e_r\cdot\vec e_\theta)+V^\theta\,(\vec e_\theta\cdot\vec e_\theta)
+    =g_{\theta\theta}\,V^\theta</p>
+  <div class="destaque">
+    <p>
+      Um fator <span class="m">4</span> entre a componente de cima e a de baixo
+      <strong>com os eixos perpendiculares</strong>. A distinção entre
+      <span class="m">V^\mu</span> e <span class="m">V_\mu</span> não nasce da
+      obliquidade: basta a base não ser unitária. E o
+      <span class="m">\vec e_\theta</span> foi <em>consumido</em> pelo produto —
+      é aquilo com que se multiplica, e o que sobra é um número.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.8.1 · a base dual, rápido</p>
+  <h2>Vetores nas colunas, 1-formas nas linhas da inversa</h2>
+  <p>
+    A condição <span class="m">\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu</span>
+    é a afirmação de que duas matrizes são inversas uma da outra, escrita
+    entrada por entrada. Então a base dual sai sem trabalho novo:
+  </p>
+  <div class="duas">
+    <div>
+      <p class="M">J=\begin{pmatrix}\cos\theta & -r\sin\theta\\ \sin\theta & r\cos\theta\end{pmatrix},
+        \quad \det J=r</p>
+      <p class="legenda">Os vetores de base como <strong>colunas</strong> — e o
+      <span class="m">r</span> do determinante é o mesmo do elemento de área
+      <span class="m">r\,dr\,d\theta</span> do cálculo.</p>
+    </div>
+    <div>
+      <p class="M">J^{-1}=\begin{pmatrix}\cos\theta & \sin\theta\\[4pt]
+        -\dfrac{\sin\theta}{r} & \dfrac{\cos\theta}{r}\end{pmatrix}</p>
+      <p class="legenda">As <strong>linhas</strong> da inversa são
+      <span class="m">\tilde\omega^r</span> e
+      <span class="m">\tilde\omega^\theta</span>.</p>
+    </div>
+  </div>
+  <p class="legenda">
+    E o inverso aparece de novo onde importa: <span class="m">|\vec e_\theta|=r</span>
+    contra <span class="m">|\tilde\omega^\theta|=1/r</span>. Onde a seta de base
+    é longa, as folhas da 1-forma de base são raras, e o produto dos dois
+    comprimentos é sempre <span class="m">1</span>.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.8.2</p>
+  <h2>Uma base genuinamente oblíqua</h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="figuras/base_obliqua.svg" style="max-height:390px"
+           alt="O mesmo vetor decomposto de duas maneiras numa base oblíqua">
+    </figure>
+    <div>
+      <p class="legenda">
+        Agora a segunda maneira: os eixos deixarem de ser perpendiculares. Aí as
+        duas decomposições diferem em <em>direção</em>, e não só em escala.
+      </p>
+      <div class="destaque">
+        <p class="legenda">
+          As componentes covariantes são as componentes na <strong>base
+          dual</strong>: <span class="m">\vec V=V_i\,\vec e^{\,i}</span> com
+          <span class="m">\vec e^{\,i}=g^{ij}\vec e_j</span>. Como
+          <span class="m">\vec e^{\,1}\cdot\vec e_2=0</span>, o eixo recíproco
+          <span class="m">\vec e^{\,1}</span> é <em>perpendicular a</em>
+          <span class="m">\vec e_2</span> — e não paralelo a
+          <span class="m">\vec e_1</span>.
+        </p>
+      </div>
+      <p class="legenda">
+        Em Minkowski, obliquidade de verdade aparece nas coordenadas de cone de
+        luz: <span class="m">u=t-x</span>, <span class="m">w=t+x</span> dão
+        <span class="m">ds^2=-du\,dw</span>, com a diagonal da métrica
+        <em>nula</em> — os dois vetores de base são nulos, cada um ortogonal a si
+        mesmo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 3.9</p>
+  <h2>Derivar: a última coisa fácil</h2>
+  <p>
+    Em coordenadas de Minkowski, derivar as componentes de um tensor acrescenta
+    um índice <em>embaixo</em> e produz outro tensor:
+  </p>
+  <p class="M">\partial_{\alpha'}T^{\mu'\nu'}
+    =\Lambda^{\beta}{}_{\alpha'}\,\Lambda^{\mu'}{}_{\rho}\,\Lambda^{\nu'}{}_{\sigma}\,
+     \partial_\beta T^{\rho\sigma}</p>
+  <div class="alerta">
+    <p>
+      <strong>Guarde a frase “os coeficientes são constantes”, porque é ela que
+      vai falhar.</strong> Em coordenadas curvilíneas — e, mais tarde, em
+      espaço-tempo curvo, onde <em>nenhuma</em> escolha de coordenadas as torna
+      constantes em toda parte — a matriz varia de ponto a ponto, e derivá-la
+      produz termos extras.
+    </p>
+    <p>
+      Aí <span class="m">\partial_\alpha T^{\mu\nu}</span> deixa de ser tensor, e
+      é preciso corrigi-lo: essa correção é a derivada covariante, e os termos
+      extras são os símbolos de Christoffel. Por ora, aproveite a simplicidade —
+      ela é a última.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Leitura extra</p>
+  <h2>Vetores são derivadas, 1-formas são diferenciais</h2>
+  <p class="M">\vec e_\mu=\frac{\partial}{\partial x^\mu},
+     \qquad \tilde\omega^\mu=\dd x^\mu</p>
+  <div class="duas">
+    <div>
+      <table class="compacta">
+        <tr><th>A conta do capítulo</th><th>Com esta identificação</th></tr>
+        <tr><td>a dualidade</td>
+            <td><span class="m">\dd x^\mu(\partial_\nu)=\partial x^\mu/\partial x^\nu=\delta^\mu{}_\nu</span></td></tr>
+        <tr><td>a lei de transformação</td>
+            <td>é a regra da cadeia, lida nos dois sentidos</td></tr>
+        <tr><td>mudar de coordenadas</td>
+            <td>substituir e multiplicar diferenciais</td></tr>
+      </table>
+    </div>
+    <div>
+      <p class="legenda">
+        A economia de verdade é a última linha. A métrica das polares, que a
+        Seção 3.8.1 obtém montando a base e contraindo, sai em três linhas:
+      </p>
+      <p class="M">\dd s^2=\dd x^2+\dd y^2=\dd r^2+r^2\dd\theta^2</p>
+      <p class="legenda">
+        E o cone de luz sai em duas:
+        <span class="m">\dd u\,\dd w=(\dd t-\dd x)(\dd t+\dd x)=-\dd s^2</span>,
+        logo <span class="m">g_{uw}=-\tfrac12</span>.
+      </p>
+    </div>
+  </div>
+  <p class="legenda">
+    O Schutz enuncia isso de passagem na Seção 5.2 e segue adiante. Quem quiser
+    o desenvolvimento: <em>Geometrical Methods of Mathematical Physics</em>, do
+    mesmo autor — capítulo 2 para vetores como derivadas, 4 para formas.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Apêndice interativo · Seção 3.8.2</p>
+  <h2>Quem está quadrado?</h2>
+  <svg id="quem-quadrado" class="grafico" style="height:280px" viewBox="0 -28 1000 528"
+       role="img" aria-label="A mesma física em duas folhas: uma riscada para S, outra para S linha"></svg>
+  <div class="duas larga-dir">
+    <div class="controle">
+      <label for="v-quadrado">velocidade relativa <span class="m">v</span></label>
+      <input type="range" id="v-quadrado" min="0" max="82" step="1" value="50">
+      <p class="leitura">
+        <span class="m">v</span> = <span id="qq-v">0,50</span>
+        &nbsp;·&nbsp; <span class="m">\gamma</span> = <span id="qq-gama">1,155</span>
+      </p>
+      <p class="leitura">
+        <span class="m">(t,x)</span> = <span id="qq-s">(0,90 ; 0,35)</span>
+        &nbsp;→&nbsp; <span id="qq-sl">(0,84 ; -0,11)</span>
+      </p>
+    </div>
+    <div>
+      <div class="destaque">
+        <p class="legenda">
+          <strong>É a ideia do papel monolog.</strong> Ninguém conclui que o
+          dilog corrigiu os dados: ele foi <em>riscado</em> para aquela lei. Aqui
+          cada folha está riscada para um observador — e a obliquidade não
+          desaparece, <em>troca de lado</em>.
+        </p>
+      </div>
+      <p class="legenda">
+        O evento <span class="m">E</span> é o mesmo ponto nas duas folhas. O que
+        muda são as réguas, e o que sobrevive é o intervalo:
+        <span class="m">\dd s^2</span> = <span id="qq-ds">−0,69  e  −0,69</span>.
+      </p>
+    </div>
+  </div>
+  <p class="legenda">
+    <strong>O limite honesto da analogia:</strong> não existe folha em que os
+    dois apareçam quadrados <em>ao mesmo tempo</em> — a assinatura
+    <span class="m">(-,+)</span> não vira <span class="m">(+,+)</span> por
+    reparametrização nenhuma, e não por curvatura, porque as duas geometrias são
+    planas. O obstáculo é o cone de luz: o único desenho igual nas duas folhas.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Apêndice interativo · a folha que existe</p>
+  <h2>O disco das rapidezas</h2>
+  <div class="duas larga-esq">
+    <svg id="disco-rapidez" class="grafico" style="height:412px" viewBox="0 0 500 500"
+         role="img" aria-label="O espaço das velocidades no disco de Poincaré, com um triângulo hiperbólico"></svg>
+    <div>
+      <div class="controle">
+        <label for="rap1">rapidez do 1.º <em>boost</em> <span class="m">\varphi_1</span></label>
+        <input type="range" id="rap1" min="16" max="230" step="2" value="160">
+        <label for="rap2" style="margin-top:0.7rem">rapidez do 2.º, perpendicular
+          <span class="m">\varphi_2</span></label>
+        <input type="range" id="rap2" min="16" max="230" step="2" value="120">
+        <p class="leitura">
+          <span class="m">v_1</span> = <span id="dr-v1">0,664</span>
+          &nbsp;·&nbsp; <span class="m">v_2</span> = <span id="dr-v2">0,537</span>
+        </p>
+        <p class="leitura">
+          <span class="m">\varphi</span> = <span id="dr-phi">1,035</span>
+          &nbsp;·&nbsp; <span class="m">v</span> = <span id="dr-v">0,776</span>
+        </p>
+      </div>
+      <p class="legenda">
+        A folha hiperbólica <strong>existe</strong> — só não é o espaço-tempo, é
+        o espaço das <em>velocidades</em>. Nele a rapidez é a
+        <strong>distância</strong> e os <em>boosts</em> são movimentos rígidos.
+        Os círculos são a malha dela: passos <em>iguais</em> de rapidez, que se
+        apertam contra a borda. É aí que se vê por que <span class="m">v</span>
+        satura em <span class="m">1</span> enquanto
+        <span class="m">\varphi</span> cresce sem limite.
+      </p>
+    </div>
+  </div>
+  <div class="destaque">
+    <p class="legenda">
+      <strong>Ângulo reto no vértice 1</strong>, porque o segundo <em>boost</em>
+      é perpendicular ao primeiro naquele referencial — daí o Pitágoras
+      hiperbólico
+      <span class="m">\cosh\varphi=\cosh\varphi_1\cosh\varphi_2</span>. Some os três
+      ângulos: <span id="dr-ang">31,2° + 90° + 46,2° = 167,4°</span>. O que falta
+      para <span class="m">180°</span> é <strong>exatamente a rotação de
+      Wigner</strong>, <span class="m">\varepsilon</span> =
+      <span id="dr-eps">12,6°</span> — e numa folha hiperbólica o defeito angular
+      de um triângulo <em>é</em> a sua área.
+    </p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<div id="contador"></div>
+<div id="ajuda">← → navegar · F tela cheia</div>
+
+<script src="../vendor/katex/katex.min.js"></script>
+<script src="../slides.js?v=4"></script>
+<script src="../interativo.js?v=6"></script>
+</body>
+</html>

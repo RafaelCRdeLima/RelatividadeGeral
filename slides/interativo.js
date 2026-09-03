@@ -1116,3 +1116,359 @@
   cy.addEventListener("input", desenhar);
   desenhar();
 })();
+
+
+// ====================================================================
+// Quem está quadrado? A obliquidade troca de lado
+// ====================================================================
+//
+// O trecho da Seção 3.8.2 avisa que os eixos inclinados de um diagrama
+// de Minkowski PARECEM uma base oblíqua e não são. Dizer isso em texto
+// convence pouco; o que convence é desenhar a mesma física duas vezes.
+//
+// À esquerda, a folha está riscada para S: a malha de S é quadrada e a
+// de S' sai torta. À direita, a folha está riscada para S': agora é a
+// malha de S que sai torta. Nenhuma das duas é a verdadeira, e o evento
+// E é o mesmo ponto nas duas -- só as réguas mudaram.
+//
+// É a ideia do papel monolog. Uma tabela que segue lei de potência sai
+// curva no papel milimetrado e reta no dilog, e ninguém conclui que o
+// papel dilog "corrigiu" os dados: ele foi riscado para aquela lei. Aqui
+// cada folha está riscada para um observador.
+//
+// O que NÃO se pode fazer, e é o limite honesto da analogia: riscar uma
+// folha em que os dois apareçam quadrados ao mesmo tempo. A assinatura
+// (-,+) não vira (+,+) por reparametrização nenhuma -- o obstáculo é o
+// cone de luz, que as duas folhas desenham igual, em verde, exatamente
+// porque ele é o que ninguém consegue torcer.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("quem-quadrado");
+  const controle = document.getElementById("v-quadrado");
+  if (!svg || !controle) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+
+  const LADO = 470, VAO = 60, M = 1.55;   // meia-largura do quadro, em unidades
+  const k = LADO / (2 * M);
+  // dois painéis, cada um com a sua origem de tela
+  const OX = [LADO / 2, LADO + VAO + LADO / 2], OY = LADO / 2;
+  const fx = (p, x) => OX[p] + x * k;
+  const fy = (y) => OY - y * k;
+
+  const COR = { reta: "rgba(238,247,246,0.34)", torta: "#8dd7dc",
+                luz: "#7ee0a0", ev: "#e6b75c", rot: "rgba(238,247,246,0.55)" };
+
+  // ---- estrutura fixa: moldura, cone de luz, rótulos -----------------
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  for (let p = 0; p < 2; p++) {
+    fundo.appendChild(cria("rect", { x: fx(p, -M), y: fy(M), width: 2 * M * k,
+                                     height: 2 * M * k, fill: "rgba(255,255,255,0.02)",
+                                     stroke: "rgba(238,247,246,0.16)" }));
+    // o cone de luz é o MESMO desenho nos dois painéis: é o que não torce
+    for (const s of [1, -1]) {
+      fundo.appendChild(cria("line", { x1: fx(p, -M), y1: fy(-s * M), x2: fx(p, M),
+                                       y2: fy(s * M), stroke: COR.luz,
+                                       "stroke-width": 2, opacity: 0.85 }));
+    }
+    const t = cria("text", { x: fx(p, -M), y: fy(M) - 11, fill: COR.rot,
+                             "font-size": 18, "font-family": "DM Mono, monospace" });
+    t.textContent = p === 0 ? "folha riscada para S" : "folha riscada para S′";
+    fundo.appendChild(t);
+  }
+
+  const movel = cria("g", {});
+  svg.appendChild(movel);
+
+  // uma malha é um feixe de segmentos; guardamos os elementos e só
+  // reescrevemos as coordenadas, para não recriar nós a cada arraste
+  function feixe(n, cor, largura, tracejado) {
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      const l = cria("line", { stroke: cor, "stroke-width": largura });
+      if (tracejado) l.setAttribute("stroke-dasharray", tracejado);
+      movel.appendChild(l);
+      arr.push(l);
+    }
+    return arr;
+  }
+  const PASSO = 0.5, N = 7;               // linhas de −1,5 a +1,5 de meio em meio
+  // malha quadrada (a do dono da folha) e malha torta (a do outro)
+  const retaH = [], retaV = [], tortaH = [], tortaV = [];
+  for (let p = 0; p < 2; p++) {
+    retaH.push(feixe(N, COR.reta, 1.1));
+    retaV.push(feixe(N, COR.reta, 1.1));
+    tortaH.push(feixe(N, COR.torta, 1.4, "5 4"));
+    tortaV.push(feixe(N, COR.torta, 1.4, "5 4"));
+  }
+  // o evento, e o rótulo dele
+  const pontos = [], rotulos = [];
+  for (let p = 0; p < 2; p++) {
+    pontos.push(movel.appendChild(cria("circle", { r: 6.5, fill: COR.ev })));
+    const r = cria("text", { fill: COR.ev, "font-size": 20, "font-style": "italic" });
+    r.textContent = "E";
+    rotulos.push(movel.appendChild(r));
+  }
+
+  const lidoV = document.getElementById("qq-v");
+  const lidoG = document.getElementById("qq-gama");
+  const lidoS = document.getElementById("qq-s");
+  const lidoSl = document.getElementById("qq-sl");
+  const lidoDs = document.getElementById("qq-ds");
+
+  // o evento é fixo em S -- são as folhas que mudam debaixo dele
+  const tE = 0.9, xE = 0.35;
+  const num = (u) => (u < 0 ? "−" : "") + Math.abs(u).toFixed(2).replace(".", ",");
+
+  function reta(el, x1, y1, x2, y2, p) {
+    el.setAttribute("x1", fx(p, x1)); el.setAttribute("y1", fy(y1));
+    el.setAttribute("x2", fx(p, x2)); el.setAttribute("y2", fy(y2));
+  }
+
+  // Recorta a reta t = a x + b (ou x = const) ao quadrado [−M,M]². Sem o
+  // recorte as linhas tortas atravessariam o painel vizinho, que foi o
+  // primeiro sintoma quando isto tinha só dois painéis lado a lado.
+  function corta(a, b) {
+    const pts = [];
+    for (const x of [-M, M]) { const t = a * x + b; if (Math.abs(t) <= M + 1e-9) pts.push([x, t]); }
+    for (const t of [-M, M]) { const x = (t - b) / a; if (Math.abs(x) <= M + 1e-9) pts.push([x, t]); }
+    return pts.length >= 2 ? [pts[0], pts[1]] : null;
+  }
+
+  function desenhar() {
+    const v = Number(controle.value) / 100;
+    const g = 1 / Math.sqrt(1 - v * v);
+
+    for (let p = 0; p < 2; p++) {
+      // sinal da velocidade relativa vista de quem é dono da folha
+      const s = p === 0 ? v : -v;
+      for (let i = 0; i < N; i++) {
+        const c = -1.5 + i * PASSO;
+        // malha quadrada: t = c e x = c
+        reta(retaH[p][i], -M, c, M, c, p);
+        reta(retaV[p][i], c, -M, c, M, p);
+        // malha torta: linhas de t′ constante têm inclinação s;
+        // linhas de x′ constante têm inclinação 1/s (verticais se s=0)
+        const lh = corta(s, c / g);
+        if (lh) reta(tortaH[p][i], lh[0][0], lh[0][1], lh[1][0], lh[1][1], p);
+        else reta(tortaH[p][i], 0, 0, 0, 0, p);
+        if (Math.abs(s) < 1e-6) {
+          reta(tortaV[p][i], c, -M, c, M, p);
+        } else {
+          const lv = corta(1 / s, -c / (g * s));
+          if (lv) reta(tortaV[p][i], lv[0][0], lv[0][1], lv[1][0], lv[1][1], p);
+          else reta(tortaV[p][i], 0, 0, 0, 0, p);
+        }
+      }
+    }
+
+    // o mesmo evento, nas duas leituras
+    const tl = g * (tE - v * xE), xl = g * (xE - v * tE);
+    const coord = [[tE, xE], [tl, xl]];
+    for (let p = 0; p < 2; p++) {
+      const [t, x] = coord[p];
+      pontos[p].setAttribute("cx", fx(p, x)); pontos[p].setAttribute("cy", fy(t));
+      rotulos[p].setAttribute("x", fx(p, x) + 11);
+      rotulos[p].setAttribute("y", fy(t) - 10);
+    }
+
+    if (lidoV) lidoV.textContent = v.toFixed(2).replace(".", ",");
+    if (lidoG) lidoG.textContent = g.toFixed(3).replace(".", ",");
+    if (lidoS) lidoS.textContent = "(" + num(tE) + " ; " + num(xE) + ")";
+    if (lidoSl) lidoSl.textContent = "(" + num(tl) + " ; " + num(xl) + ")";
+    // o intervalo é o mesmo nas duas folhas -- é o que sobrevive à troca de régua
+    if (lidoDs) {
+      const ds = -tE * tE + xE * xE, dsl = -tl * tl + xl * xl;
+      lidoDs.textContent = num(ds) + "  e  " + num(dsl);
+    }
+  }
+  controle.addEventListener("input", desenhar);
+  desenhar();
+})();
+
+
+// ====================================================================
+// O disco das rapidezas: a folha em que tudo fica reto
+// ====================================================================
+//
+// Este é o análogo honesto do papel monolog -- e a lição é que a folha
+// hiperbólica existe, só não é o espaçotempo: é o espaço das VELOCIDADES.
+//
+// O conjunto das velocidades com |v| < 1, munido da métrica que o
+// hiperboloide U.U = -1 induz, é um plano hiperbólico. Nele:
+//
+//   - a rapidez É a distância;
+//   - os boosts SÃO movimentos rígidos, não deformações;
+//   - e compor dois boosts é percorrer dois lados de um triângulo.
+//
+// No modelo do disco de Poincaré a velocidade v entra no raio tanh(phi/2),
+// e não tanh(phi) = v. Parece um capricho e não é: é o que faz os ÂNGULOS
+// do desenho serem os ângulos de verdade. Sem isso a rotação de Wigner não
+// apareceria como ângulo nenhum.
+//
+// Os círculos concêntricos são a "malha" desta folha: passos IGUAIS de
+// rapidez, meio a meio. Eles se apertam contra a borda, e é aí que se vê
+// de uma vez por que v satura em 1 enquanto phi cresce sem limite -- a
+// borda está a distância infinita.
+//
+// O fecho: a soma dos três ângulos do triângulo é menor que 180°, e o
+// que falta é EXATAMENTE a rotação de Wigner. Verificado contra o produto
+// das matrizes de Lorentz em quatro configurações antes de escrever isto.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("disco-rapidez");
+  const c1 = document.getElementById("rap1");
+  const c2 = document.getElementById("rap2");
+  if (!svg || !c1 || !c2) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+  const L = 500, CX = L / 2, CY = L / 2, R = L / 2 - 26;
+  const px = (z) => CX + z.re * R, py = (z) => CY - z.im * R;
+
+  const COR = { borda: "#7ee0a0", malha: "rgba(238,247,246,0.16)",
+                l1: "#8dd7dc", l2: "#e6b75c", hip: "#f2836b",
+                rot: "rgba(238,247,246,0.55)" };
+
+  // aritmética complexa mínima -- o disco pede Möbius, e Möbius pede isto
+  const C = (re, im) => ({ re, im });
+  const mul = (a, b) => C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
+  const add = (a, b) => C(a.re + b.re, a.im + b.im);
+  const sub = (a, b) => C(a.re - b.re, a.im - b.im);
+  const conj = (a) => C(a.re, -a.im);
+  const div = (a, b) => { const d = b.re * b.re + b.im * b.im;
+                          return C((a.re * b.re + a.im * b.im) / d,
+                                   (a.im * b.re - a.re * b.im) / d); };
+  const eit = (t) => C(Math.cos(t), Math.sin(t));
+
+  // desloca z0 por uma distância d na direção theta, ao longo da geodésica
+  const desloca = (z0, d, th) => {
+    const w = mul(C(Math.tanh(d / 2), 0), eit(th));
+    return div(add(w, z0), add(C(1, 0), mul(conj(z0), w)));
+  };
+  const dist = (a, b) => {
+    const q = div(sub(a, b), sub(C(1, 0), mul(conj(a), b)));
+    return 2 * Math.atanh(Math.hypot(q.re, q.im));
+  };
+
+  // ---- fixo: a borda e a malha de rapidez constante -------------------
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  fundo.appendChild(cria("circle", { cx: CX, cy: CY, r: R, fill: "rgba(255,255,255,0.02)",
+                                     stroke: COR.borda, "stroke-width": 2.4,
+                                     "stroke-dasharray": "7 5" }));
+  const legBorda = cria("text", { x: CX, y: CY - R - 9, fill: COR.borda, "font-size": 16,
+                                  "text-anchor": "middle" });
+  legBorda.textContent = "a borda é v = 1, e está a distância infinita";
+  fundo.appendChild(legBorda);
+  for (let i = 1; i <= 7; i++) {
+    const phi = i * 0.5;
+    fundo.appendChild(cria("circle", { cx: CX, cy: CY, r: Math.tanh(phi / 2) * R,
+                                       fill: "none", stroke: COR.malha, "stroke-width": 1.1 }));
+  }
+  const legMalha = cria("text", { x: CX, y: CY + R + 20, fill: COR.rot, "font-size": 15,
+                                  "text-anchor": "middle",
+                                  "font-family": "DM Mono, monospace" });
+  legMalha.textContent = "círculos: passos iguais de rapidez (Δφ = 0,5)";
+  fundo.appendChild(legMalha);
+
+  // ---- móvel: o triângulo ---------------------------------------------
+  const movel = cria("g", {});
+  svg.appendChild(movel);
+  const lado1 = movel.appendChild(cria("line", { stroke: COR.l1, "stroke-width": 3.2 }));
+  const lado2 = movel.appendChild(cria("path", { fill: "none", stroke: COR.l2,
+                                                 "stroke-width": 3.2 }));
+  const hipot = movel.appendChild(cria("line", { stroke: COR.hip, "stroke-width": 3.2 }));
+  const arcoO = movel.appendChild(cria("path", { fill: "none", stroke: COR.hip,
+                                                 "stroke-width": 1.6 }));
+  const canto = movel.appendChild(cria("path", { fill: "none", stroke: COR.l2,
+                                                 "stroke-width": 1.6 }));
+  const pO = movel.appendChild(cria("circle", { r: 5, fill: "rgba(246,243,236,0.9)" }));
+  const p1 = movel.appendChild(cria("circle", { r: 5.5, fill: COR.l1 }));
+  const p2 = movel.appendChild(cria("circle", { r: 5.5, fill: COR.hip }));
+  const rot = (txt, cor) => {
+    const t = cria("text", { fill: cor, "font-size": 18, "font-style": "italic" });
+    t.textContent = txt; return movel.appendChild(t);
+  };
+  const r1 = rot("1", COR.l1), r2 = rot("2", COR.hip);
+
+  const lido = (id) => document.getElementById(id);
+  const oV1 = lido("dr-v1"), oV2 = lido("dr-v2"), oPhi = lido("dr-phi"),
+        oV = lido("dr-v"), oAng = lido("dr-ang"), oEps = lido("dr-eps");
+  const n2 = (u) => u.toFixed(2).replace(".", ",");
+  const n3 = (u) => u.toFixed(3).replace(".", ",");
+  const gr = (u) => (u * 180 / Math.PI).toFixed(1).replace(".", ",") + "°";
+
+  function desenhar() {
+    const f1 = Number(c1.value) / 100, f2 = Number(c2.value) / 100;
+    const O = C(0, 0);
+    const P1 = C(Math.tanh(f1 / 2), 0);
+    // o segundo boost é perpendicular ao primeiro NO REFERENCIAL 1: por
+    // isso o ângulo interno em P1 é reto, e é daí que sai o Pitágoras
+    // hiperbólico cosh(phi) = cosh(phi1) cosh(phi2)
+    const P2 = desloca(P1, f2, Math.PI / 2);
+
+    lado1.setAttribute("x1", px(O)); lado1.setAttribute("y1", py(O));
+    lado1.setAttribute("x2", px(P1)); lado1.setAttribute("y2", py(P1));
+    hipot.setAttribute("x1", px(O)); hipot.setAttribute("y1", py(O));
+    hipot.setAttribute("x2", px(P2)); hipot.setAttribute("y2", py(P2));
+
+    // o lado 1->2 é geodésica: reta só se passar pelo centro, senão arco.
+    // Em vez de achar o círculo ortogonal à borda, amostramos a própria
+    // geodésica pela Möbius -- não tem caso degenerado.
+    const passos = 48, d12 = dist(P1, P2), p = [];
+    for (let i = 0; i <= passos; i++) {
+      const z = desloca(P1, d12 * (i / passos), Math.PI / 2);
+      p.push((i ? "L" : "M") + px(z).toFixed(2) + " " + py(z).toFixed(2));
+    }
+    lado2.setAttribute("d", p.join(" "));
+
+    // ângulo em O: as duas geodésicas que saem do centro são raios, e o
+    // disco de Poincaré é conforme -- então o ângulo do desenho é o de verdade
+    const aO = Math.atan2(P2.im, P2.re);
+    const rr = 0.30 * R, arc = [];
+    for (let i = 0; i <= 24; i++) {
+      const t = aO * (i / 24);
+      arc.push((i ? "L" : "M") + (CX + rr * Math.cos(t)).toFixed(2) + " " +
+               (CY - rr * Math.sin(t)).toFixed(2));
+    }
+    arcoO.setAttribute("d", arc.join(" "));
+    // o esquadro em P1: as direções ali são −x (de volta a O) e +y (rumo a P2)
+    const q = 15, x1 = px(P1), y1 = py(P1);
+    canto.setAttribute("d", `M ${x1 - q} ${y1} L ${x1 - q} ${y1 - q} L ${x1} ${y1 - q}`);
+
+    pO.setAttribute("cx", px(O)); pO.setAttribute("cy", py(O));
+    p1.setAttribute("cx", px(P1)); p1.setAttribute("cy", py(P1));
+    p2.setAttribute("cx", px(P2)); p2.setAttribute("cy", py(P2));
+    r1.setAttribute("x", px(P1) - 4); r1.setAttribute("y", py(P1) + 24);
+    r2.setAttribute("x", px(P2) + 10); r2.setAttribute("y", py(P2) - 8);
+
+    // ---- os números -------------------------------------------------
+    const phi = Math.acosh(Math.cosh(f1) * Math.cosh(f2));   // Pitágoras hiperbólico
+    const angO = Math.atan(Math.tanh(f2) / Math.sinh(f1));
+    const angP2 = Math.atan(Math.tanh(f1) / Math.sinh(f2));
+    const soma = angO + Math.PI / 2 + angP2;
+    const eps = Math.PI - soma;                              // defeito = Wigner
+    if (oV1) oV1.textContent = n3(Math.tanh(f1));
+    if (oV2) oV2.textContent = n3(Math.tanh(f2));
+    if (oPhi) oPhi.textContent = n3(phi);
+    if (oV) oV.textContent = n3(Math.tanh(phi));
+    if (oAng) oAng.textContent = gr(angO) + " + 90° + " + gr(angP2) + " = " + gr(soma);
+    if (oEps) oEps.textContent = gr(eps);
+  }
+  c1.addEventListener("input", desenhar);
+  c2.addEventListener("input", desenhar);
+  desenhar();
+})();

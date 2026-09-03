@@ -94,6 +94,14 @@
         katex.render(el.textContent, el, {
           displayMode: el.classList.contains("M"),
           throwOnError: false,
+          // Os mesmos apelidos da apostila, para que uma fórmula possa ser
+          // copiada de lá para cá sem tradução. O KaTeX não traz nenhum
+          // deles: sem isto, \dd sai como erro em vermelho no meio da aula.
+          macros: {
+            "\\dd": "\\mathrm{d}",
+            "\\ket": "\\lvert #1 \\rangle",
+            "\\bra": "\\langle #1 \\rvert",
+          },
         });
       } catch (e) {
         // Uma fórmula malformada não pode derrubar a apresentação
