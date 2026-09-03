@@ -4749,7 +4749,21 @@ projeções dão
 \[
   V_r=\vec V\cdot\vec e_r=1,\qquad V_\theta=\vec V\cdot\vec e_\theta=2 .
 \]
-Quatro vezes mais --- que é $g_{\theta\theta}=r^2$ em ação.
+O que interessa comparar aqui é $V_\theta=2$ com $V^\theta=\tfrac12$: a
+\emph{mesma} direção $\theta$, escrita das duas maneiras, e um fator $4$ entre
+elas. Abrindo o produto escalar se vê de onde ele vem:
+\[
+  V_\theta=\vec V\cdot\vec e_\theta
+  =\bigl(V^r\vec e_r+V^\theta\vec e_\theta\bigr)\cdot\vec e_\theta
+  =V^r\underbrace{(\vec e_r\cdot\vec e_\theta)}_{g_{r\theta}=0}
+  +V^\theta\underbrace{(\vec e_\theta\cdot\vec e_\theta)}_{g_{\theta\theta}=4}
+  =g_{\theta\theta}\,V^\theta .
+\]
+Repare que o $\vec e_\theta$ \emph{foi consumido} pelo produto: ele é aquilo
+com que se multiplica, e o que sobra é um número. E o resultado é a regra
+$V_\mu=g_{\mu\nu}V^\nu$ da Seção~\ref{sec:metrica-ponte} --- esta é a primeira
+vez no curso em que ela faz alguma coisa, porque numa base ortonormal $g$ é a
+identidade e abaixar o índice não muda número nenhum.
 
 \begin{central}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}NÃO É SOBRE ÂNGULO, É SOBRE RÉGUA}]
 As componentes de cima e as de baixo diferiram por um fator $4$ com os eixos
