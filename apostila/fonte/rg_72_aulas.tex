@@ -4773,13 +4773,36 @@ razão, independente desta, e é o assunto da subseção seguinte.
 \end{central}
 
 \textbf{A base dual, e o inverso outra vez.} A condição
-\eqref{eq:base-dual}, $\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$, dá
+\eqref{eq:base-dual}, $\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$, é a
+afirmação de que duas matrizes são inversas uma da outra, escrita entrada por
+entrada. E por isso a base dual sai sem trabalho novo: basta inverter a matriz
+que já temos. Ponha os dois vetores de base como \emph{colunas},
+\[
+  J=\begin{pmatrix}\cos\theta & -r\sin\theta\\[2pt]
+                   \sin\theta & \phantom{-}r\cos\theta\end{pmatrix},
+  \qquad \det J=r
+\]
+--- o mesmo $r$ do elemento de área $r\,\dd r\,\dd\theta$ do cálculo. Inverter
+uma $2\times2$ é mecânico: trocar a diagonal, negar a antidiagonal, dividir
+pelo determinante.
+\[
+  J^{-1}=\frac1r\begin{pmatrix}\phantom{-}r\cos\theta & r\sin\theta\\[2pt]
+                               -\sin\theta & \cos\theta\end{pmatrix}
+        =\begin{pmatrix}\phantom{-}\cos\theta & \sin\theta\\[6pt]
+                        -\dfrac{\sin\theta}{r} & \dfrac{\cos\theta}{r}\end{pmatrix}
+\]
+As \emph{linhas} da inversa são o que se procurava:
 \[
   \tilde\omega^r=\cos\theta\,\tilde\omega^x+\sin\theta\,\tilde\omega^y,
   \qquad
   \tilde\omega^\theta=-\frac{\sin\theta}{r}\,\tilde\omega^x
                       +\frac{\cos\theta}{r}\,\tilde\omega^y ,
 \]
+e vale guardar a assimetria, que não depende de dimensão nem de coordenadas:
+\textbf{os vetores de base são as colunas da matriz direta; as 1-formas de base
+são as linhas da inversa}. Conferir é imediato --- por exemplo
+$\tilde\omega^\theta(\vec e_\theta)=-\frac{\sin\theta}{r}(-r\sin\theta)
++\frac{\cos\theta}{r}(r\cos\theta)=1$.
 e daí $|\tilde\omega^r|=1$ e $|\tilde\omega^\theta|=1/r$. Compare com
 $|\vec e_\theta|=r$: onde a seta de base é longa, as folhas da 1-forma de base
 são raras, e o produto dos dois comprimentos é sempre $1$. É a
