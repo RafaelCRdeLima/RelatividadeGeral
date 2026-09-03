@@ -3,6 +3,15 @@
 // Cada um procura o seu elemento pelo id e desiste em silêncio se ele não
 // estiver nesta página -- assim o mesmo arquivo serve a todos os
 // capítulos sem que nenhum precise saber o que os outros contêm.
+//
+// AO MEXER NESTE ARQUIVO, SUBA O ?v= NOS TRÊS DECKS.
+//
+// O site é servido com cache-control: max-age=600, e o navegador guarda
+// pelo URL inteiro, query incluída. Editar o arquivo sem trocar a versão
+// entrega o arquivo VELHO a quem já tinha aberto a página -- e o sintoma é
+// silencioso: o painel desenha, mas um controle novo não faz nada, porque
+// o JS em cache não sabe que ele existe. Já aconteceu uma vez, entre os
+// commits 1f881f5 e b4792ca, com o controle de recentrar o disco.
 
 (function () {
   "use strict";
