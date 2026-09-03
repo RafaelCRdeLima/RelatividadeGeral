@@ -1327,7 +1327,8 @@
   const svg = document.getElementById("disco-rapidez");
   const c1 = document.getElementById("rap1");
   const c2 = document.getElementById("rap2");
-  if (!svg || !c1 || !c2) return;
+  const cc = document.getElementById("dr-centro");
+  if (!svg || !c1 || !c2 || !cc) return;
 
   const NS = "http://www.w3.org/2000/svg";
   const cria = (tag, attrs) => {
@@ -1352,9 +1353,10 @@
                           return C((a.re * b.re + a.im * b.im) / d,
                                    (a.im * b.re - a.re * b.im) / d); };
   const eit = (t) => C(Math.cos(t), Math.sin(t));
+  const arg = (a) => Math.atan2(a.im, a.re);
 
-  // desloca z0 por uma distância d na direção theta, ao longo da geodésica
-  const desloca = (z0, d, th) => {
+  // as três operações da geometria do disco
+  const desloca = (z0, d, th) => {                  // andar d na direção th
     const w = mul(C(Math.tanh(d / 2), 0), eit(th));
     return div(add(w, z0), add(C(1, 0), mul(conj(z0), w)));
   };
@@ -1362,8 +1364,15 @@
     const q = div(sub(a, b), sub(C(1, 0), mul(conj(a), b)));
     return 2 * Math.atanh(Math.hypot(q.re, q.im));
   };
+  // a isometria que leva `a` ao centro. É ela que faz o painel MOSTRAR a
+  // homogeneidade em vez de afirmá-la: um boost é este movimento rígido.
+  const centrar = (z, a) => div(sub(z, a), sub(C(1, 0), mul(conj(a), z)));
+  // direção da geodésica que sai de `de` rumo a `para`
+  const direcao = (de, para) => arg(centrar(para, de));
 
   // ---- fixo: a borda e a malha de rapidez constante -------------------
+  // Os círculos NÃO se movem quando se troca o centro: eles são "rapidez
+  // relativa a quem está no meio", e quem está no meio é sempre o meio.
   const fundo = cria("g", {});
   svg.appendChild(fundo);
   fundo.appendChild(cria("circle", { cx: CX, cy: CY, r: R, fill: "rgba(255,255,255,0.02)",
@@ -1374,101 +1383,134 @@
   legBorda.textContent = "a borda é v = 1, e está a distância infinita";
   fundo.appendChild(legBorda);
   for (let i = 1; i <= 7; i++) {
-    const phi = i * 0.5;
-    fundo.appendChild(cria("circle", { cx: CX, cy: CY, r: Math.tanh(phi / 2) * R,
+    fundo.appendChild(cria("circle", { cx: CX, cy: CY, r: Math.tanh(i * 0.5 / 2) * R,
                                        fill: "none", stroke: COR.malha, "stroke-width": 1.1 }));
   }
   const legMalha = cria("text", { x: CX, y: CY + R + 20, fill: COR.rot, "font-size": 15,
                                   "text-anchor": "middle",
                                   "font-family": "DM Mono, monospace" });
-  legMalha.textContent = "círculos: passos iguais de rapidez (Δφ = 0,5)";
+  legMalha.textContent = "círculos: rapidez em relação a quem está no centro";
   fundo.appendChild(legMalha);
 
   // ---- móvel: o triângulo ---------------------------------------------
   const movel = cria("g", {});
   svg.appendChild(movel);
-  const lado1 = movel.appendChild(cria("line", { stroke: COR.l1, "stroke-width": 3.2 }));
-  const lado2 = movel.appendChild(cria("path", { fill: "none", stroke: COR.l2,
-                                                 "stroke-width": 3.2 }));
-  const hipot = movel.appendChild(cria("line", { stroke: COR.hip, "stroke-width": 3.2 }));
-  const arcoO = movel.appendChild(cria("path", { fill: "none", stroke: COR.hip,
+  // os três lados são geodésicas amostradas -- depois de recentrar, nenhum
+  // deles é garantidamente um raio reto, então todos passam pelo mesmo código
+  const lados = [COR.l1, COR.l2, COR.hip].map((cor) =>
+    movel.appendChild(cria("path", { fill: "none", stroke: cor, "stroke-width": 3.2 })));
+  const arcoC = movel.appendChild(cria("path", { fill: "none", stroke: COR.hip,
                                                  "stroke-width": 1.6 }));
   const canto = movel.appendChild(cria("path", { fill: "none", stroke: COR.l2,
                                                  "stroke-width": 1.6 }));
-  const pO = movel.appendChild(cria("circle", { r: 5, fill: "rgba(246,243,236,0.9)" }));
-  const p1 = movel.appendChild(cria("circle", { r: 5.5, fill: COR.l1 }));
-  const p2 = movel.appendChild(cria("circle", { r: 5.5, fill: COR.hip }));
-  const rot = (txt, cor) => {
-    const t = cria("text", { fill: cor, "font-size": 18, "font-style": "italic" });
-    t.textContent = txt; return movel.appendChild(t);
-  };
-  const r1 = rot("1", COR.l1), r2 = rot("2", COR.hip);
+  const bolas = [], marcas = [];
+  for (const [k, cor] of [[0, "rgba(246,243,236,0.9)"], [1, COR.l1], [2, COR.hip]]) {
+    bolas.push(movel.appendChild(cria("circle", { r: 5.5, fill: cor })));
+    const t = cria("text", { fill: cor, "font-size": 19, "font-style": "italic" });
+    t.textContent = String(k);
+    marcas.push(movel.appendChild(t));
+  }
 
   const lido = (id) => document.getElementById(id);
   const oV1 = lido("dr-v1"), oV2 = lido("dr-v2"), oPhi = lido("dr-phi"),
-        oV = lido("dr-v"), oAng = lido("dr-ang"), oEps = lido("dr-eps");
-  const n2 = (u) => u.toFixed(2).replace(".", ",");
+        oV = lido("dr-v"), oAng = lido("dr-ang"), oEps = lido("dr-eps"),
+        oQuem = lido("dr-quem"), oLados = lido("dr-lados"),
+        oF1 = lido("dr-f1"), oF2 = lido("dr-f2");
   const n3 = (u) => u.toFixed(3).replace(".", ",");
   const gr = (u) => (u * 180 / Math.PI).toFixed(1).replace(".", ",") + "°";
 
-  function desenhar() {
-    const f1 = Number(c1.value) / 100, f2 = Number(c2.value) / 100;
-    const O = C(0, 0);
-    const P1 = C(Math.tanh(f1 / 2), 0);
-    // o segundo boost é perpendicular ao primeiro NO REFERENCIAL 1: por
-    // isso o ângulo interno em P1 é reto, e é daí que sai o Pitágoras
-    // hiperbólico cosh(phi) = cosh(phi1) cosh(phi2)
-    const P2 = desloca(P1, f2, Math.PI / 2);
-
-    lado1.setAttribute("x1", px(O)); lado1.setAttribute("y1", py(O));
-    lado1.setAttribute("x2", px(P1)); lado1.setAttribute("y2", py(P1));
-    hipot.setAttribute("x1", px(O)); hipot.setAttribute("y1", py(O));
-    hipot.setAttribute("x2", px(P2)); hipot.setAttribute("y2", py(P2));
-
-    // o lado 1->2 é geodésica: reta só se passar pelo centro, senão arco.
-    // Em vez de achar o círculo ortogonal à borda, amostramos a própria
-    // geodésica pela Möbius -- não tem caso degenerado.
-    const passos = 48, d12 = dist(P1, P2), p = [];
-    for (let i = 0; i <= passos; i++) {
-      const z = desloca(P1, d12 * (i / passos), Math.PI / 2);
+  function geodesica(a, b) {
+    const d = dist(a, b), th = direcao(a, b), p = [];
+    for (let i = 0; i <= 40; i++) {
+      const z = desloca(a, d * (i / 40), th);
       p.push((i ? "L" : "M") + px(z).toFixed(2) + " " + py(z).toFixed(2));
     }
-    lado2.setAttribute("d", p.join(" "));
+    return p.join(" ");
+  }
 
-    // ângulo em O: as duas geodésicas que saem do centro são raios, e o
-    // disco de Poincaré é conforme -- então o ângulo do desenho é o de verdade
-    const aO = Math.atan2(P2.im, P2.re);
-    const rr = 0.30 * R, arc = [];
-    for (let i = 0; i <= 24; i++) {
-      const t = aO * (i / 24);
-      arc.push((i ? "L" : "M") + (CX + rr * Math.cos(t)).toFixed(2) + " " +
-               (CY - rr * Math.sin(t)).toFixed(2));
+  function desenhar() {
+    const f1 = Number(c1.value) / 100, f2 = Number(c2.value) / 100;
+    const centro = Number(cc.value);        // 0, 1 ou 2
+
+    // o triângulo, construído sempre a partir do referencial 0
+    let P = [C(0, 0), C(Math.tanh(f1 / 2), 0), null];
+    P[2] = desloca(P[1], f2, Math.PI / 2);
+
+    // recentrar é aplicar a isometria -- e depois girar, só para o desenho
+    // não dar cambalhota a cada troca. O alvo do giro é o vértice 0, ou o 1
+    // quando é o próprio 0 que está no centro.
+    if (centro !== 0) {
+      const a = P[centro];
+      P = P.map((z) => centrar(z, a));
     }
-    arcoO.setAttribute("d", arc.join(" "));
-    // o esquadro em P1: as direções ali são −x (de volta a O) e +y (rumo a P2)
-    const q = 15, x1 = px(P1), y1 = py(P1);
-    canto.setAttribute("d", `M ${x1 - q} ${y1} L ${x1 - q} ${y1 - q} L ${x1} ${y1 - q}`);
+    const alvo = centro === 0 ? 1 : 0;
+    const giro = eit(-arg(P[alvo]));
+    P = P.map((z) => mul(z, giro));
 
-    pO.setAttribute("cx", px(O)); pO.setAttribute("cy", py(O));
-    p1.setAttribute("cx", px(P1)); p1.setAttribute("cy", py(P1));
-    p2.setAttribute("cx", px(P2)); p2.setAttribute("cy", py(P2));
-    r1.setAttribute("x", px(P1) - 4); r1.setAttribute("y", py(P1) + 24);
-    r2.setAttribute("x", px(P2) + 10); r2.setAttribute("y", py(P2) - 8);
+    // ---- desenho -----------------------------------------------------
+    lados[0].setAttribute("d", geodesica(P[0], P[1]));   // cateto phi1
+    lados[1].setAttribute("d", geodesica(P[1], P[2]));   // cateto phi2
+    lados[2].setAttribute("d", geodesica(P[0], P[2]));   // hipotenusa
+    // O rótulo se afasta do CENTRO DE MASSA do triângulo, e não da origem
+    // do disco: quem está recentrado fica em (0,0), e um afastamento radial
+    // ali é um afastamento de nada -- o número ficava escondido sob a bola.
+    const gx = (px(P[0]) + px(P[1]) + px(P[2])) / 3;
+    const gy = (py(P[0]) + py(P[1]) + py(P[2])) / 3;
+    for (let k = 0; k < 3; k++) {
+      const bx = px(P[k]), by = py(P[k]);
+      bolas[k].setAttribute("cx", bx); bolas[k].setAttribute("cy", by);
+      let dx = bx - gx, dy = by - gy, m = Math.hypot(dx, dy);
+      if (m < 1) { dx = 0; dy = 1; m = 1; }
+      marcas[k].setAttribute("x", bx + 17 * dx / m - 5);
+      marcas[k].setAttribute("y", by + 17 * dy / m + 6);
+    }
+    // o ângulo marcado é o de quem está no centro: ali as duas geodésicas
+    // são raios, e o disco é conforme, então o ângulo do desenho é o real
+    const outros = [0, 1, 2].filter((k) => k !== centro);
+    const a1 = direcao(P[centro], P[outros[0]]), a2 = direcao(P[centro], P[outros[1]]);
+    const rr = 0.26 * R, arcp = [], base = px(P[centro]), altura = py(P[centro]);
+    let d1 = a1, d2 = a2;
+    if (d2 - d1 > Math.PI) d2 -= 2 * Math.PI;
+    if (d1 - d2 > Math.PI) d1 -= 2 * Math.PI;
+    for (let i = 0; i <= 24; i++) {
+      const t = d1 + (d2 - d1) * (i / 24);
+      arcp.push((i ? "L" : "M") + (base + rr * Math.cos(t)).toFixed(2) + " " +
+                (altura - rr * Math.sin(t)).toFixed(2));
+    }
+    arcoC.setAttribute("d", arcp.join(" "));
+    // o esquadro fica sempre no vértice 1, e agora é construído das duas
+    // direções tangentes de verdade -- antes estava preso a −x e +y, o que
+    // só valia enquanto o 0 estivesse no centro
+    const e1 = direcao(P[1], P[0]), e2 = direcao(P[1], P[2]), q = 15;
+    const x1 = px(P[1]), y1 = py(P[1]);
+    const A = [x1 + q * Math.cos(e1), y1 - q * Math.sin(e1)];
+    const B = [x1 + q * Math.cos(e2), y1 - q * Math.sin(e2)];
+    canto.setAttribute("d", `M ${A[0].toFixed(1)} ${A[1].toFixed(1)} ` +
+      `L ${(A[0] + B[0] - x1).toFixed(1)} ${(A[1] + B[1] - y1).toFixed(1)} ` +
+      `L ${B[0].toFixed(1)} ${B[1].toFixed(1)}`);
 
-    // ---- os números -------------------------------------------------
-    const phi = Math.acosh(Math.cosh(f1) * Math.cosh(f2));   // Pitágoras hiperbólico
+    // ---- os números ---------------------------------------------------
+    const phi = Math.acosh(Math.cosh(f1) * Math.cosh(f2));
     const angO = Math.atan(Math.tanh(f2) / Math.sinh(f1));
     const angP2 = Math.atan(Math.tanh(f1) / Math.sinh(f2));
     const soma = angO + Math.PI / 2 + angP2;
-    const eps = Math.PI - soma;                              // defeito = Wigner
+    if (oF1) oF1.textContent = f1.toFixed(2).replace(".", ",");
+    if (oF2) oF2.textContent = f2.toFixed(2).replace(".", ",");
     if (oV1) oV1.textContent = n3(Math.tanh(f1));
     if (oV2) oV2.textContent = n3(Math.tanh(f2));
     if (oPhi) oPhi.textContent = n3(phi);
     if (oV) oV.textContent = n3(Math.tanh(phi));
     if (oAng) oAng.textContent = gr(angO) + " + 90° + " + gr(angP2) + " = " + gr(soma);
-    if (oEps) oEps.textContent = gr(eps);
+    if (oEps) oEps.textContent = gr(Math.PI - soma);
+    if (oQuem) oQuem.textContent = String(centro);
+    // os três lados MEDIDOS no desenho: é a prova numérica de que recentrar
+    // não deformou nada, e é a resposta à pergunta "onde vejo que nenhum
+    // referencial é privilegiado?"
+    if (oLados) {
+      oLados.textContent = [dist(P[0], P[1]), dist(P[1], P[2]), dist(P[0], P[2])]
+        .map(n3).join("  ·  ");
+    }
   }
-  c1.addEventListener("input", desenhar);
-  c2.addEventListener("input", desenhar);
+  for (const c of [c1, c2, cc]) c.addEventListener("input", desenhar);
   desenhar();
 })();
