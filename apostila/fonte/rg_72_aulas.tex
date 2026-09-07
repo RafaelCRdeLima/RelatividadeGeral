@@ -115,7 +115,7 @@
 % Notação de Schutz: o vetor, o referencial em que se leem as componentes,
 % e a seta que separa um do outro (\vec A \temcomp{\obs} (A^0,...)).
 \newcommand{\obs}{\mathcal{O}}
-\newcommand{\obsl}{\mathcal{O}'}
+\newcommand{\obsl}{\bar{\mathcal{O}}}
 \newcommand{\temcomp}[1]{\;\underset{#1}{\longrightarrow}\;}
 \newcommand{\munu}{\mu\nu}
 
@@ -551,7 +551,7 @@ Tempo & absoluto, universal & relativo ao observador \\
 Espaço & absoluto, palco fixo & inseparável do tempo \\
 Simultaneidade & absoluta & depende do referencial \\
 Velocidade máxima & não existe & $c$, a mesma para todos \\
-Soma de velocidades & $u'=u-v$ & $u'=(u-v)/(1-uv)$ \\
+Soma de velocidades & $\bar u=u-v$ & $\bar u=(u-v)/(1-uv)$ \\
 O que é invariante & o tempo e a distância, separadamente & o intervalo
 $\dd s^2$, que os combina \\
 Gravidade & força instantânea à distância & curvatura do espaço-tempo (RG) \\
@@ -562,42 +562,42 @@ Gravidade & força instantânea à distância & curvatura do espaço-tempo (RG) 
 O resto desta seção torna a primeira coluna precisa: escreve a transformação
 que traduz o mundo de Newton e mostra exatamente onde ela falha.
 
-\textbf{A transformação de Galileu.} Sejam $S$ e $S'$ dois referenciais
-inerciais com eixos paralelos, origens coincidentes em $t=0$, e $S'$
+\textbf{A transformação de Galileu.} Sejam $S$ e $\bar S$ dois referenciais
+inerciais com eixos paralelos, origens coincidentes em $t=0$, e $\bar S$
 deslocando-se com velocidade $v$ na direção $+x$ de $S$. A resposta de Galileu
 é a que o senso comum dita:
 \begin{equation}
-  t'=t,\qquad
-  x'=x-vt,\qquad
-  y'=y,\qquad
-  z'=z .
+  \bar t=t,\qquad
+  \bar x=x-vt,\qquad
+  \bar y=y,\qquad
+  \bar z=z .
   \label{eq:galileu}
 \end{equation}
-A segunda equação apenas desconta o quanto a origem de $S'$ andou. A primeira
---- $t'=t$ --- é a hipótese forte, e passa despercebida justamente por parecer
+A segunda equação apenas desconta o quanto a origem de $\bar S$ andou. A primeira
+--- $\bar t=t$ --- é a hipótese forte, e passa despercebida justamente por parecer
 óbvia: é o tempo absoluto de Newton escrito em uma linha.
 
 Três consequências saem de \eqref{eq:galileu} imediatamente. \emph{Primeira},
-as velocidades se somam: derivando $x'=x-vt$ em relação a $t'=t$, uma
+as velocidades se somam: derivando $\bar x=x-vt$ em relação a $\bar t=t$, uma
 partícula com velocidade $u$ em $S$ tem
 \begin{equation}
-  u'=u-v
+  \bar u=u-v
   \label{eq:galileu-velocidades}
 \end{equation}
-em $S'$ --- é a regra que todo mundo usa ao ultrapassar um carro na estrada.
-\emph{Segunda}, a aceleração não muda: derivando mais uma vez, $a'=a$, porque
+em $\bar S$ --- é a regra que todo mundo usa ao ultrapassar um carro na estrada.
+\emph{Segunda}, a aceleração não muda: derivando mais uma vez, $\bar a=a$, porque
 $v$ é constante. Como massas e forças também não mudam nessa descrição,
 $F=ma$ tem exatamente a mesma forma nos dois referenciais: a mecânica de
 Newton é insensível a \eqref{eq:galileu}, e é por isso que não se sente
 movimento uniforme dentro de um trem. \emph{Terceira}, distâncias entre
 eventos simultâneos são preservadas, já que $\Delta t=0$ implica
-$\Delta x'=\Delta x$. Note que esses dois últimos itens são o conteúdo da
+$\Delta \bar x=\Delta x$. Note que esses dois últimos itens são o conteúdo da
 primeira coluna da tabela: o que Galileu preserva é o tempo de um lado e a
 distância do outro, cada um por si.
 
 \textbf{Onde isso quebra.} O problema aparece ao aplicar
 \eqref{eq:galileu-velocidades} à luz. Se um pulso tem velocidade $u=c$ em $S$,
-então em $S'$ ele teria velocidade $c-v$: um observador que corresse atrás do
+então em $\bar S$ ele teria velocidade $c-v$: um observador que corresse atrás do
 pulso o veria mais lento, e um que corresse com $v=c$ o veria parado. Duas
 coisas dizem que isso está errado. Uma é teórica: as equações de Maxwell
 fornecem a velocidade das ondas eletromagnéticas em termos de constantes do
@@ -620,12 +620,12 @@ ponto de partida. Os dois postulados da relatividade restrita são:
 
 O segundo postulado é incompatível com \eqref{eq:galileu}, logo a
 transformação de Galileu está errada --- não como aproximação, mas como
-afirmação exata. E, como \eqref{eq:galileu} decorre diretamente de $t'=t$, o
+afirmação exata. E, como \eqref{eq:galileu} decorre diretamente de $\bar t=t$, o
 que está errado é o tempo absoluto.
 
 \begin{atencao}
 A culpada é a primeira equação de \eqref{eq:galileu}, e não a segunda. Enquanto
-$t'=t$ estiver fixo, o tempo não participa da transformação, e a única coisa
+$\bar t=t$ estiver fixo, o tempo não participa da transformação, e a única coisa
 que sobra para ajustar é a posição --- insuficiente para manter $c$ fixo.
 Salvar o segundo postulado exige que o tempo de um referencial dependa também
 da \emph{posição} no outro, isto é, que a simultaneidade deixe de ser
@@ -641,7 +641,7 @@ baixas velocidades --- e, antes disso, identifica a grandeza que substitui o
 tempo absoluto no papel de referência comum a todos os observadores.
 
 \begin{activity}
-Um trem se move a $v$ e um passageiro caminha a $u'$ dentro dele, no sentido
+Um trem se move a $v$ e um passageiro caminha a $\bar u$ dentro dele, no sentido
 do movimento. Use \eqref{eq:galileu-velocidades} para obter a velocidade do
 passageiro em relação ao solo, e repita o raciocínio para um pulso de luz
 emitido de uma lanterna do passageiro. Aponte, em cada caso, qual afirmação
@@ -719,18 +719,18 @@ volta entre eles; cada ida e volta é um tique. Oriente o relógio de modo que a
 linha que une os espelhos seja \emph{perpendicular} à direção do movimento
 (Figura~\ref{fig:relogio-luz}).
 
-No referencial $S'$ em que o relógio está parado, o pulso sobe e desce na
+No referencial $\bar S$ em que o relógio está parado, o pulso sobe e desce na
 vertical. Como a luz percorre a distância $2L$ com velocidade $1$, um tique
 dura
 \[
-  \Delta t'=2L ,
+  \Delta \bar t=2L ,
 \]
 e os dois eventos que o delimitam --- a emissão do pulso e o seu retorno ao
 espelho de baixo --- acontecem no \emph{mesmo lugar}, de modo que
-$\Delta x'=\Delta y'=\Delta z'=0$. O intervalo entre eles, calculado em $S'$, é
+$\Delta \bar x=\Delta \bar y=\Delta \bar z=0$. O intervalo entre eles, calculado em $\bar S$, é
 simplesmente
 \[
-  \Delta s'^2=-\Delta t'^2=-(2L)^2 .
+  \Delta \bar s^2=-\Delta \bar t^2=-(2L)^2 .
 \]
 
 Agora descreva o mesmo tique em $S$, referencial no qual o relógio desliza com
@@ -754,9 +754,9 @@ tempo gasto, caminho${}=\Delta t$. Elevando ao quadrado,
 \]
 O lado esquerdo é $\Delta s^2$ calculado em $S$ (as direções transversas não
 contribuem, porque o relógio se move ao longo de $x$) e o lado direito é o
-$\Delta s'^2$ obtido no parágrafo anterior. Ou seja,
+$\Delta \bar s^2$ obtido no parágrafo anterior. Ou seja,
 \[
-  \Delta s^2=\Delta s'^2 .
+  \Delta s^2=\Delta \bar s^2 .
 \]
 \begin{resultado}
 Dois observadores em movimento relativo, usando réguas e relógios diferentes e
@@ -765,7 +765,7 @@ número para essa combinação.
 \end{resultado}
 
 Uma hipótese ficou implícita: que a separação $L$ entre os espelhos, que é
-transversal ao movimento, seja a mesma em $S$ e em $S'$. Isso não é gratuito.
+transversal ao movimento, seja a mesma em $S$ e em $\bar S$. Isso não é gratuito.
 Imagine dois anéis que, em repouso, são idênticos, aproximando-se um do outro
 ao longo do eixo comum. Se o movimento encolhesse comprimentos transversais, cada
 observador diria que o anel do outro é o menor e preveria que o \emph{seu}
@@ -776,24 +776,24 @@ consistente é que comprimentos perpendiculares ao movimento não mudem.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=\textwidth]{cap01_relogio_luz.pdf}
-\caption{O relógio de luz. À esquerda, no referencial $S'$ em que ele está
-parado: o pulso sobe e desce entre os espelhos e o tique dura $\Delta t'=2L$.
+\caption{O relógio de luz. À esquerda, no referencial $\bar S$ em que ele está
+parado: o pulso sobe e desce entre os espelhos e o tique dura $\Delta \bar t=2L$.
 À direita, no referencial $S$, em que o relógio avança $\Delta x=v\,\Delta t$
 durante o mesmo tique: o pulso percorre duas hipotenusas de catetos $L$ e
 $\Delta x/2$. Como a velocidade da luz é a mesma nos dois quadros, o caminho
 mais longo à direita significa um tique mais demorado --- e Pitágoras aplicado
 ao triângulo destacado dá $\Delta t^2=(2L)^2+\Delta x^2$, isto é,
-$-\Delta t^2+\Delta x^2=-\Delta t'^2$.}
+$-\Delta t^2+\Delta x^2=-\Delta \bar t^2$.}
 \label{fig:relogio-luz}
 \end{figure}
 
 \textbf{Por que um único tique já basta.} O cálculo foi feito para uma ida e
 volta, mas nada muda se o relógio bater $n$ vezes: o zigue-zague passa a ter
 $2n$ lados, o caminho total vira $\sqrt{(2nL)^2+\Delta x^2}$ e a conclusão se
-repete com $\Delta t'=2nL$. E qualquer par de eventos com separação temporal
+repete com $\Delta \bar t=2nL$. E qualquer par de eventos com separação temporal
 pode ser posto nessa forma --- se uma partícula livre consegue estar presente
 nos dois eventos, basta imaginar o relógio embarcado nela. Nesse caso
-$-\Delta s^2=\Delta t'^2$ é o quadrado do tempo marcado \emph{pelo próprio
+$-\Delta s^2=\Delta \bar t^2$ é o quadrado do tempo marcado \emph{pelo próprio
 relógio}, ou seja, o número de tiques que aparece no mostrador. Esse número é
 um fato físico, e não uma convenção de quem descreve: pode ser anotado num
 papel e mostrado a qualquer observador. A invariância do intervalo é a
@@ -801,8 +801,8 @@ tradução matemática dessa obviedade.
 
 Sobram os pares com separação espacial, para os quais nenhum relógio consegue
 estar presente nos dois eventos. Eles ficam cobertos por continuidade: como
-nenhuma região do espaço-tempo é privilegiada, as coordenadas de $S'$ dependem
-\emph{linearmente} das de $S$, e portanto $\Delta s'^2$ é um polinômio de
+nenhuma região do espaço-tempo é privilegiada, as coordenadas de $\bar S$ dependem
+\emph{linearmente} das de $S$, e portanto $\Delta \bar s^2$ é um polinômio de
 segundo grau nas diferenças $\Delta t,\Delta x,\Delta y,\Delta z$. Dois
 polinômios que coincidem em toda uma região --- aqui, em todas as separações
 temporais, que preenchem o interior do cone de luz --- coincidem em toda
@@ -819,7 +819,7 @@ s^2$ tenha o mesmo valor para pares de eventos diferentes. E a invariância é
 uma propriedade da \emph{combinação} $-\dd t^2+\dd x^2+\dd y^2+\dd z^2$:
 tomados isoladamente, $\dd t$ e $\dd x$ mudam de referencial para referencial,
 e é precisamente por isso que dilatação do tempo e contração do comprimento
-existem. Um erro relacionado é concluir de $\dd s'^2=\dd s^2$ que $\dd s^2>0$
+existem. Um erro relacionado é concluir de $\dd \bar s^2=\dd s^2$ que $\dd s^2>0$
 sempre; o sinal é invariante, mas pode ser dos três tipos.
 \end{atencao}
 
@@ -920,10 +920,10 @@ da mesma combinação $1-v^2$, que por sua vez vem da invariância do intervalo.
 
 Esse resultado não é novo. O relógio de luz da
 Seção~\ref{sec:eventos-intervalo} já o continha: lá, um tique durava
-$\Delta t'=2L$ no referencial do próprio relógio e $\Delta t$ no referencial
+$\Delta \bar t=2L$ no referencial do próprio relógio e $\Delta t$ no referencial
 em que ele se move, com $\Delta t^2=(2L)^2+v^2\Delta t^2$. Isolando,
-$(2L)^2=\Delta t^2(1-v^2)$, ou seja $\Delta t'=\Delta t\sqrt{1-v^2}$, que é
-exatamente \eqref{eq:tempo-proprio} com $\Delta t'=\Delta\tau$. A dilatação do
+$(2L)^2=\Delta t^2(1-v^2)$, ou seja $\Delta \bar t=\Delta t\sqrt{1-v^2}$, que é
+exatamente \eqref{eq:tempo-proprio} com $\Delta \bar t=\Delta\tau$. A dilatação do
 tempo, portanto, não é um efeito à parte: é a leitura de
 \eqref{eq:tempo-proprio}, e o zigue-zague da Figura~\ref{fig:relogio-luz} é o
 seu retrato.
@@ -933,10 +933,10 @@ seu retrato.
 
 Agora que o intervalo está em mãos, dá para diagnosticar a transformação de
 Galileu com precisão, e não apenas dizer que ela contraria o postulado. Como
-\eqref{eq:galileu} dá $\dd t'=\dd t$ e $\dd x'=\dd x-v\,\dd t$,
+\eqref{eq:galileu} dá $\dd \bar t=\dd t$ e $\dd \bar x=\dd x-v\,\dd t$,
 \[
 \begin{aligned}
-  \dd s'^2&=-\dd t'^2+\dd x'^2+\dd y'^2+\dd z'^2\\
+  \dd \bar s^2&=-\dd \bar t^2+\dd \bar x^2+\dd \bar y^2+\dd \bar z^2\\
           &=-\dd t^2+\big(\dd x-v\,\dd t\big)^2+\dd y^2+\dd z^2\\
           &=\underbrace{-\dd t^2+\dd x^2+\dd y^2+\dd z^2}_{\dd s^2}
             \;-\;2v\,\dd t\,\dd x+v^2\dd t^2 .
@@ -959,19 +959,19 @@ acidente, mas uma consequência direta de dois fatos geométricos.
 \textbf{Dedução a partir da invariância do intervalo.} Restrinja-se a $1+1$
 dimensões (coordenadas $t,x$; as direções $y,z$ transversas ao movimento não
 são afetadas). Como o espaço-tempo é homogêneo, a transformação entre dois
-referenciais inerciais $S$ e $S'$ deve ser \emph{linear}:
+referenciais inerciais $S$ e $\bar S$ deve ser \emph{linear}:
 \[
-  t'=At+Bx,\qquad x'=Ct+Dx,
+  \bar t=At+Bx,\qquad \bar x=Ct+Dx,
 \]
 com $A,B,C,D$ dependendo apenas da velocidade relativa $v$. Duas condições
 fixam completamente essas constantes.
 
-\emph{Condição 1 -- a origem de $S'$ se move com velocidade $v$ em $S$.} O
-ponto $x'=0$ corresponde a $x=vt$, logo $Ct+Dvt=0$ para todo $t$, ou seja
+\emph{Condição 1 -- a origem de $\bar S$ se move com velocidade $v$ em $S$.} O
+ponto $\bar x=0$ corresponde a $x=vt$, logo $Ct+Dvt=0$ para todo $t$, ou seja
 $C=-Dv$.
 
-\emph{Condição 2 -- o intervalo é invariante.} Substituindo $t',x'$ em
-$-\dd t'^2+\dd x'^2=-\dd t^2+\dd x^2$ e igualando os coeficientes de
+\emph{Condição 2 -- o intervalo é invariante.} Substituindo $\bar t,\bar x$ em
+$-\dd \bar t^2+\dd \bar x^2=-\dd t^2+\dd x^2$ e igualando os coeficientes de
 $\dd t^2$, $\dd x^2$ e $\dd t\,\dd x$, obtém-se
 \[
   -A^2+C^2=-1,\qquad -B^2+D^2=1,\qquad -AB+CD=0.
@@ -988,7 +988,7 @@ $A^2$,
   D^2\bigl(A^2-D^2v^2\bigr)=A^2 ,
 \]
 e o parêntese vale $1$ pela primeira equação: sobra $D^2=A^2$. Dos dois
-sinais, $D=-A$ dá $x'=-A(x-vt)$, o mesmo movimento composto com a reflexão
+sinais, $D=-A$ dá $\bar x=-A(x-vt)$, o mesmo movimento composto com a reflexão
 $x\to-x$, que não tende à identidade quando $v\to0$. Fica $A=D$. Chamando esse
 valor comum de $\gamma(v)$, a primeira equação dá $\gamma^2(1-v^2)=1$, isto é,
 \[
@@ -996,9 +996,9 @@ valor comum de $\gamma(v)$, a primeira equação dá $\gamma^2(1-v^2)=1$, isto �
 \]
 com $\gamma>0$ pelo mesmo critério. Então $B=-D^2v/A=-\gamma v$:
 \begin{equation}
-  t'=\gamma(t-vx), \qquad
-  x'=\gamma(x-vt), \qquad
-  y'=y,\qquad z'=z.
+  \bar t=\gamma(t-vx), \qquad
+  \bar x=\gamma(x-vt), \qquad
+  \bar y=y,\qquad \bar z=z.
   \label{eq:lorentz}
 \end{equation}
 \end{resultado}
@@ -1009,37 +1009,37 @@ de uma forma quadrática. A velocidade da luz aparece como a velocidade
 invariante permitida por essa geometria, não como um ingrediente extra.
 Segundo, a relatividade especial contém a mecânica newtoniana como caso
 limite --- com um cuidado que a notação $c=1$ esconde. Fazer $\gamma\to1$
-sozinho deixaria $t'=t-vx$, que não é \eqref{eq:galileu}. Restaurando $c$,
+sozinho deixaria $\bar t=t-vx$, que não é \eqref{eq:galileu}. Restaurando $c$,
 \[
-  t'=\gamma\Bigl(t-\frac{vx}{c^2}\Bigr),\qquad
-  x'=\gamma\bigl(x-vt\bigr),
+  \bar t=\gamma\Bigl(t-\frac{vx}{c^2}\Bigr),\qquad
+  \bar x=\gamma\bigl(x-vt\bigr),
 \]
 os dois termos cruzados não são da mesma ordem: um carrega $1/c^2$, o outro
 não. O limite newtoniano é $c\to\infty$ com $v$ fixo --- e não $v\to0$, que
 daria a identidade. Aí $\gamma\to1$, o termo $vx/c^2$ desaparece e sobra
 exatamente \eqref{eq:galileu}. O que morre é justamente o termo de
-simultaneidade, em acordo com a Seção~\ref{sec:galileu}: $x'=x-vt$ é
-cinemática trivial e sobrevive intacta, enquanto $t'=t$ --- a hipótese forte
+simultaneidade, em acordo com a Seção~\ref{sec:galileu}: $\bar x=x-vt$ é
+cinemática trivial e sobrevive intacta, enquanto $\bar t=t$ --- a hipótese forte
 --- só se recupera no limite.
 
 A transformação preserva o intervalo e mistura tempo com espaço. A
 relatividade da simultaneidade nasce desse acoplamento: eventos com $\dd t=0$
-em $S$ têm, em geral, $\dd t'=-\gamma v\,\dd x\ne0$ em $S'$.
+em $S$ têm, em geral, $\dd \bar t=-\gamma v\,\dd x\ne0$ em $\bar S$.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.62\textwidth]{cap01_simultaneidade.pdf}
-\caption{Diagrama de Minkowski: os eixos $ct'$ e $x'$ de $S'$ aparecem
+\caption{Diagrama de Minkowski: os eixos $c\bar t$ e $\bar x$ de $\bar S$ aparecem
 inclinados em relação aos eixos de $S$ pelo mesmo ângulo $\arctan v$. A reta
 tracejada liga dois eventos $A$ e $B$ simultâneos em $S$ (mesma $ct$); a reta
-pontilhada é a reta de simultaneidade de $S'$ passando por $A$ -- ela não
+pontilhada é a reta de simultaneidade de $\bar S$ passando por $A$ -- ela não
 contém $B$.}
 \label{fig:simultaneidade}
 \end{figure}
 
 \begin{activity}
 Mostre que dois eventos simultâneos em $S$, separados por $\Delta x\ne0$, não
-são simultâneos em $S'$ se $v\ne0$. Use a Figura~\ref{fig:simultaneidade}
+são simultâneos em $\bar S$ se $v\ne0$. Use a Figura~\ref{fig:simultaneidade}
 como guia e refaça a construção geométrica para $v<0$.
 \end{activity}
 
@@ -1051,19 +1051,19 @@ respondem perguntas concretas. Esta seção usa \eqref{eq:lorentz} três vezes,
 para os três fatos que todo curso de relatividade precisa ter deduzido --- e
 não apenas anunciado.
 
-\textbf{Um comprimento é uma medida simultânea.} Uma barra em repouso em $S'$
-ocupa o intervalo entre $x'_A$ e $x'_B$; seu \emph{comprimento próprio} é
-$L_0=x'_B-x'_A$, e ele não depende de quando cada extremidade foi observada,
-porque a barra não se move em $S'$. Em $S$, onde a barra desliza, isso deixa
+\textbf{Um comprimento é uma medida simultânea.} Uma barra em repouso em $\bar S$
+ocupa o intervalo entre $\bar x_A$ e $\bar x_B$; seu \emph{comprimento próprio} é
+$L_0=\bar x_B-\bar x_A$, e ele não depende de quando cada extremidade foi observada,
+porque a barra não se move em $\bar S$. Em $S$, onde a barra desliza, isso deixa
 de valer: anotar a ponta esquerda agora e a direita daqui a um segundo daria
 qualquer resposta que se quisesse. Medir o comprimento em $S$ é, por
 definição, registrar as \emph{duas} extremidades no mesmo instante de $S$.
 
 Essa exigência --- $\Delta t=0$ em $S$ --- é toda a conta. De
-\eqref{eq:lorentz}, $x'=\gamma(x-vt)$, tomada entre as duas extremidades com
+\eqref{eq:lorentz}, $\bar x=\gamma(x-vt)$, tomada entre as duas extremidades com
 $\Delta t=0$:
 \begin{equation}
-  L_0=\Delta x'=\gamma\,\Delta x
+  L_0=\Delta \bar x=\gamma\,\Delta x
   \qquad\Longrightarrow\qquad
   L=\Delta x=\frac{L_0}{\gamma}.
   \label{eq:contracao}
@@ -1076,7 +1076,7 @@ Repare que $\gamma$ aparece aqui \emph{dividindo}, enquanto em
 \eqref{eq:tempo-proprio} ele aparecia multiplicando o tempo próprio. A
 assimetria não é um descuido de notação, e sim a diferença entre as duas
 situações. Para o tempo, os dois eventos acontecem no mesmo lugar do
-referencial próprio ($\Delta x'=0$) e a pergunta é quanto tempo passou. Para o
+referencial próprio ($\Delta \bar x=0$) e a pergunta é quanto tempo passou. Para o
 comprimento, os dois eventos acontecem ao mesmo tempo do referencial que mede
 ($\Delta t=0$) e a pergunta é qual a distância. São condições diferentes
 impostas a lados diferentes da transformação --- daí os fatores em posições
@@ -1085,12 +1085,12 @@ pergunta ``o que está sendo mantido fixo?'' acerta sempre.
 \end{atencao}
 
 \textbf{Nenhum dos dois está enganado.} A contração é recíproca: uma barra
-parada em $S$ é medida mais curta por $S'$, pela mesma conta com os papéis
+parada em $S$ é medida mais curta por $\bar S$, pela mesma conta com os papéis
 trocados. Isso não é contradição, pela mesma razão que a dilatação recíproca
 do tempo não é: cada observador está medindo um \emph{par de eventos
 diferente}. Quando $S$ registra as duas pontas simultaneamente segundo o seu
-relógio, esses dois registros \emph{não} são simultâneos para $S'$ --- e o que
-$S'$ vê $S$ fazendo é medir a ponta da frente e a de trás em instantes
+relógio, esses dois registros \emph{não} são simultâneos para $\bar S$ --- e o que
+$\bar S$ vê $S$ fazendo é medir a ponta da frente e a de trás em instantes
 distintos, o que naturalmente dá um número menor. A geometria de Minkowski
 organiza essas comparações sem precisar eleger um observador certo.
 
@@ -1105,34 +1105,34 @@ Seção~\ref{sec:transformacoes-lorentz} mostrou não ser absoluto.
 
 \textbf{Velocidades não se somam.} A pergunta que abriu este capítulo --- e se
 eu correr atrás da luz? --- agora tem resposta exata. Uma partícula tem
-velocidade $u=\dd x/\dd t$ em $S$; qual é a sua velocidade $u'=\dd x'/\dd t'$
-em $S'$? Basta dividir uma linha de \eqref{eq:lorentz} pela outra:
+velocidade $u=\dd x/\dd t$ em $S$; qual é a sua velocidade $\bar u=\dd \bar x/\dd \bar t$
+em $\bar S$? Basta dividir uma linha de \eqref{eq:lorentz} pela outra:
 \[
-  u'=\frac{\dd x'}{\dd t'}
+  \bar u=\frac{\dd \bar x}{\dd \bar t}
     =\frac{\gamma(\dd x-v\,\dd t)}{\gamma(\dd t-v\,\dd x)}
     =\frac{\dd x/\dd t-v}{1-v\,\dd x/\dd t},
 \]
 onde os fatores $\gamma$ se cancelam --- eles são os mesmos em cima e embaixo.
 Logo
 \begin{equation}
-  u'=\frac{u-v}{1-uv}.
+  \bar u=\frac{u-v}{1-uv}.
   \label{eq:composicao}
 \end{equation}
 Para $u,v\ll1$ o denominador é praticamente $1$ e recupera-se
 \eqref{eq:galileu-velocidades}, a soma ingênua. É o denominador que carrega
 toda a diferença, e ele faz duas coisas notáveis.
 
-\emph{A primeira}: se $u=1$, então $u'=(1-v)/(1-v)=1$ para qualquer $v$. A
+\emph{A primeira}: se $u=1$, então $\bar u=(1-v)/(1-v)=1$ para qualquer $v$. A
 velocidade $c$ é ponto fixo da composição --- correr atrás da luz não a
 alcança nem um pouco. Isso não é uma coincidência aritmética: é o segundo
 postulado reaparecendo do outro lado da dedução, agora como teorema.
 
 \emph{A segunda}: velocidades subluminais nunca compõem para dar uma
-superluminal. Para ver isso, o que interessa não é $u'$ em si, mas o quanto
+superluminal. Para ver isso, o que interessa não é $\bar u$ em si, mas o quanto
 falta para ela chegar a $1$. Eleve \eqref{eq:composicao} ao quadrado, subtraia
 de $1$ e reduza ao denominador comum:
 \[
-  1-u'^2=1-\frac{(u-v)^2}{(1-uv)^2}=\frac{(1-uv)^2-(u-v)^2}{(1-uv)^2}.
+  1-\bar u^2=1-\frac{(u-v)^2}{(1-uv)^2}=\frac{(1-uv)^2-(u-v)^2}{(1-uv)^2}.
 \]
 O numerador que apareceu é a diferença entre o quadrado do denominador de
 \eqref{eq:composicao} e o quadrado do seu numerador, e ele se fatora:
@@ -1141,11 +1141,11 @@ O numerador que apareceu é a diferença entre o quadrado do denominador de
 \]
 Chega-se assim a uma identidade que vale a pena guardar,
 \begin{equation}
-  1-u'^2=\frac{(1-u^2)(1-v^2)}{(1-uv)^2}.
+  1-\bar u^2=\frac{(1-u^2)(1-v^2)}{(1-uv)^2}.
   \label{eq:identidade-composicao}
 \end{equation}
 Se $|u|<1$ e $|v|<1$, os dois fatores do numerador são positivos, o denominador é um quadrado, e o lado direito inteiro
-é positivo --- ou seja, $1-u'^2>0$, isto é, $|u'|<1$. A barreira da velocidade
+é positivo --- ou seja, $1-\bar u^2>0$, isto é, $|\bar u|<1$. A barreira da velocidade
 da luz não é imposta por decreto: ela é uma consequência algébrica da forma da
 transformação.
 
@@ -1164,28 +1164,28 @@ na horizontal, de modo que a linha de mundo de um objeto parado em $S$ é uma
 reta vertical e um raio de luz é uma reta a $45^\circ$. A pergunta útil é onde
 ficam, nesse mesmo papel, os eixos de um segundo observador.
 
-\textbf{Os dois eixos de $S'$.} Cada eixo é um lugar geométrico, e
+\textbf{Os dois eixos de $\bar S$.} Cada eixo é um lugar geométrico, e
 \eqref{eq:lorentz} o entrega de imediato:
 \begin{itemize}
-  \item o \emph{eixo $t'$} é o conjunto dos eventos com $x'=0$. Como
-  $x'=\gamma(x-vt)$, isso é a reta $x=vt$ --- a própria linha de mundo da
-  origem de $S'$, o que é natural: o eixo do tempo de alguém é a sua
+  \item o \emph{eixo $\bar t$} é o conjunto dos eventos com $\bar x=0$. Como
+  $\bar x=\gamma(x-vt)$, isso é a reta $x=vt$ --- a própria linha de mundo da
+  origem de $\bar S$, o que é natural: o eixo do tempo de alguém é a sua
   história;
-  \item o \emph{eixo $x'$} é o conjunto dos eventos com $t'=0$, isto é, os
-  eventos que $S'$ considera simultâneos à origem. Como $t'=\gamma(t-vx)$,
+  \item o \emph{eixo $\bar x$} é o conjunto dos eventos com $\bar t=0$, isto é, os
+  eventos que $\bar S$ considera simultâneos à origem. Como $\bar t=\gamma(t-vx)$,
   isso é a reta $t=vx$.
 \end{itemize}
 As duas retas têm inclinações $1/v$ e $v$ no plano $(x,t)$: são simétricas em
 relação à reta $t=x$, e cada uma faz com o eixo correspondente de $S$ o mesmo
-ângulo $\arctan v$, mas em sentidos opostos. Os eixos de $S'$ se \emph{fecham}
+ângulo $\arctan v$, mas em sentidos opostos. Os eixos de $\bar S$ se \emph{fecham}
 sobre a linha de luz, e tanto mais quanto maior $v$ --- no limite $v\to1$ eles
 colapsam sobre ela. É essa tesoura que a Figura~\ref{fig:simultaneidade}
 mostra, e é dela que sai visualmente a relatividade da simultaneidade: a reta
-de simultaneidade de $S'$ é inclinada, então eventos sobre uma horizontal
+de simultaneidade de $\bar S$ é inclinada, então eventos sobre uma horizontal
 (simultâneos em $S$) não estão sobre ela.
 
 \textbf{Falta a escala.} Saber a \emph{direção} dos eixos não basta para ler
-coordenadas: é preciso saber onde fica $t'=1$ sobre o eixo $t'$. E aqui a
+coordenadas: é preciso saber onde fica $\bar t=1$ sobre o eixo $\bar t$. E aqui a
 intuição euclidiana atrapalha, porque o papel é euclidiano e o espaço-tempo
 não é. Não se pode marcar a unidade com uma régua.
 
@@ -1199,20 +1199,20 @@ distam $\Delta s^2=-1$ da origem é
 uma hipérbole com assíntotas $t=\pm x$, isto é, o próprio cone de luz. Ela
 cruza o eixo $t$ em $t=1$. Mas o intervalo é invariante --- todos os eventos
 sobre essa curva estão à mesma ``distância'' de Minkowski da origem, para
-\emph{qualquer} observador. Logo ela cruza o eixo $t'$ exatamente onde
-$t'=1$. As \emph{hipérboles invariantes} são, portanto, o compasso desse
+\emph{qualquer} observador. Logo ela cruza o eixo $\bar t$ exatamente onde
+$\bar t=1$. As \emph{hipérboles invariantes} são, portanto, o compasso desse
 desenho: elas transportam a unidade de um sistema de eixos para o outro.
 
 \begin{resultado}
-Para calibrar o eixo $t'$ de um diagrama, desenhe a hipérbole $t^2-x^2=1$ e
-marque sua interseção com o eixo $t'$: ali está $t'=1$. Analogamente,
-$x^2-t^2=1$ calibra o eixo $x'$.
+Para calibrar o eixo $\bar t$ de um diagrama, desenhe a hipérbole $t^2-x^2=1$ e
+marque sua interseção com o eixo $\bar t$: ali está $\bar t=1$. Analogamente,
+$x^2-t^2=1$ calibra o eixo $\bar x$.
 \end{resultado}
 
 \begin{atencao}
-No papel, a unidade de $t'$ aparece \emph{maior} que a de $t$ --- e isso não
-significa que o segundo de $S'$ seja mais longo. A interseção da hipérbole com
-o eixo $t'$ está, em coordenadas de $S$, no ponto $(t,x)=(\gamma,\gamma v)$,
+No papel, a unidade de $\bar t$ aparece \emph{maior} que a de $t$ --- e isso não
+significa que o segundo de $\bar S$ seja mais longo. A interseção da hipérbole com
+o eixo $\bar t$ está, em coordenadas de $S$, no ponto $(t,x)=(\gamma,\gamma v)$,
 cuja distância euclidiana até a origem é $\gamma\sqrt{1+v^2}>1$. O papel mede
 comprimentos euclidianos; a física mede intervalos. Os dois segmentos valem um
 segundo próprio cada, e o desenho não tem como representar isso sem distorcer
@@ -1221,10 +1221,10 @@ mesmo tempo.
 \end{atencao}
 
 \begin{activity}
-Desenhe os eixos de $S'$ para $v=0{,}5$ e a hipérbole $t^2-x^2=1$. Marque
-$t'=1$ e, a partir dele, a reta de simultaneidade de $S'$ que passa por esse
+Desenhe os eixos de $\bar S$ para $v=0{,}5$ e a hipérbole $t^2-x^2=1$. Marque
+$\bar t=1$ e, a partir dele, a reta de simultaneidade de $\bar S$ que passa por esse
 ponto. Em seguida marque $t=1$ sobre o eixo $t$ e verifique graficamente que
-$S$ e $S'$ discordam sobre qual dos dois relógios está atrasado --- e que cada
+$S$ e $\bar S$ discordam sobre qual dos dois relógios está atrasado --- e que cada
 um está comparando um par de eventos diferente.
 \end{activity}
 
@@ -1367,7 +1367,7 @@ nenhuma na escala.
 segundo após o outro. O que ele mede diferente é a \emph{distância} --- para
 ele, Arcturus não está a $36{,}7$ anos-luz, e sim contraída por $\gamma$,
 \[
-  D'=\frac{36{,}7}{3{,}98}\approx 9{,}2\ \text{anos-luz},
+  \bar D=\frac{36{,}7}{3{,}98}\approx 9{,}2\ \text{anos-luz},
 \]
 que a $0{,}968$ da velocidade da luz se percorrem em $9{,}5$ anos --- exatamente
 o que o relógio dele marcou. Os dois gêmeos concordam sobre todos os fatos, e
@@ -1398,17 +1398,17 @@ argumento clássico de Ignatowski, redescoberto várias vezes desde 1910.
   \item \emph{Isotropia} --- nenhuma direção é privilegiada, de modo que
   inverter o eixo $x$ equivale a trocar $v$ por $-v$;
   \item \emph{Princípio da relatividade} --- os referenciais inerciais são
-  todos equivalentes; em particular, a transformação de $S'$ para $S$ tem a
-  mesma forma que a de $S$ para $S'$, com $v$ trocado por $-v$.
+  todos equivalentes; em particular, a transformação de $\bar S$ para $S$ tem a
+  mesma forma que a de $S$ para $\bar S$, com $v$ trocado por $-v$.
 \end{enumerate}
 
 \begin{resultado}
 \textbf{Dedução.} Pela hipótese 1 a transformação é linear, e pela condição de
-que a origem de $S'$ se mova com velocidade $v$ (a mesma
+que a origem de $\bar S$ se mova com velocidade $v$ (a mesma
 \emph{Condição~1} da Seção~\ref{sec:transformacoes-lorentz}) ela tem
 necessariamente a forma
 \[
-  x'=\gamma\,(x-vt),\qquad t'=\gamma\,(t-\beta x),
+  \bar x=\gamma\,(x-vt),\qquad \bar t=\gamma\,(t-\beta x),
 \]
 onde $\gamma$ e $\beta$ dependem só de $v$ e o fator comum $\gamma$ foi posto
 em evidência por conveniência. Nada até aqui fixa $\beta$; em Galileu,
@@ -1416,21 +1416,21 @@ $\beta=0$ e $\gamma=1$.
 
 Agora a hipótese 2. Para que lado o eixo $x$ aponta é convenção nossa, não
 física --- e uma convenção não pode alterar a forma da transformação. Vire o
-eixo, então: chame $X=-x$ e $X'=-x'$. Nas coordenadas novas $S'$ se afasta no
+eixo, então: chame $X=-x$ e $\bar X=-\bar x$. Nas coordenadas novas $\bar S$ se afasta no
 sentido oposto, com velocidade $-v$, e a transformação tem de ter exatamente a
 mesma forma de antes:
 \[
-  X'=\gamma(-v)\,\bigl(X-(-v)\,t\bigr),\qquad
-  t'=\gamma(-v)\,\bigl(t-\beta(-v)\,X\bigr).
+  \bar X=\gamma(-v)\,\bigl(X-(-v)\,t\bigr),\qquad
+  \bar t=\gamma(-v)\,\bigl(t-\beta(-v)\,X\bigr).
 \]
-Traduza de volta, com $X=-x$ e $X'=-x'$. A primeira vira
-$-x'=\gamma(-v)(-x+vt)$, ou seja $x'=\gamma(-v)(x-vt)$; comparada com a
-declarada, $x'=\gamma(v)(x-vt)$, ela obriga
+Traduza de volta, com $X=-x$ e $\bar X=-\bar x$. A primeira vira
+$-\bar x=\gamma(-v)(-x+vt)$, ou seja $\bar x=\gamma(-v)(x-vt)$; comparada com a
+declarada, $\bar x=\gamma(v)(x-vt)$, ela obriga
 \[
   \gamma(-v)=\gamma(v).
 \]
-Sabendo disso, a segunda vira $t'=\gamma(v)\bigl(t+\beta(-v)x\bigr)$; comparada
-com $t'=\gamma(v)(t-\beta(v)x)$, os fatores $\gamma$ cancelam e sobra
+Sabendo disso, a segunda vira $\bar t=\gamma(v)\bigl(t+\beta(-v)x\bigr)$; comparada
+com $\bar t=\gamma(v)(t-\beta(v)x)$, os fatores $\gamma$ cancelam e sobra
 \[
   \beta(-v)=-\beta(v).
 \]
@@ -1442,7 +1442,7 @@ o produto $\beta x$ sobreviver à troca, $\beta$ tem de trocar de sinal junto.
 
 Agora a hipótese 3. Em forma matricial a transformação é
 \[
-  \begin{pmatrix}t'\\x'\end{pmatrix}
+  \begin{pmatrix}\bar t\\ \bar x\end{pmatrix}
   =\gamma\begin{pmatrix}1&-\beta\\-v&1\end{pmatrix}
   \begin{pmatrix}t\\x\end{pmatrix},
 \]
@@ -1451,7 +1451,7 @@ com determinante $\gamma^2(1-\beta v)$. Invertendo,
   \begin{pmatrix}t\\x\end{pmatrix}
   =\frac{1}{\gamma\,(1-\beta v)}
   \begin{pmatrix}1&\beta\\v&1\end{pmatrix}
-  \begin{pmatrix}t'\\x'\end{pmatrix}.
+  \begin{pmatrix}\bar t\\ \bar x\end{pmatrix}.
 \]
 Mas o princípio da relatividade diz que essa inversa \emph{é} a transformação
 direta com $v\to-v$. Escrevendo essa última e usando as duas paridades que a
@@ -1528,12 +1528,12 @@ velocidade ao quadrado. Restam três casos, e a natureza escolhe um deles por
 medida, não por dedução:
 
 \begin{itemize}
-  \item $K=0$. Então $\gamma=1$ e $t'=t$: é exatamente
+  \item $K=0$. Então $\gamma=1$ e $\bar t=t$: é exatamente
   \eqref{eq:galileu}. \emph{A transformação de Galileu não é rival da de
   Lorentz --- é o caso particular $K=0$ da mesma família.}
   \item $K>0$. Escreva $K=1/c^2$, o que define uma velocidade $c$. Substituindo
-  em \eqref{eq:composicao}, a composição fica $u'=(u-v)/(1-uv/c^2)$, e
-  $u=c$ dá $u'=c$: existe uma velocidade invariante, a mesma para todos os
+  em \eqref{eq:composicao}, a composição fica $\bar u=(u-v)/(1-uv/c^2)$, e
+  $u=c$ dá $\bar u=c$: existe uma velocidade invariante, a mesma para todos os
   observadores. Recupera-se tudo o que este capítulo deduziu.
   \item $K<0$. Aí $\gamma=1/\sqrt{1+|K|v^2}$, e agora é o \emph{denominador}
   que nunca se anula: $\gamma$ jamais diverge, nenhum valor de $v$ fica
@@ -1580,8 +1580,8 @@ transformação~\eqref{eq:lorentz} em uma matriz:
   \end{pmatrix},
   \label{eq:boost-matriz}
 \end{equation}
-de modo que $x'=\Lambda x$ reproduz, linha a linha, exatamente
-$t'=\gamma(t-vx)$, $x'=\gamma(x-vt)$, $y'=y$ e $z'=z$. As duas últimas linhas
+de modo que $\bar x=\Lambda x$ reproduz, linha a linha, exatamente
+$\bar t=\gamma(t-vx)$, $\bar x=\gamma(x-vt)$, $\bar y=y$ e $\bar z=z$. As duas últimas linhas
 são a identidade porque o boost não mexe nas direções transversais; toda a
 física está no bloco $2\times2$ do canto superior esquerdo, e é por isso que os
 programas trabalham com uma matriz $2\times2$ quando o movimento é ao longo de
@@ -1589,7 +1589,7 @@ um eixo só.
 
 Em componentes, escreve-se
 \begin{equation}
-  x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}\,x^{\beta},
+  \bar x^{\alpha}=\Lambda^{\alpha}{}_{\beta}\,x^{\beta},
   \label{eq:lorentz-indices}
 \end{equation}
 com a convenção de soma: um índice repetido, uma vez em cima e uma vez embaixo,
@@ -1614,7 +1614,7 @@ não se escreve:
 soma e seu nome não importa --- $\Lambda^{\alpha}{}_{\beta}x^{\beta}$ e
 $\Lambda^{\alpha}{}_{\mu}x^{\mu}$ são a mesma coisa. Já o $\alpha$ é
 \emph{livre}: aparece uma única vez e sobrevive, dizendo qual das quatro
-equações estamos escrevendo. A equação $x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}x^{\beta}$
+equações estamos escrevendo. A equação $\bar x^{\alpha}=\Lambda^{\alpha}{}_{\beta}x^{\beta}$
 não é uma equação: são quatro, uma para cada valor de $\alpha$, cada uma com
 quatro termos somados.
 
@@ -1667,8 +1667,8 @@ y^2+\Delta z^2$, que é o intervalo com que trabalhamos desde a
 Seção~\ref{sec:eventos-intervalo}.
 
 Agora a pergunta central do capítulo tem uma resposta de uma linha. Exigir que
-$\Lambda$ preserve o intervalo é exigir que $\Delta x'^{T}\eta\,\Delta x'=\Delta
-x^{T}\eta\,\Delta x$ para \emph{todo} $\Delta x$. Como $\Delta x'=\Lambda\,\Delta
+$\Lambda$ preserve o intervalo é exigir que $\Delta \bar x^{T}\eta\,\Delta \bar x=\Delta
+x^{T}\eta\,\Delta x$ para \emph{todo} $\Delta x$. Como $\Delta \bar x=\Lambda\,\Delta
 x$, o lado esquerdo é $\Delta x^{T}(\Lambda^{T}\eta\,\Lambda)\Delta x$, e a
 igualdade para todo $\Delta x$ obriga
 \begin{equation}
@@ -1679,7 +1679,7 @@ igualdade para todo $\Delta x$ obriga
 \begin{central}
 A equação~\eqref{eq:condicao-lorentz} \emph{é} a definição de transformação de
 Lorentz. Tudo o que deduzimos na Seção~\ref{sec:transformacoes-lorentz} --- a forma de
-$\gamma$, o termo $-vx$ no tempo, a impossibilidade de $t'=t$ --- está contido
+$\gamma$, o termo $-vx$ no tempo, a impossibilidade de $\bar t=t$ --- está contido
 nela. Boosts em qualquer direção e rotações espaciais a satisfazem, e são as
 únicas transformações lineares que a satisfazem.
 \end{central}
@@ -1771,7 +1771,7 @@ determinante, $(\det\Lambda)^2=1$; os boosts têm $\det\Lambda=+1$. E a inversa 
 \end{equation}
 que é a afirmação óbvia de que desfazer um boost é aplicar o boost contrário ---
 e a versão matricial da simetria que já usamos ao exigir que a transformação de
-$S'$ para $S$ tivesse a mesma forma com $v\to-v$.
+$\bar S$ para $S$ tivesse a mesma forma com $v\to-v$.
 
 \begin{atencao}
 \textbf{Matrizes não comutam, e isso é física.} Para boosts colineares a ordem
@@ -1816,14 +1816,14 @@ equações soltas, compor dois boosts perpendiculares seria quase impraticável.
   \item \label{item-adicao-velocidades} \textbf{Velocidades transversais e
   aberração.} A Seção~\ref{sec:consequencias} compôs velocidades ao longo do
   movimento. Refaça a conta para uma partícula que, em $S$, tem
-  \emph{também} componente $u_y$, lembrando que $y'=y$ mas $\dd t'\ne\dd t$,
+  \emph{também} componente $u_y$, lembrando que $\bar y=y$ mas $\dd \bar t\ne\dd t$,
   e obtenha
   \[
-    u'_y=\frac{u_y}{\gamma\,(1-u_xv)} .
+    \bar u_y=\frac{u_y}{\gamma\,(1-u_xv)} .
   \]
-  Note que $u'_y\ne u_y$ mesmo sem contração transversal: a diferença vem
+  Note que $\bar u_y\ne u_y$ mesmo sem contração transversal: a diferença vem
   inteira do tempo. Aplique a um raio de luz com $u_x=0$, $u_y=1$ e mostre que
-  em $S'$ ele chega inclinado --- este é o fenômeno da \emph{aberração
+  em $\bar S$ ele chega inclinado --- este é o fenômeno da \emph{aberração
   estelar}, que muda a posição aparente das estrelas ao longo do ano e foi
   medido por Bradley em 1728, bem antes de haver relatividade para explicá-lo.
 
@@ -1836,13 +1836,13 @@ equações soltas, compor dois boosts perpendiculares seria quase impraticável.
 
 \begin{example}
 \textbf{Simultaneidade relativa.} Dois eventos ocorrem em $S$ com
-$\Delta t=0$ e $\Delta x=L$. Em $S'$, que se move com velocidade $v$ em relação
+$\Delta t=0$ e $\Delta x=L$. Em $\bar S$, que se move com velocidade $v$ em relação
 a $S$,
 \[
-  \Delta t'=\gamma(\Delta t-v\Delta x)=-\gamma vL.
+  \Delta \bar t=\gamma(\Delta t-v\Delta x)=-\gamma vL.
 \]
-Logo os eventos não são simultâneos em $S'$. O sinal negativo indica que, para
-$v>0$, o evento com maior $x$ ocorre antes em $S'$. Essa conta simples é a
+Logo os eventos não são simultâneos em $\bar S$. O sinal negativo indica que, para
+$v>0$, o evento com maior $x$ ocorre antes em $\bar S$. Essa conta simples é a
 origem operacional da contração de comprimentos: medir uma barra em movimento
 requer escolher eventos simultâneos no referencial de medida.
 \end{example}
@@ -1851,12 +1851,12 @@ requer escolher eventos simultâneos no referencial de medida.
 \textbf{Invariância do cone de luz.} Se $\Delta x=\Delta t$ em uma dimensão
 espacial, então a separação é nula. Aplicando Lorentz,
 \[
-  \Delta t'=\gamma(\Delta t-v\Delta x)=\gamma\Delta t(1-v),
+  \Delta \bar t=\gamma(\Delta t-v\Delta x)=\gamma\Delta t(1-v),
 \]
 \[
-  \Delta x'=\gamma(\Delta x-v\Delta t)=\gamma\Delta t(1-v).
+  \Delta \bar x=\gamma(\Delta x-v\Delta t)=\gamma\Delta t(1-v).
 \]
-Portanto $\Delta x'=\Delta t'$. Um raio de luz continua sendo raio de luz para
+Portanto $\Delta \bar x=\Delta \bar t$. Um raio de luz continua sendo raio de luz para
 qualquer observador inercial.
 \end{example}
 
@@ -1866,8 +1866,8 @@ qualquer observador inercial.
 $\gamma=\cosh\varphi$ e $\gamma v=\sinh\varphi$. A transformação de Lorentz em
 $1+1$ dimensões fica
 \[
-  t' = t\cosh\varphi-x\sinh\varphi,\qquad
-  x' = x\cosh\varphi-t\sinh\varphi.
+  \bar t = t\cosh\varphi-x\sinh\varphi,\qquad
+  \bar x = x\cosh\varphi-t\sinh\varphi.
 \]
 Ela se parece com uma rotação hiperbólica. Duas transformações sucessivas
 somam os parâmetros $\varphi$, o que explica por que a lei de adição de
@@ -1988,8 +1988,8 @@ usam fatores $\gamma$ em posições opostas.
 \begin{exercise}
 \medio{1.10}
 Partindo das transformações de Lorentz, deduza a lei de composição de
-velocidades colineares $u'=(u-v)/(1-uv)$. Verifique que $u=1$ implica $u'=1$
-para qualquer $v$, e mostre que, se $|u|<1$ e $|v|<1$, então $|u'|<1$ --- isto
+velocidades colineares $\bar u=(u-v)/(1-uv)$. Verifique que $u=1$ implica $\bar u=1$
+para qualquer $v$, e mostre que, se $|u|<1$ e $|v|<1$, então $|\bar u|<1$ --- isto
 é, nenhuma composição de velocidades subluminais produz uma velocidade
 superluminal.
 \end{exercise}
@@ -1999,8 +1999,8 @@ superluminal.
 As hipérboles invariantes são o instrumento gráfico que calibra os eixos de um
 diagrama de Minkowski. (a) Mostre que o lugar geométrico dos eventos com
 $\Delta s^2=-1$ é uma hipérbole que cruza o eixo $t$ em $t=1$. (b) Desenhe o
-diagrama para $v=0{,}5$ e use a interseção da hipérbole com o eixo $t'$ para
-marcar a unidade de $t'$. (c) Explique por que essa unidade aparece
+diagrama para $v=0{,}5$ e use a interseção da hipérbole com o eixo $\bar t$ para
+marcar a unidade de $\bar t$. (c) Explique por que essa unidade aparece
 \emph{maior} que a de $t$ no papel, embora ambas valham um segundo próprio.
 \end{exercise}
 
@@ -2076,8 +2076,8 @@ medir a rapidez de uma fonte.
 
 \subsection*{A rapidez como ângulo hiperbólico}
 
-Partindo das transformações na forma $t'=\gamma t-\gamma v x$ e
-$x'=\gamma x-\gamma v t$, faça a substituição
+Partindo das transformações na forma $\bar t=\gamma t-\gamma v x$ e
+$\bar x=\gamma x-\gamma v t$, faça a substituição
 \[
   v=\tanh\varphi,\qquad \gamma=\cosh\varphi
   \qquad\Longrightarrow\qquad \gamma v=\sinh\varphi,
@@ -2085,19 +2085,19 @@ $x'=\gamma x-\gamma v t$, faça a substituição
 onde a última igualdade sai de $\cosh\varphi\tanh\varphi=\sinh\varphi$. A
 transformação fica
 \begin{equation}
-  t'=t\cosh\varphi-x\sinh\varphi,\qquad
-  x'=x\cosh\varphi-t\sinh\varphi,
+  \bar t=t\cosh\varphi-x\sinh\varphi,\qquad
+  \bar x=x\cosh\varphi-t\sinh\varphi,
   \label{eq:rot-hiperbolica}
 \end{equation}
 uma \emph{rotação hiperbólica} de parâmetro $\varphi$ --- a \textbf{rapidez},
 adimensional. Compare com a rotação euclidiana usual,
-$x'=x\cos\theta+y\sin\theta$ e $y'=-x\sin\theta+y\cos\theta$: a única mudança
+$\bar x=x\cos\theta+y\sin\theta$ e $\bar y=-x\sin\theta+y\cos\theta$: a única mudança
 foi trocar $\cos,\sin$ por $\cosh,\sinh$ e um sinal.
 
 Componha agora duas dessas transformações. Aplicando
 \eqref{eq:rot-hiperbolica} com $\varphi_2$ ao resultado da primeira,
 \[
-  t''=t'\cosh\varphi_2-x'\sinh\varphi_2
+  t''=\bar t\cosh\varphi_2-\bar x\sinh\varphi_2
      =(t\cosh\varphi_1-x\sinh\varphi_1)\cosh\varphi_2
       -(x\cosh\varphi_1-t\sinh\varphi_1)\sinh\varphi_2,
 \]
@@ -2260,7 +2260,7 @@ Lorentz da
 Seção~\ref{sec:transformacoes-lorentz}, que podemos escrever de forma
 compacta como
 \begin{equation}
-  x'^\mu=\Lambda^\mu{}_\nu\,x^\nu ,
+  \bar x^\mu=\Lambda^\mu{}_\nu\,x^\nu ,
   \label{eq:lorentz-matriz}
 \end{equation}
 onde $\Lambda^\mu{}_\nu$ é a matriz de coeficientes de \eqref{eq:lorentz} e
@@ -2411,7 +2411,7 @@ próprio reflexo.}
 \label{fig:ortogonalidade}
 \end{figure}
 
-Vale ligar isso ao capítulo anterior: os eixos $ct'$ e $x'$ de um observador,
+Vale ligar isso ao capítulo anterior: os eixos $c\bar t$ e $\bar x$ de um observador,
 construídos na Seção~\ref{sec:diagramas}, são exatamente um par desses ---
 fecham-se sobre a linha de luz pelo mesmo ângulo, em sentidos opostos. Aquela
 ``tesoura'' era, o tempo todo, a afirmação de que os dois eixos de um mesmo
@@ -2471,14 +2471,14 @@ $v$ ao longo de $x$ vale menos pelo resultado --- que não pode mudar --- do que
 pelo caminho, porque é o primeiro exercício de aplicar uma transformação de
 Lorentz a um vetor que não é o vetor posição. E é onde se erra o sinal.
 
-Parta das componentes no referencial de repouso, $U^{\nu'}=(1,0,0,0)$, e
+Parta das componentes no referencial de repouso, $U^{\bar\nu}=(1,0,0,0)$, e
 transforme para $\obs$. A matriz de que se precisa é a que vai de $\obsl$
 para $\obs$
 --- e não a da equação~\eqref{eq:boost-matriz}, que faz o caminho contrário.
 Como a inversa de um \emph{boost} é o mesmo \emph{boost} com o sinal da
 velocidade trocado,
 \[
-  \Lambda^{\mu}{}_{\nu'}=
+  \Lambda^{\mu}{}_{\bar\nu}=
   \begin{pmatrix}
     \gamma & \gamma v & 0 & 0\\
     \gamma v & \gamma & 0 & 0\\
@@ -2486,7 +2486,7 @@ velocidade trocado,
     0 & 0 & 0 & 1
   \end{pmatrix},
   \qquad
-  U^{\mu}=\Lambda^{\mu}{}_{\nu'}\,U^{\nu'}=(\gamma,\gamma v,0,0),
+  U^{\mu}=\Lambda^{\mu}{}_{\bar\nu}\,U^{\bar\nu}=(\gamma,\gamma v,0,0),
 \]
 que é o $\gamma(1,\bm v)$ de antes. Usar por engano a
 matriz~\eqref{eq:boost-matriz}, com $-v$, devolve $(\gamma,-\gamma v,0,0)$: a
@@ -2494,14 +2494,14 @@ norma \emph{continua} dando $-1$, porque o sinal da parte espacial some no
 quadrado, e o engano passa despercebido --- só que a partícula fica viajando
 para o lado errado.
 
-Repare em como a conta se resolveu. Como $U^{\nu'}$ só tem componente temporal,
-a soma sobre $\nu'$ na
+Repare em como a conta se resolveu. Como $U^{\bar\nu}$ só tem componente temporal,
+a soma sobre $\bar\nu$ na
 convenção~\eqref{eq:lorentz-indices} tem um único termo sobrevivente, e o que
 resta de $\Lambda$ é apenas sua \emph{primeira coluna}:
-$U^\mu=\Lambda^\mu{}_{0'}$. Essa coluna é a inclinação do eixo $t'$ desenhada
+$U^\mu=\Lambda^\mu{}_{\bar 0}$. Essa coluna é a inclinação do eixo $\bar t$ desenhada
 no diagrama de espaçotempo do Capítulo~\ref{chap:relatividade-especial} --- e
 tinha de ser: no seu próprio referencial a partícula não sai do lugar, avança
-só no tempo, então sua quadrivelocidade aponta ao longo de $t'$ e nada mais.
+só no tempo, então sua quadrivelocidade aponta ao longo de $\bar t$ e nada mais.
 Toda a estrutura de $U^\mu$ vista de $\obs$ é a inclinação daquele eixo.
 
 Fechando com a verificação direta:
@@ -2712,30 +2712,28 @@ mesmo vetor visto de dois referenciais,
 \[
   \vec A \temcomp{\obs} (A^0,A^1,A^2,A^3),
   \qquad
-  \vec A \temcomp{\obsl} (A^{0'},A^{1'},A^{2'},A^{3'}),
+  \vec A \temcomp{\obsl} (A^{\bar 0},A^{\bar 1},A^{\bar 2},A^{\bar 3}),
 \]
 e note que do lado esquerdo \emph{nada mudou}: é o mesmo $\vec A$ nas duas
 linhas.
 
-\textbf{Onde vai a marca do referencial.} O Schutz marca o segundo referencial
-com uma barra sobre o \emph{índice} --- $A^{\bar\alpha}$, $\vec e_{\bar\alpha}$
----; esta apostila usa uma linha, $A^{\alpha'}$, e as duas convenções são a
-mesma coisa. Tanto que o Capítulo~\ref{cap:fluidos}, que acompanha o Schutz
-passo a passo, adota a barra dele --- e nada muda, porque a marca é só um
-rótulo. O que não é indiferente é \emph{onde} a marca vai. Ela pertence
-ao índice, não ao símbolo: escrever $\vec A\,'$ sugeriria um segundo vetor, e é
-precisamente isso que não acontece. Por isso, daqui em diante, a linha migra do
-símbolo para o índice: a transformação de Lorentz \eqref{eq:lorentz-indices},
+\textbf{Onde vai a marca do referencial.} O segundo referencial se marca com
+uma \emph{barra sobre o índice}: $A^{\bar\alpha}$, $\vec e_{\bar\alpha}$. É a
+convenção do Schutz, e a adotamos para que ler o livro ao lado da apostila não
+exija tradução nenhuma. O que não é indiferente é \emph{onde} a marca vai. Ela
+pertence ao índice, não ao símbolo: escrever $\bar{\vec A}$ sugeriria um segundo
+vetor, e é precisamente isso que não acontece. Por isso, daqui em diante, a
+barra migra do símbolo para o índice: a transformação de Lorentz \eqref{eq:lorentz-indices},
 que a Seção~\ref{sec:matricial} escreveu como
-$x'^{\alpha}=\Lambda^{\alpha}{}_{\beta}x^{\beta}$, passa a ser
+$\bar x^{\alpha}=\Lambda^{\alpha}{}_{\beta}x^{\beta}$, passa a ser
 \[
-  x^{\alpha'}=\Lambda^{\alpha'}{}_{\beta}\,x^{\beta} .
+  x^{\bar\alpha}=\Lambda^{\bar\alpha}{}_{\beta}\,x^{\beta} .
 \]
 É a mesma equação, com a marca no lugar certo --- e é assim que a
-Seção~\ref{sec:quadrivelocidade} já a usou, ao transformar $U^{\nu'}$. Um
-índice com linha e um sem linha nunca podem ser trocados um pelo outro, mesmo
-sendo mudos: $\{A^{\alpha'}\}$ e $\{A^\alpha\}$ são conjuntos diferentes de
-números, assim como $\{\vec e_{\alpha'}\}$ é um conjunto de vetores diferente
+Seção~\ref{sec:quadrivelocidade} já a usou, ao transformar $U^{\bar\nu}$. Um
+índice com barra e um sem barra nunca podem ser trocados um pelo outro, mesmo
+sendo mudos: $\{A^{\bar\alpha}\}$ e $\{A^\alpha\}$ são conjuntos diferentes de
+números, assim como $\{\vec e_{\bar\alpha}\}$ é um conjunto de vetores diferente
 de $\{\vec e_\alpha\}$.
 
 \textbf{Os quatro vetores da base.} Em qualquer referencial $\obs$ existem
@@ -2751,8 +2749,8 @@ referencial:
   \label{eq:base-definicao}
 \end{equation}
 São os \emph{vetores da base} de $\obs$. A mesma receita em $\obsl$ produz
-outros quatro, $\vec e_{0'}\temcomp{\obsl}(1,0,0,0)$ e assim por diante --- e
-em geral $\vec e_{0'}\neq\vec e_0$, porque foram definidos em referenciais
+outros quatro, $\vec e_{\bar 0}\temcomp{\obsl}(1,0,0,0)$ e assim por diante --- e
+em geral $\vec e_{\bar 0}\neq\vec e_0$, porque foram definidos em referenciais
 diferentes. A definição \eqref{eq:base-definicao} se resume a uma linha:
 \begin{equation}
   (\vec e_\alpha)^\beta=\delta_\alpha{}^\beta ,
@@ -2779,27 +2777,27 @@ desde a Seção~\ref{sec:vetores-espacotempo}.
 
 \textbf{Como a base muda de referencial.} O raciocínio de
 \eqref{eq:expansao-base} vale em qualquer referencial, então também
-$\vec A=A^{\alpha'}\vec e_{\alpha'}$. As duas somas têm parcelas diferentes,
+$\vec A=A^{\bar\alpha}\vec e_{\bar\alpha}$. As duas somas têm parcelas diferentes,
 mas o total é o mesmo vetor:
 \begin{equation}
-  A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'} .
+  A^\alpha\vec e_\alpha=A^{\bar\alpha}\vec e_{\bar\alpha} .
   \label{eq:mesma-soma}
 \end{equation}
 Isso basta para descobrir como a base se transforma. Use
-$A^{\alpha'}=\Lambda^{\alpha'}{}_{\beta}A^{\beta}$ no lado direito de
+$A^{\bar\alpha}=\Lambda^{\bar\alpha}{}_{\beta}A^{\beta}$ no lado direito de
 \eqref{eq:mesma-soma} e junte os fatores de outro modo --- são todos números,
 a ordem não importa:
 \[
-  A^{\alpha'}\vec e_{\alpha'}
-  =\Lambda^{\alpha'}{}_{\beta}A^{\beta}\,\vec e_{\alpha'}
-  =A^{\beta}\bigl(\Lambda^{\alpha'}{}_{\beta}\,\vec e_{\alpha'}\bigr).
+  A^{\bar\alpha}\vec e_{\bar\alpha}
+  =\Lambda^{\bar\alpha}{}_{\beta}A^{\beta}\,\vec e_{\bar\alpha}
+  =A^{\beta}\bigl(\Lambda^{\bar\alpha}{}_{\beta}\,\vec e_{\bar\alpha}\bigr).
 \]
 Comparando com o lado esquerdo de \eqref{eq:mesma-soma}, reescrito com o índice
 mudo chamado $\beta$, sobra
-$A^\beta\bigl(\Lambda^{\alpha'}{}_{\beta}\vec e_{\alpha'}-\vec e_\beta\bigr)=0$.
+$A^\beta\bigl(\Lambda^{\bar\alpha}{}_{\beta}\vec e_{\bar\alpha}-\vec e_\beta\bigr)=0$.
 E como $\vec A$ é arbitrário, o parêntese tem de se anular para cada $\beta$:
 \begin{equation}
-  \vec e_\beta=\Lambda^{\alpha'}{}_{\beta}\,\vec e_{\alpha'} .
+  \vec e_\beta=\Lambda^{\bar\alpha}{}_{\beta}\,\vec e_{\bar\alpha} .
   \label{eq:base-transforma}
 \end{equation}
 
@@ -2807,14 +2805,14 @@ Vale parar um instante em \eqref{eq:base-transforma}, porque ela \emph{não} é
 uma transformação de componentes, e o contraste com a lei que já conhecíamos é
 o ponto:
 \[
-  \underbrace{A^{\alpha'}=\Lambda^{\alpha'}{}_{\beta}\,A^{\beta}}
+  \underbrace{A^{\bar\alpha}=\Lambda^{\bar\alpha}{}_{\beta}\,A^{\beta}}
     _{\text{componentes: de }\obs\text{ para }\obsl}
   \qquad\qquad
-  \underbrace{\vec e_\beta=\Lambda^{\alpha'}{}_{\beta}\,\vec e_{\alpha'}}
+  \underbrace{\vec e_\beta=\Lambda^{\bar\alpha}{}_{\beta}\,\vec e_{\bar\alpha}}
     _{\text{base: de }\obsl\text{ para }\obs}
 \]
 A mesma matriz $\Lambda$ aparece nas duas, mas levando em sentidos opostos: as
-componentes vão da base sem linha para a com linha, a base faz o caminho
+componentes vão da base sem barra para a com barra, a base faz o caminho
 inverso. E tem de ser assim --- é exatamente esse cancelamento que mantém a
 soma $A^\alpha\vec e_\alpha$ igual a si mesma, isto é, que faz de $\vec A$ um
 objeto independente de quem o descreve. É daí que vêm os dois nomes: as
@@ -2825,28 +2823,28 @@ junto com ela. O Capítulo~\ref{chap:tensores} volta a essa distinção quando e
 deixar de ser questão de nomenclatura e passar a separar dois tipos de objeto.
 
 \textbf{Um exemplo, e é o de sempre.} Para um \emph{boost} de velocidade $v$ ao
-longo de $x$, a matriz $\Lambda^{\alpha'}{}_{\beta}$ é a de
+longo de $x$, a matriz $\Lambda^{\bar\alpha}{}_{\beta}$ é a de
 \eqref{eq:boost-matriz}, e \eqref{eq:base-transforma} dá a base de $\obs$
 escrita na de $\obsl$:
 \[
-  \vec e_0=\gamma\,\vec e_{0'}-\gamma v\,\vec e_{1'},
+  \vec e_0=\gamma\,\vec e_{\bar 0}-\gamma v\,\vec e_{\bar 1},
   \qquad
-  \vec e_1=-\gamma v\,\vec e_{0'}+\gamma\,\vec e_{1'},
+  \vec e_1=-\gamma v\,\vec e_{\bar 0}+\gamma\,\vec e_{\bar 1},
   \qquad
-  \vec e_2=\vec e_{2'},\qquad \vec e_3=\vec e_{3'} .
+  \vec e_2=\vec e_{\bar 2},\qquad \vec e_3=\vec e_{\bar 3} .
 \]
 Mais útil para desenhar é a leitura inversa, com $v\to-v$: as componentes da
 base de $\obsl$ \emph{medidas em} $\obs$ são
 \begin{equation}
-  \vec e_{0'}\temcomp{\obs}\gamma(1,v,0,0),
+  \vec e_{\bar 0}\temcomp{\obs}\gamma(1,v,0,0),
   \qquad
-  \vec e_{1'}\temcomp{\obs}\gamma(v,1,0,0).
+  \vec e_{\bar 1}\temcomp{\obs}\gamma(v,1,0,0).
   \label{eq:base-linha-em-O}
 \end{equation}
 Esses números não são novidade nenhuma: são as duas primeiras colunas da
 matriz do \emph{boost} inverso, a mesma que a Seção~\ref{sec:quadrivelocidade}
 usou para transformar $U^\mu$. O que é novo é a leitura. $\gamma(1,v,0,0)$ é a
-inclinação do eixo $t'$ e $\gamma(v,1,0,0)$ é a do eixo $x'$: os vetores da
+inclinação do eixo $\bar t$ e $\gamma(v,1,0,0)$ é a do eixo $\bar x$: os vetores da
 base de $\obsl$ apontam ao longo dos eixos de $\obsl$, e a ``tesoura'' da
 Seção~\ref{sec:diagramas} era, o tempo todo, o desenho de
 \eqref{eq:base-linha-em-O}.
@@ -2854,14 +2852,14 @@ Seção~\ref{sec:diagramas} era, o tempo todo, o desenho de
 \begin{center}
 \includegraphics[width=0.98\linewidth]{cap02_base.pdf}
 \captionof{figure}{As duas bases e o mesmo vetor, tudo desenhado no papel de
-$\obs$, com $v=0{,}5$. À esquerda, $\vec e_{0'}$ e $\vec e_{1'}$ apontam ao
-longo dos eixos $t'$ e $x'$ e têm as pontas \emph{sobre} as hipérboles
+$\obs$, com $v=0{,}5$. À esquerda, $\vec e_{\bar 0}$ e $\vec e_{\bar 1}$ apontam ao
+longo dos eixos $\bar t$ e $\bar x$ e têm as pontas \emph{sobre} as hipérboles
 invariantes --- parecem mais longos que $\vec e_0$ e $\vec e_1$ numa folha
 euclidiana, mas são igualmente unitários em Minkowski. À direita, a regra do
 paralelogramo nas duas bases devolve o mesmo $\vec A$, que é todo o conteúdo
-de $\vec A=A^\alpha\vec e_\alpha=A^{\alpha'}\vec e_{\alpha'}$. Numericamente, para o
+de $\vec A=A^\alpha\vec e_\alpha=A^{\bar\alpha}\vec e_{\bar\alpha}$. Numericamente, para o
 $\vec A$ de componentes $(1{,}5;\,1{,}35;\,0;\,0)$ em $\obs$, isso dá
-$A^{0'}=0{,}953$ e $A^{1'}=0{,}693$.}
+$A^{\bar 0}=0{,}953$ e $A^{\bar 1}=0{,}693$.}
 \label{fig:base}
 \end{center}
 
@@ -2870,7 +2868,7 @@ $A^{0'}=0{,}953$ e $A^{1'}=0{,}693$.}
 Seção~\ref{sec:quadrivelocidade}, $\vec U\temcomp{\obs}\gamma(1,\bm v)$. São o
 mesmo objeto:
 \begin{equation}
-  \vec U=\vec e_{0'},
+  \vec U=\vec e_{\bar 0},
   \qquad\text{com }\obsl\text{ o referencial de repouso da partícula.}
   \label{eq:U-e-base}
 \end{equation}
@@ -2878,7 +2876,7 @@ A quadrivelocidade de uma partícula é o vetor \emph{temporal} da base do
 referencial que viaja com ela --- e é só isso. As duas afirmações que custaram
 meia página lá atrás tornam-se leituras diretas de \eqref{eq:U-e-base}: que
 $U^\mu=(1,0,0,0)$ no referencial próprio é a definição
-\eqref{eq:base-definicao} de $\vec e_{0'}$, e que $\vec U\cdot\vec U=-1$ é a
+\eqref{eq:base-definicao} de $\vec e_{\bar 0}$, e que $\vec U\cdot\vec U=-1$ é a
 norma de um vetor de base, que o próximo parágrafo calcula de uma vez para
 todos.
 
@@ -2935,9 +2933,9 @@ Ela deixa de parecer na Seção~\ref{sec:base-obliqua}, com uma base oblíqua, e
 
 A segunda é a ponte para a Seção~\ref{sec:energia-temporal}. Junte \eqref{eq:U-e-base} com a
 projeção que acabamos de obter: para um observador de quadrivelocidade
-$\vec U=\vec e_{0'}$,
+$\vec U=\vec e_{\bar 0}$,
 \[
-  -\vec p\cdot\vec U=-\vec p\cdot\vec e_{0'}=-p_{0'}=p^{0'} ,
+  -\vec p\cdot\vec U=-\vec p\cdot\vec e_{\bar 0}=-p_{\bar 0}=p^{\bar 0} ,
 \]
 que é a componente temporal do quadrimomento \emph{na base desse observador}.
 A fórmula $E=-\vec p\cdot\vec U$ das convenções (p.~\pageref{sec:convencoes})
@@ -2958,13 +2956,13 @@ números em todo ponto. É essa perda, e só ela, que o Capítulo~\ref{cap:curva
 chama de curvatura.
 
 \begin{activity}
-Com $v=0{,}5$, tome $\vec e_{0'}$ e $\vec e_{1'}$ nas componentes
+Com $v=0{,}5$, tome $\vec e_{\bar 0}$ e $\vec e_{\bar 1}$ nas componentes
 \eqref{eq:base-linha-em-O} e verifique que
-$\vec e_{0'}\cdot\vec e_{0'}=-1$, $\vec e_{1'}\cdot\vec e_{1'}=+1$ e
-$\vec e_{0'}\cdot\vec e_{1'}=0$ --- dois vetores que a Figura~\ref{fig:base}
+$\vec e_{\bar 0}\cdot\vec e_{\bar 0}=-1$, $\vec e_{\bar 1}\cdot\vec e_{\bar 1}=+1$ e
+$\vec e_{\bar 0}\cdot\vec e_{\bar 1}=0$ --- dois vetores que a Figura~\ref{fig:base}
 desenha em ângulo bem agudo. Em seguida, para o $\vec A$ de componentes
-$(1{,}5;\,1{,}35;\,0;\,0)$ em $\obs$, obtenha $A^{0'}$ e $A^{1'}$ e
-confirme, somando $A^{0'}\vec e_{0'}+A^{1'}\vec e_{1'}$ em componentes de
+$(1{,}5;\,1{,}35;\,0;\,0)$ em $\obs$, obtenha $A^{\bar 0}$ e $A^{\bar 1}$ e
+confirme, somando $A^{\bar 0}\vec e_{\bar 0}+A^{\bar 1}\vec e_{\bar 1}$ em componentes de
 $\obs$, que se recupera $\vec A$.
 \end{activity}
 
@@ -3010,15 +3008,15 @@ transformar nada à mão: pela releitura \eqref{eq:U-e-base}, a quadrivelocidade
 partícula,\footnote{No caso de a partícula estar acelerada, o referencial
 próprio é chamado de \textbf{referencial instantaneamente comóvel}.} e portanto
 \begin{equation}
-  \vec p=m\,\vec e_{0'} .
+  \vec p=m\,\vec e_{\bar 0} .
   \label{eq:p-base}
 \end{equation}
 O quadrimomento é o vetor temporal da base de quem viaja com a partícula,
 esticado por $m$, e nada mais. Suas componentes em $\obs$ já estão calculadas:
-são as de $\vec e_{0'}$, dadas por \eqref{eq:base-linha-em-O}. Para um
+são as de $\vec e_{\bar 0}$, dadas por \eqref{eq:base-linha-em-O}. Para um
 \emph{boost} de velocidade $v$ ao longo de $x$,
 \begin{equation}
-  p^{\alpha}=m\,(\vec e_{0'})^{\alpha}=m\,\Lambda^{\alpha}{}_{0'}
+  p^{\alpha}=m\,(\vec e_{\bar 0})^{\alpha}=m\,\Lambda^{\alpha}{}_{\bar 0}
   \qquad\Longrightarrow\qquad
   \vec p\temcomp{\obs}\gamma m\,(1,v,0,0),
   \label{eq:p-componentes-boost}
@@ -3030,10 +3028,10 @@ e, para uma direção qualquer de $\bm v$,
   E=\gamma m,\quad \bm p=\gamma m\bm v .
   \label{eq:E-e-p}
 \end{equation}
-Nenhuma conta nova apareceu. $\Lambda^{\alpha}{}_{0'}$ é a primeira coluna da
+Nenhuma conta nova apareceu. $\Lambda^{\alpha}{}_{\bar 0}$ é a primeira coluna da
 matriz do \emph{boost} inverso --- a mesma que a Seção~\ref{sec:quadrivelocidade}
 já havia encontrado ao transformar $U^\mu$, e a mesma que o diagrama de
-Minkowski desenha como inclinação do eixo $t'$. O que mudou foi a leitura:
+Minkowski desenha como inclinação do eixo $\bar t$. O que mudou foi a leitura:
 \emph{a energia e o momento que $\obs$ mede são a coluna temporal da
 transformação que leva de $\obs$ ao referencial da partícula}. Dizer que uma
 partícula é energética, para $\obs$, é dizer que o eixo do tempo dela está
@@ -3095,7 +3093,7 @@ se desconta o que a partícula tem por simplesmente existir.
 \eqref{eq:dispersao}, o quadrimomento fica \emph{nulo}, $\vec p\cdot\vec p=0$,
 com $E=|\bm p|$. Mas note que a definição \eqref{eq:quadrimomento} não é o
 caminho até lá: um fóton não tem referencial de repouso, seu tempo próprio não
-corre, não há $\vec e_{0'}$ para ele --- $\vec U$ simplesmente não existe. Para
+corre, não há $\vec e_{\bar 0}$ para ele --- $\vec U$ simplesmente não existe. Para
 partículas sem massa o quadrimomento é o objeto primário, definido diretamente
 como o vetor nulo tangente ao raio de luz, e $m=0$ é consequência da norma, não
 hipótese. A Seção~\ref{sec:massivas-sem-massa} volta a isso.
@@ -3103,10 +3101,10 @@ hipótese. A Seção~\ref{sec:massivas-sem-massa} volta a isso.
 \begin{activity}
 Uma partícula de massa $m$ move-se com $v=0{,}5$ ao longo de $x$ em $\obs$.
 Escreva o mesmo $\vec p$ nas duas bases --- $\vec p=p^\alpha\vec e_\alpha$ em
-$\obs$ e $\vec p=p^{\alpha'}\vec e_{\alpha'}$ no referencial de repouso ---,
-usando \eqref{eq:base-linha-em-O} para as componentes de $\vec e_{0'}$ e
-$\vec e_{1'}$ em $\obs$. Confirme que a segunda soma tem uma única parcela,
-$m\vec e_{0'}$, e que ela reproduz a primeira. Em seguida verifique
+$\obs$ e $\vec p=p^{\bar\alpha}\vec e_{\bar\alpha}$ no referencial de repouso ---,
+usando \eqref{eq:base-linha-em-O} para as componentes de $\vec e_{\bar 0}$ e
+$\vec e_{\bar 1}$ em $\obs$. Confirme que a segunda soma tem uma única parcela,
+$m\vec e_{\bar 0}$, e que ela reproduz a primeira. Em seguida verifique
 \eqref{eq:norma-quadrimomento} nas duas leituras, e note que a segunda dispensa
 qualquer $\gamma$.
 \end{activity}
@@ -3235,7 +3233,7 @@ E, ainda assim, não há problema nenhum. A colisão em B conserva o
 quadrimomento por conta própria, isto é, $\vec p_5+\vec p_6=\vec p_7+\vec p_8$;
 trocar um par pelo outro na soma não muda o total. Os dois observadores somam
 listas diferentes de partículas e chegam ao \emph{mesmo} vetor $\vec P$ --- com
-componentes diferentes, ligadas por $P^{\alpha'}=\Lambda^{\alpha'}{}_\beta
+componentes diferentes, ligadas por $P^{\bar\alpha}=\Lambda^{\bar\alpha}{}_\beta
 P^\beta$, mas o mesmo vetor. Qualquer observador pode escolher a sua fatia,
 somar tudo o que a atravessa e obter o mesmo objeto geométrico. É isso que
 torna \eqref{eq:conservacao} uma afirmação sobre o espaço-tempo, e não sobre
@@ -3478,7 +3476,7 @@ $\vec p_e{}'\cdot\vec p_e{}'=-m_e^2$.
 colisão}, e não outro referencial: tudo se passa num único referencial, o do
 elétron inicialmente em repouso, e $\vec p_\gamma$ e $\vec p_\gamma{}'$ são
 mesmo dois vetores diferentes. É o uso corrente na literatura de colisões, e
-não tem relação com a linha do interlúdio, que ia no \emph{índice} e trocava
+não tem relação com a barra do interlúdio, que vai no \emph{índice} e troca
 de observador.
 
 Conservação de quadrimomento dá
@@ -3529,11 +3527,11 @@ relatividade especial.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.62\textwidth]{cap02_compton.pdf}
-\caption{Fração de energia $E'/E$ do fóton espalhado em função do ângulo
+\caption{Fração de energia $\bar E/E$ do fóton espalhado em função do ângulo
 $\theta$, para três energias incidentes. Quanto maior $E/m_e$, mais forte o
 espalhamento (curva mais baixa): no limite $E\ll m_e$ (curva azul) o efeito
 quase desaparece e recupera-se o espalhamento Thomson clássico,
-$E'\approx E$.}
+$\bar E\approx E$.}
 \label{fig:compton}
 \end{figure}
 
@@ -3662,7 +3660,7 @@ resolvido para $E$), a fórmula fechada
 pedida no item~\ref{item-energia-limiar}; e, por fim, a mesma eliminação do
 quadrimomento do elétron usada no Exemplo de espalhamento Compton, resolvida
 agora simbolicamente para reproduzir
-$1/E'-1/E=(1-\cos\theta)/m_e$. A avaliação numérica de $E_{\rm thr}$ com as
+$1/\bar E-1/E=(1-\cos\theta)/m_e$. A avaliação numérica de $E_{\rm thr}$ com as
 massas do próton e do píon neutro reproduz o mesmo número obtido em Python
 --- uma checagem cruzada entre os dois ambientes.
 
@@ -3848,29 +3846,29 @@ tentação é chamá-los de ``o vetor gradiente''. Mas quatro números só são 
 vetor se transformarem como \eqref{eq:lorentz-matriz}, e estes não
 transformam. Pela regra da cadeia,
 \begin{equation}
-  \frac{\partial f}{\partial x^{\mu'}}
-  =\frac{\partial x^\nu}{\partial x^{\mu'}}\,\frac{\partial f}{\partial x^\nu}\quad,
+  \frac{\partial f}{\partial x^{\bar\mu}}
+  =\frac{\partial x^\nu}{\partial x^{\bar\mu}}\,\frac{\partial f}{\partial x^\nu}\quad,
   \label{eq:gradiente-transforma}
 \end{equation}
-enquanto as componentes de um vetor transformam com $\Lambda^{\mu'}{}_\nu$.
-As duas matrizes em jogo, $\partial x^\nu/\partial x^{\mu'}$ e
-$\Lambda^{\mu'}{}_\nu$, são \emph{inversas} uma da outra --- não iguais. O
+enquanto as componentes de um vetor transformam com $\Lambda^{\bar\mu}{}_\nu$.
+As duas matrizes em jogo, $\partial x^\nu/\partial x^{\bar\mu}$ e
+$\Lambda^{\bar\mu}{}_\nu$, são \emph{inversas} uma da outra --- não iguais. O
 gradiente se transforma com a matriz errada para ser um vetor.
 
 Vale dar nome a essa inversa agora, para não ter de arrastar um quociente de
 derivadas pelo resto do capítulo:
 \begin{equation}
-  \Lambda^{\nu}{}_{\mu'}\equiv\frac{\partial x^\nu}{\partial x^{\mu'}}\quad,
+  \Lambda^{\nu}{}_{\bar\mu}\equiv\frac{\partial x^\nu}{\partial x^{\bar\mu}}\quad,
   \label{eq:lambda-inversa}
 \end{equation}
 a mesma letra, com a ordem dos índices trocada. Não é símbolo novo: é a matriz
 que a caixa da Seção~\ref{sec:quadrivelocidade} usou para levar a
 quadrivelocidade do referencial de repouso da partícula para $S$. A posição da
-linha diz sozinha em que sentido ela age --- linha embaixo, sai do referencial
-com linha; linha em cima, chega nele. Com esse nome,
+barra diz sozinha em que sentido ela age --- barra embaixo, sai do referencial
+com barra; barra em cima, chega nele. Com esse nome,
 \eqref{eq:gradiente-transforma} fica
 \[
-  \partial_{\mu'}f=\Lambda^{\nu}{}_{\mu'}\,\partial_\nu f .
+  \partial_{\bar\mu}f=\Lambda^{\nu}{}_{\bar\mu}\,\partial_\nu f .
 \]
 
 \begin{resultado}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}POR QUE O JACOBIANO É A MATRIZ DE LORENTZ}]
@@ -3879,37 +3877,37 @@ de uma linha --- e ela só fecha porque a transformação de Lorentz é
 \emph{linear}.
 
 Parta da transformação em índices, \eqref{eq:lorentz-indices}, e da sua
-inversa, $x^\nu=\Lambda^{\nu}{}_{\alpha'}x^{\alpha'}$. Derive a segunda em
-relação a $x^{\mu'}$:
+inversa, $x^\nu=\Lambda^{\nu}{}_{\bar\alpha}x^{\bar\alpha}$. Derive a segunda em
+relação a $x^{\bar\mu}$:
 \[
-  \frac{\partial x^\nu}{\partial x^{\mu'}}
-  =\frac{\partial}{\partial x^{\mu'}}
-   \Bigl(\Lambda^{\nu}{}_{\alpha'}\,x^{\alpha'}\Bigr)
-  =\Lambda^{\nu}{}_{\alpha'}\,\frac{\partial x^{\alpha'}}{\partial x^{\mu'}}
-  =\Lambda^{\nu}{}_{\alpha'}\,\delta^{\alpha'}{}_{\mu'}
-  =\Lambda^{\nu}{}_{\mu'} .
+  \frac{\partial x^\nu}{\partial x^{\bar\mu}}
+  =\frac{\partial}{\partial x^{\bar\mu}}
+   \Bigl(\Lambda^{\nu}{}_{\bar\alpha}\,x^{\bar\alpha}\Bigr)
+  =\Lambda^{\nu}{}_{\bar\alpha}\,\frac{\partial x^{\bar\alpha}}{\partial x^{\bar\mu}}
+  =\Lambda^{\nu}{}_{\bar\alpha}\,\delta^{\bar\alpha}{}_{\bar\mu}
+  =\Lambda^{\nu}{}_{\bar\mu} .
 \]
 Dois passos fizeram o trabalho, e vale saber qual é qual. O primeiro foi tirar
-$\Lambda^{\nu}{}_{\alpha'}$ de dentro da derivada, o que só se pode fazer
+$\Lambda^{\nu}{}_{\bar\alpha}$ de dentro da derivada, o que só se pode fazer
 porque as entradas de $\Lambda$ são \emph{números fixos}: dependem apenas da
 velocidade relativa, não do evento em que se está. O segundo foi
-$\partial x^{\alpha'}/\partial x^{\mu'}=\delta^{\alpha'}{}_{\mu'}$, que vale
-porque as quatro coordenadas são independentes entre si --- derivar $x'$ em
-relação a $t'$ dá zero.
+$\partial x^{\bar\alpha}/\partial x^{\bar\mu}=\delta^{\bar\alpha}{}_{\bar\mu}$, que vale
+porque as quatro coordenadas são independentes entre si --- derivar $\bar x$ em
+relação a $\bar t$ dá zero.
 
 \textbf{Em números.} Para um \emph{boost} de velocidade $v$ ao longo de $x$ a
-relação inversa é $t=\gamma(t'+vx')$ e $x=\gamma(x'+vt')$, e as quatro
+relação inversa é $t=\gamma(\bar t+v\bar x)$ e $x=\gamma(\bar x+v\bar t)$, e as quatro
 derivadas dão
 \[
-  \frac{\partial x^\nu}{\partial x^{\mu'}}
+  \frac{\partial x^\nu}{\partial x^{\bar\mu}}
   =\begin{pmatrix}\gamma & \gamma v\\[2pt] \gamma v & \gamma\end{pmatrix},
 \]
 que é exatamente a matriz da caixa da Seção~\ref{sec:quadrivelocidade} --- e
-que não depende nem de $t'$ nem de $x'$, em nenhuma entrada.
+que não depende nem de $\bar t$ nem de $\bar x$, em nenhuma entrada.
 
 \textbf{E é aqui que a igualdade vai falhar.} Em coordenadas curvilíneas a
 relação entre os dois sistemas deixa de ser linear: o jacobiano
-$\partial x^\nu/\partial x^{\mu'}$ passa a depender do ponto, e não existe
+$\partial x^\nu/\partial x^{\bar\mu}$ passa a depender do ponto, e não existe
 matriz constante $\Lambda$ nenhuma para batizá-lo. O jacobiano é o objeto
 geral; $\Lambda$ é o caso particular em que ele é o mesmo em toda parte. Vale
 guardar a distinção agora, porque é dela que a
@@ -3931,7 +3929,7 @@ vetor,
   \tilde W(\vec V)=W_\mu V^\mu ,
 \]
 produz um número igual em todas as bases: as duas matrizes se cancelam,
-$\Lambda^{\nu}{}_{\mu'}\Lambda^{\mu'}{}_{\rho}=\delta^\nu{}_\rho$. Nenhuma métrica foi usada --- este é o ponto
+$\Lambda^{\nu}{}_{\bar\mu}\Lambda^{\bar\mu}{}_{\rho}=\delta^\nu{}_\rho$. Nenhuma métrica foi usada --- este é o ponto
 que o terceiro dos Exercícios, no fim do capítulo, explora. A contração de um índice em cima com um
 índice embaixo é a única operação que produz invariantes de graça, e é por
 isso que a notação insiste tanto na posição dos índices.
@@ -4330,9 +4328,9 @@ $r$ 1-formas e $s$ vetores e devolve um número. Suas componentes carregam $r$
 índices em cima e $s$ embaixo, e cada um deles transforma com a matriz que lhe
 cabe --- $\Lambda$ para os de cima, $\Lambda^{-1}$ para os de baixo:
 \[
-  T^{\mu'\nu'}{}_{\rho'}
-  =\Lambda^{\mu'}{}_{\alpha}\,\Lambda^{\nu'}{}_{\beta}\,
-   \Lambda^{\gamma}{}_{\rho'}\;T^{\alpha\beta}{}_{\gamma}.
+  T^{\bar\mu\bar\nu}{}_{\bar\rho}
+  =\Lambda^{\bar\mu}{}_{\alpha}\,\Lambda^{\bar\nu}{}_{\beta}\,
+   \Lambda^{\gamma}{}_{\bar\rho}\;T^{\alpha\beta}{}_{\gamma}.
 \]
 \emph{É essa lei, e apenas ela, que define um tensor.} Um arranjo de números
 com índices que não obedeça a ela não é tensor, por mais que se pareça com um
@@ -4696,8 +4694,8 @@ No plano, $x=r\cos\theta$ e $y=r\sin\theta$.
 
 \textbf{A base sai do jacobiano.} Os vetores de base de um sistema de
 coordenadas apontam ao longo das linhas coordenadas, e se obtêm com a matriz
-que a Seção~\ref{sec:umaformas} batizou: $\vec e_{\mu'}=\Lambda^{\nu}{}_{\mu'}
-\vec e_\nu$, com $\Lambda^{\nu}{}_{\mu'}=\partial x^\nu/\partial x^{\mu'}$.
+que a Seção~\ref{sec:umaformas} batizou: $\vec e_{\bar\mu}=\Lambda^{\nu}{}_{\bar\mu}
+\vec e_\nu$, com $\Lambda^{\nu}{}_{\bar\mu}=\partial x^\nu/\partial x^{\bar\mu}$.
 Aqui,
 \[
   \vec e_r=\cos\theta\,\vec e_x+\sin\theta\,\vec e_y,
@@ -4819,12 +4817,12 @@ perpendiculares. Em Minkowski isso aparece nas coordenadas de cone de luz do
 \hyperref[sec:extra-tensores]{Conteúdo extra} deste capítulo.
 
 Antes disso, um exemplo tentador que \emph{não} serve. Os eixos inclinados
-$t'$ e $x'$ de um diagrama de Minkowski
+$\bar t$ e $\bar x$ de um diagrama de Minkowski
 (Figura~\ref{fig:simultaneidade} do
 Capítulo~\ref{chap:relatividade-especial}) parecem uma base oblíqua, e não
 são: a inclinação é artefato de desenhar Minkowski numa folha euclidiana. Um
 \emph{boost} leva base ortonormal em base ortonormal, e a métrica calculada na
-base de $S'$ dá de volta $\eta_{\mu\nu}$, sem termos cruzados --- é o
+base de $\bar S$ dá de volta $\eta_{\mu\nu}$, sem termos cruzados --- é o
 item~2 do Conteúdo extra que manda verificar isso. Obliquidade de verdade em
 Minkowski exige uma base que \emph{não} esteja ligada à original por uma
 transformação de Lorentz.
@@ -4892,13 +4890,13 @@ tensor:
   \quad\text{é um tensor de tipo }(2,1).
 \]
 A razão é a mesma que fez do gradiente uma 1-forma --- $\partial_\alpha$
-transforma com $\Lambda^{\beta}{}_{\alpha'}$ --- combinada com o
+transforma com $\Lambda^{\beta}{}_{\bar\alpha}$ --- combinada com o
 fato de que os coeficientes $\Lambda$ são \emph{constantes} numa
 transformação de Lorentz, e portanto passam intactos pela derivada:
 \[
-  \partial_{\alpha'}T^{\mu'\nu'}
-  =\Lambda^{\beta}{}_{\alpha'}\,
-   \Lambda^{\mu'}{}_{\rho}\,\Lambda^{\nu'}{}_{\sigma}\,
+  \partial_{\bar\alpha}T^{\bar\mu\bar\nu}
+  =\Lambda^{\beta}{}_{\bar\alpha}\,
+   \Lambda^{\bar\mu}{}_{\rho}\,\Lambda^{\bar\nu}{}_{\sigma}\,
    \partial_\beta T^{\rho\sigma} .
 \]
 Cada índice recebeu o seu fator, que é exatamente a lei de transformação de um
@@ -4984,20 +4982,20 @@ Logo a contração é igual ao seu negativo e, portanto, vale zero.
 \end{example}
 
 \begin{example}
-\textbf{Transformação de uma 1-forma.} Em duas dimensões, tome $x'=2x$ e
-$y'=y$ --- apenas uma troca de unidade no eixo $x$. O vetor de base acompanha
+\textbf{Transformação de uma 1-forma.} Em duas dimensões, tome $\bar x=2x$ e
+$\bar y=y$ --- apenas uma troca de unidade no eixo $x$. O vetor de base acompanha
 pela inversa,
 \[
-  \vec e_{x'}=\Lambda^{\nu}{}_{x'}\vec e_\nu=\tfrac12\,\vec e_x ,
+  \vec e_{\bar x}=\Lambda^{\nu}{}_{\bar x}\vec e_\nu=\tfrac12\,\vec e_x ,
 \]
-porque agora basta meio $\vec e_x$ para avançar uma unidade de $x'$. Tome a
+porque agora basta meio $\vec e_x$ para avançar uma unidade de $\bar x$. Tome a
 1-forma $\tilde W=\tilde\omega^x$, de componentes $(1,0)$ no sistema
 original. Pela definição de componente,
 \[
-  W_{x'}=\tilde W(\vec e_{x'})=\tfrac12\,\tilde W(\vec e_x)=\tfrac12 .
+  W_{\bar x}=\tilde W(\vec e_{\bar x})=\tfrac12\,\tilde W(\vec e_x)=\tfrac12 .
 \]
 A componente da 1-forma encolheu pelo mesmo fator que o vetor de base,
-enquanto a componente de um vetor \emph{dobrou} ($V^{x'}=2V^{x}$). É essa
+enquanto a componente de um vetor \emph{dobrou} ($V^{\bar x}=2V^{x}$). É essa
 oposição que preserva $W_\mu V^\mu$: um fator sobe, o outro desce, e o
 produto sobrevive.
 \end{example}
@@ -5033,20 +5031,20 @@ antissimétrica, como a Seção~\ref{sec:simetrias} pedia --- seis entradas
 independentes para seis números de campo.
 
 Sendo de tipo $(0,2)$, cada índice recebe um fator da matriz inversa:
-$F_{\mu'\nu'}=\Lambda^{\alpha}{}_{\mu'}\Lambda^{\beta}{}_{\nu'}F_{\alpha\beta}$,
-que em forma matricial é $F'=\Lambda^{\mathsf T}F\Lambda$. Para um
+$F_{\bar\mu\bar\nu}=\Lambda^{\alpha}{}_{\bar\mu}\Lambda^{\beta}{}_{\bar\nu}F_{\alpha\beta}$,
+que em forma matricial é $\bar F=\Lambda^{\mathsf T}F\Lambda$. Para um
 \emph{boost} de velocidade $v$ ao longo de $x$, o produto devolve
 \begin{align*}
-  E'_x&=E_x, & E'_y&=\gamma(E_y-vB_z), & E'_z&=\gamma(E_z+vB_y),\\
-  B'_x&=B_x, & B'_y&=\gamma(B_y+vE_z), & B'_z&=\gamma(B_z-vE_y).
+  \bar E_x&=E_x, & \bar E_y&=\gamma(E_y-vB_z), & \bar E_z&=\gamma(E_z+vB_y),\\
+  \bar B_x&=B_x, & \bar B_y&=\gamma(B_y+vE_z), & \bar B_z&=\gamma(B_z-vE_y).
 \end{align*}
 As componentes ao longo do \emph{boost} não mudam; as transversais se
 misturam, e se misturam \emph{entre} $\bm E$ e $\bm B$.
 
 O caso limpo é o campo puramente elétrico $\bm E=(0,E,0)$ com $\bm B=0$. Em
-$S'$,
+$\bar S$,
 \[
-  \bm E'=(0,\gamma E,0),\qquad \bm B'=(0,0,-\gamma v E).
+  \bar{\bm E}=(0,\gamma E,0),\qquad \bar{\bm B}=(0,0,-\gamma v E).
 \]
 Apareceu campo magnético onde não havia nenhum, só por trocar de referencial.
 É neste sentido preciso que o magnetismo é a eletricidade vista de um
@@ -5056,7 +5054,7 @@ campo magnético'' sem dizer o referencial é tão malposto quanto perguntar
 ``qual é a componente $x$'' sem dizer os eixos.
 
 Como conferência, o escalar $F_{\mu\nu}F^{\mu\nu}=2(B^2-E^2)$ tem de valer o
-mesmo nos dois referenciais: em $S$ dá $-2E^2$, e em $S'$,
+mesmo nos dois referenciais: em $S$ dá $-2E^2$, e em $\bar S$,
 $2(\gamma^2v^2E^2-\gamma^2E^2)=-2\gamma^2E^2(1-v^2)=-2E^2$.
 \end{example}
 
@@ -5125,8 +5123,8 @@ B^\nu$, $\;A^\mu=B_\mu$, $\;T^{\mu\nu}A_\mu B_\nu C^\rho$.
 
 \begin{exercise}
 \medio{3.4}
-Considere a mudança de coordenadas $x'=x+\alpha t$, $t'=t$ (uma transformação
-de Galileu). (a) Calcule $\partial x^\mu/\partial x'^\nu$ e escreva a lei de
+Considere a mudança de coordenadas $\bar x=x+\alpha t$, $\bar t=t$ (uma transformação
+de Galileu). (a) Calcule $\partial x^\mu/\partial \bar x^\nu$ e escreva a lei de
 transformação das componentes de um vetor e de uma 1-forma. (b) Mostre
 explicitamente que $W_\mu V^\mu$ é invariante sob essa transformação,
 \emph{embora} ela não preserve o intervalo. (c) O que isso ensina sobre a
@@ -5173,10 +5171,10 @@ paralelo a $\bm B$. Mostre que ele existe sempre que o segundo invariante é
 não nulo, e que não existe para uma onda plana.
 
   \item \textbf{Uma base genuinamente oblíqua em Minkowski.} Comece por uma
-armadilha: adapte a figura de \arq{cap03\_figuras.py} para os eixos $t'$ e
-$x'$ de um boost com $v=0{,}5$ e calcule a métrica \emph{nessa} base,
-$g_{\mu'\nu'}=\vec e_{\mu'}\cdot\vec e_{\nu'}$. Você vai obter exatamente
-$\eta_{\mu\nu}$ --- os eixos de $S'$ parecem oblíquos no papel, mas são
+armadilha: adapte a figura de \arq{cap03\_figuras.py} para os eixos $\bar t$ e
+$\bar x$ de um boost com $v=0{,}5$ e calcule a métrica \emph{nessa} base,
+$g_{\bar\mu\bar\nu}=\vec e_{\bar\mu}\cdot\vec e_{\bar\nu}$. Você vai obter exatamente
+$\eta_{\mu\nu}$ --- os eixos de $\bar S$ parecem oblíquos no papel, mas são
 \emph{ortonormais} em Minkowski. A inclinação é artefato de desenhar uma
 geometria de Minkowski numa folha euclidiana, e não obliquidade de verdade:
 um boost leva base ortonormal em base ortonormal.
@@ -5261,14 +5259,14 @@ As coordenadas são independentes entre si; não há mais nada a provar.
 opostos que a Seção~\ref{sec:umaformas} deduziu comparando matrizes viram uma
 linha cada:
 \[
-  \frac{\partial}{\partial x^{\mu'}}
-  =\frac{\partial x^\nu}{\partial x^{\mu'}}\frac{\partial}{\partial x^\nu}
+  \frac{\partial}{\partial x^{\bar\mu}}
+  =\frac{\partial x^\nu}{\partial x^{\bar\mu}}\frac{\partial}{\partial x^\nu}
   \;\Longrightarrow\;
-  \vec e_{\mu'}=\Lambda^{\nu}{}_{\mu'}\vec e_\nu ,
+  \vec e_{\bar\mu}=\Lambda^{\nu}{}_{\bar\mu}\vec e_\nu ,
   \qquad
-  \dd x^{\mu'}=\frac{\partial x^{\mu'}}{\partial x^\nu}\,\dd x^\nu
+  \dd x^{\bar\mu}=\frac{\partial x^{\bar\mu}}{\partial x^\nu}\,\dd x^\nu
   \;\Longrightarrow\;
-  \tilde\omega^{\mu'}=\Lambda^{\mu'}{}_{\nu}\,\tilde\omega^\nu .
+  \tilde\omega^{\bar\mu}=\Lambda^{\bar\mu}{}_{\nu}\,\tilde\omega^\nu .
 \]
 Repare que as duas matrizes aparecem sozinhas, uma em cada, e que são a mesma
 regra da cadeia lida nos dois sentidos. Não há o que memorizar: quem transforma
@@ -5477,9 +5475,7 @@ movimento térmico, sem interação. É pouco realista e didaticamente perfeito.
 \subsection*{A densidade depende de quem mede}
 
 Seja $n$ o número de partículas por unidade de volume medido no MCRF. Em um
-referencial $\bar O$ --- este capítulo acompanha o Schutz de perto, e adota a
-barra dele para o segundo referencial, no lugar da linha usada nos capítulos
-anteriores --- no qual as partículas se movem com velocidade $v$, o
+referencial $\bar O$ no qual as partículas se movem com velocidade $v$, o
 \emph{número} de partículas é o mesmo, mas o volume que elas ocupam não: a
 contração de Lorentz encolhe a dimensão paralela ao movimento por $1/\gamma$ e
 deixa as transversas intactas. Logo
