@@ -21,6 +21,15 @@
     // Um slide mais alto que a tela rola; ao trocar, sempre começar do
     // topo -- senão o próximo aparece no meio, sem título.
     slides[atual].scrollTop = 0;
+    // As faixas de toque das laterais são `position: fixed` com z-index
+    // acima do quadro, então engolem o clique de qualquer coisa que passe
+    // por baixo delas. Num slide cujo painel se opera clicando no desenho
+    // isso é fatal: o aluno clica na parte esquerda da figura e o slide
+    // volta, sem nenhum aviso de que ali havia uma faixa. Nesses slides --
+    // e só neles -- as faixas saem do caminho; as setas do teclado
+    // continuam navegando.
+    document.body.classList.toggle("sem-faixas",
+      !!slides[atual].querySelector("[data-clique]"));
   }
 
   // O quadro tem 1440x810 fixos; quem se ajusta à janela é a escala.

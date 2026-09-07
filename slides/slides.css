@@ -339,6 +339,9 @@ td:first-child { color: var(--grafite); }
 .zona { position: fixed; top: 0; width: 14vw; height: 100%; z-index: 4; cursor: pointer; }
 .zona.esq { left: 0; }
 .zona.dir { right: 0; }
+/* Ver o comentário em slides.js: num slide que se opera clicando no desenho,
+   as faixas não podem ficar por cima dele. */
+body.sem-faixas .zona { pointer-events: none; }
 
 /* Nada de reempacotar em uma coluna conforme a largura da JANELA: o
    quadro tem sempre 1440px, então o layout interno não muda -- numa tela
