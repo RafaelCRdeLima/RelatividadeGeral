@@ -2720,7 +2720,9 @@ linhas.
 \textbf{Onde vai a marca do referencial.} O Schutz marca o segundo referencial
 com uma barra sobre o \emph{índice} --- $A^{\bar\alpha}$, $\vec e_{\bar\alpha}$
 ---; esta apostila usa uma linha, $A^{\alpha'}$, e as duas convenções são a
-mesma coisa. O que não é indiferente é \emph{onde} a marca vai. Ela pertence
+mesma coisa. Tanto que o Capítulo~\ref{cap:fluidos}, que acompanha o Schutz
+passo a passo, adota a barra dele --- e nada muda, porque a marca é só um
+rótulo. O que não é indiferente é \emph{onde} a marca vai. Ela pertence
 ao índice, não ao símbolo: escrever $\vec A\,'$ sugeriria um segundo vetor, e é
 precisamente isso que não acontece. Por isso, daqui em diante, a linha migra do
 símbolo para o índice: a transformação de Lorentz \eqref{eq:lorentz-indices},
@@ -5475,12 +5477,14 @@ movimento térmico, sem interação. É pouco realista e didaticamente perfeito.
 \subsection*{A densidade depende de quem mede}
 
 Seja $n$ o número de partículas por unidade de volume medido no MCRF. Em um
-referencial $\obsl$ no qual as partículas se movem com velocidade $v$, o
+referencial $\bar O$ --- este capítulo acompanha o Schutz de perto, e adota a
+barra dele para o segundo referencial, no lugar da linha usada nos capítulos
+anteriores --- no qual as partículas se movem com velocidade $v$, o
 \emph{número} de partículas é o mesmo, mas o volume que elas ocupam não: a
 contração de Lorentz encolhe a dimensão paralela ao movimento por $1/\gamma$ e
 deixa as transversas intactas. Logo
 \begin{equation}
-  n_{\obsl}=\gamma\,n=\frac{n}{\sqrt{1-v^2}} .
+  n_{\bar O}=\gamma\,n=\frac{n}{\sqrt{1-v^2}} .
   \label{eq:densidade-contraida}
 \end{equation}
 
@@ -5489,9 +5493,9 @@ deixa as transversas intactas. Logo
   \includegraphics[width=\linewidth]{figuras/cap04_densidade_fluxo.pdf}
   \caption{À esquerda, a origem de \eqref{eq:densidade-contraida}: as mesmas
   partículas, o mesmo número, ocupando um volume menor. À direita, a
-  construção do fluxo: em um intervalo $\Delta t'$, atravessam a área
+  construção do fluxo: em um intervalo $\Delta \bar t$, atravessam a área
   $\Delta A$ exatamente as partículas contidas no paralelepípedo de altura
-  $v^{x'}\Delta t'$ --- as demais não chegam a tempo.}
+  $v^{\bar x}\Delta \bar t$ --- as demais não chegam a tempo.}
   \label{fig:cap04-densidade-fluxo}
 \end{figure}
 
@@ -5503,21 +5507,21 @@ depende do referencial (área e tempo são conceitos dependentes de
 referencial) e da orientação da superfície --- uma superfície paralela à
 velocidade não é atravessada por ninguém.
 
-Tome em $\obsl$ uma superfície $S$ perpendicular a $x'$, de área
-$\Delta A$, e um intervalo $\Delta t'$. Atravessam $S$ nesse intervalo
+Tome em $\bar O$ uma superfície $S$ perpendicular a $\bar x$, de área
+$\Delta A$, e um intervalo $\Delta \bar t$. Atravessam $S$ nesse intervalo
 todas as partículas --- e somente elas --- que estejam a uma distância menor
-que $v^{x'}\Delta t'$ de $S$, do lado de trás. Essas partículas ocupam
-um paralelepípedo de volume $v^{x'}\Delta t'\,\Delta A$, e a densidade
-ali é $\gamma n$. O número que atravessa é $\gamma n\,v^{x'}\Delta t'\,\Delta A$, e portanto
+que $v^{\bar x}\Delta \bar t$ de $S$, do lado de trás. Essas partículas ocupam
+um paralelepípedo de volume $v^{\bar x}\Delta \bar t\,\Delta A$, e a densidade
+ali é $\gamma n$. O número que atravessa é $\gamma n\,v^{\bar x}\Delta \bar t\,\Delta A$, e portanto
 \begin{equation}
-  (\text{fluxo})^{x'}=\gamma\,n\,v^{x'} .
+  (\text{fluxo})^{\bar x}=\gamma\,n\,v^{\bar x} .
   \label{eq:fluxo-x}
 \end{equation}
 
 \begin{atencao}
-Note que só a componente $v^{x'}$ entra em \eqref{eq:fluxo-x}. Se as
-partículas também tiverem velocidade em $y'$, o paralelepípedo fica
-inclinado, mas sua \emph{altura na direção $x$} continua sendo $v^{x'}\Delta t'$ --- e volume de paralelepípedo é área da base vezes altura.
+Note que só a componente $v^{\bar x}$ entra em \eqref{eq:fluxo-x}. Se as
+partículas também tiverem velocidade em $\bar y$, o paralelepípedo fica
+inclinado, mas sua \emph{altura na direção $x$} continua sendo $v^{\bar x}\Delta \bar t$ --- e volume de paralelepípedo é área da base vezes altura.
 Deslocamento paralelo à superfície não faz ninguém atravessá-la.
 \end{atencao}
 
@@ -5526,7 +5530,7 @@ Deslocamento paralelo à superfície não faz ninguém atravessá-la.
 
 Olhe para \eqref{eq:densidade-contraida} e \eqref{eq:fluxo-x} lado a lado:
 \[
-  n_{\obsl}=\gamma n,\qquad (\text{fluxo})^{i'}=\gamma n v^{i'} .
+  n_{\bar O}=\gamma n,\qquad (\text{fluxo})^{\bar i}=\gamma n v^{\bar i} .
 \]
 Isso é exatamente o padrão $\gamma(1,\bm v)$ da quadrivelocidade. Definimos
 então o \textbf{vetor fluxo de número}
@@ -5570,21 +5574,21 @@ MCRF.
 Aqui está a ideia que organiza o capítulo, e vale ler devagar.
 
 Desenhe as linhas de mundo das partículas em um diagrama espaço-tempo. O
-fluxo através da superfície $x'=\text{const}$ é o número de linhas de
+fluxo através da superfície $\bar x=\text{const}$ é o número de linhas de
 mundo que cruzam essa superfície por unidade de tempo e de área --- isto é,
-por unidade de \emph{volume tridimensional} $\Delta t'\,\Delta y'\,\Delta z'$ da superfície.
+por unidade de \emph{volume tridimensional} $\Delta \bar t\,\Delta \bar y\,\Delta \bar z$ da superfície.
 
 Agora repare que nada obriga esse volume tridimensional a conter a direção
-temporal. Tome, em vez dele, a fatia $t'=\text{const}$ e conte as linhas
-de mundo que a cruzam por unidade de volume $\Delta x'\,\Delta y'\,\Delta z'$. Mas cruzar uma fatia de tempo constante é simplesmente
+temporal. Tome, em vez dele, a fatia $\bar t=\text{const}$ e conte as linhas
+de mundo que a cruzam por unidade de volume $\Delta \bar x\,\Delta \bar y\,\Delta \bar z$. Mas cruzar uma fatia de tempo constante é simplesmente
 \emph{estar lá naquele instante}: esse número é a densidade.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figuras/cap04_fluxo_temporal.pdf}
   \caption{As mesmas linhas de mundo, contadas de duas maneiras. À esquerda,
-  quantas cruzam um pedaço da superfície $x'=$ const: isso é o fluxo. À
-  direita, quantas cruzam um pedaço da superfície $t'=$ const: isso é a
+  quantas cruzam um pedaço da superfície $\bar x=$ const: isso é o fluxo. À
+  direita, quantas cruzam um pedaço da superfície $\bar t=$ const: isso é a
   densidade. Uma única operação --- contar linhas de mundo que atravessam uma
   hipersuperfície --- produz as duas grandezas, dependendo apenas de qual
   hipersuperfície se escolhe.}
@@ -5638,17 +5642,17 @@ convincente:
 
 \begin{example}
 \textbf{As duas contas, de uma vez.}
-Para a superfície $x'=\text{const}$ tome $\varphi=x'$. Então
+Para a superfície $\bar x=\text{const}$ tome $\varphi=\bar x$. Então
 $\partial_\mu\varphi=(0,1,0,0)$ e $|\dd\varphi|=|\eta^{xx}|^{1/2}=1$, de modo
 que $\tilde n$ tem componentes $(0,1,0,0)$ e
 \[
-  \tilde n(\vec N)=n_\mu N^\mu=N^{x'}=\gamma n v^{x'},
+  \tilde n(\vec N)=n_\mu N^\mu=N^{\bar x}=\gamma n v^{\bar x},
 \]
-que é o fluxo \eqref{eq:fluxo-x}. Para a superfície $t'=\text{const}$
-tome $\varphi=t'$; então $\partial_\mu\varphi=(1,0,0,0)$,
+que é o fluxo \eqref{eq:fluxo-x}. Para a superfície $\bar t=\text{const}$
+tome $\varphi=\bar t$; então $\partial_\mu\varphi=(1,0,0,0)$,
 $|\dd\varphi|=|\eta^{tt}|^{1/2}=1$, e
 \[
-  \tilde n(\vec N)=N^{t'}=\gamma n,
+  \tilde n(\vec N)=N^{\bar t}=\gamma n,
 \]
 que é a densidade \eqref{eq:densidade-contraida}. Uma única expressão,
 $n_\mu N^\mu$, produz as duas --- é a Figura~\ref{fig:cap04-fluxo-temporal}
