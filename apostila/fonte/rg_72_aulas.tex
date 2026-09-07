@@ -5435,7 +5435,7 @@ aplica, e é preciso voltar à cinética.
 Cada elemento carrega consigo um referencial: o \textbf{MCRF}
 (\emph{momentarily comoving reference frame}), o referencial inercial que
 naquele instante acompanha o elemento. É a mesma construção feita para
-partículas no Capítulo~\ref{cap:tensores-plano}, e ela é o que permite definir
+partículas na Seção~\ref{sec:quadrivelocidade}, e ela é o que permite definir
 grandezas \emph{próprias} do fluido.
 
 \begin{central}
@@ -5475,12 +5475,12 @@ movimento térmico, sem interação. É pouco realista e pedagogicamente perfeit
 \subsection*{A densidade depende de quem mede}
 
 Seja $n$ o número de partículas por unidade de volume medido no MCRF. Em um
-referencial $\bar O$ no qual as partículas se movem com velocidade $v$, o
+referencial $\obsl$ no qual as partículas se movem com velocidade $v$, o
 \emph{número} de partículas é o mesmo, mas o volume que elas ocupam não: a
 contração de Lorentz encolhe a dimensão paralela ao movimento por $1/\gamma$ e
 deixa as transversas intactas. Logo
 \begin{equation}
-  n_{\bar O}=\gamma\,n=\frac{n}{\sqrt{1-v^2}} .
+  n_{\obsl}=\gamma\,n=\frac{n}{\sqrt{1-v^2}} .
   \label{eq:densidade-contraida}
 \end{equation}
 
@@ -5489,9 +5489,9 @@ deixa as transversas intactas. Logo
   \includegraphics[width=\linewidth]{figuras/cap04_densidade_fluxo.pdf}
   \caption{À esquerda, a origem de \eqref{eq:densidade-contraida}: as mesmas
   partículas, o mesmo número, ocupando um volume menor. À direita, a
-  construção do fluxo: em um intervalo $\Delta\bar t$, atravessam a área
+  construção do fluxo: em um intervalo $\Delta t'$, atravessam a área
   $\Delta A$ exatamente as partículas contidas no paralelepípedo de altura
-  $v^{\bar x}\Delta\bar t$ --- as demais não chegam a tempo.}
+  $v^{x'}\Delta t'$ --- as demais não chegam a tempo.}
   \label{fig:cap04-densidade-fluxo}
 \end{figure}
 
@@ -5503,23 +5503,21 @@ depende do referencial (área e tempo são conceitos dependentes de
 referencial) e da orientação da superfície --- uma superfície paralela à
 velocidade não é atravessada por ninguém.
 
-Tome em $\bar O$ uma superfície $S$ perpendicular a $\bar x$, de área
-$\Delta A$, e um intervalo $\Delta\bar t$. Atravessam $S$ nesse intervalo
+Tome em $\obsl$ uma superfície $S$ perpendicular a $x'$, de área
+$\Delta A$, e um intervalo $\Delta t'$. Atravessam $S$ nesse intervalo
 todas as partículas --- e somente elas --- que estejam a uma distância menor
-que $v^{\bar x}\Delta\bar t$ de $S$, do lado de trás. Essas partículas ocupam
-um paralelepípedo de volume $v^{\bar x}\Delta\bar t\,\Delta A$, e a densidade
-ali é $\gamma n$. O número que atravessa é $\gamma n\,v^{\bar
-x}\Delta\bar t\,\Delta A$, e portanto
+que $v^{x'}\Delta t'$ de $S$, do lado de trás. Essas partículas ocupam
+um paralelepípedo de volume $v^{x'}\Delta t'\,\Delta A$, e a densidade
+ali é $\gamma n$. O número que atravessa é $\gamma n\,v^{x'}\Delta t'\,\Delta A$, e portanto
 \begin{equation}
-  (\text{fluxo})^{\bar x}=\gamma\,n\,v^{\bar x} .
+  (\text{fluxo})^{x'}=\gamma\,n\,v^{x'} .
   \label{eq:fluxo-x}
 \end{equation}
 
 \begin{atencao}
-Note que só a componente $v^{\bar x}$ entra em \eqref{eq:fluxo-x}. Se as
-partículas também tiverem velocidade em $\bar y$, o paralelepípedo fica
-inclinado, mas sua \emph{altura na direção $x$} continua sendo $v^{\bar
-x}\Delta\bar t$ --- e volume de paralelepípedo é área da base vezes altura.
+Note que só a componente $v^{x'}$ entra em \eqref{eq:fluxo-x}. Se as
+partículas também tiverem velocidade em $y'$, o paralelepípedo fica
+inclinado, mas sua \emph{altura na direção $x$} continua sendo $v^{x'}\Delta t'$ --- e volume de paralelepípedo é área da base vezes altura.
 Deslocamento paralelo à superfície não faz ninguém atravessá-la.
 \end{atencao}
 
@@ -5528,7 +5526,7 @@ Deslocamento paralelo à superfície não faz ninguém atravessá-la.
 
 Olhe para \eqref{eq:densidade-contraida} e \eqref{eq:fluxo-x} lado a lado:
 \[
-  n_{\bar O}=\gamma n,\qquad (\text{fluxo})^{\bar i}=\gamma n v^{\bar i} .
+  n_{\obsl}=\gamma n,\qquad (\text{fluxo})^{i'}=\gamma n v^{i'} .
 \]
 Isso é exatamente o padrão $\gamma(1,\bm v)$ da quadrivelocidade. Definimos
 então o \textbf{vetor fluxo de número}
@@ -5572,23 +5570,21 @@ MCRF.
 Aqui está a ideia que organiza o capítulo, e vale ler devagar.
 
 Desenhe as linhas de mundo das partículas em um diagrama espaço-tempo. O
-fluxo através da superfície $\bar x=\text{const}$ é o número de linhas de
+fluxo através da superfície $x'=\text{const}$ é o número de linhas de
 mundo que cruzam essa superfície por unidade de tempo e de área --- isto é,
-por unidade de \emph{volume tridimensional} $\Delta\bar t\,\Delta\bar
-y\,\Delta\bar z$ da superfície.
+por unidade de \emph{volume tridimensional} $\Delta t'\,\Delta y'\,\Delta z'$ da superfície.
 
 Agora repare que nada obriga esse volume tridimensional a conter a direção
-temporal. Tome, em vez dele, a fatia $\bar t=\text{const}$ e conte as linhas
-de mundo que a cruzam por unidade de volume $\Delta\bar x\,\Delta\bar
-y\,\Delta\bar z$. Mas cruzar uma fatia de tempo constante é simplesmente
+temporal. Tome, em vez dele, a fatia $t'=\text{const}$ e conte as linhas
+de mundo que a cruzam por unidade de volume $\Delta x'\,\Delta y'\,\Delta z'$. Mas cruzar uma fatia de tempo constante é simplesmente
 \emph{estar lá naquele instante}: esse número é a densidade.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figuras/cap04_fluxo_temporal.pdf}
   \caption{As mesmas linhas de mundo, contadas de duas maneiras. À esquerda,
-  quantas cruzam um pedaço da superfície $\bar x=$ const: isso é o fluxo. À
-  direita, quantas cruzam um pedaço da superfície $\bar t=$ const: isso é a
+  quantas cruzam um pedaço da superfície $x'=$ const: isso é o fluxo. À
+  direita, quantas cruzam um pedaço da superfície $t'=$ const: isso é a
   densidade. Uma única operação --- contar linhas de mundo que atravessam uma
   hipersuperfície --- produz as duas grandezas, dependendo apenas de qual
   hipersuperfície se escolhe.}
@@ -5613,7 +5609,7 @@ uma superfície é descrita por uma 1-forma.
 Uma superfície é o lugar geométrico de $\varphi(t,x,y,z)=\text{const}$ para
 alguma função $\varphi$. O gradiente $\dd\varphi$ é uma 1-forma, e ela
 determina a superfície: as direções tangentes a ela são exatamente as
-direções $V^\mu$ com $\dd\varphi(V)=0$. Como qualquer múltiplo de
+direções $V^\mu$ com $\dd\varphi(\vec V)=0$. Como qualquer múltiplo de
 $\dd\varphi$ define a mesma superfície, normalizamos (para superfícies não
 nulas):
 \begin{equation}
@@ -5634,7 +5630,7 @@ obrigatório.
 Com isso, o fluxo através da superfície é simplesmente
 \begin{equation}
   \boxed{\ \text{fluxo através de } \varphi=\text{const}
-  \;=\; \tilde n(N)=n_\mu N^\mu\ }
+  \;=\; \tilde n(\vec N)=n_\mu N^\mu\ }
   \label{eq:fluxo-invariante}
 \end{equation}
 Vale conferir os dois casos da seção anterior, que é o que torna a fórmula
@@ -5642,17 +5638,17 @@ convincente:
 
 \begin{example}
 \textbf{As duas contas, de uma vez.}
-Para a superfície $\bar x=\text{const}$ tome $\varphi=\bar x$. Então
+Para a superfície $x'=\text{const}$ tome $\varphi=x'$. Então
 $\partial_\mu\varphi=(0,1,0,0)$ e $|\dd\varphi|=|\eta^{xx}|^{1/2}=1$, de modo
 que $\tilde n$ tem componentes $(0,1,0,0)$ e
 \[
-  \tilde n(N)=n_\mu N^\mu=N^{\bar x}=\gamma n v^{\bar x},
+  \tilde n(\vec N)=n_\mu N^\mu=N^{x'}=\gamma n v^{x'},
 \]
-que é o fluxo \eqref{eq:fluxo-x}. Para a superfície $\bar t=\text{const}$
-tome $\varphi=\bar t$; então $\partial_\mu\varphi=(1,0,0,0)$,
+que é o fluxo \eqref{eq:fluxo-x}. Para a superfície $t'=\text{const}$
+tome $\varphi=t'$; então $\partial_\mu\varphi=(1,0,0,0)$,
 $|\dd\varphi|=|\eta^{tt}|^{1/2}=1$, e
 \[
-  \tilde n(N)=N^{\bar t}=\gamma n,
+  \tilde n(\vec N)=N^{t'}=\gamma n,
 \]
 que é a densidade \eqref{eq:densidade-contraida}. Uma única expressão,
 $n_\mu N^\mu$, produz as duas --- é a Figura~\ref{fig:cap04-fluxo-temporal}
@@ -5756,12 +5752,13 @@ argumento de torque da Seção~\ref{sec:simetria-T}. Em teorias mais gerais
 \label{sec:simetria-T}
 
 As componentes espaciais merecem atenção porque são as menos intuitivas.
-Considere dois elementos vizinhos com interface comum $S$ de área $A$. O
-elemento $A$ exerce sobre $B$ uma força $\bm F$. Como força é taxa de variação
-de momento --- e no MCRF as velocidades são nulas, então a lei de Newton vale
----, dizer que $A$ empurra $B$ com força $\bm F$ é dizer que $A$ despeja
-momento em $B$ à taxa $\bm F$. Há, portanto, um \emph{fluxo de momento}
-através de $S$ igual a $\bm F/A$. Se $S$ é uma superfície de $x^j$ constante,
+Considere dois elementos vizinhos, $\mathcal{E}_1$ e $\mathcal{E}_2$, com
+interface comum $S$ de área $A$. O primeiro exerce sobre o segundo uma força
+$\bm F$. Como força é taxa de variação de momento --- e no MCRF as velocidades
+são nulas, então a lei de Newton vale ---, dizer que $\mathcal{E}_1$ empurra
+$\mathcal{E}_2$ com força $\bm F$ é dizer que despeja momento nele à taxa
+$\bm F$. Há, portanto, um \emph{fluxo de momento} através de $S$ igual a
+$\bm F/A$. Se $S$ é uma superfície de $x^j$ constante,
 esse fluxo é precisamente $T^{ij}$.
 
 \begin{figure}[htbp]
@@ -5815,15 +5812,22 @@ densidade de energia total $\rho$ é o que gravita; $\rho_0$ é apenas a parte
 de massa de repouso.
 
 A primeira lei da termodinâmica, aplicada a um elemento que troca calor e
-realiza trabalho, é $\Delta E=\Delta Q-p\,\Delta V$. Com $N$ partículas fixas
-no elemento, $V=N/n$ e $E=\rho V$, um cálculo direto leva a
+realiza trabalho, é $\Delta E=\Delta Q-p\,\Delta V$. O elemento tem $N$
+partículas fixas, de modo que $V=N/n$ e $E=\rho V$ --- e note que é o
+\emph{número} que se mantém, não o volume: quem varia é $n$. Então
+$\Delta V=-N\,\Delta n/n^2$, e substituir as duas na primeira lei dá, depois de
+dividir por $N$,
 \begin{equation}
   n\,\Delta q=\Delta\rho-\frac{\rho+p}{n}\,\Delta n ,
   \label{eq:primeira-lei}
 \end{equation}
-com $q=Q/N$ o calor por partícula. Definindo temperatura e entropia
-específica pelo fator integrante da forma diferencial do lado direito, isso
-vira $\Delta q=T\Delta S$.
+com $q=Q/N$ o calor por partícula. O lado direito é uma forma diferencial em
+$(\rho,n)$, e como toda forma em duas variáveis ela admite um fator integrante:
+existem funções $T$ e $S$ de $(\rho,n)$ tais que $\Delta q=T\,\Delta S$. São a
+\textbf{temperatura} e a \textbf{entropia específica} --- definidas, aqui, por
+essa propriedade e por mais nada. É o mesmo movimento da termodinâmica de
+sempre; o que a relatividade acrescenta é apenas que $\rho$ inclui a energia de
+repouso.
 
 \begin{central}
 Repare na combinação $\rho+p$ que aparece em \eqref{eq:primeira-lei}. Ela não
@@ -5834,6 +5838,62 @@ para a inércia --- e, por consequência, para a gravidade. Guarde isso; é a
 diferença conceitual mais importante deste capítulo em relação à física
 newtoniana.
 \end{central}
+
+\section{Conservação de energia e momento}
+\label{sec:conservacao-T}
+
+A Seção~\ref{sec:conservacao-numero} escreveu a conservação do número de
+partículas como $\partial_\mu N^\mu=0$ e prometeu que a estrutura se repetiria
+com energia e momento. Repete-se --- e vale fazer a conta, porque ela é a
+mesma que se faz em qualquer curso de fluidos, e o resultado é a equação que o
+resto do curso vai carregar.
+
+Tome um elemento cúbico de lado $\ell$, parado no referencial de trabalho. A
+energia dentro dele é $T^{00}\ell^3$. Energia entra e sai pelas seis faces:
+pela face em $x=0$ ela entra à taxa $\ell^2\,T^{0x}(x{=}0)$, e pela face em
+$x=\ell$ ela \emph{sai} à taxa $\ell^2\,T^{0x}(x{=}\ell)$ --- com o sinal
+trocado, porque $T^{0x}$ mede energia indo no sentido de $x$ crescente, o que
+naquela face é para fora. Somando as três direções e igualando à variação do
+que há dentro,
+\[
+  \frac{\partial}{\partial t}\bigl(T^{00}\ell^3\bigr)
+  =\ell^2\Bigl[T^{0x}(0)-T^{0x}(\ell)+T^{0y}(0)-T^{0y}(\ell)
+               +T^{0z}(0)-T^{0z}(\ell)\Bigr] .
+\]
+Divida por $\ell^3$ e faça $\ell\to0$. Cada colchete dividido por $\ell$ é
+menos uma derivada, pela definição de derivada, e sobra
+\[
+  \partial_t T^{00}
+  =-\partial_x T^{0x}-\partial_y T^{0y}-\partial_z T^{0z} ,
+  \qquad\text{ou seja}\qquad
+  \partial_\beta T^{0\beta}=0 .
+\]
+Isso é a conservação da \emph{energia}. Para o momento a conta é idêntica ---
+basta trocar o índice $0$ pela componente de momento em questão, porque a
+definição de $T^{\alpha\beta}$ já diz que a primeira linha de índices é ``o
+que está sendo transportado''. As quatro juntas são
+\begin{equation}
+  \boxed{\ \partial_\beta T^{\alpha\beta}=0\ }
+  \label{eq:conservacao-T}
+\end{equation}
+
+\begin{central}
+A mesma frase de novo: \emph{a divergência de um fluxo se anula}. O que mudou
+foi a grandeza transportada. Antes era o número de partículas, um escalar, e o
+fluxo era um vetor; agora é energia-momento, um vetor, e o fluxo é um tensor.
+O índice a mais em $T^{\alpha\beta}$ é exatamente o índice a mais em ``o quê''.
+E são \emph{quatro} equações, não uma: $\alpha=0$ é a energia, $\alpha=i$ é
+cada componente do momento.
+\end{central}
+
+\begin{atencao}
+Repare no que esta conta \emph{não} usou: nada sobre fluido perfeito, nada
+sobre equação de estado, nem sequer que exista um fluido. A
+Equação~\eqref{eq:conservacao-T} vale para qualquer $T^{\alpha\beta}$ que
+mereça o nome de tensor energia-momento --- o do campo eletromagnético
+inclusive. Especializá-la para o fluido perfeito é o assunto da
+Seção~\ref{sec:euler}, e é de lá que saem as equações de Euler.
+\end{atencao}
 
 \section{O fluido perfeito}
 \label{sec:fluido-perfeito}
@@ -5878,16 +5938,12 @@ referencial local em que ela é simples, ponha em forma tensorial, e a versão
 curva se obtém trocando a métrica.
 \end{atencao}
 
-\section{Conservação: continuidade e Euler}
+\section{As equações do fluido perfeito}
 \label{sec:euler}
 
-A lei dinâmica do fluido é a conservação local de energia e momento,
-\begin{equation}
-  \partial_\alpha T^{\alpha\beta}=0 ,
-  \label{eq:conservacao-T}
-\end{equation}
-que são quatro equações. Vale extrair o que elas dizem. Substituindo
-\eqref{eq:T-fluido-perfeito},
+Agora especializamos \eqref{eq:conservacao-T} para o fluido perfeito, e as
+quatro equações ganham nome. Substituindo \eqref{eq:T-fluido-perfeito} em
+$\partial_\alpha T^{\alpha\beta}=0$,
 \[
   \partial_\alpha\bigl[(\rho+p)U^\alpha U^\beta\bigr]+\partial^\beta p=0 .
 \]
@@ -5913,8 +5969,11 @@ O que sobra, projetado ortogonalmente a $U^\beta$, é
 \end{equation}
 Esta é a \textbf{equação de Euler relativística}. O operador
 $h^{\beta\nu}=\eta^{\beta\nu}+U^\beta U^\nu$ é o projetor sobre o espaço
-ortogonal a $U$: ele garante que só o gradiente de pressão \emph{transversal
-ao movimento} acelera o fluido, como tem de ser.
+ortogonal a $\vec U$. Cuidado com a leitura: ele \emph{não} remove a
+componente do gradiente ao longo da velocidade --- essa acelera o fluido, e
+deve. O que ele remove é a componente ao longo de $\vec U$, isto é, a direção
+temporal do MCRF. O que sobra é o gradiente de pressão \emph{espacial no
+referencial do próprio elemento}, que é o único que pode empurrá-lo.
 
 \begin{central}
 Compare \eqref{eq:euler-relativistica} com a Euler newtoniana,
@@ -5977,42 +6036,6 @@ frações apreciáveis de $\rho$, é um laboratório para o limite de rigidez da
 matéria.
 \end{atencao}
 
-\section{Lei de Gauss em quatro dimensões}
-\label{sec:gauss-4d}
-
-A forma diferencial $\partial_\mu N^\mu=0$ tem uma contrapartida integral, e
-é ela que dá o significado físico. O teorema de Gauss em quatro dimensões diz
-que, para qualquer região $\Omega$ do espaço-tempo com fronteira
-$\partial\Omega$,
-\begin{equation}
-  \int_\Omega \partial_\mu N^\mu\;\dd^4x
-  =\oint_{\partial\Omega} N^\mu\,n_\mu\;\dd^3S .
-  \label{eq:gauss-4d}
-\end{equation}
-Se a divergência é nula, o fluxo total através da fronteira é zero.
-
-Escolha para $\Omega$ um cilindro no espaço-tempo: uma região espacial $V$
-fixa, entre os instantes $t_1$ e $t_2$. A fronteira tem três pedaços --- a
-tampa em $t_2$, a tampa em $t_1$ e a lateral. Pelo que vimos na
-Seção~\ref{sec:fluxo-temporal}, a integral sobre cada tampa é o número de
-partículas dentro de $V$ naquele instante, e a integral sobre a lateral é o
-número que atravessou a fronteira espacial no intervalo. A
-Equação~\eqref{eq:gauss-4d} vira então
-\[
-  N(t_2)-N(t_1)=-\,(\text{número que saiu por } \partial V) ,
-\]
-que é a conservação do número de partículas escrita como todo mundo espera.
-
-\begin{central}
-Repare no que a linguagem quadridimensional fez: ``o que havia antes'', ``o
-que há depois'' e ``o que atravessou a fronteira'' deixaram de ser três
-coisas distintas e viraram três pedaços da \emph{mesma} integral sobre a
-fronteira de uma região do espaço-tempo. A mesma construção, aplicada a
-$T^{\mu\nu}$, dará a conservação de energia e momento --- e é ela que, no
-Capítulo~\ref{cap:einstein}, vai exigir que o lado geométrico das equações de
-campo tenha divergência nula.
-\end{central}
-
 \section{Por que isso importa para a relatividade geral}
 \label{sec:importancia-rg}
 
@@ -6050,6 +6073,42 @@ genérico não tem. Voltaremos a esse ponto no Capítulo~\ref{cap:einstein};
 por ora, basta notar que ``energia se conserva'' é uma frase que, em
 relatividade geral, precisa ser qualificada.
 \end{atencao}
+
+\section{Lei de Gauss em quatro dimensões}
+\label{sec:gauss-4d}
+
+A forma diferencial $\partial_\mu N^\mu=0$ tem uma contrapartida integral, e
+é ela que dá o significado físico. O teorema de Gauss em quatro dimensões diz
+que, para qualquer região $\Omega$ do espaço-tempo com fronteira
+$\partial\Omega$,
+\begin{equation}
+  \int_\Omega \partial_\mu N^\mu\;\dd^4x
+  =\oint_{\partial\Omega} N^\mu\,n_\mu\;\dd^3S .
+  \label{eq:gauss-4d}
+\end{equation}
+Se a divergência é nula, o fluxo total através da fronteira é zero.
+
+Escolha para $\Omega$ um cilindro no espaço-tempo: uma região espacial $V$
+fixa, entre os instantes $t_1$ e $t_2$. A fronteira tem três pedaços --- a
+tampa em $t_2$, a tampa em $t_1$ e a lateral. Pelo que vimos na
+Seção~\ref{sec:fluxo-temporal}, a integral sobre cada tampa é o número de
+partículas dentro de $V$ naquele instante, e a integral sobre a lateral é o
+número que atravessou a fronteira espacial no intervalo. A
+Equação~\eqref{eq:gauss-4d} vira então
+\[
+  N(t_2)-N(t_1)=-\,(\text{número que saiu por } \partial V) ,
+\]
+que é a conservação do número de partículas escrita como todo mundo espera.
+
+\begin{central}
+Repare no que a linguagem quadridimensional fez: ``o que havia antes'', ``o
+que há depois'' e ``o que atravessou a fronteira'' deixaram de ser três
+coisas distintas e viraram três pedaços da \emph{mesma} integral sobre a
+fronteira de uma região do espaço-tempo. A mesma construção, aplicada a
+$T^{\mu\nu}$, dará a conservação de energia e momento --- e é ela que, no
+Capítulo~\ref{cap:einstein}, vai exigir que o lado geométrico das equações de
+campo tenha divergência nula.
+\end{central}
 
 \section{Exemplos resolvidos adicionais}
 
@@ -6103,17 +6162,17 @@ em sistemas com $v/c$ apreciável ou com $p$ comparável a $\rho$.
 
 \begin{example}
 \textbf{A radiação cósmica de fundo como fluido.} A CMB é um corpo negro a
-$T_0=2{,}725$~K. Sua densidade de energia é $\varepsilon=aT_0^4$, com
-$a=7{,}566\times10^{-16}\,\mathrm{J\,m^{-3}\,K^{-4}}$:
+$T_0=2{,}725$~K. Sua densidade de energia é $\varepsilon=a_{\mathrm{R}}T_0^4$, com
+$a_{\mathrm{R}}=7{,}566\times10^{-16}\,\mathrm{J\,m^{-3}\,K^{-4}}$:
 \[
-  \varepsilon=7{,}566\times10^{-16}\times(2{,}725)^4
+  \varepsilon=a_{\mathrm{R}}\,(2{,}725)^4
   \approx4{,}17\times10^{-14}\ \mathrm{J\,m^{-3}} ,
 \]
 e a pressão, por $p=\varepsilon/3$, vale $1{,}39\times10^{-14}$~Pa. Para
 comparação, a densidade de energia da matéria hoje é da ordem de
 $2\times10^{-10}\,\mathrm{J\,m^{-3}}$ --- cerca de cinco mil vezes maior.
 
-Mas $\rho_r\propto a^{-4}$ e $\rho_m\propto a^{-3}$, de modo que a razão
+Mas $\rho_r\propto a^{-4}$ e $\rho_m\propto a^{-3}$, com $a$ agora o fator de escala, de modo que a razão
 cresce como $(1+z)$ para trás no tempo. As duas se igualam em
 $1+z\approx5\times10^{3}$, que é a ordem de grandeza correta da igualdade
 matéria--radiação. Um fluido com pressão de $10^{-14}$~Pa dominou a dinâmica
@@ -6200,7 +6259,7 @@ mostre que ela reproduz a equação de Euler, identificando o termo de pressão.
 \end{exercise}
 
 \begin{exercise}
-\medio{4.5}
+\medio{4.7}
 Considere um gás de fótons em equilíbrio. (a) Use o fato de o tensor
 energia-momento eletromagnético ter traço nulo para concluir $p=\rho/3$ sem
 nenhum argumento estatístico. (b) A partir de
@@ -6227,9 +6286,10 @@ Os três problemas abaixo pedem para \emph{modificar} um programa da página da 
 \begin{enumerate}
   \item \textbf{Até onde a pressão pode ir.} Em \arq{cap03\_tensores.py},
 monte $T^{\mu\nu}$ de um fluido perfeito em repouso e, para cada observador
-com quadrivelocidade $u^\mu$, calcule o vetor fluxo de energia que ele mede,
+de quadrivelocidade $U^\mu_{\rm obs}$, calcule o vetor fluxo de energia que ele
+mede,
 \[
-  J^\mu=-T^\mu{}_\nu\,u^\nu .
+  J^\mu=-T^\mu{}_\nu\,U^\nu_{\rm obs} .
 \]
 Sorteie alguns milhares de observadores com velocidades aleatórias e teste se
 $J^\mu$ é sempre causal, isto é, $J\cdot J\le0$. Varie $p$ com $\rho$ fixo e
