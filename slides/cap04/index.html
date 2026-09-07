@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluidos relativísticos · Slides do Capítulo 4</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../slides.css?v=6">
+</head>
+<body>
+<div id="progresso"></div>
+<div class="zona esq" aria-hidden="true"></div>
+<div class="zona dir" aria-hidden="true"></div>
+
+<main id="palco">
+<div id="quadro">
+
+<section>
+  <p class="etiqueta">Relatividade Geral · UDESC/CCT · Capítulo 4</p>
+  <h1>Fluidos<br>relativísticos</h1>
+  <p style="max-width:60ch">
+    Contar partículas até chegar ao objeto que é a fonte da gravidade —
+    e descobrir, no caminho, que densidade e fluxo são a mesma coisa.
+  </p>
+  <p class="legenda" style="margin-top:2rem">
+    Aulas 16 a 20 · use <strong>→</strong> e <strong>←</strong> para navegar,
+    <strong>F</strong> para tela cheia
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Roteiro</p>
+  <h2>Um degrau de cada vez</h2>
+  <div class="duas">
+    <div>
+      <table class="compacta">
+        <tr><th>§</th><th>Assunto</th></tr>
+        <tr><td>4.1–4.3</td><td>Fluido, poeira, e o vetor <span class="m">N^\mu=nU^\mu</span></td></tr>
+        <tr><td>4.4–4.5</td><td>Densidade <em>é</em> fluxo; a 1-forma da superfície</td></tr>
+        <tr><td>4.6–4.8</td><td>Conservação; <span class="m">T^{\alpha\beta}</span>; simetria</td></tr>
+        <tr><td>4.9–4.12</td><td>Fluidos gerais, conservação, fluido perfeito, Euler</td></tr>
+        <tr><td>4.13–4.15</td><td>Equação de estado, importância, Gauss</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="alerta">
+        <p class="legenda">
+          <strong>Este é o capítulo mais abstrato da primeira metade.</strong>
+          Até aqui todo objeto novo tinha análogo newtoniano imediato:
+          quadrivelocidade é velocidade, quadrimomento é momento. O tensor
+          energia-momento não tem — ele reúne num objeto só coisas que Newton
+          trata como não relacionadas.
+        </p>
+      </div>
+      <p class="legenda">
+        A estratégia: começar contando partículas, que é concreto; descobrir
+        que densidade e fluxo são o mesmo objeto visto de ângulos diferentes;
+        e só então repetir o argumento trocando “número de partículas” por
+        “energia e momento”.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.1</p>
+  <h2>O que é um fluido</h2>
+  <p>
+    Um <strong>contínuo</strong> é uma coleção tão numerosa que não faz sentido
+    acompanhar cada partícula. Ficamos com médias. Mas médias sobre quantas?
+  </p>
+  <div class="destaque">
+    <p>
+      A coleção precisa ser <em>grande</em> o bastante para que a partícula
+      individual não importe, e <em>pequena</em> o bastante para que dentro dela
+      tudo seja homogêneo. Uma coleção assim é um <strong>elemento</strong> de
+      fluido.
+    </p>
+  </div>
+  <table class="compacta">
+    <tr><th>Meio</th><th><span class="m">n</span> (m<span class="m">^{-3}</span>)</th><th>Há janela?</th></tr>
+    <tr><td>ar ao nível do mar</td><td><span class="m">2{,}5\times10^{25}</span></td>
+        <td>enorme — um cubo de 1 μm tem <span class="m">2{,}5\times10^{7}</span> moléculas</td></tr>
+    <tr><td>estrela de nêutrons</td><td><span class="m">10^{44}</span></td>
+        <td>de sobra — 1 μm tem <span class="m">10^{26}</span>, e a estrela tem 10 km</td></tr>
+    <tr><td>gás intergaláctico</td><td><span class="m">1</span></td>
+        <td>por pouco — o elemento precisa ter anos-luz de lado</td></tr>
+  </table>
+  <p class="legenda">
+    Onde a janela não existe — um gás muito rarefeito num aparato de laboratório
+    — a descrição de fluido não se aplica, e é preciso voltar à cinética.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.1</p>
+  <h2>O MCRF, e o que separa fluido de sólido</h2>
+  <div class="duas">
+    <div>
+      <div class="destaque">
+        <p class="legenda">
+          Cada elemento carrega um referencial: o <strong>MCRF</strong>, o
+          inercial que naquele instante o acompanha. Toda grandeza escalar do
+          fluido é <em>definida nele</em> — é isso que a torna escalar. Não é
+          “a densidade medida por alguém”, é “a densidade medida por quem
+          acompanha o elemento”.
+        </p>
+      </div>
+    </div>
+    <div>
+      <p class="legenda">
+        Dois elementos vizinhos se empurram através da interface comum. A força
+        pode ter componente <strong>perpendicular</strong> — a pressão — e
+        componente <strong>paralela</strong>, que impede um de deslizar sobre o
+        outro. É a segunda que dá rigidez.
+      </p>
+      <p class="legenda">
+        Um <em>fluido</em> é um contínuo em que as forças de deslizamento são
+        fracas; um <em>fluido perfeito</em>, aquele em que são exatamente nulas.
+      </p>
+    </div>
+  </div>
+  <div class="alerta">
+    <p class="legenda">
+      A divisão não é nítida, e não precisa ser: sob pressão suficiente quase
+      todo sólido escoa — o manto terrestre é rocha e se comporta como fluido em
+      escalas de milhões de anos. O que a definição faz não é classificar
+      substâncias, é <strong>isolar a única propriedade que vai entrar na
+      física</strong>: se há ou não força paralela à interface. Guarde a
+      pergunta; ela reaparece como a condição que anula as componentes fora da
+      diagonal de <span class="m">T^{\mu\nu}</span>.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.2</p>
+  <h2>A densidade depende de quem mede</h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="figuras/densidade_fluxo.svg" style="max-height:360px"
+           alt="Contração de Lorentz e a construção do fluxo">
+    </figure>
+    <div>
+      <p>
+        <strong>Poeira:</strong> partículas todas em repouso em algum
+        referencial. Sem pressão, sem movimento térmico, sem interação. Pouco
+        realista e didaticamente perfeito.
+      </p>
+      <p class="M">\bar n=\gamma\,n=\frac{n}{\sqrt{1-v^2}}</p>
+      <p class="legenda">
+        O <em>número</em> é o mesmo; o volume não. A contração encolhe a
+        dimensão paralela ao movimento por <span class="m">1/\gamma</span> e
+        deixa as transversas intactas.
+      </p>
+      <p class="M">(\text{fluxo})^{\bar x}=\gamma\,n\,v^{\bar x}</p>
+      <p class="legenda">
+        Só <span class="m">v^{\bar x}</span> entra: deslocamento paralelo à
+        superfície não faz ninguém atravessá-la.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.3</p>
+  <h2>O vetor fluxo de número</h2>
+  <p>Ponha as duas lado a lado:</p>
+  <p class="M">\bar n=\gamma n,\qquad (\text{fluxo})^{\bar i}=\gamma n v^{\bar i}</p>
+  <p>
+    É exatamente o padrão <span class="m">\gamma(1,\bm v)</span> da
+    quadrivelocidade. Então:
+  </p>
+  <p class="M">N^\mu=n\,U^\mu,
+    \qquad N^0=\gamma n\ \text{(densidade)},
+    \qquad N^i=\gamma n v^i\ \text{(fluxo)}</p>
+  <div class="destaque">
+    <p>
+      <strong>Densidade e fluxo não são duas grandezas.</strong> São a
+      componente temporal e as componentes espaciais de <em>um</em> quadrivetor.
+      A física pré-relativística tratava o fluxo como vetor tridimensional
+      dependente do referencial e a densidade como escalar à parte; a
+      relatividade os funde — como fundiu energia e momento em
+      <span class="m">p^\mu</span>.
+    </p>
+  </div>
+  <p class="legenda">
+    E a norma devolve a densidade própria:
+    <span class="m">N^\mu N_\mu=-n^2</span>, logo
+    <span class="m">n=\sqrt{-N^\mu N_\mu}</span> é um escalar — do mesmo modo
+    que a massa de repouso é escalar embora a energia dependa do observador.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.4 · a ideia que organiza o capítulo</p>
+  <h2>Densidade <em>é</em> um fluxo temporal</h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="figuras/fluxo_temporal.svg" style="max-height:340px"
+           alt="As mesmas linhas de mundo contadas de duas maneiras">
+    </figure>
+    <div>
+      <p class="legenda">
+        Desenhe as linhas de mundo. O fluxo através de
+        <span class="m">\bar x=</span> const é o número que cruza aquela
+        superfície, por unidade de tempo e de área.
+      </p>
+      <p class="legenda">
+        Agora repare: <strong>nada obriga esse volume tridimensional a conter a
+        direção temporal.</strong> Tome a fatia <span class="m">\bar t=</span>
+        const e conte as linhas que a cruzam. Mas cruzar uma fatia de tempo
+        constante é simplesmente <em>estar lá naquele instante</em> — e esse
+        número é a densidade.
+      </p>
+      <div class="destaque">
+        <p class="legenda">
+          Uma única operação — contar linhas de mundo que atravessam uma
+          hipersuperfície — produz as duas grandezas, dependendo apenas de qual
+          hipersuperfície se escolhe.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Apêndice interativo · Seção 4.4</p>
+  <h2>Ponha partículas, e olhe as linhas de mundo</h2>
+  <div class="duas larga-esq">
+    <svg id="linhas-mundo" class="grafico" style="height:352px" viewBox="0 0 1010 512"
+         role="application"
+         aria-label="Plano xy à esquerda para criar partículas; linhas de mundo à direita"></svg>
+    <div>
+      <p class="legenda">
+        <strong>Clique no quadro da esquerda</strong> para criar partículas;
+        clique em cima de uma para removê-la. Em repouso, as linhas de mundo
+        sobem retas — cada partícula apenas persiste, e é só isso que a linha
+        diz.
+      </p>
+      <div class="controle">
+        <label for="lm-v">velocidade com que passam por você
+          <span class="m">v</span>
+          <button type="button" id="lm-limpar">limpar</button></label>
+        <input type="range" id="lm-v" min="0" max="88" step="1" value="0">
+        <p class="leitura">
+          <span class="m">v</span> = <span id="lm-vv">0,00</span>
+          &nbsp;·&nbsp; <span class="m">\gamma</span> = <span id="lm-gama">1,000</span>
+        </p>
+        <p class="leitura">
+          <span id="lm-np">6</span> partículas em
+          <span class="m">\bar V</span> = <span id="lm-vol">1,00</span>
+          &nbsp;→&nbsp; <span class="m">\bar n</span> = <span id="lm-no">6,00</span>
+        </p>
+      </div>
+      <div class="destaque">
+        <p class="legenda">
+          Duas coisas acontecem juntas: as linhas se inclinam <strong>e a caixa
+          encolhe em <span class="m">x</span></strong>. Mesmo número de
+          partículas, volume menor — que é
+          <span class="m">\bar n=\gamma n</span> desenhado.
+        </p>
+      </div>
+    </div>
+  </div>
+  <p class="legenda">
+    O controle <em>não acelera</em> as partículas: ele troca de observador —
+    acelerar um conjunto é ambíguo, porque o espaçamento depende de <em>como</em>
+    se acelera, ao passo que olhar a mesma poeira de outro referencial é limpo, e
+    é o que a Seção 4.2 faz. O painel direito <strong>suprime
+    <span class="m">y</span></strong>, como a Figura 4.4 do Schutz. E nenhuma
+    linha de mundo chega a se deitar tanto quanto as tracejadas: elas são a luz,
+    a 45°.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.5</p>
+  <h2>A superfície é uma 1-forma</h2>
+  <p>
+    Falta dizer, sem coordenadas, o que é “a superfície” atravessada. Uma
+    superfície é <span class="m">\varphi=</span> const; o gradiente
+    <span class="m">\dd\varphi</span> é uma 1-forma, e as direções tangentes são
+    exatamente as <span class="m">\vec V</span> com
+    <span class="m">\dd\varphi(\vec V)=0</span>. Normalizando:
+  </p>
+  <p class="M">\tilde n=\frac{\dd\varphi}{|\dd\varphi|}
+    \qquad\Longrightarrow\qquad
+    \text{fluxo}=\tilde n(\vec N)=n_\mu N^\mu</p>
+  <div class="duas">
+    <div>
+      <p class="legenda">
+        <strong>Superfície <span class="m">\bar x=</span> const:</strong>
+        <span class="m">\tilde n=(0,1,0,0)</span> e
+        <span class="m">\tilde n(\vec N)=N^{\bar x}=\gamma n v^{\bar x}</span> —
+        o fluxo.
+      </p>
+    </div>
+    <div>
+      <p class="legenda">
+        <strong>Superfície <span class="m">\bar t=</span> const:</strong>
+        <span class="m">\tilde n=(1,0,0,0)</span> e
+        <span class="m">\tilde n(\vec N)=N^{\bar t}=\gamma n</span> — a
+        densidade.
+      </p>
+    </div>
+  </div>
+  <div class="destaque">
+    <p class="legenda">
+      Uma única expressão, <span class="m">n_\mu N^\mu</span>, produz as duas.
+      É o slide anterior escrito em símbolos.
+    </p>
+  </div>
+  <p class="legenda">
+    <strong>Aviso de notação:</strong> o <span class="m">\tilde n</span> da
+    1-forma normal e o <span class="m">n</span> da densidade própria não têm
+    nada em comum — é acidente histórico infeliz que usem a mesma letra. O til
+    é obrigatório.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.6</p>
+  <h2>Conservação do número de partículas</h2>
+  <p class="M">\partial_\mu N^\mu=0</p>
+  <p>
+    Escrevendo as componentes,
+    <span class="m">\partial_t(\gamma n)+\partial_i(\gamma n v^i)=0</span>, que
+    no limite <span class="m">v\ll1</span> vira
+    <span class="m">\partial_t n+\nabla\!\cdot(n\bm v)=0</span> — a continuidade
+    newtoniana.
+  </p>
+  <div class="destaque">
+    <p>
+      <strong>Uma lei de conservação, na linguagem tensorial, é sempre a mesma
+      frase:</strong> a divergência de um fluxo se anula. O conteúdo físico está
+      em <em>qual</em> grandeza é transportada. Aqui é o número de partículas;
+      adiante será energia e momento, e a estrutura não muda.
+    </p>
+  </div>
+  <p class="legenda">
+    A versão relativística não é uma equação nova. É a mesma, escrita de modo
+    que todo observador escreva a mesma coisa.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.7</p>
+  <h2>O tensor energia-momento</h2>
+  <div class="destaque">
+    <p>
+      <span class="m">T^{\alpha\beta}</span> é o fluxo da componente
+      <span class="m">\alpha</span> do quadrimomento através de uma superfície
+      de <span class="m">x^\beta</span> constante.
+    </p>
+  </div>
+  <p class="legenda">
+    Leia duas vezes. O <strong>primeiro</strong> índice diz <em>qual</em>
+    componente do momento é transportada; o <strong>segundo</strong>, através de
+    <em>qual superfície</em>. É a estrutura de <span class="m">N^\mu</span> com
+    um índice a mais.
+  </p>
+  <p class="M">T^{\alpha\beta}=m\,U^\alpha N^\beta=\rho\,U^\alpha U^\beta,
+    \qquad \rho\equiv mn</p>
+  <p class="legenda">
+    Para poeira, cada partícula carrega <span class="m">p^\alpha=mU^\alpha</span>
+    e o fluxo de partículas é <span class="m">N^\beta=nU^\beta</span> — o fluxo
+    de momento é o produto. No MCRF sobra só
+    <span class="m">T^{00}=\rho</span>: nenhuma energia flui, nenhum momento
+    existe, nenhuma tensão atua. <strong>Poeira em repouso é o objeto mais
+    simples que gravita.</strong>
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.7</p>
+  <h2>Os quatro blocos</h2>
+  <table class="compacta">
+    <tr><th></th><th>nome</th><th>o que é</th></tr>
+    <tr><td><span class="m">T^{00}</span></td><td>densidade de energia</td>
+        <td>energia por unidade de volume</td></tr>
+    <tr><td><span class="m">T^{0i}</span></td><td>fluxo de energia</td>
+        <td>no MCRF só pode vir de <em>condução de calor</em></td></tr>
+    <tr><td><span class="m">T^{i0}</span></td><td>densidade de momento</td>
+        <td>no MCRF as partículas não têm momento líquido, mas energia em
+        trânsito carrega momento</td></tr>
+    <tr><td><span class="m">T^{ij}</span></td><td>tensões</td>
+        <td>fluxo da componente <span class="m">i</span> do momento através da
+        superfície <span class="m">j</span>: força por unidade de área</td></tr>
+  </table>
+  <div class="alerta">
+    <p class="legenda">
+      <span class="m">T^{0i}</span> e <span class="m">T^{i0}</span> parecem a
+      mesma coisa e não são: um é fluxo de <em>energia</em>, o outro é densidade
+      de <em>momento</em>. Que acabem iguais é um <strong>resultado a
+      demonstrar</strong>, não uma definição — e em teorias com spin o tensor
+      pode não ser simétrico.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.8</p>
+  <h2>Por que <span class="m">T^{ij}=T^{ji}</span></h2>
+  <div class="duas larga-esq">
+    <figure>
+      <img src="figuras/tensoes.svg" style="max-height:330px"
+           alt="Forças nas faces de um elemento e o torque das componentes fora da diagonal">
+    </figure>
+    <div>
+      <p class="legenda">
+        Tome um cubo de lado <span class="m">\ell</span> e calcule o torque em
+        torno de <span class="m">z</span>:
+      </p>
+      <p class="M">\tau_z=\ell^3\bigl(T^{xy}-T^{yx}\bigr)</p>
+      <p class="legenda">
+        O momento de inércia escala como
+        <span class="m">I\propto\rho\,\ell^5</span>, então
+      </p>
+      <p class="M">\dot\omega=\frac{\tau_z}{I}\propto\frac{1}{\ell^2}
+        \xrightarrow[\ell\to0]{}\infty</p>
+      <div class="destaque">
+        <p class="legenda">
+          Um elemento arbitrariamente pequeno giraria com aceleração angular
+          arbitrariamente grande. Absurdo — logo
+          <span class="m">T^{xy}=T^{yx}</span>. E como foi demonstrado num
+          referencial e <span class="m">T</span> é tensor, vale em todos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.9</p>
+  <h2>Fluidos gerais: energia interna</h2>
+  <p class="M">\rho=\rho_0(1+\Pi),\qquad \rho_0=mn</p>
+  <p class="legenda">
+    Poeira só tem energia de repouso. Um fluido de verdade tem também agitação
+    térmica, energia de ligação, excitação — e <span class="m">\Pi</span> é essa
+    energia interna <em>por unidade de massa de repouso</em>. A densidade total
+    <span class="m">\rho</span> é o que gravita.
+  </p>
+  <p class="M">n\,\Delta q=\Delta\rho-\frac{\rho+p}{n}\,\Delta n</p>
+  <p class="legenda">
+    É a primeira lei, <span class="m">\Delta E=\Delta Q-p\,\Delta V</span>, com
+    <span class="m">V=N/n</span> e <span class="m">E=\rho V</span>. O que se
+    mantém fixo é o <em>número</em>, não o volume: daí
+    <span class="m">\Delta V=-N\Delta n/n^2</span>.
+  </p>
+  <div class="destaque">
+    <p>
+      Repare na combinação <span class="m">\rho+p</span>. Não é acidente de
+      álgebra: é a mesma que aparecerá no tensor do fluido perfeito e nas
+      equações de Euler, fazendo o papel de <strong>densidade de
+      inércia</strong>. Em relatividade a pressão contribui para a inércia — e,
+      por consequência, para a gravidade.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.10</p>
+  <h2>Conservação de energia e momento</h2>
+  <p class="legenda">
+    Um cubo de lado <span class="m">\ell</span>. A energia dentro é
+    <span class="m">T^{00}\ell^3</span>; ela entra e sai pelas seis faces. Pela
+    face em <span class="m">x=0</span> entra à taxa
+    <span class="m">\ell^2T^{0x}(0)</span>, e pela face em
+    <span class="m">x=\ell</span> <em>sai</em> — com o sinal trocado.
+  </p>
+  <p class="M">\frac{\partial}{\partial t}\bigl(T^{00}\ell^3\bigr)
+    =\ell^2\bigl[T^{0x}(0)-T^{0x}(\ell)+\cdots\bigr]</p>
+  <p class="legenda">
+    Divida por <span class="m">\ell^3</span>, faça
+    <span class="m">\ell\to0</span>, e cada colchete vira menos uma derivada:
+  </p>
+  <p class="M">\boxed{\ \partial_\beta T^{\alpha\beta}=0\ }</p>
+  <div class="alerta">
+    <p class="legenda">
+      Repare no que a conta <em>não</em> usou: nada sobre fluido perfeito, nada
+      sobre equação de estado, nem que exista um fluido. Vale para qualquer
+      <span class="m">T^{\alpha\beta}</span> que mereça o nome — o do campo
+      eletromagnético inclusive. E são <strong>quatro</strong> equações:
+      <span class="m">\alpha=0</span> é a energia,
+      <span class="m">\alpha=i</span> é cada componente do momento.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.11</p>
+  <h2>O fluido perfeito</h2>
+  <div class="duas">
+    <div>
+      <table class="compacta">
+        <tr><th>Hipótese</th><th>Consequência no MCRF</th></tr>
+        <tr><td>sem condução de calor</td>
+            <td><span class="m">T^{0i}=T^{i0}=0</span></td></tr>
+        <tr><td>sem forças paralelas</td>
+            <td><span class="m">T^{ij}=0</span> para <span class="m">i\ne j</span></td></tr>
+        <tr><td>isotropia</td>
+            <td><span class="m">T^{ij}=p\,\delta^{ij}</span></td></tr>
+      </table>
+      <p class="M">T^{\alpha\beta}\ \hat=\ \mathrm{diag}(\rho,p,p,p)</p>
+    </div>
+    <div>
+      <p class="legenda">
+        Falta escrever sem referencial. Procuramos a combinação de
+        <span class="m">U^\alpha U^\beta</span> e
+        <span class="m">\eta^{\alpha\beta}</span> que reproduza aquela matriz
+        onde <span class="m">U^\alpha=(1,0,0,0)</span>:
+      </p>
+      <p class="M">\boxed{\ T^{\alpha\beta}=(\rho+p)U^\alpha U^\beta
+        +p\,\eta^{\alpha\beta}\ }</p>
+      <p class="legenda">
+        A verificação é de uma linha: a componente <span class="m">00</span> dá
+        <span class="m">(\rho+p)-p=\rho</span>, e cada
+        <span class="m">ii</span> dá <span class="m">0+p=p</span>. Dois tensores
+        que coincidem num referencial coincidem em todos.
+      </p>
+    </div>
+  </div>
+  <div class="destaque">
+    <p class="legenda">
+      Em relatividade geral basta trocar <span class="m">\eta</span> por
+      <span class="m">g</span>. É o padrão que se repete no curso inteiro:
+      escreva a física no referencial local onde ela é simples, ponha em forma
+      tensorial, e a versão curva sai trocando a métrica.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.12</p>
+  <h2>As equações do fluido perfeito</h2>
+  <p class="legenda">
+    Substituindo em <span class="m">\partial_\alpha T^{\alpha\beta}=0</span> e
+    projetando de duas maneiras.
+  </p>
+  <div class="duas">
+    <div>
+      <p class="legenda"><strong>Ao longo de <span class="m">\vec U</span></strong>
+      (contraia com <span class="m">U_\beta</span>):</p>
+      <p class="M">U^\alpha\partial_\alpha\rho
+        +(\rho+p)\,\partial_\alpha U^\alpha=0</p>
+      <p class="legenda">
+        Variação de <span class="m">\rho</span> seguindo o elemento, mais o
+        trabalho de expansão. É a primeira lei em forma de campo.
+      </p>
+    </div>
+    <div>
+      <p class="legenda"><strong>Perpendicular a <span class="m">\vec U</span>:</strong></p>
+      <p class="M">(\rho+p)\,U^\alpha\partial_\alpha U^\beta
+        =-h^{\beta\nu}\partial_\nu p</p>
+      <p class="legenda">
+        com <span class="m">h^{\beta\nu}=\eta^{\beta\nu}+U^\beta U^\nu</span>.
+        É a <strong>Euler relativística</strong>.
+      </p>
+    </div>
+  </div>
+  <div class="destaque">
+    <p>
+      Compare com <span class="m">\rho(\partial_t\bm v+\bm v\cdot\nabla\bm v)
+      =-\nabla p</span>. A estrutura é idêntica, com <em>uma</em> diferença:
+      onde Newton tem <span class="m">\rho</span>, a relatividade tem
+      <span class="m">\rho+p</span>. <strong>A pressão contribui para a
+      inércia.</strong> Um gás muito quente é mais difícil de acelerar que um
+      frio de mesma densidade de massa.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.13</p>
+  <h2>Equações de estado</h2>
+  <p>
+    As equações não fecham: há mais incógnitas
+    (<span class="m">\rho</span>, <span class="m">p</span>,
+    <span class="m">n</span>, <span class="m">U^\mu</span>) que equações. Falta
+    a relação constitutiva <span class="m">p=w\rho</span>.
+  </p>
+  <table class="compacta">
+    <tr><th><span class="m">w</span></th><th>componente</th><th>justificativa</th></tr>
+    <tr><td><span class="m">0</span></td><td>poeira fria</td>
+        <td>sem movimento térmico apreciável: <span class="m">p\ll\rho</span></td></tr>
+    <tr><td><span class="m">1/3</span></td><td>radiação</td>
+        <td><span class="m">T^\mu{}_\mu=-\rho+3p</span>, e o tensor
+        eletromagnético tem traço nulo</td></tr>
+    <tr><td><span class="m">-1</span></td><td>constante cosmológica</td>
+        <td>pressão negativa; produz expansão acelerada</td></tr>
+  </table>
+  <div class="destaque">
+    <p class="legenda">
+      A radiação sai <strong>sem estatística nenhuma</strong>: nenhuma hipótese
+      sobre distribuição de velocidades, nenhuma integral sobre modos. A equação
+      de estado vem de uma propriedade algébrica do traço.
+    </p>
+  </div>
+  <p class="legenda">
+    E a causalidade limita o resto: <span class="m">c_s^2=\dd p/\dd\rho</span>,
+    e exigir <span class="m">c_s\le1</span> dá <span class="m">w\le1</span>.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.14</p>
+  <h2>Por que isso importa</h2>
+  <p class="M">G_{\mu\nu}=8\pi G\,T_{\mu\nu}</p>
+  <div class="duas">
+    <div>
+      <div class="destaque">
+        <p class="legenda">
+          <strong>A fonte não é a massa.</strong> É o tensor inteiro. A massa
+          newtoniana é apenas <span class="m">T^{00}</span> no limite de campo
+          fraco e velocidades pequenas.
+        </p>
+      </div>
+      <p class="legenda">
+        Para a Terra em órbita, <span class="m">v/c\approx10^{-4}</span>: o
+        bloco de densidade de momento é dez mil vezes menor que o de energia, e
+        o de tensões, cem milhões. Sobra <span class="m">T^{00}</span> sozinho.
+      </p>
+    </div>
+    <div>
+      <div class="destaque">
+        <p class="legenda">
+          <strong>Pressão gravita.</strong> Numa estrela de nêutrons, a pressão
+          que sustenta a estrela também contribui para o peso a sustentar — e é
+          dessa realimentação que nasce uma <em>massa máxima</em>, coisa que
+          Newton não prevê.
+        </p>
+      </div>
+      <div class="destaque">
+        <p class="legenda">
+          <strong>A conservação não é opcional.</strong> A identidade geométrica
+          <span class="m">\nabla_\mu G^{\mu\nu}=0</span> força
+          <span class="m">\nabla_\mu T^{\mu\nu}=0</span>. O movimento do fluido
+          está contido nas equações de campo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.15</p>
+  <h2>Lei de Gauss em quatro dimensões</h2>
+  <p class="M">\int_\Omega \partial_\mu N^\mu\,\dd^4x
+    =\oint_{\partial\Omega} N^\mu n_\mu\,\dd^3S</p>
+  <p class="legenda">
+    Tome para <span class="m">\Omega</span> um cilindro no espaço-tempo: uma
+    região espacial <span class="m">V</span> fixa, entre
+    <span class="m">t_1</span> e <span class="m">t_2</span>. A fronteira tem
+    três pedaços — as duas tampas e a lateral. Pela Seção 4.4, cada tampa dá o
+    número de partículas dentro naquele instante, e a lateral dá o número que
+    atravessou a fronteira espacial.
+  </p>
+  <p class="M">N(t_2)-N(t_1)=-\,(\text{número que saiu por }\partial V)</p>
+  <div class="destaque">
+    <p>
+      Repare no que a linguagem quadridimensional fez: <strong>“o que havia
+      antes”, “o que há depois” e “o que atravessou a fronteira” deixaram de ser
+      três coisas e viraram três pedaços da mesma integral</strong> sobre a
+      fronteira de uma região do espaço-tempo. A mesma construção, aplicada a
+      <span class="m">T^{\mu\nu}</span>, vai exigir que o lado geométrico das
+      equações de campo tenha divergência nula.
+    </p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<div id="contador"></div>
+<div id="ajuda">← → navegar · F tela cheia</div>
+
+<script src="../vendor/katex/katex.min.js"></script>
+<script src="../slides.js?v=4"></script>
+<script src="../interativo.js?v=8"></script>
+</body>
+</html>

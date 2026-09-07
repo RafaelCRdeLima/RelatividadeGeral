@@ -1523,3 +1523,197 @@
   for (const c of [c1, c2, cc]) c.addEventListener("input", desenhar);
   desenhar();
 })();
+
+
+// ====================================================================
+// Contar linhas de mundo: o espaço à esquerda, o espaçotempo à direita
+// ====================================================================
+//
+// O painel da Seção 4.4. O aluno põe partículas clicando no plano xy, e
+// vê, ao lado, as linhas de mundo delas. Paradas, as linhas sobem retas.
+//
+// O controle NÃO acelera as partículas -- ele troca de observador. A
+// distinção importa e é fácil de errar: acelerar um conjunto de
+// partículas é ambíguo (o espaçamento depende de COMO se acelera, que é
+// o paradoxo das naves de Bell), enquanto olhar a mesma poeira de outro
+// referencial é uma operação limpa e é a que a Seção 4.2 faz.
+//
+// Por isso o painel esquerdo faz duas coisas ao mesmo tempo quando o
+// controle sai do zero: as partículas ganham seta de velocidade E a
+// caixa encolhe em x por 1/gamma. As duas juntas são a Equação (4.1):
+// mesmo número de partículas, volume menor, densidade maior por gamma.
+//
+// O painel direito suprime y -- é a Figura 4.4 do Schutz, e é o preço
+// de desenhar 2+1 dimensões numa folha. Partículas de mesmo x caem sobre
+// a mesma linha de mundo, e vale dizer isso em voz alta na aula.
+//
+// A contagem já está montada (n próprio, n em Ō, gamma) porque a Seção
+// 4.5 vai pedir fluxo através de superfícies, e o que falta para lá é
+// desenhar a superfície e contar cruzamentos -- não refazer isto.
+
+(function () {
+  "use strict";
+  const svg = document.getElementById("linhas-mundo");
+  const cv = document.getElementById("lm-v");
+  const limpar = document.getElementById("lm-limpar");
+  if (!svg || !cv) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const cria = (tag, attrs) => {
+    const el = document.createElementNS(NS, tag);
+    for (const a in attrs) el.setAttribute(a, attrs[a]);
+    return el;
+  };
+
+  const LADO = 430, VAO = 92;
+  const OX = [26, 26 + LADO + VAO];          // canto esquerdo de cada painel
+  const OY = 34;                              // topo dos dois painéis
+  const COR = { moldura: "rgba(238,247,246,0.22)", eixo: "rgba(238,247,246,0.45)",
+                part: "#e6b75c", linha: "#8dd7dc", luz: "#7ee0a0",
+                rot: "rgba(238,247,246,0.6)", caixa: "rgba(141,215,220,0.10)" };
+
+  // coordenadas próprias: a caixa tem lado 1 em x e em y, no referencial
+  // em que as partículas estão paradas
+  const px0 = (x) => OX[0] + x * LADO;                 // painel espacial
+  const py0 = (y) => OY + (1 - y) * LADO;
+  // As escalas de x̄ e de t̄ têm de ser IGUAIS, senão a linha da luz não sai a
+  // 45° e o cone deixa de ser reconhecível. O preço é que uma linha de mundo
+  // rápida sai pela borda -- o recorte cuida disso, e sair de vista é o que
+  // uma partícula faz mesmo num diagrama de espaçotempo.
+  const px1 = (x) => OX[1] + x * LADO;                // painel espaçotempo
+  const py1 = (t) => OY + (1 - t) * LADO;
+
+  const fundo = cria("g", {});
+  svg.appendChild(fundo);
+  // tudo que é desenhado em coordenadas de x̄ pode escapar da moldura -- o cone
+  // de luz sai por baixo, e uma linha de mundo rápida que comece perto da borda
+  // direita sai por cima. Um recorte resolve os dois de uma vez.
+  const recorte = cria("clipPath", { id: "lm-recorte" });
+  recorte.appendChild(cria("rect", { x: OX[1], y: OY, width: LADO, height: LADO }));
+  svg.appendChild(recorte);
+  const fundoET = cria("g", { "clip-path": "url(#lm-recorte)" });
+  svg.appendChild(fundoET);
+  const movel = cria("g", {});
+  svg.appendChild(movel);
+  const movelET = cria("g", { "clip-path": "url(#lm-recorte)" });
+  svg.appendChild(movelET);
+
+  // --- moldura e rótulos do painel espacial ---------------------------
+  // O contorno tracejado marca o tamanho PRÓPRIO da caixa e não se mexe. Sem
+  // ele a contração não se vê: a caixa apenas ficaria menor, sem nada com que
+  // comparar.
+  fundo.appendChild(cria("rect", { x: OX[0], y: OY, width: LADO, height: LADO,
+    fill: "none", stroke: COR.moldura, "stroke-width": 1.2,
+    "stroke-dasharray": "5 6" }));
+  const caixa = fundo.appendChild(cria("rect", { fill: COR.caixa,
+    stroke: COR.moldura, "stroke-width": 1.4 }));
+  const tit0 = fundo.appendChild(cria("text", { x: OX[0], y: OY - 12,
+    fill: COR.rot, "font-size": 17, "font-family": "DM Mono, monospace" }));
+  tit0.textContent = "espaço: clique para pôr partículas";
+  for (const [t, x, y, a] of [["x", OX[0] + LADO, OY + LADO + 20, "end"],
+                              ["y", OX[0] - 6, OY + 4, "end"]]) {
+    const e = fundo.appendChild(cria("text", { x, y, fill: COR.eixo,
+      "font-size": 18, "font-style": "italic", "text-anchor": a }));
+    e.textContent = t;
+  }
+
+  // --- moldura e eixos do painel espaçotempo --------------------------
+  fundo.appendChild(cria("rect", { x: OX[1], y: OY, width: LADO, height: LADO,
+    fill: "rgba(255,255,255,0.02)", stroke: COR.moldura, "stroke-width": 1.4 }));
+  const tit1 = fundo.appendChild(cria("text", { x: OX[1], y: OY - 12,
+    fill: COR.rot, "font-size": 17, "font-family": "DM Mono, monospace" }));
+  tit1.textContent = "espaçotempo: as linhas de mundo (y suprimido)";
+  // o cone de luz, saindo do centro da base
+  for (const s of [1, -1]) {
+    fundoET.appendChild(cria("line", { x1: px1(0.5), y1: py1(0),
+      x2: px1(0.5 + s * 1.0), y2: py1(1), stroke: COR.luz,
+      "stroke-width": 1.8, opacity: 0.75, "stroke-dasharray": "6 5" }));
+  }
+  for (const [t, x, y, a] of [["x̄", OX[1] + LADO, OY + LADO + 20, "end"],
+                              ["t̄", OX[1] - 6, OY + 4, "end"]]) {
+    const e = fundo.appendChild(cria("text", { x, y, fill: COR.eixo,
+      "font-size": 18, "font-style": "italic", "text-anchor": a }));
+    e.textContent = t;
+  }
+
+  // --- estado ----------------------------------------------------------
+  // posições PRÓPRIAS das partículas, em [0,1]x[0,1]
+  let part = [[0.22, 0.30], [0.44, 0.62], [0.68, 0.22], [0.30, 0.78],
+              [0.78, 0.55], [0.55, 0.40]];
+
+  const lidoV = document.getElementById("lm-vv");
+  const lidoG = document.getElementById("lm-gama");
+  const lidoNp = document.getElementById("lm-np");
+  const lidoNo = document.getElementById("lm-no");
+  const lidoVol = document.getElementById("lm-vol");
+
+  function desenhar() {
+    const v = Number(cv.value) / 100;
+    const g = 1 / Math.sqrt(1 - v * v);
+    movel.replaceChildren();
+    movelET.replaceChildren();
+
+    // a caixa encolhe em x por 1/gamma: mesmo número, menos volume
+    const larg = LADO / g;
+    caixa.setAttribute("x", OX[0]); caixa.setAttribute("y", OY);
+    caixa.setAttribute("width", larg); caixa.setAttribute("height", LADO);
+
+    for (const [x, y] of part) {
+      // painel espacial: x contraído, y intacto
+      const cx = OX[0] + x * larg, cy = py0(y);
+      movel.appendChild(cria("circle", { cx, cy, r: 6, fill: COR.part }));
+      if (v > 0.005) {
+        movel.appendChild(cria("line", { x1: cx, y1: cy,
+          x2: cx + 42 * v, y2: cy, stroke: COR.part, "stroke-width": 2,
+          opacity: 0.75, "marker-end": "url(#pt-part)" }));
+      }
+      // painel espaçotempo: a linha de mundo x̄ = x̄0 + v t̄, com t̄ de 0 a 1.
+      // Em repouso é vertical; com v ela deita na direção da luz sem
+      // alcançá-la, porque v < 1 e a luz é a diagonal tracejada.
+      const x0 = x / g;
+      movelET.appendChild(cria("line", { x1: px1(x0), y1: py1(0),
+        x2: px1(x0 + v), y2: py1(1), stroke: COR.linha, "stroke-width": 2.4 }));
+      movelET.appendChild(cria("circle", { cx: px1(x0), cy: py1(0), r: 4,
+        fill: COR.part }));
+    }
+
+    // no referencial próprio a caixa tem área 1, então a densidade é a contagem
+    const nProprio = part.length;
+    if (lidoV) lidoV.textContent = v.toFixed(2).replace(".", ",");
+    if (lidoG) lidoG.textContent = g.toFixed(3).replace(".", ",");
+    if (lidoNp) lidoNp.textContent = nProprio.toFixed(0);
+    if (lidoNo) lidoNo.textContent = (g * nProprio).toFixed(2).replace(".", ",");
+    if (lidoVol) lidoVol.textContent = (1 / g).toFixed(2).replace(".", ",");
+  }
+
+  // ponta de seta da velocidade
+  const defs = cria("defs", {});
+  const mk = cria("marker", { id: "pt-part", viewBox: "0 0 10 10", refX: 8,
+    refY: 5, markerWidth: 5, markerHeight: 5, orient: "auto-start-reverse" });
+  mk.appendChild(cria("path", { d: "M 0 0 L 10 5 L 0 10 z", fill: COR.part }));
+  defs.appendChild(mk);
+  svg.insertBefore(defs, svg.firstChild);
+
+  // --- clique: converte pixel de tela em coordenada do SVG -------------
+  // getScreenCTM já embute a escala que slides.js aplica ao quadro, então
+  // isto continua certo em tela cheia e em qualquer tamanho de janela.
+  svg.addEventListener("pointerdown", (ev) => {
+    const pt = svg.createSVGPoint();
+    pt.x = ev.clientX; pt.y = ev.clientY;
+    const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    const v = Number(cv.value) / 100, g = 1 / Math.sqrt(1 - v * v);
+    const larg = LADO / g;
+    if (p.x < OX[0] || p.x > OX[0] + larg || p.y < OY || p.y > OY + LADO) return;
+    // desfaz a contração para guardar a posição PRÓPRIA
+    const x = (p.x - OX[0]) / larg, y = 1 - (p.y - OY) / LADO;
+    // clicar em cima de uma partícula a remove -- é o modo de corrigir
+    const perto = part.findIndex(([a, b]) =>
+      Math.hypot((a - x) * larg, (b - y) * LADO) < 12);
+    if (perto >= 0) part.splice(perto, 1); else part.push([x, y]);
+    desenhar();
+  });
+
+  if (limpar) limpar.addEventListener("click", () => { part = []; desenhar(); });
+  cv.addEventListener("input", desenhar);
+  desenhar();
+})();
