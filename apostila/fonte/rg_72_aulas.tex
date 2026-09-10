@@ -440,8 +440,8 @@ Aula & Foco & Seções & Conteúdo \\
 16 & O que é um fluido & 4.1, 4.2, 4.3 & Fluidos relativísticos: o que é um fluido; poeira como o caso mais simples, com densidade e fluxo; o vetor fluxo de número. \\
 17 & Fluxo de número e conservação & 4.4, 4.5, 4.6 & Fluidos relativísticos: densidade como um fluxo temporal; 1-formas, superfícies e o fluxo invariante; conservação do número de partículas. \\
 18 & O tensor energia-momento & 4.7, 4.8 & Fluidos relativísticos: o tensor energia-momento componente a componente; tensões, e o argumento que força a simetria. \\
-19 & Fluido perfeito e Euler & 4.9, 4.10, 4.11 & Fluidos relativísticos: fluidos gerais, energia interna e a primeira lei; o fluido perfeito; a conservação que devolve continuidade e Euler. \\
-20 & Equações de estado e fechamento & 4.12, 4.13, 4.14, 4.15, 4.16, 4.17, 4.18 & Fluidos relativísticos: equações de estado; lei de Gauss em quatro dimensões; por que isso importa para a relatividade geral. Exemplos resolvidos, problemas orientados e exercícios. \\
+19 & Fluido perfeito e Euler & 4.9, 4.10, 4.11, 4.12 & Fluidos relativísticos: fluidos gerais, energia interna e a primeira lei; o fluido perfeito; a conservação que devolve continuidade e Euler. \\
+20 & Equações de estado e fechamento & 4.13, 4.14, 4.15, 4.16, 4.17, 4.18, 4.19 & Fluidos relativísticos: equações de estado; lei de Gauss em quatro dimensões; por que isso importa para a relatividade geral. Exemplos resolvidos, problemas orientados e exercícios. \\
 21 & Por que o espaço-tempo não é plano & 5.1 & Da gravidade à curvatura: O princípio da equivalência, e o argumento do redshift na torre --- se o quadrilátero não fecha, a geometria não é a de Minkowski. \\
 22 & Coordenadas curvilíneas e bases & 5.2, 5.3 & Da gravidade à curvatura: Coordenadas curvilíneas; bases coordenadas contra bases ortonormais, e por que as fórmulas do cálculo vetorial parecem diferentes. \\
 23 & Geodésicas e Christoffel & 5.4 & Da gravidade à curvatura: dedução da equação geodésica por princípio variacional, de onde sai a fórmula dos símbolos de Christoffel. \\
@@ -5689,36 +5689,152 @@ energia e momento, e a estrutura da equação não mudará.
 \label{sec:tensor-em}
 
 Agora repetimos tudo trocando ``número de partículas'' por ``energia e
-momento''. A diferença é que número de partículas é um escalar, enquanto
-energia-momento é um quadrivetor --- e por isso o objeto que descreve seu
-fluxo tem um índice a mais.
+momento''. Dessa vez, porém, o padrão de $N^\mu$ não vai bastar --- e vale ver
+exatamente onde ele quebra, porque é a quebra que produz o objeto novo.
 
-\begin{resultado}
-\textbf{Definição.} A componente $T^{\alpha\beta}$ do tensor energia-momento é
-o fluxo da componente $\alpha$ do quadrimomento através de uma superfície de
-$x^\beta$ constante.
+\subsection*{Onde o quadrivetor não dá conta}
+
+Chame de $\rho$ a densidade de energia medida no MCRF. Para poeira de
+partículas de massa de repouso $m$, cada uma tem energia $m$ ali, e há $n$
+delas por unidade de volume:
+\begin{equation}
+  \rho=m\,n \qquad\text{(poeira)} .
+  \label{eq:rho-poeira}
+\end{equation}
+Como $m$ e $n$ são escalares, $\rho$ também é --- de novo a convenção da
+Seção~\ref{sec:vetor-fluxo}: o símbolo sozinho é o valor no MCRF.
+
+Meça agora a mesma densidade de energia em $\bar O$, onde as partículas passam
+com velocidade $v$. Duas coisas mudam ao mesmo tempo, e não uma:
+
+\begin{itemize}
+  \item o número por unidade de volume vira $\gamma n$, pela contração de
+  \eqref{eq:densidade-contraida};
+  \item a energia de cada partícula vira $\gamma m$, porque agora ela se move.
+\end{itemize}
+
+\noindent Multiplicando as duas,
+\begin{equation}
+  \rho_{\bar O}=\gamma n\cdot\gamma m=\gamma^2\rho=\frac{\rho}{1-v^2} .
+  \label{eq:rho-dois-gamas}
+\end{equation}
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}CONTE OS FATORES DE $\gamma$}]
+Compare \eqref{eq:rho-dois-gamas} com \eqref{eq:densidade-contraida}. A
+densidade de \emph{número} ganhou um fator de $\gamma$; a de \emph{energia}
+ganhou dois. E um fator de $\gamma$ é um fator de $\Lambda$: uma grandeza que
+transforma com um $\Lambda$ é componente de um vetor, e foi exatamente por
+isso que $N^\mu$ coube. Com dois $\Lambda$ não há quadrivetor que sirva ---
+não existe onde encaixar $\rho$ num objeto de um índice só.
+\end{atencao}
+
+A saída não é abandonar a estrutura, e sim subir um degrau nela. Um arranjo
+cujas componentes transformam com dois $\Lambda$,
+\[
+  T^{\bar\alpha\bar\beta}
+  =\Lambda^{\bar\alpha}{}_{\mu}\,\Lambda^{\bar\beta}{}_{\nu}\,T^{\mu\nu} ,
+\]
+é precisamente um tensor de tipo $(2,0)$ --- a linha da tabela da
+Seção~\ref{sec:tipos-tensor} que ficou prometida a este capítulo.
+
+\subsection*{Duas 1-formas, e por quê}
+
+O tipo $(2,0)$ não é um remendo para acomodar os dois $\gamma$. Ele já estava
+embutido no próprio enunciado ``densidade de energia'': para produzir esse
+número é preciso fazer \emph{duas} escolhas independentes, e cada uma delas é
+uma 1-forma.
+
+A primeira é \emph{qual componente} do quadrimomento se está contando.
+Selecionar uma componente de um vetor é o que uma 1-forma de base faz --- de
+$\tilde\omega^\alpha(\vec e_\nu)=\delta^\alpha{}_\nu$ segue
+\[
+  \tilde\omega^\alpha(\vec p)
+  =p^\nu\,\tilde\omega^\alpha(\vec e_\nu)=p^\alpha ,
+\]
+e em particular $\tilde\omega^0(\vec p)=p^0$ é a energia. Repare no que isso
+diz: ``energia'' não é uma propriedade só de $\vec p$; é $\vec p$
+\emph{mais} a escolha de um observador --- e essa escolha entra como uma
+1-forma.
+
+A segunda é \emph{através de qual superfície}, e a
+Seção~\ref{sec:umaforma-superficie} já mostrou que uma superfície é dada por
+uma 1-forma. Densidade não escapa disso: pela Seção~\ref{sec:fluxo-temporal},
+densidade é o fluxo através de uma superfície de tempo constante --- também
+uma escolha de superfície, também uma 1-forma.
+
+Duas 1-formas na entrada, um número na saída. Isso é a definição de um tensor
+$(2,0)$, palavra por palavra.
+
+\begin{central}
+\textbf{Definição.} O \textbf{tensor energia-momento} $T$ é a máquina de tipo
+$(2,0)$ que recebe duas 1-formas e devolve um número: a primeira entrada diz
+\emph{o que} está sendo transportado, e a segunda, \emph{através de onde}.
+Suas componentes são os valores sobre a base dual,
+\[
+  T(\tilde\omega^\alpha,\tilde\omega^\beta)=T^{\alpha\beta} ,
+\]
+do mesmo modo que $W_\mu=\tilde W(\vec e_\mu)$ dava as componentes de uma
+1-forma na Seção~\ref{sec:base-dual}.
+\end{central}
+
+Essa é a definição a guardar, porque é a que não menciona referencial nenhum.
+Lida em componentes, ela vira a frase que se encontra na maioria dos textos:
+
+\begin{resultado}[title={\sffamily\bfseries\footnotesize\color{rgAmbar}A MESMA COISA, EM COMPONENTES}]
+A componente $T^{\alpha\beta}$ do tensor energia-momento é o fluxo da
+componente $\alpha$ do quadrimomento através de uma superfície de $x^\beta$
+constante.
 \end{resultado}
 
-Leia essa definição duas vezes. O primeiro índice diz \emph{qual} componente
-do momento está sendo transportada; o segundo diz \emph{através de qual
-superfície}. É a mesma estrutura de $N^\mu$, com um índice extra para dizer
-de qual das quatro componentes de $p^\mu$ estamos falando.
+As duas dizem a mesma coisa, e a tradução entre elas é imediata: a entrada
+$\tilde\omega^\alpha$ é o que seleciona a componente $\alpha$ do quadrimomento,
+e a entrada $\tilde\omega^\beta$ é a 1-forma normal à superfície
+$x^\beta=\text{const}$, já que $\tilde\omega^\beta$ é o gradiente da função
+coordenada $x^\beta$. O primeiro índice diz \emph{qual} componente do momento
+está sendo transportada; o segundo, \emph{através de qual superfície}. É a
+mesma estrutura de $N^\mu$, com um índice extra para dizer de qual das quatro
+componentes de $p^\mu$ estamos falando.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}LENDO O SCHUTZ AO LADO}]
+Schutz escreve essa definição como
+$\mathbf{T}(\tilde{\dd}x^\alpha,\tilde{\dd}x^\beta)=T^{\alpha\beta}$, porque
+para ele as 1-formas de base são os $\tilde{\dd}x^\alpha$. É o mesmo objeto:
+o nosso $\tilde\omega^\alpha$ é o $\tilde{\dd}x^\alpha$ dele. Mantemos
+$\tilde\omega$ pelo motivo dado na Seção~\ref{sec:base-dual} --- aqui
+$\dd x^\mu$ já é o vetor deslocamento.
+\end{atencao}
 
 \subsection*{O caso da poeira}
 
-Para poeira de partículas de massa de repouso $m$, cada partícula carrega
-$p^\alpha=mU^\alpha$, e o fluxo de partículas é $N^\beta=nU^\beta$. O fluxo de
-$p^\alpha$ é então o produto:
+Com a definição geométrica na mão, o tensor da poeira sai sem conta nenhuma.
+Cada partícula carrega o quadrimomento $\vec p=m\vec U$, e o fluxo de
+partículas é $\vec N=n\vec U$. O fluxo de quadrimomento é o produto tensorial
+dos dois --- a operação que a Seção~\ref{sec:tipos-tensor} descreveu ao dizer
+que de $A^\mu$ e $B^\nu$ sai o tensor de componentes $A^\mu B^\nu$, e que se
+escreve com o símbolo $\otimes$:
 \begin{equation}
-  T^{\alpha\beta}=m\,U^\alpha\,N^\beta=m\,n\,U^\alpha U^\beta
-  =\rho\,U^\alpha U^\beta ,
-  \qquad \rho\equiv mn ,
+  T=\vec p\otimes\vec N ,
+  \qquad\text{isto é}\qquad
+  T^{\alpha\beta}=m\,U^\alpha\,n\,U^\beta=\rho\,U^\alpha U^\beta ,
   \label{eq:T-poeira}
 \end{equation}
-onde $\rho$ é a densidade própria de energia (para poeira, só massa de
-repouso). No MCRF, a única componente não nula é $T^{00}=\rho$: nenhuma
-energia flui, nenhum momento existe, nenhuma tensão atua. Poeira em repouso é
-o objeto mais simples que gravita.
+com $\rho=mn$ de \eqref{eq:rho-poeira}. Vale ver a máquina funcionando, que é
+onde a definição geométrica se paga:
+\[
+  T(\tilde\omega^\alpha,\tilde\omega^\beta)
+  =\tilde\omega^\alpha(\vec p)\;\tilde\omega^\beta(\vec N)
+  =p^\alpha N^\beta ,
+\]
+que se lê ``a componente $\alpha$ do momento de cada partícula, vezes o fluxo
+de partículas através da superfície $\beta$'' --- exatamente o enunciado da
+caixa anterior.
+
+No MCRF a única componente não nula é $T^{00}=\rho$: nenhuma energia flui,
+nenhum momento existe, nenhuma tensão atua. Poeira em repouso é o objeto mais
+simples que gravita. E a consistência com o ponto de partida é imediata: em
+$\bar O$, onde $U^{\bar 0}=\gamma$, a expressão $\rho\,U^\alpha U^\beta$ dá
+$T^{\bar 0\bar 0}=\gamma^2\rho$, que é \eqref{eq:rho-dois-gamas} --- os dois
+fatores de $\gamma$ agora aparecem, um para cada índice.
 
 \subsection*{Os quatro blocos}
 

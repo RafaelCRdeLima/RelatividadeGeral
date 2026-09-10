@@ -349,31 +349,97 @@
 </section>
 
 <section>
-  <p class="etiqueta">Seção 4.7</p>
-  <h2>O tensor energia-momento</h2>
-  <div class="destaque">
+  <p class="etiqueta">Seção 4.7 · onde o quadrivetor não dá conta</p>
+  <h2>Conte os fatores de <span class="m">\gamma</span></h2>
+  <p>
+    Chame de <span class="m">\rho</span> a densidade de energia no MCRF. Para
+    poeira, <span class="m">\rho=mn</span>. Meça a mesma coisa em
+    <span class="m">\bar O</span>: <strong>duas</strong> coisas mudam ao mesmo
+    tempo, e não uma.
+  </p>
+  <div class="duas">
+    <div>
+      <p class="legenda">
+        o número por unidade de volume vira <span class="m">\gamma n</span>,
+        pela contração;
+      </p>
+    </div>
+    <div>
+      <p class="legenda">
+        a energia de cada partícula vira <span class="m">\gamma m</span>,
+        porque agora ela se move.
+      </p>
+    </div>
+  </div>
+  <p class="M">\rho_{\bar O}=\gamma n\cdot\gamma m=\gamma^2\rho
+    =\frac{\rho}{1-v^2}</p>
+  <div class="alerta">
     <p>
-      <span class="m">T^{\alpha\beta}</span> é o fluxo da componente
-      <span class="m">\alpha</span> do quadrimomento através de uma superfície
-      de <span class="m">x^\beta</span> constante.
+      A densidade de <em>número</em> ganhou um fator de
+      <span class="m">\gamma</span>; a de <em>energia</em> ganhou dois. E um
+      <span class="m">\gamma</span> é um <span class="m">\Lambda</span>: o que
+      transforma com um <span class="m">\Lambda</span> é componente de vetor, e
+      foi por isso que <span class="m">N^\mu</span> coube. <strong>Com dois
+      <span class="m">\Lambda</span> não há quadrivetor que sirva</strong> —
+      não existe onde encaixar <span class="m">\rho</span> num objeto de um
+      índice só.
     </p>
   </div>
   <p class="legenda">
-    Leia duas vezes. O <strong>primeiro</strong> índice diz <em>qual</em>
-    componente do momento é transportada; o <strong>segundo</strong>, através de
-    <em>qual superfície</em>. É a estrutura de <span class="m">N^\mu</span> com
-    um índice a mais.
+    A saída não é abandonar a estrutura, é subir um degrau nela:
+    <span class="m">T^{\bar\alpha\bar\beta}=\Lambda^{\bar\alpha}{}_{\mu}
+    \Lambda^{\bar\beta}{}_{\nu}T^{\mu\nu}</span> é exatamente um tensor de
+    tipo <span class="m">(2,0)</span>.
   </p>
-  <p class="M">T^{\alpha\beta}=m\,U^\alpha N^\beta=\rho\,U^\alpha U^\beta,
-    \qquad \rho\equiv mn</p>
+</section>
+
+<section>
+  <p class="etiqueta">Seção 4.7</p>
+  <h2>O tensor energia-momento</h2>
   <p class="legenda">
-    Para poeira, cada partícula carrega <span class="m">p^\alpha=mU^\alpha</span>
-    e o fluxo de partículas é <span class="m">N^\beta=nU^\beta</span> — o fluxo
-    de momento é o produto. No MCRF sobra só
-    <span class="m">T^{00}=\rho</span>: nenhuma energia flui, nenhum momento
-    existe, nenhuma tensão atua. <strong>Poeira em repouso é o objeto mais
-    simples que gravita.</strong>
+    O tipo <span class="m">(2,0)</span> não é remendo: já estava no enunciado
+    “densidade de energia”. Para produzir esse número são precisas
+    <strong>duas escolhas independentes</strong>, e cada uma é uma 1-forma —
+    <em>qual componente</em> do quadrimomento
+    (<span class="m">\tilde\omega^\alpha(\vec p)=p^\alpha</span>) e
+    <em>através de qual superfície</em> (§4.5).
   </p>
+  <div class="destaque">
+    <p>
+      <strong>Definição.</strong> <span class="m">T</span> é a máquina de tipo
+      <span class="m">(2,0)</span> que recebe duas 1-formas e devolve um
+      número. Suas componentes são os valores sobre a base dual:
+    </p>
+    <p class="M">T(\tilde\omega^\alpha,\tilde\omega^\beta)=T^{\alpha\beta}</p>
+    <p class="legenda">
+      A primeira entrada diz <em>o que</em> é transportado; a segunda,
+      <em>através de onde</em>. É a definição a guardar, porque não menciona
+      referencial nenhum.
+    </p>
+  </div>
+  <div class="duas larga-esq">
+    <div>
+      <p class="legenda">
+        Lida em componentes, vira a frase de sempre:
+        <span class="m">T^{\alpha\beta}</span> é o fluxo da componente
+        <span class="m">\alpha</span> do quadrimomento através de uma
+        superfície de <span class="m">x^\beta</span> constante. As duas dizem o
+        mesmo — <span class="m">\tilde\omega^\beta</span> é o gradiente de
+        <span class="m">x^\beta</span>, logo a normal àquela superfície.
+      </p>
+    </div>
+    <div>
+      <p class="M">T=\vec p\otimes\vec N
+        \quad\Longrightarrow\quad
+        T^{\alpha\beta}=\rho\,U^\alpha U^\beta</p>
+      <p class="legenda">
+        Poeira: <span class="m">T(\tilde\omega^\alpha,\tilde\omega^\beta)
+        =\tilde\omega^\alpha(\vec p)\,\tilde\omega^\beta(\vec N)
+        =p^\alpha N^\beta</span>. No MCRF sobra
+        <span class="m">T^{00}=\rho</span>.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section>
