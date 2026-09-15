@@ -5871,13 +5871,51 @@ argumento de torque da Seção~\ref{sec:simetria-T}. Em teorias mais gerais
 
 As componentes espaciais merecem atenção porque são as menos intuitivas.
 Considere dois elementos vizinhos, $\mathcal{E}_1$ e $\mathcal{E}_2$, com
-interface comum $S$ de área $A$. O primeiro exerce sobre o segundo uma força
-$\bm F$. Como força é taxa de variação de momento --- e no MCRF as velocidades
-são nulas, então a lei de Newton vale ---, dizer que $\mathcal{E}_1$ empurra
-$\mathcal{E}_2$ com força $\bm F$ é dizer que despeja momento nele à taxa
-$\bm F$. Há, portanto, um \emph{fluxo de momento} através de $S$ igual a
-$\bm F/A$. Se $S$ é uma superfície de $x^j$ constante,
-esse fluxo é precisamente $T^{ij}$.
+interface comum $S$ de área $A$, e tome $S$ como uma superfície de $x^j$
+constante. O primeiro exerce sobre o segundo uma força $\bm F$. Como força é
+taxa de variação de momento --- e no MCRF o \emph{elemento} está
+momentaneamente em repouso, de modo que a lei de Newton vale na forma usual
+---, dizer que $\mathcal{E}_1$ empurra $\mathcal{E}_2$ com força $\bm F$ é
+dizer que despeja momento nele à taxa $\bm F$. E esse momento
+não veio do nada: momento se conserva, de modo que ele \emph{atravessou} $S$.
+A taxa total com que o momento cruza a interface é, portanto, $\bm F$.
+
+Falta dividir pela área. \emph{Fluxo}, neste capítulo, é sempre por unidade de
+área e de tempo --- foi assim que a Seção~\ref{sec:poeira-densidade} o
+definiu, e é assim que $N^i=\gamma n v^i$ conta partículas. O fluxo de momento
+através de $S$ é, então, $\bm F/A$: o total $\bm F$ é o que uma integral sobre
+$S$ devolveria, e $\bm F/A$ é o integrando.
+
+Resta a questão dos índices, e ela é o ponto todo. Número de partículas é um
+\emph{escalar}, e por isso basta dizer \emph{qual superfície} foi atravessada:
+um índice, e o fluxo é a componente $N^j$. Momento não é escalar --- é preciso
+dizer também \emph{qual componente} do momento atravessou. São dois índices, e
+daí o resultado ser
+\begin{equation}
+  T^{ij}=\frac{F^{i}}{A} ,
+  \label{eq:tensao-forca-area}
+\end{equation}
+lido componente a componente: $i$ diz que componente do momento flui, e $j$,
+através de que superfície. É por isso que as tensões formam um tensor e não um
+vetor. Em termos de \eqref{eq:fluxo-invariante}, é a mesma operação de sempre
+com um índice sobrando: contrair a normal $\tilde n$ com $T^{\alpha\beta}$
+consome um índice --- como $n_\mu N^\mu$ consumia o único que havia ---, e o
+que resta não é um número, é o \emph{quadrimomento} que atravessa por unidade
+de área e de tempo.
+
+Repare, por fim, por que o argumento teve de passar por forças em vez de usar
+``densidade vezes velocidade''. No MCRF o que se anula é a velocidade
+\emph{média} do elemento, não a de cada partícula --- e ainda assim
+$T^{ij}\neq0$ para qualquer fluido com pressão. O momento atravessa $S$ sem
+que nada se desloque em média, levado pela agitação desordenada das partículas
+e pelas forças entre elas. O motivo é que o cancelamento que zera o fluxo de
+\emph{número} não zera o de momento: um é linear nas velocidades e se anula com
+$\langle v^i\rangle=0$, o outro é quadrático, $\langle v^iv^j\rangle$, e não
+tem como se anular. Se a agitação for isotrópica, $\langle v^iv^j\rangle$ é
+proporcional a $\delta^{ij}$ --- e daí a pressão ser isotrópica, que é a forma
+de $T^{ij}$ da Seção~\ref{sec:fluido-perfeito}. A poeira é a exceção: nela as
+partículas estão \emph{de fato} todas paradas no MCRF, e é por isso que, só
+para ela, $T^{ij}=0$.
 
 \begin{figure}[htbp]
   \centering
@@ -5891,13 +5929,38 @@ esse fluxo é precisamente $T^{ij}$.
 \end{figure}
 
 \begin{resultado}
-\textbf{Por que $T^{ij}=T^{ji}$.} Tome um elemento cúbico de lado $\ell$ e
-calcule o torque em torno do eixo $z$. A força sobre a face de normal $x$ é
-$F^i_{(x)}=T^{ix}\ell^2$; a sobre a face de normal $y$ é
-$F^i_{(y)}=T^{iy}\ell^2$. Cada uma age a uma distância $\ell/2$ do centro, e
-as faces opostas contribuem igualmente. O torque resultante é
+\textbf{Por que $T^{ij}=T^{ji}$.} Tome um elemento cúbico de lado $\ell$
+centrado na origem e calcule o torque em torno do eixo $z$, isto é
+$\tau_z=xF^y-yF^x$. A força sobre a face de normal $x$ é
+$F^i_{(x)}=T^{ix}\ell^2$, aplicada a $\ell/2$ do centro; a força sobre a face
+de normal $y$ é $F^i_{(y)}=T^{iy}\ell^2$, também a $\ell/2$. As faces de
+normal $z$ não entram: estão em $x=y=0$, e $\tau_z$ só enxerga $x$ e $y$.
+
+O passo que decide a conta é o que acontece na face \emph{oposta}. Lá a força
+inverte, porque a normal externa inverte --- é a lei de Cauchy
+$\vec t(-\hat n)=-\vec t(\hat n)$, que é a terceira lei de Newton aplicada à
+interface ---, e o vetor posição inverte junto. Cada par de faces é, portanto,
+um \textbf{binário}: duas forças antiparalelas de mesmo módulo aplicadas em
+pontos opostos, que é exatamente a combinação que anula a força resultante sem
+anular o torque,
 \[
-  \tau_z=\ell^3\bigl(T^{xy}-T^{yx}\bigr) .
+  \vec F_-=-\vec F_+
+  \quad\Longrightarrow\quad
+  \underbrace{\vec F_++\vec F_-=\vec 0}_{\text{força}},
+  \qquad
+  \underbrace{\vec r\times\vec F_++(-\vec r)\times\vec F_-
+   =2\,\vec r\times\vec F_+}_{\text{torque}} .
+\]
+As duas faces de um par contribuem igualmente, em vez de se cancelarem, e cada
+par vale, portanto,
+\[
+  2\times\frac{\ell}{2}\times\ell^2=\ell^3
+\]
+vezes a sua componente de tensão --- é aqui que o braço $\ell/2$ deixa de
+aparecer ---, e os dois pares entram com sinais opostos, porque um aparece em
+$xF^y$ e o outro em $-yF^x$:
+\[
+  \tau_z=\ell^3\bigl(T^{yx}-T^{xy}\bigr) .
 \]
 Agora compare com o momento de inércia do elemento, que escala como
 $I\propto\rho\,\ell^5$. A aceleração angular seria

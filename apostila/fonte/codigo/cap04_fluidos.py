@@ -146,16 +146,18 @@ def figura_tensoes():
     ax = axs[0]
     ax.add_patch(Polygon([(0, 0), (1, 0), (1, 1), (0, 1)], closed=True,
                          facecolor=NEVOA, edgecolor=PETROLEO, lw=1.6))
-    setas = [((1.0, 0.5), (0.42, 0.0), r"$T^{xx}$", TERRACOTA),
-             ((1.0, 0.5), (0.0, 0.34), r"$T^{yx}$", AMBAR),
-             ((0.5, 1.0), (0.0, 0.42), r"$T^{yy}$", TERRACOTA),
-             ((0.5, 1.0), (0.34, 0.0), r"$T^{xy}$", AMBAR)]
-    for (px, py), (dx, dy), rot, cor in setas:
+    setas = [((1.0, 0.5), (0.42, 0.0), r"$T^{xx}$", TERRACOTA,
+              (1.48, 0.50), "left", "center"),
+             ((1.0, 0.5), (0.0, 0.34), r"$T^{yx}$", AMBAR,
+              (1.06, 0.67), "left", "center"),
+             ((0.5, 1.0), (0.0, 0.42), r"$T^{yy}$", TERRACOTA,
+              (0.50, 1.49), "center", "bottom"),
+             ((0.5, 1.0), (0.34, 0.0), r"$T^{xy}$", AMBAR,
+              (0.67, 1.06), "center", "bottom")]
+    for (px, py), (dx, dy), rot, cor, (tx, ty), ha, va in setas:
         ax.arrow(px, py, dx, dy, color=cor, lw=1.4, head_width=0.055,
                  length_includes_head=True)
-        ax.text(px + dx * 1.25 + (0.10 if dy else 0.0),
-                py + dy * 1.25 + (0.10 if dx else 0.0),
-                rot, color=cor, fontsize=10, ha="center")
+        ax.text(tx, ty, rot, color=cor, fontsize=10, ha=ha, va=va)
     ax.text(0.5, 0.5, "elemento\nde fluido", ha="center", va="center",
             color=GRAFITE, fontsize=9)
     ax.text(0.5, -0.30, "a face de normal $x$ recebe as duas componentes:\n"
@@ -187,7 +189,7 @@ def figura_tensoes():
             color=TERRACOTA, fontsize=12)
     ax.text(1.18, 0.72, r"$T^{yx}$", color=AMBAR, fontsize=10)
     ax.text(0.80, 1.16, r"$T^{xy}$", color=PETROLEO, fontsize=10)
-    ax.text(0.5, -0.30, r"$\tau_z = \ell^3\,(T^{xy}-T^{yx})$ e $I\propto \ell^5$:"
+    ax.text(0.5, -0.30, r"$\tau_z = \ell^3\,(T^{yx}-T^{xy})$ e $I\propto \ell^5$:"
             "\n" r"se $T^{xy}\neq T^{yx}$, a rotação diverge quando $\ell\to0$",
             ha="center", color=GRAFITE, fontsize=8.5)
     ax.set_xlim(-0.65, 1.75)
