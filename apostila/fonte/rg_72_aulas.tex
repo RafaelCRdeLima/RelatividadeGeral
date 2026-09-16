@@ -6003,12 +6003,41 @@ dividir por $N$,
   \label{eq:primeira-lei}
 \end{equation}
 com $q=Q/N$ o calor por partícula. O lado direito é uma forma diferencial em
-$(\rho,n)$, e como toda forma em duas variáveis ela admite um fator integrante:
-existem funções $T$ e $S$ de $(\rho,n)$ tais que $\Delta q=T\,\Delta S$. São a
-\textbf{temperatura} e a \textbf{entropia específica} --- definidas, aqui, por
-essa propriedade e por mais nada. É o mesmo movimento da termodinâmica de
-sempre; o que a relatividade acrescenta é apenas que $\rho$ inclui a energia de
-repouso.
+$(\rho,n)$, e toda forma em duas variáveis admite um fator integrante. Existem,
+portanto, funções $T$ e $S$ de $(\rho,n)$ tais que
+\begin{equation}
+  \Delta q=T\,\Delta S ,
+  \label{eq:fator-integrante}
+\end{equation}
+e elas são a \textbf{temperatura} e a \textbf{entropia específica}. É o mesmo
+movimento da termodinâmica de sempre; o que a relatividade acrescenta é apenas
+que $\rho$ inclui a energia de repouso.
+
+\begin{atencao}
+Vale saber exatamente o quanto \eqref{eq:fator-integrante} define, porque é
+menos do que parece. O teorema entrega um \emph{par} --- uma função
+multiplicando a diferencial de outra --- e nada nele diz qual das duas deve se
+chamar $T$: escrever $\Delta q=S\,\Delta T$, com os nomes trocados, seria
+igualmente legítimo neste ponto. E a liberdade é maior que uma troca: se
+$\Delta q=T\,\Delta S$ vale, então vale também com $S'=F(S)$ e $T'=T/F'(S)$
+para qualquer $F$ suave, de modo que há uma função inteira de arbitrariedade.
+
+Quem escolhe o par certo é a física, e ela entra por três portas. A lei zero:
+o fator integrante é a grandeza que se \emph{iguala} entre corpos em contato
+térmico, e é isso que o faz intensivo, isto é, temperatura --- a diferenciada
+é a que se \emph{soma} entre subsistemas, extensiva, e é a entropia. A
+aditividade: exigir $S=S_1+S_2$ ao juntar dois sistemas mata a liberdade $F$ e
+deixa apenas uma constante multiplicativa, que é a escolha de unidade. E a
+segunda lei, que seleciona $S$ como a que não decresce. Nada disso está em
+\eqref{eq:fator-integrante}, e é por isso que ela sozinha não define $T$ e $S$
+--- apenas garante que o par existe.
+
+De passagem, a hipótese ``duas variáveis'' não é decoração. Em duas, o fator
+integrante sempre existe localmente; em três ou mais, só sob a condição de
+Frobenius, que uma forma genérica não satisfaz. É daí que vem a necessidade
+do princípio de Carathéodory na termodinâmica geral --- e é sorte do fluido
+simples que $(\rho,n)$ sejam apenas dois.
+\end{atencao}
 
 \begin{central}
 Repare na combinação $\rho+p$ que aparece em \eqref{eq:primeira-lei}. Ela não
@@ -6131,14 +6160,103 @@ $\partial_\alpha T^{\alpha\beta}=0$,
 
 \subsection*{Projeção ao longo do movimento: a equação de energia}
 
-Contraia com $U_\beta$, lembrando que $U^\beta U_\beta=-1$ e portanto
-$U_\beta\,\partial_\alpha U^\beta=0$:
+Das quatro equações, a que aponta \emph{ao longo} de $\vec U$ sai contraindo
+com $U_\beta$. Antes, um lema que será usado o curso inteiro. Derivando
+$U^\beta U_\beta=-1$ em qualquer direção, e usando que $\eta_{\mu\nu}$ é
+constante e simétrica,
+\begin{equation}
+  \partial_\alpha\bigl(U^\beta U_\beta\bigr)
+   =2\,U_\beta\,\partial_\alpha U^\beta=0 ,
+  \label{eq:U-ortogonal-dU}
+\end{equation}
+isto é, \emph{qualquer} derivada da quadrivelocidade é ortogonal a ela. É a
+mesma conta que na Seção~\ref{sec:quadrivelocidade} deu $A^\mu U_\mu=0$, agora
+com a derivada em uma direção arbitrária, e não só ao longo da linha de mundo.
+
+Agora a contração, termo a termo. No primeiro, distribua a derivada e use o
+lema:
+\[
+  U_\beta\,\partial_\alpha\bigl[(\rho+p)U^\alpha U^\beta\bigr]
+  =\partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]
+   \underbrace{U_\beta U^\beta}_{-1}
+   +(\rho+p)U^\alpha
+   \underbrace{U_\beta\,\partial_\alpha U^\beta}_{0}
+  =-\partial_\alpha\bigl[(\rho+p)U^\alpha\bigr] .
+\]
+No segundo, $U_\beta\,\partial^\beta p=U^\alpha\partial_\alpha p$. Somando os
+dois e trocando o sinal global,
+\[
+  \partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]-U^\alpha\partial_\alpha p=0 .
+\]
+Abrir o colchete revela o passo que o resultado final esconde --- e é onde
+costuma travar a leitura. De $\partial_\alpha[(\rho+p)U^\alpha]$ sai um termo
+$U^\alpha\partial_\alpha p$ que \emph{cancela} exatamente o que veio do
+gradiente de pressão. Do $\rho+p$ derivado sobra só o $\rho$, enquanto o
+$\rho+p$ que multiplica a divergência fica inteiro:
 \begin{equation}
   U^\alpha\partial_\alpha\rho+(\rho+p)\,\partial_\alpha U^\alpha=0 .
   \label{eq:energia-fluido}
 \end{equation}
-O primeiro termo é a variação de $\rho$ seguindo o elemento; o segundo é o
-trabalho de expansão. É a primeira lei da termodinâmica em forma de campo.
+
+\textbf{Os dois termos têm nome.} $U^\alpha\partial_\alpha$ é a derivada ao
+longo da linha de mundo, isto é $\dd/\dd\tau$ --- a taxa que o \emph{próprio}
+elemento mede. E $\partial_\alpha U^\alpha$ é a taxa de expansão: pela
+conservação do número \eqref{eq:continuidade} aplicada a $N^\mu=nU^\mu$,
+\[
+  \frac{\dd n}{\dd\tau}+n\,\partial_\alpha U^\alpha=0 ,
+\]
+e como um elemento com $N$ partículas fixas ocupa $V=N/n$, dividir por $-n$ dá
+\begin{equation}
+  \partial_\alpha U^\alpha=\frac{1}{V}\frac{\dd V}{\dd\tau} .
+  \label{eq:expansao}
+\end{equation}
+O divergente da quadrivelocidade é a taxa fracionária de variação do volume do
+elemento --- nada além disso.
+
+\textbf{E então ela é literalmente a primeira lei.} Ponha
+\eqref{eq:expansao} em \eqref{eq:energia-fluido} e multiplique por $V$:
+\begin{equation}
+  \frac{\dd}{\dd\tau}\bigl(\underbrace{\rho V}_{E}\bigr)
+   +p\,\frac{\dd V}{\dd\tau}=0
+  \qquad\Longleftrightarrow\qquad
+  \Delta E=-p\,\Delta V .
+  \label{eq:primeira-lei-campo}
+\end{equation}
+É a primeira lei da Seção~\ref{sec:energia-interna} de volta --- com
+$\Delta Q=0$. O que \eqref{eq:energia-fluido} tem a mais é só a tradução para
+campos: em vez de ``este elemento trocou tanto de energia'', ela diz a mesma
+coisa em cada ponto e em cada instante.
+
+\textbf{O corolário: o escoamento é adiabático.} Aquele $\Delta Q=0$ não foi
+suposto, e vale a pena ver de onde veio. Compare \eqref{eq:energia-fluido} com
+a primeira lei \eqref{eq:primeira-lei}, que ainda continha o calor. Seguindo o
+elemento e usando \eqref{eq:expansao},
+\[
+  n\,\frac{\dd q}{\dd\tau}
+   =\frac{\dd\rho}{\dd\tau}-\frac{\rho+p}{n}\frac{\dd n}{\dd\tau}
+   =\frac{\dd\rho}{\dd\tau}+(\rho+p)\,\partial_\alpha U^\alpha
+   =0 ,
+\]
+onde a última igualdade é \eqref{eq:energia-fluido}. Logo $\dd q/\dd\tau=0$, e
+com \eqref{eq:fator-integrante} sobra
+\begin{equation}
+  U^\alpha\partial_\alpha S=\frac{\dd S}{\dd\tau}=0 .
+  \label{eq:adiabatico}
+\end{equation}
+\emph{A entropia específica de cada elemento não muda enquanto ele escoa.} E
+isso já estava dentro de \eqref{eq:T-fluido-perfeito} desde o começo: um
+fluido perfeito foi \emph{definido} sem condução de calor --- é o
+$T^{0i}=0$ no MCRF --- e sem condução não há como um elemento trocar calor com
+o vizinho. Também não há viscosidade, então não há nada irreversível: a
+segunda lei é obedecida no caso de igualdade, $\Delta S=0$, e não por pouco.
+
+\begin{central}
+Guarde a divisão de trabalho, porque ela se repete em espaço curvo: a
+componente de $\partial_\alpha T^{\alpha\beta}=0$ \emph{paralela} a $\vec U$ é
+a conservação de energia da termodinâmica; as três \emph{ortogonais} são a
+segunda lei de Newton. Quatro equações, dois conteúdos físicos --- e a
+projeção é o que os separa.
+\end{central}
 
 \subsection*{Projeção perpendicular: as equações de Euler}
 
