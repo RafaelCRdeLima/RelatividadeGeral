@@ -202,8 +202,127 @@ def figura_tensoes():
     plt.close(fig)
 
 
+# ----------------------------------------------------------------------
+# 4) O projetor h: as tres contas do Exemplo 4.3, em desenho
+# ----------------------------------------------------------------------
+def figura_projetor(v=0.5):
+    """As tres propriedades de h^mu_beta = delta^mu_beta + U^mu U_beta.
+
+    Sai um arquivo por propriedade, para que cada desenho fique ao lado da
+    sua conta no Exemplo 4.3.  O MESMO vetor A aparece nos tres, decomposto
+    como A = a U + b e_perp com a = 1,3 e b = 0,9 (a != 1 de proposito: no
+    painel (c) a componente temporal de A tem de ser distinguivel de U).
+
+      _a  h aniquila U: a reta de deslizamento coincide com o proprio U, e
+          por isso a sombra de U sobre a reta ortogonal e' a origem.
+      _b  idempotencia: projetado uma vez, A cai sobre a reta; a segunda
+          projecao nao tem para onde mover.
+      _c  no MCRF a mesma operacao e' a projecao perpendicular de sempre.
+    """
+    g = 1.0 / np.sqrt(1.0 - v**2)
+    U = np.array([g * v, g])            # tipo-tempo, norma -1, em (x, ct)
+    E = np.array([g, g * v])            # tipo-espaco, ortogonal a U, norma +1
+    a, b = 1.3, 0.9
+    A = a * U + b * E
+    hA = b * E
+    CINZA = "#9FAEB4"
+    L0, L1 = -0.85, 2.60
+
+    def nova(rotulos=("$x$", "$ct$")):
+        fig, ax = plt.subplots(figsize=(4.3, 4.0))
+        ax.set_xlim(L0, L1); ax.set_ylim(L0, L1)
+        ax.set_aspect("equal")
+        ax.axhline(0, color=LINHA, lw=0.8, zorder=0)
+        ax.axvline(0, color=LINHA, lw=0.8, zorder=0)
+        ax.set_xlabel(rotulos[0]); ax.set_ylabel(rotulos[1])
+        ax.set_xticks([]); ax.set_yticks([])
+        return fig, ax
+
+    def seta(ax, vec, cor, rot, dx=8, dy=6, lw=2.2, tam=12):
+        ax.annotate("", xy=tuple(vec), xytext=(0, 0),
+                    arrowprops=dict(arrowstyle="-|>", color=cor, lw=lw), zorder=5)
+        if rot:
+            ax.annotate(rot, xy=tuple(vec), xytext=(dx, dy),
+                        textcoords="offset points", fontsize=tam, color=cor,
+                        zorder=6)
+
+    def cenario(ax):
+        t = np.array([-0.95, 2.45])
+        ax.plot(t * E[0], t * E[1], color=AMBAR, lw=1.5, zorder=2)
+        ax.plot([0, 2.5], [0, 2.5], color=LINHA, lw=1.2, ls=(0, (6, 4)),
+                zorder=1)
+        seta(ax, U, PETROLEO, r"$\vec{U}$", dx=-32, dy=-2)
+        ax.text(2.50, 1.38, r"$\perp\vec{U}$", fontsize=11.5, color=AMBAR,
+                ha="right", va="bottom")
+
+    def salvar(fig, nome):
+        fig.tight_layout()
+        fig.savefig(OUTDIR / nome, bbox_inches="tight")
+        plt.close(fig)
+
+    # ---------------- (a) o projetor aniquila U ------------------------
+    fig, ax = nova()
+    cenario(ax)
+    ax.plot([U[0], -0.62 * U[0]], [U[1], -0.62 * U[1]], color=TERRACOTA,
+            lw=1.4, ls=(0, (4, 3)), zorder=4)
+    ax.plot([0], [0], "o", color=TERRACOTA, ms=9, zorder=7)
+    ax.annotate(r"$h(\vec{U})=0$", xy=(0, 0), xytext=(14, -26),
+                textcoords="offset points", fontsize=12, color=TERRACOTA,
+                zorder=7)
+    ax.text(L0 + 0.08, 2.50,
+            "projetar é deslizar paralelamente\n"
+            r"a $\vec{U}$ até a reta $\perp\vec{U}$; para o" "\n"
+            r"próprio $\vec{U}$, essa reta passa" "\n"
+            "pela origem",
+            fontsize=8.6, color=GRAFITE, ha="left", va="top")
+    salvar(fig, "cap04_projetor_a.pdf")
+
+    # ---------------- (b) projetar duas vezes = projetar uma -----------
+    fig, ax = nova()
+    cenario(ax)
+    seta(ax, A, GRAFITE, r"$\vec{A}$", dx=4, dy=4)
+    ax.annotate("", xy=tuple(hA), xytext=tuple(A),
+                arrowprops=dict(arrowstyle="-|>", color=TERRACOTA, lw=1.4,
+                                ls=(0, (4, 3))), zorder=4)
+    seta(ax, hA, TERRACOTA, "", lw=2.4)
+    ax.plot([hA[0]], [hA[1]], "o", color=TERRACOTA, ms=7, zorder=7)
+    ax.annotate(r"$h\vec{A}$", xy=tuple(hA * 0.55), xytext=(0, -22),
+                textcoords="offset points", fontsize=12, color=TERRACOTA,
+                ha="center", zorder=7)
+    ax.annotate("2ª projeção: já está\nsobre a reta, não se move",
+                xy=tuple(hA + np.array([0.06, -0.03])), xytext=(2.50, 0.02),
+                textcoords="data", fontsize=8.6, color=TERRACOTA,
+                ha="right", va="bottom",
+                arrowprops=dict(arrowstyle="-|>", color=TERRACOTA, lw=1.0,
+                                connectionstyle="arc3,rad=-0.3"), zorder=6)
+    salvar(fig, "cap04_projetor_b.pdf")
+
+    # ---------------- (c) no MCRF: diag(0,1,1,1) -----------------------
+    fig, ax = nova(rotulos=("$x'$", "$ct'$"))
+    ax.plot([-0.95, 2.45], [0, 0], color=AMBAR, lw=1.5, zorder=2)
+    ax.plot([0, 2.5], [0, 2.5], color=LINHA, lw=1.2, ls=(0, (6, 4)), zorder=1)
+    seta(ax, (0.0, 1.0), PETROLEO, r"$\vec{U}=\vec{e}_{0'}$", dx=-14, dy=2)
+    Am = np.array([b, a])                      # componentes de A no MCRF
+    seta(ax, Am, GRAFITE, r"$\vec{A}$", dx=6, dy=4)
+    ax.plot([0, Am[0]], [Am[1], Am[1]], color=LINHA, lw=1.1, ls=(0, (3, 3)),
+            zorder=2)
+    ax.annotate("", xy=(Am[0], Am[1]), xytext=(Am[0], 0),
+                arrowprops=dict(arrowstyle="-|>", color=CINZA, lw=2.2), zorder=4)
+    ax.text(Am[0] + 0.10, Am[1] * 0.5, r"$A^{0'}\to 0$", fontsize=10,
+            color=CINZA, ha="left", va="center")
+    seta(ax, (Am[0], 0.0), TERRACOTA, "", lw=2.6)
+    ax.text(Am[0] * 0.5, -0.20, r"$A^{1'}$ fica", fontsize=10,
+            color=TERRACOTA, ha="center", va="top")
+    ax.text(L0 + 0.08, 2.50,
+            r"$h^{\mu\nu}=\mathrm{diag}(0,1,1,1)$" "\n"
+            "no referencial do próprio elemento\na projeção é a de sempre",
+            fontsize=8.6, color=GRAFITE, ha="left", va="top")
+    salvar(fig, "cap04_projetor_c.pdf")
+
+
 if __name__ == "__main__":
     figura_densidade_fluxo()
     figura_fluxo_temporal()
     figura_tensoes()
+    figura_projetor()
     print(f"Figuras salvas em {OUTDIR}")
