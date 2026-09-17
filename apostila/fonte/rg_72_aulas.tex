@@ -6342,7 +6342,39 @@ espaço \emph{ortogonal} a $\vec U$. O operador que faz isso é
   h^{\mu}{}_{\beta}=\delta^{\mu}{}_{\beta}+U^{\mu}U_{\beta} ,
   \label{eq:projetor}
 \end{equation}
-e o que o caracteriza são três propriedades que vale conferir à mão uma vez.
+
+\textbf{Uma palavra sobre os índices, antes de usá-lo.} O mesmo $h$ vai
+aparecer com os índices em posições diferentes, e elas não são objetos
+diferentes. Levantando o segundo com a métrica,
+\begin{equation}
+  h^{\mu\nu}=\eta^{\nu\beta}h^{\mu}{}_{\beta}
+   =\underbrace{\eta^{\nu\beta}\delta^{\mu}{}_{\beta}}_{\eta^{\mu\nu}}
+    +U^{\mu}U^{\nu}
+   =\eta^{\mu\nu}+U^{\mu}U^{\nu} ,
+  \label{eq:projetor-levantado}
+\end{equation}
+e o que parece fórmula nova --- o $\delta$ virando $\eta$ --- é só isso: o
+índice levantado de $\delta^{\mu}{}_{\beta}$ \emph{é} $\eta^{\mu\nu}$. Descendo o
+outro sai $h_{\mu\nu}=\eta_{\mu\nu}+U_{\mu}U_{\nu}$.
+
+A posição dos índices não é gosto: ela diz o que o projetor está comendo.
+\begin{center}
+\small
+\begin{tabular}{llll}
+\toprule
+forma & come & devolve & onde aparece \\
+\midrule
+$h^{\mu}{}_{\beta}$ & um vetor $A^{\beta}$ & um vetor
+  & (a) e (b); itens (i) e (ii) \\
+$h^{\mu\nu}$ & uma 1-forma $\omega_{\nu}$ & um vetor
+  & item (iii); equação de Euler \\
+$h_{\mu\nu}$ & dois vetores & um escalar & a métrica espacial \\
+\bottomrule
+\end{tabular}
+\end{center}
+Basta usar a forma cujos índices se casam com o que está à mão, e não sobra
+escolha a fazer. O que caracteriza $h$ são três propriedades, e vale
+conferi-las à mão uma vez.
 
 \begin{example}
 \textbf{O projetor, em três contas.}
@@ -6383,7 +6415,7 @@ volta.
 \label{fig:projetor-b}
 \end{center}
 
-\emph{(c) No MCRF ele é a métrica espacial.} Ali $U^{\alpha}=(1,0,0,0)$, e as
+\emph{(c) No MCRF, $h$ é a métrica espacial.} Ali $U^{\alpha}=(1,0,0,0)$, e as
 componentes de $h^{\mu\nu}=\eta^{\mu\nu}+U^{\mu}U^{\nu}$ saem uma a uma:
 \[
   h^{00}=-1+(1)(1)=0,
@@ -6392,7 +6424,12 @@ componentes de $h^{\mu\nu}=\eta^{\mu\nu}+U^{\mu}U^{\nu}$ saem uma a uma:
   \qquad
   h^{ij}=\delta^{ij}+0=\delta^{ij} ,
 \]
-isto é, $h^{\mu\nu}=\operatorname{diag}(0,1,1,1)$.
+isto é, $h^{\mu\nu}=\operatorname{diag}(0,1,1,1)$. Aqui, ao contrário do item
+(iii), a posição dos índices é indiferente: subir ou descer só troca o sinal
+das entradas que carregam um $0$, e são exatamente essas que se anulam ---
+$h^{0}{}_{0}=\delta^{0}{}_{0}+U^{0}U_{0}=1-1=0$ e
+$h_{00}=\eta_{00}+U_{0}U_{0}=-1+1=0$. No MCRF, as três formas da tabela têm as
+mesmas componentes.
 
 \begin{center}
 \includegraphics[width=0.60\linewidth]{cap04_projetor_c.pdf}
@@ -6424,9 +6461,15 @@ e olhe termo a termo:
   $h^\mu{}_\beta\,U^\alpha\partial_\alpha U^\beta
    =U^\alpha\partial_\alpha U^\mu
    +U^\mu U^\alpha\underbrace{U_\beta\,\partial_\alpha U^\beta}_{0}$.
-  \item \textbf{(iii) é o único que sente o projetor de verdade}:
-  $h^\mu{}_\beta\,\partial^\beta p
-   =\bigl(\eta^{\mu\nu}+U^\mu U^\nu\bigr)\partial_\nu p$.
+  \item \textbf{(iii) é o único que sente o projetor de verdade}. E é aqui
+  que a forma de índices levantados \eqref{eq:projetor-levantado} entra, e não
+  por capricho: o projetor está agindo sobre $\partial_\nu p$, que é uma
+  1-forma, e só a versão $h^{\mu\nu}$ tem índice embaixo para contrair com
+  ela. Mesmo $h$, outra posição de índices:
+  \[
+    h^\mu{}_\beta\,\partial^\beta p=h^{\mu\nu}\partial_\nu p
+     =\bigl(\eta^{\mu\nu}+U^\mu U^\nu\bigr)\partial_\nu p .
+  \]
 \end{itemize}
 Sobra, então,
 \begin{equation}
