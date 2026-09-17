@@ -5993,11 +5993,34 @@ densidade de energia total $\rho$ é o que gravita; $\rho_0$ é apenas a parte
 de massa de repouso.
 
 A primeira lei da termodinâmica, aplicada a um elemento que troca calor e
-realiza trabalho, é $\Delta E=\Delta Q-p\,\Delta V$. O elemento tem $N$
-partículas fixas, de modo que $V=N/n$ e $E=\rho V$ --- e note que é o
-\emph{número} que se mantém, não o volume: quem varia é $n$. Então
-$\Delta V=-N\,\Delta n/n^2$, e substituir as duas na primeira lei dá, depois de
-dividir por $N$,
+realiza trabalho, é
+\begin{equation}
+  \Delta E=\Delta Q-p\,\Delta V ,
+  \label{eq:primeira-lei-classica}
+\end{equation}
+com $-p\,\Delta V$ o trabalho \emph{recebido}: comprimido, o elemento ganha
+energia; expandindo, perde. O elemento tem $N$ partículas fixas, de modo que
+$V=N/n$ e $E=\rho V$ --- e note que é o \emph{número} que se mantém, não o
+volume: quem varia é $n$.
+
+Vale abrir esse $E$ antes de seguir, porque ele não é o que o nome sugere. Com
+\eqref{eq:energia-interna} e $V=N/n$, o $n$ cancela:
+\begin{equation}
+  E=\rho V=mn(1+\Pi)\,\frac{N}{n}=mN(1+\Pi)
+   =\underbrace{mN}_{\text{repouso}}+\underbrace{mN\Pi}_{\text{interna}} .
+  \label{eq:E-elemento}
+\end{equation}
+$E$ é, portanto, a energia \emph{total} do elemento, repouso incluído --- e não
+a energia interna da termodinâmica newtoniana. Mas $mN$ é constante, de modo
+que $\Delta E=mN\,\Delta\Pi$ é exatamente a variação da energia interna. As duas
+coincidem onde importa, nas variações, e é por isso que
+\eqref{eq:primeira-lei-classica} vale sem retoque: em relatividade a energia de
+repouso viaja junto e se elimina sozinha. (Desde que o número de partículas se
+conserve --- com reações mudando as massas de repouso, $mN$ não seria constante
+e a separação voltaria a importar.)
+
+Então $\Delta V=-N\,\Delta n/n^2$, e substituir as duas em
+\eqref{eq:primeira-lei-classica} dá, depois de dividir por $N$,
 \begin{equation}
   n\,\Delta q=\Delta\rho-\frac{\rho+p}{n}\,\Delta n ,
   \label{eq:primeira-lei}
@@ -6173,8 +6196,18 @@ isto é, \emph{qualquer} derivada da quadrivelocidade é ortogonal a ela. É a
 mesma conta que na Seção~\ref{sec:quadrivelocidade} deu $A^\mu U_\mu=0$, agora
 com a derivada em uma direção arbitrária, e não só ao longo da linha de mundo.
 
-Agora a contração, termo a termo. No primeiro, distribua a derivada e use o
-lema:
+Agora a contração, termo a termo. Comece pelo primeiro, e repare que o
+$U_\beta$ fica \emph{fora} da derivada o tempo todo: ele multiplica o
+resultado, não entra no colchete. Dentro do colchete, a regra do produto
+separa $(\rho+p)U^\alpha$ de $U^\beta$:
+\[
+  \partial_\alpha\bigl[(\rho+p)U^\alpha U^\beta\bigr]
+  =\partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]U^\beta
+   +(\rho+p)U^\alpha\,\partial_\alpha U^\beta .
+\]
+Só agora multiplique por $U_\beta$ e reagrupe os fatores --- reagrupar é
+livre, porque em componentes tudo são números; o que não seria livre é mover
+um fator para dentro ou para fora de um $\partial$. Com o lema,
 \[
   U_\beta\,\partial_\alpha\bigl[(\rho+p)U^\alpha U^\beta\bigr]
   =\partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]
@@ -6203,15 +6236,43 @@ longo da linha de mundo, isto é $\dd/\dd\tau$ --- a taxa que o \emph{próprio}
 elemento mede. E $\partial_\alpha U^\alpha$ é a taxa de expansão: pela
 conservação do número \eqref{eq:continuidade} aplicada a $N^\mu=nU^\mu$,
 \[
-  \frac{\dd n}{\dd\tau}+n\,\partial_\alpha U^\alpha=0 ,
+  \frac{\dd n}{\dd\tau}+n\,\partial_\alpha U^\alpha=0
+  \qquad\Longrightarrow\qquad
+  \partial_\alpha U^\alpha=-\frac{1}{n}\frac{\dd n}{\dd\tau} .
 \]
-e como um elemento com $N$ partículas fixas ocupa $V=N/n$, dividir por $-n$ dá
+Falta trocar densidade por volume. Um elemento com $N$ partículas fixas ocupa
+$V=N/n$, com $N$ constante, e o jeito de conferir é substituir isso nos
+\emph{dois} fatores de $\frac{1}{V}\frac{\dd V}{\dd\tau}$, um de cada vez. O
+primeiro é imediato:
+\[
+  \frac{1}{V}=\frac{1}{N/n}=\frac{n}{N} .
+\]
+No segundo, o $N$ sai da derivada por ser constante, e o que sobra é derivar
+$1/n$:
+\[
+  \frac{\dd V}{\dd\tau}
+   =N\,\frac{\dd}{\dd\tau}\!\left(\frac{1}{n}\right)
+   =N\cdot\left(-\frac{1}{n^{2}}\frac{\dd n}{\dd\tau}\right)
+   =-\frac{N}{n^{2}}\,\frac{\dd n}{\dd\tau} .
+\]
+É daqui que vem o \emph{segundo} sinal --- não da divisão por $-n$, mas da
+derivada de $1/n$. Agora o produto dos dois fatores, em que o $N$ cancela e
+$n/n^{2}$ deixa $1/n$:
+\[
+  \frac{1}{V}\frac{\dd V}{\dd\tau}
+   =\frac{n}{N}\cdot\left(-\frac{N}{n^{2}}\frac{\dd n}{\dd\tau}\right)
+   =-\frac{1}{n}\frac{\dd n}{\dd\tau} ,
+\]
+que é exatamente a expressão de que partimos. Logo
 \begin{equation}
-  \partial_\alpha U^\alpha=\frac{1}{V}\frac{\dd V}{\dd\tau} .
+  \partial_\alpha U^\alpha=-\frac{1}{n}\frac{\dd n}{\dd\tau}
+   =+\frac{1}{V}\frac{\dd V}{\dd\tau} .
   \label{eq:expansao}
 \end{equation}
 O divergente da quadrivelocidade é a taxa fracionária de variação do volume do
-elemento --- nada além disso.
+elemento --- nada além disso. E o sinal está certo: num elemento que se
+expande, $V$ cresce e $n$ cai, e $\partial_\alpha U^\alpha>0$, que é o que se
+espera de algo chamado taxa de expansão.
 
 \textbf{E então ela é literalmente a primeira lei.} Ponha
 \eqref{eq:expansao} em \eqref{eq:energia-fluido} e multiplique por $V$:
@@ -6222,13 +6283,22 @@ elemento --- nada além disso.
   \Delta E=-p\,\Delta V .
   \label{eq:primeira-lei-campo}
 \end{equation}
-É a primeira lei da Seção~\ref{sec:energia-interna} de volta --- com
-$\Delta Q=0$. O que \eqref{eq:energia-fluido} tem a mais é só a tradução para
-campos: em vez de ``este elemento trocou tanto de energia'', ela diz a mesma
-coisa em cada ponto e em cada instante.
+Compare com \eqref{eq:primeira-lei-classica}, termo a termo: o $\Delta E$ é o
+mesmo, o trabalho $-p\,\Delta V$ é o mesmo --- e o calor sumiu. O que
+\eqref{eq:primeira-lei-campo} está dizendo, portanto, é
+\[
+  \Delta Q=0 ,
+\]
+e essa ausência é o conteúdo físico da equação, não descuido de quem a
+escreveu. Ela também não foi suposta em lugar nenhum: entrou junto com
+\eqref{eq:T-fluido-perfeito}, e o parágrafo seguinte mostra de onde. Fora o
+calor, a única novidade de \eqref{eq:energia-fluido} sobre
+\eqref{eq:primeira-lei-classica} é a tradução para campos: em vez de ``este
+elemento trocou tanto de energia'', ela diz a mesma coisa em cada ponto e em
+cada instante.
 
-\textbf{O corolário: o escoamento é adiabático.} Aquele $\Delta Q=0$ não foi
-suposto, e vale a pena ver de onde veio. Compare \eqref{eq:energia-fluido} com
+\textbf{O corolário: o escoamento é adiabático.} Eis de onde vem aquele
+$\Delta Q=0$. Compare \eqref{eq:energia-fluido} com
 a primeira lei \eqref{eq:primeira-lei}, que ainda continha o calor. Seguindo o
 elemento e usando \eqref{eq:expansao},
 \[
