@@ -6443,24 +6443,46 @@ espaciais, inteiras}. E como \eqref{eq:projetor} é uma equação tensorial, ess
 receita, escrita uma vez no MCRF, vale escrita em qualquer referencial.
 \end{example}
 
-Aplique-o a \eqref{eq:conservacao-fluido-perfeito}, com a derivada já
-distribuída,
+Escrita com a derivada já distribuída,
+\eqref{eq:conservacao-fluido-perfeito} tem três parcelas,
 \[
   \underbrace{\partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]U^\beta}_{\text{(i)}}
   +\underbrace{(\rho+p)U^\alpha\partial_\alpha U^\beta}_{\text{(ii)}}
   +\underbrace{\partial^\beta p}_{\text{(iii)}}=0 ,
 \]
-e olhe termo a termo:
-\begin{itemize}[leftmargin=1.4em,itemsep=0.35em]
-  \item \textbf{(i) morre inteiro}, por ser proporcional a $U^\beta$, que o
-  projetor aniquila. E não é coincidência: era exatamente a parcela que a
-  projeção paralela levou. As quatro equações se repartem em $1+3$ sem
-  sobreposição.
-  \item \textbf{(ii) passa quase intacto}, pelo mesmo lema
-  \eqref{eq:U-ortogonal-dU} de antes:
-  $h^\mu{}_\beta\,U^\alpha\partial_\alpha U^\beta
-   =U^\alpha\partial_\alpha U^\mu
-   +U^\mu U^\alpha\underbrace{U_\beta\,\partial_\alpha U^\beta}_{0}$.
+e projetar é multiplicar a igualdade inteira por $h^{\mu}{}_{\beta}$, somando
+no índice $\beta$:
+\[
+  h^{\mu}{}_{\beta}\Bigl\{
+    \partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]U^{\beta}
+    +(\rho+p)U^{\alpha}\partial_\alpha U^{\beta}
+    +\partial^{\beta}p
+  \Bigr\}=0 .
+\]
+Em cada parcela, o $h^{\mu}{}_{\beta}$ atravessa os fatores que \emph{não}
+carregam o índice $\beta$ --- são números, e reagrupá-los é livre --- até
+encontrar o único que carrega. Termo a termo:
+\begin{itemize}[leftmargin=1.4em,itemsep=0.4em]
+  \item \textbf{(i) morre inteiro.} Quem tem índice $\beta$ aqui é o próprio
+  $U^{\beta}$, e o projetor o aniquila:
+  \[
+    h^{\mu}{}_{\beta}\,\partial_\alpha\bigl[(\rho+p)U^{\alpha}\bigr]U^{\beta}
+     =\partial_\alpha\bigl[(\rho+p)U^{\alpha}\bigr]
+      \underbrace{h^{\mu}{}_{\beta}U^{\beta}}_{0}=0 .
+  \]
+  E não é coincidência: era exatamente a parcela que a projeção paralela
+  levou. As quatro equações se repartem em $1+3$ sem sobreposição.
+  \item \textbf{(ii) passa quase intacto.} Agora quem carrega o $\beta$ é
+  $\partial_\alpha U^{\beta}$, e é sobre ele que o projetor age:
+  \[
+    h^{\mu}{}_{\beta}\,\partial_\alpha U^{\beta}
+     =\bigl(\delta^{\mu}{}_{\beta}+U^{\mu}U_{\beta}\bigr)\partial_\alpha U^{\beta}
+     =\partial_\alpha U^{\mu}
+      +U^{\mu}\underbrace{U_{\beta}\,\partial_\alpha U^{\beta}}_{0}
+     =\partial_\alpha U^{\mu} ,
+  \]
+  pelo lema \eqref{eq:U-ortogonal-dU}. A parcela sobrevive como
+  $(\rho+p)U^{\alpha}\partial_\alpha U^{\mu}$.
   \item \textbf{(iii) é o único que sente o projetor de verdade}. E é aqui
   que a forma de índices levantados \eqref{eq:projetor-levantado} entra, e não
   por capricho: o projetor está agindo sobre $\partial_\nu p$, que é uma
