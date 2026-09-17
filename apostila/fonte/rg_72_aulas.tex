@@ -6483,15 +6483,26 @@ encontrar o único que carrega. Termo a termo:
   \]
   pelo lema \eqref{eq:U-ortogonal-dU}. A parcela sobrevive como
   $(\rho+p)U^{\alpha}\partial_\alpha U^{\mu}$.
-  \item \textbf{(iii) é o único que sente o projetor de verdade}. E é aqui
-  que a forma de índices levantados \eqref{eq:projetor-levantado} entra, e não
-  por capricho: o projetor está agindo sobre $\partial_\nu p$, que é uma
-  1-forma, e só a versão $h^{\mu\nu}$ tem índice embaixo para contrair com
-  ela. Mesmo $h$, outra posição de índices:
+  \item \textbf{(iii) é o único que sente o projetor de verdade}, e é aqui
+  que vale reparar em \emph{onde} a métrica entra. Contrair exige um índice em
+  cima e um embaixo, e o gradiente de pressão tem o dele embaixo --- $\partial_\nu p$
+  é uma 1-forma. Restam duas contas, equivalentes. Ou se levanta o índice do
+  gradiente e usa a forma mista,
   \[
-    h^\mu{}_\beta\,\partial^\beta p=h^{\mu\nu}\partial_\nu p
-     =\bigl(\eta^{\mu\nu}+U^\mu U^\nu\bigr)\partial_\nu p .
+    h^{\mu}{}_{\beta}\,\partial^{\beta}p ,
+    \qquad\text{com}\qquad
+    \partial^{\beta}p=\eta^{\beta\nu}\partial_\nu p ,
   \]
+  ou se levanta o índice do projetor, \eqref{eq:projetor-levantado}, e deixa o
+  gradiente como está:
+  \[
+    h^{\mu\nu}\partial_\nu p
+     =\bigl(\eta^{\mu\nu}+U^{\mu}U^{\nu}\bigr)\partial_\nu p .
+  \]
+  As duas são a mesma coisa, porque $h^{\mu\nu}=h^{\mu}{}_{\beta}\eta^{\beta\nu}$:
+  o $\eta$ entra de um jeito ou de outro, e a única escolha é onde pô-lo. A
+  segunda escrita é a usual, por deixar o gradiente com o índice que ele
+  naturalmente tem.
 \end{itemize}
 Sobra, então,
 \begin{equation}
