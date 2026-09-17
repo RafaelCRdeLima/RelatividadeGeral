@@ -6342,14 +6342,51 @@ espaço \emph{ortogonal} a $\vec U$. O operador que faz isso é
   h^{\mu}{}_{\beta}=\delta^{\mu}{}_{\beta}+U^{\mu}U_{\beta} ,
   \label{eq:projetor}
 \end{equation}
-e o que o caracteriza é aniquilar $\vec U$:
+e o que o caracteriza são três propriedades que vale conferir à mão uma vez.
+
+\begin{example}
+\textbf{O projetor, em três contas.}
+
+\emph{(a) Ele aniquila $\vec U$.} Basta abrir a definição e usar a norma:
 \[
   h^{\mu}{}_{\beta}U^{\beta}
-   =U^{\mu}+U^{\mu}\underbrace{U_\beta U^\beta}_{-1}=0 .
+   =\bigl(\delta^{\mu}{}_{\beta}+U^{\mu}U_{\beta}\bigr)U^{\beta}
+   =U^{\mu}+U^{\mu}\underbrace{U_{\beta}U^{\beta}}_{-1}
+   =U^{\mu}-U^{\mu}=0 .
 \]
-No MCRF, onde $U^\alpha=(1,0,0,0)$, ele é simplesmente
-$h^{\mu\nu}=\operatorname{diag}(0,1,1,1)$: apaga a direção temporal e preserva
-as três espaciais inteiras.
+É esta propriedade que faz a projeção devolver \emph{três} equações, e não
+quatro: uma das quatro componentes do resultado é sempre nula.
+
+\emph{(b) Projetar duas vezes é projetar uma vez.} Multiplique $h$ por si
+mesmo, com cuidado nos índices mudos:
+\[
+  h^{\mu}{}_{\beta}\,h^{\beta}{}_{\nu}
+   =\bigl(\delta^{\mu}{}_{\beta}+U^{\mu}U_{\beta}\bigr)
+    \bigl(\delta^{\beta}{}_{\nu}+U^{\beta}U_{\nu}\bigr)
+   =\delta^{\mu}{}_{\nu}+U^{\mu}U_{\nu}+U^{\mu}U_{\nu}
+    +U^{\mu}\underbrace{U_{\beta}U^{\beta}}_{-1}U_{\nu} .
+\]
+Os três últimos somam $2U^{\mu}U_{\nu}-U^{\mu}U_{\nu}=U^{\mu}U_{\nu}$, e sobra
+$h^{\mu}{}_{\nu}$. Um operador que não muda nada ao ser aplicado de novo é o
+que se chama, em qualquer contexto, de projetor: o que já foi jogado fora não
+volta.
+
+\emph{(c) No MCRF ele é a métrica espacial.} Ali $U^{\alpha}=(1,0,0,0)$, e as
+componentes de $h^{\mu\nu}=\eta^{\mu\nu}+U^{\mu}U^{\nu}$ saem uma a uma:
+\[
+  h^{00}=-1+(1)(1)=0,
+  \qquad
+  h^{0i}=0+(1)(0)=0,
+  \qquad
+  h^{ij}=\delta^{ij}+0=\delta^{ij} ,
+\]
+isto é, $h^{\mu\nu}=\operatorname{diag}(0,1,1,1)$.
+
+As três juntas dizem o que o projetor faz, sem mística nenhuma: \emph{jogue
+fora a componente temporal no referencial do próprio elemento e guarde as três
+espaciais, inteiras}. E como \eqref{eq:projetor} é uma equação tensorial, essa
+receita, escrita uma vez no MCRF, vale escrita em qualquer referencial.
+\end{example}
 
 Aplique-o a \eqref{eq:conservacao-fluido-perfeito}, com a derivada já
 distribuída,
