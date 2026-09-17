@@ -6177,14 +6177,18 @@ curva se obtém trocando a métrica.
 Agora especializamos \eqref{eq:conservacao-T} para o fluido perfeito, e as
 quatro equações ganham nome. Substituindo \eqref{eq:T-fluido-perfeito} em
 $\partial_\alpha T^{\alpha\beta}=0$,
-\[
+\begin{equation}
   \partial_\alpha\bigl[(\rho+p)U^\alpha U^\beta\bigr]+\partial^\beta p=0 .
-\]
+  \label{eq:conservacao-fluido-perfeito}
+\end{equation}
+São quatro equações, uma para cada valor de $\beta$, e o jeito de separá-las
+em pedaços com significado físico é projetá-las: uma ao longo de $\vec U$, três
+ortogonais a ele.
 
 \subsection*{Projeção ao longo do movimento: a equação de energia}
 
-Das quatro equações, a que aponta \emph{ao longo} de $\vec U$ sai contraindo
-com $U_\beta$. Antes, um lema que será usado o curso inteiro. Derivando
+Das quatro equações \eqref{eq:conservacao-fluido-perfeito}, a que aponta
+\emph{ao longo} de $\vec U$ sai contraindo com $U_\beta$. Antes, um lema que será usado o curso inteiro. Derivando
 $U^\beta U_\beta=-1$ em qualquer direção, e usando que $\eta_{\mu\nu}$ é
 constante e simétrica,
 \begin{equation}
@@ -6330,19 +6334,60 @@ projeção é o que os separa.
 
 \subsection*{Projeção perpendicular: as equações de Euler}
 
-O que sobra, projetado ortogonalmente a $U^\beta$, é
+Voltamos a \eqref{eq:conservacao-fluido-perfeito}, a mesma equação de onde
+saiu a projeção paralela. Contrair com $U_\beta$ extraiu uma das quatro
+componentes; as outras três saem projetando o índice livre $\beta$ sobre o
+espaço \emph{ortogonal} a $\vec U$. O operador que faz isso é
+\begin{equation}
+  h^{\mu}{}_{\beta}=\delta^{\mu}{}_{\beta}+U^{\mu}U_{\beta} ,
+  \label{eq:projetor}
+\end{equation}
+e o que o caracteriza é aniquilar $\vec U$:
+\[
+  h^{\mu}{}_{\beta}U^{\beta}
+   =U^{\mu}+U^{\mu}\underbrace{U_\beta U^\beta}_{-1}=0 .
+\]
+No MCRF, onde $U^\alpha=(1,0,0,0)$, ele é simplesmente
+$h^{\mu\nu}=\operatorname{diag}(0,1,1,1)$: apaga a direção temporal e preserva
+as três espaciais inteiras.
+
+Aplique-o a \eqref{eq:conservacao-fluido-perfeito}, com a derivada já
+distribuída,
+\[
+  \underbrace{\partial_\alpha\bigl[(\rho+p)U^\alpha\bigr]U^\beta}_{\text{(i)}}
+  +\underbrace{(\rho+p)U^\alpha\partial_\alpha U^\beta}_{\text{(ii)}}
+  +\underbrace{\partial^\beta p}_{\text{(iii)}}=0 ,
+\]
+e olhe termo a termo:
+\begin{itemize}[leftmargin=1.4em,itemsep=0.35em]
+  \item \textbf{(i) morre inteiro}, por ser proporcional a $U^\beta$, que o
+  projetor aniquila. E não é coincidência: era exatamente a parcela que a
+  projeção paralela levou. As quatro equações se repartem em $1+3$ sem
+  sobreposição.
+  \item \textbf{(ii) passa quase intacto}, pelo mesmo lema
+  \eqref{eq:U-ortogonal-dU} de antes:
+  $h^\mu{}_\beta\,U^\alpha\partial_\alpha U^\beta
+   =U^\alpha\partial_\alpha U^\mu
+   +U^\mu U^\alpha\underbrace{U_\beta\,\partial_\alpha U^\beta}_{0}$.
+  \item \textbf{(iii) é o único que sente o projetor de verdade}:
+  $h^\mu{}_\beta\,\partial^\beta p
+   =\bigl(\eta^{\mu\nu}+U^\mu U^\nu\bigr)\partial_\nu p$.
+\end{itemize}
+Sobra, então,
 \begin{equation}
   (\rho+p)\,U^\alpha\partial_\alpha U^\beta
-  =-\bigl(\eta^{\beta\nu}+U^\beta U^\nu\bigr)\partial_\nu p .
+  =-\bigl(\eta^{\beta\nu}+U^\beta U^\nu\bigr)\partial_\nu p ,
   \label{eq:euler-relativistica}
 \end{equation}
-Esta é a \textbf{equação de Euler relativística}. O operador
-$h^{\beta\nu}=\eta^{\beta\nu}+U^\beta U^\nu$ é o projetor sobre o espaço
-ortogonal a $\vec U$. Cuidado com a leitura: ele \emph{não} remove a
-componente do gradiente ao longo da velocidade --- essa acelera o fluido, e
-deve. O que ele remove é a componente ao longo de $\vec U$, isto é, a direção
-temporal do MCRF. O que sobra é o gradiente de pressão \emph{espacial no
-referencial do próprio elemento}, que é o único que pode empurrá-lo.
+que é a \textbf{equação de Euler relativística}.
+
+Cuidado com uma leitura tentadora. O projetor \emph{não} elimina o gradiente
+de pressão na direção em que o fluido se move --- essa componente acelera o
+elemento, e deve. O que ele elimina é a componente ao longo do
+\emph{quadrivetor} $\vec U$, que no MCRF é a direção do \emph{tempo}, isto é,
+$\partial_t p$. O que sobra é o gradiente de pressão espacial no referencial do
+próprio elemento --- as três direções inteiras ---, e é o único que pode
+empurrá-lo.
 
 \begin{central}
 Compare \eqref{eq:euler-relativistica} com a Euler newtoniana,
