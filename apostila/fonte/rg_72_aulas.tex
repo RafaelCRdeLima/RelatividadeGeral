@@ -6531,6 +6531,43 @@ No limite $p\ll\rho$ a distinção desaparece, e é por isso que a física
 newtoniana nunca precisou dela.
 \end{central}
 
+\textbf{Para que ela serve.} Vale dizer agora, porque
+\eqref{eq:euler-relativistica} vai reaparecer em quase todo capítulo daqui em
+diante --- e em três disfarces bem diferentes.
+
+\emph{Estrelas.} Em uma estrela estática, cada elemento de fluido é
+\emph{segurado} no lugar: ele não cai, e portanto está acelerado em relação à
+queda livre. A equação de Euler diz então quanto gradiente de pressão é
+preciso para produzir exatamente essa aceleração,
+$(\rho+p)\,a^\beta=-h^{\beta\nu}\partial_\nu p$. Trocando $\partial$ por
+$\nabla$ e pondo a geometria de uma massa esférica, isso \emph{é} a equação de
+Tolman--Oppenheimer--Volkoff, que o Capítulo~\ref{cap:schwarzschild} deduz e
+que governa a estrutura de anãs brancas e estrelas de nêutrons. O $\rho+p$ que
+acabamos de encontrar é o que a torna qualitativamente diferente da equação
+hidrostática newtoniana --- e é a origem da massa máxima.
+
+\emph{Cosmologia.} Num universo homogêneo e isotrópico não há direção
+espacial privilegiada, de modo que o gradiente de pressão se anula por
+simetria e \eqref{eq:euler-relativistica} é satisfeita trivialmente, com os
+dois lados nulos. Todo o conteúdo dinâmico do fluido passa para a
+\emph{outra} projeção, a de energia: com $\partial_\alpha U^\alpha=3H$ em
+\eqref{eq:energia-fluido}, ela vira $\dot\rho+3H(\rho+p)=0$, a equação do
+fluido cosmológico do Capítulo~\ref{cap:cosmologia}. É um bom exemplo de que a
+divisão $1+3$ não é simetria de enfeite: há problemas em que uma das
+projeções carrega tudo e a outra não diz nada.
+
+\emph{Queda livre.} Ponha $p=0$. Sobra $U^\alpha\partial_\alpha U^\beta=0$: a
+quadrivelocidade não muda ao longo da linha de mundo, isto é, o elemento não
+acelera. Em espaço plano é movimento retilíneo uniforme; em espaço curvo, com
+$\nabla$ no lugar de $\partial$, é a equação da geodésica. A equação de Euler
+contém a queda livre como o caso em que não há pressão para empurrar ninguém.
+
+E há um quarto uso, que é mais uma mudança de estatuto: em relatividade geral
+\eqref{eq:euler-relativistica} deixa de ser uma lei à parte. A identidade de
+Bianchi força $\nabla_\mu T^{\mu\nu}=0$, de modo que o movimento do fluido já
+está contido nas equações de campo --- o Capítulo~\ref{cap:einstein} volta a
+isso. Aqui, em espaço plano, ainda é um postulado independente; lá, não.
+
 \section{Equações de estado}
 \label{sec:eq-estado}
 \label{sec:equacoes-estado}
@@ -9202,6 +9239,7 @@ efetivamente irradiados em GW150914.
 
 
 \chapter{Cosmologia relativística}
+\label{cap:cosmologia}
 
 \begin{objetivos}
 Usar simetria cosmológica para obter a métrica FLRW, as equações de Friedmann e
