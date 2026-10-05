@@ -8212,85 +8212,140 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 
 \begin{exercise}
 \facil{5.1}
-Um laboratório em queda livre no campo da Terra tem altura $h$.
-(a) Usando $\delta a=2gh/R_\oplus$, determine o maior $h$ para que a
-aceleração de maré entre teto e piso fique abaixo de $10^{-6}g$; tome
-$R_\oplus=6{,}371\times10^{6}$~m. (b) Repita para uma tolerância de
-$10^{-9}g$. (c) Com base nos dois números, enuncie em que sentido \emph{preciso}
-o princípio da equivalência é local --- e explique por que o limite vem da
-maré, e não do valor de $g$.
+Um laboratório em queda livre próximo à superfície da Terra tem altura
+\emph{radial} $h\ll R_\oplus$, com $R_\oplus=6{,}371\times10^{6}$~m. A
+diferença instantânea de aceleração entre teto e piso, em primeira ordem em
+$h/R_\oplus$, é $\delta a\simeq 2gh/R_\oplus$, com $g$ avaliada no ponto de
+referência.
+(a) Determine a altura-limite para que $\delta a\le\varepsilon g$, primeiro com
+$\varepsilon=10^{-6}$ e depois com $\varepsilon=10^{-9}$.
+(b) Mostre que $g$ se cancela na condição e diga de que grandeza o limite
+realmente depende.
+(c) Enuncie em que sentido preciso o princípio da equivalência é local. Diga
+também o que essa estimativa \emph{não} controla: ela trata da maré radial para
+uma tolerância, e os limites transversal e temporal do referencial local são
+outros.
 \end{exercise}
 
 \begin{exercise}
 \facil{5.2}
-No plano em coordenadas polares: (a) escreva $g_{ij}$ e $g^{ij}$;
-(b) para o campo $\vec V=\vec e_y$, obtenha as componentes $V^r$ e $V^\theta$
-a partir de \eqref{eq:base-polar-5}, e depois $V_r$ e $V_\theta$ usando
-\eqref{eq:sobe-desce-polar}; (c) calcule $\tilde\omega^\theta(\vec V)$ de duas
-maneiras --- pela definição e pela contração das componentes --- e confirme que
-dão o mesmo.
+No plano em coordenadas polares, numa carta regular com $r>0$.
+(a) Escreva $g_{ij}$ e $g^{ij}$.
+(b) Para o campo $\vec V=\vec e_y$, obtenha $V^r$ e $V^\theta$ a partir de
+\eqref{eq:base-polar-5}, e depois $V_r$ e $V_\theta$ com
+\eqref{eq:sobe-desce-polar}.
+(c) Calcule $\tilde\omega^\theta(\vec V)$ por dois caminhos \emph{diferentes}:
+(i) pela definição, usando $\tilde\omega^\theta(\vec e_r)=0$ e
+$\tilde\omega^\theta(\vec e_\theta)=1$; (ii) pela expressão cartesiana
+$\tilde\omega^\theta
+=-\frac{\sin\theta}{r}\,\tilde\omega^x+\frac{\cos\theta}{r}\,\tilde\omega^y$.
+(d) Compare o resultado com $V_\theta$, que você obteve em (b). As duas
+quantidades são diferentes: qual delas a 1-forma de base extrai, e por quê?
 \end{exercise}
 
 \begin{exercise}
 \medio{5.3}
-Considere o campo constante $\vec V=\vec e_y$, cujas componentes polares são
-$(\sin\theta,\ \cos\theta/r)$. (a) Verifique explicitamente que as quatro
-componentes $\nabla_jV^i$ se anulam, exibindo o cancelamento termo a termo.
+Em $r>0$, considere o campo constante $\vec V=\vec e_y$, cujas componentes
+polares são $(\sin\theta,\ \cos\theta/r)$ --- são as do exercício anterior, e
+ficam dadas aqui para que um erro lá não impeça este.
+(a) Verifique que as quatro componentes $\nabla_jV^i$ se anulam, exibindo o
+cancelamento termo a termo.
 (b) Calcule $\nabla_iV^i$ pela fórmula \eqref{eq:divergencia-polar} e confirme
-o zero. (c) Agora tome $f=r^3\sin\theta$ e calcule $\Delta f$ por
-\eqref{eq:laplaciano-polar}; verifique o resultado passando a cartesianas.
+o zero.
+(c) Tome $f=r^3\sin\theta$ e calcule $\Delta f$ por
+\eqref{eq:laplaciano-polar}. Verifique passando a cartesianas: escreva
+explicitamente $f=(x^2+y^2)\,y$ e compare.
 \end{exercise}
 
 \begin{exercise}
 \medio{5.4}
-(a) Demonstre que $\nabla_kg_{ij}=0$ em qualquer sistema de coordenadas,
-partindo do valor cartesiano e usando o caráter tensorial. (b) Verifique
-explicitamente $\nabla_\theta g_{\theta\theta}=0$ em polares. (c) Refaça o
-passo 4 da dedução de \eqref{eq:christoffel} escrevendo os seis termos de
-conexão e mostrando quais se cancelam; indique exatamente onde a hipótese de
-torção nula é usada.
+(a) Demonstre que $\nabla_kg_{ij}=0$ em qualquer carta regular \emph{do plano
+euclidiano}, com a conexão euclidiana escrita nessa carta, partindo do valor
+cartesiano e usando o caráter tensorial. Explique por que o argumento não se
+estende a uma geometria qualquer --- a Seção~\ref{sec:compatibilidade-metrica}
+retoma esse ponto.
+(b) Verifique explicitamente $\nabla_\theta g_{r\theta}=0$ em polares, exibindo
+os dois termos de conexão que se cancelam. Repare que a componente métrica é
+nula e os termos de conexão não são.
+(c) Refaça o passo 4 da dedução de \eqref{eq:christoffel}: escreva os seis
+termos de conexão, agrupe-os e identifique os pares que se cancelam. Indique
+exatamente onde a torção nula é usada e onde se usa que a base é coordenada.
 \end{exercise}
 
 \begin{exercise}
 \dificil{5.5}
-A base polar ortonormal é
-$\vec e_{\hat r}=\partial_r$, $\vec e_{\hat\theta}=r^{-1}\partial_\theta$.
-(a) Calcule o comutador $[\vec e_{\hat r},\vec e_{\hat\theta}]$ aplicado a uma
-função arbitrária e conclua que não existe carta que produza esse par.
+A base polar ortonormal é $\vec e_{\hat r}=\partial_r$ e
+$\vec e_{\hat\theta}=r^{-1}\partial_\theta$, em $r>0$.
+(a) Calcule $[\vec e_{\hat r},\vec e_{\hat\theta}]$ aplicado a uma função
+arbitrária e conclua que não existe carta que produza esse par.
 (b) Suponha que existisse uma coordenada $u$ com $\dd u=r\,\dd\theta$; derive
 uma contradição a partir da igualdade das derivadas segundas cruzadas.
-(c) Traduza a divergência \eqref{eq:divergencia-polar} para componentes
-ortonormais e recupere a fórmula do cálculo vetorial. (d) Explique por que a
-métrica ser $\delta_{\hat i\hat j}$ nessa base não torna a base constante.
+(c) Traduza \eqref{eq:divergencia-polar} para componentes ortonormais e
+recupere a fórmula do cálculo vetorial.
+(d) Agora um caso novo, para transferir a ideia. No plano cartesiano, gire a
+base canônica por um ângulo que varia com a posição:
+\[
+  \vec E_1=\cos(kx)\,\partial_x+\sin(kx)\,\partial_y ,
+  \qquad
+  \vec E_2=-\sin(kx)\,\partial_x+\cos(kx)\,\partial_y ,
+\]
+com $k$ constante não nula, de dimensão de inverso de comprimento. Verifique
+que o par é ortonormal em todo ponto, calcule $[\vec E_1,\vec E_2]$ e decida se
+existe carta que o realize.
+(e) Nas duas bases deste exercício a métrica é $\delta_{\hat i\hat j}$,
+constante. Se alguém aplicasse \eqref{eq:christoffel} a essa métrica, obteria
+$\Gamma=0$ --- e, para a base polar ortonormal, o valor correto é
+$\Gamma^{\hat\theta}{}_{\hat\theta\hat r}=1/r$ e
+$\Gamma^{\hat r}{}_{\hat\theta\hat\theta}=-1/r$. Explique o que
+\eqref{eq:christoffel} exige e que essas bases não cumprem.
 \end{exercise}
 
 
 \section{Conteúdo extra}
 
-Os três problemas abaixo pedem para \emph{modificar} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare.
+Os três problemas abaixo pedem para \emph{estender} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare. O último dispensa o programa: pede um script curto, escrito do zero.
 
 \begin{enumerate}
-  \item \textbf{Outra carta, a mesma geometria.} Baixe
-\arq{cap05\_calculo\_polar.py} e troque a carta polar pelas coordenadas
-elípticas $x=a\cosh u\cos v$, $y=a\sinh u\sin v$. Obtenha a métrica, os
-símbolos de Christoffel e o laplaciano nessa carta. Depois confirme que o
-plano continua plano: aplique o programa a $f=x$ e verifique que o gradiente
-reconstruído é o campo constante $\vec e_x$, como no
-Exemplo~\ref{ex:gradiente-x}.
+  \item \textbf{A carta elíptica, até o fim.} O bloco final de
+\arq{cap05\_calculo\_polar.py} já imprime a métrica e os símbolos de
+Christoffel da carta elíptica $x=a\cosh u\cos v$, $y=a\sinh u\sin v$. Siga
+daí. (a) Mostre que a métrica é $g=H^2\delta_{ij}$ com
+$H^2=a^2(\sinh^2u+\sin^2v)$, e obtenha a fórmula geral do laplaciano nessa
+carta --- ela sai curta por a métrica ser conforme. (b) Rode duas verificações
+independentes: $f=x$, que deve dar $\Delta f=0$, e $f=x^2+y^2$, que deve dar
+$4$. (c) Identifique o domínio em que o jacobiano é invertível; tome $a>0$,
+$u>0$ e um intervalo aberto de comprimento $2\pi$ para $v$, com corte.
+(d) \emph{Cuidado com a conclusão:} reconstruir um gradiente é verificação de
+implementação, não prova de planura. Diga de onde vem, de fato, a garantia de
+que a geometria é a mesma do plano.
 
-  \item \textbf{Onde a conexão não basta.} Use o mesmo programa com a métrica
-da esfera de raio $a$, $\dd\ell^2=a^2\dd\theta^2+a^2\sin^2\theta\,\dd\phi^2$.
-Calcule os símbolos de Christoffel e o laplaciano. Em seguida tente repetir o
-Exemplo~\ref{ex:ex-covariante}: procure um campo cujas componentes variem mas
-cuja derivada covariante se anule em toda parte. Mostre numericamente que não
-existe, e explique o que há de diferente aqui em relação ao plano.
+  \item \textbf{Log-polar: componentes constantes não é campo paralelo.}
+Implemente no programa a carta $x=a\,\mathrm{e}^{u}\cos v$,
+$y=a\,\mathrm{e}^{u}\sin v$, com $a>0$ e um intervalo angular com corte.
+(a) Obtenha a métrica e os símbolos de Christoffel; note que, ao contrário das
+polares, eles são \emph{constantes}. (b) Obtenha as componentes do campo
+cartesiano constante $\vec e_y$ a partir de $J^{-1}$ e verifique
+simbolicamente que todas as componentes de sua derivada covariante se anulam.
+(c) Agora tome o campo cujas componentes nessa carta são $(1,0)$ --- constantes
+--- e calcule sua derivada covariante. (d) Os dois campos estão em pé de
+igualdade quanto a ``ter componentes simples'', e só um é paralelo. Explique
+por que componentes constantes e campo paralelo são propriedades diferentes, e
+qual delas é a que não depende da carta.
 
-  \item \textbf{Quão grande pode ser o laboratório?} Escreva um script que calcule a
-aceleração de maré newtoniana entre topo e base de um laboratório em queda
-livre, em função da altura $h$, para a superfície da Terra e para a superfície
-do Sol. Determine, em cada caso, o $h$ máximo para que a maré fique abaixo de
-$10^{-6}g$ local. Tabule os valores e discuta o que ``local'' significa em
-cada contexto.
+  \item \textbf{Quão grande pode ser o laboratório?} Escreva um script curto
+que estime a maré newtoniana entre topo e base de um laboratório em queda
+livre de altura radial $h$, sob a aproximação de corpo esférico e campo
+externo, com $\delta a\simeq 2g_{\text{loc}}h/R$. Use
+$R_\oplus=6{,}371\times10^{6}$~m com $g_\oplus=9{,}81~\mathrm{m/s^2}$, e
+$R_\odot=6{,}96\times10^{8}$~m com $g_\odot=274~\mathrm{m/s^2}$.
+(a) Com a tolerância \emph{relativa} $\delta a\le10^{-6}g_{\text{loc}}$, tabule
+a altura-limite nos dois casos. (b) Repita com uma tolerância \emph{absoluta},
+$\delta a\le10^{-5}~\mathrm{m/s^2}$, para a qual
+$h_{\lim}=a_{\text{tol}}R/(2g_{\text{loc}})$. (c) A ordem dos dois corpos se
+inverte entre os dois critérios. Explique por quê, e conclua que ``o
+laboratório pode ser maior aqui ou ali'' não é uma pergunta bem posta sem
+dizer qual é o critério experimental. Trate os números como estimativas
+idealizadas de maré, não como projeto de laboratório.
 \end{enumerate}
 
 
@@ -8469,6 +8524,7 @@ da matéria.
 \end{resultado}
 
 \section{Compatibilidade métrica}
+\label{sec:compatibilidade-metrica}
 
 A condição $\nabla_\alpha g_{\mu\nu}=0$ afirma que o transporte paralelo
 preserva produtos escalares: se dois vetores são transportados paralelamente ao
