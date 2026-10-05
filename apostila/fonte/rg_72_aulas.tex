@@ -8313,24 +8313,59 @@ O elemento de linha é
 \[
   \dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu.
 \]
-Quando $g_{\mu\nu}$ depende da posição, a geometria muda de ponto a ponto.
+
+\begin{atencao}
+As componentes da métrica podem depender da posição mesmo em uma geometria
+plana. Essa dependência, por si só, não caracteriza curvatura. O
+Capítulo~\ref{cap:gravidade-curvatura} inteiro foi passado no plano euclidiano
+com $g_{\theta\theta}=r^2$, que depende do ponto, e o plano continuou plano.
+O critério de curvatura é outro, e aparece na
+Seção~\ref{sec:curvatura-riemann}.
+\end{atencao}
+
+A palavra que carrega o peso é \emph{localmente}. Na carta polar da
+Seção~\ref{sec:algebra-polar} já se viu o motivo: $r=0$ fica de fora, e é
+preciso escolher um intervalo de $\theta$ e aceitar um corte. Uma variedade é
+exatamente isso levado a sério --- um espaço coberto por cartas que se
+superpõem, nenhuma delas obrigada a cobrir tudo.
+
+E há uma perda concreta nessa passagem, que organiza o resto do capítulo. No
+plano, a conexão foi \emph{definida} em \eqref{eq:def-conexao} pela variação
+dos vetores de base, $\partial_j\vec e_i=\Gamma^k{}_{ji}\vec e_k$. Essa
+definição usava algo que agora não existe: um espaço cartesiano ambiente, no
+qual $\vec e_i(P)$ e $\vec e_i(Q)$ são setas do \emph{mesmo} espaço vetorial e
+podem ser subtraídas. Numa variedade, vetores em pontos distintos vivem em
+espaços tangentes distintos, e a diferença $\vec e_i(Q)-\vec e_i(P)$ não tem
+sentido. Resta \eqref{eq:christoffel} --- que no plano era um resultado --- como
+\emph{definição}.
 
 \section{Derivada covariante}
 
-Para um vetor,
+As fórmulas já estão prontas. O Capítulo~\ref{cap:gravidade-curvatura} as
+construiu no plano, e elas não mudam de forma ao passar à variedade:
 \[
-  \nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu_{\mu\alpha}V^\alpha.
+  \nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu{}_{\mu\alpha}V^\alpha,
+  \qquad
+  \nabla_\mu\omega_\nu
+  =\partial_\mu\omega_\nu-\Gamma^\alpha{}_{\mu\nu}\omega_\alpha ,
 \]
-Para uma 1-forma,
-\[
-  \nabla_\mu \omega_\nu=\partial_\mu \omega_\nu-\Gamma^\alpha_{\mu\nu}\omega_\alpha.
-\]
-O sinal muda porque a contração $\omega_\nu V^\nu$ deve ter derivada usual
-compatível.
+com a regra geral de um termo de conexão por índice, $+\Gamma$ para cada índice
+em cima e $-\Gamma$ para cada índice embaixo. O sinal foi deduzido na
+Seção~\ref{sec:calculo-polar} da exigência de que a derivada covariante de um
+escalar não tenha termo de conexão nenhum, e essa dedução é algébrica: vale
+aqui palavra por palavra.
 
-Falta dizer \emph{qual} conexão. Até aqui, $\Gamma$ foi apenas um conjunto de
-coeficientes que corrige a derivada; nada obrigou a escolher um em particular.
-Duas exigências fixam a escolha:
+O que muda não é a fórmula, é o estatuto de $\Gamma$.
+
+\begin{central}
+No plano, a conexão era um \emph{resultado}: a Seção~\ref{sec:calculo-polar} a
+obteve derivando os vetores de base, e a Seção~\ref{sec:geodesica-christoffel}
+mostrou que a métrica a reproduz. Numa variedade não há base ambiente que se
+possa derivar, e a conexão passa a ser uma \emph{estrutura adicional} que se
+escolhe --- um objeto a mais, logicamente independente da métrica.
+\end{central}
+
+Falta portanto dizer \emph{qual} conexão, e duas exigências fixam a escolha:
 \[
   \Gamma^\rho{}_{\mu\nu}=\Gamma^\rho{}_{\nu\mu}
   \quad\text{(torção nula)},
@@ -8342,10 +8377,14 @@ A primeira diz que não há uma torção intrínseca girando vetores transportad
 a segunda, que o transporte paralelo preserva comprimentos e ângulos --- sem
 ela, medir com a métrica em dois pontos diferentes não teria sentido comum.
 
-Escrevendo $\nabla_\alpha g_{\mu\nu}=0$ nas três permutações dos índices e
-combinando-as (some duas, subtraia a terceira: a torção nula é o que permite
-os cancelamentos), obtém-se exatamente a expressão \eqref{eq:christoffel} que
-a Seção~\ref{sec:geodesica-christoffel} já havia produzido por outro caminho:
+São exatamente as duas hipóteses isoladas na caixa da
+Seção~\ref{sec:geodesica-christoffel}, e a conta que vai delas até a fórmula é
+a mesma: escrever $\nabla_\alpha g_{\mu\nu}=0$ nas três permutações dos
+índices, somar duas e subtrair a terceira, e usar a simetria para cancelar
+quatro dos seis termos de conexão. Nada naquela álgebra usou a planura do
+plano --- só a simetria de $\Gamma$ e a invertibilidade de $g$ ---, de modo que
+ela se transporta inteira, e não precisa ser refeita. O resultado é
+\eqref{eq:christoffel}, agora valendo em qualquer variedade:
 \[
   \Gamma^\rho{}_{\mu\nu}
   =\tfrac12\,g^{\rho\sigma}
@@ -8353,8 +8392,8 @@ a Seção~\ref{sec:geodesica-christoffel} já havia produzido por outro caminho:
   +\partial_\nu g_{\sigma\mu}
   -\partial_\sigma g_{\mu\nu}\right).
 \]
-Essa \emph{conexão de Levi-Civita} é, portanto, a única compatível com as duas
-exigências. E a coincidência com o resultado variacional da
+Essa \emph{conexão de Levi-Civita} é a única compatível com as duas exigências.
+E a coincidência com o resultado variacional da
 Seção~\ref{sec:geodesica-christoffel} não é acidente --- é um teorema de duas
 linhas, que fecha as duas definições possíveis de ``geodésica'' numa só.
 
@@ -8395,6 +8434,7 @@ Levi-Civita, não uma obviedade: se a conexão tivesse torção, ou não fosse
 compatível com a métrica, as duas famílias de curvas se separariam.
 
 \section{Curvatura}
+\label{sec:curvatura-riemann}
 
 O tensor de Riemann mede a falha de derivadas covariantes em comutar:
 \[
@@ -8431,16 +8471,43 @@ da matéria.
 \section{Compatibilidade métrica}
 
 A condição $\nabla_\alpha g_{\mu\nu}=0$ afirma que o transporte paralelo
-preserva produtos escalares. Se dois vetores são transportados paralelamente ao
-longo de uma curva, o produto escalar entre eles permanece constante. Essa é
-uma exigência natural para uma conexão que deve representar a geometria
-determinada pela métrica.
+preserva produtos escalares: se dois vetores são transportados paralelamente ao
+longo de uma curva, o ângulo entre eles e os seus comprimentos não mudam. Sem
+isso, ``o mesmo vetor'' em dois pontos diferentes não teria comprimento comum, e
+a métrica deixaria de servir como instrumento de medida.
 
-Junto com torção nula, a compatibilidade métrica determina de modo único a
-conexão de Levi-Civita. Em relatividade geral padrão, essa é a conexão usada
-para definir geodésicas, curvatura e derivada covariante. Teorias mais gerais
-podem relaxar torção nula ou compatibilidade métrica, mas isso está além do
-curso introdutório.
+Vale parar sobre uma mudança de estatuto que é fácil deixar passar, porque a
+fórmula é idêntica nos dois casos.
+
+\begin{central}
+No plano, $\nabla_kg_{ij}=0$ foi um \textbf{teorema}: a
+Seção~\ref{sec:geodesica-christoffel} o demonstrou observando que em
+cartesianas $g_{ij}=\delta_{ij}$ é constante e todos os $\Gamma$ se anulam,
+de modo que $\nabla_kg_{ij}=0$ ali --- e, sendo um tensor, em toda parte.
+
+Numa variedade curva esse argumento não existe, porque não existem
+coordenadas cartesianas globais em que a métrica seja constante. Aqui
+$\nabla_\alpha g_{\mu\nu}=0$ é um \textbf{axioma}: uma exigência imposta à
+conexão, e não uma consequência de alguma carta privilegiada.
+\end{central}
+
+A troca não enfraquece nada --- apenas põe a hipótese à vista. Junto com torção
+nula, a compatibilidade métrica determina de modo único a conexão de
+Levi-Civita, pela álgebra da Seção~\ref{sec:geodesica-christoffel}. Em
+relatividade geral padrão é essa a conexão usada para definir geodésicas,
+curvatura e derivada covariante; teorias mais gerais relaxam uma das duas
+exigências, e estão além deste curso.
+
+\begin{atencao}
+Há uma tentação de salvar o argumento do plano usando o referencial inercial
+local: em torno de qualquer evento existem coordenadas em que
+$g_{\mu\nu}=\eta_{\mu\nu}$ e $\partial_\alpha g_{\mu\nu}=0$ \emph{naquele
+ponto}, o que daria $\nabla_\alpha g_{\mu\nu}=0$ ali e, por tensorialidade, em
+toda parte. O raciocínio é correto, mas circular neste lugar: essas
+coordenadas são construídas \emph{a partir} da conexão de Levi-Civita, que é
+justamente o que se está tentando determinar. Elas são úteis depois --- e
+serão, no Capítulo~\ref{cap:fisica-curva} ---, não antes.
+\end{atencao}
 
 \section{Simetrias do tensor de Riemann}
 
