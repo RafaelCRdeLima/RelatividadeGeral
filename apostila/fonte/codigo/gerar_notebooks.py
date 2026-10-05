@@ -33,6 +33,7 @@ TITULOS = {
     "cap02_figuras": ("Capítulo 2", "Figuras: colisor, casca de massa, Compton e foguete"),
     "cap03_tensores": ("Capítulo 3", "Base dual, simetrias e invariância do traço"),
     "cap03_figuras": ("Capítulo 3", "Figuras: 1-forma como pilha e base oblíqua"),
+    "cap05_calculo_polar": ("Capítulo 5", "Conexão, derivada covariante, divergência e laplaciano em coordenadas curvilíneas"),
     "cap06_curvatura": ("Capítulo 6", "Holonomia, tensor de Riemann numérico e desvio geodésico"),
     "cap09_ondas": ("Capítulo 9", "Anel de partículas, quadrupolo e inspiral"),
     "cap10_geodesicas_schwarzschild": ("Capítulo 10", "ISCO, precessão, deflexão e queda radial"),
