@@ -130,11 +130,11 @@ def queda_livre():
                  arrowprops=dict(arrowstyle="->", color=LARANJA, lw=2.0))
     ax1.text(0.62, 1.55, r"$\nu$", color=LARANJA, fontsize=13,
              path_effects=HALO)
-    ax1.text(1.36, 2.15, r"$\nu'=\nu\,(1-gh/c^2)$", color=VERM, fontsize=11,
+    ax1.text(1.36, 2.15, r"$\nu'=\nu\,(1-gH/c^2)$", color=VERM, fontsize=11,
              va="center", path_effects=HALO)
     ax1.text(0.65, 2.95, "laboratório apoiado", ha="center", fontsize=11,
              style="italic")
-    ax1.text(-0.12, 1.3, r"$h$", fontsize=12, ha="right", color=CINZA)
+    ax1.text(-0.12, 1.3, r"$H$", fontsize=12, ha="right", color=CINZA)
     ax1.annotate("", xy=(-0.05, 2.6), xytext=(-0.05, 0.0),
                  arrowprops=dict(arrowstyle="<->", color=CINZA, lw=1.1))
     ax1.set_xlim(-0.65, 2.6)
@@ -149,7 +149,7 @@ def queda_livre():
     for y in (0.5, 1.3, 2.1):
         ax2.annotate("", xy=(2.05, y - 0.42), xytext=(2.05, y),
                      arrowprops=dict(arrowstyle="->", color=AZUL, lw=1.5))
-    ax2.text(2.16, 1.3, r"$v=gh/c$", color=AZUL, fontsize=11, va="center",
+    ax2.text(2.16, 1.3, r"$v=gH/c$", color=AZUL, fontsize=11, va="center",
              path_effects=HALO)
     ax2.text(0.62, 1.55, r"$\nu$", color=LARANJA, fontsize=13,
              path_effects=HALO)

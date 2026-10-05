@@ -6917,28 +6917,26 @@ assinatura de um fluido com $w=1/3$ sem referencial de repouso.
 \label{cap:gravidade-curvatura}
 
 \begin{objetivos}
-Mostrar por que a relatividade especial não comporta a gravidade, e construir,
-no plano euclidiano, todo o cálculo tensorial de que a geometria curva vai
-precisar: base que varia, conexão, derivada covariante e a fórmula de
-Christoffel.
+Explicar por que os efeitos de maré impedem descrever a gravidade por um único
+referencial inercial válido em toda parte. Desenvolver, no plano euclidiano, as
+ferramentas que o estudo de espaços curvos vai exigir: base que varia, conexão,
+derivada covariante e a fórmula de Christoffel.
 \end{objetivos}
 
-Até aqui a relatividade especial bastou, e ela repousa em uma hipótese que
-nunca foi posta à prova: a de que existem referenciais inerciais que preenchem
-\emph{todo} o espaço-tempo. Este capítulo mostra que a gravidade destrói essa
-hipótese, e que o conserto é geométrico.
+A relatividade especial bastou até aqui, e ela supõe que existam referenciais
+inerciais preenchendo \emph{todo} o espaço-tempo. Este capítulo examina os
+limites dessa descrição quando há gravidade: o redshift mostra que o
+laboratório apoiado na Terra não é inercial, e as marés mostram por que um
+referencial em queda livre só pode ser considerado inercial localmente.
 
-O percurso tem duas metades, e vale saber de antemão que a segunda é de
-matemática pura. A Seção~\ref{sec:gravitacao-curvatura} é física: um
-experimento de mesa derruba o referencial estático, o princípio da equivalência
-oferece um substituto, e as marés mostram que o substituto só vale localmente.
-As Seções \ref{sec:algebra-polar} a \ref{sec:bases-nao-coordenadas} abandonam a
-relatividade por completo e estudam o \emph{plano euclidiano} em coordenadas
-polares. A escolha é do Schutz e é deliberada: tudo o que a geometria curva
-exige --- bases que mudam de ponto a ponto, conexão, derivada covariante ---
-já aparece ali, onde a intuição é firme e onde se pode conferir cada conta
-voltando às cartesianas. O capítulo seguinte troca o plano pela variedade, e
-quase nada precisa ser reaprendido.
+O percurso tem duas metades, e a segunda é de matemática pura. A
+Seção~\ref{sec:gravitacao-curvatura} é física, na ordem acima. As Seções
+\ref{sec:algebra-polar} a \ref{sec:bases-nao-coordenadas} deixam a
+relatividade de lado e estudam o \emph{plano euclidiano} em coordenadas
+polares, onde as bases variam de ponto a ponto embora o espaço continue plano.
+A escolha é do Schutz, e permite construir a conexão e a derivada covariante
+conferindo cada conta em cartesianas. No capítulo seguinte essas ferramentas
+são generalizadas para variedades curvas.
 
 \section{Da gravitação à curvatura}
 \label{sec:gravitacao-curvatura}
@@ -6946,25 +6944,25 @@ quase nada precisa ser reaprendido.
 \subsection*{A luz sobe e perde energia}
 
 O primeiro fato é de conservação de energia, e não precisa de relatividade
-geral nenhuma para ser obtido. Monte o ciclo seguinte numa torre de altura $h$,
+geral nenhuma para ser obtido. Monte o ciclo seguinte numa torre de altura $H$,
 onde a gravidade vale $g$.
 
 Uma partícula de massa de repouso $m$ está no topo. Solte-a. Ela cai e chega
-à base com energia $E=m c^2+mgh$, contando a energia cinética ganha na queda.
+à base com energia $E=m c^2+mgH$, contando a energia cinética ganha na queda.
 Na base, converta \emph{toda} essa energia em um único fóton, de frequência
-$\nu$ dada por $h_{\rm P}\nu=mc^2+mgh$, com $h_{\rm P}$ a constante de Planck.
+$\nu$ dada por $h\nu=mc^2+mgH$, com $h$ a constante de Planck.
 Mande o fóton de volta ao topo, e lá converta-o outra vez em uma partícula de
 massa $m'$.
 
 Se $m'$ fosse maior que $m$, o ciclo poderia ser repetido indefinidamente
 produzindo massa do nada. A conservação de energia exige $m'=m$, isto é,
-$h_{\rm P}\nu'=mc^2$ no topo. Dividindo as duas,
+$h\nu'=mc^2$ no topo. Dividindo as duas,
 \begin{equation}
-  \frac{\nu'}{\nu}=\frac{mc^2}{mc^2+mgh}=\frac{1}{1+gh/c^2}
-  \simeq 1-\frac{gh}{c^2} ,
+  \frac{\nu'}{\nu}=\frac{mc^2}{mc^2+mgH}=\frac{1}{1+gH/c^2}
+  \simeq 1-\frac{gH}{c^2} ,
   \label{eq:redshift-torre}
 \end{equation}
-válido para $gh\ll c^2$. A luz que sobe chega com frequência menor: é o
+válido para $gH\ll c^2$. A luz que sobe chega com frequência menor: é o
 \textbf{redshift gravitacional}.
 
 \begin{atencao}
@@ -6972,17 +6970,18 @@ Dizer que ``a luz perde energia ao subir'' é cômodo e enganoso. Energia não �
 propriedade só do fóton: pela convenção fixada no
 Capítulo~\ref{chap:vetores}, $E=-\vec p\cdot\vec U$ depende também de quem
 mede. O enunciado correto é que \emph{dois observadores estáticos, em alturas
-diferentes, atribuem energias diferentes ao mesmo fóton}. Nada acontece com o
-fóton no caminho.
+diferentes, atribuem energias diferentes ao mesmo fóton}. A comparação é entre
+duas medidas, e não pressupõe nada acontecendo com o fóton ao longo do
+percurso.
 \end{atencao}
 
 \begin{example}
-\textbf{A torre de Harvard.} Com $h=22{,}5$~m e $g=9{,}81~\mathrm{m/s^2}$,
+\textbf{A torre de Harvard.} Com $H=22{,}5$~m e $g=9{,}81~\mathrm{m/s^2}$,
 \[
-  \frac{gh}{c^2}=\frac{9{,}81\times22{,}5}{(2{,}998\times10^{8})^2}
+  \frac{gH}{c^2}=\frac{9{,}81\times22{,}5}{(2{,}998\times10^{8})^2}
   =2{,}5\times10^{-15} .
 \]
-É esse o tamanho do efeito: duas partes em $10^{15}$. Pound e Rebka o mediram
+É esse o tamanho do efeito: cerca de $2{,}5$ partes em $10^{15}$. Pound e Rebka o mediram
 em 1960, usando o efeito Mössbauer para obter uma linha de emissão estreita o
 bastante; Pound e Snider melhoraram a medida em 1965. A
 Equação~\eqref{eq:redshift-torre} foi verificada com precisão de cerca de
@@ -6999,8 +6998,8 @@ não funcionaria por mais que alguns minutos sem corrigi-lo.
 
 \subsection*{O referencial da torre não é de Lorentz}
 
-Até aqui, nada força geometria nenhuma. O passo seguinte é o argumento de
-Schild, e ele é puramente geométrico.
+Até aqui o argumento não estabelece que o espaço-tempo seja curvo. O passo
+seguinte é o de Schild, e é puramente geométrico.
 
 Suponha, por absurdo, que o referencial em repouso na superfície da Terra seja
 um referencial de Lorentz da relatividade especial, com coordenadas $(t,z)$ de
@@ -7057,18 +7056,18 @@ assim, dois observadores estáticos nessas coordenadas medem
 \[
   \frac{\dd\tau}{\dd t}=1+gz
   \qquad\Longrightarrow\qquad
-  \frac{\nu_{\text{topo}}}{\nu_{\text{base}}}=\frac{1}{1+gh}\simeq1-gh ,
+  \frac{\nu_{\text{topo}}}{\nu_{\text{base}}}=\frac{1}{1+gH}\simeq1-gH ,
 \]
 exatamente a Equação~\eqref{eq:redshift-torre}. Redshift em espaço-tempo
 \emph{plano}.
 
-A lição: o experimento da torre derruba o referencial estático, não a planura.
-O que ainda falta é mostrar que \emph{nenhum} referencial inercial serve ---
-e é isso que as marés farão. Guarde a distinção; ela separa um argumento
-correto de um slogan.
+O experimento da torre mostra que o referencial estático não é inercial, e
+não que o espaço-tempo seja curvo. Falta mostrar que \emph{nenhum}
+referencial inercial serve em toda parte, e é isso que as marés farão. A
+distinção volta a importar quando a curvatura for introduzida.
 \end{atencao}
 
-\subsection*{A queda livre, e o redshift que some}
+\subsection*{O redshift no referencial em queda livre}
 
 Se o referencial apoiado não serve, qual serve? O princípio da equivalência
 responde.
@@ -7085,19 +7084,20 @@ na Terra é, por isso, uma tarefa vazia.
 Mas há um referencial em que partículas livres mantêm velocidade uniforme: o
 que \emph{cai junto com elas}. Vale a pena conferir que o redshift realmente
 some nele. Tome o referencial que está em repouso no instante em que o fóton
-parte da base e cai livremente desde então. O fóton leva $\Delta t=h/c$ para
-subir, e nesse tempo o referencial adquiriu velocidade $v=gh/c$ para baixo em
+parte da base e cai livremente desde então. O fóton leva $\Delta t=H/c$ para
+subir, e nesse tempo o referencial adquiriu velocidade $v=gH/c$ para baixo em
 relação à torre. O topo, portanto, move-se com velocidade $v$ \emph{em
 direção} à fonte vista do referencial em queda, e o Doppler de primeira ordem
-dá um \emph{aumento} de $gh/c^2$ --- que cancela exatamente o
-$-gh/c^2$ de \eqref{eq:redshift-torre}:
+dá um \emph{aumento} de $gH/c^2$, que cancela o
+$-gH/c^2$ de \eqref{eq:redshift-torre} na mesma ordem em $gH/c^2$:
 \[
   \frac{\nu(\text{queda livre})}{\nu(\text{topo})}
-  \simeq 1+\frac{gh}{c^{2}}
+  \simeq 1+\frac{gH}{c^{2}}
   \qquad\Longrightarrow\qquad
   \nu(\text{queda livre})\simeq\nu(\text{emitida na base}).
 \]
-No referencial em queda livre não há redshift. É o melhor indício de que ele é
+Na aproximação adotada --- primeira ordem, e marés desprezadas --- não há
+redshift no referencial em queda livre. É o melhor indício de que ele é
 o referencial inercial que procurávamos --- e foi a hipótese que Einstein
 adotou.
 
@@ -7106,16 +7106,15 @@ adotou.
 \includegraphics[width=0.92\textwidth]{cap05_queda_livre.pdf}
 \caption{A mesma torre, vista do referencial que cai livremente. À esquerda, o
 laboratório apoiado: o fóton sobe e chega com frequência menor. À direita,
-visto de quem cai: no tempo de voo $h/c$ o referencial adquiriu velocidade
-$gh/c$ para baixo, e o Doppler correspondente cancela o redshift.}
+visto de quem cai: no tempo de voo $H/c$ o referencial adquiriu velocidade
+$gH/c$ para baixo, e o Doppler correspondente cancela o redshift.}
 \label{fig:queda-livre}
 \end{figure}
 
-\subsection*{Só que apenas localmente}
+\subsection*{Os limites do referencial em queda livre}
 
-Parece que a relatividade especial foi salva: basta trocar o referencial
-apoiado pelo referencial em queda livre. Não foi, e a razão é simples de
-enunciar.
+A troca do referencial apoiado pelo referencial em queda livre resolve o
+problema, mas apenas localmente --- e a razão é simples de enunciar.
 
 Referenciais em queda livre em lados opostos da Terra caem em \emph{direções
 opostas}. Não existe um único referencial que esteja em queda livre em toda
@@ -7129,30 +7128,29 @@ pioram.
 
 \begin{example}
 \textbf{De que tamanho pode ser o laboratório?}
-Duas partículas soltas, separadas verticalmente por $h$, sentem acelerações
+Duas partículas soltas, separadas verticalmente por $H$, sentem acelerações
 diferentes porque estão a raios diferentes. Com $a=GM/r^2$,
 \[
-  \delta a=\left|\frac{\dd a}{\dd r}\right|h=\frac{2GM}{r^3}\,h
-  =\frac{2g\,h}{R_\oplus} .
+  \delta a=\left|\frac{\dd a}{\dd r}\right|H=\frac{2GM}{r^3}\,H
+  =\frac{2g\,H}{R_\oplus} .
 \]
 Exija que essa aceleração relativa fique abaixo de $10^{-6}g$, que é uma
 tolerância experimental plausível. Então
 \[
-  h_{\max}=\frac{10^{-6}R_\oplus}{2}
+  H_{\max}=\frac{10^{-6}R_\oplus}{2}
   =\frac{10^{-6}\times6{,}371\times10^{6}~\mathrm{m}}{2}
   \approx 3{,}2~\mathrm{m} .
 \]
-Um laboratório de três metros em queda livre é inercial a uma parte em
-$10^{6}$; um de trinta metros, não. E note de onde veio o limite: não da
+Para $H\approx3$~m, a aceleração relativa radial fica abaixo de $10^{-6}g$;
+para trinta metros, não. E note de onde veio o limite: não da
 aceleração da gravidade, que o referencial em queda livre cancela inteira, e
 sim da sua \emph{variação} --- da maré.
 \end{example}
 
-\subsection*{Marés, e aí sim curvatura}
+\subsection*{Marés e curvatura}
 
-As não uniformidades do campo chamam-se \textbf{forças de maré}, pelo motivo
-óbvio: se a Terra estivesse num campo uniforme, cairia livremente e não teria
-maré nenhuma. As marés existem porque o campo da Lua e o do Sol \emph{diferem}
+As não uniformidades do campo chamam-se \textbf{forças de maré}: se a Terra
+estivesse num campo uniforme, cairia livremente e não teria maré alguma. As marés existem porque o campo da Lua e o do Sol \emph{diferem}
 de um lado a outro da Terra.
 
 \begin{figure}[htb]
@@ -7201,7 +7199,7 @@ Pular do primeiro ao terceiro é o erro contra o qual a caixa anterior
 advertiu.
 \end{atencao}
 
-\subsection*{O plano de ataque}
+\subsection*{Por que começar pelo plano euclidiano}
 
 Para transformar isso em teoria, é preciso matemática de geometria curva. E
 aqui vale a estratégia do Schutz, que é a deste capítulo: comece por
@@ -7213,7 +7211,7 @@ Christoffel --- já aparece no plano euclidiano em coordenadas polares, onde a
 resposta certa é sempre conhecida, porque se pode voltar às cartesianas e
 conferir. O que \emph{não} aparece é a curvatura, e isso é uma vantagem: tudo
 o que sobrar no capítulo seguinte, depois de descontado o que já vimos aqui,
-será curvatura de verdade.
+será curvatura.
 
 De agora até o fim do capítulo, portanto: sem relatividade, sem assinatura
 lorentziana, sem $c$. Apenas o plano euclidiano, com
@@ -7231,8 +7229,8 @@ onde essa mesma base polar apareceu pela primeira vez.
 A Seção~\ref{sec:base-polar} já montou a base polar; esta seção a retoma com
 um objetivo novo. Lá queríamos mostrar que componentes com índice em cima e em
 baixo são coisas diferentes. Aqui queremos o \emph{ferramental completo} ---
-carta, base, base dual, métrica e subida de índices --- porque a próxima seção
-vai derivá-lo tudo, e não se deriva o que não se tem.
+carta, base, base dual, métrica e subida de índices --- porque a próxima seção vai
+derivar esses objetos, e não se deriva o que não se tem.
 
 \subsection*{A carta e o jacobiano}
 
@@ -7340,7 +7338,7 @@ sai subindo o índice:
   =\frac{1}{r^2}\,\partial_\theta f .
   \label{eq:gradiente-vetor}
 \end{equation}
-O $1/r^2$ não é enfeite: é a métrica fazendo seu trabalho.
+O fator $1/r^2$ é a componente $g^{\theta\theta}$ da métrica inversa.
 
 \begin{example}
 \label{ex:gradiente-x}
@@ -7384,7 +7382,7 @@ Um campo constante, cujas componentes polares dependem do ponto.
 \section{Cálculo tensorial em coordenadas polares}
 \label{sec:calculo-polar}
 
-\subsection*{O problema, em uma linha}
+\subsection*{Por que derivar as componentes não basta}
 
 Olhe outra vez para \eqref{eq:ex-em-polares}. O campo $\vec e_x$ é constante:
 mesma direção, mesmo comprimento, em toda parte. Suas componentes polares
@@ -7517,7 +7515,8 @@ estragavam a lei de transformação.
 
 \begin{example}
 \label{ex:ex-covariante}
-\textbf{A conta que fecha tudo.} Se \eqref{eq:derivada-covariante} está certa,
+\textbf{A derivada covariante de um campo constante.} Se
+\eqref{eq:derivada-covariante} está certa,
 a derivada covariante de $\vec e_x$ tem de ser \emph{zero}, porque $\vec e_x$
 não varia. Vamos ver. Pelo Exemplo~\ref{ex:gradiente-x},
 $V^r=\cos\theta$ e $V^\theta=-\sin\theta/r$.
@@ -7564,8 +7563,8 @@ primeiro e o terceiro termos:
   =\frac1r\,\partial_r\bigl(rV^r\bigr)+\partial_\theta V^\theta\ }
   \label{eq:divergencia-polar}
 \end{equation}
-Esta é a fórmula da divergência em polares --- a mesma que o curso de cálculo
-apresenta sem explicação, agora deduzida. O fator $1/r$ veio de um único
+Esta é a expressão usual da divergência em polares, aqui deduzida a partir
+da conexão. O fator $1/r$ veio de um único
 símbolo de Christoffel.
 
 Para o laplaciano, note que $\Delta f$ é a divergência do \emph{vetor}
@@ -7579,10 +7578,10 @@ $V^\theta=r^{-2}\partial_\theta f$ em \eqref{eq:divergencia-polar}:
 \end{equation}
 
 \begin{atencao}
-O passo que mais se erra é esquecer de subir o índice. Contrair diretamente
-$\nabla_i(\partial_if)$ somaria uma componente de cima com uma de baixo, e
-produziria $\partial_r^2f+\partial_\theta^2f$ --- que está errado, como se vê
-no exemplo abaixo. A métrica não é opcional.
+O passo que mais se erra é esquecer de subir o índice. Os dois índices de
+$\partial_if$ e de $\nabla_j$ são covariantes, e contraí-los exige a métrica
+inversa; sem ela o resultado seria $\partial_r^2f+\partial_\theta^2f$, que está
+errado, como mostra o exemplo abaixo.
 \end{atencao}
 
 \begin{example}
@@ -7807,8 +7806,9 @@ do tangente na direção do tangente se anula:
 \begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O PARÂMETRO NÃO É QUALQUER UM}]
 A forma \eqref{eq:geodesica} pressupõe que $\lambda$ seja um \textbf{parâmetro
 afim} --- comprimento de arco, ou tempo próprio, ou qualquer função afim
-deles. Reparametrizar a mesma curva por $\sigma(\lambda)$ arbitrário não a
-deixa de ser geodésica, mas a equação ganha um termo à direita:
+deles. Uma reparametrização regular $\sigma(\lambda)$ preserva a trajetória, que
+continua geodésica, mas muda a forma da equação, que ganha um termo à
+direita:
 \[
   \frac{\dd^2x^m}{\dd\sigma^2}
   +\Gamma^m{}_{ij}\frac{\dd x^i}{\dd\sigma}\frac{\dd x^j}{\dd\sigma}
@@ -7924,8 +7924,8 @@ dedução métrica; o princípio variacional apenas não a contradiz.
 \subsection*{Christoffel não é força}
 
 É tentador ler $\Gamma^m{}_{ij}$ na equação geodésica como uma força
-gravitacional, pela posição que ocupa. A tentação deve ser resistida, e o
-contraexemplo está nesta mesma página.
+gravitacional, pela posição que ocupa. Ela não se sustenta, e o
+contraexemplo é o próprio plano em polares.
 
 No plano euclidiano, em cartesianas, todos os $\Gamma$ são nulos; em polares,
 três não são. É o \emph{mesmo plano}. Se $\Gamma$ fosse um tensor, isso seria
@@ -7958,7 +7958,8 @@ cálculo vetorial da graduação e a notação deste curso.
 A base usada até aqui é a \emph{coordenada}: $\vec e_i=\partial/\partial x^i$,
 tangente às curvas de coordenada. Ela tem a propriedade que fez tudo
 funcionar --- as componentes de um vetor tangente são
-$V^i=\dd x^i/\dd\lambda$ --- e o defeito de não ser ortonormal:
+$V^i=\dd x^i/\dd\lambda$ --- e um inconveniente: em geral ela não é
+ortonormal, pois
 $|\vec e_\theta|=r$. A alternativa é normalizar,
 \begin{equation}
   \vec e_{\hat r}=\vec e_r ,
@@ -8024,7 +8025,7 @@ $\vec e_{\hat\theta}$ é tangente aos círculos $r=\text{const}$, que são curva
 coordenadas das próprias polares. Qualquer campo de vetores que não se anule é
 tangente a alguma família de curvas.
 
-A obstrução não é sobre um vetor, e sim sobre o \emph{par}: o que não existe é
+A obstrução não diz respeito a um vetor, e sim ao \emph{par}: o que não existe é
 uma carta cujas \emph{duas} direções coordenadas sejam simultaneamente
 $\vec e_{\hat r}$ e $\vec e_{\hat\theta}$, com essas normalizações. Quem
 detecta isso é o comutador \eqref{eq:comutador-nao-coordenada}, não a
@@ -8035,7 +8036,7 @@ tangência.
 Três avisos que evitam confusões frequentes:
 \begin{itemize}
   \item nem toda base não coordenada é ortonormal, e nem toda base ortonormal
-  é não coordenada --- a base cartesiana é as duas coisas;
+  é não coordenada: a base cartesiana é ortonormal e coordenada;
   \item a fórmula \eqref{eq:christoffel}, com derivadas parciais da métrica,
   vale em \emph{base coordenada}. Aplicá-la a uma base arbitrária, sem
   correção, dá resultado errado;
@@ -8092,8 +8093,10 @@ sobre a base coordenada nos polos?
 \section{Olhando adiante}
 \label{sec:olhando-adiante}
 
-Vale recolher o que este capítulo construiu, porque o próximo o generaliza
-quase sem acrescentar ideias novas.
+Vale recolher o que este capítulo construiu, porque o próximo retoma essas
+construções em espaços curvos. Ele acrescenta ideias novas --- variedade,
+comparação de vetores em pontos distintos, curvatura ---, e é justamente por
+isso que convém ter claro o que já está pronto.
 
 \begin{resultado}
 \textbf{A cadeia inteira.}
@@ -8112,8 +8115,8 @@ derivada covariante define a geodésica como a curva que transporta o próprio
 tangente.
 \end{resultado}
 
-Três conclusões a levar, cada uma correspondendo a um erro que este capítulo
-desarmou:
+Três conclusões principais, cada uma correspondendo a uma distinção
+estabelecida neste capítulo:
 
 \begin{enumerate}
   \item \textbf{Componentes podem variar num campo constante.} É o
@@ -8130,16 +8133,17 @@ desarmou:
 O que falta, e que é o assunto do Capítulo~\ref{cap:curvatura}, são duas
 coisas. A primeira é trocar o plano pela \emph{variedade}: um espaço que só
 localmente se parece com $\mathbb{R}^n$, onde não há cartesianas globais a que
-recorrer e onde a definição \eqref{eq:def-conexao} pela variação da base perde
-o chão --- restando \eqref{eq:christoffel} como definição. A segunda é
+recorrer e onde \eqref{eq:def-conexao} deixa de estar disponível, porque não se
+podem subtrair vetores de espaços tangentes distintos --- restando
+\eqref{eq:christoffel} como definição. A segunda é
 construir o objeto que mede curvatura de verdade.
 
 \begin{atencao}
 Fica aqui apenas a antecipação do critério. Transporte um vetor ao longo de um
-circuito fechado e devolva-o ao ponto de partida. No plano, em polares, os
-$\Gamma$ são não nulos e o vetor volta igual ao que era: nenhuma rotação
-líquida. Numa esfera, o mesmo passeio devolve o vetor girado, por um ângulo
-proporcional à área cercada. Essa diferença --- \emph{holonomia} --- é a
+circuito fechado e transporte-o de volta ao ponto de partida. No plano, em
+polares, os $\Gamma$ são não nulos e o vetor volta igual ao que era: nenhuma
+rotação líquida. Numa esfera, ele pode retornar com outra orientação, girado
+por um ângulo proporcional à área cercada. Essa diferença --- \emph{holonomia} --- é a
 assinatura da curvatura, e o Capítulo~\ref{cap:curvatura} a transforma no
 tensor de Riemann. Não a calcularemos antes de ter a definição.
 \end{atencao}
@@ -8152,8 +8156,8 @@ tensor de Riemann. Não a calcularemos antes de ter a definição.
 deste capítulo acompanha a dele, seção a seção:
 \begin{itemize}
   \item \S5.1, pp.~111--118 --- redshift, princípio da equivalência,
-  referenciais inerciais locais e marés. É o original do argumento de Schild e
-  da discussão sobre o tamanho do laboratório.
+  referenciais inerciais locais e marés. Apresenta o argumento de Schild e a
+  discussão sobre o tamanho do laboratório.
   \item \S5.2, pp.~118--124 --- álgebra tensorial em polares.
   \item \S5.3, pp.~124--130 --- cálculo tensorial em polares: é a fonte da
   dedução da Seção~\ref{sec:calculo-polar}.
@@ -8173,8 +8177,8 @@ sobre os testes experimentais do princípio da equivalência.
 \begin{enumerate}
   \item \textbf{A carta polar.} Para \eqref{eq:carta-polar}, escreva o
   jacobiano $\partial(x,y)/\partial(r,\theta)$ e o seu inverso
-  $\partial(r,\theta)/\partial(x,y)$, e verifique que um é mesmo o inverso do
-  outro. Onde o segundo deixa de existir, e o que isso tem a ver com o fato
+  $\partial(r,\theta)/\partial(x,y)$, e verifique que o produto das duas
+  matrizes é a identidade. Onde o segundo deixa de existir, e o que isso tem a ver com o fato
   de a origem não ter ângulo?
 
   \item \textbf{Base dual explícita.} Escreva $\tilde\omega^r$ e
@@ -8189,16 +8193,16 @@ sobre os testes experimentais do princípio da equivalência.
   \eqref{eq:christoffel} para obter os símbolos de Christoffel não nulos.
   (b) Mostre que um observador estático em $z$ tem $\dd\tau/\dd t=1+gz$.
   (c) Argumente, pela estaticidade, que duas cristas emitidas em $z=0$ chegam
-  a $z=h$ separadas pelo \emph{mesmo} $\Delta t$, e conclua
-  $\nu_{\text{topo}}/\nu_{\text{base}}=1/(1+gh)$. (d) Explique em uma frase por
+  a $z=H$ separadas pelo \emph{mesmo} $\Delta t$, e conclua
+  $\nu_{\text{topo}}/\nu_{\text{base}}=1/(1+gH)$. (d) Explique em uma frase por
   que isso \emph{não} contradiz a planura do espaço-tempo. (A verificação de
   que o tensor de Riemann se anula fica para o
   Capítulo~\ref{cap:curvatura}.)
 
   \item \textbf{Geodésica radial.} Mostre que as curvas com
   $\theta=\mathrm{const}$ são geodésicas do plano, parametrizadas por
-  $r=\lambda$. Qual termo de \eqref{eq:geodesica} precisaria ser não nulo para
-  que falhassem?
+  $r=\lambda$. Qual termo de \eqref{eq:geodesica} precisaria ser não nulo para que essas
+  curvas deixassem de satisfazer a equação geodésica?
 
   \item \textbf{Círculos não são geodésicas.} Tome $r=R$ constante e
   $\theta=\lambda$. Substitua em \eqref{eq:geodesica} e identifique a
@@ -8221,14 +8225,14 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 \begin{exercise}
 \facil{5.1}
 Um laboratório em queda livre próximo à superfície da Terra tem altura
-\emph{radial} $h\ll R_\oplus$, com $R_\oplus=6{,}371\times10^{6}$~m. A
+\emph{radial} $H\ll R_\oplus$, com $R_\oplus=6{,}371\times10^{6}$~m. A
 diferença instantânea de aceleração entre teto e piso, em primeira ordem em
-$h/R_\oplus$, é $\delta a\simeq 2gh/R_\oplus$, com $g$ avaliada no ponto de
+$H/R_\oplus$, é $\delta a\simeq 2gH/R_\oplus$, com $g$ avaliada no ponto de
 referência.
 (a) Determine a altura-limite para que $\delta a\le\varepsilon g$, primeiro com
 $\varepsilon=10^{-6}$ e depois com $\varepsilon=10^{-9}$.
-(b) Mostre que $g$ se cancela na condição e diga de que grandeza o limite
-realmente depende.
+(b) Mostre que $g$ se cancela na condição e identifique a grandeza que, para
+uma tolerância relativa fixa, determina sozinha a altura-limite.
 (c) Enuncie em que sentido preciso o princípio da equivalência é local. Diga
 também o que essa estimativa \emph{não} controla: ela trata da maré radial para
 uma tolerância, e os limites transversal e temporal do referencial local são
@@ -8255,11 +8259,12 @@ quantidades são diferentes: qual delas a 1-forma de base extrai, e por quê?
 \medio{5.3}
 Em $r>0$, considere o campo constante $\vec V=\vec e_y$, cujas componentes
 polares são $(\sin\theta,\ \cos\theta/r)$ --- são as do exercício anterior, e
-ficam dadas aqui para que um erro lá não impeça este.
+ficam dadas aqui para que este exercício possa ser resolvido
+independentemente do anterior.
 (a) Verifique que as quatro componentes $\nabla_jV^i$ se anulam, exibindo o
 cancelamento termo a termo.
-(b) Calcule $\nabla_iV^i$ pela fórmula \eqref{eq:divergencia-polar} e confirme
-o zero.
+(b) Calcule $\nabla_iV^i$ pela fórmula \eqref{eq:divergencia-polar} e verifique
+que a divergência se anula.
 (c) Tome $f=r^3\sin\theta$ e calcule $\Delta f$ por
 \eqref{eq:laplaciano-polar}. Verifique passando a cartesianas: escreva
 explicitamente $f=(x^2+y^2)\,y$ e compare.
@@ -8290,7 +8295,7 @@ arbitrária e conclua que não existe carta que produza esse par.
 uma contradição a partir da igualdade das derivadas segundas cruzadas.
 (c) Traduza \eqref{eq:divergencia-polar} para componentes ortonormais e
 recupere a fórmula do cálculo vetorial.
-(d) Agora um caso novo, para transferir a ideia. No plano cartesiano, gire a
+(d) Aplique o mesmo critério a uma base nova. No plano cartesiano, gire a
 base canônica por um ângulo que varia com a posição:
 \[
   \vec E_1=\cos(kx)\,\partial_x+\sin(kx)\,\partial_y ,
@@ -8304,8 +8309,8 @@ existe carta que o realize.
 constante. Se alguém aplicasse \eqref{eq:christoffel} a essa métrica, obteria
 $\Gamma=0$ --- e, para a base polar ortonormal, o valor correto é
 $\Gamma^{\hat\theta}{}_{\hat\theta\hat r}=1/r$ e
-$\Gamma^{\hat r}{}_{\hat\theta\hat\theta}=-1/r$. Explique o que
-\eqref{eq:christoffel} exige e que essas bases não cumprem.
+$\Gamma^{\hat r}{}_{\hat\theta\hat\theta}=-1/r$. Identifique a hipótese de
+\eqref{eq:christoffel} que essas bases não satisfazem.
 \end{exercise}
 
 
@@ -8314,12 +8319,12 @@ $\Gamma^{\hat r}{}_{\hat\theta\hat\theta}=-1/r$. Explique o que
 Os três problemas abaixo pedem para \emph{estender} um programa da página da disciplina e obter um resultado que não está nesta apostila. Baixe o arquivo indicado em \href{\rgsitecodigos}{\texttt{\rgsitecodigos}}, altere o que se pede e compare. O último dispensa o programa: pede um script curto, escrito do zero.
 
 \begin{enumerate}
-  \item \textbf{A carta elíptica, até o fim.} O bloco final de
+  \item \textbf{O laplaciano na carta elíptica.} O bloco final de
 \arq{cap05\_calculo\_polar.py} já imprime a métrica e os símbolos de
-Christoffel da carta elíptica $x=a\cosh u\cos v$, $y=a\sinh u\sin v$. Siga
-daí. (a) Mostre que a métrica é $g=H^2\delta_{ij}$ com
-$H^2=a^2(\sinh^2u+\sin^2v)$, e obtenha a fórmula geral do laplaciano nessa
-carta --- ela sai curta por a métrica ser conforme. (b) Rode duas verificações
+Christoffel da carta elíptica $x=a\cosh u\cos v$, $y=a\sinh u\sin v$. Estenda
+esse bloco para as etapas abaixo. (a) Mostre que a métrica é $g=\Omega^2\delta_{ij}$ com
+$\Omega^2=a^2(\sinh^2u+\sin^2v)$, e obtenha a fórmula geral do laplaciano nessa
+carta, que a forma conforme da métrica simplifica. (b) Rode duas verificações
 independentes: $f=x$, que deve dar $\Delta f=0$, e $f=x^2+y^2$, que deve dar
 $4$. (c) Identifique o domínio em que o jacobiano é invertível; tome $a>0$,
 $u>0$ e um intervalo aberto de comprimento $2\pi$ para $v$, com corte.
@@ -8327,7 +8332,7 @@ $u>0$ e um intervalo aberto de comprimento $2\pi$ para $v$, com corte.
 implementação, não prova de planura. Diga de onde vem, de fato, a garantia de
 que a geometria é a mesma do plano.
 
-  \item \textbf{Log-polar: componentes constantes não é campo paralelo.}
+  \item \textbf{Log-polar: componentes constantes não garantem paralelismo.}
 Implemente no programa a carta $x=a\,\mathrm{e}^{u}\cos v$,
 $y=a\,\mathrm{e}^{u}\sin v$, com $a>0$ e um intervalo angular com corte.
 (a) Obtenha a métrica e os símbolos de Christoffel; note que, ao contrário das
@@ -8335,24 +8340,22 @@ polares, eles são \emph{constantes}. (b) Obtenha as componentes do campo
 cartesiano constante $\vec e_y$ a partir de $J^{-1}$ e verifique
 simbolicamente que todas as componentes de sua derivada covariante se anulam.
 (c) Agora tome o campo cujas componentes nessa carta são $(1,0)$ --- constantes
---- e calcule sua derivada covariante. (d) Os dois campos estão em pé de
-igualdade quanto a ``ter componentes simples'', e só um é paralelo. Explique
-por que componentes constantes e campo paralelo são propriedades diferentes, e
-qual delas é a que não depende da carta.
+--- e calcule sua derivada covariante. (d) Compare os dois resultados e explique
+por que componentes constantes e paralelismo são propriedades distintas, e
+qual delas não depende da carta.
 
-  \item \textbf{Quão grande pode ser o laboratório?} Escreva um script curto
+  \item \textbf{De que tamanho pode ser o laboratório?} Escreva um script curto
 que estime a maré newtoniana entre topo e base de um laboratório em queda
-livre de altura radial $h$, sob a aproximação de corpo esférico e campo
-externo, com $\delta a\simeq 2g_{\text{loc}}h/R$. Use
+livre de altura radial $H$, sob a aproximação de corpo esférico e campo
+externo, com $\delta a\simeq 2g_{\text{loc}}H/R$. Use
 $R_\oplus=6{,}371\times10^{6}$~m com $g_\oplus=9{,}81~\mathrm{m/s^2}$, e
 $R_\odot=6{,}96\times10^{8}$~m com $g_\odot=274~\mathrm{m/s^2}$.
 (a) Com a tolerância \emph{relativa} $\delta a\le10^{-6}g_{\text{loc}}$, tabule
 a altura-limite nos dois casos. (b) Repita com uma tolerância \emph{absoluta},
 $\delta a\le10^{-5}~\mathrm{m/s^2}$, para a qual
-$h_{\lim}=a_{\text{tol}}R/(2g_{\text{loc}})$. (c) A ordem dos dois corpos se
-inverte entre os dois critérios. Explique por quê, e conclua que ``o
-laboratório pode ser maior aqui ou ali'' não é uma pergunta bem posta sem
-dizer qual é o critério experimental. Trate os números como estimativas
+$H_{\lim}=a_{\text{tol}}R/(2g_{\text{loc}})$. (c) A ordem dos dois corpos se
+inverte entre os dois critérios. Explique por quê, e conclua que comparar os dois
+corpos exige antes especificar a tolerância experimental. Trate os números como estimativas
 idealizadas de maré, não como projeto de laboratório.
 \end{enumerate}
 
