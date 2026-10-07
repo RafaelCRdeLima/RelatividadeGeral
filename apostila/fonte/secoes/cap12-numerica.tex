@@ -66,9 +66,9 @@ $\ddot a/a = -(4\pi/3)(\rho + 3p)$, e é uma boa pergunta de prova.
 
 \subsubsection*{Evolução do fator de escala}
 
-Integrar $\dd a/\dd t = a E(a)$ é direto, e vale a pena fazê-lo para vários
-universos ao mesmo tempo: as diferenças de forma são mais instrutivas que
-qualquer curva isolada.
+Integrar $\dd a/\dd t = a E(a)$ é direto, e fazê-lo para vários universos ao
+mesmo tempo é mais instrutivo: as diferenças de forma dizem mais que qualquer
+curva isolada.
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
@@ -142,10 +142,7 @@ devolve $\dot\rho + 3H(\rho + p) = 0$.
 \begin{central}
 A equação de continuidade \emph{não} é uma terceira equação independente.
 Ela sai das duas primeiras por causa da identidade de Bianchi contraída,
-$\nabla_{\mu}G^{\mu\nu} = 0$, provada no Capítulo~\ref{cap:curvatura}. Vale
-verificar isso explicitamente no notebook: é a demonstração mais concreta de
-que a conservação local da matéria está costurada na geometria, e não
-imposta por fora.
+$\nabla_{\mu}G^{\mu\nu} = 0$, provada no Capítulo~\ref{cap:curvatura}. Verifique isso explicitamente no notebook: é a demonstração mais concreta de que a conservação local da matéria está costurada na geometria, e não imposta por fora.
 \end{central}
 
 Por fim, a solução fechada para o caso plano com matéria e $\Lambda$, que
@@ -159,7 +156,7 @@ serviu de referência para o teste numérico:
   \label{eq:cap13-sinh}
 \end{equation}
 
-Vale contemplar essa expressão por um instante. O $\sinh^{2/3}$ contém as
+Essa expressão merece um instante de atenção. O $\sinh^{2/3}$ contém as
 duas eras: para argumento pequeno, $\sinh x \approx x$ e recuperamos
 $a \propto t^{2/3}$ de Einstein--de Sitter; para argumento grande,
 $\sinh x \approx e^{x}/2$ e a expansão vira exponencial. A transição entre
