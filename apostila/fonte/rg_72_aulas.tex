@@ -7567,21 +7567,72 @@ Esta é a expressão usual da divergência em polares, aqui deduzida a partir
 da conexão. O fator $1/r$ veio de um único
 símbolo de Christoffel.
 
-Para o laplaciano, note que $\Delta f$ é a divergência do \emph{vetor}
-gradiente, não da 1-forma: é preciso subir o índice primeiro, com
-\eqref{eq:gradiente-vetor}. Substituindo $V^r=\partial_rf$ e
-$V^\theta=r^{-2}\partial_\theta f$ em \eqref{eq:divergencia-polar}:
+O laplaciano de uma função é a divergência do seu gradiente,
+\[
+  \Delta f=\operatorname{div}\bigl(\operatorname{grad}f\bigr),
+\]
+e em polares vale separar as duas operações, porque a métrica entra em cada
+uma por um motivo diferente.
+
+\textbf{1. Construir o vetor gradiente.} As derivadas de $f$ aparecem
+primeiro na 1-forma \eqref{eq:gradiente-1forma},
+$\dd f=\partial_rf\,\tilde\omega^r+\partial_\theta f\,\tilde\omega^\theta$,
+que recebe um vetor e devolve a variação de $f$ naquela direção. O
+\emph{gradiente} é outra coisa: é o vetor que produz esse mesmo número por
+produto escalar,
+\begin{equation}
+  \operatorname{grad}f\cdot\vec X=\dd f(\vec X)
+  \qquad\text{para todo }\vec X ,
+  \label{eq:def-gradiente}
+\end{equation}
+que é a ponte da Seção~\ref{sec:metrica-ponte} aplicada a $\dd f$. Escrevendo
+\eqref{eq:def-gradiente} em componentes, $g_{ij}(\operatorname{grad}f)^jX^i
+=\partial_if\,X^i$ para todo $X^i$, e portanto
+$(\operatorname{grad}f)^i=g^{ij}\partial_jf$ --- que é
+\eqref{eq:gradiente-vetor}. Com a inversa de \eqref{eq:metrica-polar},
+\[
+  \operatorname{grad}f=\partial_rf\,\vec e_r
+  +\frac{1}{r^2}\,\partial_\theta f\,\vec e_\theta .
+\]
+
+\textbf{2. Tomar a divergência desse vetor.} Agora é só substituir em
+\eqref{eq:divergencia-polar}, com $V^r=\partial_rf$ e
+$V^\theta=r^{-2}\partial_\theta f$:
 \begin{equation}
   \boxed{\ \Delta f=\frac1r\,\partial_r\bigl(r\,\partial_rf\bigr)
+  +\frac{1}{r^2}\,\partial^2_\theta f
+  =\partial_r^2f+\frac1r\,\partial_rf
   +\frac{1}{r^2}\,\partial^2_\theta f\ }
   \label{eq:laplaciano-polar}
 \end{equation}
 
+Vale dar sentido aos dois fatores de $r$, porque eles vêm de lugares
+distintos. O $1/r^2$ do passo 1 está lá porque \emph{a mesma variação angular
+corresponde a uma distância maior longe da origem}: o arco vale $r\,\dd\theta$,
+e derivar em relação a $\theta$ não é derivar em relação à distância. Já o
+$1/r$ do passo 2 vem do elemento de área, $r\,\dd r\,\dd\theta$: a divergência
+mede fluxo por unidade de volume, e esse volume também muda com $r$.
+
 \begin{atencao}
-O passo que mais se erra é esquecer de subir o índice. Os dois índices de
-$\partial_if$ e de $\nabla_j$ são covariantes, e contraí-los exige a métrica
-inversa; sem ela o resultado seria $\partial_r^2f+\partial_\theta^2f$, que está
-errado, como mostra o exemplo abaixo.
+Em coordenadas curvilíneas não basta somar as segundas derivadas parciais, e
+são \emph{dois} os cuidados, um por operação: a métrica inversa converte a
+1-forma $\dd f$ no vetor gradiente, e a divergência leva em conta a variação
+do elemento de volume. A expressão que reúne os dois é
+\[
+  \Delta f=\frac{1}{\sqrt{\det g}}\,
+  \partial_i\!\left(\sqrt{\det g}\;g^{ij}\,\partial_jf\right),
+\]
+com $\sqrt{\det g}=r$ em polares. O Capítulo~\ref{cap:curvatura} demonstra a
+forma com $\sqrt{\det g}$; aqui ela serve para mostrar que os dois efeitos são
+independentes --- e cada omissão cobra o seu preço:
+\begin{itemize}
+  \item esquecer a métrica inversa estraga só o termo angular, que fica
+  $\partial^2_\theta f$ em vez de $r^{-2}\partial^2_\theta f$;
+  \item esquecer o elemento de volume come exatamente o termo
+  $\frac1r\partial_rf$;
+  \item esquecer os dois é a soma ingênua
+  $\partial_r^2f+\partial_\theta^2f$.
+\end{itemize}
 \end{atencao}
 
 \begin{example}
@@ -7601,8 +7652,12 @@ $\partial_xx+\partial_yy=2$. Bate.
   \Delta f=\frac1r\,\partial_r\bigl(r\cdot2r\bigr)+0=\frac{4r}{r}=4 .
 \]
 Em cartesianas, $\partial_x^2(x^2+y^2)+\partial_y^2(x^2+y^2)=2+2=4$. Bate. E
-note que a receita errada da caixa acima daria
-$\partial_r^2(r^2)=2$, metade do valor certo.
+a omissão cobra o que a caixa anuncia: a soma ingênua daria
+$\partial_r^2(r^2)=2$, metade do valor certo, porque perde o
+$\frac1r\partial_rf$, que aqui vale $2$. Note, porém, que este $f$ não
+enxerga o \emph{outro} descuido: como $\partial_\theta f=0$, esquecer a
+métrica inversa aqui não mudaria nada. O Exercício~\ref{ex:lap-angular} usa um
+$f$ que depende de $\theta$ e revela os dois.
 
 \emph{(c) Uma função harmônica.} Tome $f=\ln r$, com $r>0$. Então
 $\partial_rf=1/r$ e
@@ -8265,7 +8320,7 @@ independentemente do anterior.
 cancelamento termo a termo.
 (b) Calcule $\nabla_iV^i$ pela fórmula \eqref{eq:divergencia-polar} e verifique
 que a divergência se anula.
-(c) Tome $f=r^3\sin\theta$ e calcule $\Delta f$ por
+(c)\label{ex:lap-angular} Tome $f=r^3\sin\theta$ e calcule $\Delta f$ por
 \eqref{eq:laplaciano-polar}. Verifique passando a cartesianas: escreva
 explicitamente $f=(x^2+y^2)\,y$ e compare.
 \end{exercise}
@@ -8668,13 +8723,13 @@ resultado ao sinal de componentes apropriadas de curvatura.
 \begin{example}
 \textbf{Divergência em coordenadas polares.} No plano,
 $g_{ij}=\mathrm{diag}(1,r^2)$ e $\sqrt{|g|}=r$. Para um vetor
-$V^i=(V^r,V^\phi)$,
+$V^i=(V^r,V^\theta)$,
 \[
-  \nabla_iV^i=\frac{1}{r}\partial_r(rV^r)+\frac{1}{r}\partial_\phi(rV^\phi).
+  \nabla_iV^i=\frac{1}{r}\partial_r(rV^r)+\frac{1}{r}\partial_\theta(rV^\theta).
 \]
-Como $r$ não depende de $\phi$,
+Como $r$ não depende de $\theta$,
 \[
-  \nabla_iV^i=\partial_rV^r+\frac{1}{r}V^r+\partial_\phi V^\phi.
+  \nabla_iV^i=\partial_rV^r+\frac{1}{r}V^r+\partial_\theta V^\theta.
 \]
 Esse é o termo extra familiar da divergência em polares, agora entendido como
 consequência de $\sqrt{|g|}$. Atenção ao comparar com a fórmula do cálculo
