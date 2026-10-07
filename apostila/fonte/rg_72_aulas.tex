@@ -4894,6 +4894,26 @@ transformação de Lorentz, e portanto passam intactos pela derivada:
 Cada índice recebeu o seu fator, que é exatamente a lei de transformação de um
 tensor $(2,1)$.
 
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}A VÍRGULA DO SCHUTZ}]
+Como derivar acrescenta um índice embaixo, é cômodo escrever esse índice
+\emph{junto dos outros}, separado por vírgula. A convenção, que o Schutz usa
+do capítulo 3 em diante, é
+\begin{equation}
+  T^{\mu\nu}{}_{,\alpha}\ \equiv\ \partial_\alpha T^{\mu\nu}
+  \ =\ \frac{\partial T^{\mu\nu}}{\partial x^\alpha} .
+  \label{eq:virgula}
+\end{equation}
+É notação, não objeto novo: $\varphi_{,\alpha}$ é o gradiente,
+$U^\alpha{}_{,\alpha}$ é a divergência, e assim por diante. A vantagem
+aparece quando houver uma \emph{segunda} derivada, de outra espécie --- e aí a
+vírgula ganha uma companheira, o ponto e vírgula da
+Seção~\ref{sec:calculo-polar}.
+
+Nesta apostila a forma principal continua sendo $\partial_\alpha$, que deixa o
+operador visível. A vírgula fica registrada porque o Schutz escreve com ela, e
+quem ler os dois ao mesmo tempo precisa reconhecê-la.
+\end{atencao}
+
 \begin{atencao}
 Guarde a frase ``os coeficientes são constantes'', porque é ela que vai
 falhar. Em coordenadas curvilíneas --- e, mais tarde, em espaço-tempo curvo,
@@ -7485,6 +7505,41 @@ Diferentemente de $\partial_jV^i$, este conjunto \emph{é} um tensor de tipo
 $(1,1)$: o termo de conexão existe precisamente para cancelar os pedaços que
 estragavam a lei de transformação.
 \end{central}
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}VÍRGULA E PONTO E VÍRGULA}]
+A Seção~\ref{sec:derivada-tensor} registrou a vírgula de
+\eqref{eq:virgula} para a derivada parcial. A derivada covariante ganha a
+companheira óbvia, o \emph{ponto e vírgula}, e com ela
+\eqref{eq:derivada-covariante} fica
+\begin{equation}
+  V^i{}_{;j}\ \equiv\ \nabla_jV^i\ =\ V^i{}_{,j}+\Gamma^i{}_{jk}V^k .
+  \label{eq:ponto-e-virgula}
+\end{equation}
+A tradução entre as duas notações é toda esta:
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+ & nesta apostila & no Schutz \\
+\midrule
+derivada parcial    & $\partial_jV^i$ & $V^i{}_{,j}$ \\
+derivada covariante & $\nabla_jV^i$   & $V^i{}_{;j}$ \\
+1-forma             & $\nabla_j\omega_i$ & $\omega_{i;j}$ \\
+tensor              & $\nabla_kT^i{}_j$ & $T^i{}_{j;k}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Em cartesianas os $\Gamma$ se anulam e as duas coincidem, $V^i{}_{;j}=V^i{}_{,j}$;
+é só fora delas que a distinção importa.
+
+Guarde o par, porque ele volta como \emph{regra física}. O princípio da
+equivalência, no Capítulo~\ref{cap:fisica-curva}, diz que uma lei válida em
+relatividade especial continua valendo em espaço-tempo curvo trocando cada
+derivada parcial pela covariante --- isto é, \textbf{trocando cada vírgula por
+um ponto e vírgula}. É assim que se enuncia o acoplamento mínimo, e é por isso
+que a notação do Schutz sobrevive: ela transforma um princípio numa instrução
+tipográfica.
+\end{atencao}
 
 \begin{example}
 \label{ex:ex-covariante}
