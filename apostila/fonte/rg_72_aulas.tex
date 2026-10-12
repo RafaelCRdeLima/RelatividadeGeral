@@ -8619,11 +8619,17 @@ $\eta$. Na segunda, de uma construção explícita, que vale exibir.
 
 \emph{As coordenadas normais.} Fixe em $P$ uma base com
 $g_{\bar\mu\bar\nu}|_P=\eta_{\bar\mu\bar\nu}$, o que a lei de Sylvester
-já garante. Para cada vetor $v^{\bar\mu}$ de $T_P$, siga a geodésica que sai
-de $P$ com tangente $v$ e caminhe por um parâmetro afim unitário; ao ponto
-onde se chega, atribua as coordenadas $v^{\bar\mu}$. Por construção, as
-geodésicas que passam por $P$ são então as \emph{retas}
-$x^{\bar\mu}(\lambda)=\lambda\,v^{\bar\mu}$.
+já garante. Para cada vetor $v^{\bar\mu}$ de $T_P$ \emph{suficientemente
+pequeno}, siga a geodésica que sai de $P$ com tangente $v$ e caminhe por um
+parâmetro afim unitário; ao ponto onde se chega, atribua as coordenadas
+$v^{\bar\mu}$. Por construção, as geodésicas que passam por $P$ são então as
+\emph{retas} $x^{\bar\mu}(\lambda)=\lambda\,v^{\bar\mu}$.
+
+A restrição a $v$ pequeno não é detalhe: a aplicação que leva $v$ ao ponto de
+chegada --- a \emph{exponencial} --- só é invertível numa vizinhança de $P$,
+e fora dela geodésicas distintas podem reencontrar-se. Na esfera isso ocorre
+já no ponto antípoda, onde todas as geodésicas que partem de $P$ se cruzam, e
+a carta normal deixa de existir. A planura local é, como o nome diz, local.
 
 Agora ponha essas retas na equação geodésica
 \eqref{eq:geodesica-variedade}. Como $\ddot x^{\bar\mu}=0$, sobra
@@ -8643,8 +8649,21 @@ $\Gamma|_P=0$ equivale a $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$:
 uma direção sai da própria fórmula \eqref{eq:christoffel-variedade}, e a
 outra, de escrever $\nabla g=0$ por extenso com os $\Gamma$ anulados.
 
-A contagem diz que não há obstrução; esta construção diz que de fato se
-consegue.
+\begin{atencao}
+Repare no estatuto de cada peça, porque elas não são independentes do mesmo
+jeito. A \emph{contagem} e a lei de Sylvester são puramente métricas --- não
+mencionam conexão, e é essa independência que torna legítima a rota
+alternativa discutida na Seção~\ref{sec:derivada-covariante-variedade}. Já a
+\emph{construção} acima usa geodésicas, isto é, usa a conexão de
+Levi-Civita; ela não serve, portanto, como demonstração independente da
+existência, e sim como exibição: tendo a conexão em mãos, as coordenadas que
+realizam $\partial g|_P=0$ podem ser escritas.
+
+Quem quiser a existência sem conexão nenhuma segue o Schutz: a segunda linha
+da tabela é um sistema \emph{linear} nas $40$ incógnitas
+$\partial_\gamma\Lambda|_P$, com $40$ equações, e resolvê-lo é um exercício
+de álgebra linear --- sem geodésica alguma.
+\end{atencao}
 \end{atencao}
 
 \begin{central}
@@ -8768,10 +8787,15 @@ invertibilidade de $g$. Ela se transporta inteira.
 \begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}DUAS ROTAS, NENHUMA CIRCULAR}]
 Escolhemos aqui fixar a conexão por \eqref{eq:torcao} e
 \eqref{eq:compat-variedade}. Há outra apresentação, que é a do Schutz:
-construir primeiro as coordenadas localmente inerciais da
-Seção~\ref{sec:metrica-variedade} --- o que, como se viu, não usa conexão
-nenhuma --- e \emph{definir} ali a derivada covariante como a derivada
-parcial, obtendo a compatibilidade como consequência.
+construir primeiro as coordenadas localmente inerciais e \emph{definir} ali a
+derivada covariante como a derivada parcial, obtendo a compatibilidade como
+consequência.
+
+Essa rota só é legítima porque a existência daquelas coordenadas pode ser
+estabelecida \emph{sem} conexão --- pela contagem e pela álgebra linear da
+Seção~\ref{sec:metrica-variedade}. Não confunda esse argumento com a
+construção por geodésicas exibida lá: aquela pressupõe Levi-Civita e, usada
+aqui, seria circular.
 
 As duas rotas chegam à mesma conexão. A diferença é de exposição: uma parte
 do que se exige, a outra do que se constrói.
