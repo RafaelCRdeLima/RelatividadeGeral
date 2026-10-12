@@ -9329,31 +9329,39 @@ fórmulas.
 \section{Problemas orientados}
 
 \begin{enumerate}
-  \item \textbf{Compatibilidade métrica.} Partindo de $\nabla_\alpha g_{\mu\nu}=0$,
-  mostre que $\nabla_\alpha g^{\mu\nu}=0$. A pista é derivar
-  $g_{\mu\rho}g^{\rho\nu}=\delta_\mu{}^\nu$.
+  \item \textbf{A contagem, em $n$ dimensões.} Refaça a tabela da
+  Seção~\ref{sec:metrica-variedade} para dimensão $n$ qualquer. (a) Mostre que
+  as liberdades são $n^2$, $n\cdot\frac{n(n+1)}{2}$ e
+  $n\cdot\frac{n(n+1)(n+2)}{6}$, e as exigências $\frac{n(n+1)}{2}$,
+  $n\cdot\frac{n(n+1)}{2}$ e $\bigl[\frac{n(n+1)}{2}\bigr]^2$. (b) Verifique
+  que a segunda linha fecha exatamente em qualquer $n$. (c) Mostre que o que
+  sobra na terceira é $\frac{n^2(n^2-1)}{12}$, e confira para $n=2,3,4$.
 
-  \item \textbf{Divergência de vetor.} Mostre que
-  \[
-    \nabla_\mu V^\mu=\frac{1}{\sqrt{|g|}}\partial_\mu(\sqrt{|g|}V^\mu).
-  \]
-  Esse resultado é útil para leis de conservação em coordenadas gerais.
+  \item \textbf{Torção é tensor.} Mostre que
+  $T^\rho{}_{\mu\nu}=\Gamma^\rho{}_{\mu\nu}-\Gamma^\rho{}_{\nu\mu}$ é um
+  tensor, apesar de $\Gamma$ não ser: os termos não tensoriais se cancelam na
+  diferença. Depois explique por que, em base coordenada, o comutador
+  $[\vec e_\mu,\vec e_\nu]$ não aparece em \eqref{eq:torcao}.
+
+  \item \textbf{Compatibilidade com índices em cima.} Partindo de
+  $\nabla_\alpha g_{\mu\nu}=0$, mostre que $\nabla_\alpha g^{\mu\nu}=0$. A
+  pista é derivar $g_{\mu\rho}g^{\rho\nu}=\delta_\mu{}^\nu$.
+
+  \item \textbf{Divergência e $\sqrt{|g|}$.} Demonstre
+  \eqref{eq:divergencia-sqrtg}. Sugestão: mostre primeiro que
+  $\Gamma^\mu{}_{\mu\alpha}=\partial_\alpha\ln\sqrt{|g|}$, usando a identidade
+  $\delta(\ln\det g)=\operatorname{tr}(g^{-1}\delta g)$.
 
   \item \textbf{Comutador em escalares.} Verifique que
-  $[\nabla_\mu,\nabla_\nu]f=0$ para qualquer escalar $f$, assumindo conexão sem
-  torção.
+  $[\nabla_\mu,\nabla_\nu]f=0$ para qualquer escalar $f$, e identifique onde a
+  hipótese de torção nula entra --- com torção, o resultado seria
+  $-T^\lambda{}_{\mu\nu}\partial_\lambda f$.
 
-  \item \textbf{Ricci da esfera.} Usando os Christoffel da esfera unitária,
-  calcule pelo menos uma componente de $R_{\mu\nu}$ e compare com
-  $R_{\mu\nu}=g_{\mu\nu}$ para esfera unitária.
-
-  \item \textbf{Número de componentes.} Conte os componentes independentes de
-  um tensor simétrico $4\times4$. Depois discuta por que as equações de
-  Einstein têm dez componentes, mas nem todas são evolutivas independentes.
-
-  \item \textbf{Curvatura zero.} Explique por que todos os componentes do
-  tensor de Riemann se anulam em Minkowski, mesmo quando usamos coordenadas
-  polares ou esféricas.
+  \item \textbf{Curvatura zero em coordenadas curvilíneas.} Explique por que
+  todas as componentes de $R^\rho{}_{\sigma\mu\nu}$ se anulam em Minkowski,
+  mesmo em polares ou esféricas, onde os $\Gamma$ não são nulos. Depois diga
+  por que isso \emph{não} implica holonomia trivial em qualquer circuito, e
+  use o cone do Conteúdo extra como contraexemplo.
 \end{enumerate}
 
 \section{Exemplos resolvidos adicionais}
@@ -9361,51 +9369,47 @@ fórmulas.
 \begin{example}
 \textbf{Divergência em coordenadas polares.} No plano,
 $g_{ij}=\mathrm{diag}(1,r^2)$ e $\sqrt{|g|}=r$. Para um vetor
-$V^i=(V^r,V^\theta)$,
+$V^i=(V^r,V^\theta)$, a fórmula \eqref{eq:divergencia-sqrtg} dá
 \[
-  \nabla_iV^i=\frac{1}{r}\partial_r(rV^r)+\frac{1}{r}\partial_\theta(rV^\theta).
+  \nabla_iV^i=\frac{1}{r}\partial_r(rV^r)+\frac{1}{r}\partial_\theta(rV^\theta)
+  =\partial_rV^r+\frac{1}{r}V^r+\partial_\theta V^\theta ,
 \]
-Como $r$ não depende de $\theta$,
-\[
-  \nabla_iV^i=\partial_rV^r+\frac{1}{r}V^r+\partial_\theta V^\theta.
-\]
-Esse é o termo extra familiar da divergência em polares, agora entendido como
-consequência de $\sqrt{|g|}$. Atenção ao comparar com a fórmula do cálculo
-vetorial: esta está em componentes \emph{coordenadas}, aquela em componentes
-\emph{ortonormais}, e a tradução entre as duas é a
+porque $r$ não depende de $\theta$. É a mesma expressão que a
+Seção~\ref{sec:calculo-polar} obteve somando um símbolo de Christoffel, agora
+com a origem do fator à vista: o elemento de área. Atenção ao comparar com a
+tabela do cálculo vetorial --- esta está em componentes \emph{coordenadas},
+aquela em \emph{ortonormais}, e a tradução é a
 Seção~\ref{sec:bases-nao-coordenadas}.
 \end{example}
 
 \begin{example}
-\textbf{Geodésicas na esfera.} Na esfera unitária,
+\textbf{O equador é geodésica --- as duas equações.} Na esfera unitária,
+$\dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\varphi^2$, com
 \[
-  \dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\phi^2.
+  \Gamma^\theta{}_{\varphi\varphi}=-\sin\theta\cos\theta ,
+  \qquad
+  \Gamma^\varphi{}_{\theta\varphi}=\Gamma^\varphi{}_{\varphi\theta}=\cot\theta .
 \]
-Os símbolos relevantes são
-\[
-  \Gamma^\theta_{\phi\phi}=-\sin\theta\cos\theta,\qquad
-  \Gamma^\phi_{\theta\phi}=\cot\theta.
-\]
-No equador, $\theta=\pi/2$ e $\dot\theta=0$. A equação para $\theta$ contém
-$-\sin\theta\cos\theta\,\dot\phi^2$, que se anula no equador. Portanto o
-equador é geodésica.
-\end{example}
+Tome $\theta=\pi/2$ constante e $\varphi=\lambda$. São \emph{duas} equações a
+verificar, e a segunda costuma ser esquecida.
 
-\begin{example}
-\textbf{Curvatura por transporte paralelo.} Transporte um vetor ao longo de um
-triângulo pequeno em uma superfície curva. A diferença entre o vetor inicial e
-final é proporcional à área do circuito e ao tensor de curvatura. No limite de
-área infinitesimal, essa relação fornece uma interpretação geométrica direta de
-$R^\rho{}_{\sigma\mu\nu}$: ele mede a rotação infinitesimal produzida por um
-paralelogramo infinitesimal.
-\end{example}
+\emph{Componente $\theta$:}
+$\ddot\theta+\Gamma^\theta{}_{\varphi\varphi}\dot\varphi^2
+=0+\bigl(-\sin\tfrac\pi2\cos\tfrac\pi2\bigr)(1)^2=0$,
+porque $\cos(\pi/2)=0$.
 
-\begin{example}
-\textbf{Coordenadas normais.} Em qualquer ponto de uma variedade pseudo-
-riemanniana, é possível escolher coordenadas tais que
-$g_{\mu\nu}=\eta_{\mu\nu}$ e $\partial_\alpha g_{\mu\nu}=0$ naquele ponto. Como
-os Christoffel dependem de primeiras derivadas da métrica, eles se anulam ali.
-As segundas derivadas, porém, permanecem e codificam a curvatura.
+\emph{Componente $\varphi$:}
+$\ddot\varphi+2\Gamma^\varphi{}_{\theta\varphi}\dot\theta\dot\varphi
+=0+2\cot\bigl(\tfrac\pi2\bigr)\cdot0\cdot1=0$,
+que se anula porque $\dot\theta=0$.
+
+As duas se satisfazem, e só então o equador é geodésica \emph{com $\lambda$
+afim}. A primeira sozinha não bastaria: ela diz que a curva não sai do
+equador, não que o ritmo ao longo dele seja o certo.
+
+\emph{E um paralelo qualquer não é.} Para $\theta_0\ne\pi/2$ a componente
+$\theta$ deixa $-\sin\theta_0\cos\theta_0\ne0$, que é a aceleração necessária
+para manter a partícula no paralelo.
 \end{example}
 
 \clearpage
@@ -9418,49 +9422,60 @@ Cinco problemas por capítulo, para entrega. A marca indica a dificuldade e a \e
 \end{leitura}
 
 \begin{exercise}
+\facil{6.2}
+O teorema da planura local e a contagem de Riemann.
+(a) Na tabela da Seção~\ref{sec:metrica-variedade}, explique em uma frase o
+que cada uma das três linhas está exigindo da transformação de coordenadas.
+(b) A primeira linha deixa $6$ parâmetros livres. Identifique-os fisicamente.
+(c) A terceira deixa $20$ graus que não se podem anular. Liste as simetrias
+\eqref{eq:simetrias-riemann} que levam $R^\rho{}_{\sigma\mu\nu}$ de $4^4$ para
+$20$ componentes independentes, e explique por que os dois números são o
+mesmo.
+\end{exercise}
+
+\begin{exercise}
 \facil{6.3}
 A derivada covariante de um vetor é
 $\nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu{}_{\mu\alpha}V^\alpha$.
 (a) Escreva a regra correspondente para uma 1-forma e justifique o sinal
 oposto. (b) Escreva a regra para um tensor $T^{\mu}{}_{\nu}$. (c) Verifique
-que $\nabla_\mu$ aplicado a um escalar coincide com $\partial_\mu$.
+que $\nabla_\mu$ aplicado a um escalar coincide com $\partial_\mu$, e diga por
+que isso \emph{tinha} de acontecer.
 \end{exercise}
 
 \begin{exercise}
-\facil{6.5}
-Em quatro dimensões, o tensor de Riemann tem $20$ componentes independentes.
-(a) Liste as quatro simetrias que produzem essa contagem. (b) Quantas
-componentes independentes tem o tensor de Ricci? (c) Quantas sobram para o
-tensor de Weyl, e o que essa parte descreve fisicamente?
-\end{exercise}
-
-\begin{exercise}
-\medio{6.2}
+\medio{6.3}
 Partindo da compatibilidade métrica $\nabla_\alpha g_{\mu\nu}=0$ e da ausência
-de torção: (a) mostre que $\nabla_\alpha g^{\mu\nu}=0$; (b) deduza a fórmula
-de Christoffel em termos de derivadas da métrica, explicitando onde cada
-hipótese entra; (c) mostre que o transporte paralelo preserva o produto
-escalar entre dois vetores.
+de torção: (a) deduza a fórmula de Christoffel
+\eqref{eq:christoffel-variedade} em termos de derivadas da métrica,
+explicitando onde cada hipótese entra; (b) mostre que o transporte paralelo
+preserva $g(\vec V,\vec W)$ para dois vetores transportados ao longo da mesma
+curva; (c) conclua que ele preserva normas e, no caso lorentziano, o caráter
+temporal, nulo ou espacial de um vetor.
 \end{exercise}
 
 \begin{exercise}
-\medio{6.6}
-Para a esfera unitária: (a) calcule $R^\theta{}_{\phi\theta\phi}$;
-(b) obtenha $R_{\mu\nu}$ e mostre que $R_{\mu\nu}=g_{\mu\nu}$; (c) calcule o
-escalar $R$ e relacione-o à curvatura de Gauss $K=1$. (d) Repita o item (c)
-para a esfera de raio $a$ e verifique a dependência com $a$.
+\medio{6.5}
+Para a esfera de raio $a$, $\dd\ell^2=a^2\dd\theta^2+a^2\sin^2\theta\,
+\dd\varphi^2$: (a) calcule $R^\theta{}_{\varphi\theta\varphi}$ e mostre que
+vale $\sin^2\theta$, independentemente de $a$; (b) obtenha $R_{\mu\nu}$ e
+mostre que $R_{\mu\nu}=g_{\mu\nu}/a^2$; (c) calcule o escalar $R$ e relacione-o
+à curvatura de Gauss por $R=2K$; (d) confira com a fórmula bidimensional
+$R_{ijkl}=K(g_{ik}g_{jl}-g_{il}g_{jk})$ da Seção~\ref{sec:curvatura-riemann}.
 \end{exercise}
 
 \begin{exercise}
-\dificil{6.4}
+\dificil{6.5}
 A equação de desvio geodésico é
 $\D^2\xi^\mu/\D\tau^2=-R^\mu{}_{\alpha\nu\beta}U^\alpha\xi^\nu U^\beta$.
 (a) Deduza-a a partir de uma família de geodésicas $x^\mu(\tau,s)$, com
-$\xi^\mu=\partial x^\mu/\partial s$. (b) Aplique-a a duas partículas em queda
-livre radial no campo newtoniano de uma massa $M$, e mostre que ela reproduz
-a maré $2GM/r^3$ para separação radial e $-GM/r^3$ para separação transversa.
-(c) Identifique quais componentes de $R^\mu{}_{\alpha\nu\beta}$ correspondem a
-cada caso.
+$\xi^\mu=\partial x^\mu/\partial s$, dizendo onde entram $\nabla_{\vec U}\vec U=0$
+e $[\vec U,\vec\xi]=0$. (b) Aplique-a a duas partículas em queda livre no
+campo newtoniano de uma massa $M$ e reproduza a maré $+2GM/r^3$ para
+separação radial e $-GM/r^3$ para a transversal. (c) Mostre que a soma sobre
+as três direções se anula, e identifique essa condição como
+$\nabla^2\Phi=0$. (d) Que parte da curvatura --- Ricci ou Weyl --- é
+responsável pelo traço, e o que isso diz sobre a maré no vácuo?
 \end{exercise}
 
 
