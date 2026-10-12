@@ -158,11 +158,22 @@ reproduz $48M^2/r^6$ em sete dígitos, mostrando que o Riemann completo é bem
 diferente de zero embora sua contração seja nula. É essa distinção que
 permite maré e onda gravitacional no vácuo.
 
-A terceira é a mais instrutiva. Das $256$ componentes de $R_{abcd}$, apenas
-$24$ são não nulas em Schwarzschild, e as simetrias as reduzem a $6$
-independentes --- bem abaixo das $20$ que uma métrica genérica em quatro
-dimensões teria. Simetria esférica e estaticidade não são hipóteses de
-conveniência: elas cortam o problema por um fator maior que três.
+A terceira é a mais instrutiva, e pede cuidado na leitura. Das $256$ entradas
+de $R_{abcd}$, apenas $24$ são não nulas em Schwarzschild, e elas caem em $6$
+\emph{classes} sob as simetrias \eqref{eq:simetrias-riemann} --- bem abaixo
+das $20$ que uma métrica genérica em quatro dimensões admitiria.
+
+Mas $6$ classes não são $6$ funções independentes, e é isso que o programa
+\emph{não} verifica: ele agrupa entradas, não testa independência. Olhando os
+valores, a simetria esférica relaciona os pares,
+\[
+  R_{t\varphi t\varphi}=R_{t\theta t\theta}\sin^2\theta ,
+  \qquad
+  R_{r\varphi r\varphi}=R_{r\theta r\theta}\sin^2\theta ,
+\]
+e no fim todas são múltiplas de uma única função, $M/r^3$, vezes fatores da
+métrica. Simetria esférica e estaticidade não são hipóteses de conveniência:
+elas cortam o problema muito além do que a contagem de classes sugere.
 
 \subsubsection*{Desvio geodésico}
 

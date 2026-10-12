@@ -8553,8 +8553,10 @@ O critério de curvatura é o da Seção~\ref{sec:curvatura-riemann}.
 
 \subsection*{O teorema da planura local}
 
-Aqui está o resultado que organiza o capítulo inteiro, e a demonstração é uma
-contagem --- não usa conexão nenhuma, apenas a métrica e a regra da cadeia.
+Aqui está o resultado que organiza o capítulo inteiro. A conta que o torna
+plausível é uma \emph{contagem} --- e ela não usa conexão nenhuma, apenas a
+métrica e a regra da cadeia. A contagem mostra que não há obstrução; o que
+fecha a demonstração vem logo depois dela.
 
 \begin{central}
 \textbf{Planura local.} Em torno de qualquer ponto $P$ existem coordenadas
@@ -8844,8 +8846,12 @@ $(V^\theta,V^\varphi)=(1,0)$ com que partiu.
 \emph{E ainda assim ele girou.} As componentes são as mesmas porque a
 \emph{base} girou junto: $\vec e_\theta$ no meridiano $\varphi=0$ e
 $\vec e_\theta$ no meridiano $\varphi=\pi/2$ são direções diferentes. Para
-comparar é preciso pôr os dois no mesmo espaço tangente --- o do polo --- e
-ali o ângulo é
+comparar é preciso pôr os dois no mesmo espaço tangente e usar ali um
+referencial \emph{regular}, e não a base coordenada: a carta esférica é
+singular no polo, onde $\varphi$ deixa de estar definido e
+$\Gamma^\varphi{}_{\theta\varphi}=\cot\theta$ diverge. Feche o circuito a
+uma colatitude $\epsilon$ pequena, compare as duas direções num referencial
+ortonormal ali, e tome $\epsilon\to0$. O ângulo é
 \[
   \frac{\pi}{2}
   =\frac{\text{área do octante}}{a^2}
@@ -9136,9 +9142,20 @@ sinal negativo: elas se \emph{aproximam}.
 \[
   \frac{2GM}{r^3}-\frac{GM}{r^3}-\frac{GM}{r^3}=0 ,
 \]
-que é $\nabla^2\Phi=0$, a equação de Laplace no vácuo. A maré estica numa
-direção exatamente o quanto comprime nas outras duas, e o volume de uma
-pequena bola de partículas em queda livre não muda. Em presença de matéria o
+que é $\nabla^2\Phi=0$, a equação de Laplace no vácuo: a maré estica numa
+direção exatamente o quanto comprime nas outras duas.
+
+\emph{Cuidado com o que isso garante.} Para uma pequena nuvem que parte
+\emph{em repouso}, integrar as três direções dá
+\[
+  \frac{V(t)}{V_0}
+  =1-\frac{1}{8}\left(\frac{2GM}{r^3}\right)^{\!2}t^4+\dots ,
+\]
+isto é: o traço nulo cancela a variação de ordem $t^2$, e só ela. A partir de
+$t^4$ o volume \emph{diminui}, porque o esticamento numa direção e a
+compressão nas outras deixam de se compensar quando a nuvem já se deformou ---
+é o cisalhamento que a maré produziu agindo sobre si mesmo. Traço nulo é uma
+afirmação sobre a taxa inicial, não sobre a evolução. Em presença de matéria o
 traço deixa de ser nulo, e é essa a parte da curvatura que
 $R_{\mu\nu}$ carrega --- a mesma distinção entre Ricci e Weyl da
 Seção~\ref{sec:bianchi-einstein}.
@@ -9164,12 +9181,24 @@ Riemann satisfaz uma identidade envolvendo derivadas:
   \nabla_{[\lambda}R_{\mu\nu]\rho\sigma}=0 .
   \label{eq:bianchi-diferencial}
 \end{equation}
-A demonstração é de uma linha em coordenadas localmente inerciais: ali
-$\Gamma|_P=0$, o termo quadrático de \eqref{eq:riemann} some, e
-$\nabla_\lambda R_{\mu\nu\rho\sigma}|_P=\partial_\lambda\partial_\mu
-\Gamma_{\nu\rho\sigma}-\cdots$ se cancela ao antissimetrizar em
-$\lambda\mu\nu$, porque as derivadas parciais comutam. Sendo uma equação
-tensorial, vale em qualquer carta --- e, como $P$ é arbitrário, em toda parte.
+A demonstração cabe em três passos, em coordenadas localmente inerciais em
+torno de $P$. \emph{Primeiro}, ali $\Gamma|_P=0$, de modo que os dois termos
+quadráticos de \eqref{eq:riemann} não contribuem \emph{no ponto} e
+$\nabla_\lambda$ se reduz a $\partial_\lambda$:
+\[
+  \nabla_\lambda R^\rho{}_{\sigma\mu\nu}\big|_P
+  =\partial_\lambda\bigl(\partial_\mu\Gamma^\rho{}_{\nu\sigma}
+   -\partial_\nu\Gamma^\rho{}_{\mu\sigma}\bigr)\Big|_P .
+\]
+\emph{Segundo}, antissimetrize em $\lambda\mu\nu$. Cada termo é uma segunda
+derivada parcial de $\Gamma$, e derivadas parciais comutam: os seis termos se
+cancelam aos pares, e $\nabla_{[\lambda}R^\rho{}_{|\sigma|\mu\nu]}=0$ em
+$P$. \emph{Terceiro}, isso é uma equação tensorial, logo vale em qualquer
+carta nesse ponto; e como $P$ é arbitrário, vale em toda a variedade.
+
+Repare que o segundo passo só funciona porque $\Gamma|_P=0$ mata os termos
+quadráticos: fora das coordenadas localmente inerciais a conta tem mais
+termos, que se cancelam igualmente, mas sem a mesma economia.
 
 É o teorema da planura local trabalhando: ele converte uma identidade sobre
 derivadas parciais numa identidade tensorial.
