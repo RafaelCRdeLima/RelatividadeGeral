@@ -101,8 +101,16 @@ def invariantes(g, x, h=1e-4):
     return Ric, Rs, K
 
 
-def componentes_independentes(R, g, tol=1e-6):
-    """Conta componentes independentes de R_{abcd} usando as simetrias."""
+def classes_sob_simetrias(R, g, tol=1e-6):
+    """Agrupa as entradas nao nulas de R_{abcd} em classes de equivalencia.
+
+    ATENCAO ao nome. Isto conta CLASSES sob as simetrias do Riemann, e nao
+    componentes funcionalmente independentes: duas classes distintas podem
+    estar relacionadas por uma simetria da METRICA, que esta rotina nao
+    conhece. Em Schwarzschild, por exemplo, saem 6 classes, mas a simetria
+    esferica da R_{t phi t phi} = R_{t theta t theta} sin^2(theta), e no fim
+    todas sao multiplas de M/r^3.
+    """
     n = R.shape[0]
     Rd = np.einsum("ae,ebcd->abcd", g, R)
     vistos = {}
@@ -410,9 +418,9 @@ if __name__ == "__main__":
     print(f"      componentes nao nulas de R_abcd: "
           f"{int((np.abs(np.einsum('ae,ebcd->abcd', g_schwarzschild(xs), R4)) > 1e-6).sum())}"
           f" de {4**4}")
-    print(f"      independentes sob as simetrias:  "
-          f"{componentes_independentes(R4, g_schwarzschild(xs))}"
-          f"   (o maximo em 4D e' 20)")
+    print(f"      classes sob as simetrias:        "
+          f"{classes_sob_simetrias(R4, g_schwarzschild(xs))}"
+          f"   (nao sao 6 funcoes independentes)")
 
     print("\n== 3) Desvio geodesico: xi'' + K xi = 0 ==")
     print("K vem do Riemann numerico; xi e' integrado; a coluna analitica e'")

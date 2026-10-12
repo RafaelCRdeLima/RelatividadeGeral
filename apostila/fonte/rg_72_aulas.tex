@@ -8615,12 +8615,36 @@ demonstra, sozinha, que a solução existe. A existência vem de dois lugares. N
 primeira linha, de um teorema de álgebra linear: toda forma bilinear simétrica
 não degenerada pode ser levada à forma canônica, e a assinatura que aparece é
 sempre a mesma --- é a lei de inércia de Sylvester, e é ela que garante o
-$\eta$. Na segunda, de uma construção explícita: a condição
-$\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$ equivale a
-$\Gamma^{\bar\rho}{}_{\bar\mu\bar\nu}|_P=0$, e coordenadas que a realizam
-podem ser exibidas --- são as \emph{coordenadas normais}, construídas
-mandando as geodésicas que saem de $P$ virarem retas. A contagem diz que não
-há obstrução; a construção diz que de fato se consegue.
+$\eta$. Na segunda, de uma construção explícita, que vale exibir.
+
+\emph{As coordenadas normais.} Fixe em $P$ uma base com
+$g_{\bar\mu\bar\nu}|_P=\eta_{\bar\mu\bar\nu}$, o que a lei de Sylvester
+já garante. Para cada vetor $v^{\bar\mu}$ de $T_P$, siga a geodésica que sai
+de $P$ com tangente $v$ e caminhe por um parâmetro afim unitário; ao ponto
+onde se chega, atribua as coordenadas $v^{\bar\mu}$. Por construção, as
+geodésicas que passam por $P$ são então as \emph{retas}
+$x^{\bar\mu}(\lambda)=\lambda\,v^{\bar\mu}$.
+
+Agora ponha essas retas na equação geodésica
+\eqref{eq:geodesica-variedade}. Como $\ddot x^{\bar\mu}=0$, sobra
+\[
+  \Gamma^{\bar\mu}{}_{\bar\alpha\bar\beta}(\lambda v)\,
+  v^{\bar\alpha}v^{\bar\beta}=0
+  \qquad\text{para todo }v\text{ e todo }\lambda ,
+\]
+e em $\lambda=0$ isso dá
+$\Gamma^{\bar\mu}{}_{\bar\alpha\bar\beta}|_P\,v^{\bar\alpha}
+v^{\bar\beta}=0$ para \emph{todo} $v$. Como $\Gamma$ é simétrico nos dois
+índices de baixo, uma forma quadrática que se anula em todo vetor tem todos os
+coeficientes nulos: $\Gamma^{\bar\mu}{}_{\bar\alpha\bar\beta}|_P=0$.
+
+\emph{E isso é a segunda linha da tabela}, porque
+$\Gamma|_P=0$ equivale a $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$:
+uma direção sai da própria fórmula \eqref{eq:christoffel-variedade}, e a
+outra, de escrever $\nabla g=0$ por extenso com os $\Gamma$ anulados.
+
+A contagem diz que não há obstrução; esta construção diz que de fato se
+consegue.
 \end{atencao}
 
 \begin{central}
@@ -8838,20 +8862,24 @@ tangente ou perpendicular a ela:
   mesma;
   \item \emph{ao longo do equador}: $\vec e_\theta$ é normal à geodésica, e
   a compatibilidade métrica preserva o ângulo reto;
-  \item \emph{subindo o meridiano $\varphi=\pi/2$}: de novo a tangente.
+  \item \emph{subindo o meridiano $\varphi=\pi/2$}: de novo a direção da
+  tangente --- agora \emph{antiparalela} à tangente orientada, já que $\theta$
+  decresce ao subir. Isso não muda nada: $\nabla_{\vec U}\vec U=0$ transporta
+  $\vec U$, e portanto também $-\vec U$.
 \end{itemize}
-Em componentes, o vetor chega ao polo com as \emph{mesmas}
-$(V^\theta,V^\varphi)=(1,0)$ com que partiu.
+Em componentes, o vetor mantém $(V^\theta,V^\varphi)=(1,0)$ ao longo das três
+pernas. No polo a base coordenada não existe, de modo que o enunciado exato é
+sobre \emph{limites}: as componentes tendem a $(1,0)$ quando se sobe por cada
+meridiano, cada uma na base do seu próprio meridiano.
 
 \emph{E ainda assim ele girou.} As componentes são as mesmas porque a
 \emph{base} girou junto: $\vec e_\theta$ no meridiano $\varphi=0$ e
 $\vec e_\theta$ no meridiano $\varphi=\pi/2$ são direções diferentes. Para
-comparar é preciso pôr os dois no mesmo espaço tangente e usar ali um
-referencial \emph{regular}, e não a base coordenada: a carta esférica é
-singular no polo, onde $\varphi$ deixa de estar definido e
-$\Gamma^\varphi{}_{\theta\varphi}=\cot\theta$ diverge. Feche o circuito a
-uma colatitude $\epsilon$ pequena, compare as duas direções num referencial
-ortonormal ali, e tome $\epsilon\to0$. O ângulo é
+comparar é preciso usar um referencial \emph{regular}, e não a base
+coordenada: a carta esférica é singular no polo, onde $\varphi$ deixa de estar
+definido e $\Gamma^\varphi{}_{\theta\varphi}=\cot\theta$ diverge. Feche o
+circuito a uma colatitude $\epsilon$ pequena, compare as duas direções num
+referencial ortonormal ali, e tome $\epsilon\to0$. O ângulo é
 \[
   \frac{\pi}{2}
   =\frac{\text{área do octante}}{a^2}
@@ -8867,10 +8895,12 @@ geodésico.
 \includegraphics[width=\linewidth]{figuras/cap06_triangulo_esferico.pdf}
 \caption{O transporte no triângulo esférico. À esquerda, as três pernas: o
 vetor é sempre $\vec e_\theta$, tangente aos meridianos e normal ao equador,
-de modo que o transporte é trivial em cada uma. À direita, a comparação no
-polo, que é onde o giro aparece --- as componentes coordenadas são $(1,0)$
-nos dois casos, e são as \emph{direções} que diferem de $\pi/2$. Comparar
-componentes numa base que girou junto é o erro que esconde a holonomia.}
+de modo que o transporte é trivial em cada uma. À direita, a comparação junto
+ao polo, que é onde o giro aparece. As componentes coordenadas tendem a
+$(1,0)$ pelos dois meridianos --- cada uma na base do seu --- e são as
+\emph{direções} que diferem de $\pi/2$. Comparar componentes de bases
+diferentes é o erro que esconde a holonomia; no polo, onde a carta é singular,
+a comparação só faz sentido como limite.}
 \label{fig:triangulo-esferico}
 \end{figure}
 
