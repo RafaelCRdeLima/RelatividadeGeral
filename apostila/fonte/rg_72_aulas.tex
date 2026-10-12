@@ -8820,16 +8820,53 @@ a holonomia enxerga também a forma do domínio.
 \end{atencao}
 
 \begin{example}
-\textbf{A esfera, em três pernas.} Parta do polo norte com um vetor apontando
-ao longo de um meridiano. Desça até o equador, siga pelo equador um quarto de
-volta e suba de volta ao polo, sempre transportando paralelamente. O vetor que
-retorna está girado de $90^\circ$ em relação ao que partiu.
+\label{ex:triangulo-esferico}
+\textbf{A esfera, em três pernas.} Parta do polo norte da esfera de raio $a$
+com o vetor $\vec e_\theta$, que aponta ao longo do meridiano $\varphi=0$.
+Desça até o equador, siga por ele um quarto de volta e suba de volta ao polo
+pelo meridiano $\varphi=\pi/2$, sempre transportando paralelamente
+(Figura~\ref{fig:triangulo-esferico}).
 
-Nada no percurso ``girou'' o vetor: em cada perna ele foi mantido o mais
-paralelo possível a si mesmo. O giro é da esfera, não do transporte --- e o
-ângulo, $\pi/2$, é exatamente a área do triângulo percorrido dividida por
-$a^2$. Esse é o enunciado de Gauss--Bonnet para um triângulo geodésico.
+\emph{As três pernas são fáceis, e por um motivo só.} Os dois meridianos e o
+equador são geodésicas, e em cada perna o vetor transportado é ou a própria
+tangente ou perpendicular a ela:
+\begin{itemize}
+  \item \emph{descendo o meridiano $\varphi=0$}: $\vec e_\theta$ é a
+  tangente da geodésica, e $\nabla_{\vec U}\vec U=0$ a transporta em si
+  mesma;
+  \item \emph{ao longo do equador}: $\vec e_\theta$ é normal à geodésica, e
+  a compatibilidade métrica preserva o ângulo reto;
+  \item \emph{subindo o meridiano $\varphi=\pi/2$}: de novo a tangente.
+\end{itemize}
+Em componentes, o vetor chega ao polo com as \emph{mesmas}
+$(V^\theta,V^\varphi)=(1,0)$ com que partiu.
+
+\emph{E ainda assim ele girou.} As componentes são as mesmas porque a
+\emph{base} girou junto: $\vec e_\theta$ no meridiano $\varphi=0$ e
+$\vec e_\theta$ no meridiano $\varphi=\pi/2$ são direções diferentes. Para
+comparar é preciso pôr os dois no mesmo espaço tangente --- o do polo --- e
+ali o ângulo é
+\[
+  \frac{\pi}{2}
+  =\frac{\text{área do octante}}{a^2}
+  =\frac{4\pi a^2/8}{a^2} .
+\]
+Nada no percurso girou o vetor; o giro é da esfera. E o ângulo ser a área
+dividida por $a^2$ é o enunciado de Gauss--Bonnet para um triângulo
+geodésico.
 \end{example}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\linewidth]{figuras/cap06_triangulo_esferico.pdf}
+\caption{O transporte no triângulo esférico. À esquerda, as três pernas: o
+vetor é sempre $\vec e_\theta$, tangente aos meridianos e normal ao equador,
+de modo que o transporte é trivial em cada uma. À direita, a comparação no
+polo, que é onde o giro aparece --- as componentes coordenadas são $(1,0)$
+nos dois casos, e são as \emph{direções} que diferem de $\pi/2$. Comparar
+componentes numa base que girou junto é o erro que esconde a holonomia.}
+\label{fig:triangulo-esferico}
+\end{figure}
 
 \subsection*{Geodésicas}
 
@@ -8945,6 +8982,17 @@ Os dois primeiros termos são a variação de $\Gamma$ entre as pernas; os dois
 $\mu\nu$ é a do próprio circuito: trocar $\delta a$ por $\delta b$ é percorrê-lo
 ao contrário.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.92\linewidth]{figuras/cap06_circuito.pdf}
+\caption{O circuito que produz \eqref{eq:riemann}, com as quatro pernas
+numeradas na ordem da dedução. A sutileza está na perna~2: o $\Gamma$ que
+entra ali é avaliado em $x+\delta a$, e não em $x$, o que produz o termo
+$\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu$. As pernas 1 e 3 se
+cancelam em primeira ordem; o que sobrevive é de segunda, e é a curvatura.}
+\label{fig:circuito}
+\end{figure}
+
 \begin{atencao}
 Apesar de \eqref{eq:riemann} ser escrita com $\Gamma$, que não é tensor,
 $R^\rho{}_{\sigma\mu\nu}$ \emph{é}. Os termos não tensoriais de $\Gamma$ se
@@ -9027,29 +9075,82 @@ $\lambda$ afim. Então
 onde $\D/\D\lambda\equiv U^\alpha\nabla_\alpha$ é a derivada covariante ao
 longo da curva. Para geodésicas temporais pode-se tomar $\lambda=\tau$.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\linewidth]{figuras/cap06_desvio_familia.pdf}
+\caption{Desvio geodésico. À esquerda, os objetos da
+Equação~\eqref{eq:desvio-geodesico}: a família de geodésicas, o tangente
+$\vec U$ e a separação $\vec\xi$. No meio, a esfera, onde geodésicas que
+partem paralelas se reencontram --- curvatura positiva foca. À direita, o
+mesmo cálculo no campo newtoniano: o par radial se afasta, o transversal se
+aproxima, e as três contribuições somam zero no vácuo.}
+\label{fig:desvio-familia}
+\end{figure}
+
 \begin{example}
-\textbf{O sinal, conferido na esfera.} Tome o equador como geodésica e um
-desvio na direção do meridiano. Com $K=1/a^2$,
-\eqref{eq:desvio-geodesico} dá
+\label{ex:desvio-esfera}
+\textbf{A esfera, resolvida.} Tome o equador da esfera de raio $a$ como
+geodésica, parametrizado pelo comprimento de arco $s$, de modo que
+$U^\varphi=1/a$ e $U^\theta=0$. Para um desvio na direção do meridiano,
+$\xi^\mu=(\xi,0)$, a única componente de Riemann que entra é
+$R^\theta{}_{\varphi\theta\varphi}=\sin^2\theta$, que vale $1$ no equador.
+Então \eqref{eq:desvio-geodesico} dá
 \[
-  \frac{\dd^2\xi}{\dd s^2}=-\frac{\xi}{a^2} ,
+  \frac{\dd^2\xi}{\dd s^2}
+  =-R^\theta{}_{\varphi\theta\varphi}\,(U^\varphi)^2\,\xi
+  =-(1)\left(\frac{1}{a}\right)^{\!2}\xi
+  =-\frac{\xi}{a^2} ,
 \]
-um oscilador: geodésicas vizinhas \emph{convergem}, cruzam-se e voltam a
-divergir. É o que se espera numa esfera, onde dois meridianos partem
-paralelos do equador e se encontram no polo. Curvatura positiva foca;
-curvatura negativa dispersa.
+um oscilador de comprimento de onda $2\pi a$: as geodésicas convergem, cruzam
+e voltam a divergir. É o que se vê na Figura~\ref{fig:desvio-familia}(b) ---
+dois meridianos partem paralelos do equador e se encontram no polo, a um
+quarto de período, $s=\pi a/2$. Curvatura positiva foca; curvatura negativa
+dispersa.
 \end{example}
 
-\begin{central}
-\textbf{E é esta a maré.} No limite newtoniano, \eqref{eq:desvio-geodesico}
-reduz-se a
+\begin{example}
+\label{ex:mare-newtoniana}
+\textbf{A maré newtoniana, recuperada.} No limite de campo fraco e
+velocidades pequenas, \eqref{eq:desvio-geodesico} reduz-se a
 \[
   \frac{\dd^2\xi^i}{\dd t^2}=-\partial^i\partial_j\Phi\;\xi^j ,
 \]
-que é exatamente a aceleração relativa da Seção~\ref{sec:gravitacao-curvatura}.
-As componentes de Riemann fazem o papel das segundas derivadas do potencial. A
-maré, que lá era o que sobrava depois de eliminar a gravidade, aqui tem nome e
-índices.
+com $\Phi=-GM/r$. As duas configurações da
+Seção~\ref{sec:gravitacao-curvatura} saem agora como contas de uma linha.
+
+\emph{Separação radial.} Derivando duas vezes em $r$,
+\[
+  \frac{\dd^2\xi^r}{\dd t^2}=-\frac{\partial^2\Phi}{\partial r^2}\,\xi^r
+  =+\frac{2GM}{r^3}\,\xi^r ,
+\]
+sinal positivo: as duas partículas se \emph{afastam}.
+
+\emph{Separação transversal.} Para um deslocamento perpendicular ao raio, a
+segunda derivada vale $+GM/r^3$, e
+\[
+  \frac{\dd^2\xi^\perp}{\dd t^2}=-\frac{GM}{r^3}\,\xi^\perp ,
+\]
+sinal negativo: elas se \emph{aproximam}.
+
+\emph{O fecho.} Some as três direções --- uma radial e duas transversais:
+\[
+  \frac{2GM}{r^3}-\frac{GM}{r^3}-\frac{GM}{r^3}=0 ,
+\]
+que é $\nabla^2\Phi=0$, a equação de Laplace no vácuo. A maré estica numa
+direção exatamente o quanto comprime nas outras duas, e o volume de uma
+pequena bola de partículas em queda livre não muda. Em presença de matéria o
+traço deixa de ser nulo, e é essa a parte da curvatura que
+$R_{\mu\nu}$ carrega --- a mesma distinção entre Ricci e Weyl da
+Seção~\ref{sec:bianchi-einstein}.
+\end{example}
+
+\begin{central}
+\textbf{E é esta a maré.} As componentes de Riemann fazem o papel das
+segundas derivadas do potencial. A maré, que na
+Seção~\ref{sec:gravitacao-curvatura} era o que sobrava depois de eliminar a
+gravidade por escolha de referencial, aqui tem nome e índices --- e é
+irredutível pelo mesmo motivo que os $20$ graus da
+Seção~\ref{sec:metrica-variedade} não se deixam anular.
 \end{central}
 
 \section{Bianchi, Ricci e Einstein}
