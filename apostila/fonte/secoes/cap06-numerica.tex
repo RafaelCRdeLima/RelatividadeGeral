@@ -27,15 +27,27 @@ Transportar um vetor ao longo de uma curva significa resolver
 \end{equation}
 que é uma equação diferencial ordinária comum. Se o circuito é fechado, o
 vetor volta ao ponto de partida --- e a pergunta é se ele volta igual a si
-mesmo. O ângulo de discrepância é a \emph{holonomia}.
+mesmo. A comparação é entre o vetor final e o inicial \emph{no mesmo espaço
+tangente}, e o mapa linear que leva um ao outro é a \emph{holonomia} do
+circuito.
 
-\begin{atencao}
-O ângulo tem de ser medido em relação a uma direção \emph{fixa}, não em
-relação à base coordenada --- que ela própria dá uma volta completa ao
-percorrer o circuito. Esquecer esses $2\pi$ é o erro que faz a holonomia da
-esfera dar o valor errado justamente para as calotas maiores que um
-hemisfério. No código, o acerto é uma linha: acumular o ângulo com
-\texttt{np.unwrap} e somar $2\pi$ no fim.
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}UM ÂNGULO MÓDULO $2\pi$}]
+Numa superfície riemanniana orientada esse mapa é uma rotação, e pode ser
+descrito por um ângulo --- mas um ângulo definido \emph{módulo} $2\pi$. Ao
+medi-lo contra a base coordenada, que ela própria gira ao percorrer o
+circuito, é preciso decidir qual representante registrar. O código acumula a
+fase com \texttt{np.unwrap} e soma $2\pi$, o que seleciona o representante
+que varia continuamente com o tamanho do circuito --- e é esse que coincide
+com a área da calota.
+
+Isso é uma escolha de representante, não uma correção de erro, e não vale
+para qualquer carta ou métrica. Repare na linha do equador na saída abaixo:
+$\theta_0=\pi/2$ dá exatamente $2\pi$, que como \emph{mapa} é a identidade.
+E tem de ser: o equador é geodésica, e transportar ao longo de uma geodésica
+fechada devolve o vetor como ele partiu.
+
+No espaço-tempo lorentziano a holonomia pode envolver \emph{boosts}, e a
+palavra ``rotação'' deixa de descrever todos os casos.
 \end{atencao}
 
 \begin{saida}
@@ -60,16 +72,20 @@ As duas metades desta saída são a tese do capítulo. No plano em coordenadas
 polares, $\Gamma^r{}_{\phi\phi}=-r$ e $\Gamma^\phi{}_{r\phi}=1/r$ são não
 nulos, o integrador trabalha de verdade --- e o vetor volta \emph{exatamente}
 como saiu, a $10^{-11}$. Na esfera, a holonomia coincide com a área
-envolvida em oito casas decimais. Conexão é artefato de carta; holonomia é
-geometria. Este é o conteúdo operacional da frase ``Christoffel não é
-curvatura''.
+envolvida em oito casas decimais.
+
+Coeficientes de conexão não nulos podem resultar apenas da escolha de
+coordenadas; a holonomia descreve o transporte que a conexão define, e é a
+mesma em qualquer carta. Este é o conteúdo operacional da frase ``Christoffel
+não é curvatura''.
 \end{central}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figuras/cap06_holonomia.pdf}
   \caption{À esquerda, o vetor transportado ao longo de um paralelo da
-  esfera: ele gira continuamente e não retorna à direção inicial. À direita,
+  esfera, para $\theta_0$ diferente de $\pi/2$: ele gira ao longo do percurso
+  e retorna formando um ângulo não nulo com a direção de partida. À direita,
   a holonomia medida contra a área envolvida pelo circuito. Os pontos da
   esfera caem sobre a reta $\alpha=A$ --- a curvatura de Gauss é $1$ e a
   holonomia \emph{é} a área. Os quadrados são o plano euclidiano em

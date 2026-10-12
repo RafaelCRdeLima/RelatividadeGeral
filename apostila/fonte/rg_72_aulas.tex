@@ -454,11 +454,11 @@ Aula & Foco & Seções & Conteúdo \\
 22 & O plano em polares: álgebra e cálculo & 5.2, 5.3 & Da gravidade à curvatura: carta, base dual e métrica em polares; a base que varia, a conexão, a derivada covariante, divergência e laplaciano deduzidos. \\
 23 & Christoffel pela métrica & 5.4 & Da gravidade à curvatura: compatibilidade métrica e a dedução pelas três permutações; a equação geodésica e o parâmetro afim; por que $\Gamma$ não é força. \\
 24 & Bases não coordenadas e síntese & 5.5, 5.6, 5.7, 5.8, 5.9, 5.10 & Da gravidade à curvatura: base ortonormal e o comutador que prova a não integrabilidade; tradução para o cálculo vetorial; síntese e ponte ao Capítulo 6. \\
-25 & Variedades e derivada covariante & 6.1, 6.2 & Variedades, derivada covariante e curvatura: Variedades e métricas; Derivada covariante. \\
-26 & Compatibilidade métrica & 6.4, 6.8 & Variedades, derivada covariante e curvatura: Compatibilidade métrica; Problemas orientados, itens 1--3. \\
-27 & Riemann e suas simetrias & 6.3, 6.5 & Variedades, derivada covariante e curvatura: Curvatura; Simetrias do tensor de Riemann. \\
-28 & Curvatura intrínseca e desvio geodésico & 6.6, 6.7 & Variedades, derivada covariante e curvatura: Curvatura intrínseca e extrínseca; Desvio geodésico. \\
-29 & Oficina computacional IV & 6.9, 6.10, 6.11, 6.12 & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
+25 & Variedades e planura local & 6.1, 6.2 & Variedades, derivada covariante e curvatura: variedade e espaço tangente; a métrica, o teorema da planura local pela contagem de Schutz e o volume próprio. \\
+26 & Conexão e transporte paralelo & 6.3, 6.4 & Variedades, derivada covariante e curvatura: a conexão como estrutura; torção e compatibilidade; transporte paralelo, dependência do caminho e geodésicas. \\
+27 & O tensor de Riemann & 6.5 & Variedades, derivada covariante e curvatura: Riemann pelo circuito e pelo comutador; simetrias, contagem e desvio geodésico como maré. \\
+28 & Bianchi, Ricci e Einstein & 6.6, 6.7, 6.8, 6.9 & Variedades, derivada covariante e curvatura: identidade diferencial, contrações, divergência nula de G; síntese e problemas orientados. \\
+29 & Oficina computacional IV & 6.10, 6.11, 6.12, 6.13 & Variedades, derivada covariante e curvatura: Resolução numérica --- holonomia, Riemann por diferenças finitas e desvio geodésico; Exemplos resolvidos adicionais; Problemas orientados, itens 4--6; Exercícios. Resumo de fórmulas: Geometria. \\
 30 & Movimento livre e energia medida & 7.1, 7.2 & Física em espaço-tempo curvo: Movimento livre; Energia medida por um observador. \\
 31 & Simetrias e vetores de Killing & 7.3 & Física em espaço-tempo curvo: Simetrias e quantidades conservadas, com a equação de Killing e a demonstração da constante de movimento. \\
 32 & Observadores e tetradas & 7.4, 7.5, 7.6 & Física em espaço-tempo curvo: Observadores não são coordenadas; Tetradas locais; Constantes de movimento e energia local. \\
@@ -8446,273 +8446,693 @@ curvatura}
 \label{cap:curvatura}
 
 \begin{objetivos}
-Formalizar o cálculo tensorial em espaços-tempos curvos e obter os objetos
-geométricos que entram nas equações de Einstein.
+Levar o cálculo tensorial do plano para a variedade curva: construir o espaço
+tangente, demonstrar que a geometria é localmente plana, definir a derivada
+covariante e o transporte paralelo, e obter o tensor que mede a curvatura ---
+o de Riemann --- junto com as contrações que entram nas equações de Einstein.
 \end{objetivos}
 
-\section{Variedades e métricas}
+O Capítulo~\ref{cap:gravidade-curvatura} fez todo o trabalho no plano
+euclidiano, e por um motivo declarado: ali a resposta certa é sempre
+conhecida, porque se pode voltar às cartesianas e conferir. Agora o chão sai.
+Vamos refazer as mesmas construções onde não há cartesianas globais, e o
+roteiro é o do Schutz: primeiro a variedade e seus vetores, depois a métrica e
+o que ela permite \emph{localmente}, em seguida a derivada covariante, o
+transporte paralelo e, só então, a curvatura.
 
-Uma variedade diferenciável é um espaço que, localmente, parece $\mathbb{R}^n$.
-O espaço-tempo da relatividade geral é uma variedade quadridimensional equipada
-com uma métrica lorentziana $g_{\mu\nu}$.
+A ordem importa. O tensor de Riemann mede a falha de uma operação ---
+transportar um vetor --- e não faz sentido apresentá-lo antes dessa operação
+existir.
 
-O elemento de linha é
-\[
-  \dd s^2=g_{\mu\nu}\dd x^\mu\dd x^\nu.
-\]
+\section{Variedades diferenciáveis e tensores}
+\label{sec:variedades}
+
+Uma \textbf{variedade} diferenciável de dimensão $n$ é um espaço que, perto de
+cada ponto, pode ser descrito por uma carta --- uma correspondência com um
+pedaço de $\mathbb{R}^n$ --- e no qual duas cartas que se superpõem se
+relacionam por funções diferenciáveis. É a formalização do que a
+Seção~\ref{sec:algebra-polar} já encontrou na prática: as polares não cobrem o
+plano inteiro, nem precisam.
 
 \begin{atencao}
-As componentes da métrica podem depender da posição mesmo em uma geometria
-plana. Essa dependência, por si só, não caracteriza curvatura. O
-Capítulo~\ref{cap:gravidade-curvatura} inteiro foi passado no plano euclidiano
-com $g_{\theta\theta}=r^2$, que depende do ponto, e o plano continuou plano.
-O critério de curvatura é outro, e aparece na
-Seção~\ref{sec:curvatura-riemann}.
+Note o que a definição \emph{não} pede: nenhum espaço ambiente. A esfera
+\emph{pode} ser vista dentro de $\mathbb{R}^3$, e isso ajuda a intuição, mas
+nada na sua geometria depende disso --- habitantes da superfície mediriam tudo
+sem jamais sair dela. É essa independência que torna a construção aplicável ao
+espaço-tempo, para o qual não se conhece nenhum ambiente.
 \end{atencao}
 
-A palavra que carrega o peso é \emph{localmente}. Na carta polar da
-Seção~\ref{sec:algebra-polar} já se viu o motivo: $r=0$ fica de fora, e é
-preciso escolher um intervalo de $\theta$ e aceitar um corte. Uma variedade é
-exatamente isso levado a sério --- um espaço coberto por cartas que se
-superpõem, nenhuma delas obrigada a cobrir tudo.
+\subsection*{O espaço tangente}
 
-E há uma perda concreta nessa passagem, que organiza o resto do capítulo. No
-plano, a conexão foi \emph{definida} em \eqref{eq:def-conexao} pela variação
-dos vetores de base, $\partial_j\vec e_i=\Gamma^k{}_{ji}\vec e_k$. Essa
-definição usava algo que agora não existe: um espaço cartesiano ambiente, no
-qual $\vec e_i(P)$ e $\vec e_i(Q)$ são setas do \emph{mesmo} espaço vetorial e
-podem ser subtraídas. Numa variedade, vetores em pontos distintos vivem em
-espaços tangentes distintos, e a diferença $\vec e_i(Q)-\vec e_i(P)$ não tem
-sentido. Resta \eqref{eq:christoffel} --- que no plano era um resultado --- como
-\emph{definição}.
-
-\section{Derivada covariante}
-
-As fórmulas já estão prontas. O Capítulo~\ref{cap:gravidade-curvatura} as
-construiu no plano, e elas não mudam de forma ao passar à variedade:
-\[
-  \nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu{}_{\mu\alpha}V^\alpha,
+O Capítulo~\ref{cap:tensores-plano} já ofereceu a leitura que agora se torna
+definição: um vetor é uma \emph{derivada direcional}. Dada uma curva
+$x^\mu(\lambda)$ passando por $P$ e uma função $f$ definida perto de $P$, a
+taxa de variação de $f$ ao longo da curva é
+\begin{equation}
+  \frac{\dd f}{\dd\lambda}
+  =\frac{\dd x^\mu}{\dd\lambda}\,\frac{\partial f}{\partial x^\mu}
+  \ \equiv\ \vec V[f] ,
   \qquad
-  \nabla_\mu\omega_\nu
-  =\partial_\mu\omega_\nu-\Gamma^\alpha{}_{\mu\nu}\omega_\alpha ,
-\]
-com a regra geral de um termo de conexão por índice, $+\Gamma$ para cada índice
-em cima e $-\Gamma$ para cada índice embaixo. O sinal foi deduzido na
-Seção~\ref{sec:calculo-polar} da exigência de que a derivada covariante de um
-escalar não tenha termo de conexão nenhum, e essa dedução é algébrica: vale
-aqui palavra por palavra.
+  V^\mu=\frac{\dd x^\mu}{\dd\lambda} .
+  \label{eq:vetor-derivada}
+\end{equation}
+O objeto $\vec V$ --- a operação ``derive ao longo desta curva'' --- é o vetor
+tangente. Ele não depende da função $f$, apenas da curva; e duas curvas que
+passam por $P$ com as mesmas $\dd x^\mu/\dd\lambda$ definem o mesmo $\vec V$.
 
-O que muda não é a fórmula, é o estatuto de $\Gamma$.
+As quatro operações $\partial/\partial x^\mu$ formam uma base, e por isso se
+escreve
+\begin{equation}
+  \vec e_\mu=\frac{\partial}{\partial x^\mu} ,
+  \qquad
+  \vec V=V^\mu\vec e_\mu .
+  \label{eq:base-coordenada-variedade}
+\end{equation}
+O conjunto de todos os vetores tangentes em $P$ é um espaço vetorial de
+dimensão $n$, o \textbf{espaço tangente} $T_P$. Seu dual --- o espaço das
+1-formas em $P$, construído no Capítulo~\ref{cap:tensores-plano} --- chama-se
+$T^*_P$, e tem a base dual $\{\tilde\omega^\mu\}$ de
+$\tilde\omega^\mu(\vec e_\nu)=\delta^\mu{}_\nu$. Tensores de tipo $(r,s)$ em
+$P$ são as máquinas multilineares de sempre, agora montadas sobre $T_P$ e
+$T^*_P$.
 
 \begin{central}
-No plano, a conexão era um \emph{resultado}: a Seção~\ref{sec:calculo-polar} a
-obteve derivando os vetores de base, e a Seção~\ref{sec:geodesica-christoffel}
-mostrou que a métrica a reproduz. Numa variedade não há base ambiente que se
-possa derivar, e a conexão passa a ser uma \emph{estrutura adicional} que se
-escolhe --- um objeto a mais, logicamente independente da métrica.
+\textbf{Um espaço tangente por ponto.} $T_P$ e $T_Q$ são espaços vetoriais
+\emph{diferentes}, e nada os identifica naturalmente. Somar um vetor de $P$ a
+um vetor de $Q$, ou perguntar se são iguais, não tem sentido antes de se dar
+uma regra que os ligue.
+
+É exatamente isso que falta, e é o que a conexão vai fornecer. No plano, a
+estrutura cartesiana dava a regra de graça --- $\vec e_x$ em $P$ e $\vec e_x$
+em $Q$ ``são o mesmo vetor'' --- e por isso a Seção~\ref{sec:calculo-polar}
+pôde \emph{definir} a conexão derivando a base. Aqui não há essa cortesia.
 \end{central}
 
-Falta portanto dizer \emph{qual} conexão, e duas exigências fixam a escolha:
-\[
-  \Gamma^\rho{}_{\mu\nu}=\Gamma^\rho{}_{\nu\mu}
-  \quad\text{(torção nula)},
+\section{Métricas, planura local e volume próprio}
+\label{sec:metrica-variedade}
+
+Até aqui, nenhuma distância. Uma \textbf{métrica} é um tensor $(0,2)$
+simétrico e não degenerado $g_{\mu\nu}$, e é ela que acrescenta à variedade a
+estrutura de medida:
+\begin{equation}
+  \dd s^2=g_{\mu\nu}\,\dd x^\mu\dd x^\nu ,
   \qquad
-  \nabla_\alpha g_{\mu\nu}=0
-  \quad\text{(compatibilidade métrica)} .
-\]
-A primeira diz que não há uma torção intrínseca girando vetores transportados;
-a segunda, que o transporte paralelo preserva comprimentos e ângulos --- sem
-ela, medir com a métrica em dois pontos diferentes não teria sentido comum.
+  \vec A\cdot\vec B=g_{\mu\nu}A^\mu B^\nu .
+  \label{eq:metrica-variedade}
+\end{equation}
+A \emph{assinatura} --- quantos autovalores positivos e negativos --- é a
+mesma em todo ponto, por continuidade. Com $(+,+,\dots)$ a variedade é
+\emph{riemanniana}; com $(-,+,+,+)$, \emph{lorentziana}, e é esse o caso do
+espaço-tempo.
 
-São exatamente as duas hipóteses isoladas na caixa da
-Seção~\ref{sec:geodesica-christoffel}, e a conta que vai delas até a fórmula é
-a mesma: escrever $\nabla_\alpha g_{\mu\nu}=0$ nas três permutações dos
-índices, somar duas e subtrair a terceira, e usar a simetria para cancelar
-quatro dos seis termos de conexão. Nada naquela álgebra usou a planura do
-plano --- só a simetria de $\Gamma$ e a invertibilidade de $g$ ---, de modo que
-ela se transporta inteira, e não precisa ser refeita. O resultado é
-\eqref{eq:christoffel}, agora valendo em qualquer variedade:
-\[
-  \Gamma^\rho{}_{\mu\nu}
-  =\tfrac12\,g^{\rho\sigma}
-  \left(\partial_\mu g_{\sigma\nu}
-  +\partial_\nu g_{\sigma\mu}
-  -\partial_\sigma g_{\mu\nu}\right).
-\]
-Essa \emph{conexão de Levi-Civita} é a única compatível com as duas exigências.
-E a coincidência com o resultado variacional da
-Seção~\ref{sec:geodesica-christoffel} não é acidente --- é um teorema de duas
-linhas, que fecha as duas definições possíveis de ``geodésica'' numa só.
+\begin{atencao}
+As componentes $g_{\mu\nu}$ dependem do ponto, e isso sozinho não diz nada
+sobre curvatura. O plano em polares tem $g_{\theta\theta}=r^2$ e é plano.
+O critério de curvatura é o da Seção~\ref{sec:curvatura-riemann}.
+\end{atencao}
 
-\begin{resultado}
-\textbf{Extremizar o tempo próprio é transportar paralelamente o próprio
-tangente.} Seja $U^\mu=\dd x^\mu/\dd\lambda$ o vetor tangente a uma curva.
-Transportá-lo paralelamente ao longo da própria curva significa
-$\nabla_U U=0$, e essa condição, escrita em componentes, é
-\[
-  U^\mu\nabla_\mu U^\sigma
-  =U^\mu\bigl(\partial_\mu U^\sigma+\Gamma^\sigma{}_{\mu\nu}U^\nu\bigr).
-\]
-O primeiro termo é a derivada de $U^\sigma$ ao longo da curva --- é a regra da
-cadeia lida ao contrário,
-\[
-  U^\mu\partial_\mu U^\sigma
-  =\frac{\dd x^\mu}{\dd\lambda}\frac{\partial U^\sigma}{\partial x^\mu}
-  =\frac{\dd U^\sigma}{\dd\lambda}
-  =\frac{\dd^2x^\sigma}{\dd\lambda^2} .
-\]
-Logo
-\[
-  \nabla_U U=0
-  \qquad\Longleftrightarrow\qquad
-  \frac{\dd^2 x^\sigma}{\dd\lambda^2}
-  +\Gamma^\sigma{}_{\mu\nu}
-   \frac{\dd x^\mu}{\dd\lambda}\frac{\dd x^\nu}{\dd\lambda}=0 ,
-\]
-que é, letra por letra, a equação geodésica \eqref{eq:geodesica} obtida lá
-atrás extremizando $\int\dd\tau$.
-\end{resultado}
+\subsection*{O teorema da planura local}
 
-As duas maneiras de dizer ``a partícula vai reto'' --- \emph{ela não muda de
-direção} e \emph{ela leva o maior tempo próprio possível} --- descrevem a mesma
-curva. A primeira é local e se escreve com a conexão; a segunda é global e se
-escreve com uma integral. Que coincidam é uma propriedade da conexão de
-Levi-Civita, não uma obviedade: se a conexão tivesse torção, ou não fosse
-compatível com a métrica, as duas famílias de curvas se separariam.
+Aqui está o resultado que organiza o capítulo inteiro, e a demonstração é uma
+contagem --- não usa conexão nenhuma, apenas a métrica e a regra da cadeia.
 
-\section{Curvatura}
-\label{sec:curvatura-riemann}
-
-O tensor de Riemann mede a falha de derivadas covariantes em comutar:
+\begin{central}
+\textbf{Planura local.} Em torno de qualquer ponto $P$ existem coordenadas
+$x^{\bar\mu}$ nas quais
 \[
-  [\nabla_\mu,\nabla_\nu]V^\rho
-  =R^\rho{}_{\sigma\mu\nu}V^\sigma.
+  g_{\bar\mu\bar\nu}(P)=\eta_{\bar\mu\bar\nu} ,
+  \qquad
+  \partial_{\bar\alpha}g_{\bar\mu\bar\nu}(P)=0 .
 \]
-Em componentes,
-\[
-  R^\rho{}_{\sigma\mu\nu}
-  =\partial_\mu\Gamma^\rho_{\nu\sigma}
-  -\partial_\nu\Gamma^\rho_{\mu\sigma}
-  +\Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}
-  -\Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}.
-\]
-As contrações relevantes são
-\[
-  R_{\mu\nu}=R^\rho{}_{\mu\rho\nu},\qquad
-  R=g^{\mu\nu}R_{\mu\nu},
-\]
-e o tensor de Einstein é
-\[
-  G_{\mu\nu}=R_{\mu\nu}-\frac{1}{2}Rg_{\mu\nu}.
-\]
+Não se pode, em geral, anular também as \emph{segundas} derivadas.
+\end{central}
 
 \begin{resultado}
-A identidade de Bianchi contraída implica
-\[
-  \nabla_\mu G^{\mu\nu}=0.
-\]
-Essa propriedade geométrica antecipa a conservação local de energia e momento
-da matéria.
+\textbf{Dedução, por contagem.} Procura-se a mudança de coordenadas
+$x^{\bar\mu}=x^{\bar\mu}(x^\nu)$ pela sua série de Taylor em torno de $P$. Os
+coeficientes livres são as derivadas sucessivas da transformação em $P$; as
+exigências são os valores da métrica e de suas derivadas em $P$. Basta
+comparar quantos há de cada lado, em $n=4$.
+
+\begin{center}
+\small
+\begin{tabular}{lrlr}
+\toprule
+\textbf{liberdade} & \textbf{quantos} & \textbf{exigência} & \textbf{quantas} \\
+\midrule
+$\Lambda^{\bar\mu}{}_\nu|_P$ & $4\times4=16$
+  & $g_{\bar\mu\bar\nu}|_P=\eta_{\bar\mu\bar\nu}$ & $10$ \\
+$\partial_\gamma\Lambda^{\bar\mu}{}_\nu|_P$ & $4\times10=40$
+  & $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$ & $40$ \\
+$\partial_\gamma\partial_\lambda\Lambda^{\bar\mu}{}_\nu|_P$ & $4\times20=80$
+  & $\partial_{\bar\gamma}\partial_{\bar\lambda}
+     g_{\bar\mu\bar\nu}|_P=0$ & $100$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\emph{Primeira linha.} A matriz $\Lambda^{\bar\mu}{}_\nu|_P$ tem $16$ entradas
+livres; impor $g=\eta$ em $P$ são $10$ equações, porque $g$ é simétrica.
+Sobram $6$ --- e são exatamente os três \emph{boosts} e as três rotações que
+preservam $\eta$. Reencontramos o grupo de Lorentz, agora como a liberdade que
+resta depois de montar o referencial local.
+
+\emph{Segunda linha.} As primeiras derivadas da transformação formam um
+arranjo simétrico nos dois índices de baixo: $4\times10=40$ números.
+Anular $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}$ são $10\times4=40$ equações.
+Quarenta contra quarenta: dá exatamente, sem folga.
+
+\emph{Terceira linha.} As segundas derivadas dão $4\times20=80$ números
+livres, enquanto anular $\partial\partial g$ exigiria $10\times10=100$.
+Faltam $20$.
 \end{resultado}
 
-\section{Compatibilidade métrica}
+\begin{central}
+Os $100-80=20$ graus que \emph{não} se pode anular são o conteúdo
+irredutível da geometria em $P$ --- e, como se verá na
+Seção~\ref{sec:curvatura-riemann}, são exatamente as $20$ componentes
+independentes do tensor de Riemann em quatro dimensões.
+
+A coincidência não é numerologia: a curvatura \emph{é} aquilo nas segundas
+derivadas da métrica que nenhuma escolha de coordenadas remove.
+\end{central}
+
+\begin{atencao}
+É esta a formulação precisa do princípio da equivalência que a
+Seção~\ref{sec:gravitacao-curvatura} obteve fisicamente. Um laboratório em
+queda livre é inercial \emph{no ponto} e, com erro de primeira ordem, na sua
+vizinhança --- isso é a segunda linha da tabela. O que sobrevive na segunda
+ordem é a maré, e é por isso que ela não pode ser eliminada por escolha de
+referencial.
+\end{atencao}
+
+\subsection*{Volume próprio}
+
+Falta uma grandeza que o Capítulo~\ref{cap:gravidade-curvatura} usou sem
+nomear: o elemento de volume. Numa carta qualquer, $\dd^nx$ não é um volume
+--- ele muda ao trocar de coordenadas pelo jacobiano. O que é invariante é
+\begin{equation}
+  \dd \mathcal{V}=\sqrt{|g|}\;\dd^nx ,
+  \qquad g\equiv\det g_{\mu\nu} ,
+  \label{eq:volume-proprio}
+\end{equation}
+porque $\sqrt{|g|}$ muda pelo inverso do mesmo jacobiano e o produto fica
+invariante. Em polares, $\sqrt{g}=r$ e $\dd\mathcal{V}=r\,\dd r\,\dd\theta$ ---
+o elemento de área de sempre, que a Seção~\ref{sec:calculo-polar} já usara ao
+interpretar o fator $1/r$ da divergência.
+
+\section{Derivada covariante em variedades}
+\label{sec:derivada-covariante-variedade}
 \label{sec:compatibilidade-metrica}
 
-A condição $\nabla_\alpha g_{\mu\nu}=0$ afirma que o transporte paralelo
-preserva produtos escalares: se dois vetores são transportados paralelamente ao
-longo de uma curva, o ângulo entre eles e os seus comprimentos não mudam. Sem
-isso, ``o mesmo vetor'' em dois pontos diferentes não teria comprimento comum, e
-a métrica deixaria de servir como instrumento de medida.
-
-Há uma mudança de estatuto que é fácil deixar passar, porque a fórmula é
-idêntica nos dois casos.
+A Seção~\ref{sec:calculo-polar} definiu a conexão derivando os vetores de
+base. Esse caminho agora está fechado: derivar $\vec e_i$ exige comparar
+$\vec e_i(P)$ com $\vec e_i(Q)$, e eles vivem em espaços tangentes diferentes.
+A saída é inverter a lógica --- em vez de \emph{deduzir} a conexão, pedi-la
+como estrutura e dizer que propriedades deve ter.
 
 \begin{central}
-No plano, $\nabla_kg_{ij}=0$ foi um \textbf{teorema}: a
-Seção~\ref{sec:geodesica-christoffel} o demonstrou observando que em
-cartesianas $g_{ij}=\delta_{ij}$ é constante e todos os $\Gamma$ se anulam,
-de modo que $\nabla_kg_{ij}=0$ ali --- e, sendo um tensor, em toda parte.
-
-Numa variedade curva esse argumento não existe, porque não existem
-coordenadas cartesianas globais em que a métrica seja constante. Aqui
-$\nabla_\alpha g_{\mu\nu}=0$ é um \textbf{axioma}: uma exigência imposta à
-conexão, e não uma consequência de alguma carta privilegiada.
+\textbf{Conexão.} Uma conexão é uma regra $\nabla$ que, dados um vetor
+$\vec X$ e um campo $\vec Y$, produz um campo $\nabla_{\vec X}\vec Y$, de modo
+que ela seja
+\begin{itemize}
+  \item \emph{linear em $\vec X$}, inclusive sobre funções:
+  $\nabla_{f\vec X}\vec Y=f\,\nabla_{\vec X}\vec Y$;
+  \item \emph{aditiva em $\vec Y$} e sujeita à regra de Leibniz:
+  $\nabla_{\vec X}(f\vec Y)=\vec X[f]\,\vec Y+f\,\nabla_{\vec X}\vec Y$.
+\end{itemize}
+Em componentes, os coeficientes da conexão são definidos por
+$\nabla_{\vec e_\nu}\vec e_\mu=\Gamma^\rho{}_{\nu\mu}\vec e_\rho$, e sai a
+fórmula já conhecida:
+\begin{equation}
+  \nabla_\mu V^\nu=\partial_\mu V^\nu+\Gamma^\nu{}_{\mu\alpha}V^\alpha ,
+  \qquad
+  \nabla_\mu\omega_\nu=\partial_\mu\omega_\nu-\Gamma^\alpha{}_{\mu\nu}
+  \omega_\alpha ,
+  \label{eq:nabla-variedade}
+\end{equation}
+com um termo de conexão por índice, $+\Gamma$ em cima e $-\Gamma$ embaixo ---
+regra deduzida na Seção~\ref{sec:calculo-polar} por um argumento puramente
+algébrico, que vale aqui sem alteração.
 \end{central}
 
-A troca não enfraquece nada --- apenas põe a hipótese à vista. Junto com torção
-nula, a compatibilidade métrica determina de modo único a conexão de
-Levi-Civita, pela álgebra da Seção~\ref{sec:geodesica-christoffel}. Em
-relatividade geral padrão é essa a conexão usada para definir geodésicas,
-curvatura e derivada covariante; teorias mais gerais relaxam uma das duas
-exigências, e estão além deste curso.
+\subsection*{Qual conexão}
+
+A definição acima admite infinitas conexões. Duas exigências escolhem uma.
+
+\textbf{Torção nula.} A \emph{torção} de uma conexão é o campo
+\begin{equation}
+  \vec T(\vec X,\vec Y)
+  =\nabla_{\vec X}\vec Y-\nabla_{\vec Y}\vec X-[\vec X,\vec Y] ,
+  \label{eq:torcao}
+\end{equation}
+que em base coordenada tem componentes
+$T^\rho{}_{\mu\nu}=\Gamma^\rho{}_{\mu\nu}-\Gamma^\rho{}_{\nu\mu}$, já que o
+comutador da base coordenada se anula. Geometricamente, a torção mede a falha
+de \emph{fechar o paralelogramo}: transportar $\vec X$ ao longo de $\vec Y$ e
+$\vec Y$ ao longo de $\vec X$ não leva ao mesmo ponto. Exigir $\vec T=0$ é
+exigir $\Gamma^\rho{}_{\mu\nu}=\Gamma^\rho{}_{\nu\mu}$.
 
 \begin{atencao}
-Há uma tentação de salvar o argumento do plano usando o referencial inercial
-local: em torno de qualquer evento existem coordenadas em que
-$g_{\mu\nu}=\eta_{\mu\nu}$ e $\partial_\alpha g_{\mu\nu}=0$ \emph{naquele
-ponto}, o que daria $\nabla_\alpha g_{\mu\nu}=0$ ali e, por tensorialidade, em
-toda parte. O raciocínio é correto, mas circular neste lugar: essas
-coordenadas são construídas \emph{a partir} da conexão de Levi-Civita, que é
-justamente o que se está tentando determinar. Elas são úteis depois --- e
-serão, no Capítulo~\ref{cap:fisica-curva} ---, não antes.
+Torção não é curvatura, e vale separar as duas agora, porque a confusão é
+frequente. A torção impede o paralelogramo de fechar; a curvatura faz um vetor
+\emph{voltar girado} depois de percorrer um circuito fechado. São falhas de
+coisas diferentes, e uma pode existir sem a outra. Neste curso a torção é
+sempre nula.
 \end{atencao}
 
-\section{Simetrias do tensor de Riemann}
+\textbf{Compatibilidade métrica.} A segunda exigência é
+\begin{equation}
+  \nabla_\alpha g_{\mu\nu}=0 ,
+  \label{eq:compat-variedade}
+\end{equation}
+que diz que o transporte paralelo preserva o produto escalar
+$g(\vec V,\vec W)$ --- e portanto normas e, no caso lorentziano, o caráter
+temporal, nulo ou espacial de um vetor.
 
-O tensor de Riemann possui várias simetrias. Com todos os índices abaixados,
-\[
-  R_{\rho\sigma\mu\nu}
-  =-R_{\sigma\rho\mu\nu}
-  =-R_{\rho\sigma\nu\mu}
-  =R_{\mu\nu\rho\sigma}.
-\]
-Além disso, vale a primeira identidade de Bianchi,
-\[
-  R_{\rho[\sigma\mu\nu]}=0.
-\]
-Essas simetrias reduzem drasticamente o número de componentes independentes.
-Em quatro dimensões, o tensor de Riemann possui 20 componentes independentes,
-não 256. O tensor de Ricci contém 10 componentes independentes. As 10 restantes
-estão associadas ao tensor de Weyl, que descreve a parte livre da curvatura,
-incluindo marés de vácuo e ondas gravitacionais.
+\begin{resultado}
+\textbf{Levi-Civita.} As duas exigências determinam a conexão, e a álgebra é a
+da Seção~\ref{sec:geodesica-christoffel} --- três permutações, soma duas e
+subtrai a terceira:
+\begin{equation}
+  \Gamma^\rho{}_{\mu\nu}
+  =\tfrac12\,g^{\rho\sigma}\bigl(\partial_\mu g_{\sigma\nu}
+  +\partial_\nu g_{\sigma\mu}-\partial_\sigma g_{\mu\nu}\bigr) .
+  \label{eq:christoffel-variedade}
+\end{equation}
+Nada naquela conta usou a planura do plano: só a simetria de $\Gamma$ e a
+invertibilidade de $g$. Ela se transporta inteira.
+\end{resultado}
 
-\section{Curvatura intrínseca e extrínseca}
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}DUAS ROTAS, NENHUMA CIRCULAR}]
+Escolhemos aqui fixar a conexão por \eqref{eq:torcao} e
+\eqref{eq:compat-variedade}. Há outra apresentação, que é a do Schutz:
+construir primeiro as coordenadas localmente inerciais da
+Seção~\ref{sec:metrica-variedade} --- o que, como se viu, não usa conexão
+nenhuma --- e \emph{definir} ali a derivada covariante como a derivada
+parcial, obtendo a compatibilidade como consequência.
 
-Uma superfície pode parecer curva por estar embutida em um espaço maior, mas a
-curvatura relevante em relatividade geral é intrínseca. Habitantes
-bidimensionais de uma esfera poderiam detectar sua curvatura medindo somas de
-ângulos de triângulos, sem olhar para uma terceira dimensão. Do mesmo modo, a
-curvatura do espaço-tempo não exige imaginá-lo embutido em um espaço externo.
-Ela é medida por experimentos internos: transporte paralelo, desvio geodésico,
-volumes de pequenas bolas geodésicas e propagação de luz.
+As duas rotas chegam à mesma conexão. A diferença é de exposição: uma parte
+do que se exige, a outra do que se constrói.
+\end{atencao}
+
+\begin{atencao}
+Um cuidado com o argumento de tensorialidade. Mostrar que
+$\nabla_\alpha g_{\mu\nu}=0$ em \emph{um} ponto, numa carta conveniente,
+permite concluir que vale naquele ponto \emph{em qualquer carta} --- é o que a
+natureza tensorial garante. Para valer em toda a variedade é preciso repetir o
+argumento em cada ponto, e é isso que a arbitrariedade de $P$ no teorema da
+planura local fornece. Tensorialidade troca de base, não de ponto.
+\end{atencao}
+
+\subsection*{Divergência e lei de Gauss}
+
+Contrair \eqref{eq:nabla-variedade} dá a divergência, e ela ganha uma forma
+compacta por causa de \eqref{eq:volume-proprio}:
+\begin{equation}
+  \nabla_\mu V^\mu=\frac{1}{\sqrt{|g|}}\,
+  \partial_\mu\bigl(\sqrt{|g|}\,V^\mu\bigr) .
+  \label{eq:divergencia-sqrtg}
+\end{equation}
+É a mesma fórmula que a Seção~\ref{sec:calculo-polar} obteve em polares, agora
+com a origem do fator à vista: $\sqrt{|g|}=r$ ali, e o $1/r$ da divergência é
+o elemento de área variando. Com ela, a lei de Gauss toma a forma
+\begin{equation}
+  \int_\Omega \nabla_\mu V^\mu\,\sqrt{|g|}\;\dd^nx
+  =\oint_{\partial\Omega} V^\mu\,n_\mu\,\dd\Sigma ,
+  \label{eq:gauss-variedade}
+\end{equation}
+que é a versão curva da construção da Seção~\ref{sec:gauss-4d}.
+
+\section{Transporte paralelo, geodésicas e curvatura}
+\label{sec:transporte-paralelo}
+
+\subsection*{Transportar um vetor}
+
+Com a conexão, finalmente se pode comparar vetores em pontos diferentes --- ao
+longo de um caminho. Um campo $\vec V$ é \textbf{transportado paralelamente}
+ao longo de uma curva de tangente $\vec U$ quando
+\begin{equation}
+  \nabla_{\vec U}\vec V=0
+  \qquad\Longleftrightarrow\qquad
+  \frac{\dd V^\mu}{\dd\lambda}
+  +\Gamma^\mu{}_{\alpha\beta}\,U^\alpha V^\beta=0 .
+  \label{eq:transporte-paralelo}
+\end{equation}
+A compatibilidade métrica garante que $g(\vec V,\vec W)$ não muda ao longo do
+transporte: derivando e usando $\nabla g=0$, os dois termos restantes se
+anulam. Comprimentos e produtos escalares sobrevivem à viagem.
+
+\begin{central}
+\textbf{O resultado depende do caminho.} É este o fato central do capítulo.
+Transporte um vetor de $P$ a $Q$ por dois caminhos diferentes e, em geral, os
+dois vetores que chegam a $Q$ são \emph{distintos}. Equivalentemente: leve um
+vetor por um circuito fechado e ele volta diferente de como partiu.
+
+Numa variedade plana isso não acontece --- e é por isso que no plano se podia
+falar em ``o mesmo vetor'' em toda parte.
+\end{central}
 
 \begin{example}
-Em uma esfera de raio $a$, um triângulo formado por dois meridianos separados
-por $90^\circ$ e pelo equador possui três ângulos retos. A soma é $270^\circ$,
-maior que $180^\circ$. Essa diferença é uma medida integrada da curvatura
-positiva da esfera.
+\textbf{A esfera, em três pernas.} Parta do polo norte com um vetor apontando
+ao longo de um meridiano. Desça até o equador, siga pelo equador um quarto de
+volta e suba de volta ao polo, sempre transportando paralelamente. O vetor que
+retorna está girado de $90^\circ$ em relação ao que partiu.
+
+Nada no percurso ``girou'' o vetor: em cada perna ele foi mantido o mais
+paralelo possível a si mesmo. O giro é da esfera, não do transporte --- e o
+ângulo, $\pi/2$, é exatamente a área do triângulo percorrido dividida por
+$a^2$. Esse é o enunciado de Gauss--Bonnet para um triângulo geodésico.
 \end{example}
 
-\section{Desvio geodésico}
+\subsection*{Geodésicas}
 
-Seja $\xi^\mu$ o vetor separação entre duas geodésicas vizinhas e $U^\mu$ o
-vetor tangente à família de geodésicas. A equação de desvio geodésico é
+Uma \textbf{geodésica} é a curva que transporta paralelamente o próprio
+tangente:
+\begin{equation}
+  \nabla_{\vec U}\vec U=0
+  \qquad\Longleftrightarrow\qquad
+  \frac{\dd^2x^\mu}{\dd\lambda^2}
+  +\Gamma^\mu{}_{\alpha\beta}
+   \frac{\dd x^\alpha}{\dd\lambda}\frac{\dd x^\beta}{\dd\lambda}=0 ,
+  \label{eq:geodesica-variedade}
+\end{equation}
+com $\lambda$ \emph{afim}, pela mesma razão discutida na
+Seção~\ref{sec:geodesica-christoffel}.
+
+\begin{atencao}
+Para curvas temporais há uma segunda caracterização: a geodésica extremiza o
+tempo próprio entre dois eventos. ``Extremiza'' é a palavra exata --- e, nas
+condições usuais, geodésicas temporais são máximos \emph{locais} de
+$\int\dd\tau$, não máximos globais entre dois eventos quaisquer. Em
+espaço-tempos com topologia não trivial pode haver várias geodésicas ligando
+os mesmos eventos, com tempos próprios diferentes.
+
+Para geodésicas nulas, $\dd\tau=0$ ao longo da curva e o argumento do tempo
+próprio não se aplica: resta \eqref{eq:geodesica-variedade} com parâmetro
+afim.
+\end{atencao}
+
+\subsection*{Curvatura intrínseca}
+
+A curvatura que importa aqui é \emph{intrínseca}: definida por medidas feitas
+dentro da variedade, sem apelo a um espaço ambiente. Habitantes de uma esfera
+detectariam a sua, medindo a soma dos ângulos de um triângulo, a razão entre
+circunferência e raio, ou a falha do transporte paralelo em um circuito.
+
+\begin{atencao}
+O cilindro é o contraexemplo que fixa a ideia. Embutido em $\mathbb{R}^3$ ele
+parece curvo, mas sua geometria intrínseca é a do plano: pode ser
+desenrolado sem esticar, triângulos têm $180^\circ$, e o transporte paralelo
+em circuitos contráteis não gira nada. A curvatura que se vê é
+\emph{extrínseca}, propriedade do embutimento, e a relatividade geral não a
+usa.
+\end{atencao}
+
+\section{O tensor de Riemann}
+\label{sec:curvatura-riemann}
+
+Falta transformar ``o vetor volta girado'' em um número. O caminho é fazer o
+circuito \emph{infinitesimal}.
+
+\subsection*{Pelo circuito}
+
+Tome dois campos de deslocamento, $\delta a^\mu$ e $\delta b^\mu$, e percorra
+o paralelogramo que eles formam: avance por $\delta a$, depois por $\delta b$,
+volte por $\delta a$, volte por $\delta b$. Transporte $\vec V$ paralelamente
+ao longo do percurso.
+
+Cada perna muda $V^\mu$ por $-\Gamma^\mu{}_{\alpha\beta}\delta x^\alpha
+V^\beta$, por \eqref{eq:transporte-paralelo}. Em primeira ordem as idas e
+voltas se cancelam; o que sobrevive é de segunda ordem, e vem de dois lugares
+--- o $\Gamma$ avaliado em pontos ligeiramente diferentes, e o $V$ já alterado
+pela perna anterior. Recolhendo os dois, a variação total é
+
+\begin{central}
+\begin{equation}
+  \delta V^\rho
+  =-R^\rho{}_{\sigma\mu\nu}\,V^\sigma\,\delta a^\mu\,\delta b^\nu ,
+  \label{eq:riemann-circuito}
+\end{equation}
+com
+\begin{equation}
+  R^\rho{}_{\sigma\mu\nu}
+  =\partial_\mu\Gamma^\rho{}_{\nu\sigma}
+  -\partial_\nu\Gamma^\rho{}_{\mu\sigma}
+  +\Gamma^\rho{}_{\mu\lambda}\Gamma^\lambda{}_{\nu\sigma}
+  -\Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma} .
+  \label{eq:riemann}
+\end{equation}
+\end{central}
+
+Os dois primeiros termos são a variação de $\Gamma$ entre as pernas; os dois
+últimos, o efeito de transportar um vetor já modificado. A antissimetria em
+$\mu\nu$ é a do próprio circuito: trocar $\delta a$ por $\delta b$ é percorrê-lo
+ao contrário.
+
+\begin{atencao}
+Apesar de \eqref{eq:riemann} ser escrita com $\Gamma$, que não é tensor,
+$R^\rho{}_{\sigma\mu\nu}$ \emph{é}. Os termos não tensoriais de $\Gamma$ se
+cancelam na combinação --- e tinham de se cancelar, porque o lado esquerdo de
+\eqref{eq:riemann-circuito} é a diferença entre dois vetores do mesmo espaço
+tangente, uma grandeza bem definida.
+\end{atencao}
+
+\subsection*{Pelo comutador}
+
+Há uma segunda via, algébrica, e ela dá o mesmo tensor:
+\begin{equation}
+  [\nabla_\mu,\nabla_\nu]V^\rho=R^\rho{}_{\sigma\mu\nu}V^\sigma .
+  \label{eq:riemann-comutador}
+\end{equation}
+Derivadas parciais comutam; derivadas covariantes não, e a falha é exatamente
+a curvatura. A ligação com o circuito é direta: $\nabla_\mu$ e $\nabla_\nu$
+são transportes em duas direções, e o comutador é a diferença entre fazê-los
+em uma ordem ou na outra --- que é o circuito fechado.
+
+\begin{atencao}
+Em \eqref{eq:riemann-comutador} supõe-se base coordenada e torção nula. Com
+torção, o comutador ganha um termo $-T^\lambda{}_{\mu\nu}\nabla_\lambda V^\rho$;
+em base não coordenada, aparece o comutador dos vetores de base. E ao escrever
+a segunda derivada por extenso, lembre que $\nabla_\mu$ age também sobre o
+índice $\nu$ de $\nabla_\nu V^\rho$, que é um tensor $(1,1)$ --- esquecer esse
+termo é o erro mais comum da conta.
+\end{atencao}
+
+\subsection*{Simetrias e contagem}
+
+Com todos os índices embaixo, $R_{\rho\sigma\mu\nu}=g_{\rho\lambda}
+R^\lambda{}_{\sigma\mu\nu}$ satisfaz
+\begin{equation}
+  R_{\rho\sigma\mu\nu}=-R_{\sigma\rho\mu\nu}=-R_{\rho\sigma\nu\mu}
+  =R_{\mu\nu\rho\sigma} ,
+  \qquad
+  R_{\rho[\sigma\mu\nu]}=0 ,
+  \label{eq:simetrias-riemann}
+\end{equation}
+sendo a última a \emph{primeira identidade de Bianchi}, algébrica. Juntas,
+elas derrubam as $n^4$ componentes para
+\begin{equation}
+  \frac{n^2(n^2-1)}{12} ,
+  \label{eq:contagem-riemann}
+\end{equation}
+que dá $1$ em duas dimensões, $6$ em três e $\mathbf{20}$ em quatro.
+
+\begin{central}
+Compare com a tabela da Seção~\ref{sec:metrica-variedade}: eram $20$ os graus
+das segundas derivadas da métrica que nenhuma escolha de coordenadas anula.
+São os mesmos $20$. A curvatura não é um objeto a mais colocado sobre a
+geometria --- ela \emph{é} o resto irredutível da métrica em segunda ordem.
+\end{central}
+
+\begin{example}
+\textbf{Duas dimensões: tudo é $K$.} Com uma única componente independente, o
+tensor inteiro fica determinado por um escalar --- a curvatura de Gauss $K$:
 \[
-  \frac{\D^2\xi^\mu}{\D\tau^2}
-  =
-  -R^\mu{}_{\alpha\nu\beta}U^\alpha\xi^\nu U^\beta.
+  R_{ijkl}=K\bigl(g_{ik}g_{jl}-g_{il}g_{jk}\bigr) ,
+  \qquad\text{e em particular}\qquad
+  R_{1212}=K\,\det g .
 \]
-Essa equação é uma das formas mais diretas de interpretar curvatura. Ela diz
-que a aceleração relativa entre partículas em queda livre é controlada pelo
-tensor de Riemann. No limite newtoniano, ela se reduz à equação de maré
-envolvendo segundas derivadas do potencial gravitacional.
+Para a esfera de raio $a$ sai $K=1/a^2$ e o escalar de Ricci $R=2/a^2$.
+Repare que $K$ não é ``uma componente qualquer'' de Riemann: é a componente
+dividida pelo determinante, que é o que a torna escalar.
+\end{example}
 
-\begin{activity}
-Considere duas partículas inicialmente em repouso relativo, separadas por uma
-pequena distância radial no campo de uma massa central. Use intuição
-newtoniana para determinar se a separação aumenta ou diminui. Depois associe o
-resultado ao sinal de componentes apropriadas de curvatura.
-\end{activity}
+\subsection*{Desvio geodésico}
+
+A leitura física da curvatura é o que ela faz com duas geodésicas vizinhas.
+Seja $\vec U$ o tangente a uma família de geodésicas e $\vec\xi$ o vetor que
+separa duas delas, com $\nabla_{\vec U}\vec U=0$, $[\vec U,\vec\xi]=0$ e
+$\lambda$ afim. Então
+\begin{equation}
+  \frac{\D^2\xi^\mu}{\D\lambda^2}
+  =-R^\mu{}_{\alpha\nu\beta}\,U^\alpha\xi^\nu U^\beta ,
+  \label{eq:desvio-geodesico}
+\end{equation}
+onde $\D/\D\lambda\equiv U^\alpha\nabla_\alpha$ é a derivada covariante ao
+longo da curva. Para geodésicas temporais pode-se tomar $\lambda=\tau$.
+
+\begin{example}
+\textbf{O sinal, conferido na esfera.} Tome o equador como geodésica e um
+desvio na direção do meridiano. Com $K=1/a^2$,
+\eqref{eq:desvio-geodesico} dá
+\[
+  \frac{\dd^2\xi}{\dd s^2}=-\frac{\xi}{a^2} ,
+\]
+um oscilador: geodésicas vizinhas \emph{convergem}, cruzam-se e voltam a
+divergir. É o que se espera numa esfera, onde dois meridianos partem
+paralelos do equador e se encontram no polo. Curvatura positiva foca;
+curvatura negativa dispersa.
+\end{example}
+
+\begin{central}
+\textbf{E é esta a maré.} No limite newtoniano, \eqref{eq:desvio-geodesico}
+reduz-se a
+\[
+  \frac{\dd^2\xi^i}{\dd t^2}=-\partial^i\partial_j\Phi\;\xi^j ,
+\]
+que é exatamente a aceleração relativa da Seção~\ref{sec:gravitacao-curvatura}.
+As componentes de Riemann fazem o papel das segundas derivadas do potencial. A
+maré, que lá era o que sobrava depois de eliminar a gravidade, aqui tem nome e
+índices.
+\end{central}
+
+\section{Bianchi, Ricci e Einstein}
+\label{sec:bianchi-einstein}
+
+\subsection*{A identidade diferencial}
+
+Além da identidade algébrica de \eqref{eq:simetrias-riemann}, o tensor de
+Riemann satisfaz uma identidade envolvendo derivadas:
+\begin{equation}
+  \nabla_{[\lambda}R_{\mu\nu]\rho\sigma}=0 .
+  \label{eq:bianchi-diferencial}
+\end{equation}
+A demonstração é de uma linha em coordenadas localmente inerciais: ali
+$\Gamma|_P=0$, o termo quadrático de \eqref{eq:riemann} some, e
+$\nabla_\lambda R_{\mu\nu\rho\sigma}|_P=\partial_\lambda\partial_\mu
+\Gamma_{\nu\rho\sigma}-\cdots$ se cancela ao antissimetrizar em
+$\lambda\mu\nu$, porque as derivadas parciais comutam. Sendo uma equação
+tensorial, vale em qualquer carta --- e, como $P$ é arbitrário, em toda parte.
+
+É o teorema da planura local trabalhando: ele converte uma identidade sobre
+derivadas parciais numa identidade tensorial.
+
+\subsection*{As contrações}
+
+Contrair o primeiro com o terceiro índice dá o \textbf{tensor de Ricci}, e
+contrair outra vez dá o \textbf{escalar de curvatura}:
+\begin{equation}
+  R_{\mu\nu}=R^\rho{}_{\mu\rho\nu} ,
+  \qquad
+  R=g^{\mu\nu}R_{\mu\nu} .
+  \label{eq:ricci}
+\end{equation}
+As simetrias \eqref{eq:simetrias-riemann} garantem que $R_{\mu\nu}$ é
+simétrico, e portanto tem $10$ componentes em quatro dimensões.
+
+\begin{atencao}
+Ricci \emph{não} é toda a curvatura. Das $20$ componentes de Riemann, $10$
+estão em Ricci e as outras $10$ no \textbf{tensor de Weyl}, a parte de traço
+nulo. É possível ter $R_{\mu\nu}=0$ e $R^\rho{}_{\sigma\mu\nu}\ne0$: é
+exatamente o que acontece no vácuo fora de uma estrela, onde não há matéria e
+ainda assim há maré. Schwarzschild é esse caso.
+\end{atencao}
+
+\subsection*{O tensor de Einstein}
+
+Contraindo \eqref{eq:bianchi-diferencial} duas vezes obtém-se uma identidade
+notável. Defina
+\begin{equation}
+  G_{\mu\nu}=R_{\mu\nu}-\tfrac12\,R\,g_{\mu\nu} .
+  \label{eq:einstein-tensor}
+\end{equation}
+Então
+\begin{equation}
+  \boxed{\ \nabla_\mu G^{\mu\nu}=0\ }
+  \label{eq:bianchi-contraida}
+\end{equation}
+\emph{identicamente} --- para qualquer métrica, sem nenhuma equação de campo e
+sem nenhuma hipótese sobre matéria. É uma propriedade da geometria.
+
+\begin{atencao}
+Cuidado com o passo seguinte, que é tentador e não é automático. De
+\eqref{eq:bianchi-contraida} \emph{não} se conclui
+$\nabla_\mu T^{\mu\nu}=0$: para isso é preciso antes \emph{relacionar} $G$ a
+$T$, e essa relação é a equação de campo do Capítulo~\ref{cap:einstein}. O que
+\eqref{eq:bianchi-contraida} diz é que o lado geométrico tem divergência nula
+--- e, portanto, que qualquer equação da forma $G_{\mu\nu}=\kappa T_{\mu\nu}$
+\emph{exige} que o lado da matéria também tenha. A identidade restringe as
+equações possíveis; ela não substitui a física.
+\end{atencao}
+
+\section{Curvatura em perspectiva}
+\label{sec:curvatura-perspectiva}
+
+\begin{resultado}
+\textbf{A cadeia, do começo ao fim.}
+\[
+  \underbrace{\text{variedade}}_{\text{cartas}}
+  \to \underbrace{g_{\mu\nu}}_{\text{medida}}
+  \to \underbrace{\Gamma^\rho{}_{\mu\nu}}_{\text{conexão}}
+  \to \underbrace{\text{transporte}}_{\nabla_{\vec U}\vec V=0}
+  \to \underbrace{R^\rho{}_{\sigma\mu\nu}}_{\text{curvatura}}
+  \to \underbrace{G_{\mu\nu}}_{\text{fonte}}
+\]
+Cada seta é uma escolha ou uma construção, e nenhuma é automática: a métrica é
+dada pela física, a conexão é fixada por torção nula e compatibilidade, o
+transporte é a conexão aplicada a um caminho, e a curvatura é a falha desse
+transporte em um circuito fechado.
+\end{resultado}
+
+Três perguntas de autoavaliação, cada uma correspondendo a uma distinção que
+este capítulo estabeleceu:
+
+\begin{enumerate}
+  \item Por que $\Gamma\ne0$ não significa curvatura, e $R\ne0$ significa?
+  \item Em que sentido preciso o espaço-tempo é ``localmente plano'', e o que
+  exatamente sobrevive à construção do referencial inercial local?
+  \item Por que $\nabla_\mu G^{\mu\nu}=0$ não demonstra, sozinho, a
+  conservação da energia da matéria?
+\end{enumerate}
+
+\begin{central}
+O que já se pode fazer, e o que falta. Com a conexão e o transporte, o
+Capítulo~\ref{cap:fisica-curva} descreve partículas livres, luz, relógios e
+observadores em geometria curva --- toda a física \emph{local}. O que ainda
+não existe é a equação que diz \emph{qual} geometria a matéria produz. Ela
+precisa de um objeto geométrico com divergência nula, construído a partir da
+curvatura, para igualar ao $T_{\mu\nu}$ do Capítulo~\ref{cap:fluidos}. Esse
+objeto é $G_{\mu\nu}$, e a equação é o Capítulo~\ref{cap:einstein}.
+\end{central}
+
+\section{Leitura orientada}
+\label{sec:leitura-cap6}
+
+\begin{leitura}
+\textbf{Schutz, 3.\textsuperscript{a} ed. (2022), capítulo 6.} A estrutura
+deste capítulo acompanha a dele:
+\begin{itemize}
+  \item \S6.1, pp.~141--143 --- variedades diferenciáveis, vetores e tensores
+  antes da métrica.
+  \item \S6.2, pp.~143--149 --- variedades riemannianas, e a demonstração do
+  teorema da planura local pela contagem que reproduzimos na
+  Seção~\ref{sec:metrica-variedade}.
+  \item \S6.3, pp.~149--152 --- derivação covariante, compatibilidade,
+  divergência e Gauss.
+  \item \S6.4, pp.~152--156 --- transporte paralelo, geodésicas e curvatura;
+  intrínseca contra extrínseca.
+  \item \S6.5, pp.~156--162 --- o tensor de curvatura, pelo circuito e pelo
+  comutador, com as simetrias e o desvio geodésico.
+  \item \S6.6, pp.~162--164 --- Bianchi, Ricci e Einstein.
+  \item \S6.7, pp.~164--165 --- curvatura em perspectiva.
+\end{itemize}
+A Bibliografia comentada, ao final da apostila, indica leituras adicionais
+sobre geometria diferencial e sobre as convenções de sinal, que variam entre
+os textos --- confira sempre a definição de Riemann antes de comparar
+fórmulas.
+\end{leitura}
+
 
 \section{Problemas orientados}
 
@@ -8858,11 +9278,19 @@ Os cinco problemas abaixo pedem para \emph{modificar} um programa da página da 
 
 \begin{enumerate}
   \item \textbf{O toro e Gauss--Bonnet.} Aplique a máquina de
-\arq{cap06\_curvatura.py} à métrica do toro,
-$\dd\ell^2=\dd u^2+(R+a\cos u)^2\dd v^2$. Mostre que a curvatura de Gauss é
-positiva na face externa, negativa na interna e nula nos dois círculos com
-$\cos u=0$. Integre $K$ sobre toda a superfície e verifique que o resultado
-é zero, como exige Gauss--Bonnet para gênero $1$.
+\arq{cap06\_curvatura.py} à métrica do toro de revolução, de raio do tubo $a$
+e raio do centro do tubo $R_0>a$, com $u$ e $v$ \emph{angulares}:
+\[
+  \dd\ell^2=a^2\,\dd u^2+(R_0+a\cos u)^2\,\dd v^2 .
+\]
+(a) Obtenha $K=\cos u/[a(R_0+a\cos u)]$ e mostre que ela é positiva na face
+externa, negativa na interna e nula nos dois círculos com $\cos u=0$.
+(b) Com $\dd A=a(R_0+a\cos u)\,\dd u\,\dd v$, verifique que $K\,\dd A=\cos
+u\,\dd u\,\dd v$ e que a integral sobre toda a superfície se anula, como exige
+Gauss--Bonnet para gênero $1$. (c) Confira a área, $4\pi^2aR_0$.
+(d) \emph{Teste de consistência:} repita (a) esquecendo o fator $a^2$ do
+primeiro termo e veja o que acontece com $K$. Por que uma métrica com
+$\dd u^2$ em vez de $a^2\dd u^2$ descreveria outra superfície?
 
   \item \textbf{Os dois regimes do erro numérico.} Meça o erro do escalar de
 curvatura da esfera calculado por \texttt{riemann} em função do passo $h$,
