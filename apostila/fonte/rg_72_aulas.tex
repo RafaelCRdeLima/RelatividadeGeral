@@ -8607,6 +8607,20 @@ livres, enquanto anular $\partial\partial g$ exigiria $10\times10=100$.
 Faltam $20$.
 \end{resultado}
 
+\begin{atencao}
+A contagem mostra que o sistema não é \emph{sobredeterminado}; ela não
+demonstra, sozinha, que a solução existe. A existência vem de dois lugares. Na
+primeira linha, de um teorema de álgebra linear: toda forma bilinear simétrica
+não degenerada pode ser levada à forma canônica, e a assinatura que aparece é
+sempre a mesma --- é a lei de inércia de Sylvester, e é ela que garante o
+$\eta$. Na segunda, de uma construção explícita: a condição
+$\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$ equivale a
+$\Gamma^{\bar\rho}{}_{\bar\mu\bar\nu}|_P=0$, e coordenadas que a realizam
+podem ser exibidas --- são as \emph{coordenadas normais}, construídas
+mandando as geodésicas que saem de $P$ virarem retas. A contagem diz que não
+há obstrução; a construção diz que de fato se consegue.
+\end{atencao}
+
 \begin{central}
 Os $100-80=20$ graus que \emph{não} se pode anular são o conteúdo
 irredutível da geometria em $P$ --- e, como se verá na
@@ -8620,8 +8634,9 @@ derivadas da métrica que nenhuma escolha de coordenadas remove.
 \begin{atencao}
 É esta a formulação precisa do princípio da equivalência que a
 Seção~\ref{sec:gravitacao-curvatura} obteve fisicamente. Um laboratório em
-queda livre é inercial \emph{no ponto} e, com erro de primeira ordem, na sua
-vizinhança --- isso é a segunda linha da tabela. O que sobrevive na segunda
+queda livre é inercial \emph{no ponto}, e a segunda linha da tabela diz quanto
+isso se estende: como as primeiras derivadas da métrica se anulam em $P$, o
+desvio em relação a $\eta$ só começa na \emph{segunda} ordem do deslocamento. O que sobrevive na segunda
 ordem é a maré, e é por isso que ela não pode ser eliminada por escolha de
 referencial.
 \end{atencao}
@@ -8789,9 +8804,20 @@ Transporte um vetor de $P$ a $Q$ por dois caminhos diferentes e, em geral, os
 dois vetores que chegam a $Q$ são \emph{distintos}. Equivalentemente: leve um
 vetor por um circuito fechado e ele volta diferente de como partiu.
 
-Numa variedade plana isso não acontece --- e é por isso que no plano se podia
-falar em ``o mesmo vetor'' em toda parte.
+Onde a curvatura se anula, o transporte entre dois pontos independe do caminho
+--- desde que os caminhos possam ser deformados um no outro. É por isso que no
+plano se podia falar em ``o mesmo vetor'' em toda parte.
 \end{central}
+
+\begin{atencao}
+A ressalva não é escolástica. Curvatura nula em toda parte garante
+independência do caminho apenas \emph{localmente}, ou para circuitos
+contráteis. Numa região com topologia não trivial pode haver holonomia sem
+curvatura: o cone do segundo problema do Conteúdo extra é exatamente esse
+caso --- plano em toda a região regular, e ainda assim um circuito que
+envolve o vértice devolve o vetor girado de $2\pi(1-k)$. A curvatura é local;
+a holonomia enxerga também a forma do domínio.
+\end{atencao}
 
 \begin{example}
 \textbf{A esfera, em três pernas.} Parta do polo norte com um vetor apontando
@@ -8862,11 +8888,40 @@ o paralelogramo que eles formam: avance por $\delta a$, depois por $\delta b$,
 volte por $\delta a$, volte por $\delta b$. Transporte $\vec V$ paralelamente
 ao longo do percurso.
 
-Cada perna muda $V^\mu$ por $-\Gamma^\mu{}_{\alpha\beta}\delta x^\alpha
-V^\beta$, por \eqref{eq:transporte-paralelo}. Em primeira ordem as idas e
-voltas se cancelam; o que sobrevive é de segunda ordem, e vem de dois lugares
---- o $\Gamma$ avaliado em pontos ligeiramente diferentes, e o $V$ já alterado
-pela perna anterior. Recolhendo os dois, a variação total é
+Cada perna muda $V^\rho$ por $-\Gamma^\rho{}_{\mu\sigma}\,\delta x^\mu
+V^\sigma$, por \eqref{eq:transporte-paralelo}. Em primeira ordem as idas e
+voltas se cancelam; o que sobrevive é de segunda ordem, e vem de dois lugares.
+Vale fazer a conta com as duas primeiras pernas e deixar que a simetria faça o
+resto.
+
+\emph{Primeira perna}, ao longo de $\delta a$:
+\[
+  V^\rho\ \longrightarrow\
+  V^\rho-\Gamma^\rho{}_{\mu\sigma}\,\delta a^\mu V^\sigma ,
+\]
+com $\Gamma$ avaliado no ponto de partida. \emph{Segunda perna}, ao longo de
+$\delta b$, a partir do novo ponto: agora $\Gamma$ é avaliado em
+$x+\delta a$, isto é,
+$\Gamma^\rho{}_{\nu\sigma}+\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,
+\delta a^\mu$, e o vetor que entra já é o da linha acima. O produto dá
+\[
+  -\bigl(\Gamma^\rho{}_{\nu\sigma}
+  +\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\bigr)
+  \delta b^\nu
+  \bigl(V^\sigma-\Gamma^\sigma{}_{\lambda\tau}\,\delta a^\lambda
+  V^\tau\bigr) .
+\]
+Expandindo e guardando só a segunda ordem, sobram dois termos:
+$-\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\delta b^\nu
+V^\sigma$ e
+$+\Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}\,
+\delta a^\mu\delta b^\nu V^\sigma$.
+
+\emph{As outras duas pernas} refazem o mesmo percurso na ordem trocada e com
+o sinal invertido, o que equivale a repetir a conta acima com
+$\delta a\leftrightarrow\delta b$ e subtrair. Os termos de primeira ordem se
+cancelam, como anunciado, e cada um dos dois termos de segunda ordem ganha o
+seu parceiro antissimetrizado. Recolhendo tudo,
 
 \begin{central}
 \begin{equation}
@@ -9041,13 +9096,49 @@ ainda assim há maré. Schwarzschild é esse caso.
 
 \subsection*{O tensor de Einstein}
 
-Contraindo \eqref{eq:bianchi-diferencial} duas vezes obtém-se uma identidade
-notável. Defina
+Contrair \eqref{eq:bianchi-diferencial} duas vezes produz uma identidade
+notável, e vale seguir as duas contrações porque o resultado delas é a forma
+do lado esquerdo das equações de Einstein.
+
+\begin{resultado}
+\textbf{Dedução.} Escreva \eqref{eq:bianchi-diferencial} por extenso:
+\[
+  \nabla_\lambda R_{\mu\nu\rho\sigma}
+  +\nabla_\mu R_{\nu\lambda\rho\sigma}
+  +\nabla_\nu R_{\lambda\mu\rho\sigma}=0 .
+\]
+
+\emph{Primeira contração}, com $g^{\lambda\rho}$. No segundo termo,
+$g^{\lambda\rho}R_{\nu\lambda\rho\sigma}
+=-g^{\lambda\rho}R_{\lambda\nu\rho\sigma}=-R_{\nu\sigma}$, pela
+antissimetria no primeiro par; no terceiro, $g^{\lambda\rho}
+R_{\lambda\mu\rho\sigma}=R_{\mu\sigma}$. Resta
+\[
+  \nabla^\rho R_{\mu\nu\rho\sigma}
+  -\nabla_\mu R_{\nu\sigma}+\nabla_\nu R_{\mu\sigma}=0 .
+\]
+
+\emph{Segunda contração}, com $g^{\mu\sigma}$. Agora
+$g^{\mu\sigma}R_{\mu\nu\rho\sigma}=-R_{\nu\rho}$, e os dois últimos
+termos dão $-\nabla^\sigma R_{\sigma\nu}$ e $+\nabla_\nu R$:
+\[
+  -\nabla^\rho R_{\rho\nu}-\nabla^\sigma R_{\sigma\nu}+\nabla_\nu R=0
+  \qquad\Longrightarrow\qquad
+  \nabla^\mu R_{\mu\nu}=\tfrac12\,\nabla_\nu R .
+\]
+
+\emph{Fecho.} Essa última igualdade é exatamente a afirmação de que a
+combinação
 \begin{equation}
-  G_{\mu\nu}=R_{\mu\nu}-\tfrac12\,R\,g_{\mu\nu} .
+  G_{\mu\nu}=R_{\mu\nu}-\tfrac12\,R\,g_{\mu\nu}
   \label{eq:einstein-tensor}
 \end{equation}
-Então
+tem divergência nula, pois $\nabla^\mu g_{\mu\nu}=0$ pela compatibilidade
+métrica. O fator $\tfrac12$ não foi escolhido por elegância: é o único que
+faz os dois termos se cancelarem.
+\end{resultado}
+
+Portanto
 \begin{equation}
   \boxed{\ \nabla_\mu G^{\mu\nu}=0\ }
   \label{eq:bianchi-contraida}
@@ -9288,9 +9379,10 @@ externa, negativa na interna e nula nos dois círculos com $\cos u=0$.
 (b) Com $\dd A=a(R_0+a\cos u)\,\dd u\,\dd v$, verifique que $K\,\dd A=\cos
 u\,\dd u\,\dd v$ e que a integral sobre toda a superfície se anula, como exige
 Gauss--Bonnet para gênero $1$. (c) Confira a área, $4\pi^2aR_0$.
-(d) \emph{Teste de consistência:} repita (a) esquecendo o fator $a^2$ do
-primeiro termo e veja o que acontece com $K$. Por que uma métrica com
-$\dd u^2$ em vez de $a^2\dd u^2$ descreveria outra superfície?
+(d) \emph{Teste de consistência:} repita (a) escrevendo $\dd u^2$ em vez de
+$a^2\,\dd u^2$ e mostre que a curvatura obtida fica $a^2$ vezes a correta.
+Por que essa outra métrica descreve uma superfície diferente, e o que $u$
+passaria a significar nela?
 
   \item \textbf{Os dois regimes do erro numérico.} Meça o erro do escalar de
 curvatura da esfera calculado por \texttt{riemann} em função do passo $h$,

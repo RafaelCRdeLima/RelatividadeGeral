@@ -43,8 +43,15 @@ com a área da calota.
 Isso é uma escolha de representante, não uma correção de erro, e não vale
 para qualquer carta ou métrica. Repare na linha do equador na saída abaixo:
 $\theta_0=\pi/2$ dá exatamente $2\pi$, que como \emph{mapa} é a identidade.
-E tem de ser: o equador é geodésica, e transportar ao longo de uma geodésica
-fechada devolve o vetor como ele partiu.
+E tem de ser, por um argumento que só vale em duas dimensões: o equador é
+geodésica, de modo que a sua tangente é transportada em si mesma; a
+compatibilidade métrica preserva o ângulo que o vetor faz com essa tangente; e
+numa superfície o par (norma, ângulo com a tangente) já determina o vetor.
+Logo ele volta igual.
+
+Em dimensão maior o argumento cai: a parte ortogonal à tangente tem mais de
+uma direção disponível, e pode girar entre elas. Uma geodésica fechada
+preserva a \emph{sua} tangente, não qualquer vetor transportado ao longo dela.
 
 No espaço-tempo lorentziano a holonomia pode envolver \emph{boosts}, e a
 palavra ``rotação'' deixa de descrever todos os casos.
