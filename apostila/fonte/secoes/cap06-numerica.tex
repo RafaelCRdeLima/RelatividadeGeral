@@ -1,17 +1,47 @@
 % =====================================================================
-%  Capítulo 7 — Resolução numérica
+%  Capítulo 6 — Resolução numérica
 %  Inserir antes da seção de exercícios.
 % =====================================================================
 \section{Resolução numérica}
 \label{sec:cap06-numerica}
 
-Este capítulo afirmou três coisas que só ficam realmente convincentes quando
-viram número: que a conexão pode ser não nula sem haver curvatura, que o
-tensor de Riemann é a rotação produzida por um circuito fechado, e que a
-curvatura controla a aceleração relativa de geodésicas vizinhas. Aqui as três
-são medidas. E, de quebra, montamos uma máquina que extrai $\Gamma$, Riemann,
-Ricci e Kretschmann de uma métrica qualquer, por diferenças finitas --- a
-mesma que será apontada para Schwarzschild nos capítulos seguintes.
+Três resultados deste capítulo foram \emph{deduzidos} atrás, e aqui são
+\emph{medidos}: que a conexão pode ser não nula sem haver curvatura
+(Seção~\ref{sec:transporte-paralelo}), que o tensor de Riemann é o que sobra
+de um circuito fechado (Seção~\ref{sec:curvatura-riemann}), e que a curvatura
+controla a aceleração relativa de geodésicas vizinhas
+(Equação~\eqref{eq:desvio-geodesico}).
+
+A oficina não os introduz --- ela os confere, e serve a dois propósitos que a
+dedução não cumpre. Primeiro, pôr número onde havia símbolo: a holonomia da
+esfera \emph{é} a área, em oito casas. Segundo, montar a máquina que extrai
+$\Gamma$, Riemann, Ricci e Kretschmann de uma métrica qualquer por diferenças
+finitas --- a mesma que será apontada para Schwarzschild nos capítulos
+seguintes.
+
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}O QUE UM TESTE NUMÉRICO MOSTRA, E O QUE NÃO}]
+Cada saída desta seção tem um piso e um domínio, e lê-las sem isso é o
+caminho mais curto para conclusões falsas.
+
+\emph{Piso.} As derivadas são centrais, de passo $h$: o erro de truncamento
+cai como $h^2$, mas o cancelamento em ponto flutuante cresce como $1/h^2$, de
+modo que existe um $h$ ótimo e um piso abaixo do qual nada melhora. É por isso
+que o Ricci de Schwarzschild sai $10^{-7}$ em vez de zero --- o valor exato é
+zero, e $10^{-7}$ é o piso, não física. O terceiro problema do Conteúdo extra
+pede para medir esses dois regimes.
+
+\emph{Domínio.} A carta esférica exclui os polos, onde
+$\Gamma^\varphi{}_{\theta\varphi}=\cot\theta$ diverge; o teste de
+Schwarzschild é feito em $r=8M$, fora do horizonte; e o circuito do plano
+polar não envolve a origem. Nenhuma dessas exclusões é detalhe de
+implementação --- são os domínios de carta da
+Seção~\ref{sec:variedades}.
+
+\emph{Alcance.} Concordância numérica em alguns casos ilustra um resultado;
+não o demonstra. As demonstrações estão nas Seções
+\ref{sec:curvatura-riemann} e \ref{sec:bianchi-einstein}, e é delas que vem a
+generalidade.
+\end{atencao}
 
 \subsection{Python}
 
