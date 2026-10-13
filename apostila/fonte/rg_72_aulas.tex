@@ -8543,19 +8543,30 @@ Seção~\ref{sec:derivada-covariante-variedade} fará.
 \section{Métricas, planura local e volume próprio}
 \label{sec:metrica-variedade}
 
-Até aqui, nenhuma distância. Uma \textbf{métrica} é um tensor $(0,2)$
-simétrico e não degenerado $g_{\mu\nu}$, e é ela que acrescenta à variedade a
-estrutura de medida:
+Até aqui, nenhuma distância. A variedade da Seção~\ref{sec:variedades} é uma
+coleção de pontos com cartas: há vizinhanças, funções suaves, vetores
+tangentes e tensores --- mas nada que diga o comprimento de uma curva ou o
+ângulo entre duas direções. Nesse estágio, ela não tem forma.
+
+Quem dá forma é a métrica. Uma \textbf{métrica} é um tensor $(0,2)$ simétrico
+e não degenerado $g_{\mu\nu}$:
 \begin{equation}
   \dd s^2=g_{\mu\nu}\,\dd x^\mu\dd x^\nu ,
   \qquad
   \vec A\cdot\vec B=g_{\mu\nu}A^\mu B^\nu .
   \label{eq:metrica-variedade}
 \end{equation}
-A \emph{assinatura} --- quantos autovalores positivos e negativos --- é a
-mesma em todo ponto, por continuidade. Com $(+,+,\dots)$ a variedade é
-\emph{riemanniana}; com $(-,+,+,+)$, \emph{lorentziana}, e é esse o caso do
-espaço-tempo.
+Ela é estrutura \emph{acrescentada}, e não consequência da variedade: sobre a
+mesma coleção de pontos, uma escolha de $g$ produz a esfera e outra produz um
+elipsoide. Como no plano, a métrica também fornece o isomorfismo entre vetores
+e 1-formas, $A_\mu=g_{\mu\nu}A^\nu$, com a inversa $g^{\mu\nu}$ subindo
+índices.
+
+Daqui em diante, as componentes $g_{\mu\nu}$ são funções do ponto, em geral
+complicadas, e aceitamos qualquer carta --- não apenas as que deixam a métrica
+simples. Essa renúncia é obrigatória, e a razão é a do
+Capítulo~\ref{cap:gravidade-curvatura}: a gravidade impede referenciais
+inerciais globais.
 
 \begin{atencao}
 As componentes $g_{\mu\nu}$ dependem do ponto, e isso sozinho não diz nada
@@ -8563,158 +8574,319 @@ sobre curvatura. O plano em polares tem $g_{\theta\theta}=r^2$ e é plano.
 O critério de curvatura é o da Seção~\ref{sec:curvatura-riemann}.
 \end{atencao}
 
+\subsection*{Em um ponto, a métrica é a de Minkowski}
+
+Fixe um ponto $P$ e olhe apenas para os números $g_{\mu\nu}(P)$. Eles formam
+uma matriz real simétrica, e nesse passo não há geometria em jogo: é álgebra
+linear. A \textbf{lei de inércia de Sylvester} garante que existe uma mudança
+de base tornando essa matriz diagonal, com entradas $+1$, $-1$ e $0$, e que as
+quantidades de cada sinal não dependem da base escolhida. Elas são a
+\emph{assinatura} da métrica.
+
+Se a métrica é não degenerada, não há zeros. Com três autovalores positivos e
+um negativo, existe base em que
+\begin{equation}
+  g_{\mu\nu}(P)=\eta_{\mu\nu}=\operatorname{diag}(-1,1,1,1).
+  \label{eq:sylvester-eta}
+\end{equation}
+
+Essa linha curta tem peso físico. No Capítulo~\ref{cap:gravidade-curvatura}
+chegamos, por queda livre e pelo princípio da equivalência, à conclusão de que
+sempre se pode montar um referencial inercial local em qualquer evento. A
+equação \eqref{eq:sylvester-eta} é a representação matemática dessa conclusão.
+
+A assinatura, com isso, deixa de ser detalhe técnico. Ela é constante em cada
+componente conexa, por continuidade e pela não degeneração da métrica, e
+\eqref{eq:sylvester-eta} só é alcançável se ela for $(-,+,+,+)$. Um
+espaço-tempo com gravidade precisa admitir um referencial inercial local em
+todo evento; logo, precisa ter essa assinatura. É a chamada métrica
+\emph{lorentziana}. Uma métrica positiva definida --- assinatura
+$(+,+,+,+)$ --- é \emph{riemanniana}, e descreve geometria, não
+espaço-tempo.
+
+\begin{interludio}[breakable=false]{A lei de inércia de Sylvester}
+Uma matriz real simétrica $G$ representa uma forma quadrática,
+$q(v)=v^{\mathsf T}Gv$. Ao mudar de base por uma matriz invertível $A$, a
+mesma forma passa a ser representada por $A^{\mathsf T}GA$.
+
+A \textbf{lei de inércia de Sylvester} afirma que podemos escolher a base
+para tornar essa matriz diagonal, com entradas $+1$, $-1$ e $0$. As
+quantidades de sinais positivos, negativos e zeros não mudam sob uma mudança
+invertível de base. Se a forma é não degenerada, não há zeros: esses números
+de sinais caracterizam sua \emph{assinatura}.
+
+\emph{Como obter a forma diagonal?} Uma matriz real simétrica tem uma base
+ortonormal de autovetores. Nessa base, $q=\sum_i\lambda_i z_i^2$. Quando
+$\lambda_i\ne0$, a mudança $w_i=\sqrt{|\lambda_i|}\,z_i$ dá
+\[
+  q=\sum_i\operatorname{sgn}(\lambda_i)\,w_i^2.
+\]
+Por exemplo, $q=-4u^2+9v^2$ se torna $q=-U^2+V^2$ com $U=2u$ e $V=3v$.
+Os valores dos coeficientes mudam, mas permanece um sinal negativo e um
+positivo.
+
+\textbf{O que isso resolve, e o que não resolve.} A mudança é linear e age em
+um ponto: ela acerta $g_{\mu\nu}(P)$, e nada mais. As derivadas da métrica em
+$P$ ficam onde estavam. Eliminá-las exigirá uma mudança \emph{quadrática},
+construída na demonstração no fim desta seção.
+\end{interludio}
+
+\subsection*{Um referencial em cada ponto não é uma carta}
+
+A tentação imediata é repetir o procedimento em todos os pontos: aplicar
+Sylvester em cada $P$ e obter $\eta_{\mu\nu}$ em toda parte. Isso de fato
+funciona --- mas o que se obtém é um \emph{campo de bases}, não uma carta.
+
+A Seção~\ref{sec:bases-nao-coordenadas} já exibiu o fenômeno, e no plano. Na
+base ortonormal polar $\{\vec e_{\hat r},\vec e_{\hat\theta}\}$ a métrica é
+$\delta_{\hat i\hat j}$ em todo ponto, constante, e ainda assim nenhuma carta
+produz esse par: o comutador \eqref{eq:comutador-nao-coordenada} não se anula.
+Componentes constantes da métrica não implicam base coordenada.
+
+O critério geral é o mesmo comutador, escrito para a matriz
+$\Lambda^{\bar\mu}{}_\nu$ que diagonaliza a métrica ponto a ponto. Se ela
+viesse de uma mudança de coordenadas, as 1-formas
+$\tilde\omega^{\bar\mu}=\Lambda^{\bar\mu}{}_\nu\,\tilde\omega^\nu$ seriam uma
+base coordenada, e então
+\[
+  \frac{\partial\Lambda^{\bar\mu}{}_\nu}{\partial x^\rho}
+  =\frac{\partial\Lambda^{\bar\mu}{}_\rho}{\partial x^\nu} .
+\]
+Em um campo gravitacional genérico isso é impossível, e a razão é direta: se
+tais coordenadas existissem, teríamos $g_{\bar\mu\bar\nu}=\eta_{\bar\mu\bar\nu}$
+em toda uma região --- um referencial de Lorentz global, exatamente o que a
+gravidade proíbe.
+
+Resta a pergunta sobre o que \emph{se} pode conseguir com coordenadas. A
+resposta é o teorema a seguir: não $\eta$ em toda parte, mas $\eta$ em um
+ponto \emph{com as primeiras derivadas nulas}. É o melhor possível --- e é
+suficiente.
+
 \subsection*{O teorema da planura local}
 
-Mesmo em um espaço-tempo curvo, podemos escolher coordenadas nas quais, em um
-ponto, a métrica assume a forma de Minkowski e suas primeiras derivadas se
-anulam. Esse é o conteúdo do teorema da planura local. Para entender essa
-possibilidade, começaremos comparando as condições impostas à métrica com a
-liberdade de escolha das coordenadas. Essa contagem ajuda a compreender o
-resultado, mas não basta para demonstrá-lo; em seguida, construiremos
-coordenadas que satisfazem as condições do teorema.
+Em um espaço-tempo curvo, podemos escolher coordenadas nas quais a métrica,
+em um ponto, tem a forma de Minkowski e suas primeiras derivadas se anulam.
+Isso permite descrever a geometria, perto desse ponto, como a da relatividade
+especial até a primeira ordem nos deslocamentos. O teorema afirma uma
+propriedade local: não diz que a curvatura desaparece nem que essas condições
+valem em toda uma região.
 
 \begin{central}
-\textbf{Planura local.} Em torno de qualquer ponto $P$ existem coordenadas
-$x^{\bar\mu}$ nas quais
+\textbf{Teorema da planura local.} Seja $P$ um ponto de um espaço-tempo com
+métrica lorentziana suave. Existem coordenadas $y^\mu$, definidas em uma
+vizinhança de $P$, tais que $y^\mu(P)=0$ e
 \[
-  g_{\bar\mu\bar\nu}(P)=\eta_{\bar\mu\bar\nu} ,
+  g^{(y)}_{\mu\nu}(P)=\eta_{\mu\nu},
   \qquad
-  \partial_{\bar\alpha}g_{\bar\mu\bar\nu}(P)=0 .
+  \partial^{(y)}_\lambda g^{(y)}_{\mu\nu}(P)=0.
 \]
-Não se pode, em geral, anular também as \emph{segundas} derivadas.
+O sobrescrito $(y)$ identifica as componentes na nova carta. Para uma métrica
+riemanniana, a mesma construção produz $\delta_{ij}$ no lugar de $\eta_{\mu\nu}$.
 \end{central}
 
-\begin{resultado}
-\textbf{A contagem.} Procura-se a mudança de coordenadas
-$x^{\bar\mu}=x^{\bar\mu}(x^\nu)$ pela sua série de Taylor em torno de $P$. Os
-coeficientes livres são as derivadas sucessivas da transformação em $P$; as
-exigências são os valores da métrica e de suas derivadas em $P$. Basta
-comparar quantos há de cada lado, em $n=4$.
-
-\begin{center}
-\small
-\begin{tabular}{lrlr}
-\toprule
-\textbf{liberdade} & \textbf{quantos} & \textbf{exigência} & \textbf{quantas} \\
-\midrule
-$\Lambda^{\bar\mu}{}_\nu|_P$ & $4\times4=16$
-  & $g_{\bar\mu\bar\nu}|_P=\eta_{\bar\mu\bar\nu}$ & $10$ \\
-$\partial_\gamma\Lambda^{\bar\mu}{}_\nu|_P$ & $4\times10=40$
-  & $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$ & $40$ \\
-$\partial_\gamma\partial_\lambda\Lambda^{\bar\mu}{}_\nu|_P$ & $4\times20=80$
-  & $\partial_{\bar\gamma}\partial_{\bar\lambda}
-     g_{\bar\mu\bar\nu}|_P=0$ & $100$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\emph{Primeira linha.} A matriz $\Lambda^{\bar\mu}{}_\nu|_P$ tem $16$ entradas
-livres; impor $g=\eta$ em $P$ são $10$ equações, porque $g$ é simétrica.
-Sobram $6$ --- e são exatamente os três \emph{boosts} e as três rotações que
-preservam $\eta$. Reencontramos o grupo de Lorentz, agora como a liberdade que
-resta depois de montar o referencial local.
-
-\emph{Segunda linha.} As primeiras derivadas da transformação formam um
-arranjo simétrico nos dois índices de baixo: $4\times10=40$ números.
-Anular $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}$ são $10\times4=40$ equações.
-Quarenta contra quarenta: dá exatamente, sem folga.
-
-\emph{Terceira linha.} As segundas derivadas dão $4\times20=80$ números
-livres, enquanto anular $\partial\partial g$ exigiria $10\times10=100$.
-Faltam $20$.
-\end{resultado}
+O que se ganha com a ausência do termo linear é concreto. No espaço-tempo
+plano, as retas são as linhas de mundo de partículas livres. Anular as
+primeiras derivadas da métrica faz com que, nessas coordenadas, partículas
+livres percorram perto de $P$ linhas que são localmente retas. As equações da
+física ficam ali quase tão simples quanto no espaço-tempo plano --- e, se
+escritas pelas regras tensoriais da Seção~\ref{sec:variedades}, valem em
+seguida em qualquer carta. Esse vaivém --- ir ao referencial inercial local,
+escrever a lei conhecida, voltar --- será usado muitas vezes, e a primeira
+delas vem logo abaixo, no elemento de volume.
 
 \begin{atencao}
-A contagem mostra que o sistema não é \emph{sobredeterminado}; ela não
-demonstra, sozinha, que a solução existe. A existência vem de dois lugares. Na
-primeira linha, de um teorema de álgebra linear: toda forma bilinear simétrica
-não degenerada pode ser levada à forma canônica, e a assinatura que aparece é
-sempre a mesma --- é a lei de inércia de Sylvester, e é ela que garante o
-$\eta$. Na segunda, de uma construção explícita, que vale exibir.
-
-\emph{As coordenadas normais.} Fixe em $P$ uma base com
-$g_{\bar\mu\bar\nu}|_P=\eta_{\bar\mu\bar\nu}$, o que a lei de Sylvester
-já garante. Para cada vetor $v^{\bar\mu}$ de $T_P$ \emph{suficientemente
-pequeno}, siga a geodésica que sai de $P$ com tangente $v$ e caminhe por um
-parâmetro afim unitário; ao ponto onde se chega, atribua as coordenadas
-$v^{\bar\mu}$. Por construção, as geodésicas que passam por $P$ são então as
-\emph{retas} $x^{\bar\mu}(\lambda)=\lambda\,v^{\bar\mu}$.
-
-A restrição a $v$ pequeno não é detalhe: a aplicação que leva $v$ ao ponto de
-chegada --- a \emph{exponencial} --- só é invertível numa vizinhança de $P$,
-e fora dela geodésicas distintas podem reencontrar-se. Na esfera isso ocorre
-já no ponto antípoda, onde todas as geodésicas que partem de $P$ se cruzam, e
-a carta normal deixa de existir. A planura local é, como o nome diz, local.
-
-Agora ponha essas retas na equação geodésica
-\eqref{eq:geodesica-variedade}. Como $\ddot x^{\bar\mu}=0$, sobra
-\[
-  \Gamma^{\bar\mu}{}_{\bar\alpha\bar\beta}(\lambda v)\,
-  v^{\bar\alpha}v^{\bar\beta}=0
-  \qquad\text{para todo }v\text{ e todo }\lambda ,
-\]
-e em $\lambda=0$ isso dá
-$\Gamma^{\bar\mu}{}_{\bar\alpha\bar\beta}|_P\,v^{\bar\alpha}
-v^{\bar\beta}=0$ para \emph{todo} $v$. Como $\Gamma$ é simétrico nos dois
-índices de baixo, uma forma quadrática que se anula em todo vetor tem todos os
-coeficientes nulos: $\Gamma^{\bar\mu}{}_{\bar\alpha\bar\beta}|_P=0$.
-
-\emph{E isso é a segunda linha da tabela}, porque
-$\Gamma|_P=0$ equivale a $\partial_{\bar\gamma}g_{\bar\mu\bar\nu}|_P=0$:
-uma direção sai da própria fórmula \eqref{eq:christoffel-variedade}, e a
-outra, de escrever $\nabla g=0$ por extenso com os $\Gamma$ anulados.
-
-\begin{atencao}
-Repare no estatuto de cada peça, porque elas não são independentes do mesmo
-jeito. A \emph{contagem} e a lei de Sylvester são puramente métricas --- não
-mencionam conexão, e é essa independência que torna legítima a rota
-alternativa discutida na Seção~\ref{sec:derivada-covariante-variedade}. Já a
-\emph{construção} acima usa geodésicas, isto é, usa a conexão de
-Levi-Civita; ela não serve, portanto, como demonstração independente da
-existência, e sim como exibição: tendo a conexão em mãos, as coordenadas que
-realizam $\partial g|_P=0$ podem ser escritas.
-
-Quem quiser a existência sem conexão nenhuma segue o Schutz: a segunda linha
-da tabela é um sistema \emph{linear} nas $40$ incógnitas
-$\partial_\gamma\Lambda|_P$, com $40$ equações, e resolvê-lo é um exercício
-de álgebra linear --- sem geodésica alguma.
-\end{atencao}
-\end{atencao}
-
-\begin{central}
-Os $100-80=20$ graus que \emph{não} se pode anular são o conteúdo
-irredutível da geometria em $P$ --- e, como se verá na
-Seção~\ref{sec:curvatura-riemann}, são exatamente as $20$ componentes
-independentes do tensor de Riemann em quatro dimensões.
-
-A coincidência não é numerologia: a curvatura \emph{é} aquilo nas segundas
-derivadas da métrica que nenhuma escolha de coordenadas remove.
-\end{central}
-
-\begin{atencao}
-É esta a formulação precisa do princípio da equivalência que a
-Seção~\ref{sec:gravitacao-curvatura} obteve fisicamente. Um laboratório em
-queda livre é inercial \emph{no ponto}, e a segunda linha da tabela diz quanto
-isso se estende: como as primeiras derivadas da métrica se anulam em $P$, o
-desvio em relação a $\eta$ só começa na \emph{segunda} ordem do deslocamento. O que sobrevive na segunda
-ordem é a maré, e é por isso que ela não pode ser eliminada por escolha de
-referencial.
+As condições valem em $P$. Na vizinhança, a expansão da métrica começa por
+$g^{(y)}_{\mu\nu}(y)=\eta_{\mu\nu}+O(|y|^2)$: não há termo linear, mas
+os termos quadráticos podem permanecer. A curvatura será expressa por uma
+combinação dessas segundas derivadas na
+Seção~\ref{sec:curvatura-riemann}. Por isso, o teorema permite construir um
+referencial inercial local, mas não eliminar os efeitos de maré em uma região
+com curvatura não nula.
 \end{atencao}
 
 \subsection*{Volume próprio}
 
 Falta uma grandeza que o Capítulo~\ref{cap:gravidade-curvatura} usou sem
 nomear: o elemento de volume. Numa carta qualquer, $\dd^nx$ não é um volume
---- ele muda ao trocar de coordenadas pelo jacobiano. O que é invariante é
+--- ele muda ao trocar de coordenadas pelo jacobiano. E obter a expressão
+correta é a primeira aplicação do vaivém que acabamos de descrever.
+
+Vá a um referencial inercial local em $P$, com coordenadas $y^\mu$. Ali a
+métrica é $\eta$ e a região é indistinguível de um pedaço de Minkowski, de
+modo que o volume é o de sempre, $\dd^4y$ --- é o que réguas e relógios medem.
+Agora traduza para uma carta arbitrária $x^\mu$. O cálculo de várias variáveis
+dá
+\[
+  \dd^4y=\left|\det\Lambda\right|\dd^4x ,
+  \qquad
+  \Lambda^\mu{}_\nu=\frac{\partial y^\mu}{\partial x^\nu} ,
+\]
+e calcular esse jacobiano entrada por entrada seria tedioso. A métrica o
+entrega de graça. Em notação matricial, a lei de transformação
+$g_{\mu\nu}=\Lambda^\alpha{}_\mu\Lambda^\beta{}_\nu\,\eta_{\alpha\beta}$ é
+$(g)=(\Lambda)^{\mathsf T}(\eta)(\Lambda)$, e tomando determinantes,
+\[
+  \det g=\det(\eta)\,\bigl[\det\Lambda\bigr]^2=-\bigl[\det\Lambda\bigr]^2 ,
+  \qquad\text{ou seja}\qquad
+  \left|\det\Lambda\right|=\sqrt{|g|} .
+\]
+Numa variedade riemanniana de dimensão $n$, $\det\eta$ dá lugar a
+$\det\delta=1$ e o sinal desaparece --- o valor absoluto cobre os dois casos.
+Portanto o elemento invariante é
 \begin{equation}
   \dd \mathcal{V}=\sqrt{|g|}\;\dd^nx ,
   \qquad g\equiv\det g_{\mu\nu} ,
   \label{eq:volume-proprio}
 \end{equation}
-porque $\sqrt{|g|}$ muda pelo inverso do mesmo jacobiano e o produto fica
-invariante. Em polares, $\sqrt{g}=r$ e $\dd\mathcal{V}=r\,\dd r\,\dd\theta$ ---
+e essa é a expressão do volume verdadeiro em qualquer ponto e em qualquer
+carta. Em polares, $\sqrt{g}=r$ e $\dd\mathcal{V}=r\,\dd r\,\dd\theta$ ---
 o elemento de área de sempre, que a Seção~\ref{sec:calculo-polar} já usara ao
 interpretar o fator $1/r$ da divergência.
+
+\subsection*{Demonstração do teorema da planura local}
+
+A demonstração ficou para o fim da seção por ser longa, e porque o resultado
+já pôde ser usado antes dela. Ela é construtiva: exibe a mudança de
+coordenadas, em vez de apenas garantir que exista. São duas etapas ---
+primeiro ajustar a métrica em $P$, depois eliminar suas primeiras derivadas
+--- e o único maquinário é a lei de transformação da métrica com a regra da
+cadeia.
+
+\begin{samepage}
+\emph{1. Ajustar a métrica no ponto.} Comece com uma carta que tenha origem
+em $P$. Como $g_{\mu\nu}(P)$ é uma forma bilinear simétrica, não degenerada e
+de assinatura $(-,+,+,+)$, a lei de inércia de Sylvester garante uma mudança
+linear de coordenadas que a leva à forma de Minkowski. Chamaremos essas
+coordenadas já ajustadas de $x^\mu$. Assim,
+\[
+  x^\mu(P)=0,
+  \qquad g^{(x)}_{\mu\nu}(P)=\eta_{\mu\nu}.
+\]
+As derivadas da métrica nessas coordenadas ainda podem ser diferentes de zero.
+\end{samepage}
+
+\emph{2. Escolher os termos quadráticos da transformação.} Defina os
+números
+\begin{equation}
+  C^\rho{}_{\mu\nu}
+  =\frac12\eta^{\rho\sigma}
+  \left(\partial^{(x)}_\mu g^{(x)}_{\sigma\nu}
+       +\partial^{(x)}_\nu g^{(x)}_{\sigma\mu}
+       -\partial^{(x)}_\sigma g^{(x)}_{\mu\nu}\right)\Big|_P.
+  \label{eq:planura-coeficientes}
+\end{equation}
+Esses coeficientes são simétricos em $\mu,\nu$. Por enquanto, são apenas uma
+combinação das primeiras derivadas da métrica em $P$; não precisamos definir
+uma conexão para usá-los.
+
+Considere agora a transformação
+\begin{equation}
+  x^\rho=y^\rho-\frac12 C^\rho{}_{\mu\nu}y^\mu y^\nu.
+  \label{eq:planura-transformacao}
+\end{equation}
+Na origem, suas primeiras e segundas derivadas são
+\[
+  \left.\frac{\partial x^\rho}{\partial y^\mu}\right|_P
+  =\delta^\rho{}_\mu,
+  \qquad
+  \left.\frac{\partial^2x^\rho}
+  {\partial y^\lambda\partial y^\mu}\right|_P
+  =-C^\rho{}_{\lambda\mu}.
+\]
+O jacobiano em $P$ é a identidade. Pelo teorema da função inversa, a
+transformação é invertível em uma vizinhança suficientemente pequena e
+define uma carta válida. Como o jacobiano é a identidade em $P$, a métrica
+continua igual a $\eta$ nesse ponto.
+
+\emph{3. Verificar as primeiras derivadas.} A lei de transformação da
+métrica é
+\[
+  g^{(y)}_{\mu\nu}(y)
+  =g^{(x)}_{\alpha\beta}(x(y))
+    \frac{\partial x^\alpha}{\partial y^\mu}
+    \frac{\partial x^\beta}{\partial y^\nu}.
+\]
+Derive em relação a $y^\lambda$. A regra do produto gera três termos: um
+da métrica e um de cada fator do jacobiano. Avaliando em $P$, obtemos
+\begin{equation}
+  \partial^{(y)}_\lambda g^{(y)}_{\mu\nu}\big|_P
+  =\partial^{(x)}_\lambda g^{(x)}_{\mu\nu}\big|_P
+   -\eta_{\rho\nu}C^\rho{}_{\lambda\mu}
+   -\eta_{\mu\rho}C^\rho{}_{\lambda\nu}.
+  \label{eq:planura-derivada}
+\end{equation}
+Para ver o cancelamento, substitua \eqref{eq:planura-coeficientes}:
+\begin{align*}
+  \eta_{\rho\nu}C^\rho{}_{\lambda\mu}
+  &=\frac12\left(
+    \partial^{(x)}_\lambda g^{(x)}_{\nu\mu}
+   +\partial^{(x)}_\mu g^{(x)}_{\nu\lambda}
+   -\partial^{(x)}_\nu g^{(x)}_{\lambda\mu}\right)\Big|_P,\\
+  \eta_{\mu\rho}C^\rho{}_{\lambda\nu}
+  &=\frac12\left(
+    \partial^{(x)}_\lambda g^{(x)}_{\mu\nu}
+   +\partial^{(x)}_\nu g^{(x)}_{\mu\lambda}
+   -\partial^{(x)}_\mu g^{(x)}_{\lambda\nu}\right)\Big|_P.
+\end{align*}
+Somando as duas linhas e usando $g^{(x)}_{\mu\nu}=g^{(x)}_{\nu\mu}$, os
+termos com derivadas em $\mu$ e $\nu$ se cancelam. Restam duas metades de
+$\partial^{(x)}_\lambda g^{(x)}_{\mu\nu}|_P$. Portanto,
+\[
+  \eta_{\rho\nu}C^\rho{}_{\lambda\mu}
+  +\eta_{\mu\rho}C^\rho{}_{\lambda\nu}
+  =\partial^{(x)}_\lambda g^{(x)}_{\mu\nu}\big|_P.
+\]
+Substituindo em \eqref{eq:planura-derivada}, concluímos que
+\[
+  \boxed{\quad g^{(y)}_{\mu\nu}(P)=\eta_{\mu\nu},
+  \qquad \partial^{(y)}_\lambda g^{(y)}_{\mu\nu}(P)=0.\quad}
+\]
+Isso completa a demonstração: a transformação foi construída, sua
+invertibilidade local foi justificada e as duas condições foram verificadas.
+
+\subsubsection*{Quanta liberdade sobrou}
+
+A construção acima estabelece a existência das coordenadas. Uma contagem de
+coeficientes --- é por ela que o Schutz demonstra o teorema --- responde a
+uma pergunta diferente: por que a construção para na primeira ordem, e o que
+impede de anular também as segundas derivadas da métrica.
+
+Em quatro dimensões, escreva
+$J^\rho{}_{\mu}=\partial x^\rho/\partial y^\mu$ e compare, ordem a ordem, os
+coeficientes disponíveis na transformação com as condições a impor sobre a
+métrica:
+\begin{center}
+\small
+\begin{tabular}{lrlr}
+\toprule
+\textbf{coeficientes da transformação} & \textbf{quantos}
+  & \textbf{condições em $P$} & \textbf{quantas}\\
+\midrule
+$J|_P$ & $16$ & $g^{(y)}|_P=\eta$ & $10$\\
+$\partial J|_P$ & $40$ & $\partial g^{(y)}|_P=0$ & $40$\\
+$\partial\partial J|_P$ & $80$ & $\partial\partial g^{(y)}|_P=0$ & $100$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+As duas primeiras linhas são o que a demonstração fez. Na primeira, as $16$
+entradas do jacobiano atendem às $10$ condições da métrica simétrica, e a
+liberdade restante corresponde às três rotações espaciais e aos três
+\emph{boosts} que preservam $\eta$. Na segunda, as segundas derivadas da
+transformação são simétricas nos dois índices de derivação --- há
+$4\times10=40$ coeficientes --- para exatamente as $10\times4=40$ primeiras
+derivadas da métrica. O ajuste é possível, e foi \eqref{eq:planura-coeficientes}
+que o realizou.
+
+A terceira linha é a que interessa aqui. As terceiras derivadas da
+transformação, simétricas nos três índices de derivação, deixam
+$4\times20=80$ coeficientes, contra $10\times10=100$ segundas derivadas da
+métrica. Faltam $20$, e nenhuma escolha de coordenadas as alcança: são
+informação geométrica, não artefato de carta. São precisamente as $20$
+componentes independentes do tensor de Riemann em quatro dimensões, como
+veremos na Seção~\ref{sec:curvatura-riemann}. Em uma geometria particular
+esses dados podem ser parcial ou totalmente nulos; o número $20$ não
+significa que todos sejam diferentes de zero.
 
 \section{Derivada covariante em variedades}
 \label{sec:derivada-covariante-variedade}
@@ -8799,21 +8971,17 @@ Nada naquela conta usou a planura do plano: só a simetria de $\Gamma$ e a
 invertibilidade de $g$. Ela se transporta inteira.
 \end{resultado}
 
-\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}DUAS ROTAS, NENHUMA CIRCULAR}]
-Escolhemos aqui fixar a conexão por \eqref{eq:torcao} e
-\eqref{eq:compat-variedade}. Há outra apresentação, que é a do Schutz:
-construir primeiro as coordenadas localmente inerciais e \emph{definir} ali a
-derivada covariante como a derivada parcial, obtendo a compatibilidade como
-consequência.
+\begin{atencao}[title={\sffamily\bfseries\footnotesize\color{rgTerracota}DUAS FORMAS DE CONSTRUIR A CONEXÃO}]
+Neste texto, escolhemos a conexão pela torção nula e pela compatibilidade
+métrica. Schutz segue outra apresentação: usa coordenadas localmente inerciais
+para definir, em cada ponto, a derivada covariante como a derivada parcial.
+Nessas coordenadas, as primeiras derivadas da métrica se anulam; a
+compatibilidade métrica resulta então dessa definição.
 
-Essa rota só é legítima porque a existência daquelas coordenadas pode ser
-estabelecida \emph{sem} conexão --- pela contagem e pela álgebra linear da
-Seção~\ref{sec:metrica-variedade}. Não confunda esse argumento com a
-construção por geodésicas exibida lá: aquela pressupõe Levi-Civita e, usada
-aqui, seria circular.
-
-As duas rotas chegam à mesma conexão. A diferença é de exposição: uma parte
-do que se exige, a outra do que se constrói.
+A prova da Seção~\ref{sec:metrica-variedade} foi feita diretamente pela
+transformação da métrica, sem recorrer a geodésicas ou a uma conexão já
+escolhida. Por isso, ela também sustenta essa segunda apresentação. As duas
+formas de construção conduzem à conexão de Levi-Civita.
 \end{atencao}
 
 \begin{atencao}
@@ -9406,8 +9574,9 @@ deste capítulo acompanha a dele:
   \item \S6.1, pp.~141--143 --- variedades diferenciáveis, vetores e tensores
   antes da métrica.
   \item \S6.2, pp.~143--149 --- variedades riemannianas, e a demonstração do
-  teorema da planura local pela contagem que reproduzimos na
-  Seção~\ref{sec:metrica-variedade}.
+  teorema da planura local. A Seção~\ref{sec:metrica-variedade} apresenta
+  uma prova construtiva pela transformação da métrica e retoma a contagem
+  de graus de liberdade do livro.
   \item \S6.3, pp.~149--152 --- derivação covariante, compatibilidade,
   divergência e Gauss.
   \item \S6.4, pp.~152--156 --- transporte paralelo, geodésicas e curvatura;
