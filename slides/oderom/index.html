@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ODEROM · Laboratório entre os capítulos 5 e 6</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../slides.css?v=8">
+</head>
+<body>
+<div id="progresso"></div>
+<div class="zona esq" aria-hidden="true"></div>
+<div class="zona dir" aria-hidden="true"></div>
+
+<main id="palco">
+<div id="quadro">
+
+<section>
+  <p class="etiqueta">Relatividade Geral · UDESC/CCT · Laboratório</p>
+  <h1>ODEROM</h1>
+  <p style="max-width:62ch">
+    Escrever a métrica e receber de volta os símbolos de Christoffel, o
+    Riemann, o Ricci e as equações de campo — não só o valor, mas
+    <strong>a cadeia de igualdades que leva até ele</strong>. Contas dos
+    capítulos 5 e 6, refeitas pelo programa.
+  </p>
+  <p class="legenda" style="margin-top:2rem">
+    Entre as aulas 24 e 25 · use <strong>→</strong> e <strong>←</strong> para
+    navegar, <strong>F</strong> para tela cheia
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Roteiro</p>
+  <h2>Onde isto entra</h2>
+  <div class="duas">
+    <div>
+      <table class="compacta">
+        <tr><th>Parte</th><th>Assunto</th></tr>
+        <tr><td>1</td><td>Por que um motor simbólico; a tela e a galeria</td></tr>
+        <tr><td>2</td><td>A linguagem: <span class="m">\text{manifold}</span>, <span class="m">\text{chart}</span>, <span class="m">\text{metric}</span>, <span class="m">\text{eval}</span></td></tr>
+        <tr><td>3</td><td><span class="m">\text{derive}</span>: a conta de uma componente, passo a passo</td></tr>
+        <tr><td>4</td><td>Quatro contas do Capítulo 5</td></tr>
+        <tr><td>5</td><td>Sete contas do Capítulo 6, e três deduções</td></tr>
+        <tr><td>6</td><td>O método do controle; o que o programa não faz</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="destaque">
+        <p>
+          O Capítulo 5 ensinou a derivar em coordenadas curvilíneas; o
+          Capítulo 6 vai levar isso a uma variedade sem espaço ambiente. Entre
+          os dois há uma pergunta prática: <strong>como conferir uma conta de
+          vinte termos sem fazê-la três vezes?</strong>
+        </p>
+      </div>
+      <p class="legenda">
+        Nada aqui substitui a dedução. O que o programa faz é tirar do caminho
+        o erro de sinal, para que a atenção fique onde ela rende — na estrutura
+        do argumento.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 1</p>
+  <h2>O tamanho real das contas</h2>
+  <p>
+    A apostila pede, no Capítulo 6, que se verifique a identidade de Bianchi e
+    as simetrias do Riemann. Vale medir o que isso custa à mão.
+  </p>
+  <table class="compacta">
+    <tr><th>Objeto</th><th>Células em <span class="m">n=4</span></th><th>O que cada uma é</th></tr>
+    <tr><td><span class="m">\Gamma^\rho{}_{\mu\nu}</span></td><td>40</td><td>uma soma de três derivadas da métrica</td></tr>
+    <tr><td><span class="m">R^\mu{}_{\nu\alpha\beta}</span></td><td>256</td><td>duas derivadas de <span class="m">\Gamma</span> e dois produtos <span class="m">\Gamma\Gamma</span></td></tr>
+    <tr><td><span class="m">R_{\mu\nu\alpha\beta;\lambda}</span></td><td>1024</td><td>uma derivada covariante de um tensor de ordem 4</td></tr>
+  </table>
+  <div class="alerta">
+    <p>
+      Conferir Bianchi à mão em Schwarzschild é fazer <strong>1024 derivadas
+      covariantes</strong>. Ninguém faz, e por isso a identidade costuma ser
+      aceita sem verificação — o que é uma pena, porque é dela que sai
+      <span class="m">\nabla_\mu G^{\mu\nu}=0</span>, e daí a compatibilidade
+      das equações de Einstein com a conservação da energia.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 1</p>
+  <h2>A tela</h2>
+  <figure class="tela">
+    <img src="figuras/00-tela.png" style="max-height:430px"
+         alt="O caderno do ODEROM aberto no navegador, com quatro blocos">
+  </figure>
+  <div class="duas">
+    <p class="legenda">
+      Um caderno de blocos, como um notebook Jupyter — mas sem instalar nada:
+      o motor é compilado para WebAssembly e roda dentro da aba. Funciona no
+      laboratório, num notebook emprestado e numa máquina onde não se pode
+      instalar nada.
+    </p>
+    <p class="legenda">
+      <strong>Shift+Enter</strong> executa o bloco e passa ao próximo ·
+      <strong>Ctrl+Enter</strong> executa e fica · <strong>Alt+Enter</strong>
+      insere um bloco. O número entre colchetes à esquerda é a ordem de
+      execução.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 1</p>
+  <h2>A galeria: seis métricas prontas</h2>
+  <figure class="tela">
+    <img src="figuras/00-galeria.png" style="max-height:470px"
+         alt="O painel da galeria, com De Sitter, Anti-de Sitter, FRW, Schwarzschild, Reissner-Nordström e Kerr">
+  </figure>
+  <p class="legenda">
+    Cada entrada traz, junto com a métrica, <strong>o que se espera dela</strong> —
+    Schwarzschild é vácuo e tem <span class="m">R_{\mu\nu}=0</span>;
+    Reissner–Nordström tem <span class="m">R=0</span> mas
+    <span class="m">R_{\mu\nu}\ne0</span>. Serve de gabarito: se o programa
+    devolvesse outra coisa, o erro apareceria antes de você confiar nele.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 2</p>
+  <h2>A anatomia de um documento</h2>
+  <p>
+    Quatro linhas bastam. Elas declaram, nesta ordem, o espaço, o fibrado
+    tangente, a carta e a métrica — exatamente os objetos da Seção 6.1.
+  </p>
+  <div class="codigo"><b>manifold</b> M <b>dim</b> 2
+<b>bundle</b> TM <b>on</b> M <b>dim</b> 2
+<b>chart</b> pol <b>on</b> M <b>coords</b> (r, theta)
+<b>metric</b> g <b>on</b> pol <b>bundle</b> TM { [r,r] = <i>1</i>, [theta,theta] = <i>r^2</i> }</div>
+  <div class="destaque">
+    <p>
+      É o plano euclidiano em polares — a métrica da equação (5.4) da apostila.
+      Repare que <strong>a dimensão é declarada, não inferida</strong>: o
+      programa recusa uma métrica com o número errado de componentes em vez de
+      adivinhar o que você quis dizer.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 2</p>
+  <h2>As consultas</h2>
+  <div class="duas">
+    <div>
+      <p>Pelo nome, quando o objeto é padrão:</p>
+      <div class="codigo menor"><b>christoffel</b>
+<b>riemann</b>
+<b>ricci</b>
+<b>einstein</b>
+<b>weyl</b>
+<b>kretschmann</b></div>
+      <p>Ou guardando o resultado num tensor, para usá-lo depois:</p>
+      <div class="codigo menor"><b>tensor</b> R := <b>riemann</b> g
+<b>tensor</b> Ric := <b>ricci</b> g</div>
+      <p>E <b>derive</b>, que devolve a dedução — a Parte 3:</p>
+      <div class="codigo menor"><b>derive</b> christoffel[r,theta,theta]</div>
+    </div>
+    <div>
+      <p>E <span class="m">\text{eval}</span>, que avalia uma expressão de índices nas componentes declaradas:</p>
+      <div class="codigo menor"><b>eval</b> V[a;a]
+<b>eval</b> R[a,b,c,d] + R[b,a,c,d]
+<b>eval</b> G[a,b;b]</div>
+      <div class="alerta">
+        <p class="legenda" style="margin:0">
+          <strong>A convenção dos índices.</strong> A vírgula separa índices;
+          o <strong>ponto e vírgula</strong> abre a derivada covariante, como
+          na Seção 5.3. Letra repetida soma.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 3</p>
+  <h2>Mais do que a resposta</h2>
+  <p>
+    Um valor pronto não ensina. O comando <code>derive</code> devolve a mesma
+    componente que a listagem mostra, mas <strong>como uma cadeia numerada de
+    igualdades</strong>, em que cada substituição, cada termo que se anula e
+    cada cancelamento é dito em voz alta.
+  </p>
+  <div class="duas">
+    <div>
+      <div class="codigo menor"><b>derive</b> christoffel[r,theta,theta]
+<b>derive</b> riemann[^theta,phi,theta,phi]
+<b>derive</b> ricci[theta,theta]
+<b>derive</b> scalar
+<b>derive</b> einstein[theta,theta]</div>
+    </div>
+    <div>
+      <table class="compacta">
+        <tr><th>Passo</th><th>O que ele afirma</th></tr>
+        <tr><td>fórmula geral</td><td>a definição, com índices abstratos</td></tr>
+        <tr><td>índices fixados</td><td>os livres viram coordenadas</td></tr>
+        <tr><td>soma no índice mudo</td><td>a soma aberta, termo a termo</td></tr>
+        <tr><td>termos nulos removidos</td><td>cada um, nomeado</td></tr>
+        <tr><td>componentes substituídas</td><td>os valores na carta</td></tr>
+        <tr><td>derivadas calculadas</td><td>uma por uma</td></tr>
+        <tr><td>simplificação</td><td>o valor final</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 3 · a dedução de <span class="m">\Gamma^r{}_{\theta\theta}</span></p>
+  <h2>Da fórmula geral até a soma aberta</h2>
+  <figure class="tela">
+    <img src="figuras/p1a-christoffel-passos-1-4.png" style="max-height:440px"
+         alt="Passos 1 a 4 da dedução de Gamma^r_theta theta: fórmula geral, índices fixados, soma no índice mudo, termos nulos removidos">
+  </figure>
+  <p class="legenda">
+    É a dedução da Seção 5.4 da apostila, na ordem da apostila — com a soma em
+    <span class="m">d</span> escrita por extenso antes de qualquer corte.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 3 · a dedução de <span class="m">\Gamma^r{}_{\theta\theta}</span></p>
+  <h2>E daí até <span class="m">-r</span></h2>
+  <figure class="tela">
+    <img src="figuras/p1b-christoffel-passos-5-7.png" style="max-height:370px"
+         alt="Passos 5 a 7: componentes substituídas, derivadas calculadas, simplificação, chegando a menos r">
+  </figure>
+  <div class="destaque">
+    <p>
+      O resultado é a equação (5.12). <strong>A diferença é que agora dá para
+      apontar em que passo uma conta sua divergiu da dele</strong> — e não só
+      descobrir que divergiu.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 3 · justificativas</p>
+  <h2>Cada termo que some tem nome</h2>
+  <figure class="tela">
+    <img src="figuras/p1c-christoffel-justificativas.png" style="max-height:330px"
+         alt="As justificativas abertas: g^r theta = 0 componente nula, g_r theta = 0 a derivada é zero, g^rr = 1 métrica inversa">
+  </figure>
+  <div class="destaque">
+    <p>
+      Cada passo abre numa lista de justificativas. No passo 4, <em>por que</em>
+      cada termo caiu: <span class="m">g^{r\theta}=0</span>, logo o termo
+      inteiro some; <span class="m">g_{r\theta}=0</span>, logo sua derivada é
+      zero. <strong>É a diferença entre ver o resultado e poder discordar
+      dele.</strong>
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 4 · Capítulo 5</p>
+  <h1 style="font-size:64px">Quatro contas<br>do Capítulo 5</h1>
+  <p style="max-width:58ch">
+    Coordenadas polares no plano: conexão, compatibilidade métrica,
+    divergência e laplaciano. Tudo o que o capítulo deduziu à mão, conferido
+    em quatro blocos.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 1 · Seção 5.4</p>
+  <h2>Os três símbolos de Christoffel em polares</h2>
+  <p>
+    A apostila os obtém duas vezes: derivando os vetores de base na Seção 5.3
+    e pela fórmula (5.20) na Seção 5.4. O resultado é a equação (5.12).
+  </p>
+  <figure class="tela">
+    <img src="figuras/01-christoffel-polar.png" style="max-height:340px"
+         alt="ODEROM devolve os três símbolos de Christoffel do plano em polares">
+  </figure>
+  <div class="destaque">
+    <p>
+      Os três do livro, com os mesmos sinais — e a linha que costuma ficar sem
+      conferir: <strong>os outros cinco se anulam</strong>. Essa é metade da
+      afirmação, e é a metade que ninguém verifica à mão.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 2 · Seção 5.4</p>
+  <h2>A métrica é constante sob a derivada covariante</h2>
+  <p>
+    A compatibilidade métrica, equação (5.19). A apostila a confere num caso:
+    <span class="m">\nabla_r g_{\theta\theta}=2r-\tfrac1r r^2-\tfrac1r r^2=0</span>.
+    Aqui são as oito componentes de uma vez.
+  </p>
+  <figure class="tela">
+    <img src="figuras/02-metrica-compativel.png" style="max-height:330px"
+         alt="eval g[a,b;c] devolve oito componentes identicamente nulas">
+  </figure>
+  <div class="destaque">
+    <p>
+      Oito, e não quatro: são <span class="m">2^3</span> combinações de três
+      índices em duas dimensões. <strong>A derivada parcial de
+      <span class="m">g_{\theta\theta}</span> vale <span class="m">2r</span>;
+      a covariante vale zero.</strong> A diferença entre as duas é exatamente
+      o que a conexão carrega.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 3 · Seção 5.3</p>
+  <h2>A divergência, e o termo que a parcial não dá</h2>
+  <p>
+    Equação (5.15):
+    <span class="m">\nabla\cdot\vec V=\partial_rV^r+\partial_\theta V^\theta+V^r/r</span>.
+    O terceiro termo vem de <span class="m">\Gamma^\alpha{}_{r\alpha}=1/r</span>.
+  </p>
+  <figure class="tela">
+    <img src="figuras/03-divergencia-polar.png" style="max-height:350px"
+         alt="eval V[a;a] em polares devolve a divergência com o termo A/r">
+  </figure>
+  <div class="destaque">
+    <p>
+      Dividindo por <span class="m">r</span>:
+      <span class="m">A_r+B_\theta+A/r</span>. As componentes são funções
+      indeterminadas de propósito — <strong>com um vetor concreto a conta
+      fecharia por acidente aritmético</strong> em vez de reproduzir a fórmula.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 4 · Seção 5.3</p>
+  <h2>O laplaciano, pelo caminho do livro</h2>
+  <p>
+    Equação (5.17). O caminho é converter a 1-forma gradiente em vetor — o que
+    dá componentes <span class="m">(\phi_{,r},\ \phi_{,\theta}/r^2)</span> — e
+    aplicar a divergência de novo.
+  </p>
+  <figure class="tela">
+    <img src="figuras/04-laplaciano-polar.png" style="max-height:332px"
+         alt="eval D[a;a] devolve o laplaciano em polares">
+  </figure>
+  <div class="destaque">
+    <p>
+      Dividindo por <span class="m">r^2</span>:
+      <span class="m">\phi_{rr}+\phi_r/r+\phi_{\theta\theta}/r^2</span>.
+      O <code>phi_{r}(r,theta)</code> do documento é a notação de subscrito do
+      ODEROM — <strong>derivada tratada como símbolo opaco</strong>, que é
+      exatamente o estatuto que ela tem aqui.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 5 · Capítulo 6</p>
+  <h1 style="font-size:64px">Sete contas<br>do Capítulo 6</h1>
+  <p style="max-width:58ch">
+    Curvatura: o critério que separa carta torta de espaço curvo, a esfera, o
+    comutador, as simetrias, Bianchi e a divergência de Einstein.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 5 · Seção 6.2</p>
+  <h2>Conexão não nula, curvatura nula</h2>
+  <p>
+    O aviso da Seção 6.2: <em>as componentes <span class="m">g_{\mu\nu}</span>
+    dependerem do ponto não diz nada sobre curvatura.</em> O plano em polares
+    tem três <span class="m">\Gamma</span> não nulos e é plano.
+  </p>
+  <figure class="tela">
+    <img src="figuras/05-riemann-plano-polar.png" style="max-height:340px"
+         alt="O tensor de Riemann do plano em polares é identicamente nulo">
+  </figure>
+  <div class="destaque">
+    <p>
+      Dezesseis células, todas nulas. <strong>Os termos quadráticos
+      <span class="m">\Gamma\Gamma</span> cancelam exatamente as derivadas
+      <span class="m">\partial\Gamma</span></strong> — e é esse cancelamento
+      que faz do Riemann um tensor, e não um acidente de carta.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 6 · Seção 6.5</p>
+  <h2>E o cilindro, que é plano sem ser o plano</h2>
+  <p>
+    Mesma máquina, outra métrica: <span class="m">g_{zz}=1</span>,
+    <span class="m">g_{\phi\phi}=a^2</span>. Coeficientes constantes, todos os
+    <span class="m">\Gamma</span> nulos — e o Riemann também.
+  </p>
+  <figure class="tela">
+    <img src="figuras/06-riemann-cilindro.png" style="max-height:340px"
+         alt="O tensor de Riemann do cilindro é identicamente nulo">
+  </figure>
+  <div class="alerta">
+    <p>
+      Os dois exemplos juntos é que ensinam. O cilindro é plano por motivo
+      <em>fácil</em>; o plano em polares é plano por motivo <em>difícil</em>.
+      <strong>Um programa que apagasse os termos <span class="m">\Gamma\Gamma</span>
+      passaria no cilindro e erraria o plano em polares</strong> — foi assim
+      que o ODEROM foi conferido, sabotando-o.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 7 · Seção 6.5</p>
+  <h2>A esfera: uma componente, e o escalar</h2>
+  <p>
+    Na esfera de raio <span class="m">a</span> a única componente independente
+    é <span class="m">R_{\theta\phi\theta\phi}=a^2\sin^2\theta</span>, e
+    <span class="m">R=2/a^2</span> — duas vezes a curvatura gaussiana
+    <span class="m">1/a^2</span>, como tem de ser em duas dimensões.
+  </p>
+  <figure class="tela">
+    <img src="figuras/07-esfera-curvatura.png" style="max-height:420px"
+         alt="Riemann e escalar de curvatura da esfera">
+  </figure>
+  <p class="legenda">
+    O escalar sai do traço, <code>Ric[a,a]</code> =
+    <span class="m">g^{\mu\nu}R_{\mu\nu}</span>, que é a própria definição da
+    Seção 6.6 — e não de um comando separado que poderia estar certo por outro
+    caminho.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 7 · a dedução</p>
+  <h2>De onde vem <span class="m">R^\theta{}_{\phi\theta\phi}</span></h2>
+  <figure class="tela">
+    <img src="figuras/p2a-riemann-passos-1-3.png" style="max-height:276px"
+         alt="Passos 1 a 3 da dedução do Riemann da esfera">
+  </figure>
+  <figure class="tela">
+    <img src="figuras/p2b-riemann-passos-4-fim.png" style="max-height:276px"
+         alt="Passos 4 ao fim: componentes substituídas, derivadas calculadas, simplificação">
+  </figure>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 7 · a dedução</p>
+  <h2>Os quatro termos, e o que sobra</h2>
+  <div class="duas">
+    <div>
+      <p>
+        A fórmula tem quatro parcelas —
+        <span class="m">\partial_\theta\Gamma^\theta{}_{\phi\phi}
+        -\partial_\phi\Gamma^\theta{}_{\phi\theta}
+        +\Gamma^\theta{}_{\theta e}\Gamma^e{}_{\phi\phi}
+        -\Gamma^\theta{}_{\phi e}\Gamma^e{}_{\phi\theta}</span> —
+        e é no passo dos <em>termos nulos removidos</em> que o aluno vê quais
+        morrem, e por quê.
+      </p>
+      <div class="destaque">
+        <p>
+          Aqui a derivação é a aula inteira da Seção 6.5: a curvatura mede a
+          falha de <span class="m">\partial\Gamma</span> em se cancelar contra
+          <span class="m">\Gamma\Gamma</span>. <strong>Com os quatro termos na
+          tela, dá para ver o que no plano em polares se cancelou e aqui
+          não.</strong>
+        </p>
+      </div>
+    </div>
+    <div>
+      <figure class="tela">
+        <img src="figuras/p4-escalar.png" style="max-height:440px"
+             alt="derive scalar na esfera: R = 2/a^2 deduzido a partir do Ricci">
+      </figure>
+      <p class="legenda" style="margin-top:0.6rem">
+        <code>derive scalar</code>: o escalar <span class="m">2/a^2</span>
+        saindo do traço, e não de uma fórmula decorada.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 11 · a dedução</p>
+  <h2>Einstein, um nível por vez</h2>
+  <p>
+    <span class="m">G_{\theta\theta}=R_{\theta\theta}-\tfrac12 g_{\theta\theta}R</span>
+    na esfera. Repare no que a justificativa faz: cada peça vem com
+    <strong>a consulta que a produz</strong>.
+  </p>
+  <figure class="tela">
+    <img src="figuras/p5-einstein.png" style="max-height:400px"
+         alt="derive einstein na esfera: cada componente citada com a consulta que a produz">
+  </figure>
+  <p class="legenda">
+    <code>R_θθ</code> remete a <code>derive ricci[theta,theta]</code>, e
+    <code>R</code> a <code>derive scalar</code> — a dedução é navegável para
+    baixo até a métrica.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 8 · Seção 6.5</p>
+  <h2>O comutador de derivadas covariantes <em>é</em> o Riemann</h2>
+  <p>
+    A equação (6.19):
+    <span class="m">[\nabla_\alpha,\nabla_\beta]W_\mu=R_{\mu\nu\alpha\beta}V^\nu</span>.
+    Sobre a esfera, declare um campo de 1-formas com componentes
+    indeterminadas e o vetor que lhe corresponde:
+  </p>
+  <div class="codigo menor"><b>tensor</b> W : TM* <b>on</b> s { [theta] = <i>P(theta,phi)</i>, [phi] = <i>Q(theta,phi)</i> }
+<b>tensor</b> V : TM  <b>on</b> s { [theta] = <i>P(theta,phi)/a^2</i>, [phi] = <i>Q(theta,phi)/(a^2*sin(theta)^2)</i> }
+<b>tensor</b> R := <b>riemann</b> g</div>
+  <div class="destaque">
+    <p>
+      <span class="m">P</span> e <span class="m">Q</span> ficam
+      indeterminadas de propósito. <strong>Com um campo concreto, uma
+      identidade falsa poderia fechar por acidente</strong> — e a verificação
+      não teria provado nada sobre o caso geral.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 8 · Seção 6.5</p>
+  <h2>Primeiro o comutador; só depois a diferença</h2>
+  <figure class="tela">
+    <img src="figuras/08-comutador-riemann-consultas.png" style="max-height:432px"
+         alt="O comutador na esfera tem quatro células não nulas; a diferença contra o Riemann é nula">
+  </figure>
+  <div class="destaque">
+    <p>
+      <strong>A primeira saída é que faz a segunda valer alguma coisa.</strong>
+      Quatro das oito células do comutador são não nulas — só então o zero da
+      segunda prova a identidade.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 9 · Seção 6.5</p>
+  <h2>As quatro simetrias, em Schwarzschild</h2>
+  <p>
+    <span class="m">R_{\alpha\beta\mu\nu}=-R_{\beta\alpha\mu\nu}=-R_{\alpha\beta\nu\mu}=R_{\mu\nu\alpha\beta}</span>,
+    mais a identidade cíclica — as quatro que reduzem 256 componentes a 20.
+    Sobre a métrica de Schwarzschild, basta <code>tensor R := riemann g</code>:
+  </p>
+  <figure class="tela">
+    <img src="figuras/09-simetrias-riemann-consultas.png" style="max-height:440px"
+         alt="As quatro identidades de simetria do Riemann, todas identicamente nulas">
+  </figure>
+  <p class="legenda">
+    Schwarzschild tem 24 células não nulas no Riemann — <strong>nenhuma das
+    quatro identidades fecha por vacuidade</strong>.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 10 · Seção 6.6</p>
+  <h2>Bianchi, na forma diferencial</h2>
+  <p>
+    <span class="m">R_{\alpha\beta\mu\nu;\lambda}+R_{\alpha\beta\lambda\mu;\nu}+R_{\alpha\beta\nu\lambda;\mu}=0</span>.
+    É a forma de onde tudo o mais vem — contraída duas vezes, dá
+    <span class="m">\nabla_\mu G^{\mu\nu}=0</span>.
+  </p>
+  <figure class="tela">
+    <img src="figuras/10-bianchi.png" style="max-height:378px"
+         alt="A identidade de Bianchi diferencial, 1024 componentes identicamente nulas">
+  </figure>
+  <div class="destaque">
+    <p>
+      Mil e vinte e quatro células, cada uma uma derivada covariante de um
+      tensor de ordem 4 — <strong>meio segundo</strong>. É a conta que ninguém
+      faz à mão, e é a que sustenta as equações de campo.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Conta 11 · Seção 6.6</p>
+  <h2>A divergência de Einstein, e o controle</h2>
+  <p>
+    <span class="m">G^{\alpha\beta}{}_{;\beta}=0</span> por identidade. Mas um
+    zero sozinho não prova nada — por isso, ao lado, a divergência do
+    <em>Ricci</em>, que <strong>não</strong> é nula.
+  </p>
+  <figure class="tela">
+    <img src="figuras/11-divergencia-einstein-consultas.png" style="max-height:400px"
+         alt="A divergência do tensor de Einstein é nula; a do Ricci não é">
+  </figure>
+  <p class="legenda">
+    A métrica é FRW, e não Schwarzschild, de propósito: em vácuo
+    <span class="m">G</span> já é nulo componente a componente, e a divergência
+    de zero é zero <strong>sem que <span class="m">\nabla</span> tenha feito
+    trabalho nenhum</strong>.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 6</p>
+  <h2>O método: um zero só vale com um controle</h2>
+  <p>
+    Três das onze contas devolveram <em>tudo nulo</em>. Isso é o resultado
+    desejado — e é também o resultado que um programa quebrado daria.
+  </p>
+  <table class="compacta">
+    <tr><th>A conta</th><th>O controle que a valida</th></tr>
+    <tr><td>Riemann nulo em polares</td><td>a esfera, mesma máquina, <strong>não</strong> dá zero</td></tr>
+    <tr><td>Comutador <span class="m">-\ R\,V</span> nulo</td><td>o comutador sozinho tem 4 células não nulas</td></tr>
+    <tr><td><span class="m">\nabla_\beta G^{\alpha\beta}=0</span></td><td><span class="m">\nabla_\beta R^{\alpha\beta}\ne0</span>, e o livro diz quanto vale</td></tr>
+    <tr><td>Simetrias em Schwarzschild</td><td>o Riemann tem 24 células não nulas ali</td></tr>
+  </table>
+  <div class="alerta">
+    <p>
+      <strong>É um hábito a levar para fora do programa.</strong> Toda vez que
+      uma conta fecha em zero, pergunte qual conta vizinha <em>não</em> fecha —
+      e faça essa também. Sem ela, você não distinguiu um teorema de um erro.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 6</p>
+  <h2>O que o ODEROM não faz</h2>
+  <div class="duas">
+    <div>
+      <div class="alerta">
+        <p><strong>Não expande em série.</strong> O campo fraco — a aproximação
+        <span class="m">g_{\mu\nu}=\eta_{\mu\nu}+h_{\mu\nu}</span> com
+        <span class="m">|h|\ll1</span> — fica fora. É uma consulta de outra
+        natureza.</p>
+      </div>
+      <div class="alerta">
+        <p><strong>Não procura vetores de Killing.</strong> Simetrias e
+        quantidades conservadas não existem como pergunta.</p>
+      </div>
+    </div>
+    <div>
+      <div class="alerta">
+        <p><strong>A simplificação tem limite.</strong>
+        <code>exp(2x)/exp(x)</code> não reduz. O limite está fixado por um
+        teste, e não é um descuido: fechá-lo mudaria a grafia de toda saída com
+        exponencial, afastando-a do que o livro escreve.</p>
+      </div>
+      <p class="legenda">
+        Saber onde a ferramenta para faz parte de usá-la. Um programa que
+        tentasse responder a tudo responderia mal a alguma coisa — e sem avisar
+        qual.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Para fazer</p>
+  <h2>Cinco exercícios</h2>
+  <table class="compacta">
+    <tr><th>#</th><th>O que pedir ao programa</th></tr>
+    <tr><td>1</td><td>O toro: <span class="m">g_{\chi\chi}=b^2</span>, <span class="m">g_{\phi\phi}=(a+b\cos\chi)^2</span>. Mostre que <span class="m">K</span> troca de sinal — e confira que <span class="m">\int K\,\dd\mathcal V=0</span>.</td></tr>
+    <tr><td>2</td><td>A três-esfera em coordenadas hiperesféricas. Confirme <span class="m">R=6/a^2</span>, <strong>sem</strong> <span class="m">\chi</span> nem <span class="m">\theta</span> na resposta.</td></tr>
+    <tr><td>3</td><td>Schwarzschild: verifique <span class="m">R_{\mu\nu}=0</span> e, ainda assim, Kretschmann <span class="m">=48M^2/r^6</span>. Vácuo não é planura.</td></tr>
+    <tr><td>4</td><td>A divergência pela raiz do determinante, <span class="m">\nabla_\alpha V^\alpha=\tfrac{1}{\sqrt{|g|}}\partial_\alpha(\sqrt{|g|}V^\alpha)</span> — equação (6.13). Compare com <code>eval V[a;a]</code>.</td></tr>
+    <tr><td>5</td><td>Reissner–Nordström: por que <span class="m">R=0</span> mas <span class="m">R_{\mu\nu}\ne0</span>? Qual é o traço que se anula?</td></tr>
+  </table>
+  <p class="legenda">
+    Em todos: antes de rodar, escreva no papel o que você espera. O valor do
+    exercício está na diferença entre a previsão e a saída.
+  </p>
+</section>
+
+<section>
+  <p class="etiqueta">Onde</p>
+  <h2>Abrir, salvar, citar</h2>
+  <div class="duas">
+    <div>
+      <div class="destaque">
+        <p>
+          <strong>oderom.pages.dev</strong><br>
+          Abre no navegador, sem instalar nada. O caderno salva em
+          <code>.od</code> na sua máquina — nada sobe para lugar nenhum.
+        </p>
+      </div>
+      <p class="legenda">
+        O botão <strong>Exportar</strong> entrega o mesmo resultado como código
+        SymPy ou Mathematica, para quem quiser seguir a conta em outro
+        ambiente.
+      </p>
+    </div>
+    <div>
+      <p class="legenda">
+        <strong>Como citar.</strong> O programa tem DOI permanente no Zenodo:
+      </p>
+      <div class="codigo menor">doi.org/10.5281/zenodo.22262763</div>
+      <p class="legenda">
+        As onze contas destes slides, mais onze outras do Schutz, estão
+        reproduzidas no documento <em>ODEROM contra Schutz</em>, que acompanha
+        o programa — cada saída capturada de uma execução real.
+      </p>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<div id="contador"></div>
+<div id="ajuda">← → navegar · F tela cheia</div>
+
+<script src="../vendor/katex/katex.min.js"></script>
+<script src="../slides.js?v=5"></script>
+</body>
+</html>

@@ -386,3 +386,47 @@ table.compacta th, table.compacta td { padding: 0.3rem 0.7rem; font-size: 18px; 
 
 /* A conferência ao lado do resultado: mesma linha, peso menor. */
 .leitura-formula .confere { font-size: 19px; color: var(--grafite); }
+
+/* Blocos de código, para as apresentações que ensinam a escrever num
+   programa -- a do ODEROM é a primeira. Fundo mais escuro que o slide,
+   e não a moldura branca de `figure img`: um trecho que o aluno vai
+   digitar não é uma figura, e piscar branco no meio da aula cansa.
+   `<b>` marca palavra-chave e `<i>` o que a linha em questão acrescenta. */
+.codigo {
+  margin: 1.1rem 0;
+  padding: 1rem 1.3rem;
+  background: rgba(2, 10, 18, 0.72);
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--areia);
+  white-space: pre;
+  overflow-x: auto;
+}
+.codigo.menor { font-size: 16.5px; line-height: 1.45; }
+.codigo b { color: var(--cyan); font-weight: 500; }
+.codigo i { color: var(--gold); font-style: normal; }
+.codigo s { color: var(--grafite); text-decoration: none; }
+
+/* Um retrato de tela não é um desenho: ele já traz o próprio fundo
+   claro, então não leva o `padding` branco de `figure img`. A borda
+   existe para o retângulo não flutuar solto sobre o azul. */
+figure.tela img {
+  padding: 0;
+  border: 1px solid var(--linha);
+  background: none;
+  /* `width: 100%` com `object-fit: contain` desenha a borda em volta da
+     CAIXA, e não da imagem: quando o `max-height` morde, sobram faixas
+     escuras dentro da moldura. Deixar a largura seguir a altura faz a
+     borda abraçar o retrato. */
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* A etiqueta é caixa alta, e isso vale para o texto -- mas não para uma
+   fórmula dentro dela: `\Gamma^r` virava `Γ^R`, trocando o índice por
+   outro símbolo. O KaTeX fica fora da transformação. */
+.etiqueta .katex { text-transform: none; }
