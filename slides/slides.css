@@ -58,13 +58,24 @@ html, body {
 /* As medidas de referência. Tudo aqui dentro é px, nunca vw/vh: o que
    se adapta à tela é a escala aplicada ao quadro inteiro, e uma unidade
    de viewport aqui dentro ignoraria essa escala e brigaria com ela. */
+/* O quadro é posicionado pelo JavaScript, e não pelo `place-items` do
+   palco. A razão: centralizar por grid um item MAIOR que o contêiner não
+   produz deslocamento negativo -- o navegador encosta o item na borda
+   inicial para não cortá-lo ali. Com 1440px numa janela de 390, o quadro
+   ficava em left:0 e, escalado em torno do próprio centro, aparecia de
+   x=525 a x=915: inteiramente fora da tela. No celular isso era uma tela
+   azul vazia. Ancorado no canto e deslocado explicitamente, centraliza em
+   qualquer largura. */
 #quadro {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 1440px;
   height: 810px;
   padding: 48px 76px;
   display: grid;
   place-items: center;
-  transform-origin: center center;
+  transform-origin: top left;
 }
 
 section {
@@ -352,7 +363,7 @@ body.sem-faixas .zona { pointer-events: none; }
 @media print {
   html, body { height: auto; overflow: visible; background: white; color: black; }
   #palco { position: static; display: block; background: white; overflow: visible; }
-  #quadro { width: auto; height: auto; display: block; transform: none !important; padding: 0; }
+  #quadro { position: static; width: auto; height: auto; display: block; transform: none !important; padding: 0; }
   #progresso, #contador, #ajuda, .zona { display: none; }
   section { display: block !important; page-break-after: always; max-height: none; width: 100%; }
   h1, h2, h3, p, li, td, .katex { color: black; }
@@ -430,3 +441,33 @@ figure.tela img {
    fórmula dentro dela: `\Gamma^r` virava `Γ^R`, trocando o índice por
    outro símbolo. O KaTeX fica fora da transformação. */
 .etiqueta .katex { text-transform: none; }
+
+/* ---------------------------------------------------------------- */
+/* Celular em pé                                                     */
+/* ---------------------------------------------------------------- */
+
+/* Um palco 16:9 numa tela em retrato cabe numa faixa de um quarto da
+   altura: o texto sai com cinco pixels e não se lê. Em vez de fingir que
+   funciona, o aviso pede para virar o aparelho -- e some sozinho em
+   paisagem. O elemento é criado pelo slides.js, para não precisar entrar
+   no HTML de cada apresentação. */
+#girar {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 2rem;
+  text-align: center;
+  background: var(--navy-fundo);
+}
+#girar svg { width: 64px; height: 64px; stroke: var(--cyan); fill: none; stroke-width: 1.6; }
+#girar p { margin: 0; max-width: 28ch; font-size: 17px; line-height: 1.5; color: var(--areia); }
+#girar .legenda { font-size: 14px; color: var(--grafite); }
+
+@media (orientation: portrait) and (max-width: 860px) {
+  #girar { display: flex; }
+}

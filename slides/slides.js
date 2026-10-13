@@ -41,11 +41,22 @@
   // corpo à apresentação numa sala grande.
   const QUADRO_W = 1440, QUADRO_H = 810;
   const quadro = document.getElementById("quadro");
+  // O quadro é ancorado no canto superior esquerdo do palco e deslocado
+  // daqui -- e não centralizado pelo `place-items` do CSS. Centralizar
+  // por grid um item MAIOR que o contêiner não gera deslocamento
+  // negativo: o navegador encosta o item na borda inicial. Numa janela
+  // de 390px o quadro ficava em left:0 e, escalado em torno do próprio
+  // centro, saía inteiro para fora da tela -- no celular, uma tela azul.
+  // Com origem no canto, a sobra de cada eixo é dividida à mão.
   function ajustarEscala() {
     const e = Math.min(window.innerWidth / QUADRO_W, window.innerHeight / QUADRO_H);
-    quadro.style.transform = "scale(" + e + ")";
+    const x = (window.innerWidth - QUADRO_W * e) / 2;
+    const y = (window.innerHeight - QUADRO_H * e) / 2;
+    quadro.style.transform =
+      "translate(" + x + "px, " + y + "px) scale(" + e + ")";
   }
   window.addEventListener("resize", ajustarEscala);
+  window.addEventListener("orientationchange", ajustarEscala);
   // Entrar e sair de tela cheia muda o tamanho da janela sem disparar
   // `resize` em todos os navegadores.
   document.addEventListener("fullscreenchange", ajustarEscala);
@@ -81,6 +92,21 @@
     if (Math.abs(dx) > 60) (dx < 0 ? avancar : voltar)();
     x0 = null;
   }, { passive: true });
+
+  // Aviso de orientação. Criado em JavaScript, e não no HTML de cada
+  // apresentação, para que exista em todas sem cinco cópias. Quem decide
+  // se ele aparece é a media query de `#girar` no CSS.
+  if (!document.getElementById("girar")) {
+    const girar = document.createElement("div");
+    girar.id = "girar";
+    girar.innerHTML =
+      '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<rect x="3" y="7" width="18" height="10" rx="2"/>' +
+      '<path d="M8 3.5 10.5 6 8 8.5"/><path d="M10.5 6H7a3 3 0 0 0-3 3"/></svg>' +
+      '<p>Vire o aparelho para o lado.</p>' +
+      '<p class="legenda">Os slides são 16:9 e, em pé, caberiam numa faixa pequena demais para ler.</p>';
+    document.body.appendChild(girar);
+  }
 
   const inicial = parseInt((location.hash || "").slice(1), 10);
   mostrar(Number.isFinite(inicial) && inicial > 0 ? inicial - 1 : 0, false);
