@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../vendor/katex/katex.min.css">
-<link rel="stylesheet" href="../slides.css?v=9">
+<link rel="stylesheet" href="../slides.css?v=10">
 </head>
 <body>
 <div id="progresso"></div>
@@ -147,6 +147,46 @@
       Repare que <strong>a dimensão é declarada, não inferida</strong>: o
       programa recusa uma métrica com o número errado de componentes em vez de
       adivinhar o que você quis dizer.
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="etiqueta">Parte 2</p>
+  <h2>Variedade, fibrado, carta</h2>
+  <p>
+    As três primeiras linhas declaram três objetos diferentes, e o programa
+    não deixa confundi-los. São exatamente os da Seção 6.1.
+  </p>
+  <table class="compacta">
+    <tr><th style="width:32%">A declaração</th><th>O que ela nomeia</th></tr>
+    <tr>
+      <td><code>manifold M dim 2</code></td>
+      <td>A <strong>variedade</strong>: um espaço que, perto de cada ponto,
+      pode ser descrito por uma carta — e <em>nada além disso</em>. Sem
+      distância, sem ângulo, sem espaço ambiente. O <code>dim</code> é o
+      <span class="m">n</span>.</td>
+    </tr>
+    <tr>
+      <td><code>chart pol on M coords (r, theta)</code></td>
+      <td>A <strong>carta</strong>: a correspondência entre uma vizinhança e um
+      pedaço de <span class="m">\mathbb{R}^n</span>, com nome para cada
+      coordenada. Não é a variedade — é um jeito de nomear seus pontos, e uma
+      só raramente cobre tudo.</td>
+    </tr>
+    <tr>
+      <td><code>bundle TM on M dim 2</code></td>
+      <td>O <strong>fibrado tangente</strong>: a reunião de todos os espaços
+      tangentes <span class="m">T_P</span>, um por ponto. É onde os vetores
+      moram. <code>TM*</code> é o dual, onde moram as 1-formas.</td>
+    </tr>
+  </table>
+  <div class="destaque">
+    <p>
+      Por isso a métrica pede as <em>duas</em>:
+      <code>metric g on pol bundle TM</code>. A carta diz em que coordenadas as
+      componentes estão escritas; o fibrado diz <strong>de que elas são
+      componentes</strong>. Trocar a carta muda os números; o objeto é o mesmo.
     </p>
   </div>
 </section>

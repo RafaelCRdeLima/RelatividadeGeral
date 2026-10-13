@@ -417,6 +417,16 @@ table.compacta th, table.compacta td { padding: 0.3rem 0.7rem; font-size: 18px; 
   overflow-x: auto;
 }
 .codigo.menor { font-size: 16.5px; line-height: 1.45; }
+
+/* `code` solto no meio de uma frase -- o nome de um comando, de um
+   tensor. Sem regra nenhuma ele caía no monoespaçado padrão do
+   navegador, que destoa do DM Mono dos blocos. Ciano para se distinguir
+   de palavra comum sem precisar de moldura. */
+code {
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.88em;
+  color: var(--cyan);
+}
 .codigo b { color: var(--cyan); font-weight: 500; }
 .codigo i { color: var(--gold); font-style: normal; }
 .codigo s { color: var(--grafite); text-decoration: none; }
