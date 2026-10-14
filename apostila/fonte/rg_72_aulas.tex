@@ -9169,50 +9169,61 @@ o paralelogramo que eles formam: avance por $\delta a$, depois por $\delta b$,
 volte por $\delta a$, volte por $\delta b$. Transporte $\vec V$ paralelamente
 ao longo do percurso.
 
-Cada perna muda $V^\rho$ por $-\Gamma^\rho{}_{\mu\sigma}\,\delta x^\mu
-V^\sigma$, por \eqref{eq:transporte-paralelo}. Em primeira ordem as idas e
-voltas se cancelam; o que sobrevive é de segunda ordem, e vem de dois lugares.
-Vale fazer a conta com as duas primeiras pernas e deixar que a simetria faça o
-resto.
-
-\emph{Primeira perna}, ao longo de $\delta a$. A regra sai de
-\eqref{eq:transporte-paralelo} em um passo: multiplique por $\dd\lambda$ e
-use $U^\mu\,\dd\lambda=\dd x^\mu$,
+\emph{A regra de uma perna.} Transportar paralelamente ao longo de um
+deslocamento $\dd x^\mu$ é anular a derivada covariante \emph{naquela
+direção}:
 \[
-  \frac{\dd V^\rho}{\dd\lambda}
-  =-\Gamma^\rho{}_{\mu\sigma}\,U^\mu V^\sigma
+  \dd x^\mu\,\nabla_\mu V^\rho=0 .
+\]
+Abrindo $\nabla_\mu$ pela definição \eqref{eq:nabla-variedade} e notando que
+$\dd x^\mu\,\partial_\mu V^\rho$ é justamente $\dd V^\rho$, a variação das
+componentes entre um ponto e o seguinte,
+\[
+  \dd x^\mu\bigl(\partial_\mu V^\rho
+  +\Gamma^\rho{}_{\mu\sigma}V^\sigma\bigr)=0
   \qquad\Longrightarrow\qquad
   \dd V^\rho=-\Gamma^\rho{}_{\mu\sigma}\,\dd x^\mu\,V^\sigma .
 \]
-Para um deslocamento curto $\delta a^\mu$, isso é, em primeira ordem,
+É esta a regra que cada perna aplica. O termo não é o vetor mudando: por
+$\nabla V=0$ o vetor é o mesmo, e as componentes mudam apenas porque a base
+mudou --- é a compensação da base, com o sinal trocado.
+
+Em primeira ordem as idas e voltas se cancelam; o que sobrevive é de segunda
+ordem, e vem de dois lugares. Vale fazer a conta com as duas primeiras pernas
+e deixar que a simetria faça o resto.
+
+\emph{Primeira perna}, ao longo de $\delta a$, com $\Gamma$ avaliado no ponto
+de partida. A regra dá a variação, e a variação dá o vetor que chega à ponta:
 \[
-  V^\rho\ \longrightarrow\
-  V^\rho-\Gamma^\rho{}_{\mu\sigma}\,\delta a^\mu V^\sigma ,
+  \delta V^\rho_{(1)}=-\Gamma^\rho{}_{\mu\sigma}(x)\,\delta a^\mu V^\sigma ,
+  \qquad
+  \widetilde V^\rho
+  =V^\rho-\Gamma^\rho{}_{\mu\sigma}(x)\,\delta a^\mu V^\sigma .
 \]
-com $\Gamma$ avaliado no ponto de partida. O termo não é o vetor mudando:
-por $\nabla_{\vec U}\vec V=0$ o vetor é o mesmo, e as componentes mudam
-apenas porque a base mudou --- é a compensação da base, com o sinal
-trocado.
+Vale o nome: é $\widetilde V$, e não $V$, que entra na perna seguinte.
 
 \emph{Segunda perna}, ao longo de $\delta b$, a partir do novo ponto. Duas
-coisas mudaram desde a perna anterior, e é do par que a curvatura sai. A
-primeira: o $\Gamma$ passa a ser avaliado em $x+\delta a$, e uma série de
-Taylor em primeira ordem basta,
+coisas mudaram, e é do par que a curvatura sai. A primeira: o $\Gamma$ passa
+a ser avaliado em $x+\delta a$, e uma série de Taylor em primeira ordem
+basta,
 \[
   \Gamma^\rho{}_{\nu\sigma}(x+\delta a)
   =\Gamma^\rho{}_{\nu\sigma}(x)
   +\partial_\mu\Gamma^\rho{}_{\nu\sigma}(x)\,\delta a^\mu
   +O(\delta a^2) .
 \]
-A segunda: o vetor que entra não é mais $V^\sigma$, e sim o que saiu da
-primeira perna. Com as duas, a mudança nesta perna é
-\[
-  -\bigl(\Gamma^\rho{}_{\nu\sigma}
-  +\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\bigr)
-  \delta b^\nu
-  \bigl(V^\sigma-\Gamma^\sigma{}_{\lambda\tau}\,\delta a^\lambda
-  V^\tau\bigr) ,
-\]
+A segunda: o vetor que entra é $\widetilde V$. Pondo os dois na regra da
+perna,
+\begin{align*}
+  \delta V^\rho_{(2)}
+  &=-\Gamma^\rho{}_{\nu\sigma}(x+\delta a)\,\delta b^\nu\,
+     \widetilde V^\sigma\\
+  &=-\bigl(\Gamma^\rho{}_{\nu\sigma}
+    +\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\bigr)
+    \delta b^\nu
+    \bigl(V^\sigma-\Gamma^\sigma{}_{\lambda\tau}\,\delta a^\lambda
+    V^\tau\bigr) ,
+\end{align*}
 e abrir os parênteses dá quatro termos, de três ordens:
 \begin{align*}
   &\underbrace{-\Gamma^\rho{}_{\nu\sigma}\,\delta b^\nu V^\sigma}
