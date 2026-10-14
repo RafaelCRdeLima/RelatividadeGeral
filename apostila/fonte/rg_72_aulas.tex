@@ -9194,22 +9194,48 @@ por $\nabla_{\vec U}\vec V=0$ o vetor é o mesmo, e as componentes mudam
 apenas porque a base mudou --- é a compensação da base, com o sinal
 trocado.
 
-\emph{Segunda perna}, ao longo de $\delta b$, a partir do novo ponto: agora
-$\Gamma$ é avaliado em $x+\delta a$, isto é,
-$\Gamma^\rho{}_{\nu\sigma}+\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,
-\delta a^\mu$, e o vetor que entra já é o da linha acima. O produto dá
+\emph{Segunda perna}, ao longo de $\delta b$, a partir do novo ponto. Duas
+coisas mudaram desde a perna anterior, e é do par que a curvatura sai. A
+primeira: o $\Gamma$ passa a ser avaliado em $x+\delta a$, e uma série de
+Taylor em primeira ordem basta,
+\[
+  \Gamma^\rho{}_{\nu\sigma}(x+\delta a)
+  =\Gamma^\rho{}_{\nu\sigma}(x)
+  +\partial_\mu\Gamma^\rho{}_{\nu\sigma}(x)\,\delta a^\mu
+  +O(\delta a^2) .
+\]
+A segunda: o vetor que entra não é mais $V^\sigma$, e sim o que saiu da
+primeira perna. Com as duas, a mudança nesta perna é
 \[
   -\bigl(\Gamma^\rho{}_{\nu\sigma}
   +\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\bigr)
   \delta b^\nu
   \bigl(V^\sigma-\Gamma^\sigma{}_{\lambda\tau}\,\delta a^\lambda
-  V^\tau\bigr) .
+  V^\tau\bigr) ,
 \]
-Expandindo e guardando só a segunda ordem, sobram dois termos:
-$-\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\delta b^\nu
-V^\sigma$ e
-$+\Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}\,
-\delta a^\mu\delta b^\nu V^\sigma$.
+e abrir os parênteses dá quatro termos, de três ordens:
+\begin{align*}
+  &\underbrace{-\Gamma^\rho{}_{\nu\sigma}\,\delta b^\nu V^\sigma}
+    _{\text{primeira ordem}}\\
+  &\underbrace{{}+\Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}\,
+     \delta a^\mu\delta b^\nu V^\sigma
+   -\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,
+     \delta a^\mu\delta b^\nu V^\sigma}_{\text{segunda ordem}}\\
+  &\underbrace{{}+\partial_\mu\Gamma^\rho{}_{\nu\lambda}
+     \Gamma^\lambda{}_{\kappa\sigma}\,
+     \delta a^\mu\delta a^\kappa\delta b^\nu V^\sigma}
+    _{\text{terceira ordem}} .
+\end{align*}
+O de terceira ordem se descarta, e é para isso que o circuito encolheu. O de
+primeira ordem não sobrevive por outro motivo: ele é a ida por $\delta b$, e
+a volta por $\delta b$ o cancela. Ficam os dois do meio --- os dois lugares
+anunciados. O primeiro é o efeito de transportar um vetor \emph{já
+modificado} pela perna anterior; o segundo, o de $\Gamma$ ter mudado de valor
+entre uma perna e outra. No plano em coordenadas cartesianas nenhum dos dois
+existe, porque $\Gamma$ é nulo; em polares os dois existem, e se cancelam
+--- é o que a antecipação do capítulo anterior dizia, ao notar que ali os
+$\Gamma$ são não nulos e o vetor volta igual ao que era. Que a soma seja
+zero, e não cada parcela, é o que separa curvatura de coordenada curva.
 
 \emph{As outras duas pernas} refazem o mesmo percurso na ordem trocada e com
 o sinal invertido, o que equivale a repetir a conta acima com
