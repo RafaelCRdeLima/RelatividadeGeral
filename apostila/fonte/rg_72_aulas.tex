@@ -9158,8 +9158,9 @@ usa.
 \section{O tensor de Riemann}
 \label{sec:curvatura-riemann}
 
-Falta transformar ``o vetor volta girado'' em um número. O caminho é fazer o
-circuito \emph{infinitesimal}.
+Falta transformar o fato central da seção anterior --- o vetor volta
+diferente de como partiu --- em um número. O caminho é fazer o circuito
+\emph{infinitesimal}.
 
 \subsection*{Pelo circuito}
 
@@ -9174,14 +9175,27 @@ voltas se cancelam; o que sobrevive é de segunda ordem, e vem de dois lugares.
 Vale fazer a conta com as duas primeiras pernas e deixar que a simetria faça o
 resto.
 
-\emph{Primeira perna}, ao longo de $\delta a$:
+\emph{Primeira perna}, ao longo de $\delta a$. A regra sai de
+\eqref{eq:transporte-paralelo} em um passo: multiplique por $\dd\lambda$ e
+use $U^\mu\,\dd\lambda=\dd x^\mu$,
+\[
+  \frac{\dd V^\rho}{\dd\lambda}
+  =-\Gamma^\rho{}_{\mu\sigma}\,U^\mu V^\sigma
+  \qquad\Longrightarrow\qquad
+  \dd V^\rho=-\Gamma^\rho{}_{\mu\sigma}\,\dd x^\mu\,V^\sigma .
+\]
+Para um deslocamento curto $\delta a^\mu$, isso é, em primeira ordem,
 \[
   V^\rho\ \longrightarrow\
   V^\rho-\Gamma^\rho{}_{\mu\sigma}\,\delta a^\mu V^\sigma ,
 \]
-com $\Gamma$ avaliado no ponto de partida. \emph{Segunda perna}, ao longo de
-$\delta b$, a partir do novo ponto: agora $\Gamma$ é avaliado em
-$x+\delta a$, isto é,
+com $\Gamma$ avaliado no ponto de partida. O termo não é o vetor mudando:
+por $\nabla_{\vec U}\vec V=0$ o vetor é o mesmo, e as componentes mudam
+apenas porque a base mudou --- é a compensação da base, com o sinal
+trocado.
+
+\emph{Segunda perna}, ao longo de $\delta b$, a partir do novo ponto: agora
+$\Gamma$ é avaliado em $x+\delta a$, isto é,
 $\Gamma^\rho{}_{\nu\sigma}+\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,
 \delta a^\mu$, e o vetor que entra já é o da linha acima. O produto dá
 \[
