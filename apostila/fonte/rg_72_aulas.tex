@@ -305,6 +305,24 @@ uma vez.
   produto de Minkowski do quadrimomento, enquanto $\bm p^2$ é o quadrado
   euclidiano do trimomento; sem essa distinção, $p^2$ é ambíguo.
 
+  \item \textbf{Acentos.} São três, cada um com um sentido só, e vale
+  fixá-los porque a apostila os usa do começo ao fim sem voltar a explicar.
+  O \emph{til} marca uma 1-forma --- $\tilde W$, $\tilde\omega^\mu$,
+  $\tilde n$ --- e nunca um vetor, que é o papel da seta. A \emph{barra}
+  marca o segundo referencial, e vale igual sobre a letra ou sobre o índice:
+  $\bar S$ é o referencial, $\bar t$ e $\bar x$ são as coordenadas dele,
+  $\obsl$ é o observador que viaja com ele, e $A^{\bar\mu}$ são as
+  componentes do \emph{mesmo} $\vec A$ na base dele. O \emph{chapéu} marca
+  base ortonormal --- $\vec e_{\hat r}$, $\vec e_{\hat\theta}$ ---, por
+  oposição à base coordenada do Capítulo~\ref{cap:gravidade-curvatura}.
+
+  Os três não competem, porque respondem a perguntas diferentes: o til diz
+  \emph{que objeto} é, a barra diz \emph{de que referencial}, o chapéu diz
+  \emph{em que base}. Por isso convivem numa expressão só, como em
+  $n_{\bar\mu}$ --- as componentes da 1-forma $\tilde n$ na base barrada.
+  E por isso uma letra com barra nunca é outro objeto: é o mesmo, visto de
+  outro lugar.
+
   \item \textbf{Que letra para qual vetor.} Seguimos o Schutz, e vale fixar
   porque as duas se confundem. O \emph{vetor tangente} a uma curva qualquer é
   $\vec V$, de componentes $V^\mu=\dd x^\mu/\dd\lambda$. A
@@ -9155,6 +9173,187 @@ em circuitos contráteis não gira nada. A curvatura que se vê é
 usa.
 \end{atencao}
 
+\subsection*{As geodésicas da esfera, do começo ao fim}
+
+A equação \eqref{eq:geodesica-variedade} é curta, e isso esconde quanto
+trabalho ela dá. Vale percorrer um caso inteiro, da parametrização até a
+curva, porque o procedimento é sempre o mesmo:
+\begin{enumerate}
+  \item das definições das variáveis, obter a métrica e a sua inversa;
+  \item calcular os símbolos de Christoffel;
+  \item escrever a equação da geodésica, componente a componente;
+  \item resolver as equações diferenciais.
+\end{enumerate}
+
+\begin{example}
+\label{ex:geodesicas-esfera}
+\textbf{As geodésicas da esfera.} Tome a esfera de raio $1$, parametrizada
+pelos ângulos usuais:
+\[
+  \vec R(\theta,\varphi)
+  =\bigl(\sin\theta\cos\varphi,\ \sin\theta\sin\varphi,\ \cos\theta\bigr).
+\]
+
+\emph{1. A métrica.} Os vetores de base são as derivadas da posição em
+relação a cada coordenada,
+\[
+  \vec e_\theta=\frac{\partial\vec R}{\partial\theta}
+  =(\cos\theta\cos\varphi,\ \cos\theta\sin\varphi,\ -\sin\theta),
+  \qquad
+  \vec e_\varphi=\frac{\partial\vec R}{\partial\varphi}
+  =(-\sin\theta\sin\varphi,\ \sin\theta\cos\varphi,\ 0),
+\]
+e a métrica é a matriz dos produtos escalares, $g_{ij}=\vec e_i\cdot\vec e_j$:
+\[
+  \vec e_\theta\cdot\vec e_\theta=\cos^2\theta+\sin^2\theta=1,
+  \qquad
+  \vec e_\varphi\cdot\vec e_\varphi=\sin^2\theta,
+  \qquad
+  \vec e_\theta\cdot\vec e_\varphi=0 .
+\]
+Portanto
+\begin{equation}
+  (g_{ij})=\begin{pmatrix}1&0\\0&\sin^2\theta\end{pmatrix},
+  \qquad
+  \dd\ell^2=\dd\theta^2+\sin^2\theta\,\dd\varphi^2 .
+  \label{eq:metrica-esfera-unitaria}
+\end{equation}
+
+\emph{2. A inversa.} Ela é definida por $g_{ij}g^{jk}=\delta_i{}^k$. Com a
+métrica diagonal, cada entrada é o inverso da sua:
+\[
+  (g^{ij})=\begin{pmatrix}1&0\\0&1/\sin^2\theta\end{pmatrix}.
+\]
+
+\emph{3. Os símbolos de Christoffel.} Em duas dimensões são
+$2\times2\times2=8$. A fórmula \eqref{eq:christoffel} só pede derivadas da
+métrica, e aqui há uma única não nula:
+$\partial_\theta g_{\varphi\varphi}=2\sin\theta\cos\theta$. Logo sobram dois
+valores distintos:
+\[
+  \Gamma^\theta{}_{\varphi\varphi}
+  =-\tfrac12 g^{\theta\theta}\,\partial_\theta g_{\varphi\varphi}
+  =-\sin\theta\cos\theta ,
+  \qquad
+  \Gamma^\varphi{}_{\theta\varphi}=\Gamma^\varphi{}_{\varphi\theta}
+  =\tfrac12 g^{\varphi\varphi}\,\partial_\theta g_{\varphi\varphi}
+  =\cot\theta ,
+\]
+e os outros cinco se anulam identicamente.
+
+\emph{4. As duas equações.} Substituindo em
+\eqref{eq:geodesica-variedade}, com ponto para $\dd/\dd\lambda$:
+\begin{equation}
+  \ddot\theta-\sin\theta\cos\theta\,\dot\varphi^2=0 ,
+  \qquad
+  \ddot\varphi+2\cot\theta\,\dot\theta\dot\varphi=0 .
+  \label{eq:geodesicas-esfera}
+\end{equation}
+O fator $2$ da segunda vem de $\Gamma^\varphi{}_{\theta\varphi}$ e
+$\Gamma^\varphi{}_{\varphi\theta}$, que a soma dupla conta as duas vezes.
+
+\emph{5. Resolver, pelo palpite mais natural.} Em vez de atacar o sistema,
+teste os candidatos óbvios: os \emph{paralelos}, círculos de latitude
+constante, percorridos a ritmo uniforme,
+\[
+  \theta(\lambda)=\theta_0 ,\qquad \varphi(\lambda)=c\lambda ,\qquad c\ne0 .
+\]
+Então $\dot\theta=\ddot\theta=0$, $\dot\varphi=c$ e $\ddot\varphi=0$. A
+segunda equação de \eqref{eq:geodesicas-esfera} fica
+$0+2\cot\theta_0\cdot0\cdot c=0$: satisfeita para \emph{qualquer}
+$\theta_0$, e portanto sem informação. Quem decide é a primeira:
+\[
+  0-\sin\theta_0\cos\theta_0\,c^2=0
+  \qquad\Longrightarrow\qquad
+  \sin\theta_0\cos\theta_0=0 .
+\]
+
+\emph{O que isso deixa.} A raiz $\sin\theta_0=0$ é espúria: ela põe
+$\theta_0=0$ ou $\pi$, onde a curva degenera em um ponto --- e é
+exatamente onde $g_{\varphi\varphi}=0$ e a carta deixa de valer, como a
+Seção~\ref{sec:bases-nao-coordenadas} já observou sobre os polos. Resta
+\[
+  \cos\theta_0=0
+  \qquad\Longrightarrow\qquad
+  \theta_0=\pi/2 ,
+\]
+o \textbf{equador}, e com $c$ livre --- qualquer ritmo uniforme serve.
+\emph{Entre todos os paralelos, só o equador é geodésica.}
+
+Para $\theta_0\ne\pi/2$ a primeira equação deixa o resíduo
+$-\sin\theta_0\cos\theta_0c^2\ne0$: é a aceleração que seria necessária para
+manter a partícula no paralelo. Sem alguém a empurrando, ela não fica lá.
+
+\emph{E daí todas as outras.} O equador não tem nada de especial: ele é o
+equador \emph{das coordenadas escolhidas}. Uma rotação da esfera preserva
+$\dd\ell^2$ --- é uma isometria ---, leva geodésica em geodésica, e leva o
+equador em qualquer grande círculo. Logo todo grande círculo é geodésica. E
+são todas: \eqref{eq:geodesica-variedade} é de segunda ordem, de modo que
+por cada ponto e cada direção passa uma só, e os grandes círculos já esgotam
+essas escolhas.
+\end{example}
+
+\begin{infografico}[title={\sffamily\bfseries\footnotesize\color{rgPetroleo}A
+MESMA MÉTRICA, SEM SAIR DA SUPERFÍCIE}]
+A métrica saiu de um mergulho em $\mathbb{R}^3$, e a
+Seção~\ref{sec:variedades} insistiu que nenhum espaço ambiente é
+necessário. As duas coisas convivem: o mergulho serviu de \emph{escada} ---
+produziu \eqref{eq:metrica-esfera-unitaria} e saiu de cena, porque os
+passos 2 a 5 não olham para $\mathbb{R}^3$ uma vez sequer, só para
+$g_{ij}$. E ele não era necessário: há duas rotas até a mesma métrica que
+um habitante da superfície percorreria sozinho.
+
+\medskip
+\noindent
+\begin{minipage}[t]{0.465\linewidth}
+\textcolor{rgPetroleo}{\sffamily\bfseries\footnotesize ROTA 1 --- MEDINDO}
+\begin{etapas}
+  \item De um ponto qualquer, dispare geodésicas em todas as direções.
+  \item Rotule cada ponto por $r$, o comprimento de arco percorrido, e
+  $\psi$, o ângulo de saída.
+  \item Nessas coordenadas o lema de Gauss \emph{força}
+  $g_{rr}=1$ e $g_{r\psi}=0$:
+  \[ \dd\ell^2=\dd r^2+f(r,\psi)^2\dd\psi^2 . \]
+  \item Falta só $f$ --- e ele se mede: a circunferência do círculo de raio
+  $r$ vale $2\pi f$.
+  \item Na esfera a medida dá $2\pi\sin r$. Logo $f=\sin r$.
+\end{etapas}
+\medskip
+Uma trena basta --- e é exatamente a medida prometida acima, em
+\emph{Curvatura intrínseca}: a razão entre circunferência e raio.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.465\linewidth}
+\textcolor{rgPetroleo}{\sffamily\bfseries\footnotesize ROTA 2 --- CALCULANDO}
+\begin{etapas}
+  \item Peça apenas simetria de rotação, e a forma é a mesma:
+  \[ \dd\ell^2=\dd r^2+f(r)^2\dd\psi^2 . \]
+  \item Para ela, a curvatura gaussiana vale
+  \[ K=-f''/f . \]
+  \item Exija $K=1$. Sai $f''+f=0$, logo $f=A\sin r+B\cos r$.
+  \item No centro, $f(0)=0$ e $f'(0)=1$ --- senão o círculo de raio $r$ não
+  tende a $2\pi r$ e o ponto vira a ponta de um cone.
+  \item Sobra $f=\sin r$, e só ela.
+\end{etapas}
+\medskip
+Nenhum espaço ambiente em lugar nenhum: só a métrica e a sua curvatura.
+\end{minipage}
+
+\medskip
+{\color{rgPetroClaro}\rule{\linewidth}{0.6pt}}
+\medskip
+
+\noindent
+As duas chegam a $\dd\ell^2=\dd r^2+\sin^2r\,\dd\psi^2$, que é
+\eqref{eq:metrica-esfera-unitaria} com $\theta=r$ e $\varphi=\psi$.
+
+A equação da Rota 2 ainda entrega o resto da família: $K=0$ dá $f=r$, o
+plano; $K=-1$ dá $f=\sinh r$, o hiperbólico; e $K=1/a^2$ dá
+$f=a\sin(r/a)$, a esfera de raio $a$ --- cuja métrica, em
+$(\theta,\varphi)$, é apenas $a^2$ vezes
+\eqref{eq:metrica-esfera-unitaria}. O fator constante não muda nenhum
+símbolo de Christoffel, nem portanto as geodésicas.
+\end{infografico}
+
 \section{O tensor de Riemann}
 \label{sec:curvatura-riemann}
 
@@ -9197,10 +9396,10 @@ de partida. A regra dá a variação, e a variação dá o vetor que chega à po
 \[
   \delta V^\rho_{(1)}=-\Gamma^\rho{}_{\mu\sigma}(x)\,\delta a^\mu V^\sigma ,
   \qquad
-  \widetilde V^\rho
+  V^\rho_{(1)}
   =V^\rho-\Gamma^\rho{}_{\mu\sigma}(x)\,\delta a^\mu V^\sigma .
 \]
-Vale o nome: é $\widetilde V$, e não $V$, que entra na perna seguinte.
+Vale o nome: é $V_{(1)}$, e não $V$, que entra na perna seguinte.
 
 \emph{Segunda perna}, ao longo de $\delta b$, a partir do novo ponto. Duas
 coisas mudaram, e é do par que a curvatura sai. A primeira: o $\Gamma$ passa
@@ -9212,12 +9411,12 @@ basta,
   +\partial_\mu\Gamma^\rho{}_{\nu\sigma}(x)\,\delta a^\mu
   +O(\delta a^2) .
 \]
-A segunda: o vetor que entra é $\widetilde V$. Pondo os dois na regra da
+A segunda: o vetor que entra é $V_{(1)}$. Pondo os dois na regra da
 perna,
 \begin{align*}
   \delta V^\rho_{(2)}
   &=-\Gamma^\rho{}_{\nu\sigma}(x+\delta a)\,\delta b^\nu\,
-     \widetilde V^\sigma\\
+     V^\sigma_{(1)}\\
   &=-\bigl(\Gamma^\rho{}_{\nu\sigma}
     +\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\delta a^\mu\bigr)
     \delta b^\nu
@@ -9315,6 +9514,101 @@ a segunda derivada por extenso, lembre que $\nabla_\mu$ age também sobre o
 índice $\nu$ de $\nabla_\nu V^\rho$, que é um tensor $(1,1)$ --- esquecer esse
 termo é o erro mais comum da conta.
 \end{atencao}
+
+\begin{interludio}{Uma terceira via: os operadores de transporte}
+As duas rotas acima chegam ao mesmo tensor partindo de lugares diferentes ---
+uma do circuito, outra da álgebra. Há uma terceira, que parte do próprio
+transporte, e que entrega de quebra o termo que a caixa anterior teve de
+anunciar como ressalva.
+
+\textbf{O circuito como quatro operadores.} Tome dois campos $\vec X$ e
+$\vec Y$ e monte o circuito com parâmetro $r$ ao longo de $\vec X$ e $s$ ao
+longo de $\vec Y$. Cada perna é um operador de transporte paralelo:
+\[
+  \mathsf A\colon(0,0)\to(r,0), \quad
+  \mathsf B\colon(r,0)\to(r,s), \quad
+  \mathsf C\colon(r,s)\to(0,s), \quad
+  \mathsf D\colon(0,s)\to(0,0).
+\]
+Dar a volta inteira com $\vec Z$ é aplicar $\mathsf{DCBA}\vec Z$, e a
+holonomia é a diferença $\vec Z-\mathsf{DCBA}\vec Z$. Ela é de segunda ordem,
+de modo que o que tem limite finito é a diferença \emph{dividida pela área}:
+\begin{equation}
+  R(\vec X,\vec Y)\vec Z
+  =\lim_{r,s\to0}\frac{\vec Z-\mathsf{DCBA}\vec Z}{rs} .
+  \label{eq:riemann-operadores}
+\end{equation}
+É a construção de $f'(x)=\lim_{h\to0}[f(x+h)-f(x)]/h$, com duas direções no
+lugar de uma.
+
+\textbf{O truque.} Escreva $\vec Z=\mathsf{DCC}^{-1}\mathsf D^{-1}\vec Z$ ---
+o produto é a identidade --- e ponha $\mathsf{DC}$ em evidência:
+\[
+  \vec Z-\mathsf{DCBA}\vec Z
+  =\mathsf{DC}\bigl(\mathsf C^{-1}\mathsf D^{-1}\vec Z-\mathsf{BA}\vec Z\bigr).
+\]
+Agora some e subtraia o que for preciso para que só restem quocientes do tipo
+\emph{(operador menos identidade) sobre parâmetro}:
+\begin{align*}
+  \mathsf C^{-1}\mathsf D^{-1}\vec Z-\vec Z
+  &=\mathsf C^{-1}\bigl(\mathsf D^{-1}\vec Z-\vec Z\bigr)
+   +\bigl(\mathsf C^{-1}\vec Z-\vec Z\bigr),\\
+  \mathsf{BA}\vec Z-\vec Z
+  &=\mathsf B\bigl(\mathsf A\vec Z-\vec Z\bigr)
+   +\bigl(\mathsf B\vec Z-\vec Z\bigr).
+\end{align*}
+
+\textbf{Os limites.} Cada quociente é uma derivada covariante, e basta ver
+qual direção e qual parâmetro cada operador carrega: $\mathsf A$ e
+$\mathsf C^{-1}$ transportam ao longo de $\vec X$ com parâmetro $r$;
+$\mathsf B$ e $\mathsf D^{-1}$, ao longo de $\vec Y$ com parâmetro $s$. Logo
+\[
+  \frac{\mathsf A\vec Z-\vec Z}{r}\to\nabla_{\vec X}\vec Z ,
+  \qquad
+  \frac{\mathsf B\vec Z-\vec Z}{s}\to\nabla_{\vec Y}\vec Z ,
+\]
+e assim para os outros dois. Reagrupando os quatro pedaços, as duas segundas
+derivadas aparecem, e $\mathsf{DC}\to\mathbb 1$ no limite:
+\begin{equation}
+  R(\vec X,\vec Y)\vec Z
+  =\nabla_{\vec X}\nabla_{\vec Y}\vec Z
+  -\nabla_{\vec Y}\nabla_{\vec X}\vec Z .
+  \label{eq:riemann-operadores-comutador}
+\end{equation}
+
+\textbf{O termo que faltava.} O circuito desenhado só \emph{fecha} se as duas
+direções comutarem. Em geral a quarta perna não devolve ao ponto de partida:
+a folga é $rs\,[\vec X,\vec Y]$ em primeira ordem, com o comutador da
+Seção~\ref{sec:bases-nao-coordenadas}. Descontá-la acrescenta um terceiro
+termo:
+\begin{equation}
+  R(\vec X,\vec Y)\vec Z
+  =\nabla_{\vec X}\nabla_{\vec Y}\vec Z
+  -\nabla_{\vec Y}\nabla_{\vec X}\vec Z
+  -\nabla_{[\vec X,\vec Y]}\vec Z .
+  \label{eq:riemann-operadores-lie}
+\end{equation}
+Em base coordenada $[\vec e_\mu,\vec e_\nu]=0$ e o termo some --- é
+exatamente a ressalva da caixa anterior, aqui \emph{deduzida} em vez de
+anunciada.
+
+\textbf{De volta às componentes.} Ponha $\vec X=\vec e_\mu$,
+$\vec Y=\vec e_\nu$, $\vec Z=\vec e_\sigma$, use
+$\nabla_{\vec e_\mu}\vec e_\nu=\Gamma^\rho{}_{\mu\nu}\vec e_\rho$ e lembre que
+a derivada covariante de um escalar é a ordinária. O primeiro termo dá
+\[
+  \nabla_{\vec e_\mu}\bigl(\Gamma^\lambda{}_{\nu\sigma}\vec e_\lambda\bigr)
+  =\partial_\mu\Gamma^\rho{}_{\nu\sigma}\,\vec e_\rho
+  +\Gamma^\lambda{}_{\nu\sigma}\Gamma^\rho{}_{\mu\lambda}\,\vec e_\rho ,
+\]
+o segundo é o mesmo com $\mu\leftrightarrow\nu$, e a diferença é
+\[
+  R(\vec e_\mu,\vec e_\nu)\vec e_\sigma
+  =R^\rho{}_{\sigma\mu\nu}\,\vec e_\rho ,
+\]
+com $R^\rho{}_{\sigma\mu\nu}$ dado por \eqref{eq:riemann}, componente por
+componente. As três rotas fecham no mesmo tensor.
+\end{interludio}
 
 \subsection*{Simetrias e contagem}
 
