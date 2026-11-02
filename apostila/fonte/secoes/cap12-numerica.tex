@@ -15,9 +15,13 @@ A cosmologia de fundo é, do ponto de vista computacional, uma única função:
   \label{eq:cap13-E}
 \end{equation}
 Tudo o mais --- a evolução $a(t)$, a idade do universo, as distâncias, os
-horizontes --- são integrais dessa expressão. Nenhuma delas tem primitiva
-elementar quando mais de uma componente contribui, e é por isso que a
-cosmologia observacional é numérica desde sempre. Medimos tempo em unidades
+horizontes --- são integrais dessa expressão. Em geral elas não têm primitiva
+elementar, e é por isso que a cosmologia observacional é numérica desde
+sempre. Há exceções, e uma aparece já na saída abaixo: no caso plano com
+matéria e $\Lambda$, sem radiação, a idade fecha em
+$t_{0}=\tfrac{2}{3\sqrt{\Omega_{\Lambda}}}
+\operatorname{arcsinh}\sqrt{\Omega_{\Lambda}/\Omega_{m}}$. Com radiação
+incluída, não. Medimos tempo em unidades
 de $1/H_{0}$ e distância em $c/H_{0}$, convertendo apenas no fim. Os valores
 de fundo são próximos aos de Planck: $h = 0{,}674$, $\Omega_{m} = 0{,}315$,
 $\Omega_{\Lambda} = 0{,}685$, $\Omega_{r} = 9{,}24\times 10^{-5}$.
@@ -28,10 +32,14 @@ $\Omega_{\Lambda} = 0{,}685$, $\Omega_{r} = 9{,}24\times 10^{-5}$.
 
 \subsubsection*{Escalas temporais}
 
-A idade do universo é $t_{0} = \int_{0}^{1} \dd a/[a E(a)]$. O integrando
-diverge como $a^{-1}$ em $a \to 0$ na era de matéria e como $a^{-1}$ vezes
-$a$ na de radiação, de modo que a integral converge --- mas a quadratura
-adaptativa precisa ser avisada, e é por isso que passamos \texttt{limit=200}.
+A idade do universo é $t_{0} = \int_{0}^{1} \dd a/[a E(a)]$, em unidades de
+$1/H_{0}$. O integrando \emph{vai a zero} na ponta de baixo, e nas duas eras:
+na de matéria $E \propto a^{-3/2}$, logo $1/[aE] \propto a^{1/2}$; na de
+radiação $E \propto a^{-2}$, logo $1/[aE] \propto a$. A integral converge com
+folga --- se o integrando divergisse como $a^{-1}$, como se poderia supor, ela
+divergiria logaritmicamente. O \texttt{limit=200} não avisa o integrador de
+singularidade nenhuma: ele apenas eleva o número máximo de subdivisões, o que
+aqui serve para resolver bem a faixa em que o integrando varia depressa.
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
@@ -117,9 +125,13 @@ espalhamento, $z \approx 1100$, a distância de diâmetro angular vale
 $13$~Mpc: a mesma superfície cuja distância comóvel é de $13{,}9$~Gpc. Não há
 contradição --- são grandezas diferentes, ligadas por
 $D_{A} = D_{C}/(1+z)$, e é $D_{A}$ que converte tamanho físico em ângulo
-observado. É por isso que o horizonte acústico da CMB, de cerca de
-$150$~Mpc comóveis, subtende aproximadamente um grau no céu. Trocar $D_{A}$
-por $D_{C}$ nessa conta erra o resultado por um fator de mil.
+observado. A regra prática é converter numerador e denominador \emph{juntos}:
+comprimento comóvel sobre distância comóvel, ou comprimento físico na emissão
+sobre $D_{A}$. O horizonte acústico da CMB, de cerca de $150$~Mpc comóveis,
+dá $150/13\,900 \approx 0{,}0108$~rad, isto é $0{,}62^{\circ}$; e a conta
+física, $(150/1090)/(13\,900/1090)$, dá exatamente o mesmo. O erro de um
+fator de mil não está em escolher $D_{C}$ ou $D_{A}$, e sim em \emph{misturar}
+--- dividir o comprimento comóvel pela distância de diâmetro angular.
 
 Note ainda que o horizonte de partículas, $46$~Glyr, é maior que $c t_{0}
 = 13{,}8$~Glyr. Isso não viola nada: a luz percorreu $13{,}8$~Gyr de

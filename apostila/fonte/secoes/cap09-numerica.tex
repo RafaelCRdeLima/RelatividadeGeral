@@ -19,22 +19,41 @@ Trabalhamos em unidades SI, convertendo apenas na impressão.
 
 \subsubsection*{O anel de partículas}
 
-A equação de desvio geodésico em gauge TT, com a onda propagando-se em $z$,
-reduz-se a
+O desvio geodésico do Capítulo~\ref{cap:curvatura} já dá a equação; falta
+dizer quem é o Riemann de uma onda. Em gauge TT, para a onda propagando-se em
+$z$ e observadores em queda livre,
 \begin{equation}
-  \rd{^{2}\xi^{i}}{t^{2}} = \frac{1}{2}\,\rd{^{2}h^{\rm TT}_{ij}}{t^{2}}\,\xi^{j},
-  \qquad\text{cuja integral é}\qquad
-  \xi^{i}(t) = \left(\delta^{i}{}_{j} + \tfrac12 h^{\rm TT}_{ij}\right)\xi^{j}(0).
+  R^{i}{}_{0j0} = -\tfrac12\,\rd{^{2}h^{\rm TT}_{ij}}{t^{2}} ,
+  \qquad\text{logo}\qquad
+  \rd{^{2}\xi^{i}}{t^{2}} = \frac{1}{2}\,\rd{^{2}h^{\rm TT}_{ij}}{t^{2}}\,\xi^{j} .
   \label{eq:cap10-anel}
 \end{equation}
+É essa identificação que traz a onda para dentro da maquinaria de curvatura
+do Capítulo~\ref{cap:curvatura}: a onda não é uma força nova, é
+$R_{i0j0}$ oscilando.
+
+Integrando duas vezes, e em primeira ordem em $h$ --- o que autoriza trocar
+$\xi$ por $\xi(0)$ no lado direito ---,
+\begin{equation}
+  \xi^{i}(t) = \xi^{i}(0) + \dot\xi^{i}(0)\,t
+  + \tfrac12\bigl[h^{\rm TT}_{ij}(t) - h^{\rm TT}_{ij}(0)\bigr]\xi^{j}(0) .
+  \label{eq:cap10-anel-geral}
+\end{equation}
+A forma compacta que se costuma escrever,
+$\xi^{i}=(\delta^{i}{}_{j}+\tfrac12 h^{\rm TT}_{ij})\xi^{j}(0)$, é o caso
+particular com \emph{duas} hipóteses: separação inicialmente em repouso,
+$\dot\xi(0)=0$, e contagem a partir de um instante sem onda,
+$h^{\rm TT}(0)=0$. Fora disso os dois primeiros termos não somem.
 
 \begin{atencao}
 Em gauge TT as \emph{coordenadas} das partículas livres não mudam --- elas
 estão em queda livre e permanecem em repouso coordenado. O que muda é a
 distância própria entre elas. Dizer que a onda ``empurra'' as massas é a
 imagem errada; dizer que ela altera a régua é a certa. A elipse desenhada
-abaixo é o lugar geométrico dos pontos a distância própria constante, que é
-exatamente o que o interferômetro mede.
+abaixo é o conjunto das \emph{posições próprias} das partículas, lidas num
+referencial local --- e não o lugar dos pontos a distância própria constante,
+que seria um círculo por definição. O que oscila é a separação física de cada
+par, e é isso que o interferômetro mede.
 \end{atencao}
 
 \begin{figure}[htbp]
@@ -52,8 +71,12 @@ exatamente o que o interferômetro mede.
 
 \subsubsection*{A fórmula do quadrupolo}
 
-O texto deu apenas a escala $P\sim (G/c^{5})(\dddot Q)^{2}$. A expressão
-completa é
+A Seção~\ref{sec:emissao-ondas} já deu a fórmula do quadrupolo; vale
+repeti-la aqui, com as hipóteses, antes de testá-la. Ela supõe fonte
+\emph{lenta} --- velocidades internas muito menores que $c$ --- e campo
+\emph{radiativo distante}, longe o bastante para que só o termo que cai como
+$1/r$ importe. Fora disso a expressão não vale, por mais exata que seja a
+álgebra que a manipula. A expressão é
 \begin{equation}
   P = \frac{G}{5c^{5}}\left\langle \dddot Q_{ij}\,\dddot Q^{ij}\right\rangle,
   \qquad
@@ -61,9 +84,16 @@ completa é
   \label{eq:cap10-quadrupolo}
 \end{equation}
 com $\mu = m_{1}m_{2}/(m_{1}+m_{2})$ a massa reduzida e $Q_{ij}$ o quadrupolo
-\emph{sem traço}. Para testar a constante $1/5$ e o fator $32/5$ da forma
-fechada, derivamos $Q_{ij}$ numericamente por um estêncil de sete pontos e
-comparamos.
+\emph{sem traço}. Para testar a especialização à órbita circular, derivamos
+$Q_{ij}$ numericamente por um estêncil de sete pontos e comparamos com a
+forma fechada.
+
+Note o que esse teste pode e o que não pode. Os dois lados partem da
+\emph{mesma} \eqref{eq:cap10-quadrupolo}, com o mesmo prefator $1/5$: o que a
+comparação verifica é a álgebra que leva daí ao $32/5$ da órbita circular, e a
+implementação que produz as figuras. O prefator radiativo $1/5$ em si não é
+determinado por nenhum dos dois --- ele vem da dedução da fórmula do
+quadrupolo, e aqui é postulado.
 
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
@@ -141,6 +171,14 @@ obtém-se uma equação para a frequência da onda, $f = 2f_{\rm orb}$:
   \label{eq:cap10-chirp}
 \end{equation}
 
+A integração precisa parar em algum lugar, porque a aproximação de órbita
+quase newtoniana não vale até o fim. Adotamos aqui, \emph{como dado
+operacional}, o corte $f_{\rm ISCO}=68$~Hz para esta binária. De onde esse
+número sai --- a última órbita circular estável da geometria de
+Schwarzschild --- é assunto do Capítulo~\ref{cap:schwarzschild}, e a
+interpretação física do corte fica para lá. Aqui ele é apenas o limite
+superior da integral.
+
 \begin{saida}
 \begin{lstlisting}[style=rgsaida]
 massa de chirp M_c = 28.10 M_sol
@@ -166,9 +204,13 @@ primeira ordem.
   \includegraphics[width=\linewidth]{figuras/cap09_chirp.pdf}
   \caption{Acima, a forma de onda $h(t)$ da binária de $36+29\,\Msol$ a
   $410$~Mpc; abaixo, a frequência. Amplitude e frequência crescem juntas, e é
-  daí que vem o nome \emph{chirp}. A integração para em
-  $f_{\rm ISCO}=68$~Hz, onde a aproximação de órbita quase newtoniana deixa
-  de valer e só a relatividade numérica descreve o que acontece.}
+  daí que vem o nome \emph{chirp}. A integração para no corte
+  $f_{\rm ISCO}=68$~Hz, adotado aqui como dado --- veja o
+  Capítulo~\ref{cap:schwarzschild} ---, acima do qual a aproximação de órbita
+  quase newtoniana deixa de valer e só a relatividade numérica descreve o que
+  acontece. E uma ressalva: a ISCO de partícula teste não define exatamente a
+  fusão de uma binária de massas comparáveis; ela serve como escala, não como
+  fronteira exata.}
   \label{fig:cap10-chirp}
 \end{figure}
 
@@ -213,11 +255,17 @@ circular sem nenhuma aproximação numérica: monta $Q_{ij}$ da órbita, deriva
 três vezes em $t$ e simplifica, obtendo diretamente o fator $32/5$.
 
 \begin{central}
-O resultado simbólico e a derivação numérica concordam --- e é a combinação
-das duas que constitui a verificação. O Mathematica prova que o fator é
-exatamente $32/5$ para \emph{quaisquer} massas e separação; o Python
-confirma, com números independentes, que a implementação usada para produzir
-as figuras não tem erro de digitação. Nenhuma das duas checagens, sozinha,
-faria esse trabalho.
+O resultado simbólico e a derivação numérica concordam, e cada um faz uma
+coisa diferente. O Mathematica mostra que, \emph{partindo de}
+\eqref{eq:cap10-quadrupolo}, a especialização à órbita circular dá exatamente
+$32/5$ para quaisquer massas e separação. O Python confirma, com números
+independentes, que a implementação usada nas figuras não tem erro de
+digitação.
+
+Nenhum dos dois estabelece \eqref{eq:cap10-quadrupolo}. Os três estatutos são
+distintos, e misturá-los é o erro a evitar: a fórmula do quadrupolo é
+\emph{postulada} aqui, com as hipóteses de fonte lenta e campo distante; a
+especialização é \emph{provada} simbolicamente; a implementação é
+\emph{testada} numericamente.
 \end{central}
 

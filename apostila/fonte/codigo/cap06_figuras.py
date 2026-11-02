@@ -3,11 +3,13 @@
 Uso:
     python3 cap06_figuras.py
 
-Salva os PDFs em ../figuras/. Sao tres, uma por deducao geometrica:
+Salva os PDFs em ../figuras/. Sao quatro:
 
   cap06_triangulo_esferico.pdf  transporte no triangulo, e a rotacao de pi/2
   cap06_circuito.pdf            o circuito infinitesimal que produz Riemann
   cap06_desvio_familia.pdf      desvio geodesico, na esfera e como mare
+  cap06_ricci_volume.pdf        Ricci como soma: volume contra forma
+  cap06_tres_falhas.pdf         Lie, torcao e Riemann: tres falhas distintas
 
 Nao usa Axes3D: a esfera e' projetada a mao, por rotacao e projecao
 ortografica, o que da controle total sobre o que fica visivel e evita
@@ -313,8 +315,271 @@ def desvio_familia():
     plt.close(fig)
 
 
+
+# --------------------------------------------------------------------
+#  Ricci: a soma das direcoes transversais, e o que ela nao ve
+# --------------------------------------------------------------------
+# Tubos de geodesicas em perspectiva, e nao secoes achatadas: o ponto da
+# figura e' que as duas direcoes transversais podem ter TENDENCIAS
+# OPOSTAS, e isso so' se ve num solido -- uma face fechando enquanto a
+# outra abre. As tampas sao sombreadas para que as duas se comparem de
+# relance.
+#
+# Projecao axonometrica simples: x corre ao longo do feixe, y e' a
+# profundidade (e_2) e z a altura (e_1). Nao usa Axes3D, pela mesma razao
+# das outras figuras deste arquivo.
+ROXO = "#6B4E9B"
+
+_DY, _DZ = 0.62, -0.46          # para onde a profundidade escorre na tela
+
+
+def _ax3(x, y, z):
+    return x + _DY * y, z + _DZ * y
+
+
+def _quad(ax, cantos, cor, alpha, lw=0.0, z=2):
+    pts = [_ax3(*c) for c in cantos]
+    ax.add_patch(plt.Polygon(pts, closed=True, facecolor=cor, alpha=alpha,
+                             edgecolor=cor, lw=lw, zorder=z))
+
+
+def _tubo(ax, L, h0, h1, w0, w1):
+    """O feixe como solido: faces sombreadas, tampas destacadas.
+
+    Sem as faces o desenho vira uma chapa e some justamente o que ele
+    tem de mostrar -- que as duas direcoes transversais podem ir para
+    lados opostos. A aresta escondida vai tracejada, como num croqui.
+    """
+    def hw(t):
+        return h0 + (h1 - h0) * t, w0 + (w1 - w0) * t
+
+    # arestas de tras, primeiro e mais claras
+    for sy, sz in ((-1, -1),):
+        P = np.array([_ax3(L * t, sy * hw(t)[1], sz * hw(t)[0])
+                      for t in np.linspace(0, 1, 40)])
+        ax.plot(P[:, 0], P[:, 1], color=AZUL, lw=1.2, alpha=0.40,
+                ls=(0, (4, 3)), zorder=1)
+
+    # face de cima e face da frente: e' delas que vem o volume
+    _quad(ax, [(0, -w0, h0), (L, -w1, h1), (L, w1, h1), (0, w0, h0)],
+          AZUL, 0.13, z=2)
+    _quad(ax, [(0, w0, -h0), (L, w1, -h1), (L, w1, h1), (0, w0, h0)],
+          AZUL, 0.22, z=2)
+
+    # arestas da frente
+    for sy, sz in ((1, 1), (1, -1), (-1, 1)):
+        P = np.array([_ax3(L * t, sy * hw(t)[1], sz * hw(t)[0])
+                      for t in np.linspace(0, 1, 40)])
+        ax.plot(P[:, 0], P[:, 1], color=AZUL, lw=1.5, zorder=4)
+
+    # as duas secoes transversais, que e' o que se compara
+    for x, (h, w) in ((0.0, (h0, w0)), (L, (h1, w1))):
+        _quad(ax, [(x, -w, -h), (x, w, -h), (x, w, h), (x, -w, h)],
+              ROXO, 0.50, lw=1.5, z=5)
+
+
+def ricci_volume():
+    """Tres feixes: as duas transversais apertam, se compensam, ou abrem.
+
+    As areas das tampas sao exatas. No painel do meio o produto das
+    meias-medidas vale 0.25 nas duas pontas, de modo que a igualdade que a
+    legenda afirma se mede na figura.
+    """
+    L = 2.9
+    PAINEIS = (
+        (0.50, 0.30, 0.50, 0.30,
+         r"(a) $R_{\mu\nu}U^\mu U^\nu>0$",
+         (r"$\kappa_1>0$ fecha", r"$\kappa_2>0$ fecha"),
+         "as duas fecham:\no volume encolhe", VERM),
+        (0.50, 0.30, 0.50, 0.25 / 0.30,
+         r"(b) $R_{\mu\nu}U^\mu U^\nu=0$",
+         (r"$\kappa_1>0$ fecha", r"$\kappa_2<0$ abre"),
+         "uma fecha o quanto a outra abre:\na área se conserva nesta ordem", VERDE),
+        (0.50, 0.90, 0.50, 0.50,
+         r"(c) $R_{\mu\nu}U^\mu U^\nu<0$",
+         (r"$\kappa_1<0$ abre", r"$\kappa_2=0$ fica"),
+         "uma abre, a outra fica:\no volume cresce", AZUL),
+    )
+
+    fig, axes = plt.subplots(1, 3, figsize=(8.6, 3.4))
+
+    for ax, (h0, h1, w0, w1, titulo, kap, nota, cor) in zip(axes, PAINEIS):
+        _tubo(ax, L, h0, h1, w0, w1)
+
+        # o triedro na ponta de partida
+        o = _ax3(0.0, 0.0, 0.0)
+        for alvo, c, rot in ((_ax3(0, 0, h0 + 0.42), VERM, r"$\vec e_1$"),
+                             (_ax3(0, w0 + 0.42, 0), LARANJA, r"$\vec e_2$"),
+                             (_ax3(1.15, 0, 0), CINZA, r"$\vec U$")):
+            ax.annotate("", xy=alvo, xytext=o,
+                        arrowprops=dict(arrowstyle="-|>", color=c, lw=1.8),
+                        zorder=5)
+            ax.text(alvo[0] + 0.06, alvo[1] + 0.06, rot, color=c,
+                    fontsize=13.5, path_effects=HALO, zorder=6)
+
+        ax.text(-1.00, -1.95, kap[0], color=VERM, fontsize=12)
+        ax.text(-1.00, -2.35, kap[1], color=LARANJA, fontsize=12)
+        ax.text(1.55, -3.52, nota, fontsize=12, ha="center", color=cor)
+
+        ax.set_title(titulo, fontsize=13)
+        ax.set_xlim(-1.15, 4.35); ax.set_ylim(-4.05, 1.55)
+        ax.set_aspect("equal"); _limpa(ax)
+
+    fig.tight_layout()
+    fig.savefig(OUTDIR / "cap06_ricci_volume.pdf")
+    plt.close(fig)
+
+
+
+# --------------------------------------------------------------------
+#  Lie, torcao, Riemann: tres falhas que se parecem e nao sao a mesma
+# --------------------------------------------------------------------
+def tres_falhas():
+    """As tres falhas da Secao 6.7, lado a lado.
+
+    O ponto do desenho e' que as tres sao a MESMA tentativa -- fechar um
+    quadrilatero -- falhando de tres jeitos. Nos dois primeiros paineis o
+    quadrilatero nao fecha, e o que muda e' o que construiu as pernas:
+    fluxos num caso, transporte paralelo no outro. No terceiro ele fecha,
+    e quem nao volta igual e' o vetor.
+    """
+    fig, axs = plt.subplots(1, 3, figsize=(7.7, 3.25))
+    E = 1.0                       # o "infinitesimal", exagerado para caber
+    seta = dict(arrowstyle="-|>", lw=2.3, mutation_scale=13)
+    ROXO = "#7E3F9D"
+
+    def cabecalho(ax, titulo, rodape):
+        ax.set_title(titulo, fontsize=9.5, color=CINZA, pad=10,
+                     fontweight="bold")
+        ax.text(0.5, -0.07, rodape, transform=ax.transAxes, ha="center",
+                va="top", fontsize=8.2, color=CINZA, linespacing=1.5)
+
+    def falha(ax, a, b, texto, dx=0.13, dy=0.0, ha="left"):
+        """A seta curta que mede o quanto o quadrilatero deixou de fechar."""
+        ax.annotate("", xy=b, xytext=a,
+                    arrowprops=dict(arrowstyle="-|>", color=ROXO, lw=2.2,
+                                    mutation_scale=12, shrinkA=0, shrinkB=0))
+        m = 0.5 * (np.asarray(a, float) + np.asarray(b, float))
+        ax.text(m[0] + dx, m[1] + dy, texto, color=ROXO, fontsize=9.5,
+                ha=ha, va="center", path_effects=HALO)
+
+    def ponto(ax, P, rot=None, dx=-0.08, dy=-0.16, ha="right"):
+        ax.plot(*P, "o", color="#333333", ms=4.4, zorder=6)
+        if rot:
+            ax.text(P[0] + dx, P[1] + dy, rot, fontsize=10.5, ha=ha,
+                    path_effects=HALO)
+
+    rot = lambda v, a: np.array([np.cos(a) * v[0] - np.sin(a) * v[1],
+                                 np.sin(a) * v[0] + np.cos(a) * v[1]])
+
+    # ---------- 1. comutador de Lie: as pernas sao fluxos ----------
+    #  X = d/dx;  Y = (1 + 0.55 x) d/dy.  Logo [X,Y] = 0.55 d/dy != 0: a
+    #  subida e' mais rapida a direita, e e' so' disso que o comutador vive.
+    ax = axs[0]
+    k, p0 = 0.55, np.array([0.0, 0.0])
+    alto = E * (1 + k * E)
+    for xx in (0.0, E):                       # linhas de fluxo de Y, ao fundo
+        ax.plot([xx, xx], [-0.10, alto + 0.16], color="#CCD6DD", lw=0.9, zorder=0)
+
+    q1 = np.array([E, alto])                  # X depois Y  (sobe mais)
+    q2 = np.array([E, E])                     # Y depois X
+    ax.annotate("", xy=(E, 0.0), xytext=p0, arrowprops=dict(color=LARANJA, **seta))
+    ax.annotate("", xy=q1, xytext=(E, 0.0), arrowprops=dict(color=VERDE, **seta))
+    ax.annotate("", xy=(0.0, E), xytext=p0, arrowprops=dict(color=VERDE, **seta))
+    ax.annotate("", xy=q2, xytext=(0.0, E), arrowprops=dict(color=LARANJA, **seta))
+
+    ax.text(E * 0.5, -0.19, r"$\vec X$", color=LARANJA, fontsize=11,
+            ha="center", path_effects=HALO)
+    ax.text(-0.11, E * 0.5, r"$\vec Y$", color=VERDE, fontsize=11,
+            ha="right", va="center", path_effects=HALO)
+    ax.text(E * 0.5, E + 0.09, r"$\vec X$", color=LARANJA, fontsize=11,
+            ha="center", path_effects=HALO)
+    ax.annotate("$\\vec Y$ é maior\naqui", xy=(E + 0.03, 0.78), xytext=(E + 0.17, 0.52),
+                fontsize=8.6, color=VERDE, ha="left", va="center",
+                linespacing=1.4,
+                arrowprops=dict(arrowstyle="->", color=VERDE, lw=1.0))
+    falha(ax, q2, q1, r"$\varepsilon^2[\vec X,\vec Y]$", dx=0.12)
+    ponto(ax, p0, r"$p$"); ponto(ax, q1); ponto(ax, q2)
+    ax.set_xlim(-0.42, 1.92); ax.set_ylim(-0.38, 1.80)
+    cabecalho(ax, "COMUTADOR DE LIE",
+              "pernas = fluxos\nnão fecha: os pontos diferem")
+
+    # ---------- 2. torcao: as pernas sao transporte paralelo ----------
+    ax = axs[1]
+    p0 = np.array([0.0, 0.0]); X = np.array([E, 0.0]); Y = np.array([0.0, E])
+    #  o transporte gira cada vetor um pouco, e os dois se abrem: e' esse
+    #  descasamento das pontas que a torcao mede.
+    g = np.radians(11.0)
+    q1 = X + rot(Y, -g)                       # Y transportado ao longo de X
+    q2 = Y + rot(X, +g)                       # X transportado ao longo de Y
+    #  onde o paralelogramo teria fechado
+    ax.plot(*np.array([X, X + Y]).T, ls=(0, (3, 2.6)), color="#AFBCC6", lw=1.0, zorder=1)
+    ax.plot(*np.array([Y, X + Y]).T, ls=(0, (3, 2.6)), color="#AFBCC6", lw=1.0, zorder=1)
+    ax.plot(*(X + Y), "o", color="#AFBCC6", ms=3.6, zorder=1)
+
+    ax.annotate("", xy=X, xytext=p0, arrowprops=dict(color=LARANJA, **seta))
+    ax.annotate("", xy=q1, xytext=X, arrowprops=dict(color=VERDE, **seta))
+    ax.annotate("", xy=Y, xytext=p0, arrowprops=dict(color=VERDE, **seta))
+    ax.annotate("", xy=q2, xytext=Y, arrowprops=dict(color=LARANJA, **seta))
+
+    ax.text(E * 0.5, -0.19, r"$\vec X$", color=LARANJA, fontsize=11,
+            ha="center", path_effects=HALO)
+    ax.text(-0.11, E * 0.5, r"$\vec Y$", color=VERDE, fontsize=11,
+            ha="right", va="center", path_effects=HALO)
+    ax.text(E * 0.47, E + 0.26, r"$\vec X$", color=LARANJA, fontsize=11,
+            ha="center", path_effects=HALO)
+    ax.text(E + 0.20, E * 0.52, r"$\vec Y$", color=VERDE, fontsize=11,
+            ha="left", va="center", path_effects=HALO)
+    falha(ax, q1, q2, r"$\varepsilon^2\vec T(\vec X,\vec Y)$", dx=0.10, dy=0.17)
+    ponto(ax, p0, r"$p$"); ponto(ax, q1); ponto(ax, q2)
+    ax.set_xlim(-0.42, 1.92); ax.set_ylim(-0.38, 1.80)
+    cabecalho(ax, "TORÇÃO",
+              "pernas = transporte paralelo\nnão fecha: os pontos diferem")
+
+    # ---------- 3. Riemann: o circuito fecha, o vetor nao volta igual -----
+    ax = axs[2]
+    A = np.array([0.0, 0.0]); B = np.array([E, 0.0])
+    C = np.array([E, E]);     D = np.array([0.0, E])
+    ax.add_patch(plt.Polygon([A, B, C, D], closed=True, facecolor="#EFF4F7",
+                             edgecolor="none", zorder=0))
+    for (P, Q, cor) in ((A, B, LARANJA), (B, C, VERDE),
+                        (C, D, LARANJA), (D, A, VERDE)):
+        ax.annotate("", xy=Q, xytext=P,
+                    arrowprops=dict(arrowstyle="-|>", color=cor, lw=1.8,
+                                    mutation_scale=11, alpha=0.6))
+    V = np.array([0.80, 0.26])
+    Vl = rot(V, np.radians(38.0))
+    ax.annotate("", xy=A + V, xytext=A, arrowprops=dict(color=AZUL, **seta))
+    ax.annotate("", xy=A + Vl, xytext=A,
+                arrowprops=dict(arrowstyle="-|>", color=VERM, lw=2.3,
+                                mutation_scale=13, ls=(0, (4, 2))))
+    th = np.linspace(np.arctan2(V[1], V[0]), np.arctan2(Vl[1], Vl[0]), 60)
+    r = 0.56
+    ax.plot(r * np.cos(th), r * np.sin(th), color=VERM, lw=1.1)
+    ax.text(0.66 * np.cos(th.mean()), 0.66 * np.sin(th.mean()) + 0.03,
+            r"$\delta\vec V$", color=VERM, fontsize=10.5,
+            ha="center", va="bottom", path_effects=HALO)
+    ax.text(A[0] + V[0] + 0.06, A[1] + V[1] - 0.03, r"$\vec V$", color=AZUL,
+            fontsize=11, ha="left", va="center", path_effects=HALO)
+    ax.text(A[0] + Vl[0] - 0.14, A[1] + Vl[1] + 0.04, r"$\vec V'$", color=VERM,
+            fontsize=11, ha="right", va="center", path_effects=HALO)
+    ponto(ax, A, r"$p$")
+    ax.set_xlim(-0.42, 1.92); ax.set_ylim(-0.38, 1.80)
+    cabecalho(ax, "RIEMANN",
+              "o circuito fecha\no vetor volta girado")
+
+    for ax in axs:
+        ax.set_aspect("equal"); _limpa(ax)
+    fig.tight_layout()
+    fig.subplots_adjust(bottom=0.19, wspace=0.05)
+    fig.savefig(OUTDIR / "cap06_tres_falhas.pdf")
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     triangulo_esferico()
     circuito()
     desvio_familia()
+    ricci_volume()
+    tres_falhas()
     print("figuras do capitulo 6 geradas em", OUTDIR)
