@@ -909,6 +909,7 @@ Seção~\ref{sec:consequencias} mostra como encontrá-lo.
 \end{example}
 
 \section{Tempo próprio}
+\label{sec:tempo-proprio}
 
 Ao longo da linha de mundo de uma partícula massiva a separação é temporal, de
 modo que $\dd s^2<0$ e $-\dd s^2$ é positivo. Define-se então o tempo próprio
@@ -10642,19 +10643,83 @@ $-p_\mu U^\mu$ que ele mede e o tempo próprio que o relógio dele marca.
 \section{Movimento livre}
 \label{sec:movimento-livre}
 
-Na relatividade geral, uma partícula livre segue uma geodésica temporal:
-\[
-  U^\nu\nabla_\nu U^\mu=0.
-\]
-Essa equação expressa que o vetor tangente é transportado paralelamente ao
-longo da própria curva.
-
-Para luz,
-\[
-  k^\nu\nabla_\nu k^\mu=0,
+Na relatividade geral, uma partícula livre segue uma geodésica temporal. A
+Equação~\eqref{eq:geodesica-variedade} do capítulo anterior já a escreveu nas
+duas formas, a de operador e a de componentes; aqui ela apenas recebe o nome
+físico:
+\begin{equation}
+  U^\nu\nabla_\nu U^\mu=0 ,
   \qquad
-  k^\mu k_\mu=0.
+  U^\mu=\frac{\dd x^\mu}{\dd\tau} ,
+  \qquad
+  U^\mu U_\mu=-1 .
+  \label{eq:geodesica-massiva}
+\end{equation}
+A primeira igualdade diz que o vetor tangente é transportado paralelamente ao
+longo da própria curva: a partícula não vira para lado nenhum, e o que parecia
+força é a geometria do caminho. A segunda fixa o que $U^\mu$ é --- a
+quadrivelocidade, derivada da posição em relação ao tempo próprio da
+Seção~\ref{sec:tempo-proprio}. A terceira é a normalização que define $\tau$.
+
+E a normalização sobrevive ao movimento, o que não é óbvio e custa duas
+linhas:
+\[
+  U^\nu\nabla_\nu\bigl(U^\mu U_\mu\bigr)
+  =2U_\mu\,U^\nu\nabla_\nu U^\mu=0 ,
 \]
+onde se passou a métrica pela derivada com $\nabla_\alpha g_{\mu\nu}=0$ e
+depois se usou a própria equação geodésica. Quem parte com $U\cdot U=-1$
+continua com $U\cdot U=-1$; a curva não precisa ser renormalizada a cada
+passo.
+
+\subsection*{E a luz, que não tem tempo próprio}
+
+Para um raio de luz a \emph{lei} é a mesma --- transportar paralelamente o
+próprio tangente ---, mas o parâmetro não pode ser $\tau$. Ao longo de uma
+curva nula vale $\dd s^2=0$ em todo ponto, logo $\dd\tau\equiv0$: o tempo
+próprio não avança, e um rótulo que não avança não distingue pontos da
+trajetória. Escreve-se então
+\begin{equation}
+  k^\nu\nabla_\nu k^\mu=0 ,
+  \qquad
+  k^\mu=\frac{\dd x^\mu}{\dd\lambda} ,
+  \qquad
+  k^\mu k_\mu=0 ,
+  \label{eq:geodesica-nula}
+\end{equation}
+com $\lambda$ um \textbf{parâmetro afim}: um rótulo ao longo da curva,
+escolhido de modo que a equação tenha exatamente essa forma, sem termo à
+direita.
+
+São três diferenças, e só três:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & \textbf{partícula massiva} & \textbf{luz} \\
+\midrule
+tangente  & $U^\mu=\dd x^\mu/\dd\tau$ & $k^\mu=\dd x^\mu/\dd\lambda$ \\
+norma     & $U\cdot U=-1$             & $k\cdot k=0$ \\
+parâmetro & tempo próprio $\tau$      & afim $\lambda$, a menos de $a\lambda+b$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A norma nula é o que proíbe a normalização: não há como dividir $k^\mu$ por
+$\sqrt{-k\cdot k}$ para fixar seu comprimento, porque esse número é zero. Sem
+normalização a escala do tangente fica livre, e com ela a de $\lambda$ --- o
+que resta é a liberdade $\lambda\to a\lambda+b$, com $a\neq0$, e é dela que
+vem a palavra ``afim''. A Seção~\ref{sec:exemplos-cap7} refaz o argumento por
+extenso e mostra o que a equação vira quando o parâmetro \emph{não} é afim.
+
+Falta dizer o que $k^\mu$ mede, já que não é velocidade: ele é proporcional ao
+quadrimomento do fóton. Fixando a escala de $\lambda$ de modo que
+$p^\mu=k^\mu$, as fórmulas deste capítulo que contraem $p^\mu$ com alguma
+coisa --- a energia medida, as constantes associadas a simetrias --- valem
+para luz e para matéria sem nenhuma alteração. É por isso que daqui em diante
+o texto escreve $p^\mu$, e não $U^\mu$: com $p^\mu=mU^\mu$ no caso massivo e
+$p^\mu=k^\mu$ no nulo, as contas não se repartem em dois casos.
 
 \section{Acoplamento mínimo, e Maxwell como teste}
 \label{sec:acoplamento-minimo}
@@ -10831,6 +10896,11 @@ vetores no mesmo ponto --- a única operação que a geometria autoriza sem
 transporte.
 \end{central}
 
+O sinal de menos não é convenção arbitrária: com a assinatura $(-,+,+,+)$, a
+contração de dois vetores temporais apontados para o futuro é negativa, e o
+menos devolve energia positiva. Confira no caso trivial, em Minkowski, com o
+observador em repouso: $U^\mu=(1,0,0,0)$ dá $-p_\mu U^\mu=-p_t=E$.
+
 Guarde a ressalva embutida em ``no evento em que se cruzam''. A contração só
 faz sentido onde os dois vetores vivem no mesmo espaço tangente; perguntar
 quanta energia um observador \emph{daqui} atribui a uma partícula \emph{lá}
@@ -10853,6 +10923,23 @@ relacionado a $\dd t$ por um fator que depende de onde ele está, enquanto um
 observador em queda livre pelo mesmo evento tem outra quadrivelocidade e obtém
 outra decomposição local de energia e momento. O mesmo $p^\mu$, o mesmo ponto,
 dois números.
+
+E não é preciso curvatura para ver isso. Dois observadores que se cruzam no
+\emph{mesmo} evento, com velocidade relativa $v$, medem para o mesmo fóton
+\begin{equation}
+  E'=\gamma\,(1-v\cos\theta)\,E ,
+  \label{eq:doppler-local}
+\end{equation}
+que é o fator Doppler de \eqref{eq:fator-doppler} --- relatividade especial,
+aplicada no espaço tangente daquele ponto. Repare no que mudou e no que não
+mudou. A energia mudou, porque é a contração $-p_\mu U^\mu$ e cada um entra
+com o seu $U^\mu$. Já a componente de carta $p_t$ é \emph{um número só}: não
+depende de quem passa por ali, porque é propriedade de $\vec p$ e do mapa.
+
+Daí a regra que organiza o resto do capítulo: \textbf{componente de carta é
+rótulo; grandeza medida é contração.} Trocar uma pela outra é a origem de
+quase todo paradoxo sobre ``o tempo que para no horizonte'' ou ``o fóton que
+perde energia para a expansão''.
 
 \section{Simetrias e quantidades conservadas}
 \label{sec:simetrias-conservadas}
@@ -10987,10 +11074,14 @@ Façamos a construção inteira uma vez, numa geometria estática e
 esfericamente simétrica genérica:
 \begin{equation}
   \dd s^2=-N(r)^2\dd t^2+A(r)^2\dd r^2
-  +r^2\bigl(\dd\theta^2+\sin^2\theta\,\dd\varphi^2\bigr) .
+  +r^2\underbrace{\bigl(\dd\theta^2+\sin^2\theta\,\dd\varphi^2\bigr)}
+       _{\textstyle\dd\Omega^2} .
   \label{eq:metrica-estatica-generica}
 \end{equation}
-Nada se supõe sobre $N$ e $A$ além de serem positivas na região considerada.
+Nada se supõe sobre $N$ e $A$ além de serem positivas na região considerada. A
+abreviação $\dd\Omega^2$, marcada acima, é a métrica da esfera unitária, e será
+usada daqui em diante --- inclusive nos capítulos seguintes, onde quase toda
+geometria com simetria esférica a traz.
 
 \begin{infografico}
 \begin{etapas}
@@ -11232,6 +11323,7 @@ medida, exige movimento \emph{orbital} --- e é por isso que o giroscópio do
 \end{enumerate}
 
 \section{Exemplos resolvidos adicionais}
+\label{sec:exemplos-cap7}
 
 \begin{example}
 \textbf{Dois relógios, e a energia que cada um mede.} Na métrica estática
